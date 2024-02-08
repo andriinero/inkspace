@@ -9,7 +9,7 @@ import IndexLayout from './pages/indexPage/index';
 
 const Router = () => {
   const router = createBrowserRouter(
-    createRoutesFromElements(<Route path="/" element={<IndexLayout />}></Route>)
+    createRoutesFromElements(<Route index path="/" element={<IndexLayout />}></Route>)
   );
 
   return <RouterProvider router={router} />;

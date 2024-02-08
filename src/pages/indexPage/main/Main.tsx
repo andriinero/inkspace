@@ -1,11 +1,16 @@
-import { WrapperMain } from './Main.styled';
+import Post from '@/types/Post';
 
-const Main = () => {
+import { WrapperMain } from './Main.styled';
+import PostContainer from './PostContainer';
+
+type MainProps = {
+  posts: Post[];
+};
+
+const Main = ({ posts }: MainProps) => {
   return (
     <WrapperMain>
-      <span>
-        This is <strong>Main</strong> section
-      </span>
+      <PostContainer posts={posts} />
     </WrapperMain>
   );
 };
