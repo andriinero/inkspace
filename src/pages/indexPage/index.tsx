@@ -6,7 +6,6 @@ import postsData from '@/data/postsData';
 import { Wrapper } from './index.styled';
 import Header from './header/Header';
 import Main from './main/Main';
-import Aside from './aside/Aside';
 import Footer from './footer/Footer';
 
 const IndexLayout = () => {
@@ -16,7 +15,6 @@ const IndexLayout = () => {
     <Wrapper>
       <Header />
       <Main posts={postsData} />
-      <Aside />
       <Footer />
     </Wrapper>
   );

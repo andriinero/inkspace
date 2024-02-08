@@ -56,7 +56,7 @@ export const Title = styled.h3`
 
 export const BodyText = styled.p`
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 
   max-width: 100%;

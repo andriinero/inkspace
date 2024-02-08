@@ -1,4 +1,4 @@
-import Post from "@/types/Post";
+import Post from '@/types/Post';
 
 const postsData: Post[] = [
   {
@@ -8,8 +8,8 @@ const postsData: Post[] = [
       username: 'CoolGuyNerd357',
       email: 'example@gmail.com',
     },
-    title: 'That\'s an updated title',
-    body: 'Sentence officer go lay individual leather zoo had selection along while fix speed spring loss solid affect stomach outer two listen joined met eventually',
+    title: "First post",
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae lorem semper, pulvinar nisi vel, commodo mi. Mauris justo erat, egestas et fermentum et, facilisis fringilla mauris. Mauris ipsum tortor, ullamcorper vitae libero ut, accumsan efficitur dui. Pellentesque consequat urna nibh, vel commodo tellus vulputate pretium. Aliquam ac lobortis dui. Curabitur sed varius sapien. Duis id proin.',
     date: '2024-02-06T21:37:46.687Z',
     comments: [],
     __v: 1,
@@ -21,8 +21,8 @@ const postsData: Post[] = [
       username: 'CoolGuyNerd357',
       email: 'example@gmail.com',
     },
-    title: 'That\'s an updated title',
-    body: 'Hardly sweet yet stone local flight save day carry pony outer hollow log myself brave fort fine poetry wear pound massage plain girl good',
+    title: "Second post",
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae lorem semper, pulvinar nisi vel, commodo mi. Mauris justo erat, egestas et fermentum et, facilisis fringilla mauris. Mauris ipsum tortor, ullamcorper vitae libero ut, accumsan efficitur dui. Pellentesque consequat urna nibh, vel commodo tellus vulputate pretium. Aliquam ac lobortis dui. Curabitur sed varius sapien. Duis id proin.',
     date: '2024-02-06T21:37:46.695Z',
     comments: [],
     __v: 2,

@@ -1,8 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const WrapperMain = styled.main`
   grid-area: main;
-
-  padding: 1rem;
-  max-width: 80%;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
 `;
+
