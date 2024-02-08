@@ -99,6 +99,7 @@ export const Bottom = styled.div`
 export const MiscContainer = styled.div`
   display: flex;
   align-items: center;
+  gap: 1rem;
 `;
 
 export const Topic = styled.span`
@@ -111,8 +112,6 @@ export const Topic = styled.span`
 `;
 
 export const TimeEstimate = styled.span`
-  padding-left: 1rem;
-
   font-weight: 300;
   font-size: 0.75rem;
 `;
@@ -124,6 +123,14 @@ export const Controls = styled.div`
 
 export const ControlsIcon = styled.img`
   width: 24px;
+  height: 24px;
+
+  fill: #fff;
+  transition: filter 200ms;
 
   cursor: pointer;
+
+  &:hover {
+    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%) contrast(82%);
+  }
 `;
