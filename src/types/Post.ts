@@ -8,6 +8,7 @@ type Post = {
   title: string;
   body: string;
   date: string;
+  topic: string;
   comments: [];
   __v: number;
 };

@@ -4,6 +4,6 @@ export const WrapperMain = styled.main`
   grid-area: main;
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 6rem;
 `;
 

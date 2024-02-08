@@ -8,8 +8,13 @@ export const Wrapper = styled.div`
   row-gap: 0.7rem;
   column-gap: 4rem;
 
-  padding: 1rem;
+  padding: 2rem 0;
   max-width: 75ch;
+  border-bottom: 1px solid ${({ theme }) => theme.color.border_clr_feint};
+
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 // #region PostHead
@@ -30,13 +35,15 @@ export const AuthorPfp = styled.img`
   object-fit: contain;
 `;
 
+export const Divider = styled.span`
+  font-size: 0.9rem;
+`;
+
 export const AuthorName = styled.span`
   display: inline-block;
 
   font-weight: 500;
 `;
-
-export const Divider = styled.span``;
 
 export const Date = styled.span``;
 
@@ -81,3 +88,42 @@ export const PreviewImage = styled.img`
 `;
 
 // #endregion
+
+// #region PostBottom
+export const Bottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const MiscContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const Topic = styled.span`
+  padding: 0.3rem 0.5rem;
+  border: 1px solid ${({ theme }) => theme.color.topic_border};
+  border-radius: 16px;
+  background-color: ${({ theme }) => theme.color.topic_bg};
+
+  font-size: 0.8rem;
+`;
+
+export const TimeEstimate = styled.span`
+  padding-left: 1rem;
+
+  font-weight: 300;
+  font-size: 0.75rem;
+`;
+
+export const Controls = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+export const ControlsIcon = styled.img`
+  width: 24px;
+
+  cursor: pointer;
+`;
