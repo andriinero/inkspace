@@ -1,18 +1,24 @@
-import Post from '@/types/Post';
+import { useContext } from 'react';
+
+import { PostContext } from '../..';
 
 import { Wrapper } from './PostContainer.styled';
 import PostItem from './PostItem';
+import Spinner from '@/components/general/Spinner';
+import Error from '@/components/general/Error';
 
-type PostContainerProps = {
-  posts: Post[];
-};
+const PostContainer = () => {
+  const { posts, loading, error } = useContext(PostContext);
 
-const PostContainer = ({ posts }: PostContainerProps) => {
   return (
     <Wrapper>
-      {posts.map((post) => (
-        <PostItem key={post._id} {...post} />
-      ))}
+      {loading ? (
+        <Spinner />
+      ) : error ? (
+        <Error />
+      ) : (
+        posts.map((post) => <PostItem key={post._id} {...post} />)
+      )}
     </Wrapper>
   );
 };

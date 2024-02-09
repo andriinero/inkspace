@@ -1,17 +1,11 @@
-import Post from '@/types/Post';
-
 import { WrapperMain } from './Main.styled';
 import PostContainer from './posts/PostContainer';
 import MiscContainer from './misc/MiscContainer';
 
-type MainProps = {
-  posts: Post[];
-};
-
-const Main = ({ posts }: MainProps) => {
+const Main = () => {
   return (
     <WrapperMain>
-      <PostContainer posts={posts} />
+      <PostContainer />
       <MiscContainer />
     </WrapperMain>
   );

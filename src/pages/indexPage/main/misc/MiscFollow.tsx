@@ -13,7 +13,7 @@ const MiscFollow = ({ authors }: MiscFollowProps) => {
       <S.Header>Who to follow</S.Header>
       <S.AuthorList>
         {authors.map((author) => (
-          <MiscAuthor {...author} />
+          <MiscAuthor key={author._id} {...author} />
         ))}
       </S.AuthorList>
     </S.Wrapper>

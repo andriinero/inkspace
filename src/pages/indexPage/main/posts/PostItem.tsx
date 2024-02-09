@@ -41,7 +41,7 @@ const PostItem = ({ author, title, body, date, topic }: Post) => {
       </S.Preview>
       <S.Bottom>
         <S.MiscContainer>
-          <S.Topic>{topic}</S.Topic>
+          {topic && <S.Topic>{topic}</S.Topic>}
           <S.TimeEstimate>{timeEstimate} min read</S.TimeEstimate>
         </S.MiscContainer>
         <S.Controls>
