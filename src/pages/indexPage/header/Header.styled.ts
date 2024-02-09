@@ -7,5 +7,5 @@ export const WrapperHeader = styled.header`
   align-items: center;
 
   padding: 1.5rem;
-  border-bottom: 1px solid ${({ theme }) => theme.color.border_clr};
+  border-bottom: 1px solid ${({ theme }) => theme.color.border};
 `;

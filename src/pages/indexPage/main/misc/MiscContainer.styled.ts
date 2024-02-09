@@ -5,5 +5,5 @@ export const Wrapper = styled.div`
   flex-direction: column;
 
   padding: 2rem;
-  border-left: 1px solid ${({ theme }) => theme.color.border_clr};
+  border-left: 1px solid ${({ theme }) => theme.color.border};
 `;

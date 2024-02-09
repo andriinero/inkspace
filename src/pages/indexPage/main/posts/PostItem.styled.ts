@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 
   padding: 2rem 0;
   max-width: 75ch;
-  border-bottom: 1px solid ${({ theme }) => theme.color.border_clr_feint};
+  border-bottom: 1px solid ${({ theme }) => theme.color.border_feint};
 
   &:last-child {
     border-bottom: none;
@@ -90,6 +90,7 @@ export const PreviewImage = styled.img`
 // #endregion
 
 // #region PostBottom
+
 export const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
@@ -126,11 +127,14 @@ export const ControlsIcon = styled.img`
   height: 24px;
 
   fill: #fff;
-  transition: filter 200ms;
+  transition: filter 100ms;
 
   cursor: pointer;
 
   &:hover {
-    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%) contrast(82%);
+    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
+      contrast(82%);
   }
 `;
+
+// #endregion
