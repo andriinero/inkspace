@@ -1,10 +1,22 @@
-import { Wrapper, Header } from './MiscFollow.styled';
+import { Author } from '@/types/Author';
 
-const MiscFollow = () => {
+import * as S from './MiscFollow.styled';
+import MiscAuthor from './MiscAuthor';
+
+type MiscFollowProps = {
+  authors: Author[];
+};
+
+const MiscFollow = ({ authors }: MiscFollowProps) => {
   return (
-    <Wrapper>
-      <Header>Who to follow</Header>
-    </Wrapper>
+    <S.Wrapper>
+      <S.Header>Who to follow</S.Header>
+      <S.AuthorList>
+        {authors.map((author) => (
+          <MiscAuthor {...author} />
+        ))}
+      </S.AuthorList>
+    </S.Wrapper>
   );
 };
 
