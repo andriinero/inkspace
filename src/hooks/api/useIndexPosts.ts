@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import Post from '@/types/Post';
-import { PostContextType } from '@/pages/indexPage';
+import type Post from '@/types/Post';
 
-export const useIndexPosts = (): PostContextType => {
+export const useIndexPosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);

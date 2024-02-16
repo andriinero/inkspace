@@ -1,16 +1,16 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import IndexLayout from './pages/indexPage/index';
+import App from './app/App';
+import Home from './pages/Home';
 
 const Router = () => {
-  const router = createBrowserRouter(
-    createRoutesFromElements(<Route index path="/" element={<IndexLayout />}></Route>)
-  );
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <App />,
+      children: [{ index: true, element: <Home /> }],
+    },
+  ]);
 
   return <RouterProvider router={router} />;
 };

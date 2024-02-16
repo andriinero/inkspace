@@ -8,3 +8,11 @@ export const Wrapper = styled.div`
   min-height: 100dvh;
   background-color: ${({ theme }) => theme.color.bg_primary};
 `;
+
+export const WrapperMain = styled.main`
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 50ch 25ch;
+  justify-content: center;
+  gap: 6rem;
+`;
