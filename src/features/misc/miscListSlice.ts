@@ -1,11 +1,11 @@
 import { RootState } from '@/app/store';
 import { Author } from '@/types/Author';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 type miscListState = {
   authorList: Author[];
   isLoading: boolean;
-  error: Error | null;
+  error: SerializedError | null;
 };
 
 const initialState: miscListState = {
@@ -17,9 +17,6 @@ const initialState: miscListState = {
 export const fetchAuthors = createAsyncThunk('miscList/fetchAuthors', async () => {
   const response = await fetch('http://localhost:3000/api/users', { mode: 'cors' });
   const data = await response.json();
-
-  console.log(data);
-  
 
   return data;
 });
@@ -39,7 +36,7 @@ const miscListSlice = createSlice({
       })
       .addCase(fetchAuthors.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload as Error;
+        state.error = action.error;
       });
   },
 });

@@ -1,9 +1,13 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/app/store';
 import Post from '@/types/Post';
 
-type postListState = { postList: Post[]; isLoading: boolean; error: Error | null };
+type postListState = {
+  postList: Post[];
+  isLoading: boolean;
+  error: SerializedError | null;
+};
 
 const initialState: postListState = { postList: [], isLoading: true, error: null };
 
@@ -28,9 +32,9 @@ const postListSlice = createSlice({
         state.isLoading = false;
         state.postList = action.payload;
       })
-      .addCase(fetchPosts.rejected, (state) => {
+      .addCase(fetchPosts.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = new Error('an error has occurred');
+        state.error = action.error;
       });
   },
 });
