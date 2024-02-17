@@ -1,4 +1,4 @@
-import PostContainer from '@/features/posts/components/PostContainer';
+import PostContainer from '@/features/postList/components/PostContainer';
 import MiscContainer from '@/features/misc/components/MiscContainer';
 
 const Home = () => {

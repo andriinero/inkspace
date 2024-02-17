@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 export const WrapperMain = styled.main`
   grid-area: main;
   display: grid;
-  grid-template-columns: 50ch 25ch;
+  grid-template-columns: 75ch 25ch;
   justify-content: center;
   gap: 6rem;
 `;
