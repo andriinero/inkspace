@@ -1,13 +1,11 @@
-import { authorData } from '@/data/authorData';
-
 import { Wrapper } from './MiscContainer.styled';
-import MiscFollow from './MiscFollow';
-import MiscTopics from './MiscTopics';
+import AuthorContainer from './AuthorContainer';
+import MiscTopics from './TopicContainer';
 
 const MiscContainer = () => {
   return (
     <Wrapper>
-      <MiscFollow authors={authorData} />
+      <AuthorContainer />
       <MiscTopics />
     </Wrapper>
   );

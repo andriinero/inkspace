@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import type Post from '@/types/Post';
 
-export const useIndexPosts = () => {
+const useIndexPosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
@@ -23,3 +23,5 @@ export const useIndexPosts = () => {
 
   return { posts, loading, error };
 };
+
+export default useIndexPosts;

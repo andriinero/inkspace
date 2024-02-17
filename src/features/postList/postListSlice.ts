@@ -11,8 +11,6 @@ export const fetchPosts = createAsyncThunk('postList/fetchPosts', async () => {
   const response = await fetch('http://localhost:3000/api/posts', { mode: 'cors' });
   const posts = await response.json();
 
-  console.log(posts);
-
   return posts;
 });
 
@@ -22,6 +20,10 @@ const postListSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(fetchPosts.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.postList = action.payload;
