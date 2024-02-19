@@ -15,7 +15,7 @@ const initialState: miscListState = {
 };
 
 export const fetchAuthors = createAsyncThunk('miscList/fetchAuthors', async () => {
-  const response = await fetch('http://localhost:3000/api/users', { mode: 'cors' });
+  const response = await fetch('http://localhost:3000/api/authors?limit=3', { mode: 'cors' });
   const data = await response.json();
 
   return data;

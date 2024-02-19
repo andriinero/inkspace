@@ -12,7 +12,9 @@ type postListState = {
 const initialState: postListState = { postList: [], isLoading: true, error: null };
 
 export const fetchPosts = createAsyncThunk('postList/fetchPosts', async () => {
-  const response = await fetch('http://localhost:3000/api/posts', { mode: 'cors' });
+  const response = await fetch('http://localhost:3000/api/posts?page=1', {
+    mode: 'cors',
+  });
   const posts = await response.json();
 
   return posts;
