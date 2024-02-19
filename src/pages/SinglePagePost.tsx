@@ -28,7 +28,7 @@ const SinglePagePost = () => {
       {post ? (
         <PostWrapper>
           <Header>{post.title}</Header>
-          <PostAuthor {...post.author} />
+          <PostAuthor bodyLength={post.body.length} date={post.date} {...post.author} />
           <Body>{post.body}</Body>
         </PostWrapper>
       ) : isLoading ? (

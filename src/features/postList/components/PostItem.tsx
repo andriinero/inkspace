@@ -1,14 +1,20 @@
 import { useState } from 'react';
-import { DateTime } from 'luxon';
-
-import { CHARACTERS_PER_MINUTE } from '@/data/consts';
-import Post from '@/types/Post';
-
 import * as S from './PostItem.styled';
 import Dropdown from './Dropdown';
+import { Author } from '@/types/Author';
+import { Topic } from '@/types/Topic';
+import PostReadTime from '@/components/general/PostReadTime';
+import PostDate from '@/components/general/PostDate';
 
-//TODO: refactor props
-const PostItem = ({ author, title, body, date, topic }: Post) => {
+type PostItemProps = {
+  author: Author;
+  title: string;
+  body: string;
+  date: string;
+  topic: Topic;
+};
+
+const PostItem = ({ author, title, body, date, topic }: PostItemProps) => {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
@@ -20,9 +26,6 @@ const PostItem = ({ author, title, body, date, topic }: Post) => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const timeToRead: number = Math.trunc(Math.round(body.length / CHARACTERS_PER_MINUTE));
-  const timeEstimate: string = timeToRead < 1 ? '<1' : timeToRead.toString();
-
   const bookmarkSrc = isBookmarked ? '/bookmark.svg' : '/bookmark-outline.svg';
 
   return (
@@ -31,7 +34,7 @@ const PostItem = ({ author, title, body, date, topic }: Post) => {
         <S.AuthorPfp src="/portrait-placeholder.png" />
         <S.AuthorName>{author.username}</S.AuthorName>
         <S.Divider>·</S.Divider>
-        <S.Date>{DateTime.fromISO(date).toLocaleString(DateTime.DATE_MED)}</S.Date>
+        <PostDate date={date} />
       </S.Head>
       <S.Body>
         <S.Title>{title}</S.Title>
@@ -43,7 +46,7 @@ const PostItem = ({ author, title, body, date, topic }: Post) => {
       <S.Bottom>
         <S.MiscContainer>
           {topic && <S.Topic>{topic.name}</S.Topic>}
-          <S.TimeEstimate>{timeEstimate} min read</S.TimeEstimate>
+          <PostReadTime bodyLength={body.length} />
         </S.MiscContainer>
         <S.Controls>
           <S.ControlsIcon onClick={handleBookmarkToggle} src={bookmarkSrc} />

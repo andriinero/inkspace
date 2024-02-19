@@ -1,3 +1,4 @@
+import PostReadTime from '@/components/general/PostReadTime';
 import {
   Divider,
   FollowButton,
@@ -5,18 +6,20 @@ import {
   MiscContainer,
   Name,
   ProfileIcon,
-  ReadTimeEstimate,
-  TimeAgo,
   Wrapper,
 } from './PostAuthor.styled';
+import PostDate from '@/components/general/PostDate';
 
 type PostAuthorProps = {
   _id: string;
   username: string;
   email: string;
+  bodyLength: number;
+  date: string;
 };
 
-const PostAuthor = ({ _id, username, email }: PostAuthorProps) => {
+//TODO: refactor semantics (not author specific)
+const PostAuthor = ({ _id, username, email, bodyLength, date }: PostAuthorProps) => {
   return (
     <Wrapper>
       <ProfileIcon src="/portrait-placeholder.png" alt="Author Profile Picture" />
@@ -28,13 +31,13 @@ const PostAuthor = ({ _id, username, email }: PostAuthorProps) => {
             console.log('followed!');
           }}
           type="button"
-          value='Follow'
+          value="Follow"
         />
       </MainContainer>
       <MiscContainer>
-        <ReadTimeEstimate>1 min</ReadTimeEstimate>
+        <PostReadTime bodyLength={bodyLength} />
         <Divider>·</Divider>
-        <TimeAgo>5 mins</TimeAgo>
+        <PostDate date={date} />
       </MiscContainer>
     </Wrapper>
   );

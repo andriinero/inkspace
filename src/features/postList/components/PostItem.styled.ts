@@ -45,8 +45,6 @@ export const AuthorName = styled.span`
   font-weight: 500;
 `;
 
-export const Date = styled.span``;
-
 // #endregion
 
 // #region PostBody
@@ -110,11 +108,6 @@ export const Topic = styled.span`
   background-color: ${({ theme }) => theme.color.topic_bg};
 
   font-size: 0.8rem;
-`;
-
-export const TimeEstimate = styled.span`
-  font-weight: 300;
-  font-size: 0.75rem;
 `;
 
 export const Controls = styled.div`

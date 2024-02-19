@@ -37,8 +37,4 @@ export const ProfileIcon = styled.img`
 
 export const Name = styled.div``;
 
-export const TimeAgo = styled.span``;
-
-export const ReadTimeEstimate = styled.span``;
-
 export const FollowButton = styled.input``;

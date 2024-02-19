@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
 export const PostWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 
   padding: 4rem 0;
   max-width: 80ch;
