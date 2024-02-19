@@ -1,3 +1,5 @@
+import { Topic } from "./Topic";
+
 type Post = {
   _id: string;
   author: {
@@ -8,7 +10,7 @@ type Post = {
   title: string;
   body: string;
   date: string;
-  topic: string;
+  topic: Topic;
   comments: [];
   __v: number;
 };

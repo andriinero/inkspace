@@ -10,7 +10,7 @@ type singlePagePostState = {
 
 const initialState: singlePagePostState = {
   post: null,
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 

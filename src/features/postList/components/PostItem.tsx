@@ -7,6 +7,7 @@ import Post from '@/types/Post';
 import * as S from './PostItem.styled';
 import Dropdown from './Dropdown';
 
+//TODO: refactor props
 const PostItem = ({ author, title, body, date, topic }: Post) => {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);

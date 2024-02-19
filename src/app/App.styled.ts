@@ -9,10 +9,4 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.color.bg_primary};
 `;
 
-export const WrapperMain = styled.main`
-  grid-area: main;
-  display: grid;
-  grid-template-columns: 75ch 25ch;
-  justify-content: center;
-  gap: 6rem;
-`;
+export const WrapperMain = styled.main``;
