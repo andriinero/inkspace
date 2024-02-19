@@ -14,12 +14,17 @@ const initialState: singlePagePostState = {
   error: null,
 };
 
-const fetchPost = createAsyncThunk('singlePagePost/fetchPost', async (postid) => {
-  const response = await fetch(`http://localhost:3000/posts/${postid}`, { mode: 'cors' });
-  const data = await response.json();
+export const fetchPost = createAsyncThunk(
+  'singlePagePost/fetchPost',
+  async (postid: string) => {
+    const response = await fetch(`http://localhost:3000/api/posts/${postid}`, {
+      mode: 'cors',
+    });
+    const data = await response.json();
 
-  return data;
-});
+    return data;
+  }
+);
 
 const singlePagePostSlice = createSlice({
   name: 'singlePagePost',
