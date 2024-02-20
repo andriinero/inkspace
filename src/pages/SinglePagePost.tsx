@@ -10,7 +10,7 @@ import {
 import Error from '@/components/general/Error';
 import Spinner from '@/components/general/Spinner';
 import { Body, Header, PostWrapper, Wrapper } from './SinglePagePost.styled';
-import PostAuthor from '@/features/singlePagePost/components/PostAuthor';
+import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo';
 
 const SinglePagePost = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +28,12 @@ const SinglePagePost = () => {
       {post ? (
         <PostWrapper>
           <Header>{post.title}</Header>
-          <PostAuthor bodyLength={post.body.length} date={post.date} {...post.author} />
+          <PostHeaderInfo
+            bodyLength={post.body.length}
+            date={post.date}
+            topic={post.topic}
+            author={post.author}
+          />
           <Body>{post.body}</Body>
         </PostWrapper>
       ) : isLoading ? (

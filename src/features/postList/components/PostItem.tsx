@@ -49,7 +49,7 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
       <S.Bottom>
         <S.MiscContainer>
           {topic && <S.Topic>{topic.name}</S.Topic>}
-          <PostReadTime bodyLength={body.length} />
+          <S.PostReadEstimate bodyLength={body.length} />
         </S.MiscContainer>
         <S.Controls>
           <S.ControlsIcon onClick={handleBookmarkToggle} src={bookmarkSrc} />

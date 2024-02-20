@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { NavLink } from 'react-router-dom';
+import PostReadTime from '@/components/general/PostReadTime';
 
 export const Wrapper = styled.div`
   display: grid;
@@ -115,6 +116,11 @@ export const Topic = styled.span`
   background-color: ${({ theme }) => theme.color.topic_bg};
 
   font-size: 0.8rem;
+`;
+
+export const PostReadEstimate = styled(PostReadTime)`
+  font-size: 0.75rem;
+  font-weight: 300;
 `;
 
 export const Controls = styled.div`

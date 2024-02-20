@@ -9,6 +9,7 @@ const mainTheme = {
     border_feint: '#242728',
     topic_bg: '#242728',
     topic_border: '#34383a',
+    text_clr_button_follow: '#7de276',
   },
 };
 

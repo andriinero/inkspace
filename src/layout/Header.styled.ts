@@ -40,7 +40,7 @@ export const PostButton = styled.div`
 `;
 
 export const PostIcon = styled.img`
-  width: 24px;
+  width: 28px;
 `;
 
 export const ButtonText = styled.span`
