@@ -6,7 +6,9 @@ export const Wrapper = styled.div`
   gap: 1.5rem;
 `;
 
-export const Header = styled.h3``;
+export const Header = styled.h3`
+  font-size: 1rem;
+`;
 
 export const AuthorList = styled.ul`
   display: flex;

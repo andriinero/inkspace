@@ -1,21 +1,41 @@
 import styled from 'styled-components';
 
-export const AuthorItem = styled.li`
+export const WrapperItem = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.1rem;
 `;
 
-export const Name = styled.span`
+export const BioContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+`;
+
+export const BioName = styled.span`
   display: inline-block;
 
   font-weight: 500;
 `;
 
+export const BioContent = styled.p`
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  text-overflow: ellipsis;
+`;
+
 export const Icon = styled.img`
+  align-self: flex-start;
+
   width: 32px;
-  height: auto;
+  height: 32px;
   border-radius: 50%;
 `;
 
@@ -26,7 +46,11 @@ export const FollowButton = styled.input`
   border-radius: 16px;
 
   color: ${({ theme }) => theme.color.text_clr_primary};
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 
   cursor: pointer;
+
+  &:hover {
+    color: ${({ theme }) => theme.color.text_clr_secondary};
+  }
 `;

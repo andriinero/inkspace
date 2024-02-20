@@ -3,7 +3,6 @@ import * as S from './PostItem.styled';
 import Dropdown from './Dropdown';
 import { Author } from '@/types/Author';
 import { Topic } from '@/types/Topic';
-import PostReadTime from '@/components/general/PostReadTime';
 import PostDate from '@/components/general/PostDate';
 
 type PostItemProps = {
