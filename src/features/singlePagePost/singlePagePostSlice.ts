@@ -34,6 +34,7 @@ const singlePagePostSlice = createSlice({
     builder
       .addCase(fetchPost.pending, (state) => {
         state.isLoading = true;
+        state.post = null;
         state.error = null;
       })
       .addCase(fetchPost.fulfilled, (state, action) => {

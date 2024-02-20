@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { NavLink } from 'react-router-dom';
+
 export const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr minmax(64px, 128px);
@@ -51,6 +53,11 @@ export const AuthorName = styled.span`
 
 export const Body = styled.div`
   grid-area: body;
+`;
+
+export const PostLink = styled(NavLink)`
+  color: inherit;
+  text-decoration: none;
 `;
 
 export const Title = styled.h3`

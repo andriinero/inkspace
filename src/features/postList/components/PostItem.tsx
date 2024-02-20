@@ -7,6 +7,7 @@ import PostReadTime from '@/components/general/PostReadTime';
 import PostDate from '@/components/general/PostDate';
 
 type PostItemProps = {
+  _id: string;
   author: Author;
   title: string;
   body: string;
@@ -14,7 +15,7 @@ type PostItemProps = {
   topic: Topic;
 };
 
-const PostItem = ({ author, title, body, date, topic }: PostItemProps) => {
+const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
@@ -37,7 +38,9 @@ const PostItem = ({ author, title, body, date, topic }: PostItemProps) => {
         <PostDate date={date} />
       </S.Head>
       <S.Body>
-        <S.Title>{title}</S.Title>
+        <S.PostLink to={`/posts/${_id}`}>
+          <S.Title>{title}</S.Title>
+        </S.PostLink>
         <S.BodyText>{body}</S.BodyText>
       </S.Body>
       <S.Preview>
