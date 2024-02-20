@@ -7,7 +7,7 @@ export const Wrapper = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid ${({ theme }) => theme.color.border};
 `;
 
@@ -40,13 +40,15 @@ export const PostButton = styled.div`
 `;
 
 export const PostIcon = styled.img`
-  width: 28px;
+  width: 24px;
 `;
 
-export const ButtonText = styled.span``;
+export const ButtonText = styled.span`
+  font-size: 0.9rem;
+`;
 
 export const ProfileIcon = styled.img`
-  width: 40px;
+  width: 32px;
   border-radius: 50%;
 
   cursor: pointer;
