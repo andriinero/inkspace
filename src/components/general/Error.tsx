@@ -1,5 +1,5 @@
 const Error = () => {
-  return <h2>An unexpected error has occurred</h2>;
+  return <h3>Error: failed to fetch data</h3>;
 };
 
 export default Error;

@@ -48,6 +48,8 @@ export const FollowButton = styled.input`
   color: ${({ theme }) => theme.color.text_clr_primary};
   font-size: 0.85rem;
 
+  transition: color 100ms;
+
   cursor: pointer;
 
   &:hover {

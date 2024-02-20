@@ -2,20 +2,41 @@ import { RootState } from '@/app/store';
 import { Author } from '@/types/Author';
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-type miscListState = {
+type AuthorsState = {
   authorList: Author[];
   isLoading: boolean;
   error: SerializedError | null;
 };
 
+type TopicsState = {
+  topicList: Author[];
+  isLoading: boolean;
+  error: SerializedError | null;
+};
+
+type miscListState = {
+  authors: AuthorsState;
+  topics: TopicsState;
+};
+
 const initialState: miscListState = {
-  authorList: [],
-  isLoading: false,
-  error: null,
+  authors: { authorList: [], isLoading: false, error: null },
+  topics: { topicList: [], isLoading: false, error: null },
 };
 
 export const fetchAuthors = createAsyncThunk('miscList/fetchAuthors', async () => {
-  const response = await fetch('http://localhost:3000/api/authors?limit=3', { mode: 'cors' });
+  const response = await fetch('http://localhost:3000/api/authors?limit=3', {
+    mode: 'cors',
+  });
+  const data = await response.json();
+
+  return data;
+});
+
+export const fetchTopics = createAsyncThunk('miscList/fetchTopics', async () => {
+  const response = await fetch('http://localhost:3000/api/topics?limit=5', {
+    mode: 'cors',
+  });
   const data = await response.json();
 
   return data;
@@ -28,23 +49,34 @@ const miscListSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchAuthors.pending, (state) => {
-        state.isLoading = true;
+        state.authors.isLoading = true;
       })
       .addCase(fetchAuthors.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.authorList = action.payload;
+        state.authors.isLoading = false;
+        state.authors.authorList = action.payload;
       })
       .addCase(fetchAuthors.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.error;
+        state.authors.isLoading = false;
+        state.authors.error = action.error;
+      });
+
+    builder
+      .addCase(fetchTopics.pending, (state) => {
+        state.topics.isLoading = true;
+      })
+      .addCase(fetchTopics.fulfilled, (state, action) => {
+        state.topics.isLoading = false;
+        state.topics.topicList = action.payload;
+      })
+      .addCase(fetchTopics.rejected, (state, action) => {
+        state.topics.isLoading = false;
+        state.topics.error = action.error;
       });
   },
 });
 
 export default miscListSlice.reducer;
 
-export const selectAuthorListState = (state: RootState) => ({
-  authorList: state.miscList.authorList,
-  isLoading: state.miscList.isLoading,
-  error: state.miscList.error,
-});
+export const selectAuthorListState = (state: RootState) => state.miscList.authors;
+
+export const selectTopicsListState = (state: RootState) => state.miscList.topics;
