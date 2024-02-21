@@ -1,16 +1,15 @@
+import { ReactNode } from 'react';
 import { Wrapper, List, ListItem } from './Dropdown.styled';
 
 type DropdownProps = {
   isOpen: boolean;
+  children: ReactNode;
 };
 
-const Dropdown = ({ isOpen }: DropdownProps) => {
+const Dropdown = ({ isOpen, children }: DropdownProps) => {
   return (
     <Wrapper $isOpen={isOpen}>
-      <List>
-        <ListItem>Mute this author</ListItem>
-        <ListItem>Mute this publication</ListItem>
-      </List>
+      <List>{children}</List>
     </Wrapper>
   );
 };

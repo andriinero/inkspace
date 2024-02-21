@@ -143,4 +143,27 @@ export const ControlsIcon = styled.img`
   }
 `;
 
+export const ListItem = styled.div`
+  padding: 0.5rem 1rem;
+
+  font-size: 0.9rem;
+  font-weight: 300;
+
+  transition: color 100ms, background-color 100ms;
+
+  cursor: pointer;
+
+  &:hover {
+    color: ${({ theme }) => theme.color.text_clr_secondary};
+  }
+
+  &:first-child {
+    padding-top: 1rem;
+  }
+
+  &:last-child {
+    padding-bottom: 1rem;
+  }
+`;
+
 // #endregion

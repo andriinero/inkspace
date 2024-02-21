@@ -7,10 +7,10 @@ import {
   selectSinglePostState,
 } from '@/features/singlePagePost/singlePagePostSlice';
 
+import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo';
 import Error from '@/components/general/Error';
 import Spinner from '@/components/general/Spinner';
 import { Body, Header, PostWrapper, Wrapper } from './SinglePagePost.styled';
-import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo';
 
 //TODO: fix container padding
 const SinglePagePost = () => {

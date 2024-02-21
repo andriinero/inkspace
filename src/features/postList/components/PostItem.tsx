@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import * as S from './PostItem.styled';
-import Dropdown from './Dropdown';
+import PostDate from '@/components/general/PostDate';
 import { Author } from '@/types/Author';
 import { Topic } from '@/types/Topic';
-import PostDate from '@/components/general/PostDate';
+import Bookmark from '@/components/general/Bookmark';
+import DotMenu from '@/components/general/DotMenu';
 
 type PostItemProps = {
   _id: string;
@@ -16,17 +17,15 @@ type PostItemProps = {
 
 const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const handleBookmarkToggle = (): void => {
     setIsBookmarked(!isBookmarked);
   };
 
-  const handleMoreToggle = (): void => {
-    setIsDropdownOpen(!isDropdownOpen);
+  const handleMenuToggle = (): void => {
+    setIsMenuOpen(!isMenuOpen);
   };
-
-  const bookmarkSrc = isBookmarked ? '/bookmark.svg' : '/bookmark-outline.svg';
 
   return (
     <S.Wrapper>
@@ -59,9 +58,15 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
           <S.PostReadEstimate bodyLength={body.length} />
         </S.MiscContainer>
         <S.Controls>
-          <S.ControlsIcon onClick={handleBookmarkToggle} src={bookmarkSrc} />
-          <S.ControlsIcon onClick={handleMoreToggle} src="/dots-horizontal.svg" />
-          <Dropdown isOpen={isDropdownOpen} />
+          <Bookmark
+            onBookmarked={handleBookmarkToggle}
+            isBookmarked={isBookmarked}
+            altText="Bookmark Icon"
+          />
+          <DotMenu onToggle={handleMenuToggle} isOpen={isMenuOpen}>
+            <S.ListItem>Mute this author</S.ListItem>
+            <S.ListItem>Mute this publication</S.ListItem>
+          </DotMenu>
         </S.Controls>
       </S.Bottom>
     </S.Wrapper>
