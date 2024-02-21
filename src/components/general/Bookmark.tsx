@@ -4,10 +4,9 @@ type BookmarkProps = {
   onBookmarked: () => void;
   className?: string;
   isBookmarked: boolean;
-  altText: string;
 };
 
-const Bookmark = ({ onBookmarked, className, isBookmarked, altText }: BookmarkProps) => {
+const Bookmark = ({ onBookmarked, className, isBookmarked }: BookmarkProps) => {
   const bookmarkSrc = isBookmarked ? '/bookmark.svg' : '/bookmark-outline.svg';
 
   return (
@@ -15,7 +14,7 @@ const Bookmark = ({ onBookmarked, className, isBookmarked, altText }: BookmarkPr
       onClick={onBookmarked}
       className={className}
       src={bookmarkSrc}
-      alt={altText}
+      alt="Bookmark Icon"
     />
   );
 };

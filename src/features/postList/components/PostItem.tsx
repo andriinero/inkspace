@@ -58,14 +58,10 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
           <S.PostReadEstimate bodyLength={body.length} />
         </S.MiscContainer>
         <S.Controls>
-          <Bookmark
-            onBookmarked={handleBookmarkToggle}
-            isBookmarked={isBookmarked}
-            altText="Bookmark Icon"
-          />
+          <Bookmark onBookmarked={handleBookmarkToggle} isBookmarked={isBookmarked} />
           <DotMenu onToggle={handleMenuToggle} isOpen={isMenuOpen}>
-            <S.ListItem>Mute this author</S.ListItem>
-            <S.ListItem>Mute this publication</S.ListItem>
+            <S.MenuItem onClick={handleMenuToggle}>Mute this author</S.MenuItem>
+            <S.MenuItem onClick={handleMenuToggle}>Mute this publication</S.MenuItem>
           </DotMenu>
         </S.Controls>
       </S.Bottom>

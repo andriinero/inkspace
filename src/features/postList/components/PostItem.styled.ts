@@ -143,11 +143,12 @@ export const ControlsIcon = styled.img`
   }
 `;
 
-export const ListItem = styled.div`
+export const MenuItem = styled.li`
   padding: 0.5rem 1rem;
 
   font-size: 0.9rem;
   font-weight: 300;
+  list-style-type: none;
 
   transition: color 100ms, background-color 100ms;
 

@@ -11,8 +11,8 @@ import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo'
 import Error from '@/components/general/Error';
 import Spinner from '@/components/general/Spinner';
 import { Body, Header, PostWrapper, Wrapper } from './SinglePagePost.styled';
+import PostControls from '@/features/singlePagePost/components/PostControls';
 
-//TODO: fix container padding
 const SinglePagePost = () => {
   const dispatch = useAppDispatch();
 
@@ -35,6 +35,7 @@ const SinglePagePost = () => {
             topic={post.topic}
             author={post.author}
           />
+          <PostControls />
           <Body>{post.body}</Body>
         </PostWrapper>
       ) : isLoading ? (

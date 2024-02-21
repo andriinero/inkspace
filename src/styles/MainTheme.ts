@@ -7,6 +7,7 @@ const mainTheme = {
     bg_secondary: '#242728',
     border: '#34383a',
     border_feint: '#242728',
+    border_post_controls: '#34383a',
     topic_bg: '#242728',
     topic_border: '#34383a',
     text_clr_button_follow: '#7de276',

@@ -3,14 +3,15 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+
+  padding: 4rem 0;
 `;
 
 export const PostWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2.5rem;
 
-  padding: 4rem 0;
   max-width: 70ch;
 `;
 
