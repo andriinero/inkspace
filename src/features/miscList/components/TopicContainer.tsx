@@ -7,7 +7,6 @@ import Spinner from '@/components/general/Spinner';
 import Error from '@/components/general/Error';
 import { Header, TopicList, Wrapper } from './TopicContainer.styled';
 
-//TODO: add topics resource route
 const MiscTopics = () => {
   const dispatch = useAppDispatch();
 

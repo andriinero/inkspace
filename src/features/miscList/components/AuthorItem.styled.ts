@@ -1,10 +1,16 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const WrapperItem = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1.1rem;
+`;
+
+export const AuthorLink = styled(NavLink)`
+  color: inherit;
+  /* text-decoration: none; */
 `;
 
 export const BioContainer = styled.div`

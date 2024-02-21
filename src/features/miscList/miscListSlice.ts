@@ -1,6 +1,9 @@
-import { RootState } from '@/app/store';
-import { Author } from '@/types/Author';
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
+import { RootState } from '@/app/store';
+
+import { Author } from '@/types/Author';
+import { Topic } from '@/types/Topic';
 
 type AuthorsState = {
   authorList: Author[];
@@ -9,7 +12,7 @@ type AuthorsState = {
 };
 
 type TopicsState = {
-  topicList: Author[];
+  topicList: Topic[];
   isLoading: boolean;
   error: SerializedError | null;
 };

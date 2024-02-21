@@ -12,7 +12,6 @@ export const Header = styled.h3`
 
 export const TopicList = styled.ul`
   display: flex;
-  flex-direction: column;
   gap: 1rem;
 
   list-style: none;

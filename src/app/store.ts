@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import postListReducer from '@/features/postList/postListSlice';
-import miscListReducer from '@/features/misc/miscListSlice';
+import miscListReducer from '@/features/miscList/miscListSlice';
 import singlePagePostReducer from '@/features/singlePagePost/singlePagePostSlice';
 
 export const store = configureStore({

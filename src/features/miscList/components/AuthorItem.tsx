@@ -11,7 +11,9 @@ const AuthorItem = ({ _id, username, bio }: AuthorItemProps) => {
     <S.WrapperItem>
       <S.Icon src="/portrait-placeholder.png" />
       <S.BioContainer>
-        <S.BioName>{username}</S.BioName>
+        <S.AuthorLink to={`/authors/${_id}`}>
+          <S.BioName> {username}</S.BioName>
+        </S.AuthorLink>
         <S.BioContent>{bio}</S.BioContent>
       </S.BioContainer>
       <S.FollowButton type="button" value="Follow" />
