@@ -31,8 +31,12 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
   return (
     <S.Wrapper>
       <S.Head>
-        <S.AuthorPfp src="/portrait-placeholder.png" />
-        <S.AuthorName>{author.username}</S.AuthorName>
+        <S.PostLink to={`/authors/${author._id}`}>
+          <S.AuthorPfp src="/portrait-placeholder.png" />
+        </S.PostLink>
+        <S.PostLink to={`/authors/${author._id}`}>
+          <S.AuthorName>{author.username}</S.AuthorName>
+        </S.PostLink>
         <S.Divider>·</S.Divider>
         <PostDate date={date} />
       </S.Head>
@@ -47,7 +51,11 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
       </S.Preview>
       <S.Bottom>
         <S.MiscContainer>
-          {topic && <S.Topic>{topic.name}</S.Topic>}
+          {topic && (
+            <S.PostLink to={`/topics/${topic._id}`}>
+              <S.Topic>{topic.name}</S.Topic>
+            </S.PostLink>
+          )}
           <S.PostReadEstimate bodyLength={body.length} />
         </S.MiscContainer>
         <S.Controls>

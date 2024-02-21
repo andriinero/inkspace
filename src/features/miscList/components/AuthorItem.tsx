@@ -9,7 +9,9 @@ type AuthorItemProps = {
 const AuthorItem = ({ _id, username, bio }: AuthorItemProps) => {
   return (
     <S.WrapperItem>
-      <S.Icon src="/portrait-placeholder.png" />
+      <S.AuthorLink to={`/authors/${_id}`}>
+        <S.Icon src="/portrait-placeholder.png" />
+      </S.AuthorLink>
       <S.BioContainer>
         <S.AuthorLink to={`/authors/${_id}`}>
           <S.BioName> {username}</S.BioName>

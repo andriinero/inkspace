@@ -9,8 +9,9 @@ export const WrapperItem = styled.li`
 `;
 
 export const AuthorLink = styled(NavLink)`
+  align-self: flex-start;
+
   color: inherit;
-  /* text-decoration: none; */
 `;
 
 export const BioContainer = styled.div`

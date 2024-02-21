@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-
 import { NavLink } from 'react-router-dom';
+
 import PostReadTime from '@/components/general/PostReadTime';
 
 export const Wrapper = styled.div`
@@ -18,6 +18,11 @@ export const Wrapper = styled.div`
   &:last-child {
     border-bottom: none;
   }
+`;
+
+export const PostLink = styled(NavLink)`
+  color: inherit;
+  text-decoration: none;
 `;
 
 // #region PostHead
@@ -54,11 +59,6 @@ export const AuthorName = styled.span`
 
 export const Body = styled.div`
   grid-area: body;
-`;
-
-export const PostLink = styled(NavLink)`
-  color: inherit;
-  text-decoration: none;
 `;
 
 export const Title = styled.h3`
