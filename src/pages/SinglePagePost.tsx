@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
@@ -12,8 +12,13 @@ import Error from '@/components/general/Error';
 import Spinner from '@/components/general/Spinner';
 import { Body, Header, PostWrapper, Wrapper } from './SinglePagePost.styled';
 import PostControls from '@/features/singlePagePost/components/PostControls';
+import PostComments from '@/features/singlePagePost/components/PostComments';
 
 const SinglePagePost = () => {
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isCommentsOpen, setIsCommentsOpen] = useState<boolean>(false);
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
 
   const { postid } = useParams();
@@ -23,6 +28,18 @@ const SinglePagePost = () => {
   }, [dispatch, postid]);
 
   const { post, isLoading, error } = useAppSelector(selectSinglePostState);
+
+  const handleLikeToggle = (): void => {
+    setIsLiked(!isLiked);
+  };
+
+  const handleCommentsToggle = (): void => {
+    setIsCommentsOpen(!isCommentsOpen);
+  };
+
+  const handleBookmarkToggle = (): void => {
+    setIsBookmarked(!isBookmarked);
+  };
 
   return (
     <Wrapper>
@@ -35,8 +52,15 @@ const SinglePagePost = () => {
             topic={post.topic}
             author={post.author}
           />
-          <PostControls />
+          <PostControls
+            onLikedToggle={handleLikeToggle}
+            onCommentsToggle={handleCommentsToggle}
+            onBookmarkedToggle={handleBookmarkToggle}
+            isBookmarked={isBookmarked}
+            isLiked={isLiked}
+          />
           <Body>{post.body}</Body>
+          <PostComments isOpen={isCommentsOpen} commentList={post.comments} />
         </PostWrapper>
       ) : isLoading ? (
         <Spinner />

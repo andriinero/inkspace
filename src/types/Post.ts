@@ -1,18 +1,15 @@
-import { Topic } from "./Topic";
+import { Author } from './Author';
+import { Comment } from './Comment';
+import { Topic } from './Topic';
 
 type Post = {
   _id: string;
-  author: {
-    _id: string;
-    username: string;
-    email: string;
-  };
+  author: Author;
   title: string;
   body: string;
   date: string;
   topic: Topic;
-  comments: [];
-  __v: number;
+  comments: Comment[];
 };
 
 export default Post;

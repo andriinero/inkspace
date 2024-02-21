@@ -8,26 +8,25 @@ import {
 import Bookmark from '@/components/general/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
 
-const PostControls = () => {
-  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [isCommentsOpen, setIsCommentsOpen] = useState<boolean>(false);
+type PostControlsProps = {
+  onLikedToggle: () => void;
+  onCommentsToggle: () => void;
+  onBookmarkedToggle: () => void;
+  isLiked: boolean;
+  isBookmarked: boolean;
+};
 
-  const handleBookmarkToggle = (): void => {
-    setIsBookmarked(!isBookmarked);
-  };
+const PostControls = ({
+  onLikedToggle,
+  onCommentsToggle,
+  onBookmarkedToggle,
+  isLiked,
+  isBookmarked,
+}: PostControlsProps) => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const handleMenuToggle = (): void => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleLikeToggle = (): void => {
-    setIsLiked(!isLiked);
-  };
-
-  const handleCommentsToggle = (): void => {
-    setIsCommentsOpen(!isCommentsOpen);
   };
 
   const likeSrc = isLiked ? '/thumb-up.svg' : '/thumb-up-outline.svg';
@@ -35,11 +34,11 @@ const PostControls = () => {
   return (
     <Wrapper>
       <ControlsContainer>
-        <ControlsIcon onClick={handleLikeToggle} src={likeSrc} />
-        <ControlsIcon onClick={handleCommentsToggle} src="/comment-outline.svg" />
+        <ControlsIcon onClick={onLikedToggle} src={likeSrc} />
+        <ControlsIcon onClick={onCommentsToggle} src="/comment-outline.svg" />
       </ControlsContainer>
       <ControlsContainer>
-        <Bookmark onBookmarked={handleBookmarkToggle} isBookmarked={isBookmarked} />
+        <Bookmark onBookmarked={onBookmarkedToggle} isBookmarked={isBookmarked} />
         <DotMenu onToggle={handleMenuToggle} isOpen={isMenuOpen}>
           <MenuItem onClick={handleMenuToggle}>Mute this author</MenuItem>
           <MenuItem onClick={handleMenuToggle}>Mute this publication</MenuItem>
