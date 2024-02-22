@@ -1,16 +1,17 @@
 const mainTheme = {
   color: {
-    // text_clr_primary: '#E8E6E3',
-    text_clr_primary: '#D3D3D3',
-    text_clr_secondary: '#FFF',
-    bg_primary: '#181a1b',
-    bg_secondary: '#242728',
-    border: '#34383a',
-    border_feint: '#242728',
-    border_post_controls: '#34383a',
+    // text_primary: '#E8E6E3',
+    text_primary: '#D3D3D3',
+    text_secondary: '#FFF',
+    main_bg_primary: '#181a1b',
+    main_bg_secondary: '#242728',
+    main_border: '#34383a',
+    main_border_feint: '#242728',
+    post_border_controls: '#34383a',
     topic_bg: '#242728',
     topic_border: '#34383a',
-    text_clr_button_follow: '#7de276',
+    text_button_follow: '#7de276',
+    main_button_bg: '#1E6E1A',
   },
 };
 

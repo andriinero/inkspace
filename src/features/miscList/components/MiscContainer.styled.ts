@@ -6,5 +6,5 @@ export const Wrapper = styled.div`
   gap: 3rem;
 
   padding: 3rem 2rem;
-  border-left: 1px solid ${({ theme }) => theme.color.border};
+  border-left: 1px solid ${({ theme }) => theme.color.main_border};
 `;

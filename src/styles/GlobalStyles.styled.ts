@@ -9,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    color: ${({ theme }) => theme.color.text_clr_primary};
+    color: ${({ theme }) => theme.color.text_primary};
   }
 `;
 

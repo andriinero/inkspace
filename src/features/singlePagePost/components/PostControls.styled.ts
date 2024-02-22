@@ -7,8 +7,8 @@ export const Wrapper = styled.div`
   gap: 1rem;
 
   padding: 1rem;
-  border-top: 1px solid ${({ theme }) => theme.color.border_post_controls};
-  border-bottom: 1px solid ${({ theme }) => theme.color.border_post_controls};
+  border-top: 1px solid ${({ theme }) => theme.color.post_border_controls};
+  border-bottom: 1px solid ${({ theme }) => theme.color.post_border_controls};
 `;
 
 export const ControlsContainer = styled.div`
@@ -43,7 +43,7 @@ export const MenuItem = styled.li`
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => theme.color.text_clr_secondary};
+    color: ${({ theme }) => theme.color.text_secondary};
   }
 
   &:first-child {

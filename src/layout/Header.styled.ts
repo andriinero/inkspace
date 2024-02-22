@@ -8,15 +8,27 @@ export const Wrapper = styled.header`
   align-items: center;
 
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid ${({ theme }) => theme.color.border};
+  border-bottom: 1px solid ${({ theme }) => theme.color.main_border};
 `;
 
-export const StyledLink = styled(Link)`
-  color: ${({ theme }) => theme.color.text_clr_primary};
+export const HeaderLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+`;
+
+export const Logo = styled.h1`
+  color: ${({ theme }) => theme.color.text_primary};
   font-size: 1.5rem;
   font-weight: 500;
-  text-decoration: none;
   text-transform: uppercase;
+
+  transition: transform 200ms, color 200ms;
+
+  &:hover {
+    color: ${({ theme }) => theme.color.text_secondary};
+
+    transform: translate(-1px, -1px);
+  }
 `;
 
 export const ProfileWrapper = styled.div`

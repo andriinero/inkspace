@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   align-items: center;
 
   min-height: 100dvh;
-  background-color: ${({ theme }) => theme.color.bg_primary};
+  background-color: ${({ theme }) => theme.color.main_bg_primary};
 `;
 
 export const MessageWrapper = styled.div`

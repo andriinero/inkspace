@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Wrapper, List, ListItem } from './Dropdown.styled';
+import { Wrapper, List } from './Dropdown.styled';
 
 type DropdownProps = {
   isOpen: boolean;

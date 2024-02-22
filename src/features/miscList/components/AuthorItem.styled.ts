@@ -52,7 +52,7 @@ export const FollowButton = styled.input`
   border: 1px solid ${({ theme }) => theme.color.topic_border};
   border-radius: 16px;
 
-  color: ${({ theme }) => theme.color.text_clr_primary};
+  color: ${({ theme }) => theme.color.text_primary};
   font-size: 0.85rem;
 
   transition: color 100ms;
@@ -60,6 +60,6 @@ export const FollowButton = styled.input`
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => theme.color.text_clr_secondary};
+    color: ${({ theme }) => theme.color.text_secondary};
   }
 `;

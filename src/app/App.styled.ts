@@ -6,7 +6,10 @@ export const Wrapper = styled.div`
   grid-template-areas: 'header' 'main' 'footer';
 
   min-height: 100dvh;
-  background-color: ${({ theme }) => theme.color.bg_primary};
+  background-color: ${({ theme }) => theme.color.main_bg_primary};
 `;
 
-export const WrapperMain = styled.main``;
+export const WrapperMain = styled.main`
+  display: flex;
+  justify-content: center;
+`;

@@ -7,7 +7,7 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
 
   width: 400px;
   min-height: 100dvh;
-  background-color: ${({ theme }) => theme.color.bg_secondary};
+  background-color: ${({ theme }) => theme.color.main_bg_secondary};
 
   transition: transform 400ms;
   transform: ${(props) => (props.$isOpen ? 'translateX(0)' : 'translateX(500px)')};

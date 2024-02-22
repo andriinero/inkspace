@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
 
   padding: 2rem 0;
   max-width: 75ch;
-  border-bottom: 1px solid ${({ theme }) => theme.color.border_feint};
+  border-bottom: 1px solid ${({ theme }) => theme.color.main_border_feint};
 
   &:last-child {
     border-bottom: none;
@@ -155,7 +155,7 @@ export const MenuItem = styled.li`
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => theme.color.text_clr_secondary};
+    color: ${({ theme }) => theme.color.text_secondary};
   }
 
   &:first-child {

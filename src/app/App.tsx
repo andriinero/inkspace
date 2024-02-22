@@ -7,6 +7,7 @@ const App = () => {
   return (
     <Wrapper>
       <Header />
+      {/* TODO: fix wrapper layers */}
       <WrapperMain>
         <Outlet />
       </WrapperMain>

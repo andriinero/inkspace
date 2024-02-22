@@ -6,7 +6,7 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
 
   margin-top: 30px;
   margin-left: 30px;
-  background-color: ${({ theme }) => theme.color.bg_secondary};
+  background-color: ${({ theme }) => theme.color.main_bg_secondary};
 `;
 
 export const List = styled.div`

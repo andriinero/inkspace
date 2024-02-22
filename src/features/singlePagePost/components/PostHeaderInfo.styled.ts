@@ -60,7 +60,7 @@ export const FollowButton = styled.input`
   border: 1px solid transparent;
   background-color: transparent;
 
-  color: ${({ theme }) => theme.color.text_clr_button_follow};
+  color: ${({ theme }) => theme.color.text_button_follow};
   font-size: 1rem;
 
   cursor: pointer;

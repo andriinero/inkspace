@@ -1,20 +1,25 @@
 import {
   Wrapper,
-  StyledLink,
+  HeaderLink,
   PostButton,
   PostIcon,
   ProfileWrapper,
   ProfileIcon,
   ButtonText,
+  Logo,
 } from './Header.styled';
 
 const Header = () => {
   return (
     <Wrapper>
-      <StyledLink to='/'>Well-done</StyledLink>
+      <HeaderLink to="/">
+        <Logo>Well-done</Logo>
+      </HeaderLink>
       <ProfileWrapper>
         <PostButton>
-          <PostIcon src="/post.svg" />
+          <HeaderLink to="/new-post">
+            <PostIcon src="/post.svg" />
+          </HeaderLink>
           <ButtonText>Write</ButtonText>
         </PostButton>
         <ProfileIcon src="/portrait-placeholder.png" />
