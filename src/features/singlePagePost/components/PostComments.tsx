@@ -1,13 +1,16 @@
 import { Comment } from '@/types/Comment';
 
 import { Wrapper } from './PostComments.styled';
+import { useAppSelector } from '@/app/hooks';
+import { selectIsCommentsOpen } from '../singlePagePostSlice';
 
 type PostCommentsProps = {
-  isOpen: boolean;
   commentList: Comment[];
 };
 
-const PostComments = ({ isOpen, commentList }: PostCommentsProps) => {
+const PostComments = ({ commentList }: PostCommentsProps) => {
+  const isOpen = useAppSelector(selectIsCommentsOpen);
+
   return <Wrapper $isOpen={isOpen}>something</Wrapper>;
 };
 

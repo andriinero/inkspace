@@ -1,4 +1,14 @@
 import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+
+import {
+  selectIsPostBookmarked,
+  selectIsPostLiked,
+  toggleIsBookmarked,
+  toggleIsCommentsOpen,
+  toggleIsLiked,
+} from '../singlePagePostSlice';
+
 import {
   ControlsContainer,
   ControlsIcon,
@@ -8,22 +18,25 @@ import {
 import Bookmark from '@/components/general/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
 
-type PostControlsProps = {
-  onLikedToggle: () => void;
-  onCommentsToggle: () => void;
-  onBookmarkedToggle: () => void;
-  isLiked: boolean;
-  isBookmarked: boolean;
-};
-
-const PostControls = ({
-  onLikedToggle,
-  onCommentsToggle,
-  onBookmarkedToggle,
-  isLiked,
-  isBookmarked,
-}: PostControlsProps) => {
+const PostControls = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const isLiked = useAppSelector(selectIsPostLiked);
+  const isBookmarked = useAppSelector(selectIsPostBookmarked);
+
+  const dispatch = useAppDispatch();
+
+  const onLikeClick = (): void => {
+    dispatch(toggleIsLiked());
+  };
+
+  const onCommentsClick = (): void => {
+    dispatch(toggleIsCommentsOpen());
+  };
+
+  const onBookmarkClick = (): void => {
+    dispatch(toggleIsBookmarked());
+  };
 
   const handleMenuToggle = (): void => {
     setIsMenuOpen(!isMenuOpen);
@@ -34,11 +47,11 @@ const PostControls = ({
   return (
     <Wrapper>
       <ControlsContainer>
-        <ControlsIcon onClick={onLikedToggle} src={likeSrc} />
-        <ControlsIcon onClick={onCommentsToggle} src="/comment-outline.svg" />
+        <ControlsIcon onClick={onLikeClick} src={likeSrc} />
+        <ControlsIcon onClick={onCommentsClick} src="/comment-outline.svg" />
       </ControlsContainer>
       <ControlsContainer>
-        <Bookmark onBookmarked={onBookmarkedToggle} isBookmarked={isBookmarked} />
+        <Bookmark onBookmarked={onBookmarkClick} isBookmarked={isBookmarked} />
         <DotMenu onToggle={handleMenuToggle} isOpen={isMenuOpen}>
           <MenuItem onClick={handleMenuToggle}>Mute this author</MenuItem>
           <MenuItem onClick={handleMenuToggle}>Mute this publication</MenuItem>

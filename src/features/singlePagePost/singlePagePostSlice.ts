@@ -6,12 +6,18 @@ type singlePagePostState = {
   post: Post | null;
   isLoading: boolean;
   error: SerializedError | null;
+  isLiked: boolean;
+  isBookmarked: boolean;
+  isCommentsOpen: boolean;
 };
 
 const initialState: singlePagePostState = {
   post: null,
   isLoading: true,
   error: null,
+  isLiked: false,
+  isBookmarked: false,
+  isCommentsOpen: false,
 };
 
 export const fetchPost = createAsyncThunk(
@@ -29,7 +35,17 @@ export const fetchPost = createAsyncThunk(
 const singlePagePostSlice = createSlice({
   name: 'singlePagePost',
   initialState,
-  reducers: {},
+  reducers: {
+    toggleIsLiked(state) {
+      state.isLiked = !state.isLiked;
+    },
+    toggleIsCommentsOpen(state) {
+      state.isCommentsOpen = !state.isCommentsOpen;
+    },
+    toggleIsBookmarked(state) {
+      state.isBookmarked = !state.isBookmarked;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchPost.pending, (state) => {
@@ -48,6 +64,9 @@ const singlePagePostSlice = createSlice({
   },
 });
 
+export const { toggleIsLiked, toggleIsCommentsOpen, toggleIsBookmarked } =
+  singlePagePostSlice.actions;
+
 export default singlePagePostSlice.reducer;
 
 export const selectSinglePost = (state: RootState) => state.singlePagePost.post;
@@ -57,3 +76,17 @@ export const selectSinglePostState = (state: RootState) => ({
   isLoading: state.singlePagePost.isLoading,
   error: state.singlePagePost.error,
 });
+
+export const selectPostData = (state: RootState) => state.singlePagePost.post;
+
+export const selectPostIsLoading = (state: RootState) => state.singlePagePost.isLoading;
+
+export const selectPostError = (state: RootState) => state.singlePagePost.error;
+
+export const selectIsPostLiked = (state: RootState) => state.singlePagePost.isLiked;
+
+export const selectIsCommentsOpen = (state: RootState) =>
+  state.singlePagePost.isCommentsOpen;
+
+export const selectIsPostBookmarked = (state: RootState) =>
+  state.singlePagePost.isBookmarked;
