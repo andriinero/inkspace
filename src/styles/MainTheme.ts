@@ -12,6 +12,8 @@ const mainTheme = {
     topic_border: '#34383a',
     text_button_follow: '#7de276',
     main_button_bg: '#1E6E1A',
+    scrollbar_bg_thumb: '#5B6163',
+    scrollbar_bg_track: '#262828',
   },
 };
 

@@ -93,6 +93,8 @@ export const Preview = styled.div`
 export const PreviewImage = styled.img`
   max-width: 128px;
   object-fit: contain;
+
+  -webkit-user-drag: none;
 `;
 
 // #endregion
