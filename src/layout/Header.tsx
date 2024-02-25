@@ -9,11 +9,11 @@ import {
   NewPostButtonText,
   Logo,
 } from './Header.styled';
-import { logout, selectAuthData } from '@/features/auth/authSlice';
+import { logout, selectIsAuthenticated } from '@/features/auth/authSlice';
 import ActionButton from '@/components/general/ActionButton';
 
 const Header = () => {
-  const authData = useAppSelector(selectAuthData);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   const dispatch = useAppDispatch();
 
@@ -27,17 +27,17 @@ const Header = () => {
         <Logo>Well-done</Logo>
       </HeaderLink>
       <ProfileWrapper>
-        <NewPostButton>
-          <HeaderLink to="/new-post">
-            <NewPostIcon src="/post.svg" />
-            <NewPostButtonText>Write</NewPostButtonText>
-          </HeaderLink>
-        </NewPostButton>
-        {authData ? (
+        {isAuthenticated ? (
           <>
+            <NewPostButton>
+              <HeaderLink to="/new-post">
+                <NewPostIcon src="/post.svg" />
+                <NewPostButtonText>Write</NewPostButtonText>
+              </HeaderLink>
+            </NewPostButton>
             <ProfileIcon src="/portrait-placeholder.png" />
-            <HeaderLink to="/">
-              <ActionButton onButtonClick={onLogoutClick} value='Logout'/>
+            <HeaderLink reloadDocument to="/">
+              <ActionButton onButtonClick={onLogoutClick} value="Logout" />
             </HeaderLink>
           </>
         ) : (

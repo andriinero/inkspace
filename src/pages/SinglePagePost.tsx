@@ -15,9 +15,12 @@ import Error from '@/components/general/Error';
 import Spinner from '@/components/general/Spinner';
 import PostControls from '@/features/singlePagePost/components/PostControls';
 import PostComments from '@/features/singlePagePost/components/PostComments';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 const SinglePagePost = () => {
   const { postid } = useParams();
+
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   const dispatch = useAppDispatch();
 
@@ -40,7 +43,7 @@ const SinglePagePost = () => {
             topic={post.topic}
             author={post.author}
           />
-          <PostControls />
+          {isAuthenticated && <PostControls />}
           <Body>{post.body}</Body>
           <PostComments commentList={post.comments} />
         </PostWrapper>

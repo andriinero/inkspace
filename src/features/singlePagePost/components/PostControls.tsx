@@ -19,10 +19,10 @@ import Bookmark from '@/components/general/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
 
 const PostControls = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-
   const isLiked = useAppSelector(selectIsPostLiked);
   const isBookmarked = useAppSelector(selectIsPostBookmarked);
+
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 

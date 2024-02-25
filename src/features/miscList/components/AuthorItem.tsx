@@ -1,4 +1,6 @@
+import { useAppSelector } from '@/app/hooks';
 import * as S from './AuthorItem.styled';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 type AuthorItemProps = {
   _id: string;
@@ -8,6 +10,9 @@ type AuthorItemProps = {
 
 // TODO: fix bio styling
 const AuthorItem = ({ _id, username, bio }: AuthorItemProps) => {
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
+  const followLink = isAuthenticated ? `/authors/${_id}` : '/login';
   return (
     <S.WrapperItem>
       <S.AuthorLink to={`/authors/${_id}`}>
@@ -19,7 +24,9 @@ const AuthorItem = ({ _id, username, bio }: AuthorItemProps) => {
         </S.AuthorLink>
         <S.BioContent>{bio || 'No user bio'}</S.BioContent>
       </S.BioContainer>
-      <S.FollowButton type="button" value="Follow" />
+      <S.AuthorLink to={followLink}>
+        <S.FollowButton type="button" value="Follow" />
+      </S.AuthorLink>
     </S.WrapperItem>
   );
 };

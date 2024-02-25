@@ -90,3 +90,5 @@ export const selectAuthData = (state: RootState) => state.auth.authData;
 export const selectToken = (state: RootState) => state.auth.token;
 
 export const selectLoginState = (state: RootState) => state.auth.loginState;
+
+export const selectIsAuthenticated = (state: RootState) => Boolean(state.auth.authData); 

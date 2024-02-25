@@ -5,6 +5,8 @@ import { Author } from '@/types/Author';
 import { Topic } from '@/types/Topic';
 import Bookmark from '@/components/general/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
+import { useAppSelector } from '@/app/hooks';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 type PostItemProps = {
   _id: string;
@@ -16,6 +18,8 @@ type PostItemProps = {
 };
 
 const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
@@ -58,11 +62,15 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
           <S.PostReadEstimate bodyLength={body.length} />
         </S.MiscContainer>
         <S.Controls>
-          <Bookmark onBookmarked={handleBookmarkToggle} isBookmarked={isBookmarked} />
-          <DotMenu onToggle={handleMenuToggle} isOpen={isMenuOpen}>
-            <S.MenuItem onClick={handleMenuToggle}>Mute this author</S.MenuItem>
-            <S.MenuItem onClick={handleMenuToggle}>Mute this publication</S.MenuItem>
-          </DotMenu>
+          {isAuthenticated && (
+            <>
+              <Bookmark onBookmarked={handleBookmarkToggle} isBookmarked={isBookmarked} />
+              <DotMenu onToggle={handleMenuToggle} isOpen={isMenuOpen}>
+                <S.MenuItem onClick={handleMenuToggle}>Mute this author</S.MenuItem>
+                <S.MenuItem onClick={handleMenuToggle}>Mute this publication</S.MenuItem>
+              </DotMenu>
+            </>
+          )}
         </S.Controls>
       </S.Bottom>
     </S.Wrapper>
