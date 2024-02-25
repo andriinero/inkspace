@@ -1,3 +1,4 @@
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import {
   Wrapper,
   HeaderLink,
@@ -7,9 +8,20 @@ import {
   ProfileIcon,
   ButtonText,
   Logo,
+  LoginButton,
+  LogoutButton,
 } from './Header.styled';
+import { logout, selectAuthData } from '@/features/auth/authSlice';
 
 const Header = () => {
+  const authData = useAppSelector(selectAuthData);
+
+  const dispatch = useAppDispatch();
+
+  const onLogoutClick = (): void => {
+    dispatch(logout());
+  };
+
   return (
     <Wrapper>
       <HeaderLink to="/">
@@ -22,7 +34,18 @@ const Header = () => {
             <ButtonText>Write</ButtonText>
           </HeaderLink>
         </PostButton>
-        <ProfileIcon src="/portrait-placeholder.png" />
+        {authData ? (
+          <>
+            <ProfileIcon src="/portrait-placeholder.png" />
+            <HeaderLink to="/">
+              <LogoutButton onClick={onLogoutClick} type="button" value="Logout" />
+            </HeaderLink>
+          </>
+        ) : (
+          <HeaderLink to="/login">
+            <LoginButton type="button" value="Login" />
+          </HeaderLink>
+        )}
       </ProfileWrapper>
     </Wrapper>
   );

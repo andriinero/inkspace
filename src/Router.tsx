@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import SinglePagePost from './pages/SinglePagePost';
 import NotFound404 from './pages/NotFound404';
 import CreatePost from './pages/CreatePost';
+import Login from './pages/Login';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -15,6 +16,7 @@ const Router = () => {
         { index: true, element: <Home /> },
         { path: '/posts/:postid', element: <SinglePagePost /> },
         { path: '/new-post', element: <CreatePost /> },
+        { path: '/login', element: <Login /> },
       ],
       errorElement: <NotFound404 />,
     },
