@@ -37,10 +37,12 @@ export const Head = styled.div`
   font-size: 0.9rem;
 `;
 
-export const AuthorPfp = styled.img`
+export const AuthorIcon = styled.img`
   max-width: 24px;
   border-radius: 50%;
   object-fit: contain;
+
+  -webkit-user-drag: none;
 `;
 
 export const Divider = styled.span`

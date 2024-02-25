@@ -1,4 +1,5 @@
-import { Form, Header, Wrapper, SubmitButton } from './CreatePost.styled';
+import ActionButton from '@/components/general/ActionButton';
+import { Form, Header, Wrapper } from './CreatePost.styled';
 import { Editor } from '@tinymce/tinymce-react';
 
 const CreatePost = () => {
@@ -28,10 +29,10 @@ const CreatePost = () => {
             content_style:
               'body {font-family: Times New Roman, Arial, sans-serif; font-size: 16px;}',
           }}
-          initialValue="Tell your story...:"
+          initialValue="Tell your story..."
         />
       </Form>
-      <SubmitButton form="create-new-post" type="submit" value="Publish" />
+      <ActionButton form="create-new-post" type="submit" value="Publish" />
     </Wrapper>
   );
 };

@@ -28,6 +28,8 @@ export const Logo = styled.h1`
 
   transition: transform 200ms, color 200ms;
 
+  user-select: none;
+
   &:hover {
     color: ${({ theme }) => theme.color.text_secondary};
 
@@ -40,7 +42,7 @@ export const ProfileWrapper = styled.div`
   gap: 2rem;
 `;
 
-export const PostButton = styled.div`
+export const NewPostButton = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -48,6 +50,7 @@ export const PostButton = styled.div`
   transition: filter 100ms;
 
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
@@ -55,11 +58,11 @@ export const PostButton = styled.div`
   }
 `;
 
-export const PostIcon = styled.img`
+export const NewPostIcon = styled.img`
   width: 28px;
 `;
 
-export const ButtonText = styled.span`
+export const NewPostButtonText = styled.span`
   margin-left: 0.5rem;
 
   font-size: 0.9rem;
@@ -70,4 +73,5 @@ export const ProfileIcon = styled.img`
   border-radius: 50%;
 
   cursor: pointer;
+  -webkit-user-drag: none;
 `;

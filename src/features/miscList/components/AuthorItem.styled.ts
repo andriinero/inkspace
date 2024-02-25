@@ -44,6 +44,8 @@ export const Icon = styled.img`
   width: 32px;
   height: 32px;
   border-radius: 50%;
+
+  -webkit-user-drag: none;
 `;
 
 export const FollowButton = styled.input`

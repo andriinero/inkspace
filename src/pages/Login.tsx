@@ -2,7 +2,6 @@ import {
   fetchAuthData,
   login,
   selectAuthData,
-  selectLoginState,
   selectToken,
 } from '@/features/auth/authSlice';
 import { Wrapper } from './Login.styled';
@@ -14,7 +13,6 @@ import ActionButton from '@/components/general/ActionButton';
 const Login = () => {
   const token = useAppSelector(selectToken);
   const authData = useAppSelector(selectAuthData);
-  const { isLoading, error } = useAppSelector(selectLoginState);
 
   const dispatch = useAppDispatch();
 

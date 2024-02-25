@@ -2,11 +2,11 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import {
   Wrapper,
   HeaderLink,
-  PostButton,
-  PostIcon,
+  NewPostButton,
+  NewPostIcon,
   ProfileWrapper,
   ProfileIcon,
-  ButtonText,
+  NewPostButtonText,
   Logo,
 } from './Header.styled';
 import { logout, selectAuthData } from '@/features/auth/authSlice';
@@ -27,12 +27,12 @@ const Header = () => {
         <Logo>Well-done</Logo>
       </HeaderLink>
       <ProfileWrapper>
-        <PostButton>
+        <NewPostButton>
           <HeaderLink to="/new-post">
-            <PostIcon src="/post.svg" />
-            <ButtonText>Write</ButtonText>
+            <NewPostIcon src="/post.svg" />
+            <NewPostButtonText>Write</NewPostButtonText>
           </HeaderLink>
-        </PostButton>
+        </NewPostButton>
         {authData ? (
           <>
             <ProfileIcon src="/portrait-placeholder.png" />

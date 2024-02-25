@@ -1,14 +1,31 @@
 import { Button } from './ActionButton.styled';
 
 type ActionButtonProps = {
-  onButtonClick?: () => void;
-  value: string;
   className?: string;
+  id?: string;
+  form?: string;
+  onButtonClick?: () => void;
+  value?: string;
+  type?: string;
 };
 
-const ActionButton = ({ onButtonClick, value, className }: ActionButtonProps) => {
+const ActionButton = ({
+  className,
+  id,
+  form,
+  onButtonClick,
+  value,
+  type = 'button',
+}: ActionButtonProps) => {
   return (
-    <Button className={className} onClick={onButtonClick} type="button" value={value} />
+    <Button
+      className={className}
+      id={id}
+      form={form}
+      onClick={onButtonClick}
+      type={type}
+      value={value}
+    />
   );
 };
 

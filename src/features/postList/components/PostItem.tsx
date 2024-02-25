@@ -31,7 +31,7 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
     <S.Wrapper>
       <S.Head>
         <S.PostLink to={`/authors/${author._id}`}>
-          <S.AuthorPfp src="/portrait-placeholder.png" />
+          <S.AuthorIcon src="/portrait-placeholder.png" />
         </S.PostLink>
         <S.PostLink to={`/authors/${author._id}`}>
           <S.AuthorName>{author.username}</S.AuthorName>
