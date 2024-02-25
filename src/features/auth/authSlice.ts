@@ -22,7 +22,6 @@ export const fetchAuthData = createAsyncThunk(
   'auth/fetchUserData',
   async (_, { getState }) => {
     const { auth } = getState() as { auth: AuthState };
-    console.log(auth.token);
 
     const response = await fetch('http://localhost:3000/auth/login', {
       method: 'GET',
@@ -45,8 +44,6 @@ export const login = createAsyncThunk(
       body: JSON.stringify(loginBody),
     });
     const data = await response.json();
-
-    console.log(`Token: ${data.token}`);
 
     localStorage.setItem('token', data.token);
 
@@ -80,7 +77,6 @@ const authSlice = createSlice({
       });
     builder.addCase(fetchAuthData.fulfilled, (state, action) => {
       state.authData = action.payload;
-      console.log(`Username: ${state.authData?.username}`);
     });
   },
 });

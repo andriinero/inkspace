@@ -71,15 +71,3 @@ export const ProfileIcon = styled.img`
 
   cursor: pointer;
 `;
-
-export const LoginButton = styled.input`
-  padding: 0.5rem;
-
-  cursor: pointer;
-`;
-
-export const LogoutButton = styled.input`
-  padding: 0.5rem;
-
-  cursor: pointer;
-`;

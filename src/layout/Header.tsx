@@ -8,10 +8,9 @@ import {
   ProfileIcon,
   ButtonText,
   Logo,
-  LoginButton,
-  LogoutButton,
 } from './Header.styled';
 import { logout, selectAuthData } from '@/features/auth/authSlice';
+import ActionButton from '@/components/general/ActionButton';
 
 const Header = () => {
   const authData = useAppSelector(selectAuthData);
@@ -38,12 +37,12 @@ const Header = () => {
           <>
             <ProfileIcon src="/portrait-placeholder.png" />
             <HeaderLink to="/">
-              <LogoutButton onClick={onLogoutClick} type="button" value="Logout" />
+              <ActionButton onButtonClick={onLogoutClick} value='Logout'/>
             </HeaderLink>
           </>
         ) : (
           <HeaderLink to="/login">
-            <LoginButton type="button" value="Login" />
+            <ActionButton onButtonClick={onLogoutClick} value="Login" />
           </HeaderLink>
         )}
       </ProfileWrapper>
