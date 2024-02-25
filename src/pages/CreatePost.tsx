@@ -28,7 +28,7 @@ const CreatePost = () => {
             content_style:
               'body {font-family: Times New Roman, Arial, sans-serif; font-size: 16px;}',
           }}
-          initialValue="Type your bright thoughts here!"
+          initialValue="Tell your story...:"
         />
       </Form>
       <SubmitButton form="create-new-post" type="submit" value="Publish" />

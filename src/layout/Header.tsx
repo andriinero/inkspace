@@ -19,8 +19,8 @@ const Header = () => {
         <PostButton>
           <HeaderLink to="/new-post">
             <PostIcon src="/post.svg" />
+            <ButtonText>Write</ButtonText>
           </HeaderLink>
-          <ButtonText>Write</ButtonText>
         </PostButton>
         <ProfileIcon src="/portrait-placeholder.png" />
       </ProfileWrapper>

@@ -12,6 +12,10 @@ export const Wrapper = styled.header`
 `;
 
 export const HeaderLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   color: inherit;
   text-decoration: none;
 `;
@@ -56,6 +60,8 @@ export const PostIcon = styled.img`
 `;
 
 export const ButtonText = styled.span`
+  margin-left: 0.5rem;
+
   font-size: 0.9rem;
 `;
 

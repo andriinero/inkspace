@@ -6,6 +6,7 @@ type AuthorItemProps = {
   bio?: string;
 };
 
+// TODO: fix bio styling
 const AuthorItem = ({ _id, username, bio }: AuthorItemProps) => {
   return (
     <S.WrapperItem>
@@ -16,7 +17,7 @@ const AuthorItem = ({ _id, username, bio }: AuthorItemProps) => {
         <S.AuthorLink to={`/authors/${_id}`}>
           <S.BioName> {username}</S.BioName>
         </S.AuthorLink>
-        <S.BioContent>{bio}</S.BioContent>
+        <S.BioContent>{bio || 'No user bio'}</S.BioContent>
       </S.BioContainer>
       <S.FollowButton type="button" value="Follow" />
     </S.WrapperItem>
