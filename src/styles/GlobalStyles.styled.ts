@@ -15,11 +15,17 @@ const GlobalStyles = createGlobalStyle`
   }
   
   *::-webkit-scrollbar {
-    width: 12px;
+    width: 16px;
   }
 
   *::-webkit-scrollbar-thumb {
     background-color: ${({ theme }) => theme.color.scrollbar_bg_thumb};    
+    
+    transition: color 200ms;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.color.scrollbar_bg_thumb_hover};
+    }
   }
   
   *::-webkit-scrollbar-track {

@@ -1,29 +1,21 @@
-import {
-  fetchAuthData,
-  login,
-  selectAuthData,
-  selectToken,
-} from '@/features/auth/authSlice';
+import { fetchAuthData, login, selectAuthData } from '@/features/auth/authSlice';
 import { Wrapper } from './Login.styled';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import ActionButton from '@/components/general/ActionButton';
 
 const Login = () => {
-  const token = useAppSelector(selectToken);
   const authData = useAppSelector(selectAuthData);
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    console.log('fetching auth data');
-
-    dispatch(fetchAuthData());
-  }, [dispatch, token]);
-
-  const onLoginClick = (): void => {
-    dispatch(login({ username: 'CoolGirlNerd', password: 'strongpass1' }));
+  const onLoginClick = async (): Promise<void> => {
+    try {
+      await dispatch(login({ username: 'CoolGirlNerd', password: 'strongpass1' }));
+      dispatch(fetchAuthData());
+    } catch (err) {
+      console.error((err as Error).message);
+    }
   };
 
   if (authData) return <Navigate to="/" />;

@@ -1,8 +1,6 @@
-import Post from './Post';
-
 export type Comment = {
   _id: string;
-  post: Post;
+  post: string;
   email: string;
   title: string;
   body: string;
