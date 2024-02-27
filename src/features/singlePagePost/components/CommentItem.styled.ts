@@ -9,7 +9,7 @@ export const Wrapper = styled.li`
   gap: 0.5rem;
 `;
 
-export const Header = styled.h2`
+export const Header = styled.h3`
   display: flex;
   align-items: center;
   gap: 0.5rem;

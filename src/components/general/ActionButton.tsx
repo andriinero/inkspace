@@ -1,3 +1,4 @@
+import { FormEvent } from 'react';
 import { Button } from './ActionButton.styled';
 
 type ActionButtonProps = {
@@ -5,6 +6,7 @@ type ActionButtonProps = {
   id?: string;
   form?: string;
   onButtonClick?: () => void;
+  onSubmitClick?: (e: FormEvent) => void;
   value?: string;
   type?: string;
 };
@@ -14,6 +16,7 @@ const ActionButton = ({
   id,
   form,
   onButtonClick,
+  onSubmitClick,
   value,
   type = 'button',
 }: ActionButtonProps) => {
@@ -23,8 +26,9 @@ const ActionButton = ({
       id={id}
       form={form}
       onClick={onButtonClick}
-      type={type}
+      onSubmit={onSubmitClick}
       value={value}
+      type={type}
     />
   );
 };
