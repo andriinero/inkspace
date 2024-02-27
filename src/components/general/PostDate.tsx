@@ -2,10 +2,14 @@ import { DateTime } from 'luxon';
 
 import { Wrapper } from './PostDate.styled';
 
-type PostDateProps = { date: string };
+type PostDateProps = { className?: string; date: string };
 
-const PostDate = ({ date }: PostDateProps) => {
-  return <Wrapper>{DateTime.fromISO(date).toLocaleString(DateTime.DATE_MED)}</Wrapper>;
+const PostDate = ({ className, date }: PostDateProps) => {
+  return (
+    <Wrapper className={className}>
+      {DateTime.fromISO(date).toLocaleString(DateTime.DATE_MED)}
+    </Wrapper>
+  );
 };
 
 export default PostDate;
