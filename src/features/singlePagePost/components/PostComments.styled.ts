@@ -17,6 +17,4 @@ export const CommentList = styled.ol`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
-list-style-type: decimal;
 `;
