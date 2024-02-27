@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import {
@@ -42,6 +42,10 @@ const PostControls = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleMenuClose = (): void => {
+    setIsMenuOpen(false);
+  };
+
   const likeSrc = isLiked ? '/thumb-up.svg' : '/thumb-up-outline.svg';
 
   return (
@@ -52,9 +56,13 @@ const PostControls = () => {
       </ControlsContainer>
       <ControlsContainer>
         <Bookmark onBookmarked={onBookmarkClick} isBookmarked={isBookmarked} />
-        <DotMenu onToggle={handleMenuToggle} isOpen={isMenuOpen}>
-          <MenuItem onClick={handleMenuToggle}>Mute this author</MenuItem>
-          <MenuItem onClick={handleMenuToggle}>Mute this publication</MenuItem>
+        <DotMenu
+          onToggle={handleMenuToggle}
+          onMenuClose={handleMenuClose}
+          isOpen={isMenuOpen}
+        >
+          <MenuItem onClick={handleMenuClose}>Mute this author</MenuItem>
+          <MenuItem onClick={handleMenuClose}>Mute this publication</MenuItem>
         </DotMenu>
       </ControlsContainer>
     </Wrapper>

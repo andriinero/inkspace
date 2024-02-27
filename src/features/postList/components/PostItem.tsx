@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import * as S from './PostItem.styled';
 import PostDate from '@/components/general/PostDate';
 import { Author } from '@/types/Author';
@@ -19,7 +19,7 @@ type PostItemProps = {
 
 const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  
+
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
@@ -29,6 +29,10 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
 
   const handleMenuToggle = (): void => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleMenuClose = (): void => {
+    setIsMenuOpen(false);
   };
 
   return (
@@ -65,9 +69,13 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
           {isAuthenticated && (
             <>
               <Bookmark onBookmarked={handleBookmarkToggle} isBookmarked={isBookmarked} />
-              <DotMenu onToggle={handleMenuToggle} isOpen={isMenuOpen}>
-                <S.MenuItem onClick={handleMenuToggle}>Mute this author</S.MenuItem>
-                <S.MenuItem onClick={handleMenuToggle}>Mute this publication</S.MenuItem>
+              <DotMenu
+                onToggle={handleMenuToggle}
+                onMenuClose={handleMenuClose}
+                isOpen={isMenuOpen}
+              >
+                <S.MenuItem onClick={handleMenuClose}>Mute this author</S.MenuItem>
+                <S.MenuItem onClick={handleMenuClose}>Mute this publication</S.MenuItem>
               </DotMenu>
             </>
           )}
