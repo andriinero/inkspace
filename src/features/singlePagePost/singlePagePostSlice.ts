@@ -2,7 +2,7 @@ import { RootState } from '@/app/store';
 import Post from '@/types/Post';
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-type singlePagePostState = {
+type SinglePagePostState = {
   post: Post | null;
   isLoading: boolean;
   error: SerializedError | null;
@@ -11,7 +11,7 @@ type singlePagePostState = {
   isCommentsOpen: boolean;
 };
 
-const initialState: singlePagePostState = {
+const initialState: SinglePagePostState = {
   post: null,
   isLoading: true,
   error: null,

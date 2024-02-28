@@ -8,34 +8,44 @@ import {
   Wrapper,
 } from './CreatePost.styled';
 import { Editor } from '@tinymce/tinymce-react';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { Editor as TinyMCEEditor } from 'tinymce';
+import { ChangeEvent, FormEvent, useRef, useState } from 'react';
+import { useAppDispatch } from '@/app/hooks';
+import { postPost } from '@/features/createPost/createPostSlice';
+import { useNavigate } from 'react-router-dom';
 
 const CreatePost = () => {
-  const [title, setTitle] = useState('');
-  const [topic, setTopic] = useState('');
-  const [bodyContent, setBodyContent] = useState('');
+  const editorRef = useRef<TinyMCEEditor | null>(null);
 
-  const onTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const [title, setTitle] = useState<string>('');
+  const [topic, setTopic] = useState<string>('');
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const onTitleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setTitle(e.target.value);
   };
 
-  const onTopicChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onTopicChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setTopic(e.target.value);
   };
 
-  const onBodyChange = (e) => {
-    setBodyContent(e.target.value);
-    console.log(bodyContent);
-  };
-
-  const onFormSubmit = (e: FormEvent) => {
+  const onFormSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
+    if (editorRef.current) {
+      const response = await dispatch(
+        postPost({ title: title, topic: topic, body: editorRef.current.getContent() })
+      ).unwrap();
+
+      if (response) navigate('/');
+    }
   };
 
   return (
     <Wrapper>
       <Header>Create post</Header>
-      <Form id="create-new-post">
+      <Form onSubmit={onFormSubmit} id="create-new-post">
         <InputContainer>
           <InputLabel htmlFor="post-title">Title</InputLabel>
           <InputText
@@ -59,10 +69,9 @@ const CreatePost = () => {
           />
         </InputContainer>
         <Editor
-          value={bodyContent}
-          onChange={onBodyChange}
           textareaName="body"
           apiKey="3igd155ej5mtk3qa3n7kfpjlza31keecuv4bwtxpqxp3lib5"
+          onInit={(evt, editor) => (editorRef.current = editor)}
           init={{
             width: 900,
             height: 500,
@@ -86,12 +95,7 @@ const CreatePost = () => {
           initialValue="Tell your story..."
         />
       </Form>
-      <ActionButton
-        onSubmitClick={onFormSubmit}
-        form="create-new-post"
-        type="submit"
-        value="Publish"
-      />
+      <ActionButton form="create-new-post" type="submit" value="Publish" />
     </Wrapper>
   );
 };
