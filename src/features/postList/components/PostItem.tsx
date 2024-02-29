@@ -39,19 +39,19 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
   return (
     <S.Wrapper>
       <S.Head>
-        <S.PostLink to={`/authors/${author._id}`}>
+        <S.StyledLink to={`/authors/${author._id}`}>
           <S.AuthorIcon src="/portrait-placeholder.png" />
-        </S.PostLink>
-        <S.PostLink to={`/authors/${author._id}`}>
+        </S.StyledLink>
+        <S.StyledLink to={`/authors/${author._id}`}>
           <S.AuthorName>{author.username}</S.AuthorName>
-        </S.PostLink>
+        </S.StyledLink>
         <S.Divider>·</S.Divider>
         <PostDate date={date} />
       </S.Head>
       <S.Body>
-        <S.PostLink to={`/posts/${_id}`}>
+        <S.StyledLink to={`/posts/${_id}`}>
           <S.Title>{title}</S.Title>
-        </S.PostLink>
+        </S.StyledLink>
         <S.BodyText>{parse(body)}</S.BodyText>
       </S.Body>
       <S.Preview>
@@ -60,9 +60,9 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
       <S.Bottom>
         <S.MiscContainer>
           {topic && (
-            <S.PostLink to={`/topics/${topic._id}`}>
+            <S.StyledLink to={`/topics/${topic._id}`}>
               <S.Topic>{topic.name}</S.Topic>
-            </S.PostLink>
+            </S.StyledLink>
           )}
           <S.PostReadEstimate bodyLength={body.length} />
         </S.MiscContainer>

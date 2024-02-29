@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const PostLink = styled(NavLink)`
+export const StyledLink = styled(NavLink)`
   color: inherit;
   text-decoration: none;
 `;

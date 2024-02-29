@@ -15,18 +15,18 @@ const AuthorItem = ({ _id, username, bio }: AuthorItemProps) => {
   const followLink = isAuthenticated ? `/authors/${_id}` : '/login';
   return (
     <S.WrapperItem>
-      <S.AuthorLink to={`/authors/${_id}`}>
+      <S.StyledLink to={`/authors/${_id}`}>
         <S.Icon src="/portrait-placeholder.png" />
-      </S.AuthorLink>
+      </S.StyledLink>
       <S.BioContainer>
-        <S.AuthorLink to={`/authors/${_id}`}>
+        <S.StyledLink to={`/authors/${_id}`}>
           <S.BioName> {username}</S.BioName>
-        </S.AuthorLink>
+        </S.StyledLink>
         <S.BioContent>{bio || 'No user bio'}</S.BioContent>
       </S.BioContainer>
-      <S.AuthorLink to={followLink}>
+      <S.StyledLink to={followLink}>
         <S.FollowButton type="button" value="Follow" />
-      </S.AuthorLink>
+      </S.StyledLink>
     </S.WrapperItem>
   );
 };

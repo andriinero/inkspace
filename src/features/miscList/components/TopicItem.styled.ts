@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.color.topic_bg};
 `;
 
-export const TopicLink = styled(NavLink)`
+export const StyledLink = styled(NavLink)`
   color: inherit;
   text-decoration: none;
 `;

@@ -1,4 +1,4 @@
-import { TopicLink, Wrapper } from './TopicItem.styled';
+import { StyledLink, Wrapper } from './TopicItem.styled';
 
 type TopicItemProps = {
   _id: string;
@@ -7,9 +7,9 @@ type TopicItemProps = {
 
 const TopicItem = ({ _id, name }: TopicItemProps) => {
   return (
-    <TopicLink to={`/topics/${_id}`}>
+    <StyledLink to={`/topics/${_id}`}>
       <Wrapper>{name}</Wrapper>
-    </TopicLink>
+    </StyledLink>
   );
 };
 

@@ -16,9 +16,9 @@ const PostHeaderInfo = ({ author, date, topic, bodyLength }: PostAuthorProps) =>
     <S.Wrapper>
       <S.ProfileIcon src="/portrait-placeholder.png" alt="Author Profile Picture" />
       <S.MainContainer>
-        <S.PostLink to={`/users/${author._id}`}>
+        <S.StyledLink to={`/users/${author._id}`}>
           <S.Name>{author.username}</S.Name>
-        </S.PostLink>
+        </S.StyledLink>
         <S.Divider>·</S.Divider>
         <S.FollowButton
           onClick={() => {
@@ -31,9 +31,9 @@ const PostHeaderInfo = ({ author, date, topic, bodyLength }: PostAuthorProps) =>
       <S.MiscContainer>
         <S.TopicInfo>
           Published in
-          <S.PostLink to={`/topics/${topic._id}`}>
+          <S.StyledLink to={`/topics/${topic._id}`}>
             <S.TopicName> {topic.name}</S.TopicName>
-          </S.PostLink>
+          </S.StyledLink>
         </S.TopicInfo>
         <S.Divider>·</S.Divider>
         <S.PostReadEstimate bodyLength={bodyLength} />

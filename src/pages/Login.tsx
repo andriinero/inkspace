@@ -11,6 +11,7 @@ const Login = () => {
 
   const onLoginClick = async (): Promise<void> => {
     try {
+      // TODO: implement login form
       await dispatch(login({ username: 'CoolGirlNerd', password: 'strongpass1' }));
       dispatch(fetchAuthData());
     } catch (err) {

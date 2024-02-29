@@ -10,13 +10,13 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
   right: 0;
 
   width: 300px;
-  padding: 1rem;
   height: 100dvh;
+  padding: 1rem;
   background-color: ${({ theme }) => theme.color.comments_bg_primary};
   box-shadow: 0 0 2em rgb(0 0 0 / 0.3);
 
-  transition: transform 300ms;
-  transform: ${(props) => (props.$isOpen ? 'translateX(0)' : 'translateX(500px)')};
+  transition: transform 500ms;
+  transform: ${(props) => (props.$isOpen ? 'translateX(0)' : 'translateX(400px)')};
 
   overflow: -moz-scrollbars-vertical;
   overflow-y: scroll;

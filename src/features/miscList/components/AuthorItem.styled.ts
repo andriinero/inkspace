@@ -2,13 +2,14 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const WrapperItem = styled.li`
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(100px, 300px) auto;
   justify-content: space-between;
   align-items: center;
   gap: 1.1rem;
 `;
 
-export const AuthorLink = styled(NavLink)`
+export const StyledLink = styled(NavLink)`
   align-self: flex-start;
 
   color: inherit;
@@ -23,7 +24,13 @@ export const BioContainer = styled.div`
 export const BioName = styled.span`
   display: inline-block;
 
+  max-width: 18ch;
+
   font-weight: 500;
+
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const BioContent = styled.p`
@@ -31,11 +38,11 @@ export const BioContent = styled.p`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 
-  overflow: hidden;
-
   font-size: 0.8rem;
   line-height: 1.2rem;
   text-overflow: ellipsis;
+
+  overflow: hidden;
 `;
 
 export const Icon = styled.img`

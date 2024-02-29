@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
   column-gap: 1rem;
 `;
 
-export const PostLink = styled(NavLink)`
+export const StyledLink = styled(NavLink)`
   color: inherit;
   text-decoration: none;
 `;
