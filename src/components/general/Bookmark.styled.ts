@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const BookmarkIcon = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 22px;
 
   fill: #fff;
   transition: filter 100ms;

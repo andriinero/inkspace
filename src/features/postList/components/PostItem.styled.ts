@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import Bookmark from '@/components/general/Bookmark';
+import DotMenu from '@/components/general/DotMenu';
 
 import PostReadTime from '@/components/general/PostReadTime';
 
@@ -139,19 +141,12 @@ export const Controls = styled.div`
   gap: 1rem;
 `;
 
-export const ControlsIcon = styled.img`
-  width: 24px;
-  height: 24px;
+export const StyledBookmark = styled(Bookmark)`
+  width: 20px;
+`;
 
-  fill: #fff;
-  transition: filter 100ms;
-
-  cursor: pointer;
-
-  &:hover {
-    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
-      contrast(82%);
-  }
+export const StyledDotMenu = styled(DotMenu)`
+  width: 20px;
 `;
 
 export const MenuItem = styled.li`

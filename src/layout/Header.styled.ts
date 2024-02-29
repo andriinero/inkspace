@@ -59,13 +59,14 @@ export const NewPostButton = styled.div`
 `;
 
 export const NewPostIcon = styled.img`
-  width: 28px;
+  width: 22px;
 `;
 
 export const NewPostButtonText = styled.span`
   margin-left: 0.5rem;
 
   font-size: 0.9rem;
+  font-weight: 300;
 `;
 
 export const ProfileIcon = styled.img`

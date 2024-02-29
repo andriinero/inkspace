@@ -69,15 +69,15 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
         <S.Controls>
           {isAuthenticated && (
             <>
-              <Bookmark onBookmarked={handleBookmarkToggle} isBookmarked={isBookmarked} />
-              <DotMenu
+              <S.StyledBookmark onBookmarked={handleBookmarkToggle} isBookmarked={isBookmarked} />
+              <S.StyledDotMenu
                 onToggle={handleMenuToggle}
                 onMenuClose={handleMenuClose}
                 isOpen={isMenuOpen}
               >
                 <S.MenuItem onClick={handleMenuClose}>Mute this author</S.MenuItem>
                 <S.MenuItem onClick={handleMenuClose}>Mute this publication</S.MenuItem>
-              </DotMenu>
+              </S.StyledDotMenu>
             </>
           )}
         </S.Controls>
