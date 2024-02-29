@@ -3,16 +3,19 @@ import {
   Form,
   Header,
   InputContainer,
+  InputItem,
   InputLabel,
   InputText,
+  PostContainer,
+  PublishButton,
   Wrapper,
 } from './CreatePost.styled';
-import { Editor } from '@tinymce/tinymce-react';
 import { Editor as TinyMCEEditor } from 'tinymce';
 import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 import { useAppDispatch } from '@/app/hooks';
 import { postPost } from '@/features/createPost/createPostSlice';
 import { useNavigate } from 'react-router-dom';
+import TinyEditor from '@/features/createPost/components/TinyEditor';
 
 const CreatePost = () => {
   const editorRef = useRef<TinyMCEEditor | null>(null);
@@ -47,55 +50,34 @@ const CreatePost = () => {
       <Header>Create post</Header>
       <Form onSubmit={onFormSubmit} id="create-new-post">
         <InputContainer>
-          <InputLabel htmlFor="post-title">Title</InputLabel>
-          <InputText
-            id="post-title"
-            name="title"
-            type="text"
-            placeholder="Your title..."
-            value={title}
-            onChange={onTitleChange}
-          />
+          <InputItem>
+            <InputLabel htmlFor="post-title">Title</InputLabel>
+            <InputText
+              id="post-title"
+              name="title"
+              type="text"
+              placeholder="Your title..."
+              value={title}
+              onChange={onTitleChange}
+            />
+          </InputItem>
+          <InputItem>
+            <InputLabel htmlFor="post-topic">Topic</InputLabel>
+            <InputText
+              id="post-topic"
+              name="topic"
+              type="text"
+              placeholder="Post topic..."
+              value={topic}
+              onChange={onTopicChange}
+            />
+          </InputItem>
         </InputContainer>
-        <InputContainer>
-          <InputLabel htmlFor="post-topic">Topic</InputLabel>
-          <InputText
-            id="post-topic"
-            name="topic"
-            type="text"
-            placeholder="Post topic..."
-            value={topic}
-            onChange={onTopicChange}
-          />
-        </InputContainer>
-        <Editor
-          textareaName="body"
-          apiKey="3igd155ej5mtk3qa3n7kfpjlza31keecuv4bwtxpqxp3lib5"
-          onInit={(evt, editor) => (editorRef.current = editor)}
-          init={{
-            width: 900,
-            height: 500,
-            plugins:
-              'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
-            toolbar:
-              'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-            mergetags_list: [
-              { value: 'First.Name', title: 'First Name' },
-              { value: 'Email', title: 'Email' },
-            ],
-            ai_request: (request, respondWith) =>
-              respondWith.string(() =>
-                Promise.reject('See docs to implement AI Assistant')
-              ),
-            content_style:
-              'body {font-family: Times New Roman, Arial, sans-serif; font-size: 16px;}',
-          }}
-          initialValue="Tell your story..."
-        />
+        <PostContainer>
+          <TinyEditor editorRef={editorRef} />
+        </PostContainer>
       </Form>
-      <ActionButton form="create-new-post" type="submit" value="Publish" />
+      <PublishButton form="create-new-post" type="submit" value="Publish" />
     </Wrapper>
   );
 };

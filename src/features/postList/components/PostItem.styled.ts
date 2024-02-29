@@ -80,6 +80,13 @@ export const BodyText = styled.p`
   font-family: 'Times New Roman', Times, serif;
   line-height: 1.5rem;
   text-overflow: ellipsis;
+
+  & * {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+  }
 `;
 
 // #endregion

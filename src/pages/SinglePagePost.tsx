@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import parse from 'html-react-parser';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import {
@@ -44,7 +45,7 @@ const SinglePagePost = () => {
             author={post.author}
           />
           {isAuthenticated && <PostControls />}
-          <Body>{post.body}</Body>
+          <Body>{parse(post.body)}</Body>
           <PostComments commentList={post.comments} />
         </PostWrapper>
       ) : isLoading ? (

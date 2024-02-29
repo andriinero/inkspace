@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import parse from 'html-react-parser';
 import * as S from './PostItem.styled';
 import PostDate from '@/components/general/PostDate';
 import { Author } from '@/types/Author';
@@ -51,7 +52,7 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
         <S.PostLink to={`/posts/${_id}`}>
           <S.Title>{title}</S.Title>
         </S.PostLink>
-        <S.BodyText>{body}</S.BodyText>
+        <S.BodyText>{parse(body)}</S.BodyText>
       </S.Body>
       <S.Preview>
         <S.PreviewImage src="/landscape-placeholder.png" />
