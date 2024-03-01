@@ -28,17 +28,16 @@ const PostComments = ({ commentList }: PostCommentsProps) => {
   const isOpen = useAppSelector(selectIsCommentsOpen);
 
   const [newCommentText, setNewCommentText] = useState<string>('');
-  const [isAnimated, setIsAnimated] = useState(false);
+  const [isOverflown, setIsOverflown] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
-
-  const handleAnimationTrigger = () => {};
 
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     if (e.target.value.length <= MAX_CHARACTERS_PER_COMMENT) {
       setNewCommentText(e.target.value);
+      setIsOverflown(false);
     } else {
-      handleAnimationTrigger();
+      setIsOverflown(true);
     }
   };
 
@@ -61,7 +60,7 @@ const PostComments = ({ commentList }: PostCommentsProps) => {
             value={newCommentText}
           />
           <WrapperControls>
-            <StyledCounter isAnimated={isAnimated}>
+            <StyledCounter isOverflown={isOverflown}>
               {newCommentText.length}/280
             </StyledCounter>
             <StyledActionButton type="submit" value="Respond" />
