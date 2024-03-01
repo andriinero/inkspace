@@ -6,7 +6,7 @@ import {
   InputLabel,
   InputText,
   PostContainer,
-  PublishButton,
+  SubmitButton,
   Wrapper,
 } from './CreatePost.styled';
 import { Editor as TinyMCEEditor } from 'tinymce';
@@ -81,7 +81,7 @@ const CreatePost = () => {
           <TinyEditor editorRef={editorRef} />
         </PostContainer>
       </Form>
-      <PublishButton form="create-new-post" type="submit" value="Publish" />
+      <SubmitButton form="create-new-post" type="submit" value="Publish" />
     </Wrapper>
   );
 };

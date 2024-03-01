@@ -1,29 +1,74 @@
+import ActionButton from '@/components/general/ActionButton';
 import styled from 'styled-components';
+import CommentCounter from './CommentCounter';
 
 export const Wrapper = styled.div<{ $isOpen: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: 1.7rem;
 
   position: fixed;
   top: 0;
   right: 0;
 
-  width: 300px;
+  max-width: 400px;
   height: 100dvh;
-  padding: 1rem;
+  padding: 0 1rem;
   background-color: ${({ theme }) => theme.color.comments_bg_primary};
   box-shadow: 0 0 2em rgb(0 0 0 / 0.3);
 
   transition: transform 500ms;
-  transform: ${(props) => (props.$isOpen ? 'translateX(0)' : 'translateX(400px)')};
+  transform: ${(props) => (props.$isOpen ? 'translateX(0)' : 'translateX(450px)')};
 
   overflow: -moz-scrollbars-vertical;
   overflow-y: scroll;
 
+  & > * {
+    padding: 1.5rem 0;
+  }
+
   &::-webkit-scrollbar {
     width: 8px;
   }
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  padding: 0.9rem;
+
+  background-color: ${({ theme }) => theme.color.main_bg_secondary};
+  box-shadow: 0 0 1em rgb(0 0 0 / 0.2);
+`;
+
+export const InputText = styled.textarea`
+  min-height: 12ch;
+
+  padding: 0.3rem;
+  border: 1px solid transparent;
+  background-color: transparent;
+
+  color: ${({ theme }) => theme.color.text_primary};
+
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
+  }
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+`;
+
+export const StyledActionButton = styled(ActionButton)`
+  align-self: flex-end;
+
+  padding: 0.3rem;
+
+  font-size: 0.7rem;
 `;
 
 export const Header = styled.h2`
@@ -34,4 +79,21 @@ export const CommentList = styled.ol`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+`;
+
+export const WrapperControls = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 0.3rem;
+`;
+
+export const StyledCounter = styled(CommentCounter)`
+  min-width: 7ch;
+
+  color: ${({ theme }) => theme.color.text_primary};
+  font-size: 0.8rem;
+  font-weight: 300;
+  text-align: right;
 `;

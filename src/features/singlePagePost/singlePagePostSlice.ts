@@ -32,6 +32,35 @@ export const fetchPost = createAsyncThunk(
   }
 );
 
+// TODO: extract into separate slice
+export const postComment = createAsyncThunk(
+  'singlePagePost/postComment',
+  async (commentBody: string, { getState }) => {
+    const { auth } = getState() as { auth: { token: string } };
+    const { singlePagePost } = getState() as { singlePagePost: SinglePagePostState };
+
+    const response = await fetch(
+      `http://localhost:3000/api/posts/${singlePagePost.post?._id}/comments`,
+      {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${auth.token}`,
+        },
+        body: JSON.stringify({ body: commentBody }),
+      }
+    );
+
+    // TODO: add validation error messages
+    if (!response.ok) return null;
+
+    const data = await response.json();
+
+    return data;
+  }
+);
+
 const singlePagePostSlice = createSlice({
   name: 'singlePagePost',
   initialState,

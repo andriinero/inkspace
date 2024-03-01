@@ -25,6 +25,7 @@ export const postPost = createAsyncThunk(
   'singlePagePost/postPost',
   async (postBody: PostBodyType, { getState }) => {
     const { auth } = getState() as { auth: { token: string } };
+
     const response = await fetch(`http://localhost:3000/api/posts`, {
       method: 'POST',
       mode: 'cors',

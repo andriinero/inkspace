@@ -50,6 +50,6 @@ export const Form = styled.form`
   overflow-wrap: break-word;
 `;
 
-export const PublishButton = styled(ActionButton)`
+export const SubmitButton = styled(ActionButton)`
   align-self: flex-start;
 `;
