@@ -4,8 +4,8 @@ import { fetchPosts, selectPostListState } from '../postListSlice';
 
 import { Wrapper } from './PostContainer.styled';
 import PostItem from './PostItem';
-import Spinner from '@/components/general/Spinner';
 import Error from '@/components/general/Error';
+import PostListLoader from '@/components/loaders/PostListLoader';
 
 const PostContainer = () => {
   const dispatch = useAppDispatch();
@@ -19,7 +19,7 @@ const PostContainer = () => {
   return (
     <Wrapper>
       {isLoading ? (
-        <Spinner />
+        <PostListLoader />
       ) : error ? (
         <Error />
       ) : (

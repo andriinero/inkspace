@@ -13,7 +13,7 @@ import {
 import { Body, Header, PostWrapper, Wrapper } from './SinglePagePost.styled';
 import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo';
 import Error from '@/components/general/Error';
-import Spinner from '@/components/general/Spinner';
+import Spinner from '@/components/loaders/Spinner';
 import PostControls from '@/features/singlePagePost/components/PostControls';
 import PostComments from '@/features/singlePagePost/components/PostComments';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';

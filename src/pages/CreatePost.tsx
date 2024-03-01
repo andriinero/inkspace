@@ -11,10 +11,11 @@ import {
 } from './CreatePost.styled';
 import { Editor as TinyMCEEditor } from 'tinymce';
 import { ChangeEvent, FormEvent, useRef, useState } from 'react';
-import { useAppDispatch } from '@/app/hooks';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { postPost } from '@/features/createPost/createPostSlice';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import TinyEditor from '@/features/createPost/components/TinyEditor';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 const CreatePost = () => {
   const editorRef = useRef<TinyMCEEditor | null>(null);
@@ -22,8 +23,12 @@ const CreatePost = () => {
   const [title, setTitle] = useState<string>('');
   const [topic, setTopic] = useState<string>('');
 
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  if (!isAuthenticated) return <Navigate to="/" />;
 
   const onTitleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setTitle(e.target.value);

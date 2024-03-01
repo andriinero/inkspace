@@ -1,12 +1,13 @@
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+
+import { fetchAuthors, selectAuthorListState } from '../miscListSlice';
+
 import * as S from './AuthorContainer.styled';
 import AuthorItem from './AuthorItem';
-import { useEffect } from 'react';
-import { fetchAuthors, selectAuthorListState } from '../miscListSlice';
-import Spinner from '@/components/general/Spinner';
 import Error from '@/components/general/Error';
+import MiscListLoader from '@/components/loaders/MiscListLoader';
 
-//TODO: fix style imports
 const AuthorContainer = () => {
   const dispatch = useAppDispatch();
 
@@ -21,7 +22,7 @@ const AuthorContainer = () => {
       <S.Header>Who to follow</S.Header>
       <S.AuthorList>
         {isLoading ? (
-          <Spinner />
+          <MiscListLoader />
         ) : error ? (
           <Error />
         ) : (

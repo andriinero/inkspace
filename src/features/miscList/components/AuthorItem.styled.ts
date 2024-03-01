@@ -5,13 +5,10 @@ export const WrapperItem = styled.li`
   display: grid;
   grid-template-columns: auto minmax(100px, 300px) auto;
   justify-content: space-between;
-  align-items: center;
   gap: 1.1rem;
 `;
 
 export const StyledLink = styled(NavLink)`
-  align-self: flex-start;
-
   color: inherit;
 `;
 
@@ -57,9 +54,9 @@ export const Icon = styled.img`
 
 export const FollowButton = styled.input`
   padding: 0.5rem 0.8rem;
-  background-color: ${({ theme }) => theme.color.topic_bg};
   border: 1px solid ${({ theme }) => theme.color.topic_border};
   border-radius: 16px;
+  background-color: ${({ theme }) => theme.color.topic_bg};
 
   color: ${({ theme }) => theme.color.text_primary};
   font-size: 0.85rem;

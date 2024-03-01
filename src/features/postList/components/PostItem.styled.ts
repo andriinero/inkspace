@@ -123,6 +123,10 @@ export const MiscContainer = styled.div`
 `;
 
 export const Topic = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   padding: 0.3rem 0.5rem;
   border: 1px solid ${({ theme }) => theme.color.topic_border};
   border-radius: 16px;
@@ -150,7 +154,7 @@ export const StyledDotMenu = styled(DotMenu)`
 `;
 
 export const MenuItem = styled.li`
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.9rem;
 
   font-size: 0.9rem;
   font-weight: 300;
@@ -165,11 +169,11 @@ export const MenuItem = styled.li`
   }
 
   &:first-child {
-    padding-top: 1rem;
+    padding-top: 0.9rem;
   }
 
   &:last-child {
-    padding-bottom: 1rem;
+    padding-bottom: 0.9rem;
   }
 `;
 

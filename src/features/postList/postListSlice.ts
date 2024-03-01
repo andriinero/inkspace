@@ -31,6 +31,7 @@ const postListSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
+        // FIXME: uncomment
         state.isLoading = false;
         state.postList = action.payload;
       })
