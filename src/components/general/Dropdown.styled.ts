@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div<{ $isOpen: boolean }>`
+export const Wrapper = styled.div<{ $isOpen: boolean; $isAlignedLeft: boolean }>`
   display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
   position: absolute;
 
-  margin-top: 30px;
-  margin-left: 30px;
+  margin-top: 25px;
+  margin-left: ${({ $isAlignedLeft }) => ($isAlignedLeft ? '-95px' : '25px')};
   background-color: ${({ theme }) => theme.color.main_bg_secondary};
 
   transform: ${({ $isOpen }) => ($isOpen ? 'translateY(0)' : 'translateY(-10px)')};

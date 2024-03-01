@@ -8,6 +8,7 @@ type DotMenuProps = {
   onMenuClose: () => void;
   className?: string;
   isOpen: boolean;
+  isAlignedLeft: boolean;
   children: ReactNode;
 };
 
@@ -16,6 +17,7 @@ const DotMenu = ({
   onMenuClose,
   className,
   isOpen,
+  isAlignedLeft,
   children,
 }: DotMenuProps) => {
   const dropdown = useRef<HTMLDivElement>(null);
@@ -30,7 +32,7 @@ const DotMenu = ({
         src="/dots-horizontal.svg"
         alt="Dot Menu Icon"
       />
-      <Dropdown innerRef={dropdown} isOpen={isOpen}>
+      <Dropdown innerRef={dropdown} isOpen={isOpen} isAlignedLeft={isAlignedLeft}>
         {children}
       </Dropdown>
     </>

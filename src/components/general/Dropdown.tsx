@@ -2,14 +2,15 @@ import { ReactNode, RefObject } from 'react';
 import { Wrapper, List } from './Dropdown.styled';
 
 type DropdownProps = {
-  isOpen: boolean;
-  children: ReactNode;
   innerRef: RefObject<HTMLDivElement>;
+  children: ReactNode;
+  isOpen: boolean;
+  isAlignedLeft: boolean;
 };
 
-const Dropdown = ({ isOpen, children, innerRef }: DropdownProps) => {
+const Dropdown = ({ innerRef, children, isOpen, isAlignedLeft }: DropdownProps) => {
   return (
-    <Wrapper ref={innerRef} $isOpen={isOpen}>
+    <Wrapper ref={innerRef} $isOpen={isOpen} $isAlignedLeft={isAlignedLeft}>
       <List>{children}</List>
     </Wrapper>
   );
