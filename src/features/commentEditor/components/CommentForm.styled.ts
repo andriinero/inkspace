@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import ActionButton from "@/components/general/ActionButton";
-import CommentCounter from "../../comments/components/CommentCounter";
+import styled from 'styled-components';
+import ActionButton from '@/components/general/ActionButton';
+import CommentCounter from '../../comments/components/CommentCounter';
 
 export const Form = styled.form`
   display: flex;
@@ -40,14 +40,6 @@ export const FormWrapper = styled.div`
   }
 `;
 
-export const StyledActionButton = styled(ActionButton)`
-  align-self: flex-end;
-
-  padding: 0.3rem;
-
-  font-size: 0.7rem;
-`;
-
 export const Header = styled.h2`
   font-size: 1.3rem;
 `;
@@ -57,12 +49,30 @@ export const CommentList = styled.ol`
   flex-direction: column;
 `;
 
-export const WrapperControls = styled.div`
+export const BottomWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   padding: 0 0.3rem;
+`;
+
+export const ControlsWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+export const SubmitActionButton = styled(ActionButton)`
+  padding: 0.3rem;
+
+  font-size: 0.7rem;
+`;
+
+export const CancelActionButton = styled(ActionButton)`
+  padding: 0.3rem;
+  background-color: ${({ theme }) => theme.color.main_button_bg_secondary};
+
+  font-size: 0.7rem;
 `;
 
 export const StyledCounter = styled(CommentCounter)`

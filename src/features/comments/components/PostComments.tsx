@@ -12,6 +12,7 @@ import {
 import { Wrapper, Header, CommentList } from './PostComments.styled';
 import CommentItem from './CommentItem';
 import CommentForm from '../../commentEditor/components/CommentForm';
+import { exitEditMode } from '@/features/commentEditor/commentEditorSlice';
 
 type PostCommentsProps = {
   postId: string;
@@ -30,6 +31,7 @@ const PostComments = ({ postId }: PostCommentsProps) => {
 
     return () => {
       dispatch(closeComments());
+      dispatch(exitEditMode());
       controller.abort();
     };
   }, [postId, dispatch]);

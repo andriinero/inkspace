@@ -62,7 +62,7 @@ const commentsSlice = createSlice({
     addComment(state, action) {
       state.comments.splice(0, 0, action.payload);
     },
-    updateComment(state, action) {
+    editComment(state, action) {
       const commentIndex = state.comments.findIndex(
         (comment) => comment._id === action.payload.commentId
       );
@@ -99,7 +99,7 @@ const commentsSlice = createSlice({
   },
 });
 
-export const { addComment, openComments, closeComments, toggleComments } =
+export const { addComment, editComment, openComments, closeComments, toggleComments } =
   commentsSlice.actions;
 
 export default commentsSlice.reducer;

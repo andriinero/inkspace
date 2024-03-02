@@ -4,12 +4,13 @@ import { RootState } from '@/app/store';
 
 type CommentEditorState = {
   textField: string;
+  isEditMode: boolean;
   postCommentState: {
     isLoading: boolean;
     error: SerializedError | null;
   };
   updateCommentState: {
-    isEditMode: boolean;
+    commentId: string | null;
     isLoading: boolean;
     error: SerializedError | null;
   };
@@ -20,12 +21,13 @@ type UpdateCommentType = { commentId: string; commentBody: string };
 
 const initialState: CommentEditorState = {
   textField: '',
+  isEditMode: false,
   postCommentState: {
     isLoading: false,
     error: null,
   },
   updateCommentState: {
-    isEditMode: false,
+    commentId: null,
     isLoading: false,
     error: null,
   },
@@ -61,14 +63,14 @@ export const updateComment = createAsyncThunk(
   ) => {
     const { auth } = getState() as { auth: { token: string } };
 
-    const response = await fetch(`http:localhost:3000/api/comments/${commentId}`, {
+    const response = await fetch(`http://localhost:3000/api/comments/${commentId}`, {
       method: 'PUT',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${auth.token}`,
       },
-      body: JSON.stringify(commentBody),
+      body: JSON.stringify({ body: commentBody}),
     });
     const data = await response.json();
 
@@ -82,11 +84,18 @@ const commentEditorSlice = createSlice({
   name: 'commentEditor',
   initialState,
   reducers: {
-    enterEditMode(state) {
-      state.updateCommentState.isEditMode = true;
+    setCommentTextField(state, action) {
+      state.textField = action.payload;
+    },
+    enterEditMode(state, action) {
+      state.isEditMode = true;
+      state.updateCommentState.commentId = action.payload.commentId;
+      state.textField = action.payload.commentBody;
     },
     exitEditMode(state) {
-      state.updateCommentState.isEditMode = false;
+      state.isEditMode = false;
+      state.updateCommentState.commentId = null;
+      state.textField = '';
     },
   },
   extraReducers(builder) {
@@ -117,9 +126,18 @@ const commentEditorSlice = createSlice({
   },
 });
 
-export const { enterEditMode, exitEditMode } = commentEditorSlice.actions;
+export const { setCommentTextField, enterEditMode, exitEditMode } =
+  commentEditorSlice.actions;
 
 export default commentEditorSlice.reducer;
+
+export const selectCommentTextField = (state: RootState) => state.commentEditor.textField;
+
+export const selectCommentIsEditMode = (state: RootState) =>
+  state.commentEditor.isEditMode;
+
+export const selectEditCommentId = (state: RootState) =>
+  state.commentEditor.updateCommentState.commentId;
 
 export const selectPostCommentState = (state: RootState) =>
   state.commentEditor.postCommentState;

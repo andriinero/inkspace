@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useAppDispatch } from '@/app/hooks';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { MAX_CHARACTERS_PER_COMMENT, MIN_CHARACTERS_PER_COMMENT } from '@/data/consts';
 
@@ -7,18 +7,30 @@ import {
   Form,
   FormWrapper,
   InputText,
-  StyledActionButton,
+  SubmitActionButton,
   StyledCounter,
-  WrapperControls,
+  BottomWrapper,
+  ControlsWrapper,
+  CancelActionButton,
 } from './CommentForm.styled';
 
-import { postComment } from '../commentEditorSlice';
-import { addComment } from '@/features/comments/commentsSlice';
+import {
+  exitEditMode,
+  postComment,
+  selectCommentIsEditMode,
+  selectCommentTextField,
+  selectEditCommentId,
+  setCommentTextField,
+  updateComment,
+} from '../commentEditorSlice';
+import { addComment, editComment } from '@/features/comments/commentsSlice';
 
 type CommentFormProps = { postId: string };
 
 const CommentForm = ({ postId }: CommentFormProps) => {
-  const [commentText, setCommentText] = useState<string>('');
+  const commentText = useAppSelector(selectCommentTextField);
+  const isEditMode = useAppSelector(selectCommentIsEditMode);
+  const editCommentId = useAppSelector(selectEditCommentId);
   const [isOverflown, setIsOverflown] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
@@ -27,7 +39,7 @@ const CommentForm = ({ postId }: CommentFormProps) => {
     if (e.target.value.length >= MAX_CHARACTERS_PER_COMMENT) {
       setIsOverflown(true);
     } else {
-      setCommentText(e.target.value);
+      dispatch(setCommentTextField(e.target.value));
       setIsOverflown(false);
     }
   };
@@ -40,26 +52,60 @@ const CommentForm = ({ postId }: CommentFormProps) => {
     } else {
       const response = await dispatch(postComment({ postId, commentBody: commentText }));
       if (response) {
-        setCommentText('');
+        dispatch(setCommentTextField(''));
         dispatch(addComment(response.payload));
       }
     }
   };
 
+  const handleCommentUpdate = async (e: FormEvent) => {
+    e.preventDefault();
+
+    if (commentText.length < MIN_CHARACTERS_PER_COMMENT) {
+      setIsOverflown(true);
+    } else {
+      if (isEditMode && editCommentId) {
+        const response = await dispatch(
+          updateComment({ commentId: editCommentId, commentBody: commentText })
+        ).unwrap();
+        if (response) {
+          dispatch(setCommentTextField(''));
+          dispatch(exitEditMode());
+          dispatch(editComment({ commentId: response._id, commentBody: response.body }));
+        }
+      }
+    }
+  };
+
+  const handleEditCancel = () => {
+    dispatch(exitEditMode());
+  };
+
+  const handleFormSubmit = isEditMode ? handleCommentUpdate : handleCommentSubmit;
+
   return (
     <FormWrapper>
-      <Form onSubmit={handleCommentSubmit}>
+      <Form onSubmit={handleFormSubmit}>
         <InputText
           onChange={handleCommentChange}
           placeholder="What are your thoughts?"
           value={commentText}
         />
-        <WrapperControls>
+        <BottomWrapper>
           <StyledCounter isOverflown={isOverflown}>
             {commentText.length}/280
           </StyledCounter>
-          <StyledActionButton type="submit" value="Respond" />
-        </WrapperControls>
+          <ControlsWrapper>
+            {isEditMode && (
+              <CancelActionButton
+                onButtonClick={handleEditCancel}
+                type="button"
+                value="Cancel"
+              />
+            )}
+            <SubmitActionButton type="submit" value={isEditMode ? 'Update' : 'Respond'} />
+          </ControlsWrapper>
+        </BottomWrapper>
       </Form>
     </FormWrapper>
   );
