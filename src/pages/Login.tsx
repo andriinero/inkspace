@@ -1,7 +1,9 @@
-import { fetchAuthData, login, selectAuthData } from '@/features/auth/authSlice';
-import { Wrapper } from './Login.styled';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { Navigate } from 'react-router-dom';
+
+import { fetchAuthData, login, selectAuthData } from '@/features/auth/authSlice';
+
+import { Wrapper } from './Login.styled';
 import ActionButton from '@/components/general/ActionButton';
 
 const Login = () => {
@@ -11,7 +13,6 @@ const Login = () => {
 
   const onFirstLoginClick = async (): Promise<void> => {
     try {
-      // TODO: implement login form
       await dispatch(login({ username: 'CoolGirlNerd', password: 'strongpass1' }));
       dispatch(fetchAuthData());
     } catch (err) {
@@ -21,7 +22,6 @@ const Login = () => {
 
   const onSecondLoginClick = async (): Promise<void> => {
     try {
-      // TODO: implement login form
       await dispatch(login({ username: 'CoolGuyNerd', password: 'strongpass1' }));
       dispatch(fetchAuthData());
     } catch (err) {

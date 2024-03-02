@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import parse from 'html-react-parser';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
+import parse from 'html-react-parser';
+
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
   fetchPost,
   selectPostData,
@@ -15,8 +17,7 @@ import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo'
 import Error from '@/components/general/Error';
 import Spinner from '@/components/loaders/Spinner';
 import PostControls from '@/features/singlePagePost/components/PostControls';
-import PostComments from '@/features/comments/components/PostComments';
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import PostComments from '@/features/commentList/components/CommentList';
 
 const SinglePagePost = () => {
   const { postid } = useParams();
@@ -26,7 +27,9 @@ const SinglePagePost = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchPost(postid!));
+    if (postid) {
+      dispatch(fetchPost(postid));
+    }
   }, [dispatch, postid]);
 
   const post = useAppSelector(selectPostData);

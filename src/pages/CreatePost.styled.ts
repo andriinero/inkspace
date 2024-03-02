@@ -17,7 +17,7 @@ export const InputContainer = styled.div`
   gap: 1rem;
 `;
 
-export const PostContainer = styled.div`
+export const PostWrapper = styled.div`
   & > * {
     padding: 0.5rem;
     min-height: 300px;

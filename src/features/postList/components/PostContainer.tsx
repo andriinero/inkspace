@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+
 import { fetchPosts, selectPostListState } from '../postListSlice';
 
 import { Wrapper } from './PostContainer.styled';

@@ -1,6 +1,8 @@
 import { useAppSelector } from '@/app/hooks';
-import * as S from './AuthorItem.styled';
+
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
+
+import * as S from './AuthorItem.styled';
 
 type AuthorItemProps = {
   _id: string;

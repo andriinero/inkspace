@@ -1,3 +1,13 @@
+import { useState, useRef, ChangeEvent, FormEvent } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { Editor as TinyMCEEditor } from 'tinymce';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+
+import TinyEditor from '@/features/createPost/components/TinyEditor';
+
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import { postPost } from '@/features/createPost/createPostSlice';
+
 import {
   Form,
   Header,
@@ -5,17 +15,10 @@ import {
   InputItem,
   InputLabel,
   InputText,
-  PostContainer,
+  PostWrapper,
   SubmitButton,
   Wrapper,
 } from './CreatePost.styled';
-import { Editor as TinyMCEEditor } from 'tinymce';
-import { ChangeEvent, FormEvent, useRef, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { postPost } from '@/features/createPost/createPostSlice';
-import { Navigate, useNavigate } from 'react-router-dom';
-import TinyEditor from '@/features/createPost/components/TinyEditor';
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 const CreatePost = () => {
   const editorRef = useRef<TinyMCEEditor | null>(null);
@@ -77,9 +80,9 @@ const CreatePost = () => {
             />
           </InputItem>
         </InputContainer>
-        <PostContainer>
+        <PostWrapper>
           <TinyEditor editorRef={editorRef} />
-        </PostContainer>
+        </PostWrapper>
       </Form>
       <SubmitButton form="create-new-post" type="submit" value="Publish" />
     </Wrapper>

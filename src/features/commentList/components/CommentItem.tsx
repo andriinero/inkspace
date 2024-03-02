@@ -15,7 +15,7 @@ import {
 } from './CommentItem.styled';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { selectCurrentUserId } from '@/features/auth/authSlice';
-import { deleteComment } from '../commentsSlice';
+import { deleteComment } from '../commentListSlice';
 import {
   enterEditMode,
   selectCommentIsEditMode,

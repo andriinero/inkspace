@@ -1,4 +1,5 @@
 import { CHARACTERS_PER_MINUTE } from '@/data/consts';
+
 import { Wrapper } from './PostReadTime.styled';
 
 type PostReadTimeProps = {

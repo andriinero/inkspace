@@ -7,9 +7,9 @@ import {
   fetchComments,
   selectAreCommentsOpen,
   selectCommentList,
-} from '@/features/comments/commentsSlice';
+} from '@/features/commentList/commentListSlice';
 
-import { Wrapper, Header, CommentList } from './PostComments.styled';
+import { Wrapper, Header, WrapperList } from './CommentList.styled';
 import CommentItem from './CommentItem';
 import CommentForm from '../../commentEditor/components/CommentForm';
 import { exitEditMode } from '@/features/commentEditor/commentEditorSlice';
@@ -18,7 +18,7 @@ type PostCommentsProps = {
   postId: string;
 };
 
-const PostComments = ({ postId }: PostCommentsProps) => {
+const CommentList = ({ postId }: PostCommentsProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   const isOpen = useAppSelector(selectAreCommentsOpen);
@@ -40,13 +40,13 @@ const PostComments = ({ postId }: PostCommentsProps) => {
     <Wrapper $isOpen={isOpen}>
       <Header>{`Responses (${commentList.length})`}</Header>
       {isAuthenticated && <CommentForm postId={postId} />}
-      <CommentList>
+      <WrapperList>
         {commentList.map((comment) => (
           <CommentItem key={comment._id} {...comment} />
         ))}
-      </CommentList>
+      </WrapperList>
     </Wrapper>
   );
 };
 
-export default PostComments;
+export default CommentList;

@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import postListReducer from '@/features/postList/postListSlice';
 import miscListReducer from '@/features/miscList/miscListSlice';
 import singlePagePostReducer from '@/features/singlePagePost/singlePagePostSlice';
 import authReducer from '@/features/auth/authSlice';
 import createPostReducer from '@/features/createPost/createPostSlice';
-import commentsReducer from '@/features/comments/commentsSlice';
+import commentListReducer from '@/features/commentList/commentListSlice';
 import commentEditorReducer from '@/features/commentEditor/commentEditorSlice';
 
 export const store = configureStore({
@@ -14,7 +15,7 @@ export const store = configureStore({
     singlePagePost: singlePagePostReducer,
     auth: authReducer,
     createPost: createPostReducer,
-    comments: commentsReducer,
+    comments: commentListReducer,
     commentEditor: commentEditorReducer,
   },
 });

@@ -7,7 +7,7 @@ import {
   toggleIsBookmarked,
   toggleIsLiked,
 } from '../singlePagePostSlice';
-import { toggleComments } from '@/features/comments/commentsSlice';
+import { toggleComments } from '@/features/commentList/commentListSlice';
 
 import {
   ControlsContainer,

@@ -23,7 +23,7 @@ import {
   setCommentTextField,
   updateComment,
 } from '../commentEditorSlice';
-import { addComment, editComment } from '@/features/comments/commentsSlice';
+import { addComment, editComment } from '@/features/commentList/commentListSlice';
 
 type CommentFormProps = { postId: string };
 
@@ -31,6 +31,7 @@ const CommentForm = ({ postId }: CommentFormProps) => {
   const commentText = useAppSelector(selectCommentTextField);
   const isEditMode = useAppSelector(selectCommentIsEditMode);
   const editCommentId = useAppSelector(selectEditCommentId);
+
   const [isOverflown, setIsOverflown] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();

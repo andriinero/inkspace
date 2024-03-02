@@ -1,7 +1,8 @@
+import { RootState } from '@/app/store';
+
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { Comment } from '@/types/Comment';
-import { RootState } from '@/app/store';
 
 type CommentsState = {
   comments: Comment[];
@@ -23,7 +24,7 @@ const initialState: CommentsState = {
 };
 
 export const fetchComments = createAsyncThunk(
-  'comments/fetchComment',
+  'commentList/fetchComment',
   async (postId: string) => {
     const response = await fetch(`http://localhost:3000/api/posts/${postId}/comments`, {
       method: 'GET',
@@ -36,7 +37,7 @@ export const fetchComments = createAsyncThunk(
 );
 
 export const deleteComment = createAsyncThunk(
-  'comments/deleteComment',
+  'commentList/deleteComment',
   async (commentId: string, { getState, rejectWithValue }) => {
     const { auth } = getState() as { auth: { token: string } };
 
@@ -55,8 +56,8 @@ export const deleteComment = createAsyncThunk(
   }
 );
 
-const commentsSlice = createSlice({
-  name: 'comments',
+const commentListSlice = createSlice({
+  name: 'commentList',
   initialState,
   reducers: {
     addComment(state, action) {
@@ -100,9 +101,9 @@ const commentsSlice = createSlice({
 });
 
 export const { addComment, editComment, openComments, closeComments, toggleComments } =
-  commentsSlice.actions;
+  commentListSlice.actions;
 
-export default commentsSlice.reducer;
+export default commentListSlice.reducer;
 
 export const selectCommentList = (state: RootState) => state.comments.comments;
 

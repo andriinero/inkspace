@@ -1,7 +1,9 @@
 import { ReactNode, useRef } from 'react';
+
+import useCloseDropdown from '@/hooks/useCloseDropdown';
+
 import { DotIcon } from './DotMenu.styled';
 import Dropdown from './Dropdown';
-import useCloseDropdown from '@/hooks/useCloseDropdown';
 
 type DotMenuProps = {
   onToggle: () => void;

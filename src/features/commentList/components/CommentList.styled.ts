@@ -1,6 +1,4 @@
-import ActionButton from '@/components/general/ActionButton';
 import styled from 'styled-components';
-import CommentCounter from './CommentCounter';
 
 export const Wrapper = styled.div<{ $isOpen: boolean }>`
   display: flex;
@@ -35,7 +33,7 @@ export const Header = styled.h2`
   font-size: 1.3rem;
 `;
 
-export const CommentList = styled.ol`
+export const WrapperList = styled.ol`
   display: flex;
   flex-direction: column;
 `;

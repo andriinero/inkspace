@@ -1,5 +1,4 @@
 import { Author } from './Author';
-import { Comment } from './Comment';
 import { Topic } from './Topic';
 
 type Post = {
@@ -9,7 +8,6 @@ type Post = {
   body: string;
   date: string;
   topic: Topic;
-  comments: Comment[];
 };
 
 export default Post;

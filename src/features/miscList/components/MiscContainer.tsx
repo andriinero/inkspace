@@ -1,6 +1,6 @@
-import { Wrapper } from './MiscContainer.styled';
 import AuthorContainer from './AuthorContainer';
 import MiscTopics from './TopicContainer';
+import { Wrapper } from './MiscContainer.styled';
 
 const MiscContainer = () => {
   return (

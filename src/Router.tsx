@@ -15,7 +15,7 @@ const Router = () => {
       children: [
         { index: true, element: <Home /> },
         { path: '/posts/:postid', element: <SinglePagePost /> },
-        { path: '/new-post', element: <CreatePost /> },
+        { path: '/create-post', element: <CreatePost /> },
         { path: '/login', element: <Login /> },
       ],
       errorElement: <NotFound404 />,

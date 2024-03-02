@@ -1,6 +1,8 @@
 import { MutableRefObject } from 'react';
-import { Editor } from '@tinymce/tinymce-react';
+
 import { Editor as TinyMCEEditor } from 'tinymce';
+
+import { Editor } from '@tinymce/tinymce-react';
 
 type TinyEditorProps = {
   editorRef: MutableRefObject<TinyMCEEditor | null>;

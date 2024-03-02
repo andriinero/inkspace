@@ -1,4 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+
+import { logout, selectIsAuthenticated } from '@/features/auth/authSlice';
+
 import {
   Wrapper,
   HeaderLink,
@@ -9,7 +12,6 @@ import {
   NewPostButtonText,
   Logo,
 } from './Header.styled';
-import { logout, selectIsAuthenticated } from '@/features/auth/authSlice';
 import ActionButton from '@/components/general/ActionButton';
 
 const Header = () => {
@@ -30,7 +32,7 @@ const Header = () => {
         {isAuthenticated ? (
           <>
             <NewPostButton>
-              <HeaderLink to="/new-post">
+              <HeaderLink to="/create-post">
                 <NewPostIcon src="/post.svg" />
                 <NewPostButtonText>Write</NewPostButtonText>
               </HeaderLink>
