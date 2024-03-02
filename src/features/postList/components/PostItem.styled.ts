@@ -71,7 +71,7 @@ export const Title = styled.h3`
   font-size: 1.25rem;
 `;
 
-export const BodyText = styled.p`
+export const BodyText = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;

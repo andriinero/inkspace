@@ -39,10 +39,11 @@ const PostComments = ({ postId }: PostCommentsProps) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchComments(postId));
+    const controller = dispatch(fetchComments(postId));
 
     return () => {
       dispatch(closeComments());
+      controller.abort();
     };
   }, [postId, dispatch]);
 

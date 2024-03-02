@@ -18,6 +18,7 @@ type CommentsState = {
 
 type PostCommentType = { postId: string; commentBody: string };
 
+// TODO: add more states for better UX
 const initialState: CommentsState = {
   comments: [],
   areCommentsOpen: false,
@@ -129,7 +130,6 @@ const commentsSlice = createSlice({
         state.postCommentState.error = payload.error;
       });
     builder.addCase(deleteComment.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.comments = state.comments.filter((c) => c._id !== action.payload._id);
     });
   },

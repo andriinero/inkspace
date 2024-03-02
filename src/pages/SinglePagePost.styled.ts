@@ -19,7 +19,7 @@ export const Header = styled.h1`
   font-size: 2.7rem;
 `;
 
-export const Body = styled.p`
+export const Body = styled.div`
   font-size: 1.25rem;
   font-family: 'Times New Roman', Times, serif;
   line-height: 1.8rem;
