@@ -45,7 +45,7 @@ export const fetchComments = createAsyncThunk(
 
 export const postComment = createAsyncThunk(
   'comments/postComment',
-  async ({ postId, commentBody }: PostCommentType, { getState }) => {
+  async ({ postId, commentBody }: PostCommentType, { getState, rejectWithValue }) => {
     const { auth } = getState() as { auth: { token: string } };
 
     const response = await fetch(`http://localhost:3000/api/posts/${postId}/comments`, {
@@ -57,11 +57,9 @@ export const postComment = createAsyncThunk(
       },
       body: JSON.stringify({ body: commentBody }),
     });
-
-    // TODO: add validation error messages
-    if (!response.ok) return null;
-
     const data = await response.json();
+
+    if (!response.ok) return rejectWithValue(data);
 
     return data;
   }
@@ -74,12 +72,16 @@ const commentsSlice = createSlice({
     toggleComments(state) {
       state.areCommentsOpen = !state.areCommentsOpen;
     },
+    closeComments(state) {
+      state.areCommentsOpen = false;
+    },
   },
   extraReducers(builder) {
     builder
       .addCase(fetchComments.pending, (state) => {
         state.fetchCommentsState.isLoading = true;
         state.fetchCommentsState.error = null;
+        state.comments = [];
       })
       .addCase(fetchComments.fulfilled, (state, action) => {
         state.fetchCommentsState.isLoading = false;
@@ -105,7 +107,7 @@ const commentsSlice = createSlice({
   },
 });
 
-export const { toggleComments } = commentsSlice.actions;
+export const { closeComments, toggleComments } = commentsSlice.actions;
 
 export default commentsSlice.reducer;
 

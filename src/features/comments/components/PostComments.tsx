@@ -1,10 +1,11 @@
 import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { MAX_CHARACTERS_PER_COMMENT } from '@/data/consts';
+import { MAX_CHARACTERS_PER_COMMENT, MIN_CHARACTERS_PER_COMMENT } from '@/data/consts';
 
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
+  closeComments,
   fetchComments,
   postComment,
   selectAreCommentsOpen,
@@ -39,25 +40,31 @@ const PostComments = ({ postId }: PostCommentsProps) => {
 
   useEffect(() => {
     dispatch(fetchComments(postId));
+
+    return () => {
+      dispatch(closeComments());
+    };
   }, [postId, dispatch]);
 
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
-    if (e.target.value.length <= MAX_CHARACTERS_PER_COMMENT) {
+    if (e.target.value.length >= MAX_CHARACTERS_PER_COMMENT) {
+      setIsOverflown(true);
+    } else {
       setNewCommentText(e.target.value);
       setIsOverflown(false);
-    } else {
-      setIsOverflown(true);
     }
   };
 
   const handleCommentSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
-    const response = await dispatch(
-      postComment({ postId, commentBody: newCommentText })
-    ).unwrap();
-
-    // TODO: implement react router solution
-    if (response) location.reload();
+    if (newCommentText.length < MIN_CHARACTERS_PER_COMMENT) {
+      setIsOverflown(true);
+    } else {
+      const response = await dispatch(
+        postComment({ postId, commentBody: newCommentText })
+      );
+      if (response) setNewCommentText('');
+    }
   };
 
   return (
