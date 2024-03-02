@@ -15,6 +15,7 @@ import {
 import {
   CommentList,
   Form,
+  FormWrapper,
   Header,
   InputText,
   StyledActionButton,
@@ -72,20 +73,22 @@ const PostComments = ({ postId }: PostCommentsProps) => {
     <Wrapper $isOpen={isOpen}>
       <Header>{`Responses (${commentList.length})`}</Header>
       {isAuthenticated && (
-        <Form onSubmit={handleCommentSubmit}>
-          <InputText
-            onChange={handleCommentChange}
-            placeholder="What are your thoughts?"
-            value={newCommentText}
-          />
-          <WrapperControls>
-            {/* // TODO: ??? */}
-            <StyledCounter isOverflown={isOverflown}>
-              {newCommentText.length}/280
-            </StyledCounter>
-            <StyledActionButton type="submit" value="Respond" />
-          </WrapperControls>
-        </Form>
+        <FormWrapper>
+          <Form onSubmit={handleCommentSubmit}>
+            <InputText
+              onChange={handleCommentChange}
+              placeholder="What are your thoughts?"
+              value={newCommentText}
+            />
+            <WrapperControls>
+              {/* // TODO: ??? */}
+              <StyledCounter isOverflown={isOverflown}>
+                {newCommentText.length}/280
+              </StyledCounter>
+              <StyledActionButton type="submit" value="Respond" />
+            </WrapperControls>
+          </Form>
+        </FormWrapper>
       )}
       <CommentList>
         {commentList.map((comment) => (

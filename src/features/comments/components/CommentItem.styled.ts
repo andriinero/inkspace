@@ -6,7 +6,14 @@ export const Wrapper = styled.li`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.7rem;
+
+  padding: 1.5rem 0.5rem;
+  border-bottom: 1px solid ${({ theme }) => theme.color.comments_border};
+  
+  &:last-child {
+    border-bottom: 1px solid transparent;
+  }
 `;
 
 export const StyledLink = styled(NavLink)`
@@ -23,20 +30,21 @@ export const Header = styled.h3`
 export const WrapperAuthor = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.7rem;
 `;
 
 export const WrapperInfo = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
 
   font-size: 1rem;
   font-weight: 400;
 `;
 
 export const AuthorIcon = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
 `;
 
@@ -67,7 +75,6 @@ export const CommentDate = styled(PostDate)`
 
 export const Body = styled.p`
   font-size: 0.9rem;
+  line-height: 1.5rem;
   overflow-wrap: break-word;
 `;
-
-export const Bottom = styled.div``;

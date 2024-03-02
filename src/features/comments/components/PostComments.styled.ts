@@ -39,7 +39,6 @@ export const Form = styled.form`
   padding: 0.9rem;
 
   background-color: ${({ theme }) => theme.color.main_bg_secondary};
-  box-shadow: 0 0 1em rgb(0 0 0 / 0.2);
 `;
 
 export const InputText = styled.textarea`
@@ -55,11 +54,18 @@ export const InputText = styled.textarea`
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
   }
 
   &::-webkit-scrollbar {
     width: 4px;
+  }
+`;
+
+export const FormWrapper = styled.div`
+  &:focus-within {
+    ${Form} {
+      box-shadow: 0 0 1em rgb(0 0 0 / 0.2);
+    }
   }
 `;
 
@@ -78,7 +84,6 @@ export const Header = styled.h2`
 export const CommentList = styled.ol`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 `;
 
 export const WrapperControls = styled.div`

@@ -16,6 +16,7 @@ const mainTheme = {
     scrollbar_bg_thumb_hover: '#575E62',
     scrollbar_bg_track: '#262828',
     comments_bg_primary: '#202223',
+    comments_border: '#34383a',
     focus_outline: '#D3D3D3',
   },
 };

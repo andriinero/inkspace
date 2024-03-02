@@ -3,7 +3,6 @@ import {
   AuthorIcon,
   AuthorName,
   Body,
-  Bottom,
   CommentDate,
   DeleteIcon,
   Header,
@@ -56,7 +55,6 @@ const Comment = ({ _id, post, author, title, body, date }: CommentProps) => {
         )}
       </Header>
       <Body>{body}</Body>
-      <Bottom></Bottom>
     </Wrapper>
   );
 };
