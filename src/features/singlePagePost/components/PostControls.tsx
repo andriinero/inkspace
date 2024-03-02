@@ -1,13 +1,13 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import {
   selectIsPostBookmarked,
   selectIsPostLiked,
   toggleIsBookmarked,
-  toggleIsCommentsOpen,
   toggleIsLiked,
 } from '../singlePagePostSlice';
+import { toggleComments } from '@/features/comments/commentsSlice';
 
 import {
   ControlsContainer,
@@ -31,7 +31,7 @@ const PostControls = () => {
   };
 
   const onCommentsClick = (): void => {
-    dispatch(toggleIsCommentsOpen());
+    dispatch(toggleComments());
   };
 
   const onBookmarkClick = (): void => {
@@ -57,6 +57,7 @@ const PostControls = () => {
       <ControlsContainer>
         <Bookmark onBookmarked={onBookmarkClick} isBookmarked={isBookmarked} />
         <DotMenu
+          isAlignedLeft={false}
           onToggle={handleMenuToggle}
           onMenuClose={handleMenuClose}
           isOpen={isMenuOpen}

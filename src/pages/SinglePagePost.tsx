@@ -15,7 +15,7 @@ import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo'
 import Error from '@/components/general/Error';
 import Spinner from '@/components/loaders/Spinner';
 import PostControls from '@/features/singlePagePost/components/PostControls';
-import PostComments from '@/features/singlePagePost/components/PostComments';
+import PostComments from '@/features/comments/components/PostComments';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 const SinglePagePost = () => {
@@ -46,7 +46,7 @@ const SinglePagePost = () => {
           />
           {isAuthenticated && <PostControls />}
           <Body>{parse(post.body)}</Body>
-          <PostComments commentList={post.comments} />
+          <PostComments postId={post._id} />
         </PostWrapper>
       ) : isLoading ? (
         <Spinner />

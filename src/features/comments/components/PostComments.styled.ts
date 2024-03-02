@@ -10,7 +10,7 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
   top: 0;
   right: 0;
 
-  max-width: 400px;
+  width: 400px;
   height: 100dvh;
   padding: 0 1rem;
   background-color: ${({ theme }) => theme.color.comments_bg_primary};

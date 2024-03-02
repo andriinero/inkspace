@@ -1,11 +1,15 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { Comment } from '@/types/Comment';
 import { MAX_CHARACTERS_PER_COMMENT } from '@/data/consts';
 
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
-import { postComment, selectIsCommentsOpen } from '../singlePagePostSlice';
+import {
+  fetchComments,
+  postComment,
+  selectAreCommentsOpen,
+  selectCommentList,
+} from '@/features/comments/commentsSlice';
 
 import {
   CommentList,
@@ -20,17 +24,22 @@ import {
 import CommentItem from './CommentItem';
 
 type PostCommentsProps = {
-  commentList: Comment[];
+  postId: string;
 };
 
-const PostComments = ({ commentList }: PostCommentsProps) => {
+const PostComments = ({ postId }: PostCommentsProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const isOpen = useAppSelector(selectIsCommentsOpen);
+  const isOpen = useAppSelector(selectAreCommentsOpen);
+  const commentList = useAppSelector(selectCommentList);
 
   const [newCommentText, setNewCommentText] = useState<string>('');
   const [isOverflown, setIsOverflown] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchComments(postId));
+  }, [postId, dispatch]);
 
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     if (e.target.value.length <= MAX_CHARACTERS_PER_COMMENT) {
@@ -43,7 +52,9 @@ const PostComments = ({ commentList }: PostCommentsProps) => {
 
   const handleCommentSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
-    const response = await dispatch(postComment(newCommentText)).unwrap();
+    const response = await dispatch(
+      postComment({ postId, commentBody: newCommentText })
+    ).unwrap();
 
     // TODO: implement react router solution
     if (response) location.reload();
@@ -60,6 +71,7 @@ const PostComments = ({ commentList }: PostCommentsProps) => {
             value={newCommentText}
           />
           <WrapperControls>
+            {/* // TODO: ??? */}
             <StyledCounter isOverflown={isOverflown}>
               {newCommentText.length}/280
             </StyledCounter>

@@ -1,23 +1,26 @@
-import { RootState } from '@/app/store';
-import Post from '@/types/Post';
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { RootState } from '@/app/store';
+
+import Post from '@/types/Post';
 
 type SinglePagePostState = {
   post: Post | null;
-  isLoading: boolean;
-  error: SerializedError | null;
   isLiked: boolean;
   isBookmarked: boolean;
-  isCommentsOpen: boolean;
+  fetchPostState: {
+    isLoading: boolean;
+    error: SerializedError | null;
+  };
 };
 
 const initialState: SinglePagePostState = {
   post: null,
-  isLoading: true,
-  error: null,
   isLiked: false,
   isBookmarked: false,
-  isCommentsOpen: false,
+  fetchPostState: {
+    isLoading: true,
+    error: null,
+  },
 };
 
 export const fetchPost = createAsyncThunk(
@@ -32,44 +35,12 @@ export const fetchPost = createAsyncThunk(
   }
 );
 
-// TODO: extract into separate slice
-export const postComment = createAsyncThunk(
-  'singlePagePost/postComment',
-  async (commentBody: string, { getState }) => {
-    const { auth } = getState() as { auth: { token: string } };
-    const { singlePagePost } = getState() as { singlePagePost: SinglePagePostState };
-
-    const response = await fetch(
-      `http://localhost:3000/api/posts/${singlePagePost.post?._id}/comments`,
-      {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${auth.token}`,
-        },
-        body: JSON.stringify({ body: commentBody }),
-      }
-    );
-
-    // TODO: add validation error messages
-    if (!response.ok) return null;
-
-    const data = await response.json();
-
-    return data;
-  }
-);
-
 const singlePagePostSlice = createSlice({
   name: 'singlePagePost',
   initialState,
   reducers: {
     toggleIsLiked(state) {
       state.isLiked = !state.isLiked;
-    },
-    toggleIsCommentsOpen(state) {
-      state.isCommentsOpen = !state.isCommentsOpen;
     },
     toggleIsBookmarked(state) {
       state.isBookmarked = !state.isBookmarked;
@@ -78,23 +49,22 @@ const singlePagePostSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchPost.pending, (state) => {
-        state.isLoading = true;
+        state.fetchPostState.isLoading = true;
+        state.fetchPostState.error = null;
         state.post = null;
-        state.error = null;
       })
       .addCase(fetchPost.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.fetchPostState.isLoading = false;
         state.post = action.payload;
       })
       .addCase(fetchPost.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.error;
+        state.fetchPostState.isLoading = false;
+        state.fetchPostState.error = action.error;
       });
   },
 });
 
-export const { toggleIsLiked, toggleIsCommentsOpen, toggleIsBookmarked } =
-  singlePagePostSlice.actions;
+export const { toggleIsLiked, toggleIsBookmarked } = singlePagePostSlice.actions;
 
 export default singlePagePostSlice.reducer;
 
@@ -102,20 +72,17 @@ export const selectSinglePost = (state: RootState) => state.singlePagePost.post;
 
 export const selectSinglePostState = (state: RootState) => ({
   post: state.singlePagePost.post,
-  isLoading: state.singlePagePost.isLoading,
-  error: state.singlePagePost.error,
+  isLoading: state.singlePagePost.fetchPostState.isLoading,
+  error: state.singlePagePost.fetchPostState.error,
 });
 
 export const selectPostData = (state: RootState) => state.singlePagePost.post;
 
-export const selectPostIsLoading = (state: RootState) => state.singlePagePost.isLoading;
+export const selectPostIsLoading = (state: RootState) => state.singlePagePost.fetchPostState.isLoading;
 
-export const selectPostError = (state: RootState) => state.singlePagePost.error;
+export const selectPostError = (state: RootState) => state.singlePagePost.fetchPostState.error;
 
 export const selectIsPostLiked = (state: RootState) => state.singlePagePost.isLiked;
-
-export const selectIsCommentsOpen = (state: RootState) =>
-  state.singlePagePost.isCommentsOpen;
 
 export const selectIsPostBookmarked = (state: RootState) =>
   state.singlePagePost.isBookmarked;

@@ -9,6 +9,11 @@ export const Wrapper = styled.li`
   gap: 0.5rem;
 `;
 
+export const StyledLink = styled(NavLink)`
+  color: inherit;
+  text-decoration: none;
+`;
+
 export const Header = styled.h3`
   display: flex;
   align-items: center;
@@ -29,12 +34,8 @@ export const AuthorIcon = styled.img`
   border-radius: 50%;
 `;
 
-export const StyledLink = styled(NavLink)`
-  color: inherit;
-  text-decoration: none;
-`;
-
 export const AuthorName = styled.span`
+  font-weight: 300;
   font-size: 0.9rem;
 `;
 
@@ -45,6 +46,7 @@ export const CommentDate = styled(PostDate)`
 
 export const Body = styled.p`
   font-size: 0.9rem;
+  overflow-wrap: break-word;
 `;
 
 export const Bottom = styled.div``;
