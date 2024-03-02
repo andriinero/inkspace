@@ -10,7 +10,7 @@ export const Wrapper = styled.li`
 
   padding: 1.5rem 0.5rem;
   border-bottom: 1px solid ${({ theme }) => theme.color.comments_border};
-  
+
   &:last-child {
     border-bottom: 1px solid transparent;
   }
@@ -53,8 +53,13 @@ export const AuthorName = styled.span`
   font-size: 0.9rem;
 `;
 
-export const DeleteIcon = styled.img`
-  width: 22px;
+export const ControlsWrapper = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+export const ControlsIcon = styled.img`
+  width: 20px;
   height: auto;
 
   fill: #fff;
@@ -66,6 +71,10 @@ export const DeleteIcon = styled.img`
     filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
       contrast(82%);
   }
+`;
+
+export const EditIcon = styled(ControlsIcon)`
+  width: 18px;
 `;
 
 export const CommentDate = styled(PostDate)`

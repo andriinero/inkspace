@@ -4,7 +4,9 @@ import {
   AuthorName,
   Body,
   CommentDate,
-  DeleteIcon,
+  ControlsIcon,
+  ControlsWrapper,
+  EditIcon,
   Header,
   StyledLink,
   Wrapper,
@@ -14,6 +16,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { selectCurrentUserId } from '@/features/auth/authSlice';
 import { deleteComment } from '../commentsSlice';
+import { enterEditMode, exitEditMode } from '@/features/commentEditor/commentEditorSlice';
 
 type CommentProps = {
   _id: string;
@@ -33,6 +36,10 @@ const Comment = ({ _id, post, author, title, body, date }: CommentProps) => {
     dispatch(deleteComment(_id));
   };
 
+  const handleEditClick = () => {
+    dispatch(enterEditMode());
+  };
+
   const ownedByUser = currentUserId === author._id;
   return (
     <Wrapper>
@@ -47,11 +54,14 @@ const Comment = ({ _id, post, author, title, body, date }: CommentProps) => {
           </WrapperInfo>
         </WrapperAuthor>
         {ownedByUser && (
-          <DeleteIcon
-            onClick={handleDeleteClick}
-            src="/delete.svg"
-            alt="Delete Comment Icon"
-          />
+          <ControlsWrapper>
+            <EditIcon onClick={handleEditClick} src="/edit.svg" alt="Edit Comment Icon" />
+            <ControlsIcon
+              onClick={handleDeleteClick}
+              src="/delete.svg"
+              alt="Delete Comment Icon"
+            />
+          </ControlsWrapper>
         )}
       </Header>
       <Body>{body}</Body>

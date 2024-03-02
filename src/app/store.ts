@@ -5,6 +5,7 @@ import singlePagePostReducer from '@/features/singlePagePost/singlePagePostSlice
 import authReducer from '@/features/auth/authSlice';
 import createPostReducer from '@/features/createPost/createPostSlice';
 import commentsReducer from '@/features/comments/commentsSlice';
+import commentEditorReducer from '@/features/commentEditor/commentEditorSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     auth: authReducer,
     createPost: createPostReducer,
     comments: commentsReducer,
+    commentEditor: commentEditorReducer,
   },
 });
 
