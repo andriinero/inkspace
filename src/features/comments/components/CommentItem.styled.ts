@@ -16,6 +16,12 @@ export const StyledLink = styled(NavLink)`
 
 export const Header = styled.h3`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const WrapperAuthor = styled.div`
+  display: flex;
   align-items: center;
   gap: 0.5rem;
 `;
@@ -37,6 +43,21 @@ export const AuthorIcon = styled.img`
 export const AuthorName = styled.span`
   font-weight: 300;
   font-size: 0.9rem;
+`;
+
+export const DeleteIcon = styled.img`
+  width: 22px;
+  height: auto;
+
+  fill: #fff;
+  transition: filter 100ms;
+
+  cursor: pointer;
+
+  &:hover {
+    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
+      contrast(82%);
+  }
 `;
 
 export const CommentDate = styled(PostDate)`

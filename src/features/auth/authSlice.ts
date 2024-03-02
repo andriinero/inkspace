@@ -1,6 +1,7 @@
+import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import { RootState } from '@/app/store';
 import { User } from '@/types/User';
-import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 type LoginBodyType = { username: string; password: string };
 
@@ -25,8 +26,8 @@ export const fetchAuthData = createAsyncThunk(
 
     const response = await fetch('http://localhost:3000/auth/login', {
       method: 'GET',
-      headers: { authorization: `Bearer ${auth.token}` },
       mode: 'cors',
+      headers: { authorization: `Bearer ${auth.token}` },
     });
     const authData = await response.json();
 
@@ -34,22 +35,19 @@ export const fetchAuthData = createAsyncThunk(
   }
 );
 
-export const login = createAsyncThunk(
-  'auth/login',
-  async (loginBody: LoginBodyType, { dispatch }) => {
-    const response = await fetch('http://localhost:3000/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      mode: 'cors',
-      body: JSON.stringify(loginBody),
-    });
-    const data = await response.json();
+export const login = createAsyncThunk('auth/login', async (loginBody: LoginBodyType) => {
+  const response = await fetch('http://localhost:3000/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    mode: 'cors',
+    body: JSON.stringify(loginBody),
+  });
+  const data = await response.json();
 
-    localStorage.setItem('token', data.token);
+  localStorage.setItem('token', data.token);
 
-    return data.token;
-  }
-);
+  return data.token;
+});
 
 const authSlice = createSlice({
   name: 'auth',
@@ -70,7 +68,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.loginState.isLoading = false;
         state.token = action.payload;
-      })  
+      })
       .addCase(login.rejected, (state, action) => {
         state.loginState.isLoading = false;
         state.loginState.error = action.error;
@@ -85,10 +83,12 @@ export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;
 
+export const selectCurrentUserId = (state: RootState) => state.auth.authData?.sub;
+
 export const selectAuthData = (state: RootState) => state.auth.authData;
 
 export const selectToken = (state: RootState) => state.auth.token;
 
 export const selectLoginState = (state: RootState) => state.auth.loginState;
 
-export const selectIsAuthenticated = (state: RootState) => Boolean(state.auth.authData); 
+export const selectIsAuthenticated = (state: RootState) => Boolean(state.auth.authData);

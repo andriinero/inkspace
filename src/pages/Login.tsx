@@ -9,10 +9,20 @@ const Login = () => {
 
   const dispatch = useAppDispatch();
 
-  const onLoginClick = async (): Promise<void> => {
+  const onFirstLoginClick = async (): Promise<void> => {
     try {
       // TODO: implement login form
       await dispatch(login({ username: 'CoolGirlNerd', password: 'strongpass1' }));
+      dispatch(fetchAuthData());
+    } catch (err) {
+      console.error((err as Error).message);
+    }
+  };
+
+  const onSecondLoginClick = async (): Promise<void> => {
+    try {
+      // TODO: implement login form
+      await dispatch(login({ username: 'CoolGuyNerd', password: 'strongpass1' }));
       dispatch(fetchAuthData());
     } catch (err) {
       console.error((err as Error).message);
@@ -23,7 +33,8 @@ const Login = () => {
 
   return (
     <Wrapper>
-      <ActionButton onButtonClick={onLoginClick} value="Authenticate user" />
+      <ActionButton onButtonClick={onFirstLoginClick} value="Authenticate CoolGirlNerd" />
+      <ActionButton onButtonClick={onSecondLoginClick} value="Authenticate CoolGuyNerd" />
     </Wrapper>
   );
 };

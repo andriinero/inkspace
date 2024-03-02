@@ -35,6 +35,7 @@ export const fetchComments = createAsyncThunk(
   'comments/fetchComment',
   async (postId: string) => {
     const response = await fetch(`http://localhost:3000/api/posts/${postId}/comments`, {
+      method: 'GET',
       mode: 'cors',
     });
     const data = await response.json();
@@ -65,15 +66,38 @@ export const postComment = createAsyncThunk(
   }
 );
 
+export const deleteComment = createAsyncThunk(
+  'comments/deleteComment',
+  async (commentId: string, { getState, rejectWithValue }) => {
+    const { auth } = getState() as { auth: { token: string } };
+
+    const response = await fetch(`http://localhost:3000/api/comments/${commentId}`, {
+      method: 'DELETE',
+      mode: 'cors',
+      headers: {
+        authorization: `Bearer ${auth.token}`,
+      },
+    });
+    const data = response.json();
+
+    if (!response.ok) return rejectWithValue(data);
+
+    return data;
+  }
+);
+
 const commentsSlice = createSlice({
   name: 'comments',
   initialState,
   reducers: {
-    toggleComments(state) {
-      state.areCommentsOpen = !state.areCommentsOpen;
+    openComments(state) {
+      state.areCommentsOpen = true;
     },
     closeComments(state) {
       state.areCommentsOpen = false;
+    },
+    toggleComments(state) {
+      state.areCommentsOpen = !state.areCommentsOpen;
     },
   },
   extraReducers(builder) {
@@ -104,10 +128,14 @@ const commentsSlice = createSlice({
         state.postCommentState.isLoading = true;
         state.postCommentState.error = payload.error;
       });
+    builder.addCase(deleteComment.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.comments = state.comments.filter((c) => c._id !== action.payload._id);
+    });
   },
 });
 
-export const { closeComments, toggleComments } = commentsSlice.actions;
+export const { openComments, closeComments, toggleComments } = commentsSlice.actions;
 
 export default commentsSlice.reducer;
 
