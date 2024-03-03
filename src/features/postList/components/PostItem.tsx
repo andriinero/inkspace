@@ -1,11 +1,21 @@
 import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import parse from 'html-react-parser';
-import * as S from './PostItem.styled';
-import PostDate from '@/components/general/TimeAgo';
+
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import {
+  addBookmark,
+  deleteBookmark,
+  postBookmark,
+  removeBookmark,
+  selectIsProfileDataPresent,
+} from '@/features/profile/profileSlice';
+
 import { Author } from '@/types/Author';
 import { Topic } from '@/types/Topic';
-import { useAppSelector } from '@/app/hooks';
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
+
+import * as S from './PostItem.styled';
+import PostDate from '@/components/general/TimeAgo';
 
 type PostItemProps = {
   _id: string;
@@ -14,16 +24,31 @@ type PostItemProps = {
   body: string;
   date: string;
   topic: Topic;
+  isBookmarked: boolean | undefined;
 };
 
-const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
-
-  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
+const PostItem = ({
+  _id,
+  author,
+  title,
+  body,
+  date,
+  topic,
+  isBookmarked,
+}: PostItemProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
-  const handleBookmarkToggle = (): void => {
-    setIsBookmarked(!isBookmarked);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isProfileDataPresent = useAppSelector(selectIsProfileDataPresent);
+
+  const dispatch = useAppDispatch();
+
+  const handleBookmarkAdd = (): void => {
+    dispatch(postBookmark(_id));
+  };
+
+  const handleBookmarkRemove = (): void => {
+    dispatch(deleteBookmark(_id));
   };
 
   const handleMenuToggle = (): void => {
@@ -33,6 +58,8 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
   const handleMenuClose = (): void => {
     setIsMenuOpen(false);
   };
+
+  const handleBookmarkClick = isBookmarked ? handleBookmarkRemove : handleBookmarkAdd;
 
   return (
     <S.Wrapper>
@@ -69,7 +96,7 @@ const PostItem = ({ _id, author, title, body, date, topic }: PostItemProps) => {
             <>
               {/* TODO: refactor handlers */}
               <S.StyledBookmark
-                onBookmarked={handleBookmarkToggle}
+                onBookmarked={handleBookmarkClick}
                 isBookmarked={isBookmarked}
               />
               <S.StyledDotMenu

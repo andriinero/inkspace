@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
+import { selectBookmarks } from '@/features/profile/profileSlice';
 import { fetchPosts, selectPostListState } from '../postListSlice';
 
 import { Wrapper } from './PostContainer.styled';
@@ -9,6 +10,8 @@ import Error from '@/components/general/Error';
 import PostListLoader from '@/components/loaders/PostListLoader';
 
 const PostContainer = () => {
+  const userBookmarks = useAppSelector(selectBookmarks);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -24,7 +27,11 @@ const PostContainer = () => {
       ) : error ? (
         <Error />
       ) : (
-        postList.map((post) => <PostItem key={post._id} {...post} />)
+        postList.map((post) => {
+          const isBookmarked = userBookmarks?.some((id) => id === post._id);
+
+          return <PostItem isBookmarked={isBookmarked} key={post._id} {...post} />;
+        })
       )}
     </Wrapper>
   );

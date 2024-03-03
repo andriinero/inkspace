@@ -106,7 +106,7 @@ const profileSlice = createSlice({
         state.fetchProfileDataState.error = null;
       })
       .addCase(postBookmark.fulfilled, (state, action) => {
-        state.profileData = action.payload;
+        if (state.profileData) state.profileData.post_bookmarks.push(action.payload._id);
       })
       .addCase(postBookmark.rejected, (state, action) => {
         state.fetchProfileDataState.isLoading = false;
@@ -118,7 +118,10 @@ const profileSlice = createSlice({
         state.fetchProfileDataState.error = null;
       })
       .addCase(deleteBookmark.fulfilled, (state, action) => {
-        state.profileData = action.payload;
+        if (state.profileData)
+          state.profileData.post_bookmarks = state.profileData.post_bookmarks.filter(
+            (id) => id !== action.payload._id
+          );
       })
       .addCase(deleteBookmark.rejected, (state, action) => {
         state.fetchProfileDataState.isLoading = false;
@@ -128,6 +131,9 @@ const profileSlice = createSlice({
 });
 
 export default profileSlice.reducer;
+
+export const selectIsProfileDataPresent = (state: RootState) =>
+  Boolean(state.profile.profileData);
 
 export const selectFetchProfileDataState = (state: RootState) =>
   state.profile.fetchProfileDataState;
