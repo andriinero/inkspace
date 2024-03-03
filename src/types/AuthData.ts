@@ -1,9 +1,9 @@
-enum UserRole {
+export enum UserRole {
   USER = 'user',
   ADMIN = 'admin',
 }
 
-export type User = {
+export type AuthData = {
   sub: string;
   username: string;
   role: UserRole;

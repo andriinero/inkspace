@@ -22,7 +22,6 @@ import {
   StyledLink,
   Wrapper,
   WrapperAuthor,
-  WrapperEditDate,
   WrapperInfo,
 } from './CommentItem.styled';
 

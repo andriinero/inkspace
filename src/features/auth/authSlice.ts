@@ -1,12 +1,12 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/app/store';
-import { User } from '@/types/User';
+import { AuthData } from '@/types/AuthData';
 
 type LoginBodyType = { username: string; password: string };
 
 type AuthState = {
-  authData: User | null;
+  authData: AuthData | null;
   token: string | null;
   loginState: { isLoading: boolean; error: SerializedError | null };
   signupState: { isLoading: boolean; error: SerializedError | null };
