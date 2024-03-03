@@ -58,7 +58,7 @@ export const postComment = createAsyncThunk(
 export const updateComment = createAsyncThunk(
   'comments/updateComment',
   async (
-    { commentId, commentBody }: UpdateCommentType,
+    { commentId, commentBody, editDate}: UpdateCommentType,
     { getState, rejectWithValue }
   ) => {
     const { auth } = getState() as { auth: { token: string } };

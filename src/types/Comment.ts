@@ -7,4 +7,5 @@ export type Comment = {
   title: string;
   body: string;
   date: string;
+  edit_date?: string;
 };

@@ -68,6 +68,7 @@ const commentListSlice = createSlice({
         (comment) => comment._id === action.payload.commentId
       );
       state.comments[commentIndex].body = action.payload.commentBody;
+      state.comments[commentIndex].edit_date = action.payload.editDate;
     },
     openComments(state) {
       state.areCommentsOpen = true;

@@ -1,6 +1,7 @@
-import PostDate from '@/components/general/PostDate';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import PostDate from '@/components/general/TimeAgo';
+import { NavLink } from 'react-router-dom';
+import TimeAgo from '@/components/general/TimeAgo';
 
 export const Wrapper = styled.li`
   display: flex;
@@ -86,4 +87,14 @@ export const Body = styled.p`
   font-size: 0.9rem;
   line-height: 1.5rem;
   overflow-wrap: break-word;
+`;
+
+export const EditDate = styled(TimeAgo)`
+  display: block;
+  align-self: flex-end;
+
+  font-size: 0.7rem;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.04rem;
 `;

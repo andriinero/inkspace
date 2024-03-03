@@ -1,4 +1,14 @@
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+
 import { Author } from '@/types/Author';
+
+import { selectCurrentUserId } from '@/features/auth/authSlice';
+import { deleteComment } from '../commentListSlice';
+import {
+  enterEditMode,
+  selectCommentIsEditMode,
+} from '@/features/commentEditor/commentEditorSlice';
+
 import {
   AuthorIcon,
   AuthorName,
@@ -6,20 +16,15 @@ import {
   CommentDate,
   ControlsIcon,
   ControlsWrapper,
+  EditDate,
   EditIcon,
   Header,
   StyledLink,
   Wrapper,
   WrapperAuthor,
+  WrapperEditDate,
   WrapperInfo,
 } from './CommentItem.styled';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { selectCurrentUserId } from '@/features/auth/authSlice';
-import { deleteComment } from '../commentListSlice';
-import {
-  enterEditMode,
-  selectCommentIsEditMode,
-} from '@/features/commentEditor/commentEditorSlice';
 
 type CommentProps = {
   _id: string;
@@ -28,9 +33,10 @@ type CommentProps = {
   title: string;
   body: string;
   date: string;
+  edit_date: string;
 };
 
-const Comment = ({ _id, post, author, title, body, date }: CommentProps) => {
+const Comment = ({ _id, post, author, title, body, date, edit_date }: CommentProps) => {
   const currentUserId = useAppSelector(selectCurrentUserId);
   const isEditMode = useAppSelector(selectCommentIsEditMode);
 
@@ -69,6 +75,7 @@ const Comment = ({ _id, post, author, title, body, date }: CommentProps) => {
         )}
       </Header>
       <Body>{body}</Body>
+      {edit_date && <EditDate date={edit_date}>last edit: </EditDate>}
     </Wrapper>
   );
 };

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import parse from 'html-react-parser';
 import * as S from './PostItem.styled';
-import PostDate from '@/components/general/PostDate';
+import PostDate from '@/components/general/TimeAgo';
 import { Author } from '@/types/Author';
 import { Topic } from '@/types/Topic';
 import { useAppSelector } from '@/app/hooks';

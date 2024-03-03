@@ -2,7 +2,7 @@ import { Author } from '@/types/Author';
 import { Topic } from '@/types/Topic';
 
 import * as S from './PostHeaderInfo.styled';
-import PostDate from '@/components/general/PostDate';
+import PostDate from '@/components/general/TimeAgo';
 
 type PostAuthorProps = {
   author: Author;

@@ -72,7 +72,13 @@ const CommentForm = ({ postId }: CommentFormProps) => {
         if (response) {
           dispatch(setCommentTextField(''));
           dispatch(exitEditMode());
-          dispatch(editComment({ commentId: response._id, commentBody: response.body }));
+          dispatch(
+            editComment({
+              commentId: response._id,
+              commentBody: response.body,
+              editDate: response.edit_date,
+            })
+          );
         }
       }
     }
