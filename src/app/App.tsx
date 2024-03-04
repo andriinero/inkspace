@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from './hooks';
 
-import { fetchAuthData } from '@/features/auth/authSlice';
+import { fetchAuthData, initializeToken } from '@/features/auth/authSlice';
 
 import Header from '@/layout/Header';
 import { Outlet } from 'react-router-dom';
@@ -13,6 +13,7 @@ const App = () => {
 
   useEffect(() => {
     const init = async () => {
+      dispatch(initializeToken());
       await dispatch(fetchAuthData());
       await dispatch(fetchProfileData());
     };

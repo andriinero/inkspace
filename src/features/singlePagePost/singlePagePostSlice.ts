@@ -25,11 +25,13 @@ const initialState: SinglePagePostState = {
 
 export const fetchPost = createAsyncThunk(
   'singlePagePost/fetchPost',
-  async (postid: string) => {
+  async (postid: string, { rejectWithValue }) => {
     const response = await fetch(`http://localhost:3000/api/posts/${postid}`, {
       mode: 'cors',
     });
     const data = await response.json();
+
+    if (!response.ok) return rejectWithValue(data);
 
     return data;
   }
@@ -54,8 +56,8 @@ const singlePagePostSlice = createSlice({
         state.post = null;
       })
       .addCase(fetchPost.fulfilled, (state, action) => {
-        state.fetchPostState.isLoading = false;
         state.post = action.payload;
+        state.fetchPostState.isLoading = false;
       })
       .addCase(fetchPost.rejected, (state, action) => {
         state.fetchPostState.isLoading = false;
@@ -70,17 +72,10 @@ export default singlePagePostSlice.reducer;
 
 export const selectSinglePost = (state: RootState) => state.singlePagePost.post;
 
-export const selectSinglePostState = (state: RootState) => ({
-  post: state.singlePagePost.post,
-  isLoading: state.singlePagePost.fetchPostState.isLoading,
-  error: state.singlePagePost.fetchPostState.error,
-});
-
 export const selectPostData = (state: RootState) => state.singlePagePost.post;
 
-export const selectPostIsLoading = (state: RootState) => state.singlePagePost.fetchPostState.isLoading;
-
-export const selectPostError = (state: RootState) => state.singlePagePost.fetchPostState.error;
+export const selectFetchPostState = (state: RootState) =>
+  state.singlePagePost.fetchPostState;
 
 export const selectIsPostLiked = (state: RootState) => state.singlePagePost.isLiked;
 

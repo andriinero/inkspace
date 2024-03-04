@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { Navigate } from 'react-router-dom';
 
-import { fetchAuthData, login, selectAuthData } from '@/features/auth/authSlice';
+import { fetchAuthData, postLogin, selectAuthData } from '@/features/auth/authSlice';
 
 import { Wrapper } from './Login.styled';
 import ActionButton from '@/components/general/ActionButton';
@@ -13,7 +13,7 @@ const Login = () => {
 
   const onFirstLoginClick = async (): Promise<void> => {
     try {
-      await dispatch(login({ username: 'CoolGirlNerd', password: 'strongpass1' }));
+      await dispatch(postLogin({ username: 'CoolGirlNerd', password: 'strongpass1' }));
       dispatch(fetchAuthData());
     } catch (err) {
       console.error((err as Error).message);
@@ -22,7 +22,7 @@ const Login = () => {
 
   const onSecondLoginClick = async (): Promise<void> => {
     try {
-      await dispatch(login({ username: 'CoolGuyNerd', password: 'strongpass1' }));
+      await dispatch(postLogin({ username: 'CoolGuyNerd', password: 'strongpass1' }));
       dispatch(fetchAuthData());
     } catch (err) {
       console.error((err as Error).message);

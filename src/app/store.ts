@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 
 import postListReducer from '@/features/postList/postListSlice';
 import miscListReducer from '@/features/miscList/miscListSlice';
@@ -16,7 +16,7 @@ export const store = configureStore({
     singlePagePost: singlePagePostReducer,
     auth: authReducer,
     createPost: createPostReducer,
-    comments: commentListReducer,
+    commentList: commentListReducer,
     commentEditor: commentEditorReducer,
     profile: profileReducer,
   },
@@ -24,3 +24,9 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action
+>;

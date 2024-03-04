@@ -4,11 +4,11 @@ import parse from 'html-react-parser';
 
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
-  addBookmark,
   deleteBookmark,
   postBookmark,
-  removeBookmark,
-  selectIsProfileDataPresent,
+  selectDeleteBookmarkState,
+  selectFetchProfileDataState,
+  selectPostBookmarkState,
 } from '@/features/profile/profileSlice';
 
 import { Author } from '@/types/Author';
@@ -24,7 +24,7 @@ type PostItemProps = {
   body: string;
   date: string;
   topic: Topic;
-  isBookmarked: boolean | undefined;
+  isBookmarked: boolean;
 };
 
 const PostItem = ({
@@ -39,16 +39,19 @@ const PostItem = ({
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const isProfileDataPresent = useAppSelector(selectIsProfileDataPresent);
+
+  const fetchProfileState = useAppSelector(selectFetchProfileDataState);
+  const postBookmarkState = useAppSelector(selectPostBookmarkState);
+  const deleteBookmarkState = useAppSelector(selectDeleteBookmarkState);
 
   const dispatch = useAppDispatch();
 
   const handleBookmarkAdd = (): void => {
-    dispatch(postBookmark(_id));
+    if (!postBookmarkState.isLoading) dispatch(postBookmark(_id));
   };
 
   const handleBookmarkRemove = (): void => {
-    dispatch(deleteBookmark(_id));
+    if (!deleteBookmarkState.isLoading) dispatch(deleteBookmark(_id));
   };
 
   const handleMenuToggle = (): void => {
@@ -92,7 +95,7 @@ const PostItem = ({
           <S.PostReadEstimate bodyLength={body.length} />
         </S.MiscContainer>
         <S.Controls>
-          {isAuthenticated && (
+          {isAuthenticated && !fetchProfileState.isLoading && (
             <>
               {/* TODO: refactor handlers */}
               <S.StyledBookmark

@@ -95,6 +95,7 @@ const profileSlice = createSlice({
       })
       .addCase(fetchProfileData.fulfilled, (state, action) => {
         state.profileData = action.payload;
+        state.fetchProfileDataState.isLoading = false;
       })
       .addCase(fetchProfileData.rejected, (state, action) => {
         state.fetchProfileDataState.isLoading = false;
@@ -102,38 +103,37 @@ const profileSlice = createSlice({
       });
     builder
       .addCase(postBookmark.pending, (state) => {
-        state.fetchProfileDataState.isLoading = true;
-        state.fetchProfileDataState.error = null;
+        state.postBookmarkState.isLoading = true;
+        state.postBookmarkState.error = null;
       })
       .addCase(postBookmark.fulfilled, (state, action) => {
         if (state.profileData) state.profileData.post_bookmarks.push(action.payload._id);
+        state.postBookmarkState.isLoading = false;
       })
       .addCase(postBookmark.rejected, (state, action) => {
-        state.fetchProfileDataState.isLoading = false;
-        state.fetchProfileDataState.error = action.error;
+        state.postBookmarkState.isLoading = false;
+        state.postBookmarkState.error = action.error;
       });
     builder
       .addCase(deleteBookmark.pending, (state) => {
-        state.fetchProfileDataState.isLoading = true;
-        state.fetchProfileDataState.error = null;
+        state.deleteBookmarkState.isLoading = true;
+        state.deleteBookmarkState.error = null;
       })
       .addCase(deleteBookmark.fulfilled, (state, action) => {
         if (state.profileData)
           state.profileData.post_bookmarks = state.profileData.post_bookmarks.filter(
             (id) => id !== action.payload._id
           );
+        state.deleteBookmarkState.isLoading = false;
       })
       .addCase(deleteBookmark.rejected, (state, action) => {
-        state.fetchProfileDataState.isLoading = false;
-        state.fetchProfileDataState.error = action.error;
+        state.deleteBookmarkState.isLoading = false;
+        state.deleteBookmarkState.error = action.error;
       });
   },
 });
 
 export default profileSlice.reducer;
-
-export const selectIsProfileDataPresent = (state: RootState) =>
-  Boolean(state.profile.profileData);
 
 export const selectFetchProfileDataState = (state: RootState) =>
   state.profile.fetchProfileDataState;
@@ -146,5 +146,5 @@ export const selectDeleteBookmarkState = (state: RootState) =>
 
 export const selectProfileData = (state: RootState) => state.profile.profileData;
 
-export const selectBookmarks = (state: RootState) =>
+export const selectProfileBookmarks = (state: RootState) =>
   state.profile.profileData?.post_bookmarks;

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { selectBookmarks } from '@/features/profile/profileSlice';
-import { fetchPosts, selectPostListState } from '../postListSlice';
+import { selectProfileBookmarks } from '@/features/profile/profileSlice';
+import { fetchPosts, selectFetchPostListState, selectPostList } from '../postListSlice';
 
 import { Wrapper } from './PostContainer.styled';
 import PostItem from './PostItem';
@@ -10,7 +10,7 @@ import Error from '@/components/general/Error';
 import PostListLoader from '@/components/loaders/PostListLoader';
 
 const PostContainer = () => {
-  const userBookmarks = useAppSelector(selectBookmarks);
+  const userBookmarks = useAppSelector(selectProfileBookmarks);
 
   const dispatch = useAppDispatch();
 
@@ -18,7 +18,8 @@ const PostContainer = () => {
     dispatch(fetchPosts());
   }, [dispatch]);
 
-  const { postList, isLoading, error } = useAppSelector(selectPostListState);
+  const postList = useAppSelector(selectPostList);
+  const { isLoading, error } = useAppSelector(selectFetchPostListState);
 
   return (
     <Wrapper>

@@ -11,9 +11,12 @@ type CommentsState = {
     isLoading: boolean;
     error: SerializedError | null;
   };
+  deleteCommentState: {
+    isLoading: boolean;
+    error: SerializedError | null;
+  };
 };
 
-// TODO: add more states for better UX
 const initialState: CommentsState = {
   comments: [],
   areCommentsOpen: false,
@@ -21,16 +24,22 @@ const initialState: CommentsState = {
     isLoading: false,
     error: null,
   },
+  deleteCommentState: {
+    isLoading: false,
+    error: null,
+  },
 };
 
 export const fetchComments = createAsyncThunk(
   'commentList/fetchComment',
-  async (postId: string) => {
+  async (postId: string, { rejectWithValue }) => {
     const response = await fetch(`http://localhost:3000/api/posts/${postId}/comments`, {
       method: 'GET',
       mode: 'cors',
     });
     const data = await response.json();
+
+    if (!response.ok) return rejectWithValue(data);
 
     return data;
   }
@@ -61,11 +70,11 @@ const commentListSlice = createSlice({
   initialState,
   reducers: {
     addComment(state, action) {
-      state.comments.splice(0, 0, action.payload);
+      state.comments.unshift(action.payload);
     },
     editComment(state, action) {
       const commentIndex = state.comments.findIndex(
-        (comment) => comment._id === action.payload.commentId
+        (c) => c._id === action.payload.commentId
       );
       state.comments[commentIndex].body = action.payload.commentBody;
       state.comments[commentIndex].edit_date = action.payload.editDate;
@@ -88,16 +97,26 @@ const commentListSlice = createSlice({
         state.comments = [];
       })
       .addCase(fetchComments.fulfilled, (state, action) => {
-        state.fetchCommentsState.isLoading = false;
         state.comments = action.payload;
+        state.fetchCommentsState.isLoading = false;
       })
       .addCase(fetchComments.rejected, (state, action) => {
         state.fetchCommentsState.isLoading = false;
         state.fetchCommentsState.error = action.error;
       });
-    builder.addCase(deleteComment.fulfilled, (state, action) => {
-      state.comments = state.comments.filter((c) => c._id !== action.payload._id);
-    });
+    builder
+      .addCase(deleteComment.pending, (state) => {
+        state.deleteCommentState.isLoading = true;
+        state.deleteCommentState.error = null;
+      })
+      .addCase(deleteComment.fulfilled, (state, action) => {
+        state.comments = state.comments.filter((c) => c._id !== action.payload._id);
+        state.deleteCommentState.isLoading = false;
+      })
+      .addCase(deleteComment.rejected, (state, action) => {
+        state.deleteCommentState.isLoading = false;
+        state.deleteCommentState.error = action.error;
+      });
   },
 });
 
@@ -106,9 +125,13 @@ export const { addComment, editComment, openComments, closeComments, toggleComme
 
 export default commentListSlice.reducer;
 
-export const selectCommentList = (state: RootState) => state.comments.comments;
+export const selectCommentList = (state: RootState) => state.commentList.comments;
 
-export const selectAreCommentsOpen = (state: RootState) => state.comments.areCommentsOpen;
+export const selectAreCommentsOpen = (state: RootState) =>
+  state.commentList.areCommentsOpen;
 
 export const selectFetchCommentState = (state: RootState) =>
-  state.comments.fetchCommentsState;
+  state.commentList.fetchCommentsState;
+
+export const selectDeleteCommentState = (state: RootState) =>
+  state.commentList.deleteCommentState;

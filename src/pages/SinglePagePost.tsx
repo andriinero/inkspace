@@ -7,9 +7,8 @@ import parse from 'html-react-parser';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
   fetchPost,
+  selectFetchPostState,
   selectPostData,
-  selectPostError,
-  selectPostIsLoading,
 } from '@/features/singlePagePost/singlePagePostSlice';
 
 import { Body, Header, PostWrapper, Wrapper } from './SinglePagePost.styled';
@@ -27,29 +26,26 @@ const SinglePagePost = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (postid) {
-      dispatch(fetchPost(postid));
-    }
+    dispatch(fetchPost(postid!));
   }, [dispatch, postid]);
 
-  const post = useAppSelector(selectPostData);
-  const isLoading = useAppSelector(selectPostIsLoading);
-  const error = useAppSelector(selectPostError);
+  const postData = useAppSelector(selectPostData);
+  const { isLoading, error } = useAppSelector(selectFetchPostState);
 
   return (
     <Wrapper>
-      {post ? (
+      {postData ? (
         <PostWrapper>
-          <Header>{post.title}</Header>
+          <Header>{postData.title}</Header>
           <PostHeaderInfo
-            bodyLength={post.body.length}
-            date={post.date}
-            topic={post.topic}
-            author={post.author}
+            bodyLength={postData.body.length}
+            date={postData.date}
+            topic={postData.topic}
+            author={postData.author}
           />
           {isAuthenticated && <PostControls />}
-          <Body>{parse(post.body)}</Body>
-          <PostComments postId={post._id} />
+          <Body>{parse(postData.body)}</Body>
+          <PostComments postId={postData._id} />
         </PostWrapper>
       ) : isLoading ? (
         <Spinner />
