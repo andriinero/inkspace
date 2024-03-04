@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   align-items: center;
   gap: 1rem;
 
-  padding: 1rem;
+  padding: 0.8rem;
   border-top: 1px solid ${({ theme }) => theme.color.post_border_controls};
   border-bottom: 1px solid ${({ theme }) => theme.color.post_border_controls};
 `;
@@ -29,6 +29,18 @@ export const ControlsIcon = styled.img`
     filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
       contrast(82%);
   }
+`;
+
+export const LikeWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+`;
+
+export const LikeCount = styled.span`
+  font-size: 0.8rem;
+  font-weight: 300;
 `;
 
 export const MenuItem = styled.li`

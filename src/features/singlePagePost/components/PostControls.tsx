@@ -1,17 +1,14 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import {
-  selectIsPostBookmarked,
-  selectIsPostLiked,
-  toggleIsBookmarked,
-  toggleIsLiked,
-} from '../singlePagePostSlice';
+import { putLikeCount, selectPostLikeCount } from '../singlePagePostSlice';
 import { toggleComments } from '@/features/commentList/commentListSlice';
 
 import {
   ControlsContainer,
   ControlsIcon,
+  LikeCount,
+  LikeWrapper,
   MenuItem,
   Wrapper,
 } from './PostControls.styled';
@@ -28,9 +25,8 @@ import {
 type PostControlsProps = { postId: string };
 
 const PostControls = ({ postId }: PostControlsProps) => {
-  const isLiked = useAppSelector(selectIsPostLiked);
-
   const userBookmarks = useAppSelector(selectProfileBookmarks);
+  const likeCount = useAppSelector(selectPostLikeCount);
 
   const postBookmarkState = useAppSelector(selectPostBookmarkState);
   const deleteBookmarkState = useAppSelector(selectDeleteBookmarkState);
@@ -42,7 +38,7 @@ const PostControls = ({ postId }: PostControlsProps) => {
   const isBookmarked = userBookmarks?.some((p) => p === postId) || false;
 
   const onLikeClick = (): void => {
-    dispatch(toggleIsLiked());
+    dispatch(putLikeCount(postId));
   };
 
   const handleBookmarkAdd = (): void => {
@@ -57,34 +53,35 @@ const PostControls = ({ postId }: PostControlsProps) => {
     dispatch(toggleComments());
   };
 
-  const handleMenuToggle = (): void => {
+  const handleDropdownToggle = (): void => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleMenuClose = (): void => {
+  const handleDropdownClose = (): void => {
     setIsMenuOpen(false);
   };
-
-  const likeSrc = isLiked ? '/thumb-up.svg' : '/thumb-up-outline.svg';
 
   const onBookmarkClick = isBookmarked ? handleBookmarkRemove : handleBookmarkAdd;
 
   return (
     <Wrapper>
       <ControlsContainer>
-        <ControlsIcon onClick={onLikeClick} src={likeSrc} />
+        <LikeWrapper>
+          <ControlsIcon onClick={onLikeClick} src="/thumb-up-outline.svg" />
+          <LikeCount>{likeCount ? likeCount : ''}</LikeCount>
+        </LikeWrapper>
         <ControlsIcon onClick={onCommentsClick} src="/comment-outline.svg" />
       </ControlsContainer>
       <ControlsContainer>
         <Bookmark onBookmarked={onBookmarkClick} isBookmarked={isBookmarked} />
         <DotMenu
           isAlignedLeft={false}
-          onToggle={handleMenuToggle}
-          onMenuClose={handleMenuClose}
+          onToggle={handleDropdownToggle}
+          onMenuClose={handleDropdownClose}
           isOpen={isMenuOpen}
         >
-          <MenuItem onClick={handleMenuClose}>Mute this author</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Mute this publication</MenuItem>
+          <MenuItem onClick={handleDropdownClose}>Mute this author</MenuItem>
+          <MenuItem onClick={handleDropdownClose}>Mute this publication</MenuItem>
         </DotMenu>
       </ControlsContainer>
     </Wrapper>
