@@ -76,7 +76,6 @@ export const deleteBookmark = createAsyncThunk(
       }
     );
     const data = await response.json();
-
     if (!response.ok) return rejectWithValue(data);
 
     return data;

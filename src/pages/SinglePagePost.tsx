@@ -8,7 +8,7 @@ import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
   fetchPost,
   selectFetchPostState,
-  selectPostData,
+  selectCurrentPostData,
 } from '@/features/singlePagePost/singlePagePostSlice';
 
 import { Body, Header, PostWrapper, Wrapper } from './SinglePagePost.styled';
@@ -29,7 +29,7 @@ const SinglePagePost = () => {
     dispatch(fetchPost(postid!));
   }, [dispatch, postid]);
 
-  const postData = useAppSelector(selectPostData);
+  const postData = useAppSelector(selectCurrentPostData);
   const { isLoading, error } = useAppSelector(selectFetchPostState);
 
   return (
@@ -43,7 +43,7 @@ const SinglePagePost = () => {
             topic={postData.topic}
             author={postData.author}
           />
-          {isAuthenticated && <PostControls />}
+          {isAuthenticated && <PostControls postId={postData._id} />}
           <Body>{parse(postData.body)}</Body>
           <PostComments postId={postData._id} />
         </PostWrapper>

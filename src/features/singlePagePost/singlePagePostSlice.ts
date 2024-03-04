@@ -6,7 +6,6 @@ import Post from '@/types/Post';
 type SinglePagePostState = {
   post: Post | null;
   isLiked: boolean;
-  isBookmarked: boolean;
   fetchPostState: {
     isLoading: boolean;
     error: SerializedError | null;
@@ -16,7 +15,6 @@ type SinglePagePostState = {
 const initialState: SinglePagePostState = {
   post: null,
   isLiked: false,
-  isBookmarked: false,
   fetchPostState: {
     isLoading: true,
     error: null,
@@ -44,9 +42,6 @@ const singlePagePostSlice = createSlice({
     toggleIsLiked(state) {
       state.isLiked = !state.isLiked;
     },
-    toggleIsBookmarked(state) {
-      state.isBookmarked = !state.isBookmarked;
-    },
   },
   extraReducers(builder) {
     builder
@@ -66,18 +61,15 @@ const singlePagePostSlice = createSlice({
   },
 });
 
-export const { toggleIsLiked, toggleIsBookmarked } = singlePagePostSlice.actions;
+export const { toggleIsLiked } = singlePagePostSlice.actions;
 
 export default singlePagePostSlice.reducer;
 
 export const selectSinglePost = (state: RootState) => state.singlePagePost.post;
 
-export const selectPostData = (state: RootState) => state.singlePagePost.post;
+export const selectCurrentPostData = (state: RootState) => state.singlePagePost.post;
 
 export const selectFetchPostState = (state: RootState) =>
   state.singlePagePost.fetchPostState;
 
 export const selectIsPostLiked = (state: RootState) => state.singlePagePost.isLiked;
-
-export const selectIsPostBookmarked = (state: RootState) =>
-  state.singlePagePost.isBookmarked;

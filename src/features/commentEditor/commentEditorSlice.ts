@@ -33,6 +33,7 @@ const initialState: CommentEditorState = {
   },
 };
 
+// TODO: move to comment list slice
 export const postComment = createAsyncThunk(
   'comments/postComment',
   async ({ postId, commentBody }: PostCommentType, { getState, rejectWithValue }) => {
@@ -58,7 +59,7 @@ export const postComment = createAsyncThunk(
 export const updateComment = createAsyncThunk(
   'comments/updateComment',
   async (
-    { commentId, commentBody, editDate}: UpdateCommentType,
+    { commentId, commentBody }: UpdateCommentType,
     { getState, rejectWithValue }
   ) => {
     const { auth } = getState() as { auth: { token: string } };
@@ -70,7 +71,7 @@ export const updateComment = createAsyncThunk(
         'Content-Type': 'application/json',
         authorization: `Bearer ${auth.token}`,
       },
-      body: JSON.stringify({ body: commentBody}),
+      body: JSON.stringify({ body: commentBody }),
     });
     const data = await response.json();
 

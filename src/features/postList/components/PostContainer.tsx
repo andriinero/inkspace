@@ -31,7 +31,7 @@ const PostContainer = () => {
         postList.map((post) => {
           const isBookmarked = userBookmarks?.some((id) => id === post._id);
 
-          return <PostItem isBookmarked={isBookmarked} key={post._id} {...post} />;
+          return <PostItem isBookmarked={isBookmarked!} key={post._id} {...post} />;
         })
       )}
     </Wrapper>

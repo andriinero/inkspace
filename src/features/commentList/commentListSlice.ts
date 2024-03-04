@@ -31,7 +31,7 @@ const initialState: CommentsState = {
 };
 
 export const fetchComments = createAsyncThunk(
-  'commentList/fetchComment',
+  'commentList/fetchComments',
   async (postId: string, { rejectWithValue }) => {
     const response = await fetch(`http://localhost:3000/api/posts/${postId}/comments`, {
       method: 'GET',

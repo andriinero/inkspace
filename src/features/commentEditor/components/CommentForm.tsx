@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { MAX_CHARACTERS_PER_COMMENT, MIN_CHARACTERS_PER_COMMENT } from '@/data/consts';
@@ -32,25 +32,17 @@ const CommentForm = ({ postId }: CommentFormProps) => {
   const isEditMode = useAppSelector(selectCommentIsEditMode);
   const editCommentId = useAppSelector(selectEditCommentId);
 
-  const [isOverflown, setIsOverflown] = useState<boolean>(false);
-
   const dispatch = useAppDispatch();
 
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
-    if (e.target.value.length >= MAX_CHARACTERS_PER_COMMENT) {
-      setIsOverflown(true);
-    } else {
+    if (e.target.value.length <= MAX_CHARACTERS_PER_COMMENT)
       dispatch(setCommentTextField(e.target.value));
-      setIsOverflown(false);
-    }
   };
 
   const handleCommentSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
 
-    if (commentText.length < MIN_CHARACTERS_PER_COMMENT) {
-      setIsOverflown(true);
-    } else {
+    if (commentText.length > MIN_CHARACTERS_PER_COMMENT) {
       const response = await dispatch(postComment({ postId, commentBody: commentText }));
       if (response) {
         dispatch(setCommentTextField(''));
@@ -62,9 +54,7 @@ const CommentForm = ({ postId }: CommentFormProps) => {
   const handleCommentUpdate = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (commentText.length < MIN_CHARACTERS_PER_COMMENT) {
-      setIsOverflown(true);
-    } else {
+    if (commentText.length >= MIN_CHARACTERS_PER_COMMENT) {
       if (isEditMode && editCommentId) {
         const response = await dispatch(
           updateComment({ commentId: editCommentId, commentBody: commentText })
@@ -84,7 +74,7 @@ const CommentForm = ({ postId }: CommentFormProps) => {
     }
   };
 
-  const handleEditCancel = () => {
+  const handleEditCancelClick = () => {
     dispatch(exitEditMode());
   };
 
@@ -99,13 +89,11 @@ const CommentForm = ({ postId }: CommentFormProps) => {
           value={commentText}
         />
         <BottomWrapper>
-          <StyledCounter isOverflown={isOverflown}>
-            {commentText.length}/280
-          </StyledCounter>
+          <StyledCounter>{commentText.length}/280</StyledCounter>
           <ControlsWrapper>
             {isEditMode && (
               <CancelActionButton
-                onButtonClick={handleEditCancel}
+                onButtonClick={handleEditCancelClick}
                 type="button"
                 value="Cancel"
               />

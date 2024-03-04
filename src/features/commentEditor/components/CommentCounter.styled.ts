@@ -18,6 +18,6 @@ export const shake = keyframes`
   }
 `;
 
-export const Counter = styled.span<{ $isOverflown: boolean }>`
+export const Counter = styled.span<{ $isOverflown?: boolean }>`
   animation: ${({ $isOverflown }) => ($isOverflown ? shake : null)} 100ms linear 2;
 `;

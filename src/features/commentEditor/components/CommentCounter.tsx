@@ -4,15 +4,11 @@ import { Counter } from './CommentCounter.styled';
 type CommentCounterProps = {
   className?: string;
   children?: ReactNode;
-  isOverflown: boolean;
 };
 
-const CommentCounter = ({ className, children, isOverflown }: CommentCounterProps) => {
-  return (
-    <Counter className={className} $isOverflown={isOverflown}>
-      {children}
-    </Counter>
-  );
+// TODO: overflow animation shake
+const CommentCounter = ({ className, children }: CommentCounterProps) => {
+  return <Counter className={className}>{children}</Counter>;
 };
 
 export default CommentCounter;

@@ -17,25 +17,44 @@ import {
 } from './PostControls.styled';
 import Bookmark from '@/components/general/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
+import {
+  deleteBookmark,
+  postBookmark,
+  selectDeleteBookmarkState,
+  selectPostBookmarkState,
+  selectProfileBookmarks,
+} from '@/features/profile/profileSlice';
 
-const PostControls = () => {
+type PostControlsProps = { postId: string };
+
+const PostControls = ({ postId }: PostControlsProps) => {
   const isLiked = useAppSelector(selectIsPostLiked);
-  const isBookmarked = useAppSelector(selectIsPostBookmarked);
+
+  const userBookmarks = useAppSelector(selectProfileBookmarks);
+
+  const postBookmarkState = useAppSelector(selectPostBookmarkState);
+  const deleteBookmarkState = useAppSelector(selectDeleteBookmarkState);
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
+  const isBookmarked = userBookmarks?.some((p) => p === postId) || false;
+
   const onLikeClick = (): void => {
     dispatch(toggleIsLiked());
   };
 
-  const onCommentsClick = (): void => {
-    dispatch(toggleComments());
+  const handleBookmarkAdd = (): void => {
+    if (!postBookmarkState.isLoading) dispatch(postBookmark(postId));
   };
 
-  const onBookmarkClick = (): void => {
-    dispatch(toggleIsBookmarked());
+  const handleBookmarkRemove = (): void => {
+    if (!deleteBookmarkState.isLoading) dispatch(deleteBookmark(postId));
+  };
+
+  const onCommentsClick = (): void => {
+    dispatch(toggleComments());
   };
 
   const handleMenuToggle = (): void => {
@@ -47,6 +66,8 @@ const PostControls = () => {
   };
 
   const likeSrc = isLiked ? '/thumb-up.svg' : '/thumb-up-outline.svg';
+
+  const onBookmarkClick = isBookmarked ? handleBookmarkRemove : handleBookmarkAdd;
 
   return (
     <Wrapper>
