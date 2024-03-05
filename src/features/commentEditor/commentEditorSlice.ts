@@ -1,4 +1,5 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useAppFetch } from '@/lib/useAppFetch';
 
 import { RootState } from '@/app/store';
 
@@ -40,7 +41,7 @@ export const postComment = createAsyncThunk(
     const state = getState() as RootState;
     const token = state.auth.token;
 
-    const response = await fetch(`http://localhost:3000/api/posts/${postId}/comments`, {
+    const { data, responseState } = await useAppFetch(`/api/posts/${postId}/comments`, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -49,9 +50,8 @@ export const postComment = createAsyncThunk(
       },
       body: JSON.stringify({ body: commentBody }),
     });
-    const data = await response.json();
 
-    if (!response.ok) return rejectWithValue(data);
+    if (!responseState.ok) return rejectWithValue(data);
 
     return data;
   }
@@ -66,7 +66,7 @@ export const updateComment = createAsyncThunk(
     const state = getState() as RootState;
     const token = state.auth.token;
 
-    const response = await fetch(`http://localhost:3000/api/comments/${commentId}`, {
+    const { data, responseState } = await useAppFetch(`/api/comments/${commentId}`, {
       method: 'PUT',
       mode: 'cors',
       headers: {
@@ -75,9 +75,8 @@ export const updateComment = createAsyncThunk(
       },
       body: JSON.stringify({ body: commentBody }),
     });
-    const data = await response.json();
 
-    if (!response.ok) return rejectWithValue(data);
+    if (!responseState.ok) return rejectWithValue(data);
 
     return data;
   }

@@ -1,4 +1,5 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useAppFetch } from '@/lib/useAppFetch';
 
 import { RootState } from '@/app/store';
 import { Author } from '@/types/Author';
@@ -21,13 +22,12 @@ const initialState: miscListState = {
 export const fetchAuthors = createAsyncThunk(
   'miscList/fetchAuthors',
   async (_, { rejectWithValue }) => {
-    const response = await fetch('http://localhost:3000/api/authors?limit=3', {
+    const { data, responseState } = await useAppFetch('/api/authors?limit=3', {
       method: 'GET',
       mode: 'cors',
     });
-    const data = await response.json();
 
-    if (!response.ok) return rejectWithValue(data);
+    if (!responseState.ok) return rejectWithValue(data);
 
     return data;
   }
@@ -36,13 +36,12 @@ export const fetchAuthors = createAsyncThunk(
 export const fetchTopics = createAsyncThunk(
   'miscList/fetchTopics',
   async (_, { rejectWithValue }) => {
-    const response = await fetch('http://localhost:3000/api/topics?limit=5', {
+    const { data, responseState } = await useAppFetch('/api/topics?limit=5', {
       method: 'GET',
       mode: 'cors',
     });
-    const data = await response.json();
 
-    if (!response.ok) return rejectWithValue(data);
+    if (!responseState.ok) return rejectWithValue(data);
 
     return data;
   }

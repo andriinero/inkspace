@@ -1,4 +1,7 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useAppFetch } from '@/lib/useAppFetch';
+
+import storage from '@/utils/storage';
 
 import { AppThunk, RootState } from '@/app/store';
 import { AuthData } from '@/types/AuthData';
@@ -22,16 +25,15 @@ const initialState: AuthState = {
 export const fetchAuthData = createAsyncThunk(
   'auth/fetchAuthData',
   async (_, { rejectWithValue }) => {
-    const token = localStorage.getItem('token');
+    const token = storage.getToken();
 
-    const response = await fetch('http://localhost:3000/auth/login', {
+    const { data, responseState } = await useAppFetch('/auth/login', {
       method: 'GET',
       mode: 'cors',
       headers: { authorization: `Bearer ${token}` },
     });
-    const data = await response.json();
 
-    if (!response.ok) return rejectWithValue(data);
+    if (!responseState.ok) return rejectWithValue(data);
 
     return data;
   }
@@ -40,29 +42,28 @@ export const fetchAuthData = createAsyncThunk(
 export const postLogin = createAsyncThunk(
   'auth/postLogin',
   async (loginBody: LoginBodyType, { rejectWithValue }) => {
-    const response = await fetch('http://localhost:3000/auth/login', {
+    const { data, responseState } = await useAppFetch('/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       mode: 'cors',
       body: JSON.stringify(loginBody),
     });
-    const data = await response.json();
 
-    if (!response.ok) return rejectWithValue(data);
+    if (!responseState.ok) return rejectWithValue(data);
 
-    localStorage.setItem('token', data.token);
+    storage.setToken(data.token);
 
     return data.token;
   }
 );
 
 export const initializeToken = (): AppThunk => (dispatch) => {
-  const token = localStorage.getItem('token');
+  const token = storage.getToken();
   dispatch(setToken(token));
 };
 
 export const logout = (): AppThunk => (dispatch) => {
-  localStorage.removeItem('token');
+  storage.clearToken();
   dispatch(resetToken());
 };
 
@@ -73,7 +74,7 @@ const authSlice = createSlice({
     setToken(state, action) {
       state.token = action.payload;
     },
-    resetToken(state) {
+    clearToken(state) {
       state.authData = null;
       state.token = null;
     },
@@ -108,7 +109,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setToken, resetToken } = authSlice.actions;
+export const { setToken, clearToken: resetToken } = authSlice.actions;
 
 export default authSlice.reducer;
 

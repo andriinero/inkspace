@@ -1,4 +1,5 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useAppFetch } from '@/lib/useAppFetch';
 
 import { RootState } from '@/app/store';
 import { UserData } from '@/types/UserData';
@@ -23,16 +24,15 @@ export const fetchProfileData = createAsyncThunk(
     const state = getState() as RootState;
     const token = state.auth.token;
 
-    const response = await fetch('http://localhost:3000/api/profile', {
+    const { data, responseState } = await useAppFetch('/api/profile', {
       method: 'GET',
       mode: 'cors',
       headers: {
         authorization: `Bearer ${token}`,
       },
     });
-    const data = await response.json();
 
-    if (!response.ok) return rejectWithValue(data);
+    if (!responseState.ok) return rejectWithValue(data);
 
     return data;
   }
@@ -44,7 +44,7 @@ export const postBookmark = createAsyncThunk(
     const state = getState() as RootState;
     const token = state.auth.token;
 
-    const response = await fetch('http://localhost:3000/api/profile/bookmarks', {
+    const { data, responseState } = await useAppFetch('/api/profile/bookmarks', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -53,9 +53,8 @@ export const postBookmark = createAsyncThunk(
       },
       body: JSON.stringify({ postid: postId }),
     });
-    const data = await response.json();
 
-    if (!response.ok) return rejectWithValue(data);
+    if (!responseState.ok) return rejectWithValue(data);
 
     return data;
   }
@@ -67,8 +66,8 @@ export const deleteBookmark = createAsyncThunk(
     const state = getState() as RootState;
     const token = state.auth.token;
 
-    const response = await fetch(
-      `http://localhost:3000/api/profile/bookmarks/${postId}`,
+    const { data, responseState } = await useAppFetch(
+      `/api/profile/bookmarks/${postId}`,
       {
         method: 'DELETE',
         mode: 'cors',
@@ -78,8 +77,8 @@ export const deleteBookmark = createAsyncThunk(
         },
       }
     );
-    const data = await response.json();
-    if (!response.ok) return rejectWithValue(data);
+
+    if (!responseState.ok) return rejectWithValue(data);
 
     return data;
   }

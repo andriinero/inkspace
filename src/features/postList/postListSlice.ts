@@ -1,4 +1,5 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useAppFetch } from '@/lib/useAppFetch';
 
 import { RootState } from '@/app/store';
 import Post from '@/types/Post';
@@ -19,12 +20,11 @@ const initialState: postListState = {
 export const fetchPosts = createAsyncThunk(
   'postList/fetchPosts',
   async (_, { rejectWithValue }) => {
-    const response = await fetch('http://localhost:3000/api/posts?page=1', {
+    const { data, responseState } = await useAppFetch('/api/posts?page=1', {
       mode: 'cors',
     });
-    const data = await response.json();
 
-    if (!response.ok) return rejectWithValue(data);
+    if (!responseState.ok) return rejectWithValue(data);
 
     return data;
   }

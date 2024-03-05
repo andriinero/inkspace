@@ -1,8 +1,8 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useAppFetch } from '@/lib/useAppFetch';
 
 import { RootState } from '@/app/store';
 import { Comment } from '@/types/Comment';
-
 
 type CommentsState = {
   comments: Comment[];
@@ -33,13 +33,12 @@ const initialState: CommentsState = {
 export const fetchComments = createAsyncThunk(
   'commentList/fetchComments',
   async (postId: string, { rejectWithValue }) => {
-    const response = await fetch(`http://localhost:3000/api/posts/${postId}/comments`, {
+    const { data, responseState } = await useAppFetch(`/api/posts/${postId}/comments`, {
       method: 'GET',
       mode: 'cors',
     });
-    const data = await response.json();
 
-    if (!response.ok) return rejectWithValue(data);
+    if (!responseState.ok) return rejectWithValue(data);
 
     return data;
   }
@@ -51,16 +50,15 @@ export const deleteComment = createAsyncThunk(
     const state = getState() as RootState;
     const token = state.auth.token;
 
-    const response = await fetch(`http://localhost:3000/api/comments/${commentId}`, {
+    const { data, responseState } = await useAppFetch(`/api/comments/${commentId}`, {
       method: 'DELETE',
       mode: 'cors',
       headers: {
         authorization: `Bearer ${token}`,
       },
     });
-    const data = response.json();
 
-    if (!response.ok) return rejectWithValue(data);
+    if (!responseState.ok) return rejectWithValue(data);
 
     return data;
   }
