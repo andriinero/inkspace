@@ -73,7 +73,7 @@ const authSlice = createSlice({
     setToken(state, action) {
       state.token = action.payload;
     },
-    deleteToken(state) {
+    resetToken(state) {
       state.authData = null;
       state.token = null;
     },
@@ -108,7 +108,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setToken, deleteToken: resetToken } = authSlice.actions;
+export const { setToken, resetToken } = authSlice.actions;
 
 export default authSlice.reducer;
 

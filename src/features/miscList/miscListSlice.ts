@@ -1,51 +1,52 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/app/store';
-
 import { Author } from '@/types/Author';
 import { Topic } from '@/types/Topic';
 
-type AuthorsState = {
-  authorList: Author[];
-  isLoading: boolean;
-  error: SerializedError | null;
-};
-
-type TopicsState = {
-  topicList: Topic[];
-  isLoading: boolean;
-  error: SerializedError | null;
-};
-
 type miscListState = {
-  authors: AuthorsState;
-  topics: TopicsState;
+  authorList: Author[];
+  topicList: Topic[];
+  authorListState: { isLoading: boolean; error: SerializedError | null };
+  topicListState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: miscListState = {
-  authors: { authorList: [], isLoading: false, error: null },
-  topics: { topicList: [], isLoading: false, error: null },
+  authorList: [],
+  topicList: [],
+  authorListState: { isLoading: false, error: null },
+  topicListState: { isLoading: false, error: null },
 };
 
-export const fetchAuthors = createAsyncThunk('miscList/fetchAuthors', async () => {
-  const response = await fetch('http://localhost:3000/api/authors?limit=3', {
-    method: 'GET',
-    mode: 'cors',
-  });
-  const data = await response.json();
+export const fetchAuthors = createAsyncThunk(
+  'miscList/fetchAuthors',
+  async (_, { rejectWithValue }) => {
+    const response = await fetch('http://localhost:3000/api/authors?limit=3', {
+      method: 'GET',
+      mode: 'cors',
+    });
+    const data = await response.json();
 
-  return data;
-});
+    if (!response.ok) return rejectWithValue(data);
 
-export const fetchTopics = createAsyncThunk('miscList/fetchTopics', async () => {
-  const response = await fetch('http://localhost:3000/api/topics?limit=5', {
-    method: 'GET',
-    mode: 'cors',
-  });
-  const data = await response.json();
+    return data;
+  }
+);
 
-  return data;
-});
+export const fetchTopics = createAsyncThunk(
+  'miscList/fetchTopics',
+  async (_, { rejectWithValue }) => {
+    const response = await fetch('http://localhost:3000/api/topics?limit=5', {
+      method: 'GET',
+      mode: 'cors',
+    });
+    const data = await response.json();
+
+    if (!response.ok) return rejectWithValue(data);
+
+    return data;
+  }
+);
 
 const miscListSlice = createSlice({
   name: 'miscList',
@@ -54,34 +55,40 @@ const miscListSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchAuthors.pending, (state) => {
-        state.authors.isLoading = true;
+        state.authorListState.isLoading = true;
+        state.authorListState.error = null;
       })
       .addCase(fetchAuthors.fulfilled, (state, action) => {
-        state.authors.isLoading = false;
-        state.authors.authorList = action.payload;
+        state.authorList = action.payload;
+        state.authorListState.isLoading = false;
       })
       .addCase(fetchAuthors.rejected, (state, action) => {
-        state.authors.isLoading = false;
-        state.authors.error = action.error;
+        state.authorListState.isLoading = false;
+        state.authorListState.error = action.error;
       });
 
     builder
       .addCase(fetchTopics.pending, (state) => {
-        state.topics.isLoading = true;
+        state.topicListState.isLoading = true;
+        state.topicListState.error = null;
       })
       .addCase(fetchTopics.fulfilled, (state, action) => {
-        state.topics.isLoading = false;
-        state.topics.topicList = action.payload;
+        state.topicList = action.payload;
+        state.topicListState.isLoading = false;
       })
       .addCase(fetchTopics.rejected, (state, action) => {
-        state.topics.isLoading = false;
-        state.topics.error = action.error;
+        state.topicListState.isLoading = false;
+        state.topicListState.error = action.error;
       });
   },
 });
 
 export default miscListSlice.reducer;
 
-export const selectAuthorListState = (state: RootState) => state.miscList.authors;
+export const selectAuthorList = (state: RootState) => state.miscList.authorList;
 
-export const selectTopicsListState = (state: RootState) => state.miscList.topics;
+export const selectTopicList = (state: RootState) => state.miscList.topicList;
+
+export const selectAuthorListState = (state: RootState) => state.miscList.authorListState;
+
+export const selectTopicsListState = (state: RootState) => state.miscList.topicListState;

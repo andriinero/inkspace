@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { fetchAuthors, selectAuthorListState } from '../miscListSlice';
+import { fetchAuthors, selectAuthorList, selectAuthorListState } from '../miscListSlice';
 
 import * as S from './AuthorContainer.styled';
 import AuthorItem from './AuthorItem';
@@ -15,7 +15,8 @@ const AuthorContainer = () => {
     dispatch(fetchAuthors());
   }, [dispatch]);
 
-  const { authorList, isLoading, error } = useAppSelector(selectAuthorListState);
+  const authorList = useAppSelector(selectAuthorList);
+  const { isLoading, error } = useAppSelector(selectAuthorListState);
 
   return (
     <S.Wrapper>
