@@ -3,6 +3,13 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { putLikeCount, selectPostLikeCount } from '../singlePagePostSlice';
 import { toggleComments } from '@/features/commentList/commentListSlice';
+import {
+  deleteBookmark,
+  postBookmark,
+  selectDeleteBookmarkState,
+  selectPostBookmarkState,
+  selectProfileBookmarks,
+} from '@/features/profile/profileSlice';
 
 import {
   ControlsContainer,
@@ -14,28 +21,19 @@ import {
 } from './PostControls.styled';
 import Bookmark from '@/components/general/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
-import {
-  deleteBookmark,
-  postBookmark,
-  selectDeleteBookmarkState,
-  selectPostBookmarkState,
-  selectProfileBookmarks,
-} from '@/features/profile/profileSlice';
 
 type PostControlsProps = { postId: string };
 
 const PostControls = ({ postId }: PostControlsProps) => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
   const userBookmarks = useAppSelector(selectProfileBookmarks);
   const likeCount = useAppSelector(selectPostLikeCount);
 
   const postBookmarkState = useAppSelector(selectPostBookmarkState);
   const deleteBookmarkState = useAppSelector(selectDeleteBookmarkState);
 
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-
   const dispatch = useAppDispatch();
-
-  const isBookmarked = userBookmarks?.some((p) => p === postId) || false;
 
   const onLikeClick = (): void => {
     dispatch(putLikeCount(postId));
@@ -60,6 +58,8 @@ const PostControls = ({ postId }: PostControlsProps) => {
   const handleDropdownClose = (): void => {
     setIsMenuOpen(false);
   };
+
+  const isBookmarked = userBookmarks?.some((p) => p === postId) || false;
 
   const onBookmarkClick = isBookmarked ? handleBookmarkRemove : handleBookmarkAdd;
 
