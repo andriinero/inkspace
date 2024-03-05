@@ -63,7 +63,7 @@ export const initializeToken = (): AppThunk => (dispatch) => {
 
 export const logout = (): AppThunk => (dispatch) => {
   localStorage.removeItem('token');
-  dispatch(deleteToken());
+  dispatch(resetToken());
 };
 
 const authSlice = createSlice({
@@ -108,7 +108,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setToken, deleteToken } = authSlice.actions;
+export const { setToken, deleteToken: resetToken } = authSlice.actions;
 
 export default authSlice.reducer;
 

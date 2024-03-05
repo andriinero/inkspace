@@ -29,6 +29,7 @@ const initialState: miscListState = {
 
 export const fetchAuthors = createAsyncThunk('miscList/fetchAuthors', async () => {
   const response = await fetch('http://localhost:3000/api/authors?limit=3', {
+    method: 'GET',
     mode: 'cors',
   });
   const data = await response.json();
@@ -38,6 +39,7 @@ export const fetchAuthors = createAsyncThunk('miscList/fetchAuthors', async () =
 
 export const fetchTopics = createAsyncThunk('miscList/fetchTopics', async () => {
   const response = await fetch('http://localhost:3000/api/topics?limit=5', {
+    method: 'GET',
     mode: 'cors',
   });
   const data = await response.json();

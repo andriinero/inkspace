@@ -37,14 +37,15 @@ const initialState: CommentEditorState = {
 export const postComment = createAsyncThunk(
   'comments/postComment',
   async ({ postId, commentBody }: PostCommentType, { getState, rejectWithValue }) => {
-    const { auth } = getState() as { auth: { token: string } };
+    const state = getState() as RootState;
+    const token = state.auth.token;
 
     const response = await fetch(`http://localhost:3000/api/posts/${postId}/comments`, {
       method: 'POST',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${auth.token}`,
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ body: commentBody }),
     });
@@ -62,14 +63,15 @@ export const updateComment = createAsyncThunk(
     { commentId, commentBody }: UpdateCommentType,
     { getState, rejectWithValue }
   ) => {
-    const { auth } = getState() as { auth: { token: string } };
+    const state = getState() as RootState;
+    const token = state.auth.token;
 
     const response = await fetch(`http://localhost:3000/api/comments/${commentId}`, {
       method: 'PUT',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${auth.token}`,
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ body: commentBody }),
     });
@@ -89,14 +91,14 @@ const commentEditorSlice = createSlice({
       state.textField = action.payload;
     },
     enterEditMode(state, action) {
+      state.textField = action.payload.commentBody;
       state.isEditMode = true;
       state.updateCommentState.commentId = action.payload.commentId;
-      state.textField = action.payload.commentBody;
     },
     exitEditMode(state) {
+      state.textField = '';
       state.isEditMode = false;
       state.updateCommentState.commentId = null;
-      state.textField = '';
     },
   },
   extraReducers(builder) {

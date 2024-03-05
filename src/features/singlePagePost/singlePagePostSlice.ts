@@ -1,4 +1,5 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import { RootState } from '@/app/store';
 
 import Post from '@/types/Post';
@@ -27,8 +28,9 @@ const initialState: SinglePagePostState = {
 
 export const fetchPost = createAsyncThunk(
   'singlePagePost/fetchPost',
-  async (postid: string, { rejectWithValue }) => {
-    const response = await fetch(`http://localhost:3000/api/posts/${postid}`, {
+  async (postId: string, { rejectWithValue }) => {
+    const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+      method: 'GET',
       mode: 'cors',
     });
     const data = await response.json();
@@ -42,13 +44,14 @@ export const fetchPost = createAsyncThunk(
 export const putLikeCount = createAsyncThunk(
   'singlePagePost/putLikeCount',
   async (postId: string, { getState, rejectWithValue }) => {
-    const { auth } = getState() as { auth: { token: string } };
+    const state = getState() as RootState;
+    const token = state.auth.token;
 
     const response = await fetch(`http://localhost:3000/api/posts/${postId}/likes`, {
       method: 'PUT',
       mode: 'cors',
       headers: {
-        authorization: `Bearer ${auth.token}`,
+        authorization: `Bearer ${token}`,
       },
     });
     const data = await response.json();

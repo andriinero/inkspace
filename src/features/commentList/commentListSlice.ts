@@ -1,8 +1,8 @@
-import { RootState } from '@/app/store';
-
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { RootState } from '@/app/store';
 import { Comment } from '@/types/Comment';
+
 
 type CommentsState = {
   comments: Comment[];
@@ -48,13 +48,14 @@ export const fetchComments = createAsyncThunk(
 export const deleteComment = createAsyncThunk(
   'commentList/deleteComment',
   async (commentId: string, { getState, rejectWithValue }) => {
-    const { auth } = getState() as { auth: { token: string } };
+    const state = getState() as RootState;
+    const token = state.auth.token;
 
     const response = await fetch(`http://localhost:3000/api/comments/${commentId}`, {
       method: 'DELETE',
       mode: 'cors',
       headers: {
-        authorization: `Bearer ${auth.token}`,
+        authorization: `Bearer ${token}`,
       },
     });
     const data = response.json();

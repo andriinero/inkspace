@@ -20,13 +20,14 @@ const initialState: ProfileState = {
 export const fetchProfileData = createAsyncThunk(
   'profile/fetchProfileData',
   async (_, { getState, rejectWithValue }) => {
-    const { auth } = getState() as { auth: { token: string } };
+    const state = getState() as RootState;
+    const token = state.auth.token;
 
     const response = await fetch('http://localhost:3000/api/profile', {
       method: 'GET',
       mode: 'cors',
       headers: {
-        authorization: `Bearer ${auth.token}`,
+        authorization: `Bearer ${token}`,
       },
     });
     const data = await response.json();
@@ -40,14 +41,15 @@ export const fetchProfileData = createAsyncThunk(
 export const postBookmark = createAsyncThunk(
   'profile/postBookmark',
   async (postId: string, { getState, rejectWithValue }) => {
-    const { auth } = getState() as { auth: { token: string } };
+    const state = getState() as RootState;
+    const token = state.auth.token;
 
     const response = await fetch('http://localhost:3000/api/profile/bookmarks', {
       method: 'POST',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${auth.token}`,
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ postid: postId }),
     });
@@ -62,7 +64,8 @@ export const postBookmark = createAsyncThunk(
 export const deleteBookmark = createAsyncThunk(
   'profile/deleteBookmark',
   async (postId: string, { getState, rejectWithValue }) => {
-    const { auth } = getState() as { auth: { token: string } };
+    const state = getState() as RootState;
+    const token = state.auth.token;
 
     const response = await fetch(
       `http://localhost:3000/api/profile/bookmarks/${postId}`,
@@ -71,7 +74,7 @@ export const deleteBookmark = createAsyncThunk(
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
-          authorization: `Bearer ${auth.token}`,
+          authorization: `Bearer ${token}`,
         },
       }
     );

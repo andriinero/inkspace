@@ -1,5 +1,6 @@
-import { RootState } from '@/app/store';
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
+import { RootState } from '@/app/store';
 
 type PostBodyType = {
   title: string;
@@ -8,38 +9,31 @@ type PostBodyType = {
 };
 
 type CreatePostState = {
-  responseMessage: string | null;
-  isLoading: boolean;
-  error: SerializedError | null;
-  validationErrors: { type: string; message: string }[] | null;
+  postPostState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: CreatePostState = {
-  responseMessage: null,
-  isLoading: false,
-  error: null,
-  validationErrors: null,
+  postPostState: { isLoading: false, error: null },
 };
 
 export const postPost = createAsyncThunk(
   'singlePagePost/postPost',
-  async (postBody: PostBodyType, { getState }) => {
-    const { auth } = getState() as { auth: { token: string } };
+  async (postBody: PostBodyType, { getState, rejectWithValue }) => {
+    const state = getState() as RootState;
+    const token = state.auth.token;
 
     const response = await fetch(`http://localhost:3000/api/posts`, {
       method: 'POST',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${auth.token}`,
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(postBody),
     });
-
-    // TODO: add validation error messages
-    if (!response.ok) return null;
-
     const data = await response.json();
+
+    if (!response.ok) return rejectWithValue(data);
 
     return data;
   }
@@ -52,23 +46,19 @@ const createPostSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(postPost.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
+        state.postPostState.isLoading = true;
+        state.postPostState.error = null;
       })
-      .addCase(postPost.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.responseMessage = action.payload;
+      .addCase(postPost.fulfilled, (state) => {
+        state.postPostState.isLoading = false;
       })
       .addCase(postPost.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.error;
+        state.postPostState.isLoading = false;
+        state.postPostState.error = action.error;
       });
   },
 });
 
 export default createPostSlice.reducer;
 
-export const selectCreatePostError = (state: RootState) => state.createPost.error;
-
-export const selectValidationErrors = (state: RootState) =>
-  state.createPost.validationErrors;
+export const selectPostPostState = (state: RootState) => state.createPost.postPostState;
