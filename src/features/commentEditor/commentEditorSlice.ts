@@ -1,6 +1,8 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
+import storage from '@/utils/storage';
+
 import { RootState } from '@/app/store';
 
 type CommentEditorState = {
@@ -37,9 +39,8 @@ const initialState: CommentEditorState = {
 // TODO: move to comment list slice
 export const postComment = createAsyncThunk(
   'comments/postComment',
-  async ({ postId, commentBody }: PostCommentType, { getState, rejectWithValue }) => {
-    const state = getState() as RootState;
-    const token = state.auth.token;
+  async ({ postId, commentBody }: PostCommentType, { rejectWithValue }) => {
+    const token = storage.getToken();
 
     const { data, responseState } = await useAppFetch(`/api/posts/${postId}/comments`, {
       method: 'POST',
@@ -59,12 +60,8 @@ export const postComment = createAsyncThunk(
 
 export const updateComment = createAsyncThunk(
   'comments/updateComment',
-  async (
-    { commentId, commentBody }: UpdateCommentType,
-    { getState, rejectWithValue }
-  ) => {
-    const state = getState() as RootState;
-    const token = state.auth.token;
+  async ({ commentId, commentBody }: UpdateCommentType, { rejectWithValue }) => {
+    const token = storage.getToken();
 
     const { data, responseState } = await useAppFetch(`/api/comments/${commentId}`, {
       method: 'PUT',

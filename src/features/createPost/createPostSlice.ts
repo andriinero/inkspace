@@ -1,6 +1,8 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
+import storage from '@/utils/storage';
+
 import { RootState } from '@/app/store';
 
 type PostBodyType = {
@@ -19,9 +21,8 @@ const initialState: CreatePostState = {
 
 export const postPost = createAsyncThunk(
   'singlePagePost/postPost',
-  async (postBody: PostBodyType, { getState, rejectWithValue }) => {
-    const state = getState() as RootState;
-    const token = state.auth.token;
+  async (postBody: PostBodyType, { rejectWithValue }) => {
+    const token = storage.getToken();
 
     const { data, responseState } = await useAppFetch(`/api/posts`, {
       method: 'POST',

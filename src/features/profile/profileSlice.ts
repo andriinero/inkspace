@@ -1,6 +1,8 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
+import storage from '@/utils/storage';
+
 import { RootState } from '@/app/store';
 import { UserData } from '@/types/UserData';
 
@@ -20,9 +22,8 @@ const initialState: ProfileState = {
 
 export const fetchProfileData = createAsyncThunk(
   'profile/fetchProfileData',
-  async (_, { getState, rejectWithValue }) => {
-    const state = getState() as RootState;
-    const token = state.auth.token;
+  async (_, { rejectWithValue }) => {
+    const token = storage.getToken();
 
     const { data, responseState } = await useAppFetch('/api/profile', {
       method: 'GET',
@@ -40,9 +41,8 @@ export const fetchProfileData = createAsyncThunk(
 
 export const postBookmark = createAsyncThunk(
   'profile/postBookmark',
-  async (postId: string, { getState, rejectWithValue }) => {
-    const state = getState() as RootState;
-    const token = state.auth.token;
+  async (postId: string, { rejectWithValue }) => {
+    const token = storage.getToken();
 
     const { data, responseState } = await useAppFetch('/api/profile/bookmarks', {
       method: 'POST',
@@ -62,9 +62,8 @@ export const postBookmark = createAsyncThunk(
 
 export const deleteBookmark = createAsyncThunk(
   'profile/deleteBookmark',
-  async (postId: string, { getState, rejectWithValue }) => {
-    const state = getState() as RootState;
-    const token = state.auth.token;
+  async (postId: string, { rejectWithValue }) => {
+    const token = storage.getToken();
 
     const { data, responseState } = await useAppFetch(
       `/api/profile/bookmarks/${postId}`,

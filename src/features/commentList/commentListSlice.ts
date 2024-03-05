@@ -1,6 +1,8 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
+import storage from '@/utils/storage';
+
 import { RootState } from '@/app/store';
 import { Comment } from '@/types/Comment';
 
@@ -46,9 +48,8 @@ export const fetchComments = createAsyncThunk(
 
 export const deleteComment = createAsyncThunk(
   'commentList/deleteComment',
-  async (commentId: string, { getState, rejectWithValue }) => {
-    const state = getState() as RootState;
-    const token = state.auth.token;
+  async (commentId: string, { rejectWithValue }) => {
+    const token = storage.getToken();
 
     const { data, responseState } = await useAppFetch(`/api/comments/${commentId}`, {
       method: 'DELETE',
