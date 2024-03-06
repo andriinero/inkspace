@@ -12,8 +12,11 @@ import AuthorItem from './AuthorItem';
 import Error from '@/components/general/Error';
 import MiscListLoader from '@/components/loaders/MiscListLoader';
 import { selectProfileFollowedUsers } from '@/features/profile/profileSlice';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 const AuthorContainer = () => {
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -24,6 +27,9 @@ const AuthorContainer = () => {
 
   const authorList = useAppSelector(selectAuthorList);
   const { isLoading, error } = useAppSelector(selectFetchAuthorsState);
+
+  // FIXME: remove comment
+  console.log(followList);
 
   return (
     <S.Wrapper>

@@ -108,6 +108,7 @@ export const selectCurrentUserId = (state: RootState) => state.auth.authData?.su
 
 export const selectAuthData = (state: RootState) => state.auth.authData;
 
-export const selectFetchAuthDataState = (state: RootState) => state.auth.fetchAuthDataState;
+export const selectFetchAuthDataState = (state: RootState) =>
+  state.auth.fetchAuthDataState;
 
 export const selectIsAuthenticated = (state: RootState) => Boolean(state.auth.authData);
