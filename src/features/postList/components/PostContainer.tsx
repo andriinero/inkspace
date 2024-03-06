@@ -50,9 +50,9 @@ const PostContainer = () => {
         <CalloutText>Be the first one to post!</CalloutText>
       ) : (
         postList.map((post) => {
-          const isBookmarked = userBookmarks?.some((id) => id === post._id);
+          const isBookmarked = userBookmarks?.some((id) => id === post._id) as boolean;
 
-          return <PostItem isBookmarked={isBookmarked!} key={post._id} {...post} />;
+          return <PostItem isBookmarked={isBookmarked} key={post._id} {...post} />;
         })
       )}
     </Wrapper>

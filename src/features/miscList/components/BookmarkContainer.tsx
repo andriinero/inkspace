@@ -9,8 +9,8 @@ import {
 
 import { BookmarkList, CalloutText, Header, Wrapper } from './BookmarkContainer.styled';
 import BookmarkItem from './BookmarkItem';
-import Spinner from '@/components/loaders/Spinner';
 import Error from '@/components/general/Error';
+import MiscListLoader from '@/components/loaders/MiscListLoader';
 
 const BookmarkContainer = () => {
   const dispatch = useAppDispatch();
@@ -27,7 +27,7 @@ const BookmarkContainer = () => {
       <Header>Recently Saved</Header>
       <BookmarkList>
         {isLoading ? (
-          <Spinner />
+          <MiscListLoader />
         ) : error ? (
           <Error />
         ) : bookmarkList.length === 0 ? (

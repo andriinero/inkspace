@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { useAppDispatch } from './hooks';
+import { useAppDispatch, useAppSelector } from './hooks';
 
-import { initAuth } from '@/features/auth/authSlice';
+import { initAuth, selectFetchAuthDataState } from '@/features/auth/authSlice';
 
 import Header from '@/layout/Header';
 import { Outlet } from 'react-router-dom';
@@ -14,14 +14,20 @@ const App = () => {
     dispatch(initAuth());
   }, [dispatch]);
 
+  const { isLoading } = useAppSelector(selectFetchAuthDataState);
+
   return (
-    <Wrapper>
-      <Header />
-      {/* TODO: fix wrappers padding  */}
-      <WrapperMain>
-        <Outlet />
-      </WrapperMain>
-    </Wrapper>
+    <>
+      {!isLoading && (
+        <Wrapper>
+          <Header />
+          {/* TODO: fix wrappers padding  */}
+          <WrapperMain>
+            <Outlet />
+          </WrapperMain>
+        </Wrapper>
+      )}
+    </>
   );
 };
 

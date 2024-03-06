@@ -11,6 +11,8 @@ type ProfileState = {
   fetchProfileDataState: { isLoading: boolean; error: SerializedError | null };
   postBookmarkState: { isLoading: boolean; error: SerializedError | null };
   deleteBookmarkState: { isLoading: boolean; error: SerializedError | null };
+  postFollowedUserState: { isLoading: boolean; error: SerializedError | null };
+  deleteFollowUserState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: ProfileState = {
@@ -18,6 +20,8 @@ const initialState: ProfileState = {
   fetchProfileDataState: { isLoading: false, error: null },
   postBookmarkState: { isLoading: false, error: null },
   deleteBookmarkState: { isLoading: false, error: null },
+  postFollowedUserState: { isLoading: false, error: null },
+  deleteFollowUserState: { isLoading: false, error: null },
 };
 
 export const fetchProfileData = createAsyncThunk(
@@ -83,6 +87,50 @@ export const deleteBookmark = createAsyncThunk(
   }
 );
 
+export const postFollowUser = createAsyncThunk(
+  'profile/postFollowUser',
+  async (userId: string, { rejectWithValue }) => {
+    const token = storage.getToken();
+
+    const { data, responseState } = await useAppFetch('/api/profile/followed-users', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ userid: userId }),
+    });
+
+    if (!responseState.ok) return rejectWithValue(data);
+
+    return data;
+  }
+);
+
+export const deleteFollowUser = createAsyncThunk(
+  'profile/deleteFollowUser',
+  async (userId: string, { rejectWithValue }) => {
+    const token = storage.getToken();
+
+    const { data, responseState } = await useAppFetch(
+      `/api/profile/followed-users/${userId}`,
+      {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!responseState.ok) return rejectWithValue(data);
+
+    return data;
+  }
+);
+
 const profileSlice = createSlice({
   name: 'profile',
   initialState,
@@ -130,6 +178,35 @@ const profileSlice = createSlice({
         state.deleteBookmarkState.isLoading = false;
         state.deleteBookmarkState.error = action.error;
       });
+    builder
+      .addCase(postFollowUser.pending, (state) => {
+        state.postFollowedUserState.isLoading = true;
+        state.postFollowedUserState.error = null;
+      })
+      .addCase(postFollowUser.fulfilled, (state, action) => {
+        if (state.profileData) state.profileData.followed_users.push(action.payload._id);
+        state.postFollowedUserState.isLoading = false;
+      })
+      .addCase(postFollowUser.rejected, (state, action) => {
+        state.postFollowedUserState.isLoading = false;
+        state.postFollowedUserState.error = action.error;
+      });
+    builder
+      .addCase(deleteFollowUser.pending, (state) => {
+        state.deleteFollowUserState.isLoading = true;
+        state.deleteFollowUserState.error = null;
+      })
+      .addCase(deleteFollowUser.fulfilled, (state, action) => {
+        if (state.profileData)
+          state.profileData.followed_users = state.profileData.followed_users.filter(
+            (id) => id !== action.payload._id
+          );
+        state.deleteFollowUserState.isLoading = false;
+      })
+      .addCase(deleteFollowUser.rejected, (state, action) => {
+        state.deleteFollowUserState.isLoading = false;
+        state.deleteFollowUserState.error = action.error;
+      });
   },
 });
 
@@ -148,3 +225,6 @@ export const selectProfileData = (state: RootState) => state.profile.profileData
 
 export const selectProfileBookmarks = (state: RootState) =>
   state.profile.profileData?.post_bookmarks;
+
+export const selectProfileFollowedUsers = (state: RootState) =>
+  state.profile.profileData?.followed_users;

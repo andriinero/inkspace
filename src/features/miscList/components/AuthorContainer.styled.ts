@@ -11,9 +11,9 @@ export const Header = styled.h3`
 `;
 
 export const AuthorList = styled.ul`
-  display: grid;
-  grid-template-rows: repeat(3, minmax(50px, 70px));
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 
   list-style: none;
 `;

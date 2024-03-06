@@ -1,14 +1,21 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { fetchAuthors, selectAuthorList, selectFetchAuthorsState } from '../miscListSlice';
+import {
+  fetchAuthors,
+  selectAuthorList,
+  selectFetchAuthorsState,
+} from '../miscListSlice';
 
 import * as S from './AuthorContainer.styled';
 import AuthorItem from './AuthorItem';
 import Error from '@/components/general/Error';
 import MiscListLoader from '@/components/loaders/MiscListLoader';
+import { selectProfileFollowedUsers } from '@/features/profile/profileSlice';
 
 const AuthorContainer = () => {
+  const followList = useAppSelector(selectProfileFollowedUsers);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -27,7 +34,11 @@ const AuthorContainer = () => {
         ) : error ? (
           <Error />
         ) : (
-          authorList.map((author) => <AuthorItem key={author._id} {...author} />)
+          authorList.map((a) => {
+            const isFollowed = followList?.some((f) => f === a._id) as boolean;
+
+            return <AuthorItem key={a._id} isFollowed={isFollowed} {...a} />;
+          })
         )}
       </S.AuthorList>
     </S.Wrapper>

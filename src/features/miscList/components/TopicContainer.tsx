@@ -3,10 +3,10 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { fetchTopics, selectTopicList, selectFetchTopicsState } from '../miscListSlice';
 
-import TopicItem from './Topicitem';
+import { Header, TopicList, Wrapper } from './TopicContainer.styled';
+import TopicItem from './TopicItem';
 import TopicListLoader from '@/components/loaders/TopicListLoader';
 import Error from '@/components/general/Error';
-import { Header, TopicList, Wrapper } from './TopicContainer.styled';
 
 const TopicContainer = () => {
   const dispatch = useAppDispatch();

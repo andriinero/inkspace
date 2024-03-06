@@ -10,6 +10,7 @@ export const WrapperItem = styled.li`
 
 export const StyledLink = styled(NavLink)`
   color: inherit;
+  text-decoration: none;
 `;
 
 export const BioContainer = styled.div`
@@ -52,13 +53,17 @@ export const Icon = styled.img`
   -webkit-user-drag: none;
 `;
 
-export const FollowButton = styled.input`
+export const FollowButton = styled.input<{ $isFollowed: boolean }>`
+  align-self: flex-start;
+
   padding: 0.5rem 0.8rem;
   border: 1px solid ${({ theme }) => theme.color.topic_border};
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.color.topic_bg};
+  background-color: ${({ $isFollowed, theme }) =>
+    $isFollowed ? theme.color.topic_bg_selected : theme.color.topic_bg};
 
-  color: ${({ theme }) => theme.color.text_primary};
+  color: ${({ $isFollowed, theme }) =>
+    $isFollowed ? theme.color.topic_bg_selected : 'inherit'};
   font-size: 0.85rem;
 
   transition: color 100ms;

@@ -6,6 +6,9 @@ const TopicListLoader = () => {
       <Item />
       <Item />
       <Item />
+      <Item />
+      <Item />
+      <Item />
     </>
   );
 };
