@@ -10,7 +10,7 @@ import {
   selectSelectedTopic,
 } from '../postListSlice';
 
-import { Header, StyledIcon, Wrapper } from './PostContainer.styled';
+import { CalloutText, Header, StyledIcon, Wrapper } from './PostContainer.styled';
 import PostItem from './PostItem';
 import Error from '@/components/general/Error';
 import PostListLoader from '@/components/loaders/PostListLoader';
@@ -27,7 +27,7 @@ const PostContainer = () => {
   const { isLoading, error } = useAppSelector(selectFetchPostListState);
 
   useEffect(() => {
-    dispatch(fetchPosts(selectedTopic?.name));
+    dispatch(fetchPosts(selectedTopic?._id));
   }, [dispatch, selectedTopic]);
 
   const handleClearClick = (): void => {
@@ -46,6 +46,8 @@ const PostContainer = () => {
         <PostListLoader />
       ) : error ? (
         <Error />
+      ) : postList.length === 0 ? (
+        <CalloutText>Be the first one to post!</CalloutText>
       ) : (
         postList.map((post) => {
           const isBookmarked = userBookmarks?.some((id) => id === post._id);

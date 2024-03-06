@@ -24,9 +24,9 @@ const initialState: postListState = {
 
 export const fetchPosts = createAsyncThunk(
   'postList/fetchPosts',
-  async (topicName: string = '', { rejectWithValue }) => {
+  async (topicId: string = '', { rejectWithValue }) => {
     const { data, responseState } = await useAppFetch(
-      `/api/posts?page=1&topic=${topicName}`,
+      `/api/posts?page=1&topic=${topicId}`,
       {
         mode: 'cors',
       }

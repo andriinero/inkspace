@@ -13,6 +13,7 @@ export const Header = styled.h3`
 export const TopicList = styled.ul`
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 
   list-style: none;
 `;
