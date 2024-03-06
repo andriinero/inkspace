@@ -16,6 +16,7 @@ import { Topic } from '@/types/Topic';
 
 import * as S from './PostItem.styled';
 import PostDate from '@/components/general/TimeAgo';
+import { setTopic } from '../postListSlice';
 
 type PostItemProps = {
   _id: string;
@@ -62,6 +63,10 @@ const PostItem = ({
     setIsMenuOpen(false);
   };
 
+  const handleTopicClick = (): void => {
+    dispatch(setTopic(topic));
+  };
+
   const handleBookmarkClick = isBookmarked ? handleBookmarkRemove : handleBookmarkAdd;
 
   return (
@@ -87,11 +92,7 @@ const PostItem = ({
       </S.Preview>
       <S.Bottom>
         <S.MiscContainer>
-          {topic && (
-            <S.StyledLink to={`/topics/${topic._id}`}>
-              <S.Topic>{topic.name}</S.Topic>
-            </S.StyledLink>
-          )}
+          {topic && <S.Topic onClick={handleTopicClick}>{topic.name}</S.Topic>}
           <S.PostReadEstimate bodyLength={body.length} />
         </S.MiscContainer>
         <S.Controls>

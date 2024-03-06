@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ $isSelected: boolean }>`
   padding: 0.5rem 0.9rem;
   border: 1px solid ${({ theme }) => theme.color.topic_border};
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.color.topic_bg};
-`;
+  background-color: ${({ $isSelected, theme }) =>
+    $isSelected ? theme.color.topic_bg_selected : theme.color.topic_bg};
 
-export const StyledLink = styled(NavLink)`
-  color: inherit;
-  text-decoration: none;
+  color: ${({ $isSelected, theme }) =>
+    $isSelected ? theme.color.topic_bg_selected : 'inherit'};
+
+  cursor: pointer;
 `;

@@ -2,27 +2,46 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { selectProfileBookmarks } from '@/features/profile/profileSlice';
-import { fetchPosts, selectFetchPostListState, selectPostList } from '../postListSlice';
+import {
+  clearTopic,
+  fetchPosts,
+  selectFetchPostListState,
+  selectPostList,
+  selectSelectedTopic,
+} from '../postListSlice';
 
-import { Wrapper } from './PostContainer.styled';
+import { Header, StyledIcon, Wrapper } from './PostContainer.styled';
 import PostItem from './PostItem';
 import Error from '@/components/general/Error';
 import PostListLoader from '@/components/loaders/PostListLoader';
+import { Topic } from '@/types/Topic';
 
 const PostContainer = () => {
   const userBookmarks = useAppSelector(selectProfileBookmarks);
 
-  const dispatch = useAppDispatch();
+  const selectedTopic = useAppSelector(selectSelectedTopic) as Topic;
 
-  useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+  const dispatch = useAppDispatch();
 
   const postList = useAppSelector(selectPostList);
   const { isLoading, error } = useAppSelector(selectFetchPostListState);
 
+  useEffect(() => {
+    dispatch(fetchPosts(selectedTopic?.name));
+  }, [dispatch, selectedTopic]);
+
+  const handleClearClick = (): void => {
+    dispatch(clearTopic());
+  };
+
   return (
     <Wrapper>
+      {selectedTopic && (
+        <Header>
+          {selectedTopic.name}
+          <StyledIcon onClick={handleClearClick} src="/close.svg" />
+        </Header>
+      )}
       {isLoading ? (
         <PostListLoader />
       ) : error ? (

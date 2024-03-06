@@ -9,6 +9,8 @@ const mainTheme = {
     main_border_feint: '#242728',
     post_border_controls: '#34383a',
     topic_bg: '#242728',
+    topic_bg_selected: '',
+    topic_text_selected: '',
     topic_border: '#34383a',
     text_button_follow: '#7de276',
     main_button_bg_primary: '#1E6E1A',

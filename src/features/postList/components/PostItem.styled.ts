@@ -133,6 +133,8 @@ export const Topic = styled.span`
   background-color: ${({ theme }) => theme.color.topic_bg};
 
   font-size: 0.8rem;
+
+  cursor: pointer;
 `;
 
 export const PostReadEstimate = styled(PostReadTime)`
