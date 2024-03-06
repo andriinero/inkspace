@@ -14,13 +14,13 @@ import MiscListLoader from '@/components/loaders/MiscListLoader';
 import { selectProfileFollowedUsers } from '@/features/profile/profileSlice';
 
 const AuthorContainer = () => {
-  const followList = useAppSelector(selectProfileFollowedUsers);
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchAuthors());
   }, [dispatch]);
+
+  const followList = useAppSelector(selectProfileFollowedUsers);
 
   const authorList = useAppSelector(selectAuthorList);
   const { isLoading, error } = useAppSelector(selectFetchAuthorsState);

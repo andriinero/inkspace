@@ -27,6 +27,7 @@ const AuthorItem = ({ _id, username, bio, isFollowed }: AuthorItemProps) => {
   };
 
   const handleFollowClick = isFollowed ? handleFollowRemove : handleFollowAdd;
+  const followButtonText = isFollowed ? 'Followed' : 'Follow';
 
   return (
     <S.WrapperItem>
@@ -39,12 +40,14 @@ const AuthorItem = ({ _id, username, bio, isFollowed }: AuthorItemProps) => {
         </S.StyledLink>
         <S.BioContent>{bio || 'No user bio'}</S.BioContent>
       </S.BioContainer>
-      <S.FollowButton
-        $isFollowed={isFollowed}
-        onClick={handleFollowClick}
-        type="button"
-        value="Follow"
-      />
+      {isAuthenticated && (
+        <S.FollowButton
+          $isFollowed={isFollowed}
+          onClick={handleFollowClick}
+          type="button"
+          value={followButtonText}
+        />
+      )}
     </S.WrapperItem>
   );
 };

@@ -7,8 +7,7 @@ export const Wrapper = styled.div<{ $isSelected: boolean }>`
   background-color: ${({ $isSelected, theme }) =>
     $isSelected ? theme.color.topic_bg_selected : theme.color.topic_bg};
 
-  color: ${({ $isSelected, theme }) =>
-    $isSelected ? theme.color.topic_bg_selected : 'inherit'};
+  color: ${({ theme }) => theme.color.text_primary};
 
   cursor: pointer;
 `;

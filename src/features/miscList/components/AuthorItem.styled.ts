@@ -22,7 +22,7 @@ export const BioContainer = styled.div`
 export const BioName = styled.span`
   display: inline-block;
 
-  max-width: 18ch;
+  max-width: 16ch;
 
   font-weight: 500;
 
@@ -35,6 +35,8 @@ export const BioContent = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+
+  max-width: 20ch;
 
   font-size: 0.8rem;
   line-height: 1.2rem;
@@ -63,14 +65,10 @@ export const FollowButton = styled.input<{ $isFollowed: boolean }>`
     $isFollowed ? theme.color.topic_bg_selected : theme.color.topic_bg};
 
   color: ${({ $isFollowed, theme }) =>
-    $isFollowed ? theme.color.topic_bg_selected : 'inherit'};
+    $isFollowed ? theme.color.topic_text_selected : theme.color.text_primary};
   font-size: 0.85rem;
 
   transition: color 100ms;
 
   cursor: pointer;
-
-  &:hover {
-    color: ${({ theme }) => theme.color.text_secondary};
-  }
 `;
