@@ -29,6 +29,8 @@ export const BookmarkTitle = styled.h4``;
 
 export const MiscInfo = styled.div`
   display: flex;
+  align-items: center;
+  gap: 0.3rem;
 
   font-size: 0.8rem;
   font-weight: 300;
@@ -37,3 +39,7 @@ export const MiscInfo = styled.div`
 export const PostDate = styled(TimeAgo)``;
 
 export const TimeToRead = styled(PostReadTime)``;
+
+export const Divider = styled.span`
+  font-size: 1rem;
+`;

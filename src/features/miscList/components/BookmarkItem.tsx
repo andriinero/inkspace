@@ -3,6 +3,7 @@ import {
   AuthorIcon,
   AuthorName,
   BookmarkTitle,
+  Divider,
   Header,
   MiscInfo,
   PostDate,
@@ -23,6 +24,7 @@ const BookmarkItem = ({ _id, author, title, body, date }: Post) => {
       </StyledLink>
       <MiscInfo>
         <PostDate date={date} />
+        <Divider>·</Divider>
         <TimeToRead bodyLength={body.length} />
       </MiscInfo>
     </WrapperItem>
