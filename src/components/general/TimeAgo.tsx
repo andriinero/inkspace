@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import { Wrapper } from './TimeAgo.styled';
-import { AppDate } from '@/utils/appDate';
+import { AppDate } from '@/utils/AppDate';
 
 type PostDateProps = { className?: string; children?: ReactNode; date: string };
 

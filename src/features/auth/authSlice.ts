@@ -5,19 +5,18 @@ import storage from '@/utils/storage';
 
 import { AppThunk, RootState } from '@/app/store';
 import { AuthData } from '@/types/AuthData';
+import { fetchProfileData } from '../profile/profileSlice';
 
 type LoginBodyType = { username: string; password: string };
 
 type AuthState = {
   authData: AuthData | null;
-  token: string | null;
   fetchAuthDataState: { isLoading: boolean; error: SerializedError | null };
   postLoginState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: AuthState = {
   authData: null,
-  token: null,
   fetchAuthDataState: { isLoading: false, error: null },
   postLoginState: { isLoading: false, error: null },
 };
@@ -57,28 +56,23 @@ export const postLogin = createAsyncThunk(
   }
 );
 
-export const initializeToken = (): AppThunk => (dispatch) => {
+export const initAuth = (): AppThunk => (dispatch) => {
   const token = storage.getToken();
-  dispatch(setToken(token));
+
+  if (token) {
+    dispatch(fetchAuthData());
+    dispatch(fetchProfileData());
+  }
 };
 
-export const logout = (): AppThunk => (dispatch) => {
+export const logout = (): AppThunk => () => {
   storage.clearToken();
-  dispatch(resetToken());
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    setToken(state, action) {
-      state.token = action.payload;
-    },
-    clearToken(state) {
-      state.authData = null;
-      state.token = null;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchAuthData.pending, (state) => {
@@ -98,8 +92,7 @@ const authSlice = createSlice({
         state.fetchAuthDataState.isLoading = true;
         state.fetchAuthDataState.error = null;
       })
-      .addCase(postLogin.fulfilled, (state, action) => {
-        state.token = action.payload;
+      .addCase(postLogin.fulfilled, (state) => {
         state.fetchAuthDataState.isLoading = false;
       })
       .addCase(postLogin.rejected, (state, action) => {
@@ -109,15 +102,11 @@ const authSlice = createSlice({
   },
 });
 
-export const { setToken, clearToken: resetToken } = authSlice.actions;
-
 export default authSlice.reducer;
 
 export const selectCurrentUserId = (state: RootState) => state.auth.authData?.sub;
 
 export const selectAuthData = (state: RootState) => state.auth.authData;
-
-export const selectToken = (state: RootState) => state.auth.token;
 
 export const selectLoginState = (state: RootState) => state.auth.fetchAuthDataState;
 
