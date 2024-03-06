@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { fetchTopics, selectTopicList, selectTopicsListState } from '../miscListSlice';
+import { fetchTopics, selectTopicList, selectFetchTopicsState } from '../miscListSlice';
 
 import TopicItem from './Topicitem';
 import TopicListLoader from '@/components/loaders/TopicListLoader';
 import Error from '@/components/general/Error';
 import { Header, TopicList, Wrapper } from './TopicContainer.styled';
 
-const MiscTopics = () => {
+const TopicContainer = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const MiscTopics = () => {
   }, [dispatch]);
 
   const topicList = useAppSelector(selectTopicList);
-  const { isLoading, error } = useAppSelector(selectTopicsListState);
+  const { isLoading, error } = useAppSelector(selectFetchTopicsState);
 
   return (
     <Wrapper>
@@ -34,4 +34,4 @@ const MiscTopics = () => {
   );
 };
 
-export default MiscTopics;
+export default TopicContainer;

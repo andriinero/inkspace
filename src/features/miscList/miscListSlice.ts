@@ -1,22 +1,29 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
+import storage from '@/utils/storage';
+
 import { RootState } from '@/app/store';
 import { Author } from '@/types/Author';
 import { Topic } from '@/types/Topic';
+import Post from '@/types/Post';
 
 type miscListState = {
   authorList: Author[];
   topicList: Topic[];
-  authorListState: { isLoading: boolean; error: SerializedError | null };
-  topicListState: { isLoading: boolean; error: SerializedError | null };
+  bookmarkList: Post[];
+  fetchAuthorsState: { isLoading: boolean; error: SerializedError | null };
+  fetchTopicsState: { isLoading: boolean; error: SerializedError | null };
+  fetchBookmarksState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: miscListState = {
   authorList: [],
   topicList: [],
-  authorListState: { isLoading: false, error: null },
-  topicListState: { isLoading: false, error: null },
+  bookmarkList: [],
+  fetchAuthorsState: { isLoading: false, error: null },
+  fetchTopicsState: { isLoading: false, error: null },
+  fetchBookmarksState: { isLoading: false, error: null },
 };
 
 export const fetchAuthors = createAsyncThunk(
@@ -36,12 +43,31 @@ export const fetchAuthors = createAsyncThunk(
 export const fetchTopics = createAsyncThunk(
   'miscList/fetchTopics',
   async (_, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch('/api/topics?limit=5', {
+    const { data, responseState } = await useAppFetch('/api/topics?limit=7', {
       method: 'GET',
       mode: 'cors',
     });
 
     if (!responseState.ok) return rejectWithValue(data);
+
+    return data;
+  }
+);
+
+export const fetchBookmarks = createAsyncThunk(
+  'miscList/fetchBookmarks',
+  async (_, { rejectWithValue }) => {
+    const token = storage.getToken();
+
+    const { data, responseState } = await useAppFetch('/api/profile/bookmarks?limit=4', {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!responseState.ok) rejectWithValue(data);
 
     return data;
   }
@@ -54,30 +80,43 @@ const miscListSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchAuthors.pending, (state) => {
-        state.authorListState.isLoading = true;
-        state.authorListState.error = null;
+        state.fetchAuthorsState.isLoading = true;
+        state.fetchAuthorsState.error = null;
       })
       .addCase(fetchAuthors.fulfilled, (state, action) => {
         state.authorList = action.payload;
-        state.authorListState.isLoading = false;
+        state.fetchAuthorsState.isLoading = false;
       })
       .addCase(fetchAuthors.rejected, (state, action) => {
-        state.authorListState.isLoading = false;
-        state.authorListState.error = action.error;
+        state.fetchAuthorsState.isLoading = false;
+        state.fetchAuthorsState.error = action.error;
       });
 
     builder
       .addCase(fetchTopics.pending, (state) => {
-        state.topicListState.isLoading = true;
-        state.topicListState.error = null;
+        state.fetchTopicsState.isLoading = true;
+        state.fetchTopicsState.error = null;
       })
       .addCase(fetchTopics.fulfilled, (state, action) => {
         state.topicList = action.payload;
-        state.topicListState.isLoading = false;
+        state.fetchTopicsState.isLoading = false;
       })
       .addCase(fetchTopics.rejected, (state, action) => {
-        state.topicListState.isLoading = false;
-        state.topicListState.error = action.error;
+        state.fetchTopicsState.isLoading = false;
+        state.fetchTopicsState.error = action.error;
+      });
+    builder
+      .addCase(fetchBookmarks.pending, (state) => {
+        state.fetchBookmarksState.isLoading = true;
+        state.fetchBookmarksState.error = null;
+      })
+      .addCase(fetchBookmarks.fulfilled, (state, action) => {
+        state.bookmarkList = action.payload.post_bookmarks;
+        state.fetchBookmarksState.isLoading = false;
+      })
+      .addCase(fetchBookmarks.rejected, (state, action) => {
+        state.fetchBookmarksState.isLoading = false;
+        state.fetchBookmarksState.error = action.error;
       });
   },
 });
@@ -88,6 +127,13 @@ export const selectAuthorList = (state: RootState) => state.miscList.authorList;
 
 export const selectTopicList = (state: RootState) => state.miscList.topicList;
 
-export const selectAuthorListState = (state: RootState) => state.miscList.authorListState;
+export const selectBookmarkList = (state: RootState) => state.miscList.bookmarkList;
 
-export const selectTopicsListState = (state: RootState) => state.miscList.topicListState;
+export const selectFetchAuthorsState = (state: RootState) =>
+  state.miscList.fetchAuthorsState;
+
+export const selectFetchTopicsState = (state: RootState) =>
+  state.miscList.fetchTopicsState;
+
+export const selectFetchBookmarksState = (state: RootState) =>
+  state.miscList.fetchBookmarksState;

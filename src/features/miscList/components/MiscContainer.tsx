@@ -1,12 +1,14 @@
 import AuthorContainer from './AuthorContainer';
-import MiscTopics from './TopicContainer';
+import TopicContainer from './TopicContainer';
 import { Wrapper } from './MiscContainer.styled';
+import BookmarkContainer from './BookmarkContainer';
 
 const MiscContainer = () => {
   return (
     <Wrapper>
       <AuthorContainer />
-      <MiscTopics />
+      <TopicContainer />
+      <BookmarkContainer />
     </Wrapper>
   );
 };

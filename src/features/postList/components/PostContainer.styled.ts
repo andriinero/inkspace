@@ -23,10 +23,12 @@ export const CalloutText = styled.h2`
   display: inline-block;
   align-self: center;
 
-  margin: auto;
+  margin-top: 8rem;
 
+  font-size: 1.4rem;
   font-weight: 200;
   font-style: italic;
+  letter-spacing: 0.1rem;
 `;
 
 export const StyledIcon = styled.img`
