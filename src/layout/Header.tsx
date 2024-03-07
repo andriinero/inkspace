@@ -33,11 +33,11 @@ const Header = () => {
           <>
             <NewPostButton>
               <HeaderLink to="/create-post">
-                <NewPostIcon src="/post.svg" />
+                <NewPostIcon src="/post.svg" alt="Create New Post Icon" />
                 <NewPostButtonText>Write</NewPostButtonText>
               </HeaderLink>
             </NewPostButton>
-            <ProfileIcon src="/portrait-placeholder.png" />
+            <ProfileIcon src="/portrait-placeholder.png" alt="Create New Post Icon" />
             <HeaderLink reloadDocument to="/">
               <ActionButton onButtonClick={onLogoutClick} value="Logout" />
             </HeaderLink>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import Bookmark from '@/components/general/Bookmark';
+import Bookmark from '@/components/icons/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
 
 import PostReadTime from '@/components/general/PostReadTime';

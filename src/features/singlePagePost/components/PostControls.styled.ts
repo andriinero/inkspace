@@ -1,3 +1,4 @@
+import AppIcon from '@/components/icons/AppIcon';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -16,19 +17,9 @@ export const ControlsContainer = styled.div`
   gap: 1rem;
 `;
 
-export const ControlsIcon = styled.img`
+export const ControlsIcon = styled(AppIcon)`
   width: 20px;
   height: 20px;
-
-  fill: #fff;
-  transition: filter 100ms;
-
-  cursor: pointer;
-
-  &:hover {
-    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
-      contrast(82%);
-  }
 `;
 
 export const LikeWrapper = styled.div`

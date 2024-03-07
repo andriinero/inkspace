@@ -11,7 +11,7 @@ const Bookmark = ({ onBookmarked, className, isBookmarked }: BookmarkProps) => {
 
   return (
     <BookmarkIcon
-      onClick={onBookmarked}
+      onIconClick={onBookmarked}
       className={className}
       src={bookmarkSrc}
       alt="Bookmark Icon"

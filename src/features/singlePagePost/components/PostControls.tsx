@@ -19,7 +19,7 @@ import {
   MenuItem,
   Wrapper,
 } from './PostControls.styled';
-import Bookmark from '@/components/general/Bookmark';
+import Bookmark from '@/components/icons/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
 
 type PostControlsProps = { postId: string };
@@ -67,10 +67,18 @@ const PostControls = ({ postId }: PostControlsProps) => {
     <Wrapper>
       <ControlsContainer>
         <LikeWrapper>
-          <ControlsIcon onClick={onLikeClick} src="/thumb-up-outline.svg" />
+          <ControlsIcon
+            onIconClick={onLikeClick}
+            src="/thumb-up-outline.svg"
+            alt="Like Icon"
+          />
           <LikeCount>{likeCount ? likeCount : ''}</LikeCount>
         </LikeWrapper>
-        <ControlsIcon onClick={onCommentsClick} src="/comment-outline.svg" />
+        <ControlsIcon
+          onIconClick={onCommentsClick}
+          src="/comment-outline.svg"
+          alt="Toggle Comments Icon"
+        />
       </ControlsContainer>
       <ControlsContainer>
         <Bookmark onBookmarked={onBookmarkClick} isBookmarked={isBookmarked} />

@@ -30,7 +30,7 @@ const DotMenu = ({
     <>
       <DotIcon
         className={className}
-        onClick={onToggle}
+        onIconClick={onToggle}
         src="/dots-horizontal.svg"
         alt="Dot Menu Icon"
       />

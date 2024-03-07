@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import PostDate from '@/components/general/TimeAgo';
 import { NavLink } from 'react-router-dom';
 import TimeAgo from '@/components/general/TimeAgo';
+import AppIcon from '@/components/icons/AppIcon';
 
 export const Wrapper = styled.li`
   display: flex;
@@ -59,19 +60,9 @@ export const ControlsWrapper = styled.div`
   gap: 0.5rem;
 `;
 
-export const ControlsIcon = styled.img`
+export const ControlsIcon = styled(AppIcon)`
   width: 20px;
-  height: auto;
-
-  fill: #fff;
-  transition: filter 100ms;
-
-  cursor: pointer;
-
-  &:hover {
-    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
-      contrast(82%);
-  }
+  height: 20px;
 `;
 
 export const EditIcon = styled(ControlsIcon)`

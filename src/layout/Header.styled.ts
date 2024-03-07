@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import AppIcon from '@/components/icons/AppIcon';
 
 export const Wrapper = styled.header`
   grid-area: header;
@@ -58,9 +59,7 @@ export const NewPostButton = styled.div`
   }
 `;
 
-export const NewPostIcon = styled.img`
-  width: 22px;
-`;
+export const NewPostIcon = styled(AppIcon)``;
 
 export const NewPostButtonText = styled.span`
   margin-left: 0.5rem;

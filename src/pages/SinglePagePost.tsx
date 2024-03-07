@@ -26,7 +26,7 @@ const SinglePagePost = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchPost(postid!));
+    if (postid) dispatch(fetchPost(postid));
   }, [dispatch, postid]);
 
   const postData = useAppSelector(selectCurrentPostData);

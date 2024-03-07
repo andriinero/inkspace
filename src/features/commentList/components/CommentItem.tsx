@@ -64,9 +64,13 @@ const Comment = ({ _id, post, author, title, body, date, edit_date }: CommentPro
         </WrapperAuthor>
         {ownedByUser && !isEditMode && (
           <ControlsWrapper>
-            <EditIcon onClick={handleEditClick} src="/edit.svg" alt="Edit Comment Icon" />
+            <EditIcon
+              onIconClick={handleEditClick}
+              src="/edit.svg"
+              alt="Edit Comment Icon"
+            />
             <ControlsIcon
-              onClick={handleDeleteClick}
+              onIconClick={handleDeleteClick}
               src="/delete.svg"
               alt="Delete Comment Icon"
             />
