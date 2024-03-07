@@ -6,13 +6,13 @@ import {
   Wrapper,
   HeaderLink,
   NewPostButton,
-  NewPostIcon,
   ProfileWrapper,
   ProfileIcon,
   NewPostButtonText,
   Logo,
 } from './Header.styled';
 import ActionButton from '@/components/general/ActionButton';
+import AppIcon from '@/components/icons/AppIcon';
 
 const Header = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -33,7 +33,7 @@ const Header = () => {
           <>
             <NewPostButton>
               <HeaderLink to="/create-post">
-                <NewPostIcon src="/post.svg" alt="Create New Post Icon" />
+                <AppIcon src="/post.svg" alt="Create New Post Icon" />
                 <NewPostButtonText>Write</NewPostButtonText>
               </HeaderLink>
             </NewPostButton>

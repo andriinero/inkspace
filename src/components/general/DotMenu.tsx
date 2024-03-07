@@ -2,8 +2,8 @@ import { ReactNode, useRef } from 'react';
 
 import useCloseDropdown from '@/hooks/useCloseDropdown';
 
-import { DotIcon } from './DotMenu.styled';
 import Dropdown from './Dropdown';
+import AppIcon from '../icons/AppIcon';
 
 type DotMenuProps = {
   onToggle: () => void;
@@ -28,7 +28,7 @@ const DotMenu = ({
 
   return (
     <>
-      <DotIcon
+      <AppIcon
         className={className}
         onIconClick={onToggle}
         src="/dots-horizontal.svg"

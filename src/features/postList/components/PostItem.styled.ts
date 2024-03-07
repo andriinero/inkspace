@@ -51,12 +51,6 @@ export const Divider = styled.span`
   font-size: 0.9rem;
 `;
 
-export const AuthorName = styled.span`
-  display: inline-block;
-
-  font-weight: 500;
-`;
-
 // #endregion
 
 // #region PostBody

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PostReadTime from '@/components/general/PostReadTime';
 import { NavLink } from 'react-router-dom';
+import UserName from '@/components/general/UserName';
 
 export const Wrapper = styled.div`
   align-self: flex-start;
@@ -45,9 +46,8 @@ export const ProfileIcon = styled.img`
   border-radius: 50%;
 `;
 
-export const Name = styled.span`
+export const Name = styled(UserName)`
   font-size: 0.9rem;
-  font-weight: 500;
 `;
 
 export const TopicInfo = styled.span``;

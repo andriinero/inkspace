@@ -19,18 +19,6 @@ export const BioContainer = styled.div`
   gap: 0.4rem;
 `;
 
-export const BioName = styled.span`
-  display: inline-block;
-
-  max-width: 16ch;
-
-  font-weight: 500;
-
-  white-space: nowrap;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-`;
-
 export const BioContent = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 2;

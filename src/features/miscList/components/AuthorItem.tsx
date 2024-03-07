@@ -4,6 +4,7 @@ import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 import * as S from './AuthorItem.styled';
 import { deleteFollowUser, postFollowUser } from '@/features/profile/profileSlice';
+import UserName from '@/components/general/UserName';
 
 type AuthorItemProps = {
   _id: string;
@@ -12,7 +13,6 @@ type AuthorItemProps = {
   isFollowed: boolean;
 };
 
-// TODO: fix bio styling
 const AuthorItem = ({ _id, username, bio, isFollowed }: AuthorItemProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
@@ -36,7 +36,7 @@ const AuthorItem = ({ _id, username, bio, isFollowed }: AuthorItemProps) => {
       </S.StyledLink>
       <S.BioContainer>
         <S.StyledLink to={`/authors/${_id}`}>
-          <S.BioName> {username}</S.BioName>
+          <UserName>{username}</UserName>
         </S.StyledLink>
         <S.BioContent>{bio || 'No user bio'}</S.BioContent>
       </S.BioContainer>

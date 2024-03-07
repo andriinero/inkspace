@@ -1,5 +1,6 @@
 import PostReadTime from '@/components/general/PostReadTime';
 import TimeAgo from '@/components/general/TimeAgo';
+import UserName from '@/components/general/UserName';
 import styled from 'styled-components';
 
 export const WrapperItem = styled.li`
@@ -20,9 +21,8 @@ export const AuthorIcon = styled.img`
   border-radius: 50%;
 `;
 
-export const AuthorName = styled.span`
+export const AuthorName = styled(UserName)`
   font-size: 0.8rem;
-  font-weight: 500;
 `;
 
 export const BookmarkTitle = styled.h4``;
