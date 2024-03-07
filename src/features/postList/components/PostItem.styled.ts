@@ -4,6 +4,7 @@ import Bookmark from '@/components/icons/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
 
 import PostReadTime from '@/components/general/PostReadTime';
+import Title from '@/components/general/Title';
 
 export const Wrapper = styled.div`
   display: grid;
@@ -23,6 +24,9 @@ export const Wrapper = styled.div`
 `;
 
 export const StyledLink = styled(NavLink)`
+  display: flex;
+  align-items: center;
+
   color: inherit;
   text-decoration: none;
 `;
@@ -57,9 +61,12 @@ export const Divider = styled.span`
 
 export const Body = styled.div`
   grid-area: body;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 `;
 
-export const Title = styled.h3`
+export const StyledTitle = styled(Title)`
   padding-bottom: 0.5rem;
 
   font-size: 1.25rem;

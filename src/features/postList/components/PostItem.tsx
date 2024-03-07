@@ -18,6 +18,7 @@ import * as S from './PostItem.styled';
 import PostDate from '@/components/general/TimeAgo';
 import { setTopic } from '../postListSlice';
 import UserName from '@/components/general/UserName';
+import Title from '@/components/general/Title';
 
 type PostItemProps = {
   _id: string;
@@ -84,7 +85,7 @@ const PostItem = ({
       </S.Head>
       <S.Body>
         <S.StyledLink to={`/posts/${_id}`}>
-          <S.Title>{title}</S.Title>
+          <Title>{title}</Title>
         </S.StyledLink>
         <S.BodyText>{parse(body)}</S.BodyText>
       </S.Body>

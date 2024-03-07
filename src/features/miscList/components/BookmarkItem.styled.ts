@@ -1,5 +1,6 @@
 import PostReadTime from '@/components/general/PostReadTime';
 import TimeAgo from '@/components/general/TimeAgo';
+import Title from '@/components/general/Title';
 import UserName from '@/components/general/UserName';
 import styled from 'styled-components';
 
@@ -25,7 +26,9 @@ export const AuthorName = styled(UserName)`
   font-size: 0.8rem;
 `;
 
-export const BookmarkTitle = styled.h4``;
+export const BookmarkTitle = styled(Title)`
+  font-size: 1rem;
+`;
 
 export const MiscInfo = styled.div`
   display: flex;
