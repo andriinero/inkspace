@@ -11,7 +11,7 @@ export const Wrapper = styled.header`
   border-bottom: 1px solid ${({ theme }) => theme.color.main_border};
 `;
 
-export const HeaderLink = styled(Link)`
+export const StyledLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;

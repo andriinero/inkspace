@@ -4,7 +4,7 @@ import { logout, selectIsAuthenticated } from '@/features/auth/authSlice';
 
 import {
   Wrapper,
-  HeaderLink,
+  StyledLink,
   NewPostButton,
   ProfileWrapper,
   ProfileIcon,
@@ -25,27 +25,29 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <HeaderLink to="/">
+      <StyledLink to="/">
         <Logo>Well-done</Logo>
-      </HeaderLink>
+      </StyledLink>
       <ProfileWrapper>
         {isAuthenticated ? (
           <>
             <NewPostButton>
-              <HeaderLink to="/create-post">
+              <StyledLink to="/create-post">
                 <AppIcon src="/post.svg" alt="Create New Post Icon" />
                 <NewPostButtonText>Write</NewPostButtonText>
-              </HeaderLink>
+              </StyledLink>
             </NewPostButton>
-            <ProfileIcon src="/portrait-placeholder.png" alt="Create New Post Icon" />
-            <HeaderLink reloadDocument to="/">
+            <StyledLink to="/profile">
+              <ProfileIcon src="/portrait-placeholder.png" alt="Create New Post Icon" />
+            </StyledLink>
+            <StyledLink reloadDocument to="/">
               <ActionButton onButtonClick={onLogoutClick} value="Logout" />
-            </HeaderLink>
+            </StyledLink>
           </>
         ) : (
-          <HeaderLink to="/login">
+          <StyledLink to="/login">
             <ActionButton onButtonClick={onLogoutClick} value="Login" />
-          </HeaderLink>
+          </StyledLink>
         )}
       </ProfileWrapper>
     </Wrapper>
