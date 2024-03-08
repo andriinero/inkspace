@@ -4,17 +4,25 @@ import {
   ProfileIcon,
   ProfileWrapper,
   StyledFollowLink,
-  StyledUserName,
+  StyledAsideUserName,
   Wrapper,
   WrapperAside,
   WrapperMain,
+  StyledMainUserName,
+  BookmarkWrapper,
 } from './Profile.styled';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import {
+  fetchProfileBookmarks,
   fetchProfileData,
+  selectFetchProfileBookmarksState,
   selectFetchProfileDataState,
+  selectProfileBookmarksList,
   selectProfileData,
 } from '@/features/profile/profileSlice';
+import Spinner from '@/components/loaders/Spinner';
+import Error from '@/components/general/Error';
+import BookmarkContainer from '@/features/profile/components/BookmarkContainer';
 
 const Profile = () => {
   const profileData = useAppSelector(selectProfileData);
@@ -28,13 +36,26 @@ const Profile = () => {
 
   return (
     <Wrapper>
-      <WrapperMain></WrapperMain>
+      <WrapperMain>
+        <StyledMainUserName>{profileData?.username}</StyledMainUserName>
+        <BookmarkWrapper>
+          <BookmarkContainer />
+        </BookmarkWrapper>
+      </WrapperMain>
       <WrapperAside>
         <ProfileWrapper>
-          <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
-          <StyledUserName>{profileData?.username}</StyledUserName>
-          <FollowCount>{profileData?.followed_users.length} Followed</FollowCount>
-          <StyledFollowLink to="/profile/edit">Edit Profile</StyledFollowLink>
+          {isLoading ? (
+            <Spinner />
+          ) : error ? (
+            <Error />
+          ) : (
+            <>
+              <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
+              <StyledAsideUserName>{profileData?.username}</StyledAsideUserName>
+              <FollowCount>{profileData?.followed_users.length} Following</FollowCount>
+              <StyledFollowLink to="/profile/edit">Edit Profile</StyledFollowLink>
+            </>
+          )}
         </ProfileWrapper>
       </WrapperAside>
     </Wrapper>

@@ -16,6 +16,17 @@ export const WrapperMain = styled.main`
   border-right: 1px solid ${({ theme }) => theme.color.main_border};
 `;
 
+export const StyledMainUserName = styled(UserName)`
+  padding: 2rem 0;
+  font-size: 2.5rem;
+`;
+
+export const BookmarkWrapper = styled.div`
+  padding: 2rem 0;
+  margin: 0 2rem;
+  border-top: 1px solid ${({ theme }) => theme.color.main_border_feint};
+`;
+
 export const WrapperAside = styled.aside`
   display: flex;
   flex-direction: column;
@@ -35,7 +46,7 @@ export const ProfileIcon = styled.img`
   border-radius: 50%;
 `;
 
-export const StyledUserName = styled(UserName)``;
+export const StyledAsideUserName = styled(UserName)``;
 
 export const FollowCount = styled.span`
   display: inline-block;

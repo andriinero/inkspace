@@ -100,7 +100,6 @@ const PostItem = ({
         <S.Controls>
           {isAuthenticated && !fetchProfileState.isLoading && (
             <>
-              {/* TODO: refactor handlers */}
               <S.StyledBookmark
                 onBookmarked={handleBookmarkClick}
                 isBookmarked={isBookmarked}

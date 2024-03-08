@@ -5,10 +5,13 @@ import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
 import { UserData } from '@/types/UserData';
+import Post from '@/types/Post';
 
 type ProfileState = {
   profileData: UserData | null;
+  profileBookmarkList: Post[];
   fetchProfileDataState: { isLoading: boolean; error: SerializedError | null };
+  fetchProfileBookmarksState: { isLoading: boolean; error: SerializedError | null };
   postBookmarkState: { isLoading: boolean; error: SerializedError | null };
   deleteBookmarkState: { isLoading: boolean; error: SerializedError | null };
   postFollowedUserState: { isLoading: boolean; error: SerializedError | null };
@@ -17,6 +20,8 @@ type ProfileState = {
 
 const initialState: ProfileState = {
   profileData: null,
+  profileBookmarkList: [],
+  fetchProfileBookmarksState: { isLoading: false, error: null },
   fetchProfileDataState: { isLoading: false, error: null },
   postBookmarkState: { isLoading: false, error: null },
   deleteBookmarkState: { isLoading: false, error: null },
@@ -30,6 +35,25 @@ export const fetchProfileData = createAsyncThunk(
     const token = storage.getToken();
 
     const { data, responseState } = await useAppFetch('/api/profile', {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!responseState.ok) return rejectWithValue(data);
+
+    return data;
+  }
+);
+
+export const fetchProfileBookmarks = createAsyncThunk(
+  'profile/fetchProfileBookmarks',
+  async (_, { rejectWithValue }) => {
+    const token = storage.getToken();
+
+    const { data, responseState } = await useAppFetch('/api/profile/bookmarks', {
       method: 'GET',
       mode: 'cors',
       headers: {
@@ -150,6 +174,19 @@ const profileSlice = createSlice({
         state.fetchProfileDataState.error = action.error;
       });
     builder
+      .addCase(fetchProfileBookmarks.pending, (state) => {
+        state.fetchProfileBookmarksState.isLoading = true;
+        state.fetchProfileBookmarksState.error = null;
+      })
+      .addCase(fetchProfileBookmarks.fulfilled, (state, action) => {
+        state.profileBookmarkList = action.payload.post_bookmarks;
+        state.fetchProfileBookmarksState.isLoading = false;
+      })
+      .addCase(fetchProfileBookmarks.rejected, (state, action) => {
+        state.fetchProfileBookmarksState.isLoading = false;
+        state.fetchProfileBookmarksState.error = action.error;
+      });
+    builder
       .addCase(postBookmark.pending, (state) => {
         state.postBookmarkState.isLoading = true;
         state.postBookmarkState.error = null;
@@ -215,6 +252,9 @@ export default profileSlice.reducer;
 export const selectFetchProfileDataState = (state: RootState) =>
   state.profile.fetchProfileDataState;
 
+export const selectFetchProfileBookmarksState = (state: RootState) =>
+  state.profile.fetchProfileBookmarksState;
+
 export const selectPostBookmarkState = (state: RootState) =>
   state.profile.postBookmarkState;
 
@@ -223,6 +263,10 @@ export const selectDeleteBookmarkState = (state: RootState) =>
 
 export const selectProfileData = (state: RootState) => state.profile.profileData;
 
+export const selectProfileBookmarksList = (state: RootState) =>
+  state.profile.profileBookmarkList;
+
+// TODO: refactor
 export const selectProfileBookmarks = (state: RootState) =>
   state.profile.profileData?.post_bookmarks;
 
