@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
+import { clearTopic } from '@/features/postList/postListSlice';
 import { logout, selectIsAuthenticated } from '@/features/auth/authSlice';
 
 import {
@@ -19,14 +20,18 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
 
-  const onLogoutClick = (): void => {
+  const handleLogoClick = (): void => {
+    dispatch(clearTopic());
+  };
+
+  const handleLogoutClick = (): void => {
     dispatch(logout());
   };
 
   return (
     <Wrapper>
       <StyledLink to="/">
-        <Logo>Well-done</Logo>
+        <Logo onClick={handleLogoClick}>Well-done</Logo>
       </StyledLink>
       <ProfileWrapper>
         {isAuthenticated ? (
@@ -41,12 +46,12 @@ const Header = () => {
               <ProfileIcon src="/portrait-placeholder.png" alt="Create New Post Icon" />
             </StyledLink>
             <StyledLink reloadDocument to="/">
-              <ActionButton onButtonClick={onLogoutClick} value="Logout" />
+              <ActionButton onButtonClick={handleLogoutClick} value="Logout" />
             </StyledLink>
           </>
         ) : (
           <StyledLink to="/login">
-            <ActionButton onButtonClick={onLogoutClick} value="Login" />
+            <ActionButton onButtonClick={handleLogoutClick} value="Login" />
           </StyledLink>
         )}
       </ProfileWrapper>

@@ -28,9 +28,6 @@ const AuthorContainer = () => {
   const authorList = useAppSelector(selectAuthorList);
   const { isLoading, error } = useAppSelector(selectFetchAuthorsState);
 
-  // FIXME: remove comment
-  console.log(followList);
-
   return (
     <S.Wrapper>
       <S.Header>Who to follow</S.Header>

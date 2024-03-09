@@ -5,6 +5,7 @@ import {
   fetchProfileBookmarks,
   selectFetchProfileBookmarksState,
   selectProfileBookmarksList,
+  selectProfileData,
 } from '../profileSlice';
 
 import { Wrapper } from './BookmarkContainer.styled';
@@ -13,6 +14,8 @@ import Error from '@/components/general/Error';
 import PostItem from '@/features/postList/components/PostItem';
 
 const BookmarkContainer = () => {
+  const profileData = useAppSelector(selectProfileData);
+
   const bookmarkList = useAppSelector(selectProfileBookmarksList);
   const { isLoading, error } = useAppSelector(selectFetchProfileBookmarksState);
 
@@ -30,8 +33,9 @@ const BookmarkContainer = () => {
         <Error />
       ) : (
         bookmarkList!.map((b) => {
-          // TODO:  
-          const isBookmarked = false;
+          const isBookmarked = profileData?.post_bookmarks.some(
+            (userB) => userB === b._id
+          ) as boolean;
 
           return <PostItem key={b._id} isBookmarked={isBookmarked} {...b} />;
         })

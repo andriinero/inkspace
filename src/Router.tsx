@@ -7,6 +7,7 @@ import NotFound404 from './pages/NotFound404';
 import CreatePost from './pages/CreatePost';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import AuthorPage from './pages/AuthorPage';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -19,6 +20,7 @@ const Router = () => {
         { path: '/create-post', element: <CreatePost /> },
         { path: '/login', element: <Login /> },
         { path: '/profile', element: <Profile /> },
+        { path: '/authors/:authorid', element: <AuthorPage /> },
       ],
       errorElement: <NotFound404 />,
     },

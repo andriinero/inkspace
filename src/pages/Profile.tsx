@@ -1,4 +1,15 @@
 import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+
+import {
+  fetchProfileData,
+  selectFetchProfileDataState,
+  selectProfileData,
+} from '@/features/profile/profileSlice';
+
+import Spinner from '@/components/loaders/Spinner';
+import Error from '@/components/general/Error';
+import BookmarkContainer from '@/features/profile/components/BookmarkContainer';
 import {
   FollowCount,
   ProfileIcon,
@@ -11,18 +22,6 @@ import {
   StyledMainUserName,
   BookmarkWrapper,
 } from './Profile.styled';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import {
-  fetchProfileBookmarks,
-  fetchProfileData,
-  selectFetchProfileBookmarksState,
-  selectFetchProfileDataState,
-  selectProfileBookmarksList,
-  selectProfileData,
-} from '@/features/profile/profileSlice';
-import Spinner from '@/components/loaders/Spinner';
-import Error from '@/components/general/Error';
-import BookmarkContainer from '@/features/profile/components/BookmarkContainer';
 
 const Profile = () => {
   const profileData = useAppSelector(selectProfileData);
