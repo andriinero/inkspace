@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { selectAuthData } from '@/features/auth/authSlice';
+import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
   deleteFollowUser,
   postFollowUser,
@@ -17,7 +17,6 @@ import {
 } from '@/features/authorPage/authorPageSlice';
 
 import PostContainer from '@/features/authorPage/components/PostContainer';
-import Spinner from '@/components/loaders/Spinner';
 import Error from '@/components/general/Error';
 import {
   FollowButton,
@@ -35,8 +34,10 @@ import {
 const AuthorPage = () => {
   const { authorid } = useParams();
 
-  const profileData = useAppSelector(selectProfileData);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
   const authData = useAppSelector(selectAuthData);
+  const profileData = useAppSelector(selectProfileData);
 
   const authorData = useAppSelector(selectAuthorData);
   const { isLoading, error } = useAppSelector(selectFetchAuthorState);
@@ -85,12 +86,14 @@ const AuthorPage = () => {
         <ProfileWrapper>
           <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
           <StyledAsideUserName>{authorData?.username}</StyledAsideUserName>
-          <FollowButton
-            $isFollowed={isFollowed}
-            onClick={handleFollowClick}
-            type="button"
-            value={followButtonText}
-          />
+          {isAuthenticated && (
+            <FollowButton
+              $isFollowed={isFollowed}
+              onClick={handleFollowClick}
+              type="button"
+              value={followButtonText}
+            />
+          )}
         </ProfileWrapper>
       </WrapperAside>
     </Wrapper>

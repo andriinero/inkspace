@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
 
 import * as S from './AuthorItem.styled';
 import { deleteFollowUser, postFollowUser } from '@/features/profile/profileSlice';
@@ -15,6 +15,7 @@ type AuthorItemProps = {
 
 const AuthorItem = ({ _id, username, bio, isFollowed }: AuthorItemProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const authData = useAppSelector(selectAuthData);
 
   const dispatch = useAppDispatch();
 
@@ -40,7 +41,7 @@ const AuthorItem = ({ _id, username, bio, isFollowed }: AuthorItemProps) => {
         </S.StyledLink>
         <S.BioContent>{bio || 'No user bio'}</S.BioContent>
       </S.BioContainer>
-      {isAuthenticated && (
+      {isAuthenticated && authData?.sub !== _id && (
         <S.FollowButton
           $isFollowed={isFollowed}
           onClick={handleFollowClick}

@@ -7,7 +7,6 @@ import {
   selectProfileData,
 } from '@/features/profile/profileSlice';
 
-import Spinner from '@/components/loaders/Spinner';
 import Error from '@/components/general/Error';
 import BookmarkContainer from '@/features/profile/components/BookmarkContainer';
 import {
@@ -23,8 +22,12 @@ import {
   BookmarkWrapper,
   Header,
 } from './Profile.styled';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import { Navigate } from 'react-router-dom';
 
 const Profile = () => {
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
   const profileData = useAppSelector(selectProfileData);
   const { isLoading, error } = useAppSelector(selectFetchProfileDataState);
 
@@ -33,6 +36,8 @@ const Profile = () => {
   useEffect(() => {
     dispatch(fetchProfileData());
   }, [dispatch]);
+
+  if (!isAuthenticated) return <Navigate to="/" />;
 
   return isLoading ? (
     <></>
