@@ -17,8 +17,12 @@ export const WrapperMain = styled.main`
 `;
 
 export const StyledMainUserName = styled(UserName)`
-  padding: 2rem 0;
+  padding: 2rem 1rem;
+  max-width: 100%;
+
   font-size: 2.5rem;
+  white-space: break-spaces;
+  word-wrap: break-word;
 `;
 
 export const BookmarkWrapper = styled.div`
@@ -46,7 +50,12 @@ export const ProfileIcon = styled.img`
   border-radius: 50%;
 `;
 
-export const StyledAsideUserName = styled(UserName)``;
+export const StyledAsideUserName = styled(UserName)`
+  max-width: none;
+
+  white-space: break-spaces;
+  word-wrap: break-word;
+`;
 
 export const FollowCount = styled.span`
   display: inline-block;

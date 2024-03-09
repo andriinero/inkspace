@@ -1,27 +1,26 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+
+import {
+  fetchAuthor,
+  selectAuthorData,
+  selectFetchAuthorState,
+} from '@/features/authorPage/authorPageSlice';
 
 import BookmarkContainer from '@/features/profile/components/BookmarkContainer';
 import Spinner from '@/components/loaders/Spinner';
 import Error from '@/components/general/Error';
 import {
   BookmarkWrapper,
-  FollowCount,
   ProfileIcon,
   ProfileWrapper,
   StyledAsideUserName,
-  StyledFollowLink,
   StyledMainUserName,
   Wrapper,
   WrapperAside,
   WrapperMain,
 } from './AuthorPage.styled';
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import {
-  fetchAuthor,
-  selectAuthorData,
-  selectFetchAuthorState,
-} from '@/features/authorPage/authorPageSlice';
 
 const AuthorPage = () => {
   const { authorid } = useParams();
