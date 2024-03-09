@@ -4,7 +4,7 @@ import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice
 
 import * as S from './AuthorItem.styled';
 import { deleteFollowUser, postFollowUser } from '@/features/profile/profileSlice';
-import UserName from '@/components/general/UserName';
+import { Username } from '@/styles/components/Username.styled';
 
 type AuthorItemProps = {
   _id: string;
@@ -37,7 +37,7 @@ const AuthorItem = ({ _id, username, bio, isFollowed }: AuthorItemProps) => {
       </S.StyledLink>
       <S.BioContainer>
         <S.StyledLink to={`/authors/${_id}`}>
-          <UserName>{username}</UserName>
+          <Username>{username}</Username>
         </S.StyledLink>
         <S.BioContent>{bio || 'No user bio'}</S.BioContent>
       </S.BioContainer>

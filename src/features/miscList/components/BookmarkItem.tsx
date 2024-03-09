@@ -1,4 +1,5 @@
 import Post from '@/types/Post';
+
 import {
   AuthorIcon,
   AuthorName,
@@ -6,26 +7,28 @@ import {
   Divider,
   Header,
   MiscInfo,
-  PostDate,
-  TimeToRead,
+  StyledLink,
   WrapperItem,
 } from './BookmarkItem.styled';
-import { StyledLink } from './BookmarkContainer.styled';
+import TimeAgo from '@/components/general/TimeAgo';
+import PostReadTime from '@/components/general/PostReadTime';
 
 const BookmarkItem = ({ _id, author, title, body, date }: Post) => {
   return (
     <WrapperItem>
       <Header>
         <AuthorIcon src="/portrait-placeholder.png" alt="Author Icon" />
-        <AuthorName>{author.username}</AuthorName>
+        <StyledLink to={`/authors/${author._id}`}>
+          <AuthorName>{author.username}</AuthorName>
+        </StyledLink>
       </Header>
       <StyledLink to={`/posts/${_id}`}>
         <BookmarkTitle>{title}</BookmarkTitle>
       </StyledLink>
       <MiscInfo>
-        <PostDate date={date} />
+        <TimeAgo date={date} />
         <Divider>·</Divider>
-        <TimeToRead bodyLength={body.length} />
+        <PostReadTime bodyLength={body.length} />
       </MiscInfo>
     </WrapperItem>
   );

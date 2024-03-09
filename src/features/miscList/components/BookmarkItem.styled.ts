@@ -1,8 +1,7 @@
-import PostReadTime from '@/components/general/PostReadTime';
-import TimeAgo from '@/components/general/TimeAgo';
-import Title from '@/components/general/Title';
-import UserName from '@/components/general/UserName';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import { StyledTitle } from '@/features/postList/components/PostItem.styled';
+import { Username } from '@/styles/components/Username.styled';
 
 export const WrapperItem = styled.li`
   display: flex;
@@ -16,17 +15,24 @@ export const Header = styled.div`
   gap: 0.5rem;
 `;
 
+export const StyledLink = styled(NavLink)`
+  margin-top: auto;
+
+  color: inherit;
+  text-decoration: none;
+`;
+
 export const AuthorIcon = styled.img`
   width: 22px;
   height: 22px;
   border-radius: 50%;
 `;
 
-export const AuthorName = styled(UserName)`
+export const AuthorName = styled(Username)`
   font-size: 0.8rem;
 `;
 
-export const BookmarkTitle = styled(Title)`
+export const BookmarkTitle = styled(StyledTitle)`
   font-size: 1rem;
 `;
 
@@ -38,10 +44,6 @@ export const MiscInfo = styled.div`
   font-size: 0.8rem;
   font-weight: 300;
 `;
-
-export const PostDate = styled(TimeAgo)``;
-
-export const TimeToRead = styled(PostReadTime)``;
 
 export const Divider = styled.span`
   font-size: 1rem;

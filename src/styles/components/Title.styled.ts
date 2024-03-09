@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledTitle = styled.h2`
+export const Title = styled.h2`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;

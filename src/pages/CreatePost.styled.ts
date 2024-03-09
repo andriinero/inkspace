@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ActionButton from '@/components/general/ActionButton';
+import { GreenButton } from '@/styles/components/GreenButton';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -48,6 +48,6 @@ export const Form = styled.form`
   overflow-wrap: break-word;
 `;
 
-export const SubmitButton = styled(ActionButton)`
+export const SubmitButton = styled(GreenButton)`
   align-self: flex-start;
 `;

@@ -1,5 +1,5 @@
-import UserName from '@/components/general/UserName';
 import styled from 'styled-components';
+import { Username } from '@/styles/components/Username.styled';
 
 export const Wrapper = styled.div`
   display: grid;
@@ -15,7 +15,7 @@ export const WrapperMain = styled.main`
   border-right: 1px solid ${({ theme }) => theme.color.main_border};
 `;
 
-export const StyledMainUserName = styled(UserName)`
+export const StyledMainUserName = styled(Username)`
   padding: 2rem 1rem;
   max-width: 100%;
 
@@ -60,7 +60,7 @@ export const ProfileIcon = styled.img`
   border-radius: 50%;
 `;
 
-export const StyledAsideUserName = styled(UserName)`
+export const StyledAsideUserName = styled(Username)`
   max-width: none;
 
   white-space: break-spaces;

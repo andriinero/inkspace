@@ -9,7 +9,7 @@ import {
 } from '@/features/auth/authSlice';
 
 import { Wrapper } from './Login.styled';
-import ActionButton from '@/components/general/ActionButton';
+import { GreenButton } from '@/styles/components/GreenButton';
 
 const Login = () => {
   const authData = useAppSelector(selectAuthData);
@@ -38,8 +38,16 @@ const Login = () => {
 
   return (
     <Wrapper>
-      <ActionButton onButtonClick={onFirstLoginClick} value="Authenticate CoolGirlNerd" />
-      <ActionButton onButtonClick={onSecondLoginClick} value="Authenticate CoolGuyNerd" />
+      <GreenButton
+        onClick={onFirstLoginClick}
+        type="button"
+        value="Authenticate CoolGirlNerd"
+      />
+      <GreenButton
+        onClick={onSecondLoginClick}
+        type="button"
+        value="Authenticate CoolGuyNerd"
+      />
     </Wrapper>
   );
 };

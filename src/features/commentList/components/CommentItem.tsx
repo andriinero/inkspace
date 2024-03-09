@@ -11,7 +11,7 @@ import {
 
 import {
   AuthorIcon,
-  StyledUserName,
+  StyledUsername,
   Body,
   CommentDate,
   ControlsIcon,
@@ -57,7 +57,7 @@ const Comment = ({ _id, post, author, title, body, date, edit_date }: CommentPro
           <AuthorIcon src="/portrait-placeholder.png" alt="Author Icon" />
           <WrapperInfo>
             <StyledLink to={`/authors/${author._id}`}>
-              <StyledUserName>{author.username}</StyledUserName>
+              <StyledUsername>{author.username}</StyledUsername>
             </StyledLink>
             <CommentDate date={date} />
           </WrapperInfo>

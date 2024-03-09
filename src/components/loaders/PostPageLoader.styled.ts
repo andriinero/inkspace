@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   min-width: 70ch;
 
   & > * {
-    background-color: ${({ theme }) => theme.color.main_bg_secondary};
+    background-color: ${({ theme }) => theme.color.loader_bg};
   }
 `;
 

@@ -17,8 +17,8 @@ import { Topic } from '@/types/Topic';
 import * as S from './PostItem.styled';
 import PostDate from '@/components/general/TimeAgo';
 import { setTopic } from '../postListSlice';
-import UserName from '@/components/general/UserName';
-import Title from '@/components/general/Title';
+import { Username } from '@/styles/components/Username.styled';
+import { Title } from '@/styles/components/Title.styled';
 
 type PostItemProps = {
   _id: string;
@@ -78,7 +78,7 @@ const PostItem = ({
           <S.AuthorIcon src="/portrait-placeholder.png" />
         </S.StyledLink>
         <S.StyledLink to={`/authors/${author._id}`}>
-          <UserName>{author.username}</UserName>
+          <Username>{author.username}</Username>
         </S.StyledLink>
         <S.Divider>·</S.Divider>
         <PostDate date={date} />

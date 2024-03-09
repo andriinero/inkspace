@@ -3,7 +3,7 @@ import PostDate from '@/components/general/TimeAgo';
 import { NavLink } from 'react-router-dom';
 import TimeAgo from '@/components/general/TimeAgo';
 import AppIcon from '@/components/icons/AppIcon';
-import UserName from '@/components/general/UserName';
+import { Username } from '@/styles/components/Username.styled';
 
 export const Wrapper = styled.li`
   display: flex;
@@ -51,7 +51,7 @@ export const AuthorIcon = styled.img`
   border-radius: 50%;
 `;
 
-export const StyledUserName = styled(UserName)`
+export const StyledUsername = styled(Username)`
   font-weight: 300;
   font-size: 0.9rem;
 `;

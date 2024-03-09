@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Button = styled.input`
+export const GreenButton = styled.input`
   padding: 0.4rem 0.5rem;
   border: 1px solid transparent;
   border-radius: 16px;

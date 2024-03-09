@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Name = styled.span`
+export const Username = styled.span`
   display: inline-block;
 
   max-width: 16ch;

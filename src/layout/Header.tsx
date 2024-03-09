@@ -11,8 +11,8 @@ import {
   ProfileIcon,
   NewPostButtonText,
   Logo,
+  HeaderButton,
 } from './Header.styled';
-import ActionButton from '@/components/general/ActionButton';
 import AppIcon from '@/components/icons/AppIcon';
 
 const Header = () => {
@@ -46,12 +46,12 @@ const Header = () => {
               <ProfileIcon src="/portrait-placeholder.png" alt="Create New Post Icon" />
             </StyledLink>
             <StyledLink reloadDocument to="/">
-              <ActionButton onButtonClick={handleLogoutClick} value="Logout" />
+              <HeaderButton onClick={handleLogoutClick} type='button' value="Logout" />
             </StyledLink>
           </>
         ) : (
           <StyledLink to="/login">
-            <ActionButton onButtonClick={handleLogoutClick} value="Login" />
+            <HeaderButton type="button" value="Login" />
           </StyledLink>
         )}
       </ProfileWrapper>

@@ -30,7 +30,6 @@ import {
   WrapperAside,
   WrapperMain,
 } from './AuthorPage.styled';
-import Spinner from '@/components/loaders/Spinner';
 
 const AuthorPage = () => {
   const { authorid } = useParams();

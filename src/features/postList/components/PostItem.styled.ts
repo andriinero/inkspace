@@ -4,7 +4,7 @@ import Bookmark from '@/components/icons/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
 
 import PostReadTime from '@/components/general/PostReadTime';
-import Title from '@/components/general/Title';
+import { Title } from '@/styles/components/Title.styled';
 
 export const Wrapper = styled.div`
   display: grid;

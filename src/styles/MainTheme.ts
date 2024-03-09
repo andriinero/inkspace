@@ -21,6 +21,7 @@ const mainTheme = {
     comments_bg_primary: '#202223',
     comments_border: '#34383a',
     focus_outline: '#D3D3D3',
+    loader_bg: '#1C1F1F',
   },
 };
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { GreenButton } from '@/styles/components/GreenButton';
 
 export const Wrapper = styled.header`
   grid-area: header;
@@ -72,3 +73,5 @@ export const ProfileIcon = styled.img`
   cursor: pointer;
   -webkit-user-drag: none;
 `;
+
+export const HeaderButton = styled(GreenButton)``;

@@ -1,4 +1,4 @@
-import { Body, Header, MiscInfo, Wrapper } from './PostPageLoadter.styled';
+import { Body, Header, MiscInfo, Wrapper } from './PostPageLoader.styled';
 
 const PostPageLoader = () => {
   return (

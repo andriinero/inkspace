@@ -14,7 +14,7 @@ export const Post = styled.div`
   gap: 1rem;
 
   & > * {
-    background-color: ${({ theme }) => theme.color.main_bg_secondary};
+    background-color: ${({ theme }) => theme.color.loader_bg};
   }
 `;
 
