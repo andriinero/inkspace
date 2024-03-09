@@ -16,8 +16,8 @@ type AuthorPageState = {
 const initialState: AuthorPageState = {
   authorData: null,
   authorPosts: [],
-  fetchAuthorState: { isLoading: false, error: null },
-  fetchAuthorPostsState: { isLoading: false, error: null },
+  fetchAuthorState: { isLoading: true, error: null },
+  fetchAuthorPostsState: { isLoading: true, error: null },
 };
 
 export const fetchAuthor = createAsyncThunk(
@@ -52,8 +52,9 @@ const authorPageSlice = createSlice({
   name: 'authorPage',
   initialState,
   reducers: {
-    resetAuthor(state) {
+    resetState(state) {
       state.authorData = null;
+      state.authorPosts = [];
     },
   },
   extraReducers(builder) {
@@ -86,7 +87,7 @@ const authorPageSlice = createSlice({
   },
 });
 
-export const { resetAuthor } = authorPageSlice.actions;
+export const { resetState } = authorPageSlice.actions;
 
 export default authorPageSlice.reducer;
 

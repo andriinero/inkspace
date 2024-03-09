@@ -11,7 +11,7 @@ import {
 
 import {
   fetchAuthor,
-  resetAuthor,
+  resetState,
   selectAuthorData,
   selectFetchAuthorState,
 } from '@/features/authorPage/authorPageSlice';
@@ -30,6 +30,7 @@ import {
   WrapperAside,
   WrapperMain,
 } from './AuthorPage.styled';
+import Spinner from '@/components/loaders/Spinner';
 
 const AuthorPage = () => {
   const { authorid } = useParams();
@@ -45,12 +46,12 @@ const AuthorPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchAuthor(authorid!));
+    if (authorid !== authData?.sub) dispatch(fetchAuthor(authorid!));
 
     return () => {
-      dispatch(resetAuthor());
+      dispatch(resetState());
     };
-  }, [authorid, dispatch]);
+  }, [authData?.sub, authorid, dispatch]);
 
   if (authorid === authData?.sub) return <Navigate to="/profile" />;
 

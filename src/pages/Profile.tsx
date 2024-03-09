@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import {
   fetchProfileData,
+  resetProfile,
   selectFetchProfileDataState,
   selectProfileData,
 } from '@/features/profile/profileSlice';
@@ -34,8 +35,8 @@ const Profile = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchProfileData());
-  }, [dispatch]);
+    if (isAuthenticated) dispatch(fetchProfileData());
+  }, [isAuthenticated, dispatch]);
 
   if (!isAuthenticated) return <Navigate to="/" />;
 
