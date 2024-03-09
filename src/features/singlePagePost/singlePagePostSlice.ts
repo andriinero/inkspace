@@ -26,7 +26,7 @@ const initialState: SinglePagePostState = {
     isLoading: true,
     error: null,
   },
-  putLikeCountState: { isLoading: false, error: null },
+  putLikeCountState: { isLoading: true, error: null },
 };
 
 export const fetchPost = createAsyncThunk(

@@ -16,7 +16,7 @@ type CreatePostState = {
 };
 
 const initialState: CreatePostState = {
-  postPostState: { isLoading: false, error: null },
+  postPostState: { isLoading: true, error: null },
 };
 
 export const postPost = createAsyncThunk(

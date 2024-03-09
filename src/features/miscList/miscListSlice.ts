@@ -21,9 +21,9 @@ const initialState: miscListState = {
   authorList: [],
   topicList: [],
   bookmarkList: [],
-  fetchAuthorsState: { isLoading: false, error: null },
-  fetchTopicsState: { isLoading: false, error: null },
-  fetchBookmarksState: { isLoading: false, error: null },
+  fetchAuthorsState: { isLoading: true, error: null },
+  fetchTopicsState: { isLoading: true, error: null },
+  fetchBookmarksState: { isLoading: true, error: null },
 };
 
 export const fetchAuthors = createAsyncThunk(

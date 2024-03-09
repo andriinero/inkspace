@@ -23,11 +23,11 @@ const initialState: CommentsState = {
   comments: [],
   areCommentsOpen: false,
   fetchCommentsState: {
-    isLoading: false,
+    isLoading: true,
     error: null,
   },
   deleteCommentState: {
-    isLoading: false,
+    isLoading: true,
     error: null,
   },
 };

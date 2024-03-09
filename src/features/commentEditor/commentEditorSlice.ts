@@ -26,12 +26,12 @@ const initialState: CommentEditorState = {
   textField: '',
   isEditMode: false,
   postCommentState: {
-    isLoading: false,
+    isLoading: true,
     error: null,
   },
   updateCommentState: {
     commentId: null,
-    isLoading: false,
+    isLoading: true,
     error: null,
   },
 };
