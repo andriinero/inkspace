@@ -25,7 +25,7 @@ export const StyledMainUserName = styled(UserName)`
   word-wrap: break-word;
 `;
 
-export const BookmarkWrapper = styled.div`
+export const PostsWrapper = styled.div`
   padding: 2rem 0;
   margin: 0 2rem;
   border-top: 1px solid ${({ theme }) => theme.color.main_border_feint};

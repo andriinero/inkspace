@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import {
@@ -8,11 +8,10 @@ import {
   selectFetchAuthorState,
 } from '@/features/authorPage/authorPageSlice';
 
-import BookmarkContainer from '@/features/profile/components/BookmarkContainer';
 import Spinner from '@/components/loaders/Spinner';
 import Error from '@/components/general/Error';
 import {
-  BookmarkWrapper,
+  PostsWrapper,
   ProfileIcon,
   ProfileWrapper,
   StyledAsideUserName,
@@ -21,9 +20,13 @@ import {
   WrapperAside,
   WrapperMain,
 } from './AuthorPage.styled';
+import { selectAuthData } from '@/features/auth/authSlice';
+import PostContainer from '@/features/authorPage/components/PostContainer';
 
 const AuthorPage = () => {
   const { authorid } = useParams();
+
+  const authData = useAppSelector(selectAuthData);
 
   const authorData = useAppSelector(selectAuthorData);
   const { isLoading, error } = useAppSelector(selectFetchAuthorState);
@@ -34,26 +37,20 @@ const AuthorPage = () => {
     dispatch(fetchAuthor(authorid!));
   }, [authorid, dispatch]);
 
+  if (authorid === authData?.sub) return <Navigate to="/profile" />;
+
   return (
     <Wrapper>
       <WrapperMain>
         <StyledMainUserName>{authorData?.username}</StyledMainUserName>
-        <BookmarkWrapper>
-          <BookmarkContainer />
-        </BookmarkWrapper>
+        <PostsWrapper>
+          <PostContainer userId={authorData?._id} />
+        </PostsWrapper>
       </WrapperMain>
       <WrapperAside>
         <ProfileWrapper>
-          {isLoading ? (
-            <Spinner />
-          ) : error ? (
-            <Error />
-          ) : (
-            <>
-              <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
-              <StyledAsideUserName>{authorData?.username}</StyledAsideUserName>
-            </>
-          )}
+          <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
+          <StyledAsideUserName>{authorData?.username}</StyledAsideUserName>
         </ProfileWrapper>
       </WrapperAside>
     </Wrapper>
