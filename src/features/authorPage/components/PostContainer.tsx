@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
+import { selectProfileData } from '@/features/profile/profileSlice';
 import {
   fetchAuthorPosts,
   selectAuthorPosts,
@@ -8,10 +9,9 @@ import {
 } from '../authorPageSlice';
 
 import { Wrapper } from './PostContainer.styled';
-import Spinner from '@/components/loaders/Spinner';
 import Error from '@/components/general/Error';
 import PostItem from '@/features/postList/components/PostItem';
-import { selectProfileData } from '@/features/profile/profileSlice';
+import PostListLoader from '@/components/loaders/PostListLoader';
 
 type PostContainerProps = {
   userId?: string;
@@ -32,7 +32,7 @@ const PostContainer = ({ userId }: PostContainerProps) => {
   return (
     <Wrapper>
       {isLoading ? (
-        <Spinner />
+        <PostListLoader />
       ) : error ? (
         <Error />
       ) : (

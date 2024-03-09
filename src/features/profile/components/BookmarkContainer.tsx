@@ -9,9 +9,9 @@ import {
 } from '../profileSlice';
 
 import { Wrapper } from './BookmarkContainer.styled';
-import Spinner from '@/components/loaders/Spinner';
 import Error from '@/components/general/Error';
 import PostItem from '@/features/postList/components/PostItem';
+import PostListLoader from '@/components/loaders/PostListLoader';
 
 const BookmarkContainer = () => {
   const profileData = useAppSelector(selectProfileData);
@@ -28,7 +28,7 @@ const BookmarkContainer = () => {
   return (
     <Wrapper>
       {isLoading ? (
-        <Spinner />
+        <PostListLoader />
       ) : error ? (
         <Error />
       ) : (

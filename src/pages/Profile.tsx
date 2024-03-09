@@ -34,7 +34,11 @@ const Profile = () => {
     dispatch(fetchProfileData());
   }, [dispatch]);
 
-  return (
+  return isLoading ? (
+    <></>
+  ) : error ? (
+    <Error />
+  ) : (
     <Wrapper>
       <WrapperMain>
         <StyledMainUserName>{profileData?.username}</StyledMainUserName>
@@ -45,18 +49,10 @@ const Profile = () => {
       </WrapperMain>
       <WrapperAside>
         <ProfileWrapper>
-          {isLoading ? (
-            <Spinner />
-          ) : error ? (
-            <Error />
-          ) : (
-            <>
-              <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
-              <StyledAsideUserName>{profileData?.username}</StyledAsideUserName>
-              <FollowCount>{profileData?.followed_users.length} Following</FollowCount>
-              <StyledEditLink to="/profile/edit">Edit Profile</StyledEditLink>
-            </>
-          )}
+          <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
+          <StyledAsideUserName>{profileData?.username}</StyledAsideUserName>
+          <FollowCount>{profileData?.followed_users.length} Following</FollowCount>
+          <StyledEditLink to="/profile/edit">Edit Profile</StyledEditLink>
         </ProfileWrapper>
       </WrapperAside>
     </Wrapper>

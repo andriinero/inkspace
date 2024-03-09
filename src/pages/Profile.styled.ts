@@ -12,6 +12,9 @@ export const Wrapper = styled.div`
 `;
 
 export const WrapperMain = styled.main`
+  display: grid;
+  grid-template-rows: 13ch 1fr;
+
   padding: 3rem 0;
   border-right: 1px solid ${({ theme }) => theme.color.main_border};
 `;

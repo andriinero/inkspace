@@ -68,35 +68,31 @@ const AuthorPage = () => {
   const handleFollowClick = isFollowed ? handleFollowRemove : handleFollowAdd;
   const followButtonText = isFollowed ? 'Followed' : 'Follow';
 
-  return (
+  return isLoading ? (
+    <></>
+  ) : error ? (
+    <Error />
+  ) : (
     <Wrapper>
-      {isLoading ? (
-        <Spinner />
-      ) : error ? (
-        <Error />
-      ) : (
-        <>
-          <WrapperMain>
-            <StyledMainUserName>{authorData?.username}</StyledMainUserName>
-            <PostsWrapper>
-              <Header>User Posts</Header>
-              <PostContainer userId={authorData?._id} />
-            </PostsWrapper>
-          </WrapperMain>
-          <WrapperAside>
-            <ProfileWrapper>
-              <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
-              <StyledAsideUserName>{authorData?.username}</StyledAsideUserName>
-              <FollowButton
-                $isFollowed={isFollowed}
-                onClick={handleFollowClick}
-                type="button"
-                value={followButtonText}
-              />
-            </ProfileWrapper>
-          </WrapperAside>
-        </>
-      )}
+      <WrapperMain>
+        <StyledMainUserName>{authorData?.username}</StyledMainUserName>
+        <PostsWrapper>
+          <Header>User Posts</Header>
+          <PostContainer userId={authorData?._id} />
+        </PostsWrapper>
+      </WrapperMain>
+      <WrapperAside>
+        <ProfileWrapper>
+          <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
+          <StyledAsideUserName>{authorData?.username}</StyledAsideUserName>
+          <FollowButton
+            $isFollowed={isFollowed}
+            onClick={handleFollowClick}
+            type="button"
+            value={followButtonText}
+          />
+        </ProfileWrapper>
+      </WrapperAside>
     </Wrapper>
   );
 };

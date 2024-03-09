@@ -14,9 +14,9 @@ import {
 import { Body, Header, PostWrapper, Wrapper } from './SinglePagePost.styled';
 import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo';
 import Error from '@/components/general/Error';
-import Spinner from '@/components/loaders/Spinner';
 import PostControls from '@/features/singlePagePost/components/PostControls';
 import PostComments from '@/features/commentList/components/CommentList';
+import PostPageLoader from '@/components/loaders/PostPageLoader';
 
 const SinglePagePost = () => {
   const { postid } = useParams();
@@ -48,7 +48,7 @@ const SinglePagePost = () => {
           <PostComments postId={postData._id} />
         </PostWrapper>
       ) : isLoading ? (
-        <Spinner />
+        <PostPageLoader />
       ) : error ? (
         <Error />
       ) : (
