@@ -14,13 +14,14 @@ import {
   FollowCount,
   ProfileIcon,
   ProfileWrapper,
-  StyledFollowLink,
+  StyledEditLink,
   StyledAsideUserName,
   Wrapper,
   WrapperAside,
   WrapperMain,
   StyledMainUserName,
   BookmarkWrapper,
+  Header,
 } from './Profile.styled';
 
 const Profile = () => {
@@ -38,6 +39,7 @@ const Profile = () => {
       <WrapperMain>
         <StyledMainUserName>{profileData?.username}</StyledMainUserName>
         <BookmarkWrapper>
+          <Header>Your Bookmarks</Header>
           <BookmarkContainer />
         </BookmarkWrapper>
       </WrapperMain>
@@ -52,7 +54,7 @@ const Profile = () => {
               <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
               <StyledAsideUserName>{profileData?.username}</StyledAsideUserName>
               <FollowCount>{profileData?.followed_users.length} Following</FollowCount>
-              <StyledFollowLink to="/profile/edit">Edit Profile</StyledFollowLink>
+              <StyledEditLink to="/profile/edit">Edit Profile</StyledEditLink>
             </>
           )}
         </ProfileWrapper>

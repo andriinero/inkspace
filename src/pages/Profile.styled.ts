@@ -26,9 +26,20 @@ export const StyledMainUserName = styled(UserName)`
 `;
 
 export const BookmarkWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
   padding: 2rem 0;
   margin: 0 2rem;
   border-top: 1px solid ${({ theme }) => theme.color.main_border_feint};
+`;
+
+export const Header = styled.h2`
+  align-self: flex-end;
+
+  font-size: 2rem;
+  font-weight: 100;
+  font-style: italic;
 `;
 
 export const WrapperAside = styled.aside`
@@ -63,7 +74,7 @@ export const FollowCount = styled.span`
   font-weight: 300;
 `;
 
-export const StyledFollowLink = styled(NavLink)`
+export const StyledEditLink = styled(NavLink)`
   color: ${({ theme }) => theme.color.text_button_follow};
   font-size: 0.8rem;
   font-weight: 400;

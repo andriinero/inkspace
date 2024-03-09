@@ -1,5 +1,4 @@
 import UserName from '@/components/general/UserName';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -26,9 +25,20 @@ export const StyledMainUserName = styled(UserName)`
 `;
 
 export const PostsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
   padding: 2rem 0;
   margin: 0 2rem;
   border-top: 1px solid ${({ theme }) => theme.color.main_border_feint};
+`;
+
+export const Header = styled.h2`
+  align-self: flex-end;
+
+  font-size: 2rem;
+  font-weight: 100;
+  font-style: italic;
 `;
 
 export const WrapperAside = styled.aside`
@@ -57,15 +67,21 @@ export const StyledAsideUserName = styled(UserName)`
   word-wrap: break-word;
 `;
 
-export const FollowCount = styled.span`
-  display: inline-block;
+export const FollowButton = styled.input<{ $isFollowed: boolean }>`
+  align-self: flex-start;
 
-  font-weight: 300;
-`;
+  min-width: 11ch;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid ${({ theme }) => theme.color.topic_border};
+  border-radius: 16px;
+  background-color: ${({ $isFollowed, theme }) =>
+    $isFollowed ? theme.color.topic_bg_selected : theme.color.topic_bg};
 
-export const StyledFollowLink = styled(NavLink)`
-  color: ${({ theme }) => theme.color.text_button_follow};
-  font-size: 0.8rem;
-  font-weight: 400;
-  text-decoration: none;
+  color: ${({ $isFollowed, theme }) =>
+    $isFollowed ? theme.color.topic_text_selected : theme.color.text_primary};
+  font-size: 0.85rem;
+
+  transition: color 100ms;
+
+  cursor: pointer;
 `;

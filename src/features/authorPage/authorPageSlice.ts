@@ -1,12 +1,13 @@
+import { useAppFetch } from '@/lib/useAppFetch';
+
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { Author } from '@/types/Author';
-import { useAppFetch } from '@/lib/useAppFetch';
 import { RootState } from '@/app/store';
+import { UserData } from '@/types/UserData';
 import Post from '@/types/Post';
 
 type AuthorPageState = {
-  authorData: Author | null;
+  authorData: UserData | null;
   authorPosts: Post[];
   fetchAuthorState: { isLoading: boolean; error: SerializedError | null };
   fetchAuthorPostsState: { isLoading: boolean; error: SerializedError | null };
@@ -50,7 +51,11 @@ export const fetchAuthorPosts = createAsyncThunk(
 const authorPageSlice = createSlice({
   name: 'authorPage',
   initialState,
-  reducers: {},
+  reducers: {
+    resetAuthor(state) {
+      state.authorData = null;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchAuthor.pending, (state) => {
@@ -80,6 +85,8 @@ const authorPageSlice = createSlice({
       });
   },
 });
+
+export const { resetAuthor } = authorPageSlice.actions;
 
 export default authorPageSlice.reducer;
 

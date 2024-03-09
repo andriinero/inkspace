@@ -46,7 +46,8 @@ export const Icon = styled.img`
 export const FollowButton = styled.input<{ $isFollowed: boolean }>`
   align-self: flex-start;
 
-  padding: 0.5rem 0.8rem;
+  min-width: 11ch;
+  padding: 0.6rem 0.8rem;
   border: 1px solid ${({ theme }) => theme.color.topic_border};
   border-radius: 16px;
   background-color: ${({ $isFollowed, theme }) =>
