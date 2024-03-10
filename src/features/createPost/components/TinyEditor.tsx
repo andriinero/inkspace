@@ -6,9 +6,11 @@ import { Editor } from '@tinymce/tinymce-react';
 
 type TinyEditorProps = {
   editorRef: MutableRefObject<TinyMCEEditor | null>;
+  onChange: (a: string, editor: TinyMCEEditor) => void | undefined;
+  value?: string;
 };
 
-const TinyEditor = ({ editorRef }: TinyEditorProps) => {
+const TinyEditor = ({ editorRef, onChange, value }: TinyEditorProps) => {
   return (
     <Editor
       textareaName="body"
@@ -18,8 +20,7 @@ const TinyEditor = ({ editorRef }: TinyEditorProps) => {
         inline_styles: true,
         inline: true,
         min_height: 300,
-        plugins:
-          'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+        plugins: '',
         toolbar:
           'undo redo | blocks | bold italic underline strikethrough | numlist bullist',
         tinycomments_mode: 'embedded',
@@ -32,6 +33,8 @@ const TinyEditor = ({ editorRef }: TinyEditorProps) => {
           respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
       }}
       initialValue="Tell your story..."
+      onEditorChange={onChange}
+      value={value}
     />
   );
 };

@@ -1,4 +1,11 @@
-import { useState, useRef, ChangeEvent, FormEvent } from 'react';
+import {
+  useState,
+  useRef,
+  ChangeEvent,
+  FormEvent,
+  JSXElementConstructor,
+  ReactElement,
+} from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Editor as TinyMCEEditor } from 'tinymce';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
@@ -6,7 +13,6 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import TinyEditor from '@/features/createPost/components/TinyEditor';
 
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
-import { postPost } from '@/features/createPost/createPostSlice';
 
 import {
   Form,
@@ -19,12 +25,21 @@ import {
   SubmitButton,
   Wrapper,
 } from './CreatePost.styled';
+import { Controller, useForm } from 'react-hook-form';
+import { postPost } from '@/features/createPost/createPostSlice';
+
+type FormValues = { title: string; topic: string; body: string };
 
 const CreatePost = () => {
-  const editorRef = useRef<TinyMCEEditor | null>(null);
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { isLoading, errors },
+    reset,
+  } = useForm<FormValues>();
 
-  const [title, setTitle] = useState<string>('');
-  const [topic, setTopic] = useState<string>('');
+  const editorRef = useRef<TinyMCEEditor | null>(null);
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
@@ -33,55 +48,44 @@ const CreatePost = () => {
 
   if (!isAuthenticated) return <Navigate to="/" />;
 
-  const onTitleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setTitle(e.target.value);
-  };
+  const onFormSubmit = async (formData: FormValues): Promise<void> => {
+    const response = await dispatch(postPost(formData)).unwrap();
 
-  const onTopicChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setTopic(e.target.value);
-  };
-
-  const onFormSubmit = async (e: FormEvent): Promise<void> => {
-    e.preventDefault();
-    if (editorRef.current) {
-      const response = await dispatch(
-        postPost({ title: title, topic: topic, body: editorRef.current.getContent() })
-      ).unwrap();
-
-      if (response) navigate('/');
-    }
+    if (response) navigate('/');
   };
 
   return (
     <Wrapper>
       <Header>Create post</Header>
-      <Form onSubmit={onFormSubmit} id="create-new-post">
+      <Form onSubmit={handleSubmit(onFormSubmit)} id="create-new-post">
         <InputContainer>
           <InputItem>
             <InputLabel htmlFor="post-title">Title</InputLabel>
             <InputText
               id="post-title"
-              name="title"
+              {...register('title')}
               type="text"
               placeholder="Your title..."
-              value={title}
-              onChange={onTitleChange}
             />
           </InputItem>
           <InputItem>
             <InputLabel htmlFor="post-topic">Topic</InputLabel>
             <InputText
+              {...register('topic')}
               id="post-topic"
-              name="topic"
               type="text"
               placeholder="Post topic..."
-              value={topic}
-              onChange={onTopicChange}
             />
           </InputItem>
         </InputContainer>
         <PostWrapper>
-          <TinyEditor editorRef={editorRef} />
+          <Controller
+            name="body"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <TinyEditor onChange={onChange} value={value} editorRef={editorRef} />
+            )}
+          />
         </PostWrapper>
       </Form>
       <SubmitButton form="create-new-post" type="submit" value="Publish" />
