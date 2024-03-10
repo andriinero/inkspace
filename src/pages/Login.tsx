@@ -10,6 +10,7 @@ import {
 
 import { Wrapper } from './Login.styled';
 import { GreenButton } from '@/styles/components/GreenButton';
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 const Login = () => {
   const authData = useAppSelector(selectAuthData);
@@ -39,11 +40,13 @@ const Login = () => {
   return (
     <Wrapper>
       <GreenButton
+        whileTap={ButtonInteraction.whileTap.animation}
         onClick={onFirstLoginClick}
         type="button"
         value="Authenticate CoolGirlNerd"
       />
       <GreenButton
+        whileTap={ButtonInteraction.whileTap.animation}
         onClick={onSecondLoginClick}
         type="button"
         value="Authenticate CoolGuyNerd"

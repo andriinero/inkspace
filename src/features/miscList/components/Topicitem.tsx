@@ -5,6 +5,7 @@ import { Topic } from '@/types/Topic';
 
 import { TopicButton, Wrapper } from './TopicItem.styled';
 import { WaterfallPopUp } from '@/styles/animations/WaterfallPopUp';
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 type TopicItemProps = {
   _id: string;
   name: string;
@@ -24,6 +25,7 @@ const TopicItem = ({ _id, name }: TopicItemProps) => {
   return (
     <Wrapper variants={WaterfallPopUp.item}>
       <TopicButton
+        whileTap={ButtonInteraction.whileTap.animation}
         $isActive={isSelected}
         onClick={handleTopicClick}
         type="button"

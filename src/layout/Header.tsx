@@ -14,25 +14,35 @@ import {
   HeaderButton,
 } from './Header.styled';
 import AppIcon from '@/components/icons/AppIcon';
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   const dispatch = useAppDispatch();
 
   const handleLogoClick = (): void => {
     dispatch(clearTopic());
+    navigate('/');
+  };
+
+  const handleLoginClick = (): void => {
+    navigate('/login');
   };
 
   const handleLogoutClick = (): void => {
     dispatch(logout());
+    location.reload();
   };
 
   return (
     <Wrapper>
-      <StyledLink to="/">
-        <Logo onClick={handleLogoClick}>Well-done</Logo>
-      </StyledLink>
+      <Logo whileHover={{ x: -1, y: -1 }} onClick={handleLogoClick}>
+        Well-done
+      </Logo>
       <ProfileWrapper>
         {isAuthenticated ? (
           <>
@@ -45,14 +55,20 @@ const Header = () => {
             <StyledLink to="/profile">
               <ProfileIcon src="/portrait-placeholder.png" alt="Create New Post Icon" />
             </StyledLink>
-            <StyledLink reloadDocument to="/">
-              <HeaderButton onClick={handleLogoutClick} type='button' value="Logout" />
-            </StyledLink>
+            <HeaderButton
+              whileTap={ButtonInteraction.whileTap.animation}
+              onClick={handleLogoutClick}
+              type="button"
+              value="Logout"
+            />
           </>
         ) : (
-          <StyledLink to="/login">
-            <HeaderButton type="button" value="Login" />
-          </StyledLink>
+          <HeaderButton
+            whileTap={ButtonInteraction.whileTap.animation}
+            onClick={handleLoginClick}
+            type="button"
+            value="Login"
+          />
         )}
       </ProfileWrapper>
     </Wrapper>

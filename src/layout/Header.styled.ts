@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { GreenButton } from '@/styles/components/GreenButton';
+import { motion } from 'framer-motion';
 
 export const Wrapper = styled.header`
   grid-area: header;
@@ -21,20 +22,19 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-export const Logo = styled.h1`
+export const Logo = styled(motion.h1)`
   color: ${({ theme }) => theme.color.text_primary};
   font-size: 1.5rem;
   font-weight: 500;
   text-transform: uppercase;
 
-  transition: transform 200ms, color 200ms;
+  transition: color 200ms;
 
   user-select: none;
+  cursor: pointer;
 
   &:hover {
     color: ${({ theme }) => theme.color.text_secondary};
-
-    transform: translate(-1px, -1px);
   }
 `;
 

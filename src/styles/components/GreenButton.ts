@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-export const GreenButton = styled.input`
+export const GreenButton = styled(motion.input)`
   padding: 0.4rem 0.5rem;
   border: 1px solid transparent;
   border-radius: 16px;

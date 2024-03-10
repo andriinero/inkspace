@@ -7,6 +7,7 @@ import { deleteFollowUser, postFollowUser } from '@/features/profile/profileSlic
 import { Username } from '@/styles/components/Username.styled';
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 import { HollowButton } from '@/styles/components/HollowButton';
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 type AuthorItemProps = {
   _id: string;
@@ -45,6 +46,8 @@ const AuthorItem = ({ _id, username, bio, isFollowed }: AuthorItemProps) => {
       </S.BioContainer>
       {isAuthenticated && authData?.sub !== _id && (
         <HollowButton
+          whileTap={ButtonInteraction.whileTap.animation}
+          transition={ButtonInteraction.whileTap.transition}
           $isActive={isFollowed}
           onClick={handleFollowClick}
           type="button"
