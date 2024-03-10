@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -16,7 +17,7 @@ export const Header = styled.h3`
   font-size: 1rem;
 `;
 
-export const BookmarkList = styled.ul`
+export const BookmarkList = styled(motion.ul)`
   display: flex;
   flex-direction: column;
   gap: 2rem;

@@ -5,8 +5,9 @@ import DotMenu from '@/components/general/DotMenu';
 
 import PostReadTime from '@/components/general/PostReadTime';
 import { Title } from '@/styles/components/Title.styled';
+import { motion } from 'framer-motion';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.li)`
   display: grid;
   grid-template-columns: 1fr minmax(64px, 128px);
   grid-template-rows: auto auto;

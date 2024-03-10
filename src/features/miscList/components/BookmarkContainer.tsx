@@ -11,6 +11,7 @@ import { BookmarkList, CalloutText, Header, Wrapper } from './BookmarkContainer.
 import BookmarkItem from './BookmarkItem';
 import Error from '@/components/general/Error';
 import MiscListLoader from '@/components/loaders/MiscListLoader';
+import { Waterfall } from '@/lib/appAnimate';
 
 const BookmarkContainer = () => {
   const dispatch = useAppDispatch();
@@ -25,20 +26,22 @@ const BookmarkContainer = () => {
   return (
     <Wrapper>
       <Header>Recently Saved</Header>
-      <BookmarkList>
-        {isLoading ? (
-          <MiscListLoader />
-        ) : error ? (
-          <Error />
-        ) : bookmarkList.length === 0 ? (
-          <CalloutText>No bookmarks yet!</CalloutText>
-        ) : (
-          bookmarkList
+      {isLoading ? (
+        <MiscListLoader />
+      ) : error ? (
+        <Error />
+      ) : bookmarkList.length === 0 ? (
+        <CalloutText>No bookmarks yet!</CalloutText>
+      ) : (
+        <BookmarkList variants={Waterfall.container} initial="hidden" animate="visible">
+          {bookmarkList
             .slice(0)
             .reverse()
-            .map((b) => <BookmarkItem key={b._id} {...b} />)
-        )}
-      </BookmarkList>
+            .map((b) => (
+              <BookmarkItem key={b._id} {...b} />
+            ))}
+        </BookmarkList>
+      )}
     </Wrapper>
   );
 };

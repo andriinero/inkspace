@@ -12,10 +12,11 @@ import {
 } from './BookmarkItem.styled';
 import TimeAgo from '@/components/general/TimeAgo';
 import PostReadTime from '@/components/general/PostReadTime';
+import { Waterfall } from '@/lib/appAnimate';
 
 const BookmarkItem = ({ _id, author, title, body, date }: Post) => {
   return (
-    <WrapperItem>
+    <WrapperItem variants={Waterfall.item}>
       <Header>
         <AuthorIcon src="/portrait-placeholder.png" alt="Author Icon" />
         <StyledLink to={`/authors/${author._id}`}>

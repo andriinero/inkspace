@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div<{ $isOpen: boolean; $isAlignedLeft: boolean }>`
+export const Wrapper = styled.ul<{ $isOpen: boolean; $isAlignedLeft: boolean }>`
   display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
   position: absolute;
 

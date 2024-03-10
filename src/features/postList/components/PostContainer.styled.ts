@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -29,6 +30,13 @@ export const CalloutText = styled.h2`
   font-weight: 200;
   font-style: italic;
   letter-spacing: 0.1rem;
+`;
+
+export const PostList = styled(motion.ul)`
+  display: flex;
+  flex-direction: column;
+
+  padding: 1rem 0;
 `;
 
 export const StyledIcon = styled.img`

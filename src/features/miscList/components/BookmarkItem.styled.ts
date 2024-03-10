@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { StyledTitle } from '@/features/postList/components/PostItem.styled';
 import { Username } from '@/styles/components/Username.styled';
+import { motion } from 'framer-motion';
 
-export const WrapperItem = styled.li`
+export const WrapperItem = styled(motion.li)`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

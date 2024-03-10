@@ -8,10 +8,11 @@ import {
   selectFetchAuthorPostsState,
 } from '../authorPageSlice';
 
-import { Wrapper } from './PostContainer.styled';
+import { PostList, Wrapper } from './PostContainer.styled';
 import Error from '@/components/general/Error';
 import PostItem from '@/features/postList/components/PostItem';
 import PostListLoader from '@/components/loaders/PostListLoader';
+import { Waterfall } from '@/lib/appAnimate';
 
 type PostContainerProps = {
   userId?: string;
@@ -36,13 +37,15 @@ const PostContainer = ({ userId }: PostContainerProps) => {
       ) : error ? (
         <Error />
       ) : (
-        postList.map((p) => {
-          const isBookmarked = profileData?.post_bookmarks.some(
-            (b) => b === p._id
-          ) as boolean;
+        <PostList variants={Waterfall.container} initial="hidden" animate="visible">
+          {postList.map((p) => {
+            const isBookmarked = profileData?.post_bookmarks.some(
+              (b) => b === p._id
+            ) as boolean;
 
-          return <PostItem key={p._id} isBookmarked={isBookmarked} {...p} />;
-        })
+            return <PostItem key={p._id} isBookmarked={isBookmarked} {...p} />;
+          })}
+        </PostList>
       )}
     </Wrapper>
   );

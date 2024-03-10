@@ -10,11 +10,19 @@ import {
   selectSelectedTopic,
 } from '../postListSlice';
 
-import { CalloutText, Header, StyledIcon, Wrapper } from './PostContainer.styled';
+import { Topic } from '@/types/Topic';
+
+import {
+  CalloutText,
+  Header,
+  PostList,
+  StyledIcon,
+  Wrapper,
+} from './PostContainer.styled';
 import PostItem from './PostItem';
 import Error from '@/components/general/Error';
 import PostListLoader from '@/components/loaders/PostListLoader';
-import { Topic } from '@/types/Topic';
+import { Waterfall } from '@/lib/appAnimate';
 
 const PostContainer = () => {
   const userBookmarks = useAppSelector(selectProfileBookmarks);
@@ -49,11 +57,13 @@ const PostContainer = () => {
       ) : postList.length === 0 ? (
         <CalloutText>Be the first one to post!</CalloutText>
       ) : (
-        postList.map((post) => {
-          const isBookmarked = userBookmarks?.some((id) => id === post._id) as boolean;
+        <PostList variants={Waterfall.container} initial="hidden" animate="visible">
+          {postList.map((post) => {
+            const isBookmarked = userBookmarks?.some((id) => id === post._id) as boolean;
 
-          return <PostItem isBookmarked={isBookmarked} key={post._id} {...post} />;
-        })
+            return <PostItem isBookmarked={isBookmarked} key={post._id} {...post} />;
+          })}
+        </PostList>
       )}
     </Wrapper>
   );

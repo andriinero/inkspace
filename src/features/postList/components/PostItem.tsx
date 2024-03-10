@@ -17,8 +17,9 @@ import { Topic } from '@/types/Topic';
 import * as S from './PostItem.styled';
 import PostDate from '@/components/general/TimeAgo';
 import { setTopic } from '../postListSlice';
-import { Username } from '@/styles/components/Username.styled';
 import { Title } from '@/styles/components/Title.styled';
+import { Waterfall } from '@/lib/appAnimate';
+import { Username } from '@/styles/components/Username.styled';
 
 type PostItemProps = {
   _id: string;
@@ -72,7 +73,7 @@ const PostItem = ({
   const handleBookmarkClick = isBookmarked ? handleBookmarkRemove : handleBookmarkAdd;
 
   return (
-    <S.Wrapper>
+    <S.Wrapper variants={Waterfall.item}>
       <S.Head>
         <S.StyledLink to={`/authors/${author._id}`}>
           <S.AuthorIcon src="/portrait-placeholder.png" />
