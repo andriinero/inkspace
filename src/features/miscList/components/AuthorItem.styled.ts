@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-export const WrapperItem = styled.li`
+export const WrapperItem = styled(motion.li)`
   display: grid;
   grid-template-columns: auto minmax(100px, 300px) auto;
   justify-content: space-between;

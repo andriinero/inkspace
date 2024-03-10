@@ -12,11 +12,9 @@ import AuthorItem from './AuthorItem';
 import Error from '@/components/general/Error';
 import MiscListLoader from '@/components/loaders/MiscListLoader';
 import { selectProfileFollowedUsers } from '@/features/profile/profileSlice';
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import { WaterfallSlideIn } from '@/styles/components/animations/WaterfallSlideIn';
 
 const AuthorContainer = () => {
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -31,19 +29,23 @@ const AuthorContainer = () => {
   return (
     <S.Wrapper>
       <S.Header>Who to follow</S.Header>
-      <S.AuthorList>
-        {isLoading ? (
-          <MiscListLoader />
-        ) : error ? (
-          <Error />
-        ) : (
-          authorList.map((a) => {
+      {isLoading ? (
+        <MiscListLoader />
+      ) : error ? (
+        <Error />
+      ) : (
+        <S.AuthorList
+          variants={WaterfallSlideIn.container}
+          initial="hidden"
+          animate="visible"
+        >
+          {authorList.map((a) => {
             const isFollowed = followList?.some((f) => f === a._id) as boolean;
 
             return <AuthorItem key={a._id} isFollowed={isFollowed} {...a} />;
-          })
-        )}
-      </S.AuthorList>
+          })}
+        </S.AuthorList>
+      )}
     </S.Wrapper>
   );
 };

@@ -5,6 +5,7 @@ import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice
 import * as S from './AuthorItem.styled';
 import { deleteFollowUser, postFollowUser } from '@/features/profile/profileSlice';
 import { Username } from '@/styles/components/Username.styled';
+import { WaterfallSlideIn } from '@/styles/components/animations/WaterfallSlideIn';
 
 type AuthorItemProps = {
   _id: string;
@@ -31,7 +32,7 @@ const AuthorItem = ({ _id, username, bio, isFollowed }: AuthorItemProps) => {
   const followButtonText = isFollowed ? 'Followed' : 'Follow';
 
   return (
-    <S.WrapperItem>
+    <S.WrapperItem variants={WaterfallSlideIn.item}>
       <S.StyledLink to={`/authors/${_id}`}>
         <S.Icon src="/portrait-placeholder.png" />
       </S.StyledLink>
