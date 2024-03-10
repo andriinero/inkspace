@@ -18,7 +18,7 @@ import * as S from './PostItem.styled';
 import PostDate from '@/components/general/TimeAgo';
 import { setTopic } from '../postListSlice';
 import { Title } from '@/styles/components/Title.styled';
-import { Waterfall } from '@/lib/appAnimate';
+import { Waterfall } from '@/styles/components/animations/Waterfall';
 import { Username } from '@/styles/components/Username.styled';
 
 type PostItemProps = {

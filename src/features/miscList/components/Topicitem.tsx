@@ -4,6 +4,7 @@ import { selectSelectedTopic, setTopic } from '@/features/postList/postListSlice
 import { Topic } from '@/types/Topic';
 
 import { Wrapper } from './TopicItem.styled';
+import { WaterfallPopUp } from '@/styles/components/animations/WaterfallPopUp';
 type TopicItemProps = {
   _id: string;
   name: string;
@@ -21,7 +22,11 @@ const TopicItem = ({ _id, name }: TopicItemProps) => {
   const isSelected = selectedTopic?._id === _id;
 
   return (
-    <Wrapper $isSelected={isSelected} onClick={handleTopicClick}>
+    <Wrapper
+      variants={WaterfallPopUp.item}
+      $isSelected={isSelected}
+      onClick={handleTopicClick}
+    >
       {name}
     </Wrapper>
   );

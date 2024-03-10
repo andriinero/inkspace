@@ -11,7 +11,7 @@ import { BookmarkList, CalloutText, Header, Wrapper } from './BookmarkContainer.
 import BookmarkItem from './BookmarkItem';
 import Error from '@/components/general/Error';
 import MiscListLoader from '@/components/loaders/MiscListLoader';
-import { Waterfall } from '@/lib/appAnimate';
+import { Waterfall } from '@/styles/components/animations/Waterfall';
 
 const BookmarkContainer = () => {
   const dispatch = useAppDispatch();

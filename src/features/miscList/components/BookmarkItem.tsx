@@ -12,7 +12,7 @@ import {
 } from './BookmarkItem.styled';
 import TimeAgo from '@/components/general/TimeAgo';
 import PostReadTime from '@/components/general/PostReadTime';
-import { Waterfall } from '@/lib/appAnimate';
+import { Waterfall } from '@/styles/components/animations/Waterfall';
 
 const BookmarkItem = ({ _id, author, title, body, date }: Post) => {
   return (

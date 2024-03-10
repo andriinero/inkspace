@@ -7,6 +7,7 @@ import { Header, TopicList, Wrapper } from './TopicContainer.styled';
 import TopicItem from './TopicItem';
 import TopicListLoader from '@/components/loaders/TopicListLoader';
 import Error from '@/components/general/Error';
+import { WaterfallPopUp } from '@/styles/components/animations/WaterfallPopUp';
 
 const TopicContainer = () => {
   const dispatch = useAppDispatch();
@@ -21,15 +22,17 @@ const TopicContainer = () => {
   return (
     <Wrapper>
       <Header>Recommended topics</Header>
-      <TopicList>
-        {isLoading ? (
-          <TopicListLoader />
-        ) : error ? (
-          <Error />
-        ) : (
-          topicList.map((topic) => <TopicItem key={topic._id} {...topic} />)
-        )}
-      </TopicList>
+      {isLoading ? (
+        <TopicListLoader />
+      ) : error ? (
+        <Error />
+      ) : (
+        <TopicList variants={WaterfallPopUp.container} initial="hidden" animate="visible">
+          {topicList.map((topic) => (
+            <TopicItem key={topic._id} {...topic} />
+          ))}
+        </TopicList>
+      )}
     </Wrapper>
   );
 };
