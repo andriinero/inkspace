@@ -1,3 +1,4 @@
+import { PostBody } from '@/styles/PostBody.styled';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -20,14 +21,5 @@ export const Header = styled.h1`
 `;
 
 export const Body = styled.div`
-  font-size: 1.25rem;
-  font-family: 'Times New Roman', Times, serif;
-  line-height: 1.8rem;
-
-  & * {
-    color: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    font-family: inherit;
-  }
+  ${PostBody}
 `;

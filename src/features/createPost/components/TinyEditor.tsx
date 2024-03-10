@@ -15,14 +15,13 @@ const TinyEditor = ({ editorRef, onChange, value }: TinyEditorProps) => {
     <Editor
       textareaName="body"
       apiKey="3igd155ej5mtk3qa3n7kfpjlza31keecuv4bwtxpqxp3lib5"
-      onInit={(evt, editor) => (editorRef.current = editor)}
+      onInit={(_, editor) => (editorRef.current = editor)}
       init={{
         inline_styles: true,
         inline: true,
         min_height: 300,
         plugins: '',
-        toolbar:
-          'undo redo | blocks | bold italic underline strikethrough | numlist bullist',
+        toolbar: 'undo redo blockquote h2 | bold italic underline strikethrough',
         tinycomments_mode: 'embedded',
         tinycomments_author: 'Author name',
         mergetags_list: [

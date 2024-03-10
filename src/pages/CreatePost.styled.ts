@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { GreenButton } from '@/styles/components/GreenButton';
+import { PostBody } from '@/styles/PostBody.styled';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -18,6 +19,7 @@ export const InputContainer = styled.div`
 
 export const PostWrapper = styled.div`
   & > * {
+    ${PostBody}
     padding: 0.5rem;
     min-height: 300px;
   }
