@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import {
   fetchProfileData,
-  resetProfile,
   selectFetchProfileDataState,
   selectProfileData,
 } from '@/features/profile/profileSlice';

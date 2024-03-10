@@ -22,7 +22,7 @@ import {
 import PostItem from './PostItem';
 import Error from '@/components/general/Error';
 import PostListLoader from '@/components/loaders/PostListLoader';
-import { Waterfall } from '@/styles/components/animations/Waterfall';
+import { Waterfall } from '@/styles/animations/Waterfall';
 
 const PostContainer = () => {
   const userBookmarks = useAppSelector(selectProfileBookmarks);

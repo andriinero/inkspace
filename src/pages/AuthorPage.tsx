@@ -19,7 +19,6 @@ import {
 import PostContainer from '@/features/authorPage/components/PostContainer';
 import Error from '@/components/general/Error';
 import {
-  FollowButton,
   Header,
   PostsWrapper,
   ProfileIcon,
@@ -30,6 +29,7 @@ import {
   WrapperAside,
   WrapperMain,
 } from './AuthorPage.styled';
+import { HollowButton } from '@/styles/components/HollowButton';
 
 const AuthorPage = () => {
   const { authorid } = useParams();
@@ -87,8 +87,8 @@ const AuthorPage = () => {
           <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
           <StyledAsideUserName>{authorData?.username}</StyledAsideUserName>
           {isAuthenticated && (
-            <FollowButton
-              $isFollowed={isFollowed}
+            <HollowButton
+              $isActive={isFollowed}
               onClick={handleFollowClick}
               type="button"
               value={followButtonText}

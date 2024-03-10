@@ -12,7 +12,7 @@ import { PostList, Wrapper } from './PostContainer.styled';
 import Error from '@/components/general/Error';
 import PostItem from '@/features/postList/components/PostItem';
 import PostListLoader from '@/components/loaders/PostListLoader';
-import { Waterfall } from '@/styles/components/animations/Waterfall';
+import { Waterfall } from '@/styles/animations/Waterfall';
 
 type PostContainerProps = {
   userId?: string;

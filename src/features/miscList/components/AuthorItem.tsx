@@ -5,7 +5,8 @@ import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice
 import * as S from './AuthorItem.styled';
 import { deleteFollowUser, postFollowUser } from '@/features/profile/profileSlice';
 import { Username } from '@/styles/components/Username.styled';
-import { WaterfallSlideIn } from '@/styles/components/animations/WaterfallSlideIn';
+import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
+import { HollowButton } from '@/styles/components/HollowButton';
 
 type AuthorItemProps = {
   _id: string;
@@ -43,8 +44,8 @@ const AuthorItem = ({ _id, username, bio, isFollowed }: AuthorItemProps) => {
         <S.BioContent>{bio || 'No user bio'}</S.BioContent>
       </S.BioContainer>
       {isAuthenticated && authData?.sub !== _id && (
-        <S.FollowButton
-          $isFollowed={isFollowed}
+        <HollowButton
+          $isActive={isFollowed}
           onClick={handleFollowClick}
           type="button"
           value={followButtonText}

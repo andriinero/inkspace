@@ -12,7 +12,7 @@ import AuthorItem from './AuthorItem';
 import Error from '@/components/general/Error';
 import MiscListLoader from '@/components/loaders/MiscListLoader';
 import { selectProfileFollowedUsers } from '@/features/profile/profileSlice';
-import { WaterfallSlideIn } from '@/styles/components/animations/WaterfallSlideIn';
+import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 
 const AuthorContainer = () => {
   const dispatch = useAppDispatch();

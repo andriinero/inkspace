@@ -7,7 +7,7 @@ import { Header, TopicList, Wrapper } from './TopicContainer.styled';
 import TopicItem from './TopicItem';
 import TopicListLoader from '@/components/loaders/TopicListLoader';
 import Error from '@/components/general/Error';
-import { WaterfallPopUp } from '@/styles/components/animations/WaterfallPopUp';
+import { WaterfallPopUp } from '@/styles/animations/WaterfallPopUp';
 
 const TopicContainer = () => {
   const dispatch = useAppDispatch();
