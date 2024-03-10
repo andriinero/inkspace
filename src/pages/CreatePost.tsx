@@ -1,11 +1,4 @@
-import {
-  useState,
-  useRef,
-  ChangeEvent,
-  FormEvent,
-  JSXElementConstructor,
-  ReactElement,
-} from 'react';
+import { useRef } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Editor as TinyMCEEditor } from 'tinymce';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
@@ -15,6 +8,7 @@ import TinyEditor from '@/features/createPost/components/TinyEditor';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 import {
+  ErrorMessage,
   Form,
   Header,
   InputContainer,
@@ -35,8 +29,7 @@ const CreatePost = () => {
     control,
     handleSubmit,
     register,
-    formState: { isLoading, errors },
-    reset,
+    formState: { errors },
   } = useForm<FormValues>();
 
   const editorRef = useRef<TinyMCEEditor | null>(null);
@@ -63,30 +56,52 @@ const CreatePost = () => {
             <InputLabel htmlFor="post-title">Title</InputLabel>
             <InputText
               id="post-title"
-              {...register('title')}
+              {...register('title', {
+                required: 'Title is required',
+                minLength: { value: 3, message: 'Title is too short' },
+                maxLength: { value: 100, message: 'Title is too long' },
+              })}
               type="text"
               placeholder="Your title..."
             />
+            <ErrorMessage $isVisible={Boolean(errors.title)}>
+              {errors.title?.message}
+            </ErrorMessage>
           </InputItem>
           <InputItem>
             <InputLabel htmlFor="post-topic">Topic</InputLabel>
             <InputText
-              {...register('topic')}
+              {...register('topic', {
+                required: 'Topic is required',
+              })}
               id="post-topic"
               type="text"
               placeholder="Post topic..."
             />
+            <ErrorMessage $isVisible={Boolean(errors.topic)}>
+              {errors.topic?.message}
+            </ErrorMessage>
           </InputItem>
         </InputContainer>
-        <PostWrapper>
-          <Controller
-            name="body"
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <TinyEditor onChange={onChange} value={value} editorRef={editorRef} />
-            )}
-          />
-        </PostWrapper>
+        <InputItem>
+          <PostWrapper>
+            <Controller
+              name="body"
+              control={control}
+              rules={{
+                required: {value: true, message: 'Post body is required'},
+                minLength: { value: 100, message: 'Post length is too short' },
+                maxLength: { value: 10000, message: 'Post length is too long' },
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TinyEditor onChange={onChange} value={value} editorRef={editorRef} />
+              )}
+            />
+          </PostWrapper>
+          <ErrorMessage $isVisible={Boolean(errors.body)}>
+            {errors.body?.message}
+          </ErrorMessage>
+        </InputItem>
       </Form>
       <SubmitButton form="create-new-post" type="submit" value="Publish" />
     </Wrapper>

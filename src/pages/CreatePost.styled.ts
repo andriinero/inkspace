@@ -48,6 +48,20 @@ export const Form = styled.form`
   overflow-wrap: break-word;
 `;
 
+export const ErrorMessage = styled.span<{ $isVisible: boolean }>`
+  display: inline-block;
+  visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
+
+  color: ${({ theme }) => theme.color.error_text};
+  font-size: 0.8rem;
+  font-weight: 300;
+  font-style: italic;
+
+  &::before {
+    content: '* ';
+  }
+`;
+
 export const SubmitButton = styled(GreenButton)`
   align-self: flex-start;
 `;

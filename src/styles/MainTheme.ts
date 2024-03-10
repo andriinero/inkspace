@@ -22,6 +22,7 @@ const mainTheme = {
     comments_border: '#34383a',
     focus_outline: '#D3D3D3',
     loader_bg: '#1C1F1F',
+    error_text: '#E74C3C',
   },
 };
 
