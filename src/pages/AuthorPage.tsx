@@ -30,6 +30,7 @@ import {
   WrapperMain,
 } from './AuthorPage.styled';
 import { HollowButton } from '@/styles/components/HollowButton';
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 const AuthorPage = () => {
   const { authorid } = useParams();
@@ -88,6 +89,7 @@ const AuthorPage = () => {
           <StyledAsideUserName>{authorData?.username}</StyledAsideUserName>
           {isAuthenticated && (
             <HollowButton
+              whileTap={ButtonInteraction.whileTap.animation}
               $isActive={isFollowed}
               onClick={handleFollowClick}
               type="button"

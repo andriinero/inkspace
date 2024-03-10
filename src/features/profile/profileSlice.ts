@@ -23,10 +23,10 @@ const initialState: ProfileState = {
   profileBookmarkList: [],
   fetchProfileBookmarksState: { isLoading: true, error: null },
   fetchProfileDataState: { isLoading: true, error: null },
-  postBookmarkState: { isLoading: true, error: null },
-  deleteBookmarkState: { isLoading: true, error: null },
-  postFollowedUserState: { isLoading: true, error: null },
-  deleteFollowUserState: { isLoading: true, error: null },
+  postBookmarkState: { isLoading: false, error: null },
+  deleteBookmarkState: { isLoading: false, error: null },
+  postFollowedUserState: { isLoading: false, error: null },
+  deleteFollowUserState: { isLoading: false, error: null },
 };
 
 export const fetchProfileData = createAsyncThunk(

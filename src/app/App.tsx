@@ -14,6 +14,7 @@ const App = () => {
     dispatch(initAuth());
   }, [dispatch]);
 
+  // FIXME: auth loading state
   const { isLoading } = useAppSelector(selectFetchAuthDataState);
 
   return (

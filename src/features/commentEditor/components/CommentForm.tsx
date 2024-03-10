@@ -93,7 +93,7 @@ const CommentForm = ({ postId }: CommentFormProps) => {
           <ControlsWrapper>
             {isEditMode && (
               <CancelActionButton
-                onButtonClick={handleEditCancelClick}
+                onClick={handleEditCancelClick}
                 type="button"
                 value="Cancel"
               />

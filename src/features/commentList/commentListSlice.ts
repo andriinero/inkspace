@@ -27,7 +27,7 @@ const initialState: CommentsState = {
     error: null,
   },
   deleteCommentState: {
-    isLoading: true,
+    isLoading: false,
     error: null,
   },
 };
