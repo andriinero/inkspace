@@ -1,11 +1,16 @@
 import { useRef } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Editor as TinyMCEEditor } from 'tinymce';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import TinyEditor from '@/features/createPost/components/TinyEditor';
+import { postPost } from '@/features/createPost/createPostSlice';
 
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
+
+import { TCreatePostSchema, createPostSchema } from '@/types/schemas/CreatePostSchema';
+
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
   ErrorMessage,
@@ -19,10 +24,7 @@ import {
   SubmitButton,
   Wrapper,
 } from './CreatePost.styled';
-import { Controller, useForm } from 'react-hook-form';
-import { postPost } from '@/features/createPost/createPostSlice';
-
-type FormValues = { title: string; topic: string; body: string };
+import TinyEditor from '@/features/createPost/components/TinyEditor';
 
 const CreatePost = () => {
   const {
@@ -30,7 +32,7 @@ const CreatePost = () => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<TCreatePostSchema>({ resolver: zodResolver(createPostSchema) });
 
   const editorRef = useRef<TinyMCEEditor | null>(null);
 
@@ -41,7 +43,7 @@ const CreatePost = () => {
 
   if (!isAuthenticated) return <Navigate to="/" />;
 
-  const onFormSubmit = async (formData: FormValues): Promise<void> => {
+  const onFormSubmit = async (formData: TCreatePostSchema): Promise<void> => {
     const response = await dispatch(postPost(formData)).unwrap();
 
     if (response) navigate('/');
@@ -58,8 +60,6 @@ const CreatePost = () => {
               id="post-title"
               {...register('title', {
                 required: 'Title is required',
-                minLength: { value: 3, message: 'Title is too short' },
-                maxLength: { value: 100, message: 'Title is too long' },
               })}
               type="text"
               placeholder="Your title..."
@@ -89,9 +89,7 @@ const CreatePost = () => {
               name="body"
               control={control}
               rules={{
-                required: {value: true, message: 'Post body is required'},
-                minLength: { value: 100, message: 'Post length is too short' },
-                maxLength: { value: 10000, message: 'Post length is too long' },
+                required: { value: true, message: 'Post body is required' },
               }}
               render={({ field: { onChange, value } }) => (
                 <TinyEditor onChange={onChange} value={value} editorRef={editorRef} />
