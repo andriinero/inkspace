@@ -12,6 +12,7 @@ import {
   NewPostButtonText,
   Logo,
   HeaderButton,
+  StyledAppIcon,
 } from './Header.styled';
 import AppIcon from '@/components/icons/AppIcon';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
@@ -48,7 +49,7 @@ const Header = () => {
           <>
             <NewPostButton>
               <StyledLink to="/create-post">
-                <AppIcon src="/post.svg" alt="Create New Post Icon" />
+                <StyledAppIcon src="/post.svg" alt="Create New Post Icon" />
                 <NewPostButtonText>Write</NewPostButtonText>
               </StyledLink>
             </NewPostButton>

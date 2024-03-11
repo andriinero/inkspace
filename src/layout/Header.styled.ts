@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { GreenButton } from '@/styles/components/GreenButton';
 import { motion } from 'framer-motion';
+import AppIcon from '@/components/icons/AppIcon';
 
 export const Wrapper = styled.header`
   grid-area: header;
@@ -56,6 +57,12 @@ export const NewPostButton = styled.div`
   &:hover {
     filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
       contrast(82%);
+  }
+`;
+
+export const StyledAppIcon = styled(AppIcon)`
+  &:hover {
+    filter: none;
   }
 `;
 
