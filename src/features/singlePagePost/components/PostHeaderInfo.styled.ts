@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import PostReadTime from '@/components/general/PostReadTime';
 import { NavLink } from 'react-router-dom';
 import { Username } from '@/styles/components/Username.styled';
+import { motion } from 'framer-motion';
 
 export const Wrapper = styled.div`
   align-self: flex-start;
@@ -56,12 +57,13 @@ export const TopicName = styled.strong``;
 
 export const PostReadEstimate = styled(PostReadTime)``;
 
-export const FollowButton = styled.input`
+export const FollowButton = styled(motion.input)`
   border: 1px solid transparent;
   background-color: transparent;
 
   color: ${({ theme }) => theme.color.text_button_follow};
   font-size: 1rem;
+  text-align: center;
 
   cursor: pointer;
 `;
