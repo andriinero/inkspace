@@ -6,8 +6,7 @@ import { toggleComments } from '@/features/commentList/commentListSlice';
 import {
   deleteBookmark,
   postBookmark,
-  selectDeleteBookmarkState,
-  selectPostBookmarkState,
+  selectBookmarkActionState,
   selectProfileBookmarks,
 } from '@/features/profile/profileSlice';
 
@@ -30,8 +29,7 @@ const PostControls = ({ postId }: PostControlsProps) => {
   const userBookmarks = useAppSelector(selectProfileBookmarks);
   const likeCount = useAppSelector(selectPostLikeCount);
 
-  const postBookmarkState = useAppSelector(selectPostBookmarkState);
-  const deleteBookmarkState = useAppSelector(selectDeleteBookmarkState);
+  const bookmarkActionState = useAppSelector(selectBookmarkActionState);
 
   const dispatch = useAppDispatch();
 
@@ -40,11 +38,11 @@ const PostControls = ({ postId }: PostControlsProps) => {
   };
 
   const handleBookmarkAdd = (): void => {
-    if (!postBookmarkState.isLoading) dispatch(postBookmark(postId));
+    if (!bookmarkActionState.isLoading) dispatch(postBookmark(postId));
   };
 
   const handleBookmarkRemove = (): void => {
-    if (!deleteBookmarkState.isLoading) dispatch(deleteBookmark(postId));
+    if (!bookmarkActionState.isLoading) dispatch(deleteBookmark(postId));
   };
 
   const onCommentsClick = (): void => {

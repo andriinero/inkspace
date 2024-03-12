@@ -12,10 +12,8 @@ type ProfileState = {
   profileBookmarkList: Post[];
   fetchProfileDataState: { isLoading: boolean; error: SerializedError | null };
   fetchProfileBookmarksState: { isLoading: boolean; error: SerializedError | null };
-  postBookmarkState: { isLoading: boolean; error: SerializedError | null };
-  deleteBookmarkState: { isLoading: boolean; error: SerializedError | null };
-  postFollowedUserState: { isLoading: boolean; error: SerializedError | null };
-  deleteFollowUserState: { isLoading: boolean; error: SerializedError | null };
+  bookmarkActionState: { isLoading: boolean; error: SerializedError | null };
+  followActionState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: ProfileState = {
@@ -23,10 +21,8 @@ const initialState: ProfileState = {
   profileBookmarkList: [],
   fetchProfileBookmarksState: { isLoading: true, error: null },
   fetchProfileDataState: { isLoading: true, error: null },
-  postBookmarkState: { isLoading: false, error: null },
-  deleteBookmarkState: { isLoading: false, error: null },
-  postFollowedUserState: { isLoading: false, error: null },
-  deleteFollowUserState: { isLoading: false, error: null },
+  bookmarkActionState: { isLoading: false, error: null },
+  followActionState: { isLoading: false, error: null },
 };
 
 export const fetchProfileData = createAsyncThunk(
@@ -187,62 +183,72 @@ const profileSlice = createSlice({
         state.fetchProfileBookmarksState.error = action.error;
       });
     builder
-      .addCase(postBookmark.pending, (state) => {
-        state.postBookmarkState.isLoading = true;
-        state.postBookmarkState.error = null;
+      .addCase(postBookmark.pending, (state, action) => {
+        if (state.profileData) state.profileData.post_bookmarks.push(action.meta.arg);
+        state.bookmarkActionState.isLoading = true;
+        state.bookmarkActionState.error = null;
       })
-      .addCase(postBookmark.fulfilled, (state, action) => {
-        if (state.profileData) state.profileData.post_bookmarks.push(action.payload._id);
-        state.postBookmarkState.isLoading = false;
+      .addCase(postBookmark.fulfilled, (state) => {
+        state.bookmarkActionState.isLoading = false;
       })
       .addCase(postBookmark.rejected, (state, action) => {
-        state.postBookmarkState.isLoading = false;
-        state.postBookmarkState.error = action.error;
-      });
-    builder
-      .addCase(deleteBookmark.pending, (state) => {
-        state.deleteBookmarkState.isLoading = true;
-        state.deleteBookmarkState.error = null;
-      })
-      .addCase(deleteBookmark.fulfilled, (state, action) => {
         if (state.profileData)
           state.profileData.post_bookmarks = state.profileData.post_bookmarks.filter(
-            (id) => id !== action.payload._id
+            (id) => id !== action.meta.arg
           );
-        state.deleteBookmarkState.isLoading = false;
+        state.bookmarkActionState.isLoading = false;
+        state.bookmarkActionState.error = action.error;
+      });
+    builder
+      .addCase(deleteBookmark.pending, (state, action) => {
+        if (state.profileData)
+          state.profileData.post_bookmarks = state.profileData.post_bookmarks.filter(
+            (id) => id !== action.meta.arg
+          );
+        state.bookmarkActionState.isLoading = true;
+        state.bookmarkActionState.error = null;
+      })
+      .addCase(deleteBookmark.fulfilled, (state) => {
+        state.bookmarkActionState.isLoading = false;
       })
       .addCase(deleteBookmark.rejected, (state, action) => {
-        state.deleteBookmarkState.isLoading = false;
-        state.deleteBookmarkState.error = action.error;
+        if (state.profileData) state.profileData.post_bookmarks.push(action.meta.arg);
+        state.bookmarkActionState.isLoading = false;
+        state.bookmarkActionState.error = action.error;
       });
     builder
-      .addCase(postFollowUser.pending, (state) => {
-        state.postFollowedUserState.isLoading = true;
-        state.postFollowedUserState.error = null;
+      .addCase(postFollowUser.pending, (state, action) => {
+        if (state.profileData) state.profileData.followed_users.push(action.meta.arg);
+        state.followActionState.isLoading = true;
+        state.followActionState.error = null;
       })
-      .addCase(postFollowUser.fulfilled, (state, action) => {
-        if (state.profileData) state.profileData.followed_users.push(action.payload._id);
-        state.postFollowedUserState.isLoading = false;
+      .addCase(postFollowUser.fulfilled, (state) => {
+        state.followActionState.isLoading = false;
       })
       .addCase(postFollowUser.rejected, (state, action) => {
-        state.postFollowedUserState.isLoading = false;
-        state.postFollowedUserState.error = action.error;
-      });
-    builder
-      .addCase(deleteFollowUser.pending, (state) => {
-        state.deleteFollowUserState.isLoading = true;
-        state.deleteFollowUserState.error = null;
-      })
-      .addCase(deleteFollowUser.fulfilled, (state, action) => {
         if (state.profileData)
           state.profileData.followed_users = state.profileData.followed_users.filter(
-            (id) => id !== action.payload._id
+            (id) => id !== action.meta.arg
           );
-        state.deleteFollowUserState.isLoading = false;
+        state.followActionState.isLoading = false;
+        state.followActionState.error = action.error;
+      });
+    builder
+      .addCase(deleteFollowUser.pending, (state, action) => {
+        if (state.profileData)
+          state.profileData.followed_users = state.profileData.followed_users.filter(
+            (id) => id !== action.meta.arg
+          );
+        state.followActionState.isLoading = true;
+        state.followActionState.error = null;
+      })
+      .addCase(deleteFollowUser.fulfilled, (state) => {
+        state.followActionState.isLoading = false;
       })
       .addCase(deleteFollowUser.rejected, (state, action) => {
-        state.deleteFollowUserState.isLoading = false;
-        state.deleteFollowUserState.error = action.error;
+        if (state.profileData) state.profileData.followed_users.push(action.meta.arg);
+        state.followActionState.isLoading = false;
+        state.followActionState.error = action.error;
       });
   },
 });
@@ -255,18 +261,17 @@ export const selectFetchProfileDataState = (state: RootState) =>
 export const selectFetchProfileBookmarksState = (state: RootState) =>
   state.profile.fetchProfileBookmarksState;
 
-export const selectPostBookmarkState = (state: RootState) =>
-  state.profile.postBookmarkState;
+export const selectBookmarkActionState = (state: RootState) =>
+  state.profile.bookmarkActionState;
 
-export const selectDeleteBookmarkState = (state: RootState) =>
-  state.profile.deleteBookmarkState;
+export const selectFollowActionState = (state: RootState) =>
+  state.profile.followActionState;
 
 export const selectProfileData = (state: RootState) => state.profile.profileData;
 
 export const selectProfileBookmarksList = (state: RootState) =>
   state.profile.profileBookmarkList;
 
-// TODO: refactor
 export const selectProfileBookmarks = (state: RootState) =>
   state.profile.profileData?.post_bookmarks;
 

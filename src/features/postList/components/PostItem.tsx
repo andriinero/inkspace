@@ -8,7 +8,7 @@ import {
   postBookmark,
   selectDeleteBookmarkState,
   selectFetchProfileDataState,
-  selectPostBookmarkState,
+  selectBookmarkActionState,
 } from '@/features/profile/profileSlice';
 
 import { Author } from '@/types/Author';
@@ -45,17 +45,16 @@ const PostItem = ({
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   const fetchProfileState = useAppSelector(selectFetchProfileDataState);
-  const postBookmarkState = useAppSelector(selectPostBookmarkState);
-  const deleteBookmarkState = useAppSelector(selectDeleteBookmarkState);
+  const bookmarkActionState = useAppSelector(selectBookmarkActionState);
 
   const dispatch = useAppDispatch();
 
   const handleBookmarkAdd = (): void => {
-    if (!postBookmarkState.isLoading) dispatch(postBookmark(_id));
+    if (!bookmarkActionState.isLoading) dispatch(postBookmark(_id));
   };
 
   const handleBookmarkRemove = (): void => {
-    if (!deleteBookmarkState.isLoading) dispatch(deleteBookmark(_id));
+    if (!bookmarkActionState.isLoading) dispatch(deleteBookmark(_id));
   };
 
   const handleMenuToggle = (): void => {
