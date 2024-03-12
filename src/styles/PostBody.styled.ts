@@ -9,6 +9,8 @@ export const PostBody = css`
   em,
   s,
   strong {
+    overflow-wrap: break-word;
+
     font-size: inherit;
     line-height: 2rem;
     font-family: inherit;

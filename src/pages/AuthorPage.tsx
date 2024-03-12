@@ -31,6 +31,8 @@ import {
 } from './AuthorPage.styled';
 import { HollowButton } from '@/styles/components/HollowButton';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+import { FollowCount, SignUpDate, UserBio } from './Profile.styled';
+import { DateTime } from 'luxon';
 
 const AuthorPage = () => {
   const { authorid } = useParams();
@@ -67,6 +69,10 @@ const AuthorPage = () => {
     if (authorData) dispatch(deleteFollowUser(authorData._id));
   };
 
+  const signUpDate = DateTime.fromISO(authorData?.sign_up_date as string).toLocaleString(
+    DateTime.DATE_MED
+  );
+
   const handleFollowClick = isFollowed ? handleFollowRemove : handleFollowAdd;
   const followButtonText = isFollowed ? 'Followed' : 'Follow';
 
@@ -87,6 +93,8 @@ const AuthorPage = () => {
         <ProfileWrapper>
           <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
           <StyledAsideUserName>{authorData?.username}</StyledAsideUserName>
+          <FollowCount>{authorData?.followed_users.length} Following</FollowCount>
+          <SignUpDate>Member since: {signUpDate}</SignUpDate>
           {isAuthenticated && (
             <HollowButton
               whileTap={ButtonInteraction.whileTap.animation}
@@ -96,6 +104,7 @@ const AuthorPage = () => {
               value={followButtonText}
             />
           )}
+          <UserBio>{authorData?.bio}</UserBio>
         </ProfileWrapper>
       </WrapperAside>
     </Wrapper>

@@ -16,7 +16,6 @@ export const Wrapper = styled(motion.li)`
   column-gap: 4rem;
 
   padding: 2rem 0;
-  max-width: 75ch;
   border-bottom: 1px solid ${({ theme }) => theme.color.main_border_feint};
 
   &:last-child {
@@ -78,12 +77,13 @@ export const BodyText = styled.div`
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 
-  max-width: 100%;
+  max-width: 70ch;
   overflow: hidden;
 
   font-family: 'Times New Roman', Times, serif;
   line-height: 1.5rem;
   text-overflow: ellipsis;
+  overflow-wrap: break-word;
 
   & * {
     color: inherit;

@@ -66,3 +66,24 @@ export const StyledAsideUserName = styled(Username)`
   white-space: break-spaces;
   word-wrap: break-word;
 `;
+
+export const FollowCount = styled.span`
+  display: inline-block;
+
+  font-weight: 300;
+`;
+
+export const SignUpDate = styled.span`
+  display: inline-block;
+
+  font-size: 0.8rem;
+  font-weight: 300;
+  font-style: italic;
+`;
+
+export const UserBio = styled.span`
+  padding: 1rem 0;
+
+  font-size: 0.9rem;
+  font-weight: 300;
+`;

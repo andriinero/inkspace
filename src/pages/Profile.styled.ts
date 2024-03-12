@@ -77,9 +77,24 @@ export const FollowCount = styled.span`
   font-weight: 300;
 `;
 
+export const SignUpDate = styled.span`
+  display: inline-block;
+
+  font-size: 0.8rem;
+  font-weight: 300;
+  font-style: italic;
+`;
+
 export const StyledEditLink = styled(NavLink)`
   color: ${({ theme }) => theme.color.text_button_follow};
   font-size: 0.8rem;
   font-weight: 400;
   text-decoration: none;
+`;
+
+export const UserBio = styled.p`
+  padding: 1rem 0;
+
+  font-size: 0.9rem;
+  font-weight: 300;
 `;

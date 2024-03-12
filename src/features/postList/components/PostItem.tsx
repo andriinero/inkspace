@@ -6,17 +6,16 @@ import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
   deleteBookmark,
   postBookmark,
-  selectDeleteBookmarkState,
   selectFetchProfileDataState,
   selectBookmarkActionState,
 } from '@/features/profile/profileSlice';
+import { setTopic } from '../postListSlice';
 
 import { Author } from '@/types/Author';
 import { Topic } from '@/types/Topic';
 
 import * as S from './PostItem.styled';
 import PostDate from '@/components/general/TimeAgo';
-import { setTopic } from '../postListSlice';
 import { Title } from '@/styles/components/Title.styled';
 import { Waterfall } from '@/styles/animations/Waterfall';
 import { Username } from '@/styles/components/Username.styled';

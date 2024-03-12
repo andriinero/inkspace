@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { Navigate } from 'react-router-dom';
 
 import {
   fetchProfileData,
   selectFetchProfileDataState,
   selectProfileData,
 } from '@/features/profile/profileSlice';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 import Error from '@/components/general/Error';
 import BookmarkContainer from '@/features/profile/components/BookmarkContainer';
@@ -21,9 +23,10 @@ import {
   StyledMainUserName,
   BookmarkWrapper,
   Header,
+  SignUpDate,
+  UserBio,
 } from './Profile.styled';
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
-import { Navigate } from 'react-router-dom';
+import { DateTime } from 'luxon';
 
 const Profile = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -38,6 +41,10 @@ const Profile = () => {
   }, [isAuthenticated, dispatch]);
 
   if (!isAuthenticated) return <Navigate to="/" />;
+
+  const signUpDate = DateTime.fromISO(profileData?.sign_up_date as string).toLocaleString(
+    DateTime.DATE_MED
+  );
 
   return isLoading ? (
     <></>
@@ -57,7 +64,9 @@ const Profile = () => {
           <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
           <StyledAsideUserName>{profileData?.username}</StyledAsideUserName>
           <FollowCount>{profileData?.followed_users.length} Following</FollowCount>
+          <SignUpDate>Member since: {signUpDate}</SignUpDate>
           <StyledEditLink to="/profile/edit">Edit Profile</StyledEditLink>
+          <UserBio>{profileData?.bio}</UserBio>
         </ProfileWrapper>
       </WrapperAside>
     </Wrapper>
