@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { StyledTitle } from '@/features/postList/components/PostItem.styled';
 import { Username } from '@/styles/components/Username.styled';
 import { motion } from 'framer-motion';
+import { Title } from '@/styles/components/Title.styled';
 
 export const WrapperItem = styled(motion.li)`
   display: flex;
@@ -33,7 +33,9 @@ export const AuthorName = styled(Username)`
   font-size: 0.8rem;
 `;
 
-export const BookmarkTitle = styled(StyledTitle)`
+export const BookmarkTitle = styled(Title)`
+  margin-bottom: 0.4rem;
+
   font-size: 1rem;
 `;
 

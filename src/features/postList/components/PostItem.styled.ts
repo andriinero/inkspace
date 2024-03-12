@@ -67,23 +67,23 @@ export const Body = styled.div`
 `;
 
 export const StyledTitle = styled(Title)`
-  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 
   font-size: 1.25rem;
 `;
-
+/**
+ * 
+ */
 export const BodyText = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 
-  max-width: 70ch;
   overflow: hidden;
 
   font-family: 'Times New Roman', Times, serif;
   line-height: 1.5rem;
   text-overflow: ellipsis;
-  overflow-wrap: break-word;
 
   & * {
     color: inherit;

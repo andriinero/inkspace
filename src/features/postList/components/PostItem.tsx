@@ -16,7 +16,6 @@ import { Topic } from '@/types/Topic';
 
 import * as S from './PostItem.styled';
 import PostDate from '@/components/general/TimeAgo';
-import { Title } from '@/styles/components/Title.styled';
 import { Waterfall } from '@/styles/animations/Waterfall';
 import { Username } from '@/styles/components/Username.styled';
 
@@ -84,7 +83,7 @@ const PostItem = ({
       </S.Head>
       <S.Body>
         <S.StyledLink to={`/posts/${_id}`}>
-          <Title>{title}</Title>
+          <S.StyledTitle>{title}</S.StyledTitle>
         </S.StyledLink>
         <S.BodyText>{parse(body)}</S.BodyText>
       </S.Body>
