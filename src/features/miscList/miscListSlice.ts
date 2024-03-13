@@ -85,13 +85,13 @@ const miscListSlice = createSlice({
       })
       .addCase(fetchAuthors.fulfilled, (state, action) => {
         state.authorList = action.payload;
+        state.authorList.sort((a, b) => (a.username > b.username ? 1 : -1));
         state.fetchAuthorsState.isLoading = false;
       })
       .addCase(fetchAuthors.rejected, (state, action) => {
         state.fetchAuthorsState.isLoading = false;
         state.fetchAuthorsState.error = action.error;
       });
-
     builder
       .addCase(fetchTopics.pending, (state) => {
         state.fetchTopicsState.isLoading = true;
@@ -99,6 +99,7 @@ const miscListSlice = createSlice({
       })
       .addCase(fetchTopics.fulfilled, (state, action) => {
         state.topicList = action.payload;
+        state.topicList.sort((a, b) => (a.name < b.name ? 1 : -1));
         state.fetchTopicsState.isLoading = false;
       })
       .addCase(fetchTopics.rejected, (state, action) => {

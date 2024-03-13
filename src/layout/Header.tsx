@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { clearTopic } from '@/features/postList/postListSlice';
@@ -14,9 +15,8 @@ import {
   HeaderButton,
   StyledAppIcon,
 } from './Header.styled';
-import AppIcon from '@/components/icons/AppIcon';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-import { useNavigate } from 'react-router-dom';
+import { PopOut } from '@/styles/animations/PopOut';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -54,7 +54,13 @@ const Header = () => {
               </StyledLink>
             </NewPostButton>
             <StyledLink to="/profile">
-              <ProfileIcon src="/portrait-placeholder.png" alt="Create New Post Icon" />
+              <ProfileIcon
+                initial={PopOut.hidden}
+                animate={PopOut.visible}
+                transition={PopOut.transition}
+                src="/portrait-placeholder.png"
+                alt="Create New Post Icon"
+              />
             </StyledLink>
             <HeaderButton
               whileTap={ButtonInteraction.whileTap.animation}

@@ -10,8 +10,12 @@ export const Wrapper = styled.header`
   justify-content: space-between;
   align-items: center;
 
+  position: sticky;
+  top: 0;
+
   padding: 0.75rem 1rem;
   border-bottom: 1px solid ${({ theme }) => theme.color.main_border};
+  background-color: ${({ theme }) => theme.color.main_bg_primary};
 `;
 
 export const StyledLink = styled(Link)`
@@ -73,7 +77,7 @@ export const NewPostButtonText = styled.span`
   font-weight: 300;
 `;
 
-export const ProfileIcon = styled.img`
+export const ProfileIcon = styled(motion.img)`
   width: 32px;
   border-radius: 50%;
 

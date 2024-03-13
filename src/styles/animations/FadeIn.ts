@@ -5,5 +5,5 @@ export const FadeIn = {
   visible: {
     opacity: 1,
   },
-  transition: { duration: 0.2 },
+  transition: { duration: 0.25 },
 };
