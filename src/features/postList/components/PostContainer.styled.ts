@@ -20,7 +20,7 @@ export const Header = styled.h1`
   font-style: italic;
 `;
 
-export const CalloutText = styled.h2`
+export const CalloutText = styled(motion.h2)`
   display: inline-block;
   align-self: center;
 

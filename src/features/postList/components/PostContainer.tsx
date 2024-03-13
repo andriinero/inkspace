@@ -23,6 +23,7 @@ import PostItem from './PostItem';
 import Error from '@/components/general/Error';
 import PostListLoader from '@/components/loaders/PostListLoader';
 import { Waterfall } from '@/styles/animations/Waterfall';
+import { FadeInSlide } from '@/styles/animations/FadeInSlide';
 
 const PostContainer = () => {
   const userBookmarks = useAppSelector(selectProfileBookmarks);
@@ -55,7 +56,13 @@ const PostContainer = () => {
       ) : error ? (
         <Error />
       ) : postList.length === 0 ? (
-        <CalloutText>Be the first one to post!</CalloutText>
+        <CalloutText
+          initial={FadeInSlide.hidden}
+          animate={FadeInSlide.visible}
+          transition={FadeInSlide.transition}
+        >
+          Be the first one to post!
+        </CalloutText>
       ) : (
         <PostList variants={Waterfall.container} initial="hidden" animate="visible">
           {postList.map((post) => {

@@ -72,7 +72,7 @@ export const StyledTitle = styled(Title)`
   font-size: 1.25rem;
 `;
 /**
- * 
+ *
  */
 export const BodyText = styled.div`
   display: -webkit-box;

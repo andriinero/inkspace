@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
 
+  margin: 4rem 0;
   min-width: 70ch;
 
   & > * {

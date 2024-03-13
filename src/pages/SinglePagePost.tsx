@@ -41,24 +41,26 @@ const SinglePagePost = () => {
 
   return (
     <Wrapper>
-      <ScrollProgressBar />
       {postData ? (
-        <PostWrapper
-          initial={FadeIn.hidden}
-          animate={FadeIn.visible}
-          transition={FadeIn.transition}
-        >
-          <Header>{postData.title}</Header>
-          <PostHeaderInfo
-            isAuthor={isAuthor}
-            author={postData.author}
-            date={postData.date}
-            topic={postData.topic}
-            bodyLength={postData.body.length}
-          />
-          {isAuthenticated && <PostControls postId={postData._id} />}
-          <Body>{parse(postData.body)}</Body>
-        </PostWrapper>
+        <>
+          <ScrollProgressBar />
+          <PostWrapper
+            initial={FadeIn.hidden}
+            animate={FadeIn.visible}
+            transition={FadeIn.transition}
+          >
+            <Header>{postData.title}</Header>
+            <PostHeaderInfo
+              isAuthor={isAuthor}
+              author={postData.author}
+              date={postData.date}
+              topic={postData.topic}
+              bodyLength={postData.body.length}
+            />
+            {isAuthenticated && <PostControls postId={postData._id} />}
+            <Body>{parse(postData.body)}</Body>
+          </PostWrapper>
+        </>
       ) : isLoading ? (
         <PostPageLoader />
       ) : error ? (

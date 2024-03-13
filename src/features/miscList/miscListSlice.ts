@@ -29,7 +29,7 @@ const initialState: miscListState = {
 export const fetchAuthors = createAsyncThunk(
   'miscList/fetchAuthors',
   async (_, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch('/api/authors?limit=3', {
+    const { data, responseState } = await useAppFetch('/api/authors?random=3', {
       method: 'GET',
       mode: 'cors',
     });
@@ -43,7 +43,7 @@ export const fetchAuthors = createAsyncThunk(
 export const fetchTopics = createAsyncThunk(
   'miscList/fetchTopics',
   async (_, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch('/api/topics?limit=7', {
+    const { data, responseState } = await useAppFetch('/api/topics?random=7', {
       method: 'GET',
       mode: 'cors',
     });

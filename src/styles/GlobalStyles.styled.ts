@@ -7,7 +7,7 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
-    word-break: break-all;
+    overflow-wrap: anywhere;
   }
 
   html {
