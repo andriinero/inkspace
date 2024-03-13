@@ -1,19 +1,20 @@
 import { PostBody } from '@/styles/PostBody.styled';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
-
-  padding: 4rem 0;
+  align-items: center;
+  flex-direction: column;
 `;
 
-export const PostWrapper = styled.div`
+export const PostWrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
   max-width: 70ch;
+  margin: 4rem 0;
 `;
 
 export const Header = styled.h1`

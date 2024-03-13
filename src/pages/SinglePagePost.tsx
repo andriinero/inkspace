@@ -10,6 +10,9 @@ import {
   selectFetchPostState,
   selectCurrentPostData,
 } from '@/features/singlePagePost/singlePagePostSlice';
+import { selectProfileId } from '@/features/profile/profileSlice';
+
+import { FadeIn } from '@/styles/animations/FadeIn';
 
 import { Body, Header, PostWrapper, Wrapper } from './SinglePagePost.styled';
 import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo';
@@ -17,7 +20,7 @@ import Error from '@/components/general/Error';
 import PostControls from '@/features/singlePagePost/components/PostControls';
 import PostComments from '@/features/commentList/components/CommentList';
 import PostPageLoader from '@/components/loaders/PostPageLoader';
-import { selectProfileId } from '@/features/profile/profileSlice';
+import ScrollProgressBar from '@/components/general/ScrollProgressBar';
 
 const SinglePagePost = () => {
   const { postid } = useParams();
@@ -38,8 +41,13 @@ const SinglePagePost = () => {
 
   return (
     <Wrapper>
+      <ScrollProgressBar />
       {postData ? (
-        <PostWrapper>
+        <PostWrapper
+          initial={FadeIn.hidden}
+          animate={FadeIn.visible}
+          transition={FadeIn.transition}
+        >
           <Header>{postData.title}</Header>
           <PostHeaderInfo
             isAuthor={isAuthor}
@@ -50,7 +58,6 @@ const SinglePagePost = () => {
           />
           {isAuthenticated && <PostControls postId={postData._id} />}
           <Body>{parse(postData.body)}</Body>
-          <PostComments postId={postData._id} />
         </PostWrapper>
       ) : isLoading ? (
         <PostPageLoader />
@@ -59,6 +66,7 @@ const SinglePagePost = () => {
       ) : (
         <h2>Critical error.</h2>
       )}
+      <PostComments postId={postData?._id} />
     </Wrapper>
   );
 };
