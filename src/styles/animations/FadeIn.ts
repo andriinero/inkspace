@@ -1,4 +1,12 @@
-export const FadeIn = {
+import { Transition, Variant } from 'framer-motion';
+
+type FadeIn = {
+  hidden: Variant;
+  visible: Variant;
+  transition: Transition;
+};
+
+export const FadeIn: FadeIn = {
   hidden: {
     opacity: 0,
   },

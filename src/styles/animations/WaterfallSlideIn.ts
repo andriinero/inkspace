@@ -1,8 +1,8 @@
-import { Variants } from 'framer-motion';
+import { Variant } from 'framer-motion';
 
 type Waterfall = {
-  container: Variants;
-  item: Variants;
+  container: { visible: Variant };
+  item: { visible: Variant; hidden: Variant };
 };
 
 export const WaterfallSlideIn: Waterfall = {

@@ -11,6 +11,7 @@ import MiscListLoader from '@/components/loaders/MiscListLoader';
 import Error from '@/components/general/Error';
 import ExplorePostItem from './ExplorePostItem';
 import { Header, PostList, Wrapper } from './ExplorePostContainer.styled';
+import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 
 const ExplorePostContainer = () => {
   const dispatch = useAppDispatch();
@@ -30,7 +31,7 @@ const ExplorePostContainer = () => {
       ) : error ? (
         <Error />
       ) : (
-        <PostList>
+        <PostList initial={WaterfallSlideIn.container}>
           {postList.map((p) => (
             <ExplorePostItem key={p._id} {...p} />
           ))}

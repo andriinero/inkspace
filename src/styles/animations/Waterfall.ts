@@ -1,4 +1,16 @@
-export const Waterfall = {
+import { Variant } from 'framer-motion';
+
+type Waterfall = {
+  container: {
+    visible: Variant;
+  };
+  item: {
+    hidden: Variant;
+    visible: Variant;
+  };
+};
+
+export const Waterfall: Waterfall = {
   container: {
     visible: {
       opacity: 1,
