@@ -14,6 +14,7 @@ import {
   WrapperItem,
   AuthorName,
 } from './ExplorePostItem.styled';
+import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 
 type ExplorePostItemProps = {
   _id: string;
@@ -32,7 +33,7 @@ const ExplorePostItem = ({ _id, author, title, topic }: ExplorePostItemProps) =>
   };
 
   return (
-    <WrapperItem>
+    <WrapperItem variants={WaterfallSlideIn.item}>
       <Header>
         <StyledLink to={`/authors/${author._id}`}>
           <AuthorIcon src="/portrait-placeholder.png" alt="Author Icon" />

@@ -1,12 +1,10 @@
-import { Variant } from 'framer-motion';
-
 type Waterfall = {
   container: {
-    visible: Variant;
+    visible: NonNullable<unknown>;
   };
   item: {
-    hidden: Variant;
-    visible: Variant;
+    hidden: NonNullable<unknown>;
+    visible: NonNullable<unknown>;
   };
 };
 

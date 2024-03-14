@@ -1,9 +1,7 @@
-import { Transition, Variant } from 'framer-motion';
-
 type FadeIn = {
-  hidden: Variant;
-  visible: Variant;
-  transition: Transition;
+  hidden: NonNullable<unknown>;
+  visible: NonNullable<unknown>;
+  transition: NonNullable<unknown>;
 };
 
 export const FadeIn: FadeIn = {

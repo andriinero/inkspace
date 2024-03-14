@@ -17,7 +17,7 @@ type AuthState = {
 
 const initialState: AuthState = {
   authData: null,
-  fetchAuthDataState: { isLoading: false, error: null },
+  fetchAuthDataState: { isLoading: true, error: null },
   postLoginState: { isLoading: false, error: null },
 };
 
@@ -62,6 +62,8 @@ export const initAuth = (): AppThunk => (dispatch) => {
   if (token) {
     dispatch(fetchAuthData());
     dispatch(fetchProfileData());
+  } else {
+    dispatch(resetLoadingState());
   }
 };
 
@@ -72,7 +74,11 @@ export const logout = (): AppThunk => () => {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    resetLoadingState(state) {
+      state.fetchAuthDataState.isLoading = false;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchAuthData.pending, (state) => {
@@ -101,6 +107,8 @@ const authSlice = createSlice({
       });
   },
 });
+
+const { resetLoadingState } = authSlice.actions;
 
 export default authSlice.reducer;
 

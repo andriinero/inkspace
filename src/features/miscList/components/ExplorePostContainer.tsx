@@ -32,7 +32,11 @@ const ExplorePostContainer = () => {
       ) : (
         <>
           <Header>Explore new posts</Header>
-          <PostList initial={WaterfallSlideIn.container.visible}>
+          <PostList
+            variants={WaterfallSlideIn.container}
+            initial="hidden"
+            animate="visible"
+          >
             {postList.map((p) => (
               <ExplorePostItem key={p._id} {...p} />
             ))}

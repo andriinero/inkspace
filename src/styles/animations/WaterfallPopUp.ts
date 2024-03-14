@@ -1,8 +1,6 @@
-import { Variant } from 'framer-motion';
-
 type Waterfall = {
-  container: { visible: Variant; hidden: Variant };
-  item: { visible: Variant; hidden: Variant };
+  container: { visible: NonNullable<unknown>; hidden: NonNullable<unknown> };
+  item: { visible: NonNullable<unknown>; hidden: NonNullable<unknown> };
 };
 
 export const WaterfallPopUp: Waterfall = {

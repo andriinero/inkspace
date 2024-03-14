@@ -1,7 +1,5 @@
-import { Variant } from 'framer-motion';
-
 type ButtonInteraction = {
-  whileTap: { animation: Variant };
+  whileTap: { animation: NonNullable<unknown> };
 };
 
 export const ButtonInteraction: ButtonInteraction = {
