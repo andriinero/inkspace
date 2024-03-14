@@ -11,18 +11,23 @@ import Post from '@/types/Post';
 type miscListState = {
   authorList: Author[];
   topicList: Topic[];
+  postList: Post[];
   bookmarkList: Post[];
+  //FIXME: naming
   fetchAuthorsState: { isLoading: boolean; error: SerializedError | null };
   fetchTopicsState: { isLoading: boolean; error: SerializedError | null };
+  fetchMiscPostsState: { isLoading: boolean; error: SerializedError | null };
   fetchBookmarksState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: miscListState = {
   authorList: [],
   topicList: [],
+  postList: [],
   bookmarkList: [],
   fetchAuthorsState: { isLoading: true, error: null },
   fetchTopicsState: { isLoading: true, error: null },
+  fetchMiscPostsState: { isLoading: true, error: null },
   fetchBookmarksState: { isLoading: true, error: null },
 };
 
@@ -49,6 +54,20 @@ export const fetchTopics = createAsyncThunk(
     });
 
     if (!responseState.ok) return rejectWithValue(data);
+
+    return data;
+  }
+);
+
+export const fetchMiscPosts = createAsyncThunk(
+  'miscList/fetchMiscPosts',
+  async (_, { rejectWithValue }) => {
+    const { data, responseState } = await useAppFetch('/api/posts?random=3', {
+      method: 'GET',
+      mode: 'cors',
+    });
+
+    if (!responseState.ok) rejectWithValue(data);
 
     return data;
   }
@@ -107,6 +126,20 @@ const miscListSlice = createSlice({
         state.fetchTopicsState.error = action.error;
       });
     builder
+      .addCase(fetchMiscPosts.pending, (state) => {
+        state.fetchMiscPostsState.isLoading = true;
+        state.fetchMiscPostsState.error = null;
+      })
+      .addCase(fetchMiscPosts.fulfilled, (state, action) => {
+        state.postList = action.payload;
+        state.postList.sort((a, b) => (a.title < b.title ? 1 : -1));
+        state.fetchMiscPostsState.isLoading = false;
+      })
+      .addCase(fetchMiscPosts.rejected, (state, action) => {
+        state.fetchMiscPostsState.isLoading = false;
+        state.fetchMiscPostsState.error = action.error;
+      });
+    builder
       .addCase(fetchBookmarks.pending, (state) => {
         state.fetchBookmarksState.isLoading = true;
         state.fetchBookmarksState.error = null;
@@ -128,6 +161,8 @@ export const selectAuthorList = (state: RootState) => state.miscList.authorList;
 
 export const selectTopicList = (state: RootState) => state.miscList.topicList;
 
+export const selectMiscPostList = (state: RootState) => state.miscList.postList;
+
 export const selectBookmarkList = (state: RootState) => state.miscList.bookmarkList;
 
 export const selectFetchAuthorsState = (state: RootState) =>
@@ -135,6 +170,9 @@ export const selectFetchAuthorsState = (state: RootState) =>
 
 export const selectFetchTopicsState = (state: RootState) =>
   state.miscList.fetchTopicsState;
+
+export const selectFetchMiscPostsState = (state: RootState) =>
+  state.miscList.fetchMiscPostsState;
 
 export const selectFetchBookmarksState = (state: RootState) =>
   state.miscList.fetchBookmarksState;

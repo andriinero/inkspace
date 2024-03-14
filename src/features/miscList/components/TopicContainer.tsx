@@ -21,7 +21,7 @@ const TopicContainer = () => {
 
   return (
     <Wrapper>
-      <Header>Recommended topics</Header>
+      <Header>Explore topics</Header>
       {isLoading ? (
         <TopicListLoader />
       ) : error ? (
