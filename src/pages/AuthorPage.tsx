@@ -85,7 +85,7 @@ const AuthorPage = () => {
       <WrapperMain>
         <StyledMainUserName>{authorData?.username}</StyledMainUserName>
         <PostsWrapper>
-          <Header>User Posts</Header>
+          <Header>Recent Posts</Header>
           <PostContainer userId={authorData?._id} />
         </PostsWrapper>
       </WrapperMain>

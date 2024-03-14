@@ -8,5 +8,4 @@ export const Title = styled.h2`
   overflow: hidden;
 
   text-overflow: ellipsis;
-  word-break: break-all;
 `;

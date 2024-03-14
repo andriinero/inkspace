@@ -21,8 +21,6 @@ export const StyledLink = styled(NavLink)`
   align-items: center;
   gap: 0.5rem;
 
-  margin-top: auto;
-
   color: inherit;
   text-decoration: none;
 `;
@@ -49,6 +47,8 @@ export const TopicWrapper = styled.div`
 export const TopicName = styled.span`
   font-size: 0.9rem;
   font-weight: 500;
+
+  cursor: pointer;
 `;
 
 export const PostTitle = styled(Title)`

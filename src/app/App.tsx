@@ -3,10 +3,10 @@ import { useAppDispatch, useAppSelector } from './hooks';
 
 import { initAuth, selectFetchAuthDataState } from '@/features/auth/authSlice';
 
-import Header from '@/layout/Header';
 import { Outlet } from 'react-router-dom';
-import { Wrapper, WrapperMain } from './App.styled';
 import ScrollToTop from '@/utils/ScrollToTop';
+import Header from '@/layout/Header';
+import { Wrapper, WrapperMain } from './App.styled';
 
 const App = () => {
   const dispatch = useAppDispatch();

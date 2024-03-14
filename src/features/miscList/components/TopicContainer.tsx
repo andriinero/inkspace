@@ -21,17 +21,23 @@ const TopicContainer = () => {
 
   return (
     <Wrapper>
-      <Header>Explore topics</Header>
       {isLoading ? (
         <TopicListLoader />
       ) : error ? (
         <Error />
       ) : (
-        <TopicList variants={WaterfallPopUp.container} initial="hidden" animate="visible">
-          {topicList.map((topic) => (
-            <TopicItem key={topic._id} {...topic} />
-          ))}
-        </TopicList>
+        <>
+          <Header>Explore topics</Header>
+          <TopicList
+            variants={WaterfallPopUp.container}
+            initial="hidden"
+            animate="visible"
+          >
+            {topicList.map((topic) => (
+              <TopicItem key={topic._id} {...topic} />
+            ))}
+          </TopicList>
+        </>
       )}
     </Wrapper>
   );

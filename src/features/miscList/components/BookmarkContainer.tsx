@@ -25,7 +25,6 @@ const BookmarkContainer = () => {
 
   return (
     <Wrapper>
-      <Header>Recently Saved</Header>
       {isLoading ? (
         <MiscListLoader />
       ) : error ? (
@@ -33,14 +32,17 @@ const BookmarkContainer = () => {
       ) : bookmarkList.length === 0 ? (
         <CalloutText>No bookmarks yet!</CalloutText>
       ) : (
-        <BookmarkList variants={Waterfall.container} initial="hidden" animate="visible">
-          {bookmarkList
-            .slice(0)
-            .reverse()
-            .map((b) => (
-              <BookmarkItem key={b._id} {...b} />
-            ))}
-        </BookmarkList>
+        <>
+          <Header>Recently Saved</Header>
+          <BookmarkList variants={Waterfall.container} initial="hidden" animate="visible">
+            {bookmarkList
+              .slice(0)
+              .reverse()
+              .map((b) => (
+                <BookmarkItem key={b._id} {...b} />
+              ))}
+          </BookmarkList>
+        </>
       )}
     </Wrapper>
   );

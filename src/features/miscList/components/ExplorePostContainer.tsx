@@ -25,17 +25,19 @@ const ExplorePostContainer = () => {
 
   return (
     <Wrapper>
-      <Header>Explore new posts</Header>
       {isLoading ? (
         <MiscListLoader />
       ) : error ? (
         <Error />
       ) : (
-        <PostList initial={WaterfallSlideIn.container}>
-          {postList.map((p) => (
-            <ExplorePostItem key={p._id} {...p} />
-          ))}
-        </PostList>
+        <>
+          <Header>Explore new posts</Header>
+          <PostList initial={WaterfallSlideIn.container.visible}>
+            {postList.map((p) => (
+              <ExplorePostItem key={p._id} {...p} />
+            ))}
+          </PostList>
+        </>
       )}
     </Wrapper>
   );

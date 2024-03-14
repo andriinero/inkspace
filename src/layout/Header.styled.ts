@@ -12,6 +12,7 @@ export const Wrapper = styled.header`
 
   position: sticky;
   top: 0;
+  z-index: 1;
 
   padding: 0.75rem 1rem;
   border-bottom: 1px solid ${({ theme }) => theme.color.main_border};
