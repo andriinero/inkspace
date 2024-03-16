@@ -18,9 +18,16 @@ type AuthorItemProps = {
   username: string;
   bio?: string;
   isFollowed: boolean;
+  profile_image: string;
 };
 
-const AuthorItem = ({ _id, username, bio, isFollowed }: AuthorItemProps) => {
+const AuthorItem = ({
+  _id,
+  username,
+  bio,
+  isFollowed,
+  profile_image,
+}: AuthorItemProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const authData = useAppSelector(selectAuthData);
 
@@ -42,7 +49,7 @@ const AuthorItem = ({ _id, username, bio, isFollowed }: AuthorItemProps) => {
   return (
     <S.WrapperItem variants={WaterfallSlideIn.item}>
       <S.StyledLink to={`/authors/${_id}`}>
-        <S.Icon src="/portrait-placeholder.png" />
+        <S.AuthorIcon imageId={profile_image} altText="Author Icon" />
       </S.StyledLink>
       <S.BioContainer>
         <S.StyledLink to={`/authors/${_id}`}>

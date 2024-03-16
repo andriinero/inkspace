@@ -95,15 +95,15 @@ const authSlice = createSlice({
       });
     builder
       .addCase(postLogin.pending, (state) => {
-        state.fetchAuthDataState.isLoading = true;
-        state.fetchAuthDataState.error = null;
+        state.postLoginState.isLoading = true;
+        state.postLoginState.error = null;
       })
       .addCase(postLogin.fulfilled, (state) => {
-        state.fetchAuthDataState.isLoading = false;
+        state.postLoginState.isLoading = false;
       })
       .addCase(postLogin.rejected, (state, action) => {
-        state.fetchAuthDataState.isLoading = false;
-        state.fetchAuthDataState.error = action.error;
+        state.postLoginState.isLoading = false;
+        state.postLoginState.error = action.error;
       });
   },
 });

@@ -61,7 +61,7 @@ const Profile = () => {
       </WrapperMain>
       <WrapperAside>
         <ProfileWrapper>
-          <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
+          <ProfileIcon imageId={profileData?.profile_image} altText="Profile Icon" />
           <StyledAsideUserName>{profileData?.username}</StyledAsideUserName>
           <FollowCount>{profileData?.followed_users.length} Following</FollowCount>
           <SignUpDate>Member since: {signUpDate}</SignUpDate>

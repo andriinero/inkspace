@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Username } from '@/styles/components/Username.styled';
 import { motion } from 'framer-motion';
 import { Title } from '@/styles/components/Title.styled';
+import AppImage from '@/components/general/AppImage';
 
 export const WrapperItem = styled(motion.li)`
   display: flex;
@@ -23,7 +24,7 @@ export const StyledLink = styled(NavLink)`
   text-decoration: none;
 `;
 
-export const AuthorIcon = styled.img`
+export const AuthorIcon = styled(AppImage)`
   width: 22px;
   height: 22px;
   border-radius: 50%;

@@ -6,6 +6,7 @@ import DotMenu from '@/components/general/DotMenu';
 import PostReadTime from '@/components/general/PostReadTime';
 import { Title } from '@/styles/components/Title.styled';
 import { motion } from 'framer-motion';
+import AppImage from '@/components/general/AppImage';
 
 export const Wrapper = styled(motion.li)`
   display: grid;
@@ -43,10 +44,10 @@ export const Head = styled.div`
   font-size: 0.9rem;
 `;
 
-export const AuthorIcon = styled.img`
-  max-width: 24px;
+export const AuthorIcon = styled(AppImage)`
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  object-fit: contain;
 
   -webkit-user-drag: none;
 `;

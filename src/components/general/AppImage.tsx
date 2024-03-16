@@ -1,7 +1,7 @@
 import useFetchImage from '@/hooks/useFetchImage';
 import { Image, ImagePlaceholder } from './AppImage.styled';
 
-type AppImageProps = { className?: string; altText?: string; imageId: string };
+type AppImageProps = { className?: string; altText?: string; imageId?: string };
 
 const AppImage = ({ className, altText, imageId }: AppImageProps) => {
   const { imageURL, isLoading, error } = useFetchImage(imageId);

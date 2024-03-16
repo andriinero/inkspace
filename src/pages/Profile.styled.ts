@@ -1,3 +1,4 @@
+import AppImage from '@/components/general/AppImage';
 import { Username } from '@/styles/components/Username.styled';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
@@ -58,9 +59,9 @@ export const ProfileWrapper = styled.div`
   gap: 1rem;
 `;
 
-export const ProfileIcon = styled.img`
+export const ProfileIcon = styled(AppImage)`
   width: 88px;
-  height: auto;
+  height: 88px;
   border-radius: 50%;
 `;
 

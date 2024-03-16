@@ -18,7 +18,7 @@ const BookmarkItem = ({ _id, author, title, body, date }: Post) => {
   return (
     <WrapperItem variants={Waterfall.item}>
       <Header>
-        <AuthorIcon src="/portrait-placeholder.png" alt="Author Icon" />
+        <AuthorIcon imageId={author.profile_image} altText="Author Icon" />
         <StyledLink to={`/authors/${author._id}`}>
           <AuthorName>{author.username}</AuthorName>
         </StyledLink>

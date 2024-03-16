@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { DateTime } from 'luxon';
 import { Navigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
@@ -32,7 +33,6 @@ import {
 import { HollowButton } from '@/styles/components/HollowButton';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 import { FollowCount, SignUpDate, UserBio } from './Profile.styled';
-import { DateTime } from 'luxon';
 
 const AuthorPage = () => {
   const { authorid } = useParams();
@@ -91,7 +91,7 @@ const AuthorPage = () => {
       </WrapperMain>
       <WrapperAside>
         <ProfileWrapper>
-          <ProfileIcon src="/portrait-placeholder.png" alt="Profile Icon" />
+          <ProfileIcon imageId={authorData?.profile_image} altText="Profile Icon" />
           <StyledAsideUserName>{authorData?.username}</StyledAsideUserName>
           <FollowCount>{authorData?.followed_users.length} Following</FollowCount>
           <SignUpDate>Member since: {signUpDate}</SignUpDate>

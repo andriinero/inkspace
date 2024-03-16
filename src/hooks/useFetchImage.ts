@@ -2,7 +2,7 @@
 import { useAppFetch } from '@/lib/useAppFetch';
 import { useEffect, useState } from 'react';
 
-const useFetchImage = (imageId: string) => {
+const useFetchImage = (imageId?: string) => {
   const [imageURL, setImage] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<number | null>();

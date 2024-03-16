@@ -73,7 +73,7 @@ const PostItem = ({
     <S.Wrapper variants={Waterfall.item}>
       <S.Head>
         <S.StyledLink to={`/authors/${author._id}`}>
-          <S.AuthorIcon src="/portrait-placeholder.png" />
+          <S.AuthorIcon imageId={author.profile_image} altText="Author Icon" />
         </S.StyledLink>
         <S.StyledLink to={`/authors/${author._id}`}>
           <Username>{author.username}</Username>

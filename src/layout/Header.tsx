@@ -56,7 +56,7 @@ const Header = () => {
             </NewPostButton>
             <StyledLink to="/profile">
               <ProfileIcon
-                imageId={profileImageId}
+                imageId={profileImageId!}
                 altText="Current User Profile Picture"
               />
             </StyledLink>

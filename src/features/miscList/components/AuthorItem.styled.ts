@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import AppImage from '@/components/general/AppImage';
 
 export const WrapperItem = styled(motion.li)`
   display: grid;
@@ -34,7 +35,7 @@ export const BioContent = styled.p`
   overflow: hidden;
 `;
 
-export const Icon = styled.img`
+export const AuthorIcon = styled(AppImage)`
   align-self: flex-start;
 
   width: 32px;

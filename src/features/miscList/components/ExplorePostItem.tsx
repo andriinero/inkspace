@@ -36,7 +36,7 @@ const ExplorePostItem = ({ _id, author, title, topic }: ExplorePostItemProps) =>
     <WrapperItem variants={WaterfallSlideIn.item}>
       <Header>
         <StyledLink to={`/authors/${author._id}`}>
-          <AuthorIcon src="/portrait-placeholder.png" alt="Author Icon" />
+          <AuthorIcon imageId={author.profile_image} altText="Author Icon" />
           <AuthorName>{author.username}</AuthorName>
         </StyledLink>
         <TopicWrapper>

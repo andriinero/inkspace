@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Username } from '@/styles/components/Username.styled';
+import AppImage from '@/components/general/AppImage';
 
 export const Wrapper = styled.div`
   display: grid;
@@ -54,9 +55,9 @@ export const ProfileWrapper = styled.div`
   gap: 1rem;
 `;
 
-export const ProfileIcon = styled.img`
+export const ProfileIcon = styled(AppImage)`
   width: 88px;
-  height: auto;
+  height: 88px;
   border-radius: 50%;
 `;
 

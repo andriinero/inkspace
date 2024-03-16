@@ -3,6 +3,7 @@ import PostReadTime from '@/components/general/PostReadTime';
 import { NavLink } from 'react-router-dom';
 import { Username } from '@/styles/components/Username.styled';
 import { motion } from 'framer-motion';
+import AppImage from '@/components/general/AppImage';
 
 export const Wrapper = styled.div`
   align-self: flex-start;
@@ -40,10 +41,11 @@ export const Divider = styled.span`
   font-size: 0.9rem;
 `;
 
-export const ProfileIcon = styled.img`
+export const ProfileIcon = styled(AppImage)`
   grid-area: icon;
 
   width: 48px;
+  height: 48px;
   border-radius: 50%;
 `;
 

@@ -5,4 +5,5 @@ export type Author = {
   bio?: string;
   sign_up_date: string;
   followed_users: string[];
+  profile_image: string;
 };

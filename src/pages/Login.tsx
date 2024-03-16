@@ -19,7 +19,7 @@ const Login = () => {
 
   const onFirstLoginClick = async (): Promise<void> => {
     try {
-      await dispatch(postLogin({ username: 'CoolGirlNerd', password: 'strongpass1' }));
+      await dispatch(postLogin({ username: 'Eve', password: 'strongpass1' }));
       dispatch(initAuth());
     } catch (err) {
       console.error((err as Error).message);
@@ -28,8 +28,9 @@ const Login = () => {
 
   const onSecondLoginClick = async (): Promise<void> => {
     try {
-      await dispatch(postLogin({ username: 'CoolGuyNerd', password: 'strongpass1' }));
+      await dispatch(postLogin({ username: 'Alex', password: 'strongpass1' }));
       dispatch(fetchAuthData());
+      dispatch(initAuth());
     } catch (err) {
       console.error((err as Error).message);
     }
