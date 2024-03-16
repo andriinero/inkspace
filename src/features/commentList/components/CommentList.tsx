@@ -15,7 +15,7 @@ import CommentForm from '../../commentEditor/components/CommentForm';
 import { exitEditMode } from '@/features/commentEditor/commentEditorSlice';
 
 type PostCommentsProps = {
-  postId: string | undefined;
+  postId: string;
 };
 
 const CommentList = ({ postId }: PostCommentsProps) => {

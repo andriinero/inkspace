@@ -7,6 +7,7 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 2;
 
   width: 400px;
   height: 100dvh;

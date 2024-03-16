@@ -60,6 +60,7 @@ const SinglePagePost = () => {
             {isAuthenticated && <PostControls postId={postData._id} />}
             <Body>{parse(postData.body)}</Body>
           </PostWrapper>
+          <PostComments postId={postData._id} />
         </>
       ) : isLoading ? (
         <PostPageLoader />
@@ -68,7 +69,6 @@ const SinglePagePost = () => {
       ) : (
         <h2>Critical error.</h2>
       )}
-      <PostComments postId={postData?._id} />
     </Wrapper>
   );
 };

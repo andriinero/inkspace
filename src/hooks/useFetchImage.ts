@@ -11,9 +11,7 @@ const useFetchImage = (imageId?: string) => {
     const fetch = () => {
       useAppFetch(`/api/images/${imageId}`, {})
         .then(({ data, responseState }) => {
-          if (!responseState.ok) {
-            return setError(responseState.statusCode);
-          }
+          if (!responseState.ok) setError(responseState.statusCode);
 
           return data;
         })
@@ -25,7 +23,12 @@ const useFetchImage = (imageId?: string) => {
         });
     };
 
-    if (imageId) fetch();
+    if (imageId) {
+      fetch();
+    } else {
+      setIsLoading(false);
+      setError(404);
+    }
   }, [imageId]);
 
   return { imageURL, isLoading, error };

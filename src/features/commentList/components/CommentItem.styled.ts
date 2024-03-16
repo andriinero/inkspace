@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import TimeAgo from '@/components/general/TimeAgo';
 import AppIcon from '@/components/icons/AppIcon';
 import { Username } from '@/styles/components/Username.styled';
+import AppImage from '@/components/general/AppImage';
 
 export const Wrapper = styled.li`
   display: flex;
@@ -45,7 +46,7 @@ export const WrapperInfo = styled.div`
   font-weight: 400;
 `;
 
-export const AuthorIcon = styled.img`
+export const AuthorIcon = styled(AppImage)`
   width: 32px;
   height: 32px;
   border-radius: 50%;

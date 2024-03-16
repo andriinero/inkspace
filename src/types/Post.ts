@@ -8,6 +8,7 @@ type Post = {
   body: string;
   date: string;
   topic: Topic;
+  thumbnail_image: string;
 };
 
 export default Post;

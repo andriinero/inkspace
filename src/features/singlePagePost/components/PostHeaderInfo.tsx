@@ -28,8 +28,8 @@ const PostHeaderInfo = ({
   topic,
   bodyLength,
 }: PostAuthorProps) => {
-  const followActionState = useAppSelector(selectFollowActionState);
   const followList = useAppSelector(selectProfileFollowedUsers);
+  const followActionState = useAppSelector(selectFollowActionState);
 
   const dispatch = useAppDispatch();
 
@@ -42,9 +42,8 @@ const PostHeaderInfo = ({
   };
 
   const isFollowed = followList?.some((f) => f === author._id);
-
-  const handleFollowClick = isFollowed ? handleFollowRemove : handleFollowAdd;
   const followButtonText = isFollowed ? 'Followed' : 'Follow';
+  const handleFollowClick = isFollowed ? handleFollowRemove : handleFollowAdd;
 
   return (
     <S.Wrapper>

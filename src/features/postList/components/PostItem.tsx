@@ -26,6 +26,7 @@ type PostItemProps = {
   body: string;
   date: string;
   topic: Topic;
+  thumbnail_image: string;
   isBookmarked: boolean;
 };
 
@@ -36,6 +37,7 @@ const PostItem = ({
   body,
   date,
   topic,
+  thumbnail_image,
   isBookmarked,
 }: PostItemProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -88,7 +90,7 @@ const PostItem = ({
         <S.BodyText>{parse(body)}</S.BodyText>
       </S.Body>
       <S.Preview>
-        <S.PreviewImage src="/landscape-placeholder.png" />
+        <S.PreviewImage imageId={thumbnail_image} altText="Post Image Preview" />
       </S.Preview>
       <S.Bottom>
         <S.MiscContainer>

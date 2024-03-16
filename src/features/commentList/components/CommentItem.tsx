@@ -32,7 +32,7 @@ type CommentProps = {
   title: string;
   body: string;
   date: string;
-  edit_date: string;
+  edit_date?: string;
 };
 
 const Comment = ({ _id, post, author, title, body, date, edit_date }: CommentProps) => {
@@ -54,7 +54,7 @@ const Comment = ({ _id, post, author, title, body, date, edit_date }: CommentPro
     <Wrapper>
       <Header>
         <WrapperAuthor>
-          <AuthorIcon src="/portrait-placeholder.png" alt="Author Icon" />
+          <AuthorIcon imageId={author.profile_image} altText="Author Icon" />
           <WrapperInfo>
             <StyledLink to={`/authors/${author._id}`}>
               <StyledUsername>{author.username}</StyledUsername>

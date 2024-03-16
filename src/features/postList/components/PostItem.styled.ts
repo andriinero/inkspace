@@ -102,9 +102,10 @@ export const Preview = styled.div`
   grid-area: preview;
 `;
 
-export const PreviewImage = styled.img`
-  max-width: 128px;
-  object-fit: contain;
+export const PreviewImage = styled(AppImage)`
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
 
   -webkit-user-drag: none;
 `;
