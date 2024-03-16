@@ -20,6 +20,11 @@ export const StyledLink = styled(NavLink)`
   text-decoration: none;
 `;
 
+export const HeaderStyledLink = styled(StyledLink)`
+  display: flex;
+  align-items: center;
+`;
+
 export const InfoContainer = styled.div`
   display: flex;
   align-items: center;

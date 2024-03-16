@@ -49,9 +49,9 @@ const PostHeaderInfo = ({
     <S.Wrapper>
       <S.ProfileIcon imageId={author.profile_image} altText="Author Icon" />
       <S.MainContainer>
-        <S.StyledLink to={`/authors/${author._id}`}>
+        <S.HeaderStyledLink to={`/authors/${author._id}`}>
           <S.Name>{author.username}</S.Name>
-        </S.StyledLink>
+        </S.HeaderStyledLink>
         {!isAuthor && (
           <>
             <S.Divider>·</S.Divider>

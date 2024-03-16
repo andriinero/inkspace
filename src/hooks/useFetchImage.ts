@@ -24,6 +24,8 @@ const useFetchImage = (imageId?: string) => {
     };
 
     if (imageId) {
+      setIsLoading(true);
+      setError(null);
       fetch();
     } else {
       setIsLoading(false);
