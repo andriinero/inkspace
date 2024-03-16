@@ -271,6 +271,9 @@ export const selectProfileData = (state: RootState) => state.profile.profileData
 
 export const selectProfileId = (state: RootState) => state.profile.profileData?._id;
 
+export const selectProfileImageId = (state: RootState) =>
+  state.profile.profileData?.profile_image;
+
 export const selectProfileBookmarksList = (state: RootState) =>
   state.profile.profileBookmarkList;
 

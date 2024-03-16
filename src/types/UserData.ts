@@ -12,4 +12,5 @@ export type UserData = {
   ignored_topics: string[];
   followed_users: string[];
   sign_up_date: string;
+  profile_image: string;
 };

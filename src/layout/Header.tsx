@@ -16,12 +16,13 @@ import {
   StyledAppIcon,
 } from './Header.styled';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-import { PopOut } from '@/styles/animations/PopOut';
+import { selectProfileImageId } from '@/features/profile/profileSlice';
 
 const Header = () => {
   const navigate = useNavigate();
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const profileImageId = useAppSelector(selectProfileImageId);
 
   const dispatch = useAppDispatch();
 
@@ -55,11 +56,8 @@ const Header = () => {
             </NewPostButton>
             <StyledLink to="/profile">
               <ProfileIcon
-                initial={PopOut.hidden}
-                animate={PopOut.visible}
-                transition={PopOut.transition}
-                src="/portrait-placeholder.png"
-                alt="Create New Post Icon"
+                imageId={profileImageId}
+                altText="Current User Profile Picture"
               />
             </StyledLink>
             <HeaderButton

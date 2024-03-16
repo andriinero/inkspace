@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { GreenButton } from '@/styles/components/GreenButton';
 import { motion } from 'framer-motion';
 import AppIcon from '@/components/icons/AppIcon';
+import AppImage from '@/components/general/AppImage';
 
 export const Wrapper = styled.header`
   grid-area: header;
@@ -78,8 +79,9 @@ export const NewPostButtonText = styled.span`
   font-weight: 300;
 `;
 
-export const ProfileIcon = styled(motion.img)`
+export const ProfileIcon = styled(AppImage)`
   width: 32px;
+  height: 32px;
   border-radius: 50%;
 
   cursor: pointer;
