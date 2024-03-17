@@ -34,7 +34,7 @@ const BookmarkContainer = () => {
         <Error />
       ) : (
         <BookmarkList variants={Waterfall.container} initial="hidden" animate="visible">
-          {bookmarkList!.map((b) => {
+          {bookmarkList.map((b) => {
             const isBookmarked = profileData?.post_bookmarks.some(
               (userB) => userB === b._id
             ) as boolean;

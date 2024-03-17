@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { PostAuthorData } from '@/types/PostAuthorData';
+import { PostAuthorData } from '@/types/itemData/PostAuthorData';
 
 import { selectCurrentUserId } from '@/features/auth/authSlice';
 import { deleteComment } from '../commentListSlice';

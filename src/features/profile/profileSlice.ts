@@ -4,16 +4,24 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
-import { ProfileData } from '@/types/ProfileData';
-import PostData from '@/types/PostData';
+import { ProfileData, ProfileDataSchema } from '@/types/itemData/ProfileData';
+import { PostData, PostDataSchema } from '@/types/itemData/PostData';
+import { ZodError, z } from 'zod';
+import { PostBookmarkSchema } from '@/types/responseData/success/PostBookmark';
+import { DeleteBookmarkSchema } from '@/types/responseData/success/DeleteBookmark';
+import { PostFollowUserSchema } from '@/types/responseData/success/PostFollowUser';
+import { DeleteFollowUserSchema } from '@/types/responseData/success/DeleteFollowUser';
 
 type ProfileState = {
   profileData: ProfileData | null;
   profileBookmarkList: PostData[];
-  fetchProfileDataState: { isLoading: boolean; error: SerializedError | null };
-  fetchProfileBookmarksState: { isLoading: boolean; error: SerializedError | null };
-  bookmarkActionState: { isLoading: boolean; error: SerializedError | null };
-  followActionState: { isLoading: boolean; error: SerializedError | null };
+  fetchProfileDataState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  fetchProfileBookmarksState: {
+    isLoading: boolean;
+    error: SerializedError | ZodError | null;
+  };
+  bookmarkActionState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  followActionState: { isLoading: boolean; error: SerializedError | ZodError | null };
 };
 
 const initialState: ProfileState = {
@@ -40,7 +48,11 @@ export const fetchProfileData = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = ProfileDataSchema.safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -59,7 +71,11 @@ export const fetchProfileBookmarks = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = z.array(PostDataSchema).safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -80,7 +96,11 @@ export const postBookmark = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = PostBookmarkSchema.safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -103,7 +123,11 @@ export const deleteBookmark = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = DeleteBookmarkSchema.safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -124,7 +148,11 @@ export const postFollowUser = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = PostFollowUserSchema.safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -147,7 +175,11 @@ export const deleteFollowUser = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = DeleteFollowUserSchema.safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -175,7 +207,7 @@ const profileSlice = createSlice({
         state.fetchProfileBookmarksState.error = null;
       })
       .addCase(fetchProfileBookmarks.fulfilled, (state, action) => {
-        state.profileBookmarkList = action.payload.post_bookmarks;
+        state.profileBookmarkList = action.payload;
         state.fetchProfileBookmarksState.isLoading = false;
       })
       .addCase(fetchProfileBookmarks.rejected, (state, action) => {

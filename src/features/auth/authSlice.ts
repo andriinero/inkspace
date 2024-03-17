@@ -2,9 +2,10 @@ import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/utils/storage';
+import { PostLoginSchema } from '@/types/responseData/success/PostLogin';
+import { AuthData, AuthDataSchema } from '@/types/itemData/AuthData';
 
 import { AppThunk, RootState } from '@/app/store';
-import { AuthData } from '@/types/AuthData';
 import { fetchProfileData } from '../profile/profileSlice';
 
 type LoginBodyType = { username: string; password: string };
@@ -34,7 +35,11 @@ export const fetchAuthData = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = AuthDataSchema.safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -50,9 +55,11 @@ export const postLogin = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    storage.setToken(data.token);
+    const validationResult = PostLoginSchema.safeParse(data);
 
-    return data.token;
+    if (!validationResult.success) return rejectWithValue(data);
+
+    storage.setToken(validationResult.data.token);
   }
 );
 

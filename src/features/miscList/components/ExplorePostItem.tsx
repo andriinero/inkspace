@@ -1,8 +1,8 @@
 import { setTopic } from '@/features/postList/postListSlice';
 import { useAppDispatch } from '@/app/hooks';
 
-import { PostAuthorData } from '@/types/PostAuthorData';
-import { TopicData } from '@/types/TopicData';
+import { PostAuthorData } from '@/types/itemData/PostAuthorData';
+import { TopicData } from '@/types/itemData/TopicData';
 
 import {
   AuthorIcon,

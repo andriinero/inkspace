@@ -8,7 +8,7 @@ import { postPost } from '@/features/createPost/createPostSlice';
 
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
-import { TCreatePostSchema, createPostSchema } from '@/types/schemas/CreatePostSchema';
+import { TCreatePostSchema, createPostSchema } from '@/types/formSchemas/CreatePostSchema';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 

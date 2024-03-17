@@ -1,10 +1,12 @@
+import { z } from 'zod';
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
-import { CommentData } from '@/types/CommentData';
+import { CommentData, CommentDataSchema } from '@/types/itemData/CommentData';
+import { DeleteCommentSchema } from '@/types/responseData/success/DeleteComment';
 
 type CommentsState = {
   comments: CommentData[];
@@ -42,7 +44,11 @@ export const fetchComments = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = z.array(CommentDataSchema).safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -61,7 +67,11 @@ export const deleteComment = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = DeleteCommentSchema.safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 

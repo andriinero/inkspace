@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { AuthorDataSchema } from './AuthorData';
 
-const CommentDataSchema = z.object({
+export const CommentDataSchema = z.object({
   _id: z.string(),
   post: z.string(),
   author: AuthorDataSchema,

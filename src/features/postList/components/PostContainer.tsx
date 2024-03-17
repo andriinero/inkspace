@@ -10,7 +10,7 @@ import {
   selectSelectedTopic,
 } from '../postListSlice';
 
-import { TopicData } from '@/types/TopicData';
+import { TopicData } from '@/types/itemData/TopicData';
 
 import {
   CalloutText,

@@ -10,9 +10,8 @@ export const PostDataSchema = z.object({
   body: z.string(),
   date: z.string(),
   topic: TopicDataSchema,
-  thumbnail_image: z.string(),
+  like_count: z.number(),
+  thumbnail_image: z.string().optional(),
 });
 
-type PostData = z.infer<typeof PostDataSchema>;
-
-export default PostData;
+export type PostData = z.infer<typeof PostDataSchema>;

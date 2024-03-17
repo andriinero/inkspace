@@ -1,10 +1,11 @@
+import { z } from 'zod';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/app/store';
-import { AuthorData } from '@/types/AuthorData';
-import PostData from '@/types/PostData';
+import { AuthorData, AuthorDataSchema } from '@/types/itemData/AuthorData';
+import { PostData, PostDataSchema } from '@/types/itemData/PostData';
 
 type AuthorPageState = {
   authorData: AuthorData | null;
@@ -30,7 +31,11 @@ export const fetchAuthor = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = AuthorDataSchema.safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -44,7 +49,11 @@ export const fetchAuthorPosts = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = z.array(PostDataSchema).safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 

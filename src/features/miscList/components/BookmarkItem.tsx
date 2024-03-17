@@ -1,4 +1,4 @@
-import { PostAuthorData } from '@/types/PostAuthorData';
+import { PostAuthorData } from '@/types/itemData/PostAuthorData';
 
 import {
   AuthorIcon,

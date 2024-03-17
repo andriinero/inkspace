@@ -3,8 +3,10 @@ import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/utils/storage';
 
+import { ZodError } from 'zod';
 import { RootState } from '@/app/store';
-import PostData from '@/types/PostData';
+import { PostData, PostDataSchema } from '@/types/itemData/PostData';
+import { PutLikeCountSchema } from '@/types/responseData/success/PutLikeCount';
 
 type SinglePagePostState = {
   post: PostData | null;
@@ -12,9 +14,9 @@ type SinglePagePostState = {
   likeCount: number;
   fetchPostState: {
     isLoading: boolean;
-    error: SerializedError | null;
+    error: SerializedError | ZodError | null;
   };
-  putLikeCountState: { isLoading: boolean; error: SerializedError | null };
+  putLikeCountState: { isLoading: boolean; error: SerializedError | ZodError | null };
 };
 
 const initialState: SinglePagePostState = {
@@ -38,7 +40,11 @@ export const fetchPost = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = PostDataSchema.safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(validationResult.error);
+
+    return validationResult.data;
   }
 );
 
@@ -57,7 +63,11 @@ export const putLikeCount = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = PutLikeCountSchema.safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 

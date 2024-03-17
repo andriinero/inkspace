@@ -4,6 +4,7 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
+import { CommentDataSchema } from '@/types/itemData/CommentData';
 
 type CommentEditorState = {
   textField: string;
@@ -54,7 +55,11 @@ export const postComment = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = CommentDataSchema.safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -75,7 +80,11 @@ export const updateComment = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = CommentDataSchema.safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 

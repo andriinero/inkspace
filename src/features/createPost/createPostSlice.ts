@@ -4,6 +4,7 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
+import { PostDataSchema } from '@/types/itemData/PostData';
 
 type PostBodyType = {
   title: string;
@@ -35,8 +36,12 @@ export const postPost = createAsyncThunk(
     });
 
     if (!responseState.ok) return rejectWithValue(data);
+    
+    const validationResult = PostDataSchema.safeParse(data);
 
-    return data;
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 

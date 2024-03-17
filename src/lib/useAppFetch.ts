@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BASE_API_URL } from '@/config';
 
 type ResponseState = {
@@ -7,7 +6,7 @@ type ResponseState = {
 };
 
 type AppFetchResult = {
-  data: any;
+  data: unknown;
   responseState: ResponseState;
 };
 

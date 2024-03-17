@@ -4,9 +4,10 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
-import { AuthorData } from '@/types/AuthorData';
-import { TopicData } from '@/types/TopicData';
-import PostData from '@/types/PostData';
+import { AuthorData, AuthorDataSchema } from '@/types/itemData/AuthorData';
+import { TopicData, TopicDataSchema } from '@/types/itemData/TopicData';
+import { PostData, PostDataSchema } from '@/types/itemData/PostData';
+import { z } from 'zod';
 
 type miscListState = {
   authorList: AuthorData[];
@@ -41,7 +42,11 @@ export const fetchAuthors = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = z.array(AuthorDataSchema).safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -55,7 +60,11 @@ export const fetchTopics = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    return data;
+    const validationResult = z.array(TopicDataSchema).safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -69,7 +78,11 @@ export const fetchMiscPosts = createAsyncThunk(
 
     if (!responseState.ok) rejectWithValue(data);
 
-    return data;
+    const validationResult = z.array(PostDataSchema).safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -88,7 +101,11 @@ export const fetchBookmarks = createAsyncThunk(
 
     if (!responseState.ok) rejectWithValue(data);
 
-    return data;
+    const validationResult = z.array(PostDataSchema).safeParse(data);
+
+    if (!validationResult.success) return rejectWithValue(data);
+
+    return validationResult.data;
   }
 );
 
@@ -145,7 +162,7 @@ const miscListSlice = createSlice({
         state.fetchBookmarksState.error = null;
       })
       .addCase(fetchBookmarks.fulfilled, (state, action) => {
-        state.bookmarkList = action.payload.post_bookmarks;
+        state.bookmarkList = action.payload;
         state.fetchBookmarksState.isLoading = false;
       })
       .addCase(fetchBookmarks.rejected, (state, action) => {
