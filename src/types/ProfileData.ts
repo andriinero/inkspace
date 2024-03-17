@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { UserRole } from './AuthData';
 
-export const UserDataSchema = z.object({
+export const ProfileDataSchema = z.object({
   _id: z.string(),
   username: z.string(),
   email: z.string(),
@@ -17,4 +17,4 @@ export const UserDataSchema = z.object({
   profile_image: z.string(),
 });
 
-export type UserData = z.infer<typeof UserDataSchema>;
+export type ProfileData = z.infer<typeof ProfileDataSchema>;
