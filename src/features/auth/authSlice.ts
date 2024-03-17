@@ -3,7 +3,7 @@ import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/utils/storage';
 import { PostLoginSchema } from '@/types/responseData/success/PostLogin';
-import { AuthData, AuthDataSchema } from '@/types/itemData/AuthData';
+import { AuthData, AuthenticationDataSchema } from '@/types/itemData/AuthenticationData';
 
 import { AppThunk, RootState } from '@/app/store';
 import { fetchProfileData } from '../profile/profileSlice';
@@ -36,7 +36,7 @@ export const fetchAuthData = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    const validationResult = AuthDataSchema.safeParse(data);
+    const validationResult = AuthenticationDataSchema.safeParse(data);
 
     if (!validationResult.success) {
       console.error(validationResult);

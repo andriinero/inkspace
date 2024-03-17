@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { PostAuthorData } from '@/types/itemData/PostAuthorData';
+import { PostAuthorData } from '@/types/itemData/GeneralAuthorData';
 import { TopicData } from '@/types/itemData/TopicData';
 
 import * as S from './PostHeaderInfo.styled';

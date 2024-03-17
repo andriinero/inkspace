@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import { PostAuthorDataSchema } from './PostAuthorData';
+import { GeneralAuthorDataSchema } from './GeneralAuthorData';
 
 export const CommentDataSchema = z.object({
   _id: z.string(),
   post: z.string(),
-  author: PostAuthorDataSchema,
+  author: GeneralAuthorDataSchema,
   body: z.string(),
   date: z.string(),
   edit_date: z.string().optional(),

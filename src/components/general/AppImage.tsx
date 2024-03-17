@@ -1,5 +1,6 @@
 import useFetchImage from '@/hooks/useFetchImage';
 import { Image, ImagePlaceholder } from './AppImage.styled';
+import { FadeIn } from '@/styles/animations/FadeIn';
 
 type AppImageProps = {
   className?: string;
@@ -21,7 +22,14 @@ const AppImage = ({
   return isLoading ? (
     <ImagePlaceholder className={className} />
   ) : (
-    <Image className={className} src={imgSrc} alt={altText} />
+    <Image
+      initial={FadeIn.hidden}
+      animate={FadeIn.visible}
+      transition={FadeIn.transition}
+      className={className}
+      src={imgSrc}
+      alt={altText}
+    />
   );
 };
 

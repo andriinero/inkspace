@@ -4,7 +4,7 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
-import { AuthorData, AuthorDataSchema } from '@/types/itemData/AuthorData';
+import { AuthorData, FullAuthorDataSchema } from '@/types/itemData/FullAuthorData';
 import { TopicData, TopicDataSchema } from '@/types/itemData/TopicData';
 import { PostData, PostDataSchema } from '@/types/itemData/PostData';
 import { ZodError, z } from 'zod';
@@ -42,7 +42,7 @@ export const fetchAuthors = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    const validationResult = z.array(AuthorDataSchema).safeParse(data);
+    const validationResult = z.array(FullAuthorDataSchema).safeParse(data);
 
     if (!validationResult.success) {
       console.error(validationResult);

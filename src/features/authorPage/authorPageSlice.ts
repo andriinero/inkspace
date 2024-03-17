@@ -4,7 +4,7 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/app/store';
-import { AuthorData, AuthorDataSchema } from '@/types/itemData/AuthorData';
+import { AuthorData, FullAuthorDataSchema } from '@/types/itemData/FullAuthorData';
 import { PostData, PostDataSchema } from '@/types/itemData/PostData';
 
 type AuthorPageState = {
@@ -31,7 +31,7 @@ export const fetchAuthor = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    const validationResult = AuthorDataSchema.safeParse(data);
+    const validationResult = FullAuthorDataSchema.safeParse(data);
 
     if (!validationResult.success) {
       console.error(validationResult);

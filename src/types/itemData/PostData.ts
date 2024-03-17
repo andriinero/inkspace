@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
 import { TopicDataSchema } from './TopicData';
-import { PostAuthorDataSchema } from './PostAuthorData';
+import { GeneralAuthorDataSchema } from './GeneralAuthorData';
 
 export const PostDataSchema = z.object({
   _id: z.string(),
-  author: PostAuthorDataSchema,
+  author: GeneralAuthorDataSchema,
   title: z.string(),
   body: z.string(),
   date: z.string(),
