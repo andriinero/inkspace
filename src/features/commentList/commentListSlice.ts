@@ -47,7 +47,7 @@ export const fetchComments = createAsyncThunk(
     const validationResult = z.array(CommentDataSchema).safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 
@@ -73,7 +73,7 @@ export const deleteComment = createAsyncThunk(
     const validationResult = DeleteCommentSchema.safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 

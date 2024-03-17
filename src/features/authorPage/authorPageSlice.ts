@@ -34,7 +34,7 @@ export const fetchAuthor = createAsyncThunk(
     const validationResult = AuthorDataSchema.safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 
@@ -55,7 +55,7 @@ export const fetchAuthorPosts = createAsyncThunk(
     const validationResult = z.array(PostDataSchema).safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 

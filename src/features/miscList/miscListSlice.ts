@@ -45,7 +45,7 @@ export const fetchAuthors = createAsyncThunk(
     const validationResult = z.array(AuthorDataSchema).safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 
@@ -66,7 +66,7 @@ export const fetchTopics = createAsyncThunk(
     const validationResult = z.array(TopicDataSchema).safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 
@@ -87,7 +87,7 @@ export const fetchMiscPosts = createAsyncThunk(
     const validationResult = z.array(PostDataSchema).safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 
@@ -113,7 +113,7 @@ export const fetchBookmarks = createAsyncThunk(
     const validationResult = z.array(PostDataSchema).safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 

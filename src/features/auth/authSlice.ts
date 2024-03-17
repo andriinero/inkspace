@@ -39,7 +39,7 @@ export const fetchAuthData = createAsyncThunk(
     const validationResult = AuthDataSchema.safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 
@@ -62,7 +62,7 @@ export const postLogin = createAsyncThunk(
     const validationResult = PostLoginSchema.safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 

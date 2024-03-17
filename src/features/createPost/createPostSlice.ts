@@ -41,7 +41,7 @@ export const postPost = createAsyncThunk(
     const validationResult = PostDataSchema.safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 

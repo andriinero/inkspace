@@ -51,7 +51,7 @@ export const fetchProfileData = createAsyncThunk(
     const validationResult = ProfileDataSchema.safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 
@@ -77,7 +77,7 @@ export const fetchProfileBookmarks = createAsyncThunk(
     const validationResult = z.array(PostDataSchema).safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 
@@ -105,7 +105,7 @@ export const postBookmark = createAsyncThunk(
     const validationResult = PostBookmarkSchema.safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 
@@ -135,7 +135,7 @@ export const deleteBookmark = createAsyncThunk(
     const validationResult = DeleteBookmarkSchema.safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 
@@ -163,7 +163,7 @@ export const postFollowUser = createAsyncThunk(
     const validationResult = PostFollowUserSchema.safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 
@@ -193,7 +193,7 @@ export const deleteFollowUser = createAsyncThunk(
     const validationResult = DeleteFollowUserSchema.safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 

@@ -59,7 +59,7 @@ export const postComment = createAsyncThunk(
     const validationResult = CommentDataSchema.safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 
@@ -87,7 +87,7 @@ export const updateComment = createAsyncThunk(
     const validationResult = CommentDataSchema.safeParse(data);
 
     if (!validationResult.success) {
-      console.error(validationResult.error);
+      console.error(validationResult);
       return rejectWithValue(validationResult.error);
     }
 
