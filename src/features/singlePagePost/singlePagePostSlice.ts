@@ -42,7 +42,10 @@ export const fetchPost = createAsyncThunk(
 
     const validationResult = PostDataSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(validationResult.error);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -50,7 +53,7 @@ export const fetchPost = createAsyncThunk(
 
 export const putLikeCount = createAsyncThunk(
   'singlePagePost/putLikeCount',
-  async (postId: string, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     const token = storage.getToken();
 
     const { data, responseState } = await useAppFetch(`/api/posts/${postId}/likes`, {
@@ -65,7 +68,10 @@ export const putLikeCount = createAsyncThunk(
 
     const validationResult = PutLikeCountSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }

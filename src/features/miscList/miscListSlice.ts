@@ -7,7 +7,7 @@ import { RootState } from '@/app/store';
 import { AuthorData, AuthorDataSchema } from '@/types/itemData/AuthorData';
 import { TopicData, TopicDataSchema } from '@/types/itemData/TopicData';
 import { PostData, PostDataSchema } from '@/types/itemData/PostData';
-import { z } from 'zod';
+import { ZodError, z } from 'zod';
 
 type miscListState = {
   authorList: AuthorData[];
@@ -15,10 +15,10 @@ type miscListState = {
   postList: PostData[];
   bookmarkList: PostData[];
   //FIXME: naming
-  fetchAuthorsState: { isLoading: boolean; error: SerializedError | null };
-  fetchTopicsState: { isLoading: boolean; error: SerializedError | null };
-  fetchMiscPostsState: { isLoading: boolean; error: SerializedError | null };
-  fetchBookmarksState: { isLoading: boolean; error: SerializedError | null };
+  fetchAuthorsState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  fetchTopicsState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  fetchMiscPostsState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  fetchBookmarksState: { isLoading: boolean; error: SerializedError | ZodError | null };
 };
 
 const initialState: miscListState = {
@@ -44,7 +44,10 @@ export const fetchAuthors = createAsyncThunk(
 
     const validationResult = z.array(AuthorDataSchema).safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -62,7 +65,10 @@ export const fetchTopics = createAsyncThunk(
 
     const validationResult = z.array(TopicDataSchema).safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -80,7 +86,10 @@ export const fetchMiscPosts = createAsyncThunk(
 
     const validationResult = z.array(PostDataSchema).safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -103,7 +112,10 @@ export const fetchBookmarks = createAsyncThunk(
 
     const validationResult = z.array(PostDataSchema).safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }

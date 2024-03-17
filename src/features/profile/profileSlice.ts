@@ -50,7 +50,10 @@ export const fetchProfileData = createAsyncThunk(
 
     const validationResult = ProfileDataSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -73,7 +76,10 @@ export const fetchProfileBookmarks = createAsyncThunk(
 
     const validationResult = z.array(PostDataSchema).safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -98,7 +104,10 @@ export const postBookmark = createAsyncThunk(
 
     const validationResult = PostBookmarkSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -125,7 +134,10 @@ export const deleteBookmark = createAsyncThunk(
 
     const validationResult = DeleteBookmarkSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -150,7 +162,10 @@ export const postFollowUser = createAsyncThunk(
 
     const validationResult = PostFollowUserSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -177,7 +192,10 @@ export const deleteFollowUser = createAsyncThunk(
 
     const validationResult = DeleteFollowUserSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }

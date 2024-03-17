@@ -7,13 +7,14 @@ import { AuthData, AuthDataSchema } from '@/types/itemData/AuthData';
 
 import { AppThunk, RootState } from '@/app/store';
 import { fetchProfileData } from '../profile/profileSlice';
+import { ZodError } from 'zod';
 
 type LoginBodyType = { username: string; password: string };
 
 type AuthState = {
   authData: AuthData | null;
-  fetchAuthDataState: { isLoading: boolean; error: SerializedError | null };
-  postLoginState: { isLoading: boolean; error: SerializedError | null };
+  fetchAuthDataState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  postLoginState: { isLoading: boolean; error: SerializedError | ZodError | null };
 };
 
 const initialState: AuthState = {
@@ -37,7 +38,10 @@ export const fetchAuthData = createAsyncThunk(
 
     const validationResult = AuthDataSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -57,7 +61,10 @@ export const postLogin = createAsyncThunk(
 
     const validationResult = PostLoginSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     storage.setToken(validationResult.data.token);
   }

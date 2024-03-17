@@ -36,7 +36,10 @@ export const fetchPosts = createAsyncThunk(
 
     const validationResult = z.array(PostDataSchema).safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -47,11 +50,11 @@ const postListSlice = createSlice({
   initialState,
   reducers: {
     setTopic: {
-      reducer(state, action: PayloadAction<Topic>) {
+      reducer(state, action: PayloadAction<TopicData>) {
         if (state.selectedTopic?._id !== action.payload._id)
           state.selectedTopic = action.payload;
       },
-      prepare(topic: Topic) {
+      prepare(topic: TopicData) {
         return { payload: topic };
       },
     },

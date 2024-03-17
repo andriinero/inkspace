@@ -5,18 +5,19 @@ import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
 import { CommentDataSchema } from '@/types/itemData/CommentData';
+import { ZodError } from 'zod';
 
 type CommentEditorState = {
   textField: string;
   isEditMode: boolean;
   postCommentState: {
     isLoading: boolean;
-    error: SerializedError | null;
+    error: SerializedError | ZodError | null;
   };
   updateCommentState: {
     commentId: string | null;
     isLoading: boolean;
-    error: SerializedError | null;
+    error: SerializedError | ZodError | null;
   };
 };
 
@@ -57,7 +58,10 @@ export const postComment = createAsyncThunk(
 
     const validationResult = CommentDataSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -82,7 +86,10 @@ export const updateComment = createAsyncThunk(
 
     const validationResult = CommentDataSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }

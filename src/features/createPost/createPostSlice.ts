@@ -5,6 +5,7 @@ import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
 import { PostDataSchema } from '@/types/itemData/PostData';
+import { ZodError } from 'zod';
 
 type PostBodyType = {
   title: string;
@@ -13,7 +14,7 @@ type PostBodyType = {
 };
 
 type CreatePostState = {
-  postPostState: { isLoading: boolean; error: SerializedError | null };
+  postPostState: { isLoading: boolean; error: SerializedError | ZodError | null };
 };
 
 const initialState: CreatePostState = {
@@ -36,10 +37,13 @@ export const postPost = createAsyncThunk(
     });
 
     if (!responseState.ok) return rejectWithValue(data);
-    
+
     const validationResult = PostDataSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }

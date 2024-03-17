@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { ZodError, z } from 'zod';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
@@ -10,8 +10,8 @@ import { PostData, PostDataSchema } from '@/types/itemData/PostData';
 type AuthorPageState = {
   authorData: AuthorData | null;
   authorPosts: PostData[];
-  fetchAuthorState: { isLoading: boolean; error: SerializedError | null };
-  fetchAuthorPostsState: { isLoading: boolean; error: SerializedError | null };
+  fetchAuthorState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  fetchAuthorPostsState: { isLoading: boolean; error: SerializedError | ZodError | null };
 };
 
 const initialState: AuthorPageState = {
@@ -33,7 +33,10 @@ export const fetchAuthor = createAsyncThunk(
 
     const validationResult = AuthorDataSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -51,7 +54,10 @@ export const fetchAuthorPosts = createAsyncThunk(
 
     const validationResult = z.array(PostDataSchema).safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }

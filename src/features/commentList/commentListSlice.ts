@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { ZodError, z } from 'zod';
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
@@ -13,11 +13,11 @@ type CommentsState = {
   areCommentsOpen: boolean;
   fetchCommentsState: {
     isLoading: boolean;
-    error: SerializedError | null;
+    error: SerializedError | ZodError | null;
   };
   deleteCommentState: {
     isLoading: boolean;
-    error: SerializedError | null;
+    error: SerializedError | ZodError | null;
   };
 };
 
@@ -46,7 +46,10 @@ export const fetchComments = createAsyncThunk(
 
     const validationResult = z.array(CommentDataSchema).safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
@@ -69,7 +72,10 @@ export const deleteComment = createAsyncThunk(
 
     const validationResult = DeleteCommentSchema.safeParse(data);
 
-    if (!validationResult.success) return rejectWithValue(data);
+    if (!validationResult.success) {
+      console.error(validationResult.error);
+      return rejectWithValue(validationResult.error);
+    }
 
     return validationResult.data;
   }
