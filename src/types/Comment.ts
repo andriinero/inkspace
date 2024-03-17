@@ -1,11 +1,15 @@
-import { Author } from './Author';
+import { z } from 'zod';
 
-export type Comment = {
-  _id: string;
-  post: string;
-  author: Author;
-  title: string;
-  body: string;
-  date: string;
-  edit_date?: string;
-};
+import { AuthorSchema } from './Author';
+
+const CommentSchema = z.object({
+  _id: z.string(),
+  post: z.string(),
+  author: AuthorSchema,
+  title: z.string(),
+  body: z.string(),
+  date: z.string(),
+  edit_date: z.string().optional(),
+});
+
+export type Comment = z.infer<typeof CommentSchema>;

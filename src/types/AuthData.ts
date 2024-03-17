@@ -1,10 +1,14 @@
+import { z } from 'zod';
+
 export enum UserRole {
   USER = 'user',
   ADMIN = 'admin',
 }
 
-export type AuthData = {
-  sub: string;
-  username: string;
-  role: UserRole;
-};
+export const AuthDataSchema = z.object({
+  sub: z.string(),
+  username: z.string(),
+  role: z.nativeEnum(UserRole),
+});
+
+export type AuthData = z.infer<typeof AuthDataSchema>;
