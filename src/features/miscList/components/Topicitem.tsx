@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { selectSelectedTopic, setTopic } from '@/features/postList/postListSlice';
 
-import { Topic } from '@/types/Topic';
+import { TopicData } from '@/types/TopicData';
 
 import { TopicButton, Wrapper } from './TopicItem.styled';
 import { WaterfallPopUp } from '@/styles/animations/WaterfallPopUp';
@@ -17,7 +17,7 @@ const TopicItem = ({ _id, name }: TopicItemProps) => {
   const dispatch = useAppDispatch();
 
   const handleTopicClick = (): void => {
-    dispatch(setTopic({ _id, name } as Topic));
+    dispatch(setTopic({ _id, name } as TopicData));
   };
 
   const isSelected = selectedTopic?._id === _id;

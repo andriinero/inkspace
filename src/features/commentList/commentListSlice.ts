@@ -4,10 +4,10 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
-import { Comment } from '@/types/Comment';
+import { CommentData } from '@/types/CommentData';
 
 type CommentsState = {
-  comments: Comment[];
+  comments: CommentData[];
   areCommentsOpen: boolean;
   fetchCommentsState: {
     isLoading: boolean;

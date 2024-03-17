@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { Author } from '@/types/Author';
+import { PostAuthorData } from '@/types/PostAuthorData';
 
 import { selectCurrentUserId } from '@/features/auth/authSlice';
 import { deleteComment } from '../commentListSlice';
@@ -28,14 +28,14 @@ import {
 type CommentProps = {
   _id: string;
   post: string;
-  author: Author;
+  author: PostAuthorData;
   title: string;
   body: string;
   date: string;
   edit_date?: string;
 };
 
-const Comment = ({ _id, post, author, title, body, date, edit_date }: CommentProps) => {
+const CommentItem = ({ _id, post, author, title, body, date, edit_date }: CommentProps) => {
   const currentUserId = useAppSelector(selectCurrentUserId);
   const isEditMode = useAppSelector(selectCommentIsEditMode);
 
@@ -83,4 +83,4 @@ const Comment = ({ _id, post, author, title, body, date, edit_date }: CommentPro
   );
 };
 
-export default Comment;
+export default CommentItem;

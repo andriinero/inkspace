@@ -1,8 +1,8 @@
 import { setTopic } from '@/features/postList/postListSlice';
 import { useAppDispatch } from '@/app/hooks';
 
-import { Author } from '@/types/Author';
-import { Topic } from '@/types/Topic';
+import { PostAuthorData } from '@/types/PostAuthorData';
+import { TopicData } from '@/types/TopicData';
 
 import {
   AuthorIcon,
@@ -18,11 +18,11 @@ import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 
 type ExplorePostItemProps = {
   _id: string;
-  author: Author;
+  author: PostAuthorData;
   title: string;
   body: string;
   date: string;
-  topic: Topic;
+  topic: TopicData;
 };
 
 const ExplorePostItem = ({ _id, author, title, topic }: ExplorePostItemProps) => {

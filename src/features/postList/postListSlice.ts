@@ -3,13 +3,12 @@ import { useAppFetch } from '@/lib/useAppFetch';
 
 import { RootState } from '@/app/store';
 import { PayloadAction } from '@reduxjs/toolkit';
-
-import Post from '@/types/Post';
-import { Topic } from '@/types/Topic';
+import PostData from '@/types/PostData';
+import { TopicData } from '@/types/TopicData';
 
 type postListState = {
-  postList: Post[];
-  selectedTopic: Topic | null;
+  postList: PostData[];
+  selectedTopic: TopicData | null;
   fetchPostsState: {
     isLoading: boolean;
     error: SerializedError | null;

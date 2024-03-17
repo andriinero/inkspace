@@ -3,12 +3,12 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/app/store';
-import { Author } from '@/types/Author';
-import Post from '@/types/Post';
+import { AuthorData } from '@/types/AuthorData';
+import PostData from '@/types/PostData';
 
 type AuthorPageState = {
-  authorData: Author | null;
-  authorPosts: Post[];
+  authorData: AuthorData | null;
+  authorPosts: PostData[];
   fetchAuthorState: { isLoading: boolean; error: SerializedError | null };
   fetchAuthorPostsState: { isLoading: boolean; error: SerializedError | null };
 };

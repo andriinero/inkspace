@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { Author } from '@/types/Author';
-import { Topic } from '@/types/Topic';
+import { PostAuthorData } from '@/types/PostAuthorData';
+import { TopicData } from '@/types/TopicData';
 
 import * as S from './PostHeaderInfo.styled';
 import PostDate from '@/components/general/TimeAgo';
@@ -15,9 +15,9 @@ import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 type PostAuthorProps = {
   isAuthor: boolean;
-  author: Author;
+  author: PostAuthorData;
   date: string;
-  topic: Topic;
+  topic: TopicData;
   bodyLength: number;
 };
 

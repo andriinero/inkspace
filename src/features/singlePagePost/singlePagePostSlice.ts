@@ -4,11 +4,10 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
-
-import Post from '@/types/Post';
+import PostData from '@/types/PostData';
 
 type SinglePagePostState = {
-  post: Post | null;
+  post: PostData | null;
   isLiked: boolean;
   likeCount: number;
   fetchPostState: {

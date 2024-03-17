@@ -8,11 +8,12 @@ import {
   selectAreCommentsOpen,
   selectCommentList,
 } from '@/features/commentList/commentListSlice';
+import { exitEditMode } from '@/features/commentEditor/commentEditorSlice';
 
 import { Wrapper, Header, WrapperList } from './CommentList.styled';
+
 import CommentItem from './CommentItem';
 import CommentForm from '../../commentEditor/components/CommentForm';
-import { exitEditMode } from '@/features/commentEditor/commentEditorSlice';
 
 type PostCommentsProps = {
   postId: string;

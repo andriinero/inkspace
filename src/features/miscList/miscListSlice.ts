@@ -4,15 +4,15 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
-import { Author } from '@/types/Author';
-import { Topic } from '@/types/Topic';
-import Post from '@/types/Post';
+import { AuthorData } from '@/types/AuthorData';
+import { TopicData } from '@/types/TopicData';
+import PostData from '@/types/PostData';
 
 type miscListState = {
-  authorList: Author[];
-  topicList: Topic[];
-  postList: Post[];
-  bookmarkList: Post[];
+  authorList: AuthorData[];
+  topicList: TopicData[];
+  postList: PostData[];
+  bookmarkList: PostData[];
   //FIXME: naming
   fetchAuthorsState: { isLoading: boolean; error: SerializedError | null };
   fetchTopicsState: { isLoading: boolean; error: SerializedError | null };

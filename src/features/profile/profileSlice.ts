@@ -4,12 +4,12 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
-import { UserData } from '@/types/UserData';
-import Post from '@/types/Post';
+import { ProfileData } from '@/types/ProfileData';
+import PostData from '@/types/PostData';
 
 type ProfileState = {
-  profileData: UserData | null;
-  profileBookmarkList: Post[];
+  profileData: ProfileData | null;
+  profileBookmarkList: PostData[];
   fetchProfileDataState: { isLoading: boolean; error: SerializedError | null };
   fetchProfileBookmarksState: { isLoading: boolean; error: SerializedError | null };
   bookmarkActionState: { isLoading: boolean; error: SerializedError | null };

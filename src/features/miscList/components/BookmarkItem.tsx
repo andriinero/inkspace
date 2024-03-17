@@ -1,4 +1,4 @@
-import Post from '@/types/Post';
+import { PostAuthorData } from '@/types/PostAuthorData';
 
 import {
   AuthorIcon,
@@ -14,7 +14,15 @@ import TimeAgo from '@/components/general/TimeAgo';
 import PostReadTime from '@/components/general/PostReadTime';
 import { Waterfall } from '@/styles/animations/Waterfall';
 
-const BookmarkItem = ({ _id, author, title, body, date }: Post) => {
+type BookmarkItemProps = {
+  _id: string;
+  author: PostAuthorData;
+  title: string;
+  body: string;
+  date: string;
+};
+
+const BookmarkItem = ({ _id, author, title, body, date }: BookmarkItemProps) => {
   return (
     <WrapperItem variants={Waterfall.item}>
       <Header>

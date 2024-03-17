@@ -10,7 +10,7 @@ import {
   selectSelectedTopic,
 } from '../postListSlice';
 
-import { Topic } from '@/types/Topic';
+import { TopicData } from '@/types/TopicData';
 
 import {
   CalloutText,
@@ -28,7 +28,7 @@ import { FadeInSlide } from '@/styles/animations/FadeInSlide';
 const PostContainer = () => {
   const userBookmarks = useAppSelector(selectProfileBookmarks);
 
-  const selectedTopic = useAppSelector(selectSelectedTopic) as Topic;
+  const selectedTopic = useAppSelector(selectSelectedTopic) as TopicData;
 
   const dispatch = useAppDispatch();
 

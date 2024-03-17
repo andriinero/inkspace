@@ -11,8 +11,8 @@ import {
 } from '@/features/profile/profileSlice';
 import { setTopic } from '../postListSlice';
 
-import { Author } from '@/types/Author';
-import { Topic } from '@/types/Topic';
+import { PostAuthorData } from '@/types/PostAuthorData';
+import { TopicData } from '@/types/TopicData';
 
 import * as S from './PostItem.styled';
 import PostDate from '@/components/general/TimeAgo';
@@ -21,11 +21,11 @@ import { Username } from '@/styles/components/Username.styled';
 
 type PostItemProps = {
   _id: string;
-  author: Author;
+  author: PostAuthorData;
   title: string;
   body: string;
   date: string;
-  topic: Topic;
+  topic: TopicData;
   thumbnail_image: string;
   isBookmarked: boolean;
 };
