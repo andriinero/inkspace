@@ -11,6 +11,7 @@ import { PostBookmarkSchema } from '@/types/responseData/success/PostBookmark';
 import { DeleteBookmarkSchema } from '@/types/responseData/success/DeleteBookmark';
 import { PostFollowUserSchema } from '@/types/responseData/success/PostFollowUser';
 import { DeleteFollowUserSchema } from '@/types/responseData/success/DeleteFollowUser';
+import { TargetObjectIdSchema } from '@/types/responseData/success/TargetObjectId';
 
 type ProfileState = {
   profileData: ProfileData | null;
@@ -132,7 +133,7 @@ export const deleteBookmark = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    const validationResult = DeleteBookmarkSchema.safeParse(data);
+    const validationResult = TargetObjectIdSchema.safeParse(data);
 
     if (!validationResult.success) {
       console.error(validationResult);

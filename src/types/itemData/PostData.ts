@@ -6,11 +6,11 @@ import { GeneralAuthorDataSchema } from './GeneralAuthorData';
 export const PostDataSchema = z.object({
   _id: z.string(),
   author: GeneralAuthorDataSchema,
-  title: z.string(),
-  body: z.string(),
+  title: z.string().min(10).max(100),
+  body: z.string().min(100).max(10000),
   date: z.string(),
   topic: TopicDataSchema,
-  like_count: z.number(),
+  like_count: z.number().min(0),
   thumbnail_image: z.string().optional(),
 });
 

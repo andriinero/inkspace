@@ -3,9 +3,9 @@ import { GeneralAuthorDataSchema } from './GeneralAuthorData';
 
 export const CommentDataSchema = z.object({
   _id: z.string(),
-  post: z.string(),
   author: GeneralAuthorDataSchema,
-  body: z.string(),
+  post: z.string(),
+  body: z.string().min(10).max(280),
   date: z.string(),
   edit_date: z.string().optional(),
 });
