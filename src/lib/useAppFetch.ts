@@ -13,10 +13,18 @@ type AppFetchResult = {
 export const useAppFetch = async (
   path: string,
   opts?: RequestInit,
-  signal?: AbortSignal
+  signal?: AbortSignal,
+  isImage: boolean = false
 ): Promise<AppFetchResult> => {
   const response = await fetch(`${BASE_API_URL}${path}`, { ...opts, signal });
-  const data = await response.json();
+
+  let data = null;
+
+  if (isImage) {
+    data = await response.blob();
+  } else {
+    data = await response.json();
+  }
 
   const responseState = { statusCode: response.status, ok: response.ok };
 
