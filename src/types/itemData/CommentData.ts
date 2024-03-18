@@ -5,7 +5,7 @@ export const CommentDataSchema = z.object({
   _id: z.string(),
   author: GeneralAuthorDataSchema,
   post: z.string(),
-  body: z.string().min(10).max(280),
+  body: z.string(),
   date: z.string(),
   edit_date: z.string().optional(),
 });

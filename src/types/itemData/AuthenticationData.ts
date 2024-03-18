@@ -7,7 +7,7 @@ export enum UserRole {
 
 export const AuthenticationDataSchema = z.object({
   sub: z.string(),
-  username: z.string().min(3).max(100),
+  username: z.string(),
   role: z.nativeEnum(UserRole),
 });
 
