@@ -6,7 +6,7 @@ import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
 import { CommentData, CommentDataSchema } from '@/types/itemData/CommentData';
-import { DeleteCommentSchema } from '@/types/responseData/success/DeleteComment';
+import { TargetObjectIdSchema } from '@/types/responseData/success/TargetObjectId';
 
 type CommentsState = {
   comments: CommentData[];
@@ -70,7 +70,7 @@ export const deleteComment = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    const validationResult = DeleteCommentSchema.safeParse(data);
+    const validationResult = TargetObjectIdSchema.safeParse(data);
 
     if (!validationResult.success) {
       console.error(validationResult);

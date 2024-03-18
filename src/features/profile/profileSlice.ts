@@ -7,10 +7,6 @@ import { RootState } from '@/app/store';
 import { ProfileData, ProfileDataSchema } from '@/types/itemData/ProfileData';
 import { PostData, PostDataSchema } from '@/types/itemData/PostData';
 import { ZodError, z } from 'zod';
-import { PostBookmarkSchema } from '@/types/responseData/success/PostBookmark';
-import { DeleteBookmarkSchema } from '@/types/responseData/success/DeleteBookmark';
-import { PostFollowUserSchema } from '@/types/responseData/success/PostFollowUser';
-import { DeleteFollowUserSchema } from '@/types/responseData/success/DeleteFollowUser';
 import { TargetObjectIdSchema } from '@/types/responseData/success/TargetObjectId';
 
 type ProfileState = {
@@ -103,7 +99,7 @@ export const postBookmark = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    const validationResult = PostBookmarkSchema.safeParse(data);
+    const validationResult = TargetObjectIdSchema.safeParse(data);
 
     if (!validationResult.success) {
       console.error(validationResult);
@@ -161,7 +157,7 @@ export const postFollowUser = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    const validationResult = PostFollowUserSchema.safeParse(data);
+    const validationResult = TargetObjectIdSchema.safeParse(data);
 
     if (!validationResult.success) {
       console.error(validationResult);
@@ -191,7 +187,7 @@ export const deleteFollowUser = createAsyncThunk(
 
     if (!responseState.ok) return rejectWithValue(data);
 
-    const validationResult = DeleteFollowUserSchema.safeParse(data);
+    const validationResult = TargetObjectIdSchema.safeParse(data);
 
     if (!validationResult.success) {
       console.error(validationResult);
