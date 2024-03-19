@@ -5,13 +5,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 type AppImageSliceState = {
   imageURLsMap: { [key: string]: string };
-  fetchCount: number;
   fetchQueue: string[];
 };
 
 const initialState: AppImageSliceState = {
   imageURLsMap: {},
-  fetchCount: 0,
   fetchQueue: [],
 };
 
@@ -47,7 +45,6 @@ const appImagesSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchImage.pending, (state, action) => {
-        state.fetchCount += 1;
         state.fetchQueue.push(action.meta.arg);
       })
       .addCase(fetchImage.fulfilled, (state, action) => {
@@ -55,11 +52,9 @@ const appImagesSlice = createSlice({
 
         if (!state.imageURLsMap[imageId]) state.imageURLsMap[imageId] = imageURL;
 
-        state.fetchCount -= 1;
         state.fetchQueue = state.fetchQueue.filter((q) => q !== action.meta.arg);
       })
       .addCase(fetchImage.rejected, (state, action) => {
-        state.fetchCount -= 1;
         state.fetchQueue = state.fetchQueue.filter((q) => q !== action.meta.arg);
       });
   },
@@ -67,9 +62,13 @@ const appImagesSlice = createSlice({
 
 export default appImagesSlice.reducer;
 
-export const selectImageFetchCount = (state: RootState) => state.appImages.fetchCount;
-
-export const selectAreImagesLoading = (state: RootState) =>
-  Boolean(state.appImages.fetchCount);
-
 export const selectImageURLsMap = (state: RootState) => state.appImages.imageURLsMap;
+
+export const selectImageURL = (imageId: string | undefined) => (state: RootState) => {
+  return imageId ? state.appImages.imageURLsMap[imageId] : undefined;
+};
+
+export const selectIsImageInQueue = (imageId: string | undefined) => (state: RootState) =>
+  state.appImages.fetchQueue.some((q) => q === imageId);
+
+export const selectAreImagesLoading = (state: RootState) => state.appImages.fetchQueue.length !== 0;

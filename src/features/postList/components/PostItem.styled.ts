@@ -98,11 +98,8 @@ export const BodyText = styled.div`
 
 // #region PostPreview
 
-export const Preview = styled.div`
-  grid-area: preview;
-`;
-
 export const PreviewImage = styled(AppImage)`
+  grid-area: preview;
   width: 128px;
   height: 128px;
   object-fit: cover;

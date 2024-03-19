@@ -89,9 +89,7 @@ const PostItem = ({
         </S.StyledLink>
         <S.BodyText>{parse(body)}</S.BodyText>
       </S.Body>
-      <S.Preview>
-        <S.PreviewImage imageId={thumbnail_image} altText="Post Image Preview" />
-      </S.Preview>
+      <S.PreviewImage imageId={thumbnail_image} altText="Post Image Preview" />
       <S.Bottom>
         <S.MiscContainer>
           {topic && <S.Topic onClick={handleTopicClick}>{topic.name}</S.Topic>}

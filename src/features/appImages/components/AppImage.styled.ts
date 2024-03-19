@@ -5,4 +5,4 @@ export const Image = styled(motion.img)`
   object-fit: cover;
 `;
 
-export const ImagePlaceholder = styled.div``;
+export const BlankPlaceholder = styled.div``;
