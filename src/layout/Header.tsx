@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { clearTopic } from '@/features/postList/postListSlice';
 import { logout, selectIsAuthenticated } from '@/features/auth/authSlice';
+import { openLoginModal } from '@/features/login/loginSlice';
 
 import {
   Wrapper,
@@ -17,6 +18,7 @@ import {
 } from './Header.styled';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 import { selectProfileImageId } from '@/features/profile/profileSlice';
+import LoginDialog from '@/features/login/components/LoginDialog';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -32,7 +34,7 @@ const Header = () => {
   };
 
   const handleLoginClick = (): void => {
-    navigate('/login');
+    dispatch(openLoginModal());
   };
 
   const handleLogoutClick = (): void => {
@@ -77,6 +79,7 @@ const Header = () => {
           />
         )}
       </ProfileWrapper>
+      <LoginDialog />
     </Wrapper>
   );
 };

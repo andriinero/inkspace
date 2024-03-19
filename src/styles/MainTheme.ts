@@ -25,7 +25,9 @@ const mainTheme = {
     loader_bg: '#1C1F1F',
     error_text: '#E74C3C',
     progress_scrollbar_bg: '#7de276',
-  }
+    dialog_modal_bg: '#181a1bf2',
+    dialog_backdrop_bg: '#181a1bf2',
+  },
 };
 
 export default mainTheme;

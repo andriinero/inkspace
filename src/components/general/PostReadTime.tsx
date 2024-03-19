@@ -9,7 +9,7 @@ type PostReadTimeProps = {
 
 const PostReadTime = ({ className, bodyLength }: PostReadTimeProps) => {
   const timeToRead: number = Math.trunc(Math.round(bodyLength / CHARACTERS_PER_MINUTE));
-  const timeEstimate: string = timeToRead < 1 ? '<1' : timeToRead.toString();
+  const timeEstimate: string = timeToRead < 1 ? 'less than 1' : timeToRead.toString();
 
   return <Wrapper className={className}>{timeEstimate} min read</Wrapper>;
 };
