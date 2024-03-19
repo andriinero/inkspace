@@ -9,6 +9,7 @@ import commentListReducer from '@/features/commentList/commentListSlice';
 import commentEditorReducer from '@/features/commentEditor/commentEditorSlice';
 import profileReducer from '@/features/profile/profileSlice';
 import authorPageReducer from '@/features/authorPage/authorPageSlice';
+import appImagesReducer from '@/features/appImages/appImagesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     commentEditor: commentEditorReducer,
     profile: profileReducer,
     authorPage: authorPageReducer,
+    appImages: appImagesReducer,
   },
 });
 

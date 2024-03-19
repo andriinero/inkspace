@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import AppImage from '@/components/general/AppImage';
+import AppImage from '@/features/appImages/components/AppImage';
 
 export const WrapperItem = styled(motion.li)`
   display: grid;

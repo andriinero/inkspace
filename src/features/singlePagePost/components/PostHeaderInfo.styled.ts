@@ -3,7 +3,7 @@ import PostReadTime from '@/components/general/PostReadTime';
 import { NavLink } from 'react-router-dom';
 import { Username } from '@/styles/components/Username.styled';
 import { motion } from 'framer-motion';
-import AppImage from '@/components/general/AppImage';
+import AppImage from '@/features/appImages/components/AppImage';
 
 export const Wrapper = styled.div`
   align-self: flex-start;

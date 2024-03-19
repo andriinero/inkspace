@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { GreenButton } from '@/styles/components/GreenButton';
 import { motion } from 'framer-motion';
 import AppIcon from '@/components/icons/AppIcon';
-import AppImage from '@/components/general/AppImage';
+import AppImage from '@/features/appImages/components/AppImage';
 
 export const Wrapper = styled.header`
   grid-area: header;

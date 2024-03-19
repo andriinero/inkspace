@@ -6,7 +6,7 @@ import DotMenu from '@/components/general/DotMenu';
 import PostReadTime from '@/components/general/PostReadTime';
 import { Title } from '@/styles/components/Title.styled';
 import { motion } from 'framer-motion';
-import AppImage from '@/components/general/AppImage';
+import AppImage from '@/features/appImages/components/AppImage';
 
 export const Wrapper = styled(motion.li)`
   display: grid;

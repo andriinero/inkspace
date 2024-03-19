@@ -1,9 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useAppFetch } from '@/lib/useAppFetch';
+import { ImageDataSchema } from '@/types/itemData/ImageData';
 import { useEffect, useState } from 'react';
-import { z } from 'zod';
-
-const ImageDataSchema = z.object({ size: z.number(), type: z.string() });
 
 const useFetchImage = (imageId?: string) => {
   const [imageURL, setImage] = useState<string>('');
@@ -22,7 +20,7 @@ const useFetchImage = (imageId?: string) => {
           const validationResult = ImageDataSchema.safeParse(data);
 
           if (!validationResult.success) {
-            throw new Error('Invalid image format');
+            setError(400);
           } else {
             const src = URL.createObjectURL(data as Blob);
 

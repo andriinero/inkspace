@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import TimeAgo from '@/components/general/TimeAgo';
 import AppIcon from '@/components/icons/AppIcon';
 import { Username } from '@/styles/components/Username.styled';
-import AppImage from '@/components/general/AppImage';
+import AppImage from '@/features/appImages/components/AppImage';
 
 export const Wrapper = styled.li`
   display: flex;

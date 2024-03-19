@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Username } from '@/styles/components/Username.styled';
-import AppImage from '@/components/general/AppImage';
+import AppImage from '@/features/appImages/components/AppImage';
 
 export const Wrapper = styled.div`
   display: grid;

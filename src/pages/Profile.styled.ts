@@ -1,4 +1,4 @@
-import AppImage from '@/components/general/AppImage';
+import AppImage from '@/features/appImages/components/AppImage';
 import { Username } from '@/styles/components/Username.styled';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
