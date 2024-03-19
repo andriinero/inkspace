@@ -46,8 +46,9 @@ const appImagesSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchImage.pending, (state) => {
+      .addCase(fetchImage.pending, (state, action) => {
         state.fetchCount += 1;
+        state.fetchQueue.push(action.meta.arg);
       })
       .addCase(fetchImage.fulfilled, (state, action) => {
         const { imageId, imageURL } = action.payload;
@@ -55,9 +56,11 @@ const appImagesSlice = createSlice({
         if (!state.imageURLsMap[imageId]) state.imageURLsMap[imageId] = imageURL;
 
         state.fetchCount -= 1;
+        state.fetchQueue = state.fetchQueue.filter((q) => q !== action.meta.arg);
       })
-      .addCase(fetchImage.rejected, (state) => {
+      .addCase(fetchImage.rejected, (state, action) => {
         state.fetchCount -= 1;
+        state.fetchQueue = state.fetchQueue.filter((q) => q !== action.meta.arg);
       });
   },
 });
