@@ -1,7 +1,9 @@
-import { RootState } from '@/app/store';
 import { useAppFetch } from '@/lib/useAppFetch';
-import { ImageDataSchema } from '@/types/itemData/ImageData';
+
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
+import { RootState } from '@/app/store';
+import { ImageDataSchema } from '@/types/itemData/ImageData';
 
 type AppImageSliceState = {
   imageURLsMap: { [key: string]: string };

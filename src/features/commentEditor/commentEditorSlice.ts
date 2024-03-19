@@ -38,7 +38,6 @@ const initialState: CommentEditorState = {
   },
 };
 
-// TODO: move to comment list slice
 export const postComment = createAsyncThunk(
   'comments/postComment',
   async ({ postId, commentBody }: PostCommentType, { rejectWithValue }) => {

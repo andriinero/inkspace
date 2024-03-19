@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
-import { Image, BlankPlaceholder } from './AppImage.styled';
-import { FadeIn } from '@/styles/animations/FadeIn';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+
 import {
   fetchImage,
   selectAreImagesLoading,
   selectImageURL,
   selectIsImageInQueue,
 } from '../appImagesSlice';
+
+import { FadeIn } from '@/styles/animations/FadeIn';
+
+import { Image, BlankPlaceholder } from './AppImage.styled';
 
 type AppImageProps = {
   className?: string;
