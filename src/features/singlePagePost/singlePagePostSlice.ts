@@ -3,10 +3,10 @@ import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/utils/storage';
 
-import { ZodError } from 'zod';
 import { RootState } from '@/app/store';
 import { PostData, PostDataSchema } from '@/types/itemData/PostData';
-import { PutLikeCountSchema } from '@/types/responseData/success/PutLikeCount';
+import { PutLikeCount, PutLikeCountSchema } from '@/types/responseData/success/PutLikeCount';
+import { ErrorData } from '@/types/responseData/error/ErrorData';
 
 type SinglePagePostState = {
   post: PostData | null;
@@ -14,9 +14,9 @@ type SinglePagePostState = {
   likeCount: number;
   fetchPostState: {
     isLoading: boolean;
-    error: SerializedError | ZodError | null;
+    error: SerializedError | null;
   };
-  putLikeCountState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  putLikeCountState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: SinglePagePostState = {
@@ -38,16 +38,12 @@ export const fetchPost = createAsyncThunk(
       mode: 'cors',
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = PostDataSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as PostData;
   }
 );
 
@@ -64,16 +60,12 @@ export const putLikeCount = createAsyncThunk(
       },
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = PutLikeCountSchema.safeParse(data);
+    const validationResult = PutLikeCountSchema.safeParse(data); 
+    if (!validationResult.success) console.error(validationResult.error);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as PutLikeCount;
   }
 );
 

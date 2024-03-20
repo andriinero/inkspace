@@ -9,4 +9,4 @@ export const FullAuthorDataSchema = z.object({
   profile_image: z.string(),
 });
 
-export type AuthorData = z.infer<typeof FullAuthorDataSchema>;
+export type FullAuthorData = z.infer<typeof FullAuthorDataSchema>;

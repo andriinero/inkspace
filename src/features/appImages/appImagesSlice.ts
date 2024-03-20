@@ -4,6 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/app/store';
 import { ImageDataSchema } from '@/types/itemData/ImageData';
+import { ErrorData } from '@/types/responseData/error/ErrorData';
 
 type AppImageSliceState = {
   imageURLsMap: { [key: string]: string };
@@ -25,15 +26,10 @@ export const fetchImage = createAsyncThunk(
       true
     );
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = ImageDataSchema.safeParse(data);
-
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
+    if (!validationResult.success) console.error(validationResult);
     const imageURL = URL.createObjectURL(data as Blob);
 
     return { imageId, imageURL };
@@ -73,4 +69,5 @@ export const selectImageURL = (imageId: string | undefined) => (state: RootState
 export const selectIsImageInQueue = (imageId: string | undefined) => (state: RootState) =>
   state.appImages.fetchQueue.some((q) => q === imageId);
 
-export const selectAreImagesLoading = (state: RootState) => state.appImages.fetchQueue.length !== 0;
+export const selectAreImagesLoading = (state: RootState) =>
+  state.appImages.fetchQueue.length !== 0;

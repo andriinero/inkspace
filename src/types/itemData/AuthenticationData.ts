@@ -5,10 +5,10 @@ export enum UserRole {
   ADMIN = 'admin',
 }
 
-export const AuthenticationDataSchema = z.object({
+export const AuthDataSchema = z.object({
   sub: z.string(),
   username: z.string(),
   role: z.nativeEnum(UserRole),
 });
 
-export type AuthData = z.infer<typeof AuthenticationDataSchema>;
+export type AuthData = z.infer<typeof AuthDataSchema>;

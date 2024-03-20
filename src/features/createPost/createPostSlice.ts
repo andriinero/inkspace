@@ -4,8 +4,8 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
-import { PostDataSchema } from '@/types/itemData/PostData';
-import { ZodError } from 'zod';
+import { PostData, PostDataSchema } from '@/types/itemData/PostData';
+import { ErrorData } from '@/types/responseData/error/ErrorData';
 
 type PostBodyType = {
   title: string;
@@ -14,7 +14,7 @@ type PostBodyType = {
 };
 
 type CreatePostState = {
-  postPostState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  postPostState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: CreatePostState = {
@@ -36,16 +36,12 @@ export const postPost = createAsyncThunk(
       body: JSON.stringify(postBody),
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = PostDataSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as PostData;
   }
 );
 

@@ -1,17 +1,18 @@
-import { ZodError, z } from 'zod';
+import { z } from 'zod';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/app/store';
-import { AuthorData, FullAuthorDataSchema } from '@/types/itemData/FullAuthorData';
+import { FullAuthorData, FullAuthorDataSchema } from '@/types/itemData/FullAuthorData';
 import { PostData, PostDataSchema } from '@/types/itemData/PostData';
+import { ErrorData } from '@/types/responseData/error/ErrorData';
 
 type AuthorPageState = {
-  authorData: AuthorData | null;
+  authorData: FullAuthorData | null;
   authorPosts: PostData[];
-  fetchAuthorState: { isLoading: boolean; error: SerializedError | ZodError | null };
-  fetchAuthorPostsState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  fetchAuthorState: { isLoading: boolean; error: SerializedError | null };
+  fetchAuthorPostsState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: AuthorPageState = {
@@ -29,16 +30,12 @@ export const fetchAuthor = createAsyncThunk(
       mode: 'cors',
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = FullAuthorDataSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as FullAuthorData;
   }
 );
 
@@ -50,16 +47,12 @@ export const fetchAuthorPosts = createAsyncThunk(
       mode: 'cors',
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = z.array(PostDataSchema).safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as PostData[];
   }
 );
 

@@ -1,4 +1,4 @@
-import { ZodError, z } from 'zod';
+import { z } from 'zod';
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
@@ -6,13 +6,14 @@ import { RootState } from '@/app/store';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { PostData, PostDataSchema } from '@/types/itemData/PostData';
 import { TopicData } from '@/types/itemData/TopicData';
+import { ErrorData } from '@/types/responseData/error/ErrorData';
 
 type postListState = {
   postList: PostData[];
   selectedTopic: TopicData | null;
   fetchPostsState: {
     isLoading: boolean;
-    error: SerializedError | ZodError | null;
+    error: SerializedError | null;
   };
 };
 
@@ -32,16 +33,12 @@ export const fetchPosts = createAsyncThunk(
       }
     );
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = z.array(PostDataSchema).safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as PostData[];
   }
 );
 

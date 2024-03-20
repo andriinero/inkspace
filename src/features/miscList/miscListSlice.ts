@@ -4,21 +4,22 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
-import { AuthorData, FullAuthorDataSchema } from '@/types/itemData/FullAuthorData';
+import { FullAuthorData, FullAuthorDataSchema } from '@/types/itemData/FullAuthorData';
 import { TopicData, TopicDataSchema } from '@/types/itemData/TopicData';
 import { PostData, PostDataSchema } from '@/types/itemData/PostData';
-import { ZodError, z } from 'zod';
+import { z } from 'zod';
+import { ErrorData } from '@/types/responseData/error/ErrorData';
 
 type miscListState = {
-  authorList: AuthorData[];
+  authorList: FullAuthorData[];
   topicList: TopicData[];
   postList: PostData[];
   bookmarkList: PostData[];
   //FIXME: naming
-  fetchAuthorsState: { isLoading: boolean; error: SerializedError | ZodError | null };
-  fetchTopicsState: { isLoading: boolean; error: SerializedError | ZodError | null };
-  fetchMiscPostsState: { isLoading: boolean; error: SerializedError | ZodError | null };
-  fetchBookmarksState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  fetchAuthorsState: { isLoading: boolean; error: SerializedError | null };
+  fetchTopicsState: { isLoading: boolean; error: SerializedError | null };
+  fetchMiscPostsState: { isLoading: boolean; error: SerializedError | null };
+  fetchBookmarksState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: miscListState = {
@@ -40,16 +41,12 @@ export const fetchAuthors = createAsyncThunk(
       mode: 'cors',
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = z.array(FullAuthorDataSchema).safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as FullAuthorData[];
   }
 );
 
@@ -61,16 +58,12 @@ export const fetchTopics = createAsyncThunk(
       mode: 'cors',
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = z.array(TopicDataSchema).safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as TopicData;
   }
 );
 
@@ -82,16 +75,12 @@ export const fetchMiscPosts = createAsyncThunk(
       mode: 'cors',
     });
 
-    if (!responseState.ok) rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = z.array(PostDataSchema).safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as PostData[];
   }
 );
 
@@ -108,16 +97,12 @@ export const fetchBookmarks = createAsyncThunk(
       },
     });
 
-    if (!responseState.ok) rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = z.array(PostDataSchema).safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as PostData[];
   }
 );
 

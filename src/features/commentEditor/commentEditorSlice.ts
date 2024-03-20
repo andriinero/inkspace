@@ -4,20 +4,20 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
-import { CommentDataSchema } from '@/types/itemData/CommentData';
-import { ZodError } from 'zod';
+import { CommentData, CommentDataSchema } from '@/types/itemData/CommentData';
+import { ErrorData } from '@/types/responseData/error/ErrorData';
 
 type CommentEditorState = {
   textField: string;
   isEditMode: boolean;
   postCommentState: {
     isLoading: boolean;
-    error: SerializedError | ZodError | null;
+    error: SerializedError | null;
   };
   updateCommentState: {
     commentId: string | null;
     isLoading: boolean;
-    error: SerializedError | ZodError | null;
+    error: SerializedError | null;
   };
 };
 
@@ -53,16 +53,12 @@ export const postComment = createAsyncThunk(
       body: JSON.stringify({ body: commentBody }),
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = CommentDataSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as CommentData;
   }
 );
 
@@ -81,16 +77,12 @@ export const updateComment = createAsyncThunk(
       body: JSON.stringify({ body: commentBody }),
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = CommentDataSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as CommentData;
   }
 );
 

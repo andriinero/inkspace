@@ -2,21 +2,20 @@ import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/utils/storage';
-import { PostLoginSchema } from '@/types/responseData/success/PostLogin';
-import { AuthData, AuthenticationDataSchema } from '@/types/itemData/AuthenticationData';
+import { PostLogin, PostLoginSchema } from '@/types/responseData/success/PostLogin';
+import { AuthData, AuthDataSchema } from '@/types/itemData/AuthenticationData';
 
 import { AppThunk, RootState } from '@/app/store';
 import { fetchProfileData } from '../profile/profileSlice';
-import { ZodError } from 'zod';
-import { ErrorDataSchema } from '@/types/responseData/error/ErrorData';
+import { ErrorData } from '@/types/responseData/error/ErrorData';
 
 type LoginBodyType = { username: string; password: string };
 
 type AuthState = {
   authData: AuthData | null;
   isModalOpen: boolean;
-  fetchAuthDataState: { isLoading: boolean; error: SerializedError | ZodError | null };
-  postLoginState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  fetchAuthDataState: { isLoading: boolean; error: SerializedError | null };
+  postLoginState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: AuthState = {
@@ -37,19 +36,12 @@ export const fetchAuthData = createAsyncThunk(
       headers: { authorization: `Bearer ${token}` },
     });
 
-    let result = null;
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    if (!responseState.ok) {
-      const validationResult = ErrorDataSchema.safeParse(data);
+    const validationResult = AuthDataSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-      if (!validationResult.success) return rejectWithValue(validationResult.error);
-      return rejectWithValue(validationResult.data);
-    } else {
-      const validationResult = PostLoginSchema.safeParse(data);
-
-      if (!validationResult.success) return rejectWithValue(validationResult.error);
-      return rejectWithValue(validationResult.data);
-    }
+    return data as AuthData;
   }
 );
 
@@ -63,18 +55,14 @@ export const postLogin = createAsyncThunk(
       body: JSON.stringify(loginBody),
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = PostLoginSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
+    storage.setToken((data as PostLogin).token);
 
-    storage.setToken(validationResult.data.token);
-
-    return data;
+    return data as PostLogin;
   }
 );
 

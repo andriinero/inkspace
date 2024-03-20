@@ -6,19 +6,23 @@ import storage from '@/utils/storage';
 import { RootState } from '@/app/store';
 import { ProfileData, ProfileDataSchema } from '@/types/itemData/ProfileData';
 import { PostData, PostDataSchema } from '@/types/itemData/PostData';
-import { ZodError, z } from 'zod';
-import { TargetObjectIdSchema } from '@/types/responseData/success/TargetObjectId';
+import { z } from 'zod';
+import {
+  TargetObjectId,
+  TargetObjectIdSchema,
+} from '@/types/responseData/success/TargetObjectId';
+import { ErrorData } from '@/types/responseData/error/ErrorData';
 
 type ProfileState = {
   profileData: ProfileData | null;
   profileBookmarkList: PostData[];
-  fetchProfileDataState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  fetchProfileDataState: { isLoading: boolean; error: SerializedError | null };
   fetchProfileBookmarksState: {
     isLoading: boolean;
-    error: SerializedError | ZodError | null;
+    error: SerializedError | null;
   };
-  bookmarkActionState: { isLoading: boolean; error: SerializedError | ZodError | null };
-  followActionState: { isLoading: boolean; error: SerializedError | ZodError | null };
+  bookmarkActionState: { isLoading: boolean; error: SerializedError | null };
+  followActionState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: ProfileState = {
@@ -43,16 +47,12 @@ export const fetchProfileData = createAsyncThunk(
       },
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = ProfileDataSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as ProfileData;
   }
 );
 
@@ -69,16 +69,12 @@ export const fetchProfileBookmarks = createAsyncThunk(
       },
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) return rejectWithValue(data as ErrorData);
 
     const validationResult = z.array(PostDataSchema).safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as PostData[];
   }
 );
 
@@ -97,16 +93,12 @@ export const postBookmark = createAsyncThunk(
       body: JSON.stringify({ postid: postId }),
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = TargetObjectIdSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as TargetObjectId;
   }
 );
 
@@ -127,16 +119,12 @@ export const deleteBookmark = createAsyncThunk(
       }
     );
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = TargetObjectIdSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as TargetObjectId;
   }
 );
 
@@ -155,16 +143,12 @@ export const postFollowUser = createAsyncThunk(
       body: JSON.stringify({ userid: userId }),
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = TargetObjectIdSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as TargetObjectId;
   }
 );
 
@@ -185,16 +169,12 @@ export const deleteFollowUser = createAsyncThunk(
       }
     );
 
-    if (!responseState.ok) return rejectWithValue(data);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = TargetObjectIdSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+    return data as TargetObjectId;
   }
 );
 
