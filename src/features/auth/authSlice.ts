@@ -69,6 +69,8 @@ export const postLogin = createAsyncThunk(
     }
 
     storage.setToken(validationResult.data.token);
+
+    return data;
   }
 );
 

@@ -1,7 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { closeLoginModal, postLogin, selectIsLoginModalOpen } from '../authSlice';
+import {
+  closeLoginModal,
+  initAuth,
+  postLogin,
+  selectIsLoginModalOpen,
+} from '../authSlice';
 
 import { FadeIn } from '@/styles/animations/FadeIn';
 
@@ -21,7 +26,6 @@ import {
 import { useForm } from 'react-hook-form';
 import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from 'react-router-dom';
 
 const LoginDialog = () => {
   const {
@@ -31,8 +35,6 @@ const LoginDialog = () => {
   } = useForm<TLoginSchema>({ resolver: zodResolver(LoginSchema) });
 
   const isModalOpen = useAppSelector(selectIsLoginModalOpen);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const positionValue = isModalOpen ? 'fixed' : 'static';
@@ -49,7 +51,10 @@ const LoginDialog = () => {
   const handleSubmitLogin = async (formData: TLoginSchema): Promise<void> => {
     const response = await dispatch(postLogin(formData)).unwrap();
 
-    if (response) navigate('/');
+    if (response) {
+      dispatch(initAuth());
+      dispatch(closeLoginModal());
+    }
   };
 
   return (

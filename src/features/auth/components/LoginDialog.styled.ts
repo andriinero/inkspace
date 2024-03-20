@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { GreenButton } from '@/styles/components/GreenButton';
 import { InputText } from '@/styles/components/InputText';
 import { motion } from 'framer-motion';
 import { ErrorMessage } from '@/styles/components/ErrorMessage';
