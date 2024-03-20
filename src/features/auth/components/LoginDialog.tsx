@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { closeLoginModal, selectIsLoginModalOpen } from '../loginSlice';
+import { closeLoginModal, selectIsLoginModalOpen } from '../authSlice';
 
 import { LoginWrapper, WrapperBackdrop } from './LoginDialog.styled';
 import { FadeIn } from '@/styles/animations/FadeIn';

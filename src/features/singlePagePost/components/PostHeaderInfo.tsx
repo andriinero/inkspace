@@ -12,6 +12,7 @@ import {
   selectProfileFollowedUsers,
 } from '@/features/profile/profileSlice';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 type PostAuthorProps = {
   isAuthor: boolean;
@@ -28,6 +29,8 @@ const PostHeaderInfo = ({
   topic,
   bodyLength,
 }: PostAuthorProps) => {
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
   const followList = useAppSelector(selectProfileFollowedUsers);
   const followActionState = useAppSelector(selectFollowActionState);
 
@@ -52,7 +55,7 @@ const PostHeaderInfo = ({
         <S.HeaderStyledLink to={`/authors/${author._id}`}>
           <S.Name>{author.username}</S.Name>
         </S.HeaderStyledLink>
-        {!isAuthor && (
+        {isAuthenticated && !isAuthor && (
           <>
             <S.Divider>·</S.Divider>
             <S.FollowButton

@@ -1,27 +1,5 @@
 import { motion } from 'framer-motion';
-import styled, { keyframes } from 'styled-components';
-
-const FadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-`;
-
-const SlideIn = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  100% {
-    opacity: 1;
-    transform:translateY(0);
-  }
-`;
+import styled from 'styled-components';
 
 export const WrapperBackdrop = styled(motion.div)<{ $isOpen: boolean }>`
   display: flex;

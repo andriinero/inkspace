@@ -13,12 +13,14 @@ type LoginBodyType = { username: string; password: string };
 
 type AuthState = {
   authData: AuthData | null;
+  isModalOpen: boolean;
   fetchAuthDataState: { isLoading: boolean; error: SerializedError | ZodError | null };
   postLoginState: { isLoading: boolean; error: SerializedError | ZodError | null };
 };
 
 const initialState: AuthState = {
   authData: null,
+  isModalOpen: false,
   fetchAuthDataState: { isLoading: true, error: null },
   postLoginState: { isLoading: false, error: null },
 };
@@ -92,6 +94,12 @@ const authSlice = createSlice({
     resetLoadingState(state) {
       state.fetchAuthDataState.isLoading = false;
     },
+    openLoginModal(state) {
+      state.isModalOpen = true;
+    },
+    closeLoginModal(state) {
+      state.isModalOpen = false;
+    },
   },
   extraReducers(builder) {
     builder
@@ -124,6 +132,8 @@ const authSlice = createSlice({
 
 const { resetLoadingState } = authSlice.actions;
 
+export const { openLoginModal, closeLoginModal } = authSlice.actions;
+
 export default authSlice.reducer;
 
 export const selectCurrentUserId = (state: RootState) => state.auth.authData?.sub;
@@ -134,3 +144,5 @@ export const selectFetchAuthDataState = (state: RootState) =>
   state.auth.fetchAuthDataState;
 
 export const selectIsAuthenticated = (state: RootState) => Boolean(state.auth.authData);
+
+export const selectIsLoginModalOpen = (state: RootState) => state.auth.isModalOpen;

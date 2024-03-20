@@ -26,9 +26,8 @@ type PostControlsProps = { postId: string };
 const PostControls = ({ postId }: PostControlsProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
-  const userBookmarks = useAppSelector(selectProfileBookmarks);
   const likeCount = useAppSelector(selectPostLikeCount);
-
+  const userBookmarks = useAppSelector(selectProfileBookmarks);
   const bookmarkActionState = useAppSelector(selectBookmarkActionState);
 
   const dispatch = useAppDispatch();
