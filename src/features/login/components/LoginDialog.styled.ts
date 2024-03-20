@@ -23,27 +23,27 @@ const SlideIn = keyframes`
   }
 `;
 
-export const Wrapper = styled(motion.dialog)`
-  margin: auto;
+export const WrapperBackdrop = styled(motion.div)<{ $isOpen: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  min-height: 400px;
-  width: 300px;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  height: 100dvh;
+  width: 100dvw;
+  background-color: ${({ theme }) => theme.color.dialog_modal_bg};
+`;
+
+export const LoginWrapper = styled(motion.div)`
   padding: 2rem;
   border: none;
-  background-color: ${({ theme }) => theme.color.main_bg_primary};
+  background-color: ${({ theme }) => theme.color.dialog_backdrop_bg};
   box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
 
   color: ${({ theme }) => theme.color.text_primary};
-
-  transition: opacity 100ms;
-
-  &[open] {
-    animation: ${SlideIn} 300ms;
-  }
-
-  &::backdrop {
-    background-color: ${({ theme }) => theme.color.dialog_backdrop_bg};
-
-    animation: ${FadeIn} 150ms ease-in;
-  }
 `;
+
+export const CloseButton = styled.input``;

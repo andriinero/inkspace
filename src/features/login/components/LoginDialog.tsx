@@ -3,28 +3,49 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { closeLoginModal, selectIsLoginModalOpen } from '../loginSlice';
 
-import { Wrapper } from './LoginDialog.styled';
+import { LoginWrapper, WrapperBackdrop } from './LoginDialog.styled';
+import { FadeIn } from '@/styles/animations/FadeIn';
+import { AnimatePresence } from 'framer-motion';
 
 const LoginDialog = () => {
-  const dialogRef = useRef<HTMLDialogElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   const isModalOpen = useAppSelector(selectIsLoginModalOpen);
 
+  useEffect(() => {
+    const positionValue = isModalOpen ? 'fixed' : 'static';
+
+    document.querySelector('html')!.style.position = positionValue;
+  }, [isModalOpen]);
+
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (isModalOpen) dialogRef.current?.showModal();
-    else dialogRef.current?.close();
-  }, [isModalOpen, dispatch]);
-
-  const handleModalClick = () => {
+  const handleBackdropClick = () => {
     dispatch(closeLoginModal());
   };
 
   return (
-    <Wrapper ref={dialogRef} onClick={handleModalClick}>
-      Login Form
-    </Wrapper>
+    <AnimatePresence>
+      {isModalOpen && (
+        <WrapperBackdrop
+          ref={dialogRef}
+          $isOpen={isModalOpen}
+          onClick={handleBackdropClick}
+          initial={FadeIn.hidden}
+          animate={FadeIn.visible}
+          transition={FadeIn.transition}
+          exit={FadeIn.hidden}
+        >
+          <LoginWrapper
+            initial={FadeIn.hidden}
+            animate={FadeIn.visible}
+            transition={FadeIn.transition}
+          >
+            Content
+          </LoginWrapper>
+        </WrapperBackdrop>
+      )}
+    </AnimatePresence>
   );
 };
 

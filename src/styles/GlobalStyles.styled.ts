@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   html {
+    width: 100%;
     background-color: ${({ theme }) => theme.color.main_bg_primary};
     overflow: -moz-scrollbars-vertical; 
     overflow-y: scroll;
