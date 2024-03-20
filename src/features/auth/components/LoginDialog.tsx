@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import {
@@ -6,13 +6,13 @@ import {
   initAuth,
   postLogin,
   selectIsLoginModalOpen,
+  selectPostLoginState,
 } from '../authSlice';
 
 import { FadeIn } from '@/styles/animations/FadeIn';
 
 import { AnimatePresence } from 'framer-motion';
 import {
-  CloseButton,
   ControlsWrapper,
   InputWrapper,
   StyledInputLabel,
@@ -25,17 +25,23 @@ import {
   Header,
   SubText,
   HeaderWrapper,
+  StyledErrorMessage,
 } from './LoginDialog.styled';
 import { useForm } from 'react-hook-form';
 import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ErrorData } from '@/types/responseData/error/ErrorData';
 
 const LoginDialog = () => {
+  const [error, setError] = useState<ErrorData | null>(null);
+
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<TLoginSchema>({ resolver: zodResolver(LoginSchema) });
+  } = useForm<TLoginSchema>({
+    resolver: zodResolver(LoginSchema),
+  });
 
   const isModalOpen = useAppSelector(selectIsLoginModalOpen);
 
@@ -52,11 +58,15 @@ const LoginDialog = () => {
   };
 
   const handleSubmitLogin = async (formData: TLoginSchema): Promise<void> => {
-    const response = await dispatch(postLogin(formData)).unwrap();
+    try {
+      const response = await dispatch(postLogin(formData)).unwrap();
 
-    if (response) {
-      dispatch(initAuth());
-      dispatch(closeLoginModal());
+      if (response) {
+        dispatch(initAuth());
+        dispatch(closeLoginModal());
+      }
+    } catch (err) {
+      setError(err as ErrorData);
     }
   };
 
@@ -92,6 +102,9 @@ const LoginDialog = () => {
                   {...register('username', { required: 'Username is required' })}
                   type="text"
                 />
+                <StyledErrorMessage $isVisible={Boolean(errors.username)}>
+                  {errors.username?.message}
+                </StyledErrorMessage>
               </InputWrapper>
               <InputWrapper>
                 <StyledInputLabel htmlFor="login-password">Password</StyledInputLabel>
@@ -100,8 +113,14 @@ const LoginDialog = () => {
                   {...register('password', { required: 'Password is required' })}
                   type="password"
                 />
+                <StyledErrorMessage $isVisible={Boolean(errors.password)}>
+                  {errors.password?.message}
+                </StyledErrorMessage>
               </InputWrapper>
               <ControlsWrapper>
+                <StyledErrorMessage $isVisible={Boolean(error)}>
+                  {error?.message}
+                </StyledErrorMessage>
                 <SubmitButton value="Submit" type="submit" />
               </ControlsWrapper>
             </LoginForm>

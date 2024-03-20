@@ -68,7 +68,7 @@ export const SubText = styled.p`
 export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
 `;
 
 export const InputWrapper = styled.div`

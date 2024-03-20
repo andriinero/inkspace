@@ -8,6 +8,7 @@ import { AuthData, AuthenticationDataSchema } from '@/types/itemData/Authenticat
 import { AppThunk, RootState } from '@/app/store';
 import { fetchProfileData } from '../profile/profileSlice';
 import { ZodError } from 'zod';
+import { ErrorDataSchema } from '@/types/responseData/error/ErrorData';
 
 type LoginBodyType = { username: string; password: string };
 
@@ -36,16 +37,19 @@ export const fetchAuthData = createAsyncThunk(
       headers: { authorization: `Bearer ${token}` },
     });
 
-    if (!responseState.ok) return rejectWithValue(data);
+    let result = null;
 
-    const validationResult = AuthenticationDataSchema.safeParse(data);
+    if (!responseState.ok) {
+      const validationResult = ErrorDataSchema.safeParse(data);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
+      if (!validationResult.success) return rejectWithValue(validationResult.error);
+      return rejectWithValue(validationResult.data);
+    } else {
+      const validationResult = PostLoginSchema.safeParse(data);
+
+      if (!validationResult.success) return rejectWithValue(validationResult.error);
+      return rejectWithValue(validationResult.data);
     }
-
-    return validationResult.data;
   }
 );
 
@@ -144,6 +148,8 @@ export const selectAuthData = (state: RootState) => state.auth.authData;
 
 export const selectFetchAuthDataState = (state: RootState) =>
   state.auth.fetchAuthDataState;
+
+export const selectPostLoginState = (state: RootState) => state.auth.postLoginState;
 
 export const selectIsAuthenticated = (state: RootState) => Boolean(state.auth.authData);
 
