@@ -29,19 +29,17 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-export const Logo = styled(motion.h1)`
-  color: ${({ theme }) => theme.color.text_primary};
-  font-size: 1.5rem;
-  font-weight: 500;
-  text-transform: uppercase;
-
-  transition: color 200ms;
+export const Logo = styled(motion.img)`
+  height: 22px;
 
   user-select: none;
   cursor: pointer;
 
+  transition: color 200ms;
+
   &:hover {
-    color: ${({ theme }) => theme.color.text_secondary};
+    filter: invert(0) sepia(0) saturate(0%) hue-rotate(198deg) brightness(101%)
+      contrast(124%);
   }
 `;
 

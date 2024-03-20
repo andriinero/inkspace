@@ -44,9 +44,11 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <Logo whileHover={{ x: -1, y: -1 }} onClick={handleLogoClick}>
-        Well-done
-      </Logo>
+      <Logo
+        whileHover={{ x: -1, y: -1 }}
+        onClick={handleLogoClick}
+        src="/logo.svg"
+      />
       <ProfileWrapper>
         {isAuthenticated ? (
           <>
