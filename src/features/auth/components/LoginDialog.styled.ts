@@ -33,14 +33,36 @@ export const WrapperBackdrop = styled(motion.div)<{ $isOpen: boolean }>`
 `;
 
 export const LoginWrapper = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
   position: absolute;
 
-  padding: 7rem;
+  padding: 7rem 10rem;
   border: none;
+  border-radius: 6px;
   background-color: ${({ theme }) => theme.color.dialog_modal_bg};
   box-shadow: 0 0 3em rgb(0 0 0 / 0.3);
+  text-align: center;
 
   color: ${({ theme }) => theme.color.text_primary};
+`;
+
+export const HeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+export const Header = styled.h2`
+  font-size: 2rem;
+  font-weight: 200;
+  font-family: ${({ theme }) => theme.font.times};
+`;
+
+export const SubText = styled.p`
+  font-weight: 300;
 `;
 
 export const LoginForm = styled.form`
@@ -55,22 +77,25 @@ export const InputWrapper = styled.div`
   gap: 1rem;
 `;
 
-export const Label = styled(InputLabel)`
+export const StyledInputLabel = styled(InputLabel)`
   font-size: 0.8rem;
   font-weight: 300;
-  text-align: center;
 `;
 
-export const StyledInputText = styled(InputText)``;
+export const StyledInputText = styled(InputText)`
+  margin: 0 1.2rem;
+`;
 
 export const StyledErrorMessage = styled(ErrorMessage)``;
 
 export const ControlsWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   gap: 1rem;
 `;
 
-export const SubmitButton = styled(FormButton)``;
+export const SubmitButton = styled(FormButton)`
+  margin: 0 3rem;
+`;
 
 export const CloseButton = styled(FormButton)``;

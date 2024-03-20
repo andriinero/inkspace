@@ -21,7 +21,7 @@ import {
   Header,
   InputContainer,
   InputItem,
-  InputLabel,
+  StyledInputLabel,
   StyledInputText,
   PostWrapper,
   SubmitButton,
@@ -58,7 +58,7 @@ const CreatePost = () => {
       <Form onSubmit={handleSubmit(handleFormSubmit)} id="create-new-post">
         <InputContainer>
           <InputItem>
-            <InputLabel htmlFor="post-title">Title</InputLabel>
+            <StyledInputLabel htmlFor="post-title">Title</StyledInputLabel>
             <StyledInputText
               id="post-title"
               {...register('title', {
@@ -72,7 +72,7 @@ const CreatePost = () => {
             </StyledErrorMessage>
           </InputItem>
           <InputItem>
-            <InputLabel htmlFor="post-topic">Topic</InputLabel>
+            <StyledInputLabel htmlFor="post-topic">Topic</StyledInputLabel>
             <StyledInputText
               {...register('topic', {
                 required: 'Topic is required',

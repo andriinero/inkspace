@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { GreenButton } from '@/styles/components/GreenButton';
-import { motion } from 'framer-motion';
 import AppIcon from '@/components/icons/AppIcon';
 import AppImage from '@/features/appImages/components/AppImage';
 

@@ -3,6 +3,7 @@ import { GreenButton } from '@/styles/components/GreenButton';
 import { PostBody } from '@/styles/PostBody.styled';
 import { ErrorMessage } from '@/styles/components/ErrorMessage';
 import { InputText } from '@/styles/components/InputText';
+import { InputLabel } from '@/styles/components/InputLabel';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -33,9 +34,7 @@ export const InputItem = styled.div`
   gap: 0.3rem;
 `;
 
-export const InputLabel = styled.label`
-  cursor: pointer;
-`;
+export const StyledInputLabel = styled(InputLabel)``;
 
 export const StyledInputText = styled(InputText)``;
 

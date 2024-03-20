@@ -15,13 +15,16 @@ import {
   CloseButton,
   ControlsWrapper,
   InputWrapper,
-  Label,
+  StyledInputLabel,
   LoginForm,
   LoginWrapper,
   StyledInputText,
   SubmitButton,
   Wrapper,
   WrapperBackdrop,
+  Header,
+  SubText,
+  HeaderWrapper,
 } from './LoginDialog.styled';
 import { useForm } from 'react-hook-form';
 import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
@@ -66,32 +69,39 @@ const LoginDialog = () => {
             onClick={handleCloseModal}
             initial={FadeIn.hidden}
             animate={FadeIn.visible}
-            transition={FadeIn.transition}
+            transition={{ duration: 0.2 }}
             exit={FadeIn.hidden}
           ></WrapperBackdrop>
           <LoginWrapper
             initial={FadeIn.hidden}
             animate={FadeIn.visible}
-            transition={FadeIn.transition}
+            transition={{ duration: 0.2 }}
             exit={FadeIn.hidden}
           >
+            <HeaderWrapper>
+              <Header>Welcome Back</Header>
+              <SubText>Sign in with your username and password</SubText>
+            </HeaderWrapper>
             <LoginForm onSubmit={handleSubmit(handleSubmitLogin)}>
               <InputWrapper>
-                <Label>Your username</Label>
+                <StyledInputLabel htmlFor="login-username">
+                  Your username
+                </StyledInputLabel>
                 <StyledInputText
+                  id="login-username"
                   {...register('username', { required: 'Username is required' })}
                   type="text"
                 />
               </InputWrapper>
               <InputWrapper>
-                <Label>Password</Label>
+                <StyledInputLabel htmlFor="login-password">Password</StyledInputLabel>
                 <StyledInputText
+                  id="login-password"
                   {...register('password', { required: 'Password is required' })}
                   type="password"
                 />
               </InputWrapper>
               <ControlsWrapper>
-                <CloseButton onClick={handleCloseModal} value="Close" type="button" />
                 <SubmitButton value="Submit" type="submit" />
               </ControlsWrapper>
             </LoginForm>
