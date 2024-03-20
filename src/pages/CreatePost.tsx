@@ -8,18 +8,21 @@ import { postPost } from '@/features/createPost/createPostSlice';
 
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
-import { TCreatePostSchema, createPostSchema } from '@/types/formSchemas/CreatePostSchema';
+import {
+  TCreatePostSchema,
+  CreatePostSchema,
+} from '@/types/formSchemas/CreatePostSchema';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
-  ErrorMessage,
+  StyledErrorMessage,
   Form,
   Header,
   InputContainer,
   InputItem,
   InputLabel,
-  InputText,
+  StyledInputText,
   PostWrapper,
   SubmitButton,
   Wrapper,
@@ -32,7 +35,7 @@ const CreatePost = () => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<TCreatePostSchema>({ resolver: zodResolver(createPostSchema) });
+  } = useForm<TCreatePostSchema>({ resolver: zodResolver(CreatePostSchema) });
 
   const editorRef = useRef<TinyMCEEditor | null>(null);
 
@@ -43,7 +46,7 @@ const CreatePost = () => {
 
   if (!isAuthenticated) return <Navigate to="/" />;
 
-  const onFormSubmit = async (formData: TCreatePostSchema): Promise<void> => {
+  const handleFormSubmit = async (formData: TCreatePostSchema): Promise<void> => {
     const response = await dispatch(postPost(formData)).unwrap();
 
     if (response) navigate('/');
@@ -52,11 +55,11 @@ const CreatePost = () => {
   return (
     <Wrapper>
       <Header>Create post</Header>
-      <Form onSubmit={handleSubmit(onFormSubmit)} id="create-new-post">
+      <Form onSubmit={handleSubmit(handleFormSubmit)} id="create-new-post">
         <InputContainer>
           <InputItem>
             <InputLabel htmlFor="post-title">Title</InputLabel>
-            <InputText
+            <StyledInputText
               id="post-title"
               {...register('title', {
                 required: 'Title is required',
@@ -64,13 +67,13 @@ const CreatePost = () => {
               type="text"
               placeholder="Your title..."
             />
-            <ErrorMessage $isVisible={Boolean(errors.title)}>
+            <StyledErrorMessage $isVisible={Boolean(errors.title)}>
               {errors.title?.message}
-            </ErrorMessage>
+            </StyledErrorMessage>
           </InputItem>
           <InputItem>
             <InputLabel htmlFor="post-topic">Topic</InputLabel>
-            <InputText
+            <StyledInputText
               {...register('topic', {
                 required: 'Topic is required',
               })}
@@ -78,9 +81,9 @@ const CreatePost = () => {
               type="text"
               placeholder="Post topic..."
             />
-            <ErrorMessage $isVisible={Boolean(errors.topic)}>
+            <StyledErrorMessage $isVisible={Boolean(errors.topic)}>
               {errors.topic?.message}
-            </ErrorMessage>
+            </StyledErrorMessage>
           </InputItem>
         </InputContainer>
         <InputItem>
@@ -96,9 +99,9 @@ const CreatePost = () => {
               )}
             />
           </PostWrapper>
-          <ErrorMessage $isVisible={Boolean(errors.body)}>
+          <StyledErrorMessage $isVisible={Boolean(errors.body)}>
             {errors.body?.message}
-          </ErrorMessage>
+          </StyledErrorMessage>
         </InputItem>
       </Form>
       <SubmitButton form="create-new-post" type="submit" value="Publish" />

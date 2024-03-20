@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { GreenButton } from '@/styles/components/GreenButton';
 import { PostBody } from '@/styles/PostBody.styled';
+import { ErrorMessage } from '@/styles/components/ErrorMessage';
+import { InputText } from '@/styles/components/InputText';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -35,13 +37,9 @@ export const InputLabel = styled.label`
   cursor: pointer;
 `;
 
-export const Header = styled.h2``;
+export const StyledInputText = styled(InputText)``;
 
-export const InputText = styled.input`
-  padding: 0.3rem 0.4rem;
-  border: 1px solid transparent;
-  border-radius: 16px;
-`;
+export const Header = styled.h2``;
 
 export const Form = styled.form`
   display: flex;
@@ -50,19 +48,7 @@ export const Form = styled.form`
   overflow-wrap: break-word;
 `;
 
-export const ErrorMessage = styled.span<{ $isVisible: boolean }>`
-  display: inline-block;
-  visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
-
-  color: ${({ theme }) => theme.color.error_text};
-  font-size: 0.8rem;
-  font-weight: 300;
-  font-style: italic;
-
-  &::before {
-    content: '* ';
-  }
-`;
+export const StyledErrorMessage = styled(ErrorMessage)``;
 
 export const SubmitButton = styled(GreenButton)`
   align-self: flex-start;

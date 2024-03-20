@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 
 export const PostBody = css`
   font-size: 1.25rem;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: ${({ theme }) => theme.font.times};
 
   p,
   span,

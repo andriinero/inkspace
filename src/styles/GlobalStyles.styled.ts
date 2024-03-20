@@ -6,7 +6,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     
-    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-family: ${({ theme }) => theme.font.roboto};
     overflow-wrap: anywhere;
   }
 

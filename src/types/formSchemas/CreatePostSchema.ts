@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const createPostSchema = z.object({
+export const CreatePostSchema = z.object({
   title: z
     .string()
     .min(3, 'Title must contain at least 3 character(s)')
@@ -15,4 +15,4 @@ export const createPostSchema = z.object({
     .max(10000, 'Post body must contain at most 10000 character(s)'),
 });
 
-export type TCreatePostSchema = z.infer<typeof createPostSchema>;
+export type TCreatePostSchema = z.infer<typeof CreatePostSchema>;
