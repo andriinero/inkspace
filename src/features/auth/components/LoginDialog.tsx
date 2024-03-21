@@ -6,7 +6,6 @@ import {
   initAuth,
   postLogin,
   selectIsLoginModalOpen,
-  selectPostLoginState,
 } from '../authSlice';
 
 import { FadeIn } from '@/styles/animations/FadeIn';

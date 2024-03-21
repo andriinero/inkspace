@@ -77,10 +77,7 @@ export const InputWrapper = styled.div`
   gap: 1rem;
 `;
 
-export const StyledInputLabel = styled(InputLabel)`
-  font-size: 0.8rem;
-  font-weight: 300;
-`;
+export const StyledInputLabel = styled(InputLabel)``;
 
 export const StyledInputText = styled(InputText)`
   margin: 0 1.2rem;

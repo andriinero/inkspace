@@ -24,8 +24,10 @@ import {
   StyledInputLabel,
   StyledInputText,
   PostWrapper,
-  SubmitButton,
+  PublishButton,
   Wrapper,
+  SaveDraftButton,
+  ControlsContainer,
 } from './CreatePost.styled';
 import TinyEditor from '@/features/createPost/components/TinyEditor';
 
@@ -104,7 +106,10 @@ const CreatePost = () => {
           </StyledErrorMessage>
         </InputItem>
       </Form>
-      <SubmitButton form="create-new-post" type="submit" value="Publish" />
+      <ControlsContainer>
+        <SaveDraftButton form="create-new-post" type="button" value="Save Draft" />
+        <PublishButton form="create-new-post" type="submit" value="Publish" />
+      </ControlsContainer>
     </Wrapper>
   );
 };

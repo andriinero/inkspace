@@ -1,21 +1,21 @@
 import styled from 'styled-components';
-import { GreenButton } from '@/styles/components/GreenButton';
 import { PostBody } from '@/styles/PostBody.styled';
 import { ErrorMessage } from '@/styles/components/ErrorMessage';
 import { InputText } from '@/styles/components/InputText';
 import { InputLabel } from '@/styles/components/InputLabel';
+import { FormButton } from '@/styles/components/FormButton';
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 3rem;
+  padding: 3rem 0;
   width: 80ch;
 `;
 
 export const InputContainer = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   gap: 1rem;
 `;
@@ -23,22 +23,37 @@ export const InputContainer = styled.div`
 export const PostWrapper = styled.div`
   & > * {
     ${PostBody}
-    padding: 0.5rem;
-    min-height: 300px;
+    padding: 1.5rem;
+    min-height: 320px;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
+    }
   }
 `;
 
 export const InputItem = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 1rem;
 `;
 
-export const StyledInputLabel = styled(InputLabel)``;
+export const StyledInputLabel = styled(InputLabel)`
+  font-size: 1rem;
+  font-family: ${({ theme }) => theme.font.times};
+  text-align: center;
+`;
 
-export const StyledInputText = styled(InputText)``;
+export const StyledInputText = styled(InputText)`
+  min-width: 300px;
+`;
 
-export const Header = styled.h2``;
+export const Header = styled.h2`
+  font-family: ${({ theme }) => theme.font.times};
+  font-weight: 400;
+  text-align: center;
+`;
 
 export const Form = styled.form`
   display: flex;
@@ -49,6 +64,18 @@ export const Form = styled.form`
 
 export const StyledErrorMessage = styled(ErrorMessage)``;
 
-export const SubmitButton = styled(GreenButton)`
-  align-self: flex-start;
+export const ControlsContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-self: flex-end;
+`;
+
+export const PublishButton = styled(FormButton)``;
+
+export const SaveDraftButton = styled(FormButton)`
+  cursor: not-allowed;
+
+  &:hover {
+    color: inherit;
+  }
 `;
