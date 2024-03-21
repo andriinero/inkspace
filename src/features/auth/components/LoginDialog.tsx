@@ -95,8 +95,8 @@ const LoginDialog = () => {
                   Your username
                 </StyledInputLabel>
                 <StyledInputText
-                  id="login-username"
                   {...register('username', { required: 'Username is required' })}
+                  id="login-username"
                   type="text"
                 />
                 <StyledErrorMessage $isVisible={Boolean(errors.username)}>
@@ -106,8 +106,8 @@ const LoginDialog = () => {
               <InputWrapper>
                 <StyledInputLabel htmlFor="login-password">Password</StyledInputLabel>
                 <StyledInputText
-                  id="login-password"
                   {...register('password', { required: 'Password is required' })}
+                  id="login-password"
                   type="password"
                 />
                 <StyledErrorMessage $isVisible={Boolean(errors.password)}>
@@ -118,7 +118,7 @@ const LoginDialog = () => {
                 <StyledErrorMessage $isVisible={Boolean(error)}>
                   {error?.message}
                 </StyledErrorMessage>
-                <SubmitButton value="Submit" type="submit" />
+                <SubmitButton type="submit" />
               </ControlsWrapper>
             </LoginForm>
           </LoginWrapper>
