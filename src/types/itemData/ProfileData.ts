@@ -13,6 +13,7 @@ export const ProfileDataSchema = z.object({
   ignored_posts: z.string().array(),
   ignored_topics: z.string().array(),
   followed_users: z.string().array(),
+  users_following: z.string().array(),
   sign_up_date: z.string(),
   profile_image: z.string().optional(),
 });

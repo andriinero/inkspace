@@ -39,7 +39,7 @@ export const LoginWrapper = styled(motion.div)`
 
   position: absolute;
 
-  padding: 7rem 10rem;
+  padding: 7rem 13rem;
   border: none;
   border-radius: 6px;
   background-color: ${({ theme }) => theme.color.dialog_modal_bg};

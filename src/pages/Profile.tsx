@@ -64,6 +64,7 @@ const Profile = () => {
           <ProfileIcon imageId={profileData?.profile_image} altText="Profile Icon" />
           <StyledAsideUserName>{profileData?.username}</StyledAsideUserName>
           <FollowCount>{profileData?.followed_users.length} Following</FollowCount>
+          <FollowCount>{profileData?.users_following.length} Followers</FollowCount>
           <SignUpDate>Member since: {signUpDate}</SignUpDate>
           <StyledEditLink to="/profile/edit">Edit Profile</StyledEditLink>
           <UserBio>{profileData?.bio}</UserBio>
