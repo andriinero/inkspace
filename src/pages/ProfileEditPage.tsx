@@ -1,8 +1,8 @@
-import { useAppSelector } from '@/app/hooks';
-import { Navigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
-import { selectProfileData } from '@/features/profile/profileSlice';
+import { putProfileData, selectProfileData } from '@/features/profile/profileSlice';
 
 import * as S from './ProfileEditPage.styled';
 import { useForm } from 'react-hook-form';
@@ -31,9 +31,16 @@ const ProfileEditPage = () => {
     resolver: zodResolver(ProfileEditSchema),
   });
 
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   if (!isAuthenticated || !profileData) return <Navigate to="/" />;
 
-  const handleFormSubmit = async (formData: TProfileEditSchema): Promise<void> => {};
+  const handleFormSubmit = async (formData: TProfileEditSchema): Promise<void> => {
+    const response = await dispatch(putProfileData(formData)).unwrap();
+
+    if (response) navigate('/');
+  };
 
   return (
     <S.Wrapper>
