@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
@@ -7,7 +8,6 @@ import { RootState } from '@/app/store';
 import { FullAuthorData, FullAuthorDataSchema } from '@/types/itemData/FullAuthorData';
 import { TopicData, TopicDataSchema } from '@/types/itemData/TopicData';
 import { PostData, PostDataSchema } from '@/types/itemData/PostData';
-import { z } from 'zod';
 import { ErrorData } from '@/types/responseData/error/ErrorData';
 
 type miscListState = {

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
   closeLoginModal,
@@ -9,8 +11,9 @@ import {
 } from '../authSlice';
 
 import { FadeIn } from '@/styles/animations/FadeIn';
+import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
+import { ErrorData } from '@/types/responseData/error/ErrorData';
 
-import { AnimatePresence } from 'framer-motion';
 import {
   ControlsWrapper,
   InputWrapper,
@@ -26,14 +29,10 @@ import {
   HeaderWrapper,
   StyledErrorMessage,
 } from './LoginDialog.styled';
-import { useForm } from 'react-hook-form';
-import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ErrorData } from '@/types/responseData/error/ErrorData';
+import { AnimatePresence } from 'framer-motion';
 
 const LoginDialog = () => {
   const [error, setError] = useState<ErrorData | null>(null);
-
   const {
     handleSubmit,
     register,
@@ -44,13 +43,12 @@ const LoginDialog = () => {
 
   const isModalOpen = useAppSelector(selectIsLoginModalOpen);
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     const positionValue = isModalOpen ? 'fixed' : 'static';
-
     document.querySelector('html')!.style.position = positionValue;
   }, [isModalOpen]);
-
-  const dispatch = useAppDispatch();
 
   const handleCloseModal = () => {
     dispatch(closeLoginModal());

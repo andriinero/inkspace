@@ -93,7 +93,7 @@ const AuthorPage = () => {
         <ProfileWrapper>
           <ProfileIcon imageId={authorData?.profile_image} altText="Profile Icon" />
           <StyledAsideUserName>{authorData?.username}</StyledAsideUserName>
-          <FollowCount>{authorData?.followed_users.length} Following</FollowCount>
+          <FollowCount>{authorData?.followed_users_count} Following</FollowCount>
           <SignUpDate>Member since: {signUpDate}</SignUpDate>
           {isAuthenticated && (
             <HollowButton

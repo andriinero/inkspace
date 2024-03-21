@@ -33,7 +33,7 @@ export const fetchAuthor = createAsyncThunk(
     if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
     const validationResult = FullAuthorDataSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+    if (!validationResult.success) console.error(validationResult.error);
 
     return data as FullAuthorData;
   }
