@@ -49,7 +49,20 @@ export const StyledInputText = styled(InputText)`
 `;
 
 export const StyledInputTextArea = styled.textarea`
-  ${InputText}
+  padding: 0.3rem 0.4rem;
+  border: 1px solid transparent;
+  background-color: transparent;
+  border-bottom: 1px solid ${({ theme }) => theme.color.input_text_border};
+  resize: none;
+
+  color: ${({ theme }) => theme.color.text_primary};
+  font-size: 1rem;
+  text-align: center;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
+  }
 `;
 
 export const StyledErrorMessage = styled(ErrorMessage)``;
