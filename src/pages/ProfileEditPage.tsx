@@ -7,6 +7,7 @@ import { selectProfileData } from '@/features/profile/profileSlice';
 
 import * as S from './ProfileEditPage.styled';
 import PersonalDetailsForm from '@/features/profileEdit/components/PersonalDetailsForm';
+import PasswordForm from '@/features/profileEdit/components/PasswordForm';
 
 const ProfileEditPage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -22,8 +23,14 @@ const ProfileEditPage = () => {
   return (
     <S.Wrapper>
       <S.WrapperMain>
-        <S.Header>Profile Information</S.Header>
-        <PersonalDetailsForm />
+        <S.FormGroupWrapper>
+          <S.Header>Personal Details</S.Header>
+          <PersonalDetailsForm />
+        </S.FormGroupWrapper>
+        <S.FormGroupWrapper>
+          <S.Header>Password</S.Header>
+          <PasswordForm />
+        </S.FormGroupWrapper>
       </S.WrapperMain>
       <S.WrapperAside>
         <S.ProfileWrapper>

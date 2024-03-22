@@ -50,17 +50,17 @@ export const putPersonalDetails = createAsyncThunk(
 
 export const putPassword = createAsyncThunk(
   'profile/putPassword',
-  async (profileData: TProfilePasswordEditSchema, { rejectWithValue }) => {
+  async (passwordData: TProfilePasswordEditSchema, { rejectWithValue }) => {
     const token = storage.getToken();
 
-    const { data, responseState } = await useAppFetch('/api/profile', {
+    const { data, responseState } = await useAppFetch('/api/profile/password', {
       method: 'PUT',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(profileData),
+      body: JSON.stringify(passwordData),
     });
 
     if (!responseState.ok) throw rejectWithValue(data as ErrorData);

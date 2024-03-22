@@ -3,8 +3,6 @@ import { ErrorMessage } from '@/styles/components/ErrorMessage';
 import { FormButton } from '@/styles/components/FormButton';
 import { InputLabel } from '@/styles/components/InputLabel';
 import { InputText } from '@/styles/components/InputText';
-import AppImage from '@/features/appImages/components/AppImage';
-import { Username } from '@/styles/components/Username.styled';
 
 export const WrapperMain = styled.div`
   display: flex;

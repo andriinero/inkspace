@@ -24,6 +24,12 @@ export const WrapperMain = styled.div`
   border-right: 1px solid ${({ theme }) => theme.color.main_border};
 `;
 
+export const FormGroupWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+`;
+
 export const Header = styled.h2`
   font-family: ${({ theme }) => theme.font.times};
   font-weight: 400;
