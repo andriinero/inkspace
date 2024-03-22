@@ -3,17 +3,6 @@ import { ErrorMessage } from '@/styles/components/ErrorMessage';
 import { FormButton } from '@/styles/components/FormButton';
 import { InputLabel } from '@/styles/components/InputLabel';
 import { InputText } from '@/styles/components/InputText';
-import AppImage from '@/features/appImages/components/AppImage';
-import { Username } from '@/styles/components/Username.styled';
-
-export const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: minmax(50ch, 80ch) minmax(30ch, 40ch);
-  justify-content: center;
-  gap: 4rem;
-
-  min-height: 100%;
-`;
 
 export const WrapperMain = styled.div`
   display: flex;
@@ -22,12 +11,6 @@ export const WrapperMain = styled.div`
 
   padding: 3rem;
   border-right: 1px solid ${({ theme }) => theme.color.main_border};
-`;
-
-export const Header = styled.h2`
-  font-family: ${({ theme }) => theme.font.times};
-  font-weight: 400;
-  text-align: center;
 `;
 
 export const Form = styled.form`
@@ -94,63 +77,9 @@ export const ControlsContainer = styled.div`
   align-self: flex-end;
 `;
 
-export const SaveProfileButton = styled(FormButton)`
+export const SaveButton = styled(FormButton)`
   align-self: flex-end;
 
   padding-left: 3rem;
   padding-right: 3rem;
-`;
-
-export const WrapperAside = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  padding: 3rem 0;
-`;
-
-export const ProfileWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-export const ProfileIcon = styled(AppImage)`
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-`;
-
-export const StyledUserName = styled(Username)`
-  max-width: none;
-
-  white-space: break-spaces;
-  word-wrap: break-word;
-`;
-
-export const ImageForm = styled.form`
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-`;
-
-export const ImageInput = styled.input``;
-
-export const SaveImageButton = styled(FormButton)`
-  align-self: flex-start;
-
-  padding: 0.4rem 0.6rem;
-`;
-
-export const FollowCount = styled.span`
-  display: inline-block;
-
-  font-weight: 300;
-`;
-
-export const SignUpDate = styled.span`
-  display: inline-block;
-
-  font-size: 0.8rem;
-  font-weight: 300;
-  font-style: italic;
 `;

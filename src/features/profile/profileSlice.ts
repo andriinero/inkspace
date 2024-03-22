@@ -12,11 +12,6 @@ import {
   TargetObjectIdSchema,
 } from '@/types/responseData/success/TargetObjectId';
 import { ErrorData } from '@/types/responseData/error/ErrorData';
-import { TProfileEditSchema } from '@/types/formSchemas/ProfileEditSchema';
-import {
-  PutProfileData,
-  PutProfileDataSchema,
-} from '@/types/responseData/PutProfileEdit';
 
 type ProfileState = {
   profileData: ProfileData | null;
@@ -28,7 +23,6 @@ type ProfileState = {
   };
   bookmarkActionState: { isLoading: boolean; error: SerializedError | null };
   followActionState: { isLoading: boolean; error: SerializedError | null };
-  putProfileDataState: { isLoading: boolean; error: SerializedError | null };
 };
 
 const initialState: ProfileState = {
@@ -38,7 +32,6 @@ const initialState: ProfileState = {
   fetchProfileDataState: { isLoading: true, error: null },
   bookmarkActionState: { isLoading: false, error: null },
   followActionState: { isLoading: false, error: null },
-  putProfileDataState: { isLoading: false, error: null },
 };
 
 export const fetchProfileData = createAsyncThunk(
@@ -185,30 +178,6 @@ export const deleteFollowUser = createAsyncThunk(
   }
 );
 
-export const putProfileData = createAsyncThunk(
-  'profile/putProfileData',
-  async (profileData: TProfileEditSchema, { rejectWithValue }) => {
-    const token = storage.getToken();
-
-    const { data, responseState } = await useAppFetch('/api/profile', {
-      method: 'PUT',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(profileData),
-    });
-
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
-
-    const validationResult = PutProfileDataSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
-
-    return data as PutProfileData;
-  }
-);
-
 const profileSlice = createSlice({
   name: 'profile',
   initialState,
@@ -308,19 +277,6 @@ const profileSlice = createSlice({
         state.followActionState.isLoading = false;
         state.followActionState.error = action.error;
       });
-    builder
-      .addCase(putProfileData.pending, (state) => {
-        state.putProfileDataState.isLoading = true;
-        state.putProfileDataState.error = null;
-      })
-      .addCase(putProfileData.fulfilled, (state, action) => {
-        state.profileData = { ...state.profileData, ...action.payload } as ProfileData;
-        state.putProfileDataState.isLoading = false;
-      })
-      .addCase(putProfileData.rejected, (state, action) => {
-        state.putProfileDataState.isLoading = false;
-        state.putProfileDataState.error = action.error;
-      });
   },
 });
 
@@ -337,9 +293,6 @@ export const selectBookmarkActionState = (state: RootState) =>
 
 export const selectFollowActionState = (state: RootState) =>
   state.profile.followActionState;
-
-export const selectPutProfileDataState = (state: RootState) =>
-  state.profile.putProfileDataState;
 
 export const selectProfileData = (state: RootState) => state.profile.profileData;
 
