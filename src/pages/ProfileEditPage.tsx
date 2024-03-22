@@ -32,6 +32,7 @@ const ProfileEditPage = () => {
     defaultValues: {
       username: profileData?.username,
       password: '',
+      passwordConfirmation: '',
       email: profileData?.email,
       bio: profileData?.bio,
     },
@@ -58,6 +59,7 @@ const ProfileEditPage = () => {
   return (
     <S.Wrapper>
       <S.WrapperMain>
+        <S.Header>Profile Information</S.Header>
         <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
           <S.InputContainer>
             <S.InputGroup>
@@ -97,6 +99,20 @@ const ProfileEditPage = () => {
               </StyledErrorMessage>
             </S.InputItem>
             <S.InputItem>
+              <S.StyledInputLabel htmlFor="edit-password-confirmation">
+                Confirm Password
+              </S.StyledInputLabel>
+              <S.StyledInputText
+                {...register('passwordConfirmation')}
+                id="edit-password-confirmation"
+                type="password"
+                placeholder="••••••••"
+              />
+              <StyledErrorMessage $isVisible={Boolean(errors.passwordConfirmation)}>
+                {errors.passwordConfirmation?.message}
+              </StyledErrorMessage>
+            </S.InputItem>
+            <S.InputItem>
               <S.StyledInputLabel htmlFor="edit-bio">Bio</S.StyledInputLabel>
               <S.StyledInputTextArea
                 {...register('bio', { required: 'Bio is required' })}
@@ -112,7 +128,7 @@ const ProfileEditPage = () => {
           <S.StyledErrorMessage $isVisible={Boolean(error)}>
             An error has occurred while submitting the form
           </S.StyledErrorMessage>
-          <S.SubmitButton type="submit" />
+          <S.SubmitButton type="submit" value="Save" />
         </S.Form>
       </S.WrapperMain>
       <S.WrapperAside>

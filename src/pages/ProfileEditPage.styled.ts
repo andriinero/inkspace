@@ -18,27 +18,33 @@ export const Wrapper = styled.div`
 export const WrapperMain = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
 
-  padding: 3rem 0;
+  padding: 3rem;
   border-right: 1px solid ${({ theme }) => theme.color.main_border};
+`;
+
+export const Header = styled.h2`
+  font-family: ${({ theme }) => theme.font.times};
+  font-weight: 400;
+  text-align: center;
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
   overflow-wrap: break-word;
 `;
 
 export const InputGroup = styled.div`
   display: flex;
-  gap: 3rem;
+  justify-content: space-between;
+  gap: 1rem;
 `;
 
 export const InputContainer = styled.div`
   display: flex;
-  align-items: flex-start;
   flex-direction: column;
   gap: 2rem;
 `;
@@ -51,12 +57,17 @@ export const InputItem = styled.div`
 
 export const StyledInputLabel = styled(InputLabel)`
   font-size: 1rem;
-  font-family: ${({ theme }) => theme.font.times};
+  font-size: 0.9rem;
 `;
 
 export const StyledInputText = styled(InputText)`
   min-width: 300px;
   text-align: start;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
+  }
 `;
 
 export const StyledInputTextArea = styled.textarea`
@@ -68,7 +79,6 @@ export const StyledInputTextArea = styled.textarea`
 
   color: ${({ theme }) => theme.color.text_primary};
   font-size: 1rem;
-  text-align: center;
 
   &:focus {
     outline: none;
@@ -85,7 +95,7 @@ export const ControlsContainer = styled.div`
 `;
 
 export const SubmitButton = styled(FormButton)`
-  align-self: flex-start;
+  align-self: flex-end;
 
   padding-left: 3rem;
   padding-right: 3rem;
