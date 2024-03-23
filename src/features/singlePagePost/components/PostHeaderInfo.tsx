@@ -14,6 +14,8 @@ import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import PostDate from '@/components/general/TimeAgo';
 import * as S from './PostHeaderInfo.styled';
+import { setTopic } from '@/features/postList/postListSlice';
+import { useNavigate } from 'react-router-dom';
 
 type PostAuthorProps = {
   isAuthor: boolean;
@@ -36,6 +38,7 @@ const PostHeaderInfo = ({
   const followActionState = useAppSelector(selectFollowActionState);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleFollowAdd = (): void => {
     if (!followActionState.isLoading) dispatch(postFollowUser(author._id));
@@ -45,6 +48,11 @@ const PostHeaderInfo = ({
     if (!followActionState.isLoading) dispatch(deleteFollowUser(author._id));
   };
 
+  const handleTopicClick = (): void => {
+    dispatch(setTopic(topic));
+    navigate('/');
+  };
+
   const isFollowed = followList?.some((f) => f === author._id);
 
   const followButtonText = isFollowed ? 'Followed' : 'Follow';
@@ -52,7 +60,9 @@ const PostHeaderInfo = ({
 
   return (
     <S.Wrapper>
-      <S.ProfileIcon imageId={author.profile_image} altText="Author Icon" />
+      <S.AuthorStyledLink to={`/authors/${author._id}`}>
+        <S.ProfileIcon imageId={author.profile_image} altText="Author Icon" />
+      </S.AuthorStyledLink>
       <S.MainContainer>
         <S.HeaderStyledLink to={`/authors/${author._id}`}>
           <S.Name>{author.username}</S.Name>
@@ -72,9 +82,7 @@ const PostHeaderInfo = ({
       <S.MiscContainer>
         <S.TopicInfo>
           Published in
-          <S.StyledLink to="/">
-            <S.TopicName> {topic.name}</S.TopicName>
-          </S.StyledLink>
+          <S.TopicName onClick={handleTopicClick}> {topic.name}</S.TopicName>
         </S.TopicInfo>
         <S.Divider>·</S.Divider>
         <S.PostReadEstimate bodyLength={bodyLength} />

@@ -20,6 +20,12 @@ export const StyledLink = styled(NavLink)`
   text-decoration: none;
 `;
 
+export const AuthorStyledLink = styled(StyledLink)`
+  grid-area: icon;
+  display: flex;
+  align-items: center;
+`;
+
 export const HeaderStyledLink = styled(StyledLink)`
   display: flex;
   align-items: center;
@@ -47,8 +53,6 @@ export const Divider = styled.span`
 `;
 
 export const ProfileIcon = styled(AppImage)`
-  grid-area: icon;
-
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -60,7 +64,9 @@ export const Name = styled(Username)`
 
 export const TopicInfo = styled.span``;
 
-export const TopicName = styled.strong``;
+export const TopicName = styled.strong`
+  cursor: pointer;
+`;
 
 export const PostReadEstimate = styled(PostReadTime)``;
 
