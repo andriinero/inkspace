@@ -25,11 +25,9 @@ const ImageForm = () => {
 
   const handleFormSubmit = async (formData: TProfileImageSchema): Promise<void> => {
     if (!isLoading) {
-      const response = await dispatch(putProfileImage(formData.image[0])).unwrap();
+      const response = await dispatch(putProfileImage(formData.image as File)).unwrap();
 
-      if (response) {
-        navigate('/');
-      }
+      if (response) navigate('/');
     }
   };
 

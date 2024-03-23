@@ -5,11 +5,22 @@ const ACCEPTED_FILE_TYPES = ['image/jpeg', 'image/png'];
 
 export const ProfileImageSchema = z.object({
   image: z
-    .any()
-    .refine((fileList) => fileList[0].size <= MAX_FILE_SIZE, 'Max image size is 2MB')
-    .refine((fileList) => {
-      return ACCEPTED_FILE_TYPES.includes(fileList[0].type);
-    }, 'Only .jpeg, .png formats are supported'),
+    .custom<FileList>()
+    .superRefine((fileList, ctx) => {
+      if (!fileList || fileList.length === 0)
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Upload field must not be empty',
+          fatal: true,
+        });
+    })
+    .transform((fileList) => fileList.length > 0 && fileList.item(0))
+    .refine((file) => !file || (!!file && file.size <= MAX_FILE_SIZE), {
+      message: 'Max image size is 2MB',
+    })
+    .refine((file) => !file || (!!file && ACCEPTED_FILE_TYPES.includes(file.type)), {
+      message: 'Only .jpeg, .png formats are supported',
+    }),
 });
 
 export type TProfileImageSchema = z.infer<typeof ProfileImageSchema>;

@@ -1,6 +1,8 @@
 import { useAppFetch } from '@/lib/useAppFetch';
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { updateImageId } from '../profile/profileSlice';
+
 import storage from '@/utils/storage';
 
 import { RootState } from '@/app/store';
@@ -15,7 +17,6 @@ import {
   TargetObjectId,
   TargetObjectIdSchema,
 } from '@/types/responseData/success/TargetObjectId';
-import { updateImageId } from '../profile/profileSlice';
 
 type ProfileEditState = {
   putPersonalDetailsState: { isLoading: boolean; error: SerializedError | null };
