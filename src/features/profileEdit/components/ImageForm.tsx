@@ -5,22 +5,27 @@ import { putProfileImage, selectPutProfileImageState } from '../profileEditSlice
 
 import * as S from './ImageForm.styled';
 import { useNavigate } from 'react-router-dom';
+import {
+  ProfileImageSchema,
+  TProfileImageSchema,
+} from '@/types/formSchemas/ProfileImageSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const ImageForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<TProfileImageSchema>({ resolver: zodResolver(ProfileImageSchema) });
 
   const { isLoading, error } = useAppSelector(selectPutProfileImageState);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleFormSubmit = async (): Promise<void> => {
+  const handleFormSubmit = async (formData: TProfileImageSchema): Promise<void> => {
     if (!isLoading) {
-      const response = await dispatch(putProfileImage('NULL')).unwrap();
+      const response = await dispatch(putProfileImage(formData.image[0])).unwrap();
 
       if (response) navigate('/');
     }
@@ -38,7 +43,7 @@ const ImageForm = () => {
           type="file"
         />
         <S.StyledErrorMessage $isVisible={Boolean(errors.image)}>
-          {errors.root?.message}
+          {errors.image?.message as string}
         </S.StyledErrorMessage>
       </S.InputItem>
       <S.StyledErrorMessage $isVisible={Boolean(error)}>

@@ -11,6 +11,14 @@ import {
   PutProfileDataSchema,
 } from '@/types/responseData/PutProfileEdit';
 import { ErrorData } from '@/types/responseData/error/ErrorData';
+import {
+  ProfileImageSchema,
+  TProfileImageSchema,
+} from '@/types/formSchemas/ProfileImageSchema';
+import {
+  TargetObjectId,
+  TargetObjectIdSchema,
+} from '@/types/responseData/success/TargetObjectId';
 
 type ProfileEditState = {
   putPersonalDetailsState: { isLoading: boolean; error: SerializedError | null };
@@ -74,13 +82,27 @@ export const putPassword = createAsyncThunk(
 
 export const putProfileImage = createAsyncThunk(
   'profile/putProfileImage',
-  async (imageData: string, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch('', {});
+  async (image: File, { rejectWithValue }) => {
+    const token = storage.getToken();
 
-    // TODO: types
+    const formData = new FormData();
+    formData.append('image', image);
+
+    const { data, responseState } = await useAppFetch('/api/profile/image', {
+      method: 'PUT',
+      mode: 'cors',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
     if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    return imageData;
+    const validationResult = TargetObjectIdSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
+
+    return data as TargetObjectId;
   }
 );
 
