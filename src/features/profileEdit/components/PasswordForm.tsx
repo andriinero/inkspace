@@ -13,8 +13,6 @@ import {
 import * as S from './PasswordForm.styled';
 
 const PasswordForm = () => {
-  const { isLoading, error } = useAppSelector(selectPutPasswordState);
-
   const {
     register,
     handleSubmit,
@@ -26,6 +24,8 @@ const PasswordForm = () => {
     },
     resolver: zodResolver(ProfilePasswordEditSchema),
   });
+
+  const { isLoading, error } = useAppSelector(selectPutPasswordState);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

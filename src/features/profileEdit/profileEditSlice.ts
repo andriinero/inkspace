@@ -74,7 +74,14 @@ export const putPassword = createAsyncThunk(
 
 export const putProfileImage = createAsyncThunk(
   'profile/putProfileImage',
-  async () => {}
+  async (imageData: string, { rejectWithValue }) => {
+    const { data, responseState } = await useAppFetch('', {});
+
+    // TODO: types
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+
+    return imageData;
+  }
 );
 
 const profileEditSlice = createSlice({

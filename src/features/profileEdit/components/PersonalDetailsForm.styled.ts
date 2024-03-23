@@ -71,12 +71,6 @@ export const StyledInputTextArea = styled.textarea`
 
 export const StyledErrorMessage = styled(ErrorMessage)``;
 
-export const ControlsContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-  align-self: flex-end;
-`;
-
 export const SaveButton = styled(FormButton)`
   align-self: flex-end;
 
