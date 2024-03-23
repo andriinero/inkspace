@@ -13,9 +13,10 @@ import {
 import { FadeIn } from '@/styles/animations/FadeIn';
 import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
 import { ErrorData } from '@/types/responseData/error/ErrorData';
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
-import * as S from './LoginDialog.styled';
 import { AnimatePresence } from 'framer-motion';
+import * as S from './LoginDialog.styled';
 
 const LoginDialog = () => {
   const [error, setError] = useState<ErrorData | null>(null);
@@ -104,7 +105,10 @@ const LoginDialog = () => {
                 <S.StyledErrorMessage $isVisible={Boolean(error)}>
                   {error?.message}
                 </S.StyledErrorMessage>
-                <S.SubmitButton type="submit" />
+                <S.SubmitButton
+                  type="submit"
+                  whileTap={ButtonInteraction.whileTap.animation}
+                />
               </S.ControlsWrapper>
             </S.LoginForm>
           </S.LoginWrapper>

@@ -72,6 +72,6 @@ export const StyledErrorMessage = styled(ErrorMessage)``;
 export const SaveButton = styled(FormButton)`
   align-self: flex-end;
 
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 `;

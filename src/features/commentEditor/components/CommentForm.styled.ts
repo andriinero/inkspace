@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { GreenButton } from '@/styles/components/GreenButton';
 import CommentCounter from './CommentCounter';
+import { FormButton } from '@/styles/components/FormButton';
 
 export const Form = styled.form`
   display: flex;
@@ -62,15 +62,16 @@ export const ControlsWrapper = styled.div`
   gap: 1rem;
 `;
 
-export const SubmitActionButton = styled(GreenButton)`
+export const SubmitActionButton = styled(FormButton)`
   padding: 0.3rem;
+  border: 1px solid ${({ theme }) => theme.color.main_button_border_primary};
+  background-color: ${({ theme }) => theme.color.main_button_bg_primary};
 
   font-size: 0.7rem;
 `;
 
-export const CancelActionButton = styled(GreenButton)`
+export const CancelActionButton = styled(FormButton)`
   padding: 0.3rem;
-  background-color: ${({ theme }) => theme.color.main_button_bg_secondary};
 
   font-size: 0.7rem;
 `;

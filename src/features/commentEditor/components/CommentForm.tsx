@@ -14,6 +14,8 @@ import {
 } from '../commentEditorSlice';
 import { addComment, editComment } from '@/features/commentList/commentListSlice';
 
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+
 import * as S from './CommentForm.styled';
 
 type CommentFormProps = { postId: string };
@@ -87,11 +89,13 @@ const CommentForm = ({ postId }: CommentFormProps) => {
                 onClick={handleEditCancelClick}
                 type="button"
                 value="Cancel"
+                whileTap={ButtonInteraction.whileTap.animation}
               />
             )}
             <S.SubmitActionButton
               type="submit"
               value={isEditMode ? 'Update' : 'Respond'}
+              whileTap={ButtonInteraction.whileTap.animation}
             />
           </S.ControlsWrapper>
         </S.BottomWrapper>

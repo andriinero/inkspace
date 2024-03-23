@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
   padding: 3rem 0;
   width: 80ch;
 `;
@@ -25,10 +26,10 @@ export const PostWrapper = styled.div`
     ${PostBody}
     padding: 1.5rem;
     min-height: 320px;
+    box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
     }
   }
 `;
@@ -66,8 +67,8 @@ export const StyledErrorMessage = styled(ErrorMessage)``;
 
 export const ControlsContainer = styled.div`
   display: flex;
-  gap: 1rem;
   align-self: flex-end;
+  gap: 1rem;
 `;
 
 export const PublishButton = styled(FormButton)``;

@@ -21,9 +21,9 @@ export const WrapperMain = styled.div`
 `;
 
 export const Header = styled.h2`
-  font-family: ${({ theme }) => theme.font.times};
-  font-weight: 400;
-  /* text-align: center; */
+  font-size: 1.4rem;
+  font-weight: 100;
+  font-family: ${({ theme }) => theme.font.roboto};
 `;
 
 export const FormGroupWrapper = styled.div`

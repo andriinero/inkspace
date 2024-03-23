@@ -9,6 +9,7 @@ import {
   ProfileImageSchema,
   TProfileImageSchema,
 } from '@/types/formSchemas/ProfileImageSchema';
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import * as S from './ImageForm.styled';
 
@@ -52,7 +53,11 @@ const ImageForm = () => {
       <S.StyledErrorMessage $isVisible={Boolean(error)}>
         An error has occurred while submitting the form
       </S.StyledErrorMessage>
-      <S.SaveButton type="submit" value="Save Image" />
+      <S.SaveButton
+        type="submit"
+        value="Save Image"
+        whileTap={ButtonInteraction.whileTap.animation}
+      />
     </S.Form>
   );
 };

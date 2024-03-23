@@ -10,6 +10,7 @@ import {
   ProfileDataEditSchema,
   TProfileDataEditSchema,
 } from '@/types/formSchemas/ProfileDataEditSchema';
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import * as S from './PersonalDetailsForm.styled';
 
@@ -84,7 +85,11 @@ const PersonalDetailsForm = () => {
       <S.StyledErrorMessage $isVisible={Boolean(error)}>
         An error has occurred while submitting the form
       </S.StyledErrorMessage>
-      <S.SaveButton type="submit" value="Save" />
+      <S.SaveButton
+        type="submit"
+        value="Save"
+        whileTap={ButtonInteraction.whileTap.animation}
+      />
     </S.Form>
   );
 };
