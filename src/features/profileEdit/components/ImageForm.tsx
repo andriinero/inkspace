@@ -33,19 +33,21 @@ const ImageForm = () => {
 
   return (
     <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
-      <S.InputItem>
-        <S.StyledInputLabel htmlFor="profile-image-upload">
-          Upload Image:
-        </S.StyledInputLabel>
-        <S.StyledInputFile
-          {...register('image', { required: 'Image is required' })}
-          id="profile-image-upload"
-          type="file"
-        />
+      <S.InputGroup>
+        <S.InputItem>
+          <S.StyledInputLabel htmlFor="profile-image-upload">
+            Upload Image:
+          </S.StyledInputLabel>
+          <S.StyledInputFile
+            {...register('image', { required: 'Image is required' })}
+            id="profile-image-upload"
+            type="file"
+          />
+        </S.InputItem>
         <S.StyledErrorMessage $isVisible={Boolean(errors.image)}>
           {errors.image?.message as string}
         </S.StyledErrorMessage>
-      </S.InputItem>
+      </S.InputGroup>
       <S.StyledErrorMessage $isVisible={Boolean(error)}>
         An error has occurred while submitting the form
       </S.StyledErrorMessage>

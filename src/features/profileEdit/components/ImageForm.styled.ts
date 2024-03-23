@@ -18,10 +18,16 @@ export const Form = styled.form`
   gap: 0.2rem;
 `;
 
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+`;
+
 export const InputItem = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.5rem;
 `;
 
 export const StyledInputLabel = styled(InputLabel)`

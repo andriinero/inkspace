@@ -16,20 +16,18 @@ export const WrapperMain = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  overflow-wrap: break-word;
 `;
 
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 `;
 
 export const InputItem = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
 `;
 
 export const StyledInputLabel = styled(InputLabel)`

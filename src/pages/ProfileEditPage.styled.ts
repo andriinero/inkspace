@@ -23,13 +23,13 @@ export const WrapperMain = styled.div`
 export const Header = styled.h2`
   font-family: ${({ theme }) => theme.font.times};
   font-weight: 400;
-  text-align: center;
+  /* text-align: center; */
 `;
 
 export const FormGroupWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2.5rem;
 `;
 
 export const WrapperAside = styled.div`
