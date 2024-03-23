@@ -13,11 +13,11 @@ import { setTopic } from '../postListSlice';
 
 import { PostAuthorData } from '@/types/itemData/GeneralAuthorData';
 import { TopicData } from '@/types/itemData/TopicData';
-
-import * as S from './PostItem.styled';
-import PostDate from '@/components/general/TimeAgo';
 import { Waterfall } from '@/styles/animations/Waterfall';
+
+import PostDate from '@/components/general/TimeAgo';
 import { Username } from '@/styles/components/Username.styled';
+import * as S from './PostItem.styled';
 
 type PostItemProps = {
   _id: string;
@@ -67,6 +67,16 @@ const PostItem = ({
 
   const handleTopicClick = (): void => {
     dispatch(setTopic(topic));
+  };
+
+  const handleMuteAuthorClick = (): void => {
+    // TODO:
+    setIsMenuOpen(false);
+  };
+
+  const handleMutePublicationClick = (): void => {
+    // TODO:
+    setIsMenuOpen(false);
   };
 
   const handleBookmarkClick = isBookmarked ? handleBookmarkRemove : handleBookmarkAdd;

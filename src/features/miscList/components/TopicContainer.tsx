@@ -3,21 +3,22 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { fetchTopics, selectTopicList, selectFetchTopicsState } from '../miscListSlice';
 
-import { Header, TopicList, Wrapper } from './TopicContainer.styled';
+import { WaterfallPopUp } from '@/styles/animations/WaterfallPopUp';
+
 import TopicItem from './TopicItem';
 import TopicListLoader from '@/components/loaders/TopicListLoader';
 import Error from '@/components/general/Error';
-import { WaterfallPopUp } from '@/styles/animations/WaterfallPopUp';
+import { Header, TopicList, Wrapper } from './TopicContainer.styled';
 
 const TopicContainer = () => {
+  const topicList = useAppSelector(selectTopicList);
+  const { isLoading, error } = useAppSelector(selectFetchTopicsState);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchTopics());
   }, [dispatch]);
-
-  const topicList = useAppSelector(selectTopicList);
-  const { isLoading, error } = useAppSelector(selectFetchTopicsState);
 
   return (
     <Wrapper>

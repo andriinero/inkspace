@@ -3,7 +3,7 @@ import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit
 
 import { updateImageId } from '../profile/profileSlice';
 
-import storage from '@/utils/storage';
+import storage from '@/lib/storage';
 
 import { RootState } from '@/app/store';
 import { TProfileDataEditSchema } from '@/types/formSchemas/ProfileDataEditSchema';

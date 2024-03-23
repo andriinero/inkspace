@@ -6,9 +6,9 @@ export const WrapperIcon = styled.img`
   fill: #fff;
   transition: filter 100ms;
 
-  cursor: pointer;
-  -webkit-user-drag: none;
   user-select: none;
+  -webkit-user-drag: none;
+  cursor: pointer;
 
   &:hover {
     filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)

@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 import { Counter } from './CommentCounter.styled';
 
 type CommentCounterProps = {

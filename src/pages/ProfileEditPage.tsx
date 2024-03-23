@@ -5,10 +5,10 @@ import { Navigate } from 'react-router-dom';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import { selectProfileData } from '@/features/profile/profileSlice';
 
-import * as S from './ProfileEditPage.styled';
 import PersonalDetailsForm from '@/features/profileEdit/components/PersonalDetailsForm';
 import PasswordForm from '@/features/profileEdit/components/PasswordForm';
 import ImageForm from '@/features/profileEdit/components/ImageForm';
+import * as S from './ProfileEditPage.styled';
 
 const ProfileEditPage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -25,11 +25,11 @@ const ProfileEditPage = () => {
     <S.Wrapper>
       <S.WrapperMain>
         <S.FormGroupWrapper>
-          <S.Header>Personal Details</S.Header>
+          <S.Header>Edit: Personal Details</S.Header>
           <PersonalDetailsForm />
         </S.FormGroupWrapper>
         <S.FormGroupWrapper>
-          <S.Header>Password</S.Header>
+          <S.Header>Edit: Account Password</S.Header>
           <PasswordForm />
         </S.FormGroupWrapper>
       </S.WrapperMain>

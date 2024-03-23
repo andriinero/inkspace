@@ -10,6 +10,8 @@ import {
   selectProfileBookmarks,
 } from '@/features/profile/profileSlice';
 
+import Bookmark from '@/components/icons/Bookmark';
+import DotMenu from '@/components/general/DotMenu';
 import {
   ControlsContainer,
   ControlsIcon,
@@ -18,8 +20,6 @@ import {
   MenuItem,
   Wrapper,
 } from './PostControls.styled';
-import Bookmark from '@/components/icons/Bookmark';
-import DotMenu from '@/components/general/DotMenu';
 
 type PostControlsProps = { postId: string };
 
@@ -56,8 +56,17 @@ const PostControls = ({ postId }: PostControlsProps) => {
     setIsMenuOpen(false);
   };
 
-  const isBookmarked = userBookmarks?.some((p) => p === postId) || false;
+  const handleMuteAuthorClick = (): void => {
+    // TODO:
+    setIsMenuOpen(false);
+  };
 
+  const handleMutePublicationClick = (): void => {
+    // TODO:
+    setIsMenuOpen(false);
+  };
+
+  const isBookmarked = userBookmarks?.some((p) => p === postId) || false;
   const onBookmarkClick = isBookmarked ? handleBookmarkRemove : handleBookmarkAdd;
 
   return (
@@ -85,8 +94,8 @@ const PostControls = ({ postId }: PostControlsProps) => {
           onMenuClose={handleDropdownClose}
           isOpen={isMenuOpen}
         >
-          <MenuItem onClick={handleDropdownClose}>Mute this author</MenuItem>
-          <MenuItem onClick={handleDropdownClose}>Mute this publication</MenuItem>
+          <MenuItem onClick={handleMuteAuthorClick}>Mute this author</MenuItem>
+          <MenuItem onClick={handleMutePublicationClick}>Mute this publication</MenuItem>
         </DotMenu>
       </ControlsContainer>
     </Wrapper>

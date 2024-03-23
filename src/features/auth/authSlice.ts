@@ -1,7 +1,7 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
-import storage from '@/utils/storage';
+import storage from '@/lib/storage';
 import { PostLogin, PostLoginSchema } from '@/types/responseData/success/PostLogin';
 import { AuthData, AuthDataSchema } from '@/types/itemData/AuthenticationData';
 

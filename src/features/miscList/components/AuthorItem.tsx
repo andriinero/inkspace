@@ -1,17 +1,17 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
-
-import * as S from './AuthorItem.styled';
 import {
   deleteFollowUser,
   postFollowUser,
   selectFollowActionState,
 } from '@/features/profile/profileSlice';
+
 import { Username } from '@/styles/components/Username.styled';
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 import { HollowButton } from '@/styles/components/HollowButton';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+import * as S from './AuthorItem.styled';
 
 type AuthorItemProps = {
   _id: string;
@@ -29,17 +29,17 @@ const AuthorItem = ({
   profile_image,
 }: AuthorItemProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const authData = useAppSelector(selectAuthData);
 
+  const authData = useAppSelector(selectAuthData);
   const followActionState = useAppSelector(selectFollowActionState);
 
   const dispatch = useAppDispatch();
 
-  const handleFollowAdd = () => {
+  const handleFollowAdd = (): void => {
     if (!followActionState.isLoading) dispatch(postFollowUser(_id));
   };
 
-  const handleFollowRemove = () => {
+  const handleFollowRemove = (): void => {
     if (!followActionState.isLoading) dispatch(deleteFollowUser(_id));
   };
 

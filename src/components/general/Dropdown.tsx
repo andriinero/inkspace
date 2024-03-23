@@ -3,7 +3,7 @@ import { ReactNode, RefObject } from 'react';
 import { Wrapper, List } from './Dropdown.styled';
 
 type DropdownProps = {
-  innerRef: RefObject<HTMLDivElement>;
+  innerRef: RefObject<HTMLUListElement>;
   children: ReactNode;
   isOpen: boolean;
   isAlignedLeft: boolean;

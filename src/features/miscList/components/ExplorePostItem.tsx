@@ -1,20 +1,12 @@
-import { setTopic } from '@/features/postList/postListSlice';
 import { useAppDispatch } from '@/app/hooks';
+
+import { setTopic } from '@/features/postList/postListSlice';
 
 import { PostAuthorData } from '@/types/itemData/GeneralAuthorData';
 import { TopicData } from '@/types/itemData/TopicData';
-
-import {
-  AuthorIcon,
-  Header,
-  PostTitle,
-  StyledLink,
-  TopicName,
-  TopicWrapper,
-  WrapperItem,
-  AuthorName,
-} from './ExplorePostItem.styled';
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
+
+import * as S from './ExplorePostItem.styled';
 
 type ExplorePostItemProps = {
   _id: string;
@@ -33,21 +25,21 @@ const ExplorePostItem = ({ _id, author, title, topic }: ExplorePostItemProps) =>
   };
 
   return (
-    <WrapperItem variants={WaterfallSlideIn.item}>
-      <Header>
-        <StyledLink to={`/authors/${author._id}`}>
-          <AuthorIcon imageId={author.profile_image} altText="Author Icon" />
-          <AuthorName>{author.username}</AuthorName>
-        </StyledLink>
-        <TopicWrapper>
+    <S.WrapperItem variants={WaterfallSlideIn.item}>
+      <S.Header>
+        <S.StyledLink to={`/authors/${author._id}`}>
+          <S.AuthorIcon imageId={author.profile_image} altText="Author Icon" />
+          <S.AuthorName>{author.username}</S.AuthorName>
+        </S.StyledLink>
+        <S.TopicWrapper>
           in
-          <TopicName onClick={handleTopicClick}>{topic.name}</TopicName>
-        </TopicWrapper>
-      </Header>
-      <StyledLink to={`/posts/${_id}`}>
-        <PostTitle>{title}</PostTitle>
-      </StyledLink>
-    </WrapperItem>
+          <S.TopicName onClick={handleTopicClick}>{topic.name}</S.TopicName>
+        </S.TopicWrapper>
+      </S.Header>
+      <S.StyledLink to={`/posts/${_id}`}>
+        <S.PostTitle>{title}</S.PostTitle>
+      </S.StyledLink>
+    </S.WrapperItem>
   );
 };
 

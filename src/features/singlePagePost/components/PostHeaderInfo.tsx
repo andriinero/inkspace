@@ -1,18 +1,19 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { PostAuthorData } from '@/types/itemData/GeneralAuthorData';
-import { TopicData } from '@/types/itemData/TopicData';
-
-import * as S from './PostHeaderInfo.styled';
-import PostDate from '@/components/general/TimeAgo';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
   deleteFollowUser,
   postFollowUser,
   selectFollowActionState,
   selectProfileFollowedUsers,
 } from '@/features/profile/profileSlice';
+
+import { PostAuthorData } from '@/types/itemData/GeneralAuthorData';
+import { TopicData } from '@/types/itemData/TopicData';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
+
+import PostDate from '@/components/general/TimeAgo';
+import * as S from './PostHeaderInfo.styled';
 
 type PostAuthorProps = {
   isAuthor: boolean;
@@ -45,6 +46,7 @@ const PostHeaderInfo = ({
   };
 
   const isFollowed = followList?.some((f) => f === author._id);
+
   const followButtonText = isFollowed ? 'Followed' : 'Follow';
   const handleFollowClick = isFollowed ? handleFollowRemove : handleFollowAdd;
 

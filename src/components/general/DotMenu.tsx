@@ -2,27 +2,27 @@ import { ReactNode, useRef } from 'react';
 
 import useCloseDropdown from '@/hooks/useCloseDropdown';
 
-import Dropdown from './Dropdown';
 import AppIcon from '../icons/AppIcon';
+import Dropdown from './Dropdown';
 
 type DotMenuProps = {
-  onToggle: () => void;
-  onMenuClose: () => void;
   className?: string;
   isOpen: boolean;
   isAlignedLeft: boolean;
   children: ReactNode;
+  onToggle: () => void;
+  onMenuClose: () => void;
 };
 
 const DotMenu = ({
-  onToggle,
-  onMenuClose,
   className,
   isOpen,
   isAlignedLeft,
   children,
+  onToggle,
+  onMenuClose,
 }: DotMenuProps) => {
-  const dropdown = useRef<HTMLDivElement>(null);
+  const dropdown = useRef<HTMLUListElement>(null);
 
   useCloseDropdown(dropdown, onMenuClose);
 

@@ -7,21 +7,22 @@ import {
   selectMiscPostList,
 } from '../miscListSlice';
 
+import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
+
 import MiscListLoader from '@/components/loaders/MiscListLoader';
 import Error from '@/components/general/Error';
 import ExplorePostItem from './ExplorePostItem';
 import { Header, PostList, Wrapper } from './ExplorePostContainer.styled';
-import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 
 const ExplorePostContainer = () => {
+  const postList = useAppSelector(selectMiscPostList);
+  const { isLoading, error } = useAppSelector(selectFetchMiscPostsState);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchMiscPosts());
   }, [dispatch]);
-
-  const postList = useAppSelector(selectMiscPostList);
-  const { isLoading, error } = useAppSelector(selectFetchMiscPostsState);
 
   return (
     <Wrapper>

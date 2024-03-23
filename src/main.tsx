@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Router from './Router';
 
-import { ThemeProvider } from 'styled-components';
+import { store } from './app/store';
+
 import mainTheme from './styles/MainTheme';
 import GlobalStyles from './styles/GlobalStyles.styled';
 
-import { store } from './app/store';
+import Router from './Router';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

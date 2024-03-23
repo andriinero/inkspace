@@ -165,7 +165,7 @@ export const MenuItem = styled.li`
 
   transition: color 100ms, background-color 100ms;
 
-  cursor: pointer;
+  cursor: not-allowed;
 
   &:hover {
     color: ${({ theme }) => theme.color.text_secondary};

@@ -33,6 +33,7 @@ export const Logo = styled(motion.img)`
   height: 22px;
 
   user-select: none;
+  -webkit-user-drag: none;
   cursor: pointer;
 
   transition: color 200ms;

@@ -9,77 +9,63 @@ import {
   selectCommentIsEditMode,
 } from '@/features/commentEditor/commentEditorSlice';
 
-import {
-  AuthorIcon,
-  StyledUsername,
-  Body,
-  CommentDate,
-  ControlsIcon,
-  ControlsWrapper,
-  EditDate,
-  EditIcon,
-  Header,
-  StyledLink,
-  Wrapper,
-  WrapperAuthor,
-  WrapperInfo,
-} from './CommentItem.styled';
+import * as S from './CommentItem.styled';
 
 type CommentProps = {
   _id: string;
   post: string;
   author: PostAuthorData;
-  title: string;
   body: string;
   date: string;
   edit_date?: string;
 };
 
-const CommentItem = ({ _id, post, author, title, body, date, edit_date }: CommentProps) => {
+const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps) => {
   const currentUserId = useAppSelector(selectCurrentUserId);
   const isEditMode = useAppSelector(selectCommentIsEditMode);
 
   const dispatch = useAppDispatch();
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (): void => {
     dispatch(deleteComment(_id));
   };
 
-  const handleEditClick = () => {
+  const handleEditClick = (): void => {
     dispatch(enterEditMode({ commentId: _id, commentBody: body }));
   };
 
   const ownedByUser = currentUserId === author._id;
+
   return (
-    <Wrapper>
-      <Header>
-        <WrapperAuthor>
-          <AuthorIcon imageId={author.profile_image} altText="Author Icon" />
-          <WrapperInfo>
-            <StyledLink to={`/authors/${author._id}`}>
-              <StyledUsername>{author.username}</StyledUsername>
-            </StyledLink>
-            <CommentDate date={date} />
-          </WrapperInfo>
-        </WrapperAuthor>
+    <S.Wrapper>
+      <S.Header>
+        <S.WrapperAuthor>
+          <S.AuthorIcon imageId={author.profile_image} altText="Author Icon" />
+          <S.WrapperInfo>
+            <S.StyledLink to={`/authors/${author._id}`}>
+              <S.StyledUsername>{author.username}</S.StyledUsername>
+            </S.StyledLink>
+            <S.CommentDate date={date} />
+          </S.WrapperInfo>
+        </S.WrapperAuthor>
         {ownedByUser && !isEditMode && (
-          <ControlsWrapper>
-            <EditIcon
+          <S.ControlsWrapper>
+            <S.EditIcon
               onIconClick={handleEditClick}
               src="/edit.svg"
               alt="Edit Comment Icon"
             />
-            <ControlsIcon
+            <S.ControlsIcon
               onIconClick={handleDeleteClick}
               src="/delete.svg"
               alt="Delete Comment Icon"
             />
-          </ControlsWrapper>
+          </S.ControlsWrapper>
         )}
-      </Header>
-      <Body>{body}</Body>
-      {edit_date && <EditDate date={edit_date}>last edit: </EditDate>}
-    </Wrapper>
+      </S.Header>
+      <S.Body>{body}</S.Body>
+      {edit_date && <S.EditDate date={edit_date}>last edit: </S.EditDate>}
+    </S.Wrapper>
   );
 };
 

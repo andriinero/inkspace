@@ -8,11 +8,12 @@ import {
   selectFetchAuthorPostsState,
 } from '../authorPageSlice';
 
-import { PostList, Wrapper } from './PostContainer.styled';
+import { Waterfall } from '@/styles/animations/Waterfall';
+
 import Error from '@/components/general/Error';
 import PostItem from '@/features/postList/components/PostItem';
 import PostListLoader from '@/components/loaders/PostListLoader';
-import { Waterfall } from '@/styles/animations/Waterfall';
+import { PostList, Wrapper } from './PostContainer.styled';
 
 type PostContainerProps = {
   userId?: string;

@@ -9,7 +9,6 @@ import {
   postFollowUser,
   selectProfileData,
 } from '@/features/profile/profileSlice';
-
 import {
   fetchAuthor,
   resetState,
@@ -17,22 +16,13 @@ import {
   selectFetchAuthorState,
 } from '@/features/authorPage/authorPageSlice';
 
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+
 import PostContainer from '@/features/authorPage/components/PostContainer';
 import Error from '@/components/general/Error';
-import {
-  Header,
-  PostsWrapper,
-  ProfileIcon,
-  ProfileWrapper,
-  StyledAsideUserName,
-  StyledMainUserName,
-  Wrapper,
-  WrapperAside,
-  WrapperMain,
-} from './AuthorPage.styled';
 import { HollowButton } from '@/styles/components/HollowButton';
-import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 import { FollowCount, SignUpDate, UserBio } from './Profile.styled';
+import * as S from './AuthorPage.styled';
 
 const AuthorPage = () => {
   const { authorid } = useParams();
@@ -57,15 +47,11 @@ const AuthorPage = () => {
 
   if (authorid === authData?.sub) return <Navigate to="/profile" />;
 
-  const isFollowed = profileData?.followed_users.some(
-    (u) => u === authorData?._id
-  ) as boolean;
-
-  const handleFollowAdd = () => {
+  const handleFollowAdd = (): void => {
     if (authorData) dispatch(postFollowUser(authorData._id));
   };
 
-  const handleFollowRemove = () => {
+  const handleFollowRemove = (): void => {
     if (authorData) dispatch(deleteFollowUser(authorData._id));
   };
 
@@ -73,26 +59,30 @@ const AuthorPage = () => {
     DateTime.DATE_MED
   );
 
-  const handleFollowClick = isFollowed ? handleFollowRemove : handleFollowAdd;
+  const isFollowed = profileData?.followed_users.some(
+    (u) => u === authorData?._id
+  ) as boolean;
+
   const followButtonText = isFollowed ? 'Followed' : 'Follow';
+  const handleFollowClick = isFollowed ? handleFollowRemove : handleFollowAdd;
 
   return isLoading ? (
     <></>
   ) : error ? (
     <Error />
   ) : (
-    <Wrapper>
-      <WrapperMain>
-        <StyledMainUserName>{authorData?.username}</StyledMainUserName>
-        <PostsWrapper>
-          <Header>Recent Posts</Header>
+    <S.Wrapper>
+      <S.WrapperMain>
+        <S.StyledMainUserName>{authorData?.username}</S.StyledMainUserName>
+        <S.PostsWrapper>
+          <S.Header>Recent Posts</S.Header>
           <PostContainer userId={authorData?._id} />
-        </PostsWrapper>
-      </WrapperMain>
-      <WrapperAside>
-        <ProfileWrapper>
-          <ProfileIcon imageId={authorData?.profile_image} altText="Profile Icon" />
-          <StyledAsideUserName>{authorData?.username}</StyledAsideUserName>
+        </S.PostsWrapper>
+      </S.WrapperMain>
+      <S.WrapperAside>
+        <S.ProfileWrapper>
+          <S.ProfileIcon imageId={authorData?.profile_image} altText="Profile Icon" />
+          <S.StyledAsideUserName>{authorData?.username}</S.StyledAsideUserName>
           <FollowCount>{authorData?.followed_users_count} Following</FollowCount>
           <FollowCount>{authorData?.users_following_count} Followers</FollowCount>
           <SignUpDate>Member since: {signUpDate}</SignUpDate>
@@ -106,9 +96,9 @@ const AuthorPage = () => {
             />
           )}
           <UserBio>{authorData?.bio}</UserBio>
-        </ProfileWrapper>
-      </WrapperAside>
-    </Wrapper>
+        </S.ProfileWrapper>
+      </S.WrapperAside>
+    </S.Wrapper>
   );
 };
 

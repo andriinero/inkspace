@@ -11,7 +11,12 @@ import {
 } from '../postListSlice';
 
 import { TopicData } from '@/types/itemData/TopicData';
+import { Waterfall } from '@/styles/animations/Waterfall';
+import { FadeInSlide } from '@/styles/animations/FadeInSlide';
 
+import PostItem from './PostItem';
+import Error from '@/components/general/Error';
+import PostListLoader from '@/components/loaders/PostListLoader';
 import {
   CalloutText,
   Header,
@@ -19,25 +24,20 @@ import {
   StyledIcon,
   Wrapper,
 } from './PostContainer.styled';
-import PostItem from './PostItem';
-import Error from '@/components/general/Error';
-import PostListLoader from '@/components/loaders/PostListLoader';
-import { Waterfall } from '@/styles/animations/Waterfall';
-import { FadeInSlide } from '@/styles/animations/FadeInSlide';
 
 const PostContainer = () => {
+  const postList = useAppSelector(selectPostList);
+  const { isLoading, error } = useAppSelector(selectFetchPostListState);
+
   const userBookmarks = useAppSelector(selectProfileBookmarks);
 
   const selectedTopic = useAppSelector(selectSelectedTopic) as TopicData;
 
   const dispatch = useAppDispatch();
 
-  const postList = useAppSelector(selectPostList);
-  const { isLoading, error } = useAppSelector(selectFetchPostListState);
-
   useEffect(() => {
     dispatch(fetchPosts(selectedTopic?._id));
-  }, [dispatch, selectedTopic]);
+  }, [selectedTopic, dispatch]);
 
   const handleClearClick = (): void => {
     dispatch(clearTopic());

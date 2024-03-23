@@ -1,15 +1,16 @@
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useNavigate } from 'react-router-dom';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { putProfileImage, selectPutProfileImageState } from '../profileEditSlice';
 
-import * as S from './ImageForm.styled';
-import { useNavigate } from 'react-router-dom';
 import {
   ProfileImageSchema,
   TProfileImageSchema,
 } from '@/types/formSchemas/ProfileImageSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
+
+import * as S from './ImageForm.styled';
 
 const ImageForm = () => {
   const {

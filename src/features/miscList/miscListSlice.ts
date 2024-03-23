@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
-import storage from '@/utils/storage';
+import storage from '@/lib/storage';
 
 import { RootState } from '@/app/store';
 import { FullAuthorData, FullAuthorDataSchema } from '@/types/itemData/FullAuthorData';

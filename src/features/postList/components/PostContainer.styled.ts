@@ -16,8 +16,8 @@ export const Header = styled.h1`
 
   padding-top: 2rem;
 
+  font-size: 1.5rem;
   font-weight: 100;
-  font-style: italic;
 `;
 
 export const CalloutText = styled(motion.h2)`

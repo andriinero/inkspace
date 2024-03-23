@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { Navigate } from 'react-router-dom';
+import { DateTime } from 'luxon';
 
 import {
   fetchProfileData,
@@ -11,22 +12,7 @@ import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 import Error from '@/components/general/Error';
 import BookmarkContainer from '@/features/profile/components/BookmarkContainer';
-import {
-  FollowCount,
-  ProfileIcon,
-  ProfileWrapper,
-  StyledEditLink,
-  StyledAsideUserName,
-  Wrapper,
-  WrapperAside,
-  WrapperMain,
-  StyledMainUserName,
-  BookmarkWrapper,
-  Header,
-  SignUpDate,
-  UserBio,
-} from './Profile.styled';
-import { DateTime } from 'luxon';
+import * as S from './Profile.styled';
 
 const Profile = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -51,26 +37,26 @@ const Profile = () => {
   ) : error ? (
     <Error />
   ) : (
-    <Wrapper>
-      <WrapperMain>
-        <StyledMainUserName>{profileData?.username}</StyledMainUserName>
-        <BookmarkWrapper>
-          <Header>Your Bookmarks</Header>
+    <S.Wrapper>
+      <S.WrapperMain>
+        <S.StyledMainUserName>{profileData?.username}</S.StyledMainUserName>
+        <S.BookmarkWrapper>
+          <S.Header>Your Bookmarks</S.Header>
           <BookmarkContainer />
-        </BookmarkWrapper>
-      </WrapperMain>
-      <WrapperAside>
-        <ProfileWrapper>
-          <ProfileIcon imageId={profileData?.profile_image} altText="Profile Icon" />
-          <StyledAsideUserName>{profileData?.username}</StyledAsideUserName>
-          <FollowCount>{profileData?.followed_users.length} Following</FollowCount>
-          <FollowCount>{profileData?.users_following.length} Followers</FollowCount>
-          <SignUpDate>Member since: {signUpDate}</SignUpDate>
-          <StyledEditLink to="/profile/edit">Edit Profile</StyledEditLink>
-          <UserBio>{profileData?.bio}</UserBio>
-        </ProfileWrapper>
-      </WrapperAside>
-    </Wrapper>
+        </S.BookmarkWrapper>
+      </S.WrapperMain>
+      <S.WrapperAside>
+        <S.ProfileWrapper>
+          <S.ProfileIcon imageId={profileData?.profile_image} altText="Profile Icon" />
+          <S.StyledAsideUserName>{profileData?.username}</S.StyledAsideUserName>
+          <S.FollowCount>{profileData?.followed_users.length} Following</S.FollowCount>
+          <S.FollowCount>{profileData?.users_following.length} Followers</S.FollowCount>
+          <S.SignUpDate>Member since: {signUpDate}</S.SignUpDate>
+          <S.StyledEditLink to="/profile/edit">Edit Profile</S.StyledEditLink>
+          <S.UserBio>{profileData?.bio}</S.UserBio>
+        </S.ProfileWrapper>
+      </S.WrapperAside>
+    </S.Wrapper>
   );
 };
 

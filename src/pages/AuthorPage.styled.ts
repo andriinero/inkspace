@@ -35,11 +35,8 @@ export const PostsWrapper = styled.div`
 `;
 
 export const Header = styled.h2`
-  align-self: flex-end;
-
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 100;
-  font-style: italic;
 `;
 
 export const WrapperAside = styled.aside`

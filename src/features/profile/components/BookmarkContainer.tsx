@@ -8,11 +8,12 @@ import {
   selectProfileData,
 } from '../profileSlice';
 
-import { BookmarkList, Wrapper } from './BookmarkContainer.styled';
+import { Waterfall } from '@/styles/animations/Waterfall';
+
 import Error from '@/components/general/Error';
 import PostItem from '@/features/postList/components/PostItem';
 import PostListLoader from '@/components/loaders/PostListLoader';
-import { Waterfall } from '@/styles/animations/Waterfall';
+import { BookmarkList, Wrapper } from './BookmarkContainer.styled';
 
 const BookmarkContainer = () => {
   const profileData = useAppSelector(selectProfileData);

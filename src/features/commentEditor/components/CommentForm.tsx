@@ -4,17 +4,6 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { MAX_CHARACTERS_PER_COMMENT, MIN_CHARACTERS_PER_COMMENT } from '@/data/consts';
 
 import {
-  Form,
-  FormWrapper,
-  InputText,
-  SubmitActionButton,
-  StyledCounter,
-  BottomWrapper,
-  ControlsWrapper,
-  CancelActionButton,
-} from './CommentForm.styled';
-
-import {
   exitEditMode,
   postComment,
   selectCommentIsEditMode,
@@ -24,6 +13,8 @@ import {
   updateComment,
 } from '../commentEditorSlice';
 import { addComment, editComment } from '@/features/commentList/commentListSlice';
+
+import * as S from './CommentForm.styled';
 
 type CommentFormProps = { postId: string };
 
@@ -51,7 +42,7 @@ const CommentForm = ({ postId }: CommentFormProps) => {
     }
   };
 
-  const handleCommentUpdate = async (e: FormEvent) => {
+  const handleCommentUpdate = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
 
     if (commentText.length >= MIN_CHARACTERS_PER_COMMENT) {
@@ -74,35 +65,38 @@ const CommentForm = ({ postId }: CommentFormProps) => {
     }
   };
 
-  const handleEditCancelClick = () => {
+  const handleEditCancelClick = (): void => {
     dispatch(exitEditMode());
   };
 
   const handleFormSubmit = isEditMode ? handleCommentUpdate : handleCommentSubmit;
 
   return (
-    <FormWrapper>
-      <Form onSubmit={handleFormSubmit}>
-        <InputText
+    <S.FormWrapper>
+      <S.Form onSubmit={handleFormSubmit}>
+        <S.InputText
           onChange={handleCommentChange}
           placeholder="What are your thoughts?"
           value={commentText}
         />
-        <BottomWrapper>
-          <StyledCounter>{commentText.length}/280</StyledCounter>
-          <ControlsWrapper>
+        <S.BottomWrapper>
+          <S.StyledCounter>{commentText.length}/280</S.StyledCounter>
+          <S.ControlsWrapper>
             {isEditMode && (
-              <CancelActionButton
+              <S.CancelActionButton
                 onClick={handleEditCancelClick}
                 type="button"
                 value="Cancel"
               />
             )}
-            <SubmitActionButton type="submit" value={isEditMode ? 'Update' : 'Respond'} />
-          </ControlsWrapper>
-        </BottomWrapper>
-      </Form>
-    </FormWrapper>
+            <S.SubmitActionButton
+              type="submit"
+              value={isEditMode ? 'Update' : 'Respond'}
+            />
+          </S.ControlsWrapper>
+        </S.BottomWrapper>
+      </S.Form>
+    </S.FormWrapper>
   );
 };
 

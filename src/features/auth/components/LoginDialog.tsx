@@ -14,21 +14,7 @@ import { FadeIn } from '@/styles/animations/FadeIn';
 import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
 import { ErrorData } from '@/types/responseData/error/ErrorData';
 
-import {
-  ControlsWrapper,
-  InputWrapper,
-  StyledInputLabel,
-  LoginForm,
-  LoginWrapper,
-  StyledInputText,
-  SubmitButton,
-  Wrapper,
-  WrapperBackdrop,
-  Header,
-  SubText,
-  HeaderWrapper,
-  StyledErrorMessage,
-} from './LoginDialog.styled';
+import * as S from './LoginDialog.styled';
 import { AnimatePresence } from 'framer-motion';
 
 const LoginDialog = () => {
@@ -50,7 +36,7 @@ const LoginDialog = () => {
     document.querySelector('html')!.style.position = positionValue;
   }, [isModalOpen]);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (): void => {
     dispatch(closeLoginModal());
   };
 
@@ -70,59 +56,59 @@ const LoginDialog = () => {
   return (
     <AnimatePresence>
       {isModalOpen && (
-        <Wrapper>
-          <WrapperBackdrop
+        <S.Wrapper>
+          <S.WrapperBackdrop
             $isOpen={isModalOpen}
             onClick={handleCloseModal}
             initial={FadeIn.hidden}
             animate={FadeIn.visible}
             transition={{ duration: 0.2 }}
             exit={FadeIn.hidden}
-          ></WrapperBackdrop>
-          <LoginWrapper
+          ></S.WrapperBackdrop>
+          <S.LoginWrapper
             initial={FadeIn.hidden}
             animate={FadeIn.visible}
             transition={{ duration: 0.2 }}
             exit={FadeIn.hidden}
           >
-            <HeaderWrapper>
-              <Header>Welcome Back</Header>
-              <SubText>Sign in with your username and password</SubText>
-            </HeaderWrapper>
-            <LoginForm onSubmit={handleSubmit(handleSubmitLogin)}>
-              <InputWrapper>
-                <StyledInputLabel htmlFor="login-username">
+            <S.HeaderWrapper>
+              <S.Header>Welcome Back</S.Header>
+              <S.SubText>Sign in with your username and password</S.SubText>
+            </S.HeaderWrapper>
+            <S.LoginForm onSubmit={handleSubmit(handleSubmitLogin)}>
+              <S.InputWrapper>
+                <S.StyledInputLabel htmlFor="login-username">
                   Your username
-                </StyledInputLabel>
-                <StyledInputText
+                </S.StyledInputLabel>
+                <S.StyledInputText
                   {...register('username', { required: 'Username is required' })}
                   id="login-username"
                   type="text"
                 />
-                <StyledErrorMessage $isVisible={Boolean(errors.username)}>
+                <S.StyledErrorMessage $isVisible={Boolean(errors.username)}>
                   {errors.username?.message}
-                </StyledErrorMessage>
-              </InputWrapper>
-              <InputWrapper>
-                <StyledInputLabel htmlFor="login-password">Password</StyledInputLabel>
-                <StyledInputText
+                </S.StyledErrorMessage>
+              </S.InputWrapper>
+              <S.InputWrapper>
+                <S.StyledInputLabel htmlFor="login-password">Password</S.StyledInputLabel>
+                <S.StyledInputText
                   {...register('password', { required: 'Password is required' })}
                   id="login-password"
                   type="password"
                 />
-                <StyledErrorMessage $isVisible={Boolean(errors.password)}>
+                <S.StyledErrorMessage $isVisible={Boolean(errors.password)}>
                   {errors.password?.message}
-                </StyledErrorMessage>
-              </InputWrapper>
-              <ControlsWrapper>
-                <StyledErrorMessage $isVisible={Boolean(error)}>
+                </S.StyledErrorMessage>
+              </S.InputWrapper>
+              <S.ControlsWrapper>
+                <S.StyledErrorMessage $isVisible={Boolean(error)}>
                   {error?.message}
-                </StyledErrorMessage>
-                <SubmitButton type="submit" />
-              </ControlsWrapper>
-            </LoginForm>
-          </LoginWrapper>
-        </Wrapper>
+                </S.StyledErrorMessage>
+                <S.SubmitButton type="submit" />
+              </S.ControlsWrapper>
+            </S.LoginForm>
+          </S.LoginWrapper>
+        </S.Wrapper>
       )}
     </AnimatePresence>
   );

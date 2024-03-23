@@ -1,24 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
+import { selectProfileImageId } from '@/features/profile/profileSlice';
 import { clearTopic } from '@/features/postList/postListSlice';
 import { logout, selectIsAuthenticated } from '@/features/auth/authSlice';
 import { openLoginModal } from '@/features/auth/authSlice';
 
-import {
-  Wrapper,
-  StyledLink,
-  NewPostButton,
-  ProfileWrapper,
-  ProfileIcon,
-  NewPostButtonText,
-  Logo,
-  HeaderButton,
-  StyledAppIcon,
-} from './Header.styled';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-import { selectProfileImageId } from '@/features/profile/profileSlice';
+
 import LoginDialog from '@/features/auth/components/LoginDialog';
+import * as S from './Header.styled';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -43,29 +34,25 @@ const Header = () => {
   };
 
   return (
-    <Wrapper>
-      <Logo
-        whileHover={{ x: -1, y: -1 }}
-        onClick={handleLogoClick}
-        src="/logo.svg"
-      />
-      <ProfileWrapper>
+    <S.Wrapper>
+      <S.Logo whileHover={{ x: -1, y: -1 }} onClick={handleLogoClick} src="/logo.svg" />
+      <S.ProfileWrapper>
         {isAuthenticated ? (
           <>
-            <NewPostButton>
-              <StyledLink to="/create-post">
-                <StyledAppIcon src="/post.svg" alt="Create New Post Icon" />
-                <NewPostButtonText>Write</NewPostButtonText>
-              </StyledLink>
-            </NewPostButton>
-            <StyledLink to="/profile">
-              <ProfileIcon
+            <S.NewPostButton>
+              <S.StyledLink to="/create-post">
+                <S.StyledAppIcon src="/post.svg" alt="Create New Post Icon" />
+                <S.NewPostButtonText>Write</S.NewPostButtonText>
+              </S.StyledLink>
+            </S.NewPostButton>
+            <S.StyledLink to="/profile">
+              <S.ProfileIcon
                 imageId={profileImageId}
                 placeholderSrc="/empty.png"
                 altText="Current User Profile Picture"
               />
-            </StyledLink>
-            <HeaderButton
+            </S.StyledLink>
+            <S.HeaderButton
               whileTap={ButtonInteraction.whileTap.animation}
               onClick={handleLogoutClick}
               type="button"
@@ -73,16 +60,16 @@ const Header = () => {
             />
           </>
         ) : (
-          <HeaderButton
+          <S.HeaderButton
             whileTap={ButtonInteraction.whileTap.animation}
             onClick={handleLoginClick}
             type="button"
             value="Login"
           />
         )}
-      </ProfileWrapper>
+      </S.ProfileWrapper>
       <LoginDialog />
-    </Wrapper>
+    </S.Wrapper>
   );
 };
 

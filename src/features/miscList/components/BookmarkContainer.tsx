@@ -7,21 +7,22 @@ import {
   selectFetchBookmarksState,
 } from '../miscListSlice';
 
-import { BookmarkList, CalloutText, Header, Wrapper } from './BookmarkContainer.styled';
+import { Waterfall } from '@/styles/animations/Waterfall';
+
 import BookmarkItem from './BookmarkItem';
 import Error from '@/components/general/Error';
 import MiscListLoader from '@/components/loaders/MiscListLoader';
-import { Waterfall } from '@/styles/animations/Waterfall';
+import { BookmarkList, CalloutText, Header, Wrapper } from './BookmarkContainer.styled';
 
 const BookmarkContainer = () => {
+  const bookmarkList = useAppSelector(selectBookmarkList);
+  const { isLoading, error } = useAppSelector(selectFetchBookmarksState);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchBookmarks());
   }, [dispatch]);
-
-  const bookmarkList = useAppSelector(selectBookmarkList);
-  const { isLoading, error } = useAppSelector(selectFetchBookmarksState);
 
   return (
     <Wrapper>
