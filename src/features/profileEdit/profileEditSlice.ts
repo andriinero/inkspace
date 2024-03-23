@@ -12,13 +12,10 @@ import {
 } from '@/types/responseData/PutProfileEdit';
 import { ErrorData } from '@/types/responseData/error/ErrorData';
 import {
-  ProfileImageSchema,
-  TProfileImageSchema,
-} from '@/types/formSchemas/ProfileImageSchema';
-import {
   TargetObjectId,
   TargetObjectIdSchema,
 } from '@/types/responseData/success/TargetObjectId';
+import { updateImageId } from '../profile/profileSlice';
 
 type ProfileEditState = {
   putPersonalDetailsState: { isLoading: boolean; error: SerializedError | null };
@@ -82,7 +79,7 @@ export const putPassword = createAsyncThunk(
 
 export const putProfileImage = createAsyncThunk(
   'profile/putProfileImage',
-  async (image: File, { rejectWithValue }) => {
+  async (image: File, { rejectWithValue, dispatch }) => {
     const token = storage.getToken();
 
     const formData = new FormData();
@@ -101,6 +98,8 @@ export const putProfileImage = createAsyncThunk(
 
     const validationResult = TargetObjectIdSchema.safeParse(data);
     if (!validationResult.success) console.error(validationResult);
+
+    dispatch(updateImageId((data as TargetObjectId)._id));
 
     return data as TargetObjectId;
   }

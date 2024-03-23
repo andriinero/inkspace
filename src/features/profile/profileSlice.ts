@@ -181,7 +181,11 @@ export const deleteFollowUser = createAsyncThunk(
 const profileSlice = createSlice({
   name: 'profile',
   initialState,
-  reducers: {},
+  reducers: {
+    updateImageId(state, action) {
+      state.profileData!.profile_image = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchProfileData.pending, (state) => {
@@ -279,6 +283,8 @@ const profileSlice = createSlice({
       });
   },
 });
+
+export const { updateImageId } = profileSlice.actions;
 
 export default profileSlice.reducer;
 

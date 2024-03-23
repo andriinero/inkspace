@@ -27,7 +27,9 @@ const ImageForm = () => {
     if (!isLoading) {
       const response = await dispatch(putProfileImage(formData.image[0])).unwrap();
 
-      if (response) navigate('/');
+      if (response) {
+        navigate('/');
+      }
     }
   };
 
