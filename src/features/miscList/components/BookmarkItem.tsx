@@ -1,4 +1,4 @@
-import { PostAuthorData } from '@/types/itemData/GeneralAuthorData';
+import { PostAuthorData } from '@/types/entityData/GeneralAuthorData';
 
 import { Waterfall } from '@/styles/animations/Waterfall';
 

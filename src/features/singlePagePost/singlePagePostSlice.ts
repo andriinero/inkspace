@@ -4,12 +4,12 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/lib/storage';
 
 import { RootState } from '@/app/store';
-import { PostData, PostDataSchema } from '@/types/itemData/PostData';
+import { PostData, PostDataSchema } from '@/types/entityData/PostData';
 import {
   PutLikeCount,
   PutLikeCountSchema,
-} from '@/types/responseData/success/PutLikeCount';
-import { ErrorData } from '@/types/responseData/error/ErrorData';
+} from '@/types/fetchResponse/success/PutLikeCount';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 type SinglePagePostState = {
   post: PostData | null;

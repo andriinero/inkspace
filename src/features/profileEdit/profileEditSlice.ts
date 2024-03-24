@@ -11,12 +11,12 @@ import { TProfilePasswordEditSchema } from '@/types/formSchemas/ProfilePasswordE
 import {
   PutProfileData,
   PutProfileDataSchema,
-} from '@/types/responseData/PutProfileEdit';
-import { ErrorData } from '@/types/responseData/error/ErrorData';
+} from '@/types/fetchResponse/success/PutProfileEdit';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import {
   TargetObjectId,
   TargetObjectIdSchema,
-} from '@/types/responseData/success/TargetObjectId';
+} from '@/types/fetchResponse/success/TargetObjectId';
 
 type ProfileEditState = {
   putPersonalDetailsState: { isLoading: boolean; error: SerializedError | null };

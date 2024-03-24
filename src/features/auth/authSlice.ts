@@ -2,12 +2,12 @@ import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/lib/storage';
-import { PostLogin, PostLoginSchema } from '@/types/responseData/success/PostLogin';
-import { AuthData, AuthDataSchema } from '@/types/itemData/AuthenticationData';
+import { PostLogin, PostLoginSchema } from '@/types/fetchResponse/success/PostLogin';
+import { AuthData, AuthDataSchema } from '@/types/entityData/AuthenticationData';
 
 import { AppThunk, RootState } from '@/app/store';
 import { fetchProfileData } from '../profile/profileSlice';
-import { ErrorData } from '@/types/responseData/error/ErrorData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 type LoginBodyType = { username: string; password: string };
 

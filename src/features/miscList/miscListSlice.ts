@@ -5,10 +5,10 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/lib/storage';
 
 import { RootState } from '@/app/store';
-import { FullAuthorData, FullAuthorDataSchema } from '@/types/itemData/FullAuthorData';
-import { TopicData, TopicDataSchema } from '@/types/itemData/TopicData';
-import { PostData, PostDataSchema } from '@/types/itemData/PostData';
-import { ErrorData } from '@/types/responseData/error/ErrorData';
+import { FullAuthorData, FullAuthorDataSchema } from '@/types/entityData/FullAuthorData';
+import { TopicData, TopicDataSchema } from '@/types/entityData/TopicData';
+import { PostData, PostDataSchema } from '@/types/entityData/PostData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 type miscListState = {
   authorList: FullAuthorData[];

@@ -8,7 +8,7 @@ import { openLoginModal } from '@/features/auth/authSlice';
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
-import LoginDialog from '@/features/auth/components/LoginDialog';
+import LoginForm from '@/features/auth/components/LoginForm';
 import * as S from './Header.styled';
 import { exitEditMode } from '@/features/postForm/postFormSlice';
 
@@ -75,7 +75,7 @@ const Header = () => {
           />
         )}
       </S.ProfileWrapper>
-      <LoginDialog />
+      <LoginForm />
     </S.Wrapper>
   );
 };

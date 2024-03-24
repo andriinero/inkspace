@@ -1,9 +1,10 @@
 import AppImage from '@/features/appImages/components/AppImage';
 import { Username } from '@/styles/components/Username.styled';
+import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
   display: grid;
   grid-template-columns: minmax(50ch, 80ch) minmax(30ch, 40ch);
   justify-content: center;

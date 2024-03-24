@@ -11,13 +11,13 @@ import {
 } from '../authSlice';
 
 import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
-import { ErrorData } from '@/types/responseData/error/ErrorData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
-import * as S from './LoginDialog.styled';
+import * as S from './LoginForm.styled';
 import Dialog from '@/components/general/Dialog';
 
-const LoginDialog = () => {
+const LoginForm = () => {
   const [error, setError] = useState<ErrorData | null>(null);
   const {
     handleSubmit,
@@ -95,4 +95,4 @@ const LoginDialog = () => {
   );
 };
 
-export default LoginDialog;
+export default LoginForm;

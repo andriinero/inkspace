@@ -3,8 +3,8 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/app/store';
-import { ImageDataSchema } from '@/types/itemData/ImageData';
-import { ErrorData } from '@/types/responseData/error/ErrorData';
+import { ImageDataSchema } from '@/types/entityData/ImageData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 type AppImageSliceState = {
   imageURLsMap: { [key: string]: string };

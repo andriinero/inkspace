@@ -2,8 +2,8 @@ import { useAppDispatch } from '@/app/hooks';
 
 import { setTopic } from '@/features/postList/postListSlice';
 
-import { PostAuthorData } from '@/types/itemData/GeneralAuthorData';
-import { TopicData } from '@/types/itemData/TopicData';
+import { PostAuthorData } from '@/types/entityData/GeneralAuthorData';
+import { TopicData } from '@/types/entityData/TopicData';
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 
 import * as S from './ExplorePostItem.styled';

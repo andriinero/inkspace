@@ -17,6 +17,7 @@ import {
 } from '@/features/authorPage/authorPageSlice';
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+import { FadeIn } from '@/styles/animations/FadeIn';
 
 import PostContainer from '@/features/authorPage/components/PostContainer';
 import Error from '@/components/general/Error';
@@ -71,7 +72,11 @@ const AuthorPage = () => {
   ) : error ? (
     <Error />
   ) : (
-    <S.Wrapper>
+    <S.Wrapper
+      initial={FadeIn.hidden}
+      animate={FadeIn.visible}
+      transition={FadeIn.transition}
+    >
       <S.WrapperMain>
         <S.StyledMainUserName>{authorData?.username}</S.StyledMainUserName>
         <S.PostsWrapper>

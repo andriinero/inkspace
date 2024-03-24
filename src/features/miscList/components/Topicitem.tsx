@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { selectSelectedTopic, setTopic } from '@/features/postList/postListSlice';
 
-import { TopicData } from '@/types/itemData/TopicData';
+import { TopicData } from '@/types/entityData/TopicData';
 
 import { WaterfallPopUp } from '@/styles/animations/WaterfallPopUp';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';

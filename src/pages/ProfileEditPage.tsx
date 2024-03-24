@@ -5,6 +5,8 @@ import { Navigate } from 'react-router-dom';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import { selectProfileData } from '@/features/profile/profileSlice';
 
+import { FadeIn } from '@/styles/animations/FadeIn';
+
 import PersonalDetailsForm from '@/features/profileEdit/components/PersonalDetailsForm';
 import PasswordForm from '@/features/profileEdit/components/PasswordForm';
 import ImageForm from '@/features/profileEdit/components/ImageForm';
@@ -22,7 +24,11 @@ const ProfileEditPage = () => {
   );
 
   return (
-    <S.Wrapper>
+    <S.Wrapper
+      initial={FadeIn.hidden}
+      animate={FadeIn.visible}
+      transition={FadeIn.transition}
+    >
       <S.WrapperMain>
         <S.FormGroupWrapper>
           <S.Header>Edit: Personal Details</S.Header>

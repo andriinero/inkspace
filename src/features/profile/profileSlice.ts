@@ -5,13 +5,13 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/lib/storage';
 
 import { RootState } from '@/app/store';
-import { ProfileData, ProfileDataSchema } from '@/types/itemData/ProfileData';
-import { PostData, PostDataSchema } from '@/types/itemData/PostData';
+import { ProfileData, ProfileDataSchema } from '@/types/entityData/ProfileData';
+import { PostData, PostDataSchema } from '@/types/entityData/PostData';
 import {
   TargetObjectId,
   TargetObjectIdSchema,
-} from '@/types/responseData/success/TargetObjectId';
-import { ErrorData } from '@/types/responseData/error/ErrorData';
+} from '@/types/fetchResponse/success/TargetObjectId';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 type ProfileState = {
   profileData: ProfileData | null;

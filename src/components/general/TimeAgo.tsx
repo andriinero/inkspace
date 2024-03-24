@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { AppDate } from '@/utils/AppDate';
+import { AppDate } from '@/lib/AppDate';
 
 import { Wrapper } from './TimeAgo.styled';
 

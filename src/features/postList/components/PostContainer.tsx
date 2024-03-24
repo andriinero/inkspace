@@ -10,7 +10,7 @@ import {
   selectSelectedTopic,
 } from '../postListSlice';
 
-import { TopicData } from '@/types/itemData/TopicData';
+import { TopicData } from '@/types/entityData/TopicData';
 import { Waterfall } from '@/styles/animations/Waterfall';
 import { FadeInSlide } from '@/styles/animations/FadeInSlide';
 

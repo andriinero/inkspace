@@ -13,8 +13,8 @@ import {
 import { setTopic } from '../postListSlice';
 import { enterEditMode } from '@/features/postForm/postFormSlice';
 
-import { PostAuthorData } from '@/types/itemData/GeneralAuthorData';
-import { TopicData } from '@/types/itemData/TopicData';
+import { PostAuthorData } from '@/types/entityData/GeneralAuthorData';
+import { TopicData } from '@/types/entityData/TopicData';
 import { Waterfall } from '@/styles/animations/Waterfall';
 
 import PostDate from '@/components/general/TimeAgo';

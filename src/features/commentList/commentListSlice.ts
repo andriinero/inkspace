@@ -5,8 +5,8 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/lib/storage';
 
 import { RootState } from '@/app/store';
-import { CommentData, CommentDataSchema } from '@/types/itemData/CommentData';
-import { TargetObjectIdSchema } from '@/types/responseData/success/TargetObjectId';
+import { CommentData, CommentDataSchema } from '@/types/entityData/CommentData';
+import { TargetObjectIdSchema } from '@/types/fetchResponse/success/TargetObjectId';
 
 type CommentsState = {
   comments: CommentData[];

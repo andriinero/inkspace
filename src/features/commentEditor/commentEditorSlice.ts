@@ -4,8 +4,8 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/lib/storage';
 
 import { RootState } from '@/app/store';
-import { CommentData, CommentDataSchema } from '@/types/itemData/CommentData';
-import { ErrorData } from '@/types/responseData/error/ErrorData';
+import { CommentData, CommentDataSchema } from '@/types/entityData/CommentData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 type CommentEditorState = {
   textField: string;

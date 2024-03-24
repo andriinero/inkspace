@@ -15,6 +15,7 @@ import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 import { Editor as TinyMCEEditor } from 'tinymce';
 import { TPostFormSchema, PostFormSchema } from '@/types/formSchemas/CreatePostSchema';
+import { FadeIn } from '@/styles/animations/FadeIn';
 
 import TinyEditor from '@/features/postForm/components/TinyEditor';
 import * as S from './PostForm.styled';
@@ -66,7 +67,11 @@ const PostForm = () => {
   const handleFormSubmit = isEditMode ? handlePutSubmit : handlePostSubmit;
 
   return (
-    <S.Wrapper>
+    <S.Wrapper
+      initial={FadeIn.hidden}
+      animate={FadeIn.visible}
+      transition={FadeIn.transition}
+    >
       <S.Header>{isEditMode ? 'Edit Post' : 'Create Post'}</S.Header>
       <S.Form onSubmit={handleSubmit(handleFormSubmit)} id="create-new-post">
         <S.InputContainer>

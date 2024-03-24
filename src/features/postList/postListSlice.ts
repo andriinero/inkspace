@@ -4,9 +4,9 @@ import { useAppFetch } from '@/lib/useAppFetch';
 
 import { RootState } from '@/app/store';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { PostData, PostDataSchema } from '@/types/itemData/PostData';
-import { TopicData } from '@/types/itemData/TopicData';
-import { ErrorData } from '@/types/responseData/error/ErrorData';
+import { PostData, PostDataSchema } from '@/types/entityData/PostData';
+import { TopicData } from '@/types/entityData/TopicData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 type postListState = {
   postList: PostData[];

@@ -9,6 +9,7 @@ import {
   selectProfileData,
 } from '@/features/profile/profileSlice';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import { FadeIn } from '@/styles/animations/FadeIn';
 
 import Error from '@/components/general/Error';
 import BookmarkContainer from '@/features/profile/components/BookmarkContainer';
@@ -37,7 +38,11 @@ const Profile = () => {
   ) : error ? (
     <Error />
   ) : (
-    <S.Wrapper>
+    <S.Wrapper
+      initial={FadeIn.hidden}
+      animate={FadeIn.visible}
+      transition={FadeIn.transition}
+    >
       <S.WrapperMain>
         <S.StyledMainUserName>{profileData?.username}</S.StyledMainUserName>
         <S.BookmarkWrapper>

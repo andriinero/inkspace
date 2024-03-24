@@ -4,8 +4,9 @@ import { ErrorMessage } from '@/styles/components/ErrorMessage';
 import { InputText } from '@/styles/components/InputText';
 import { InputLabel } from '@/styles/components/InputLabel';
 import { FormButton } from '@/styles/components/FormButton';
+import { motion } from 'framer-motion';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: 2rem;

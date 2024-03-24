@@ -8,8 +8,8 @@ import {
   selectProfileFollowedUsers,
 } from '@/features/profile/profileSlice';
 
-import { PostAuthorData } from '@/types/itemData/GeneralAuthorData';
-import { TopicData } from '@/types/itemData/TopicData';
+import { PostAuthorData } from '@/types/entityData/GeneralAuthorData';
+import { TopicData } from '@/types/entityData/TopicData';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import PostDate from '@/components/general/TimeAgo';

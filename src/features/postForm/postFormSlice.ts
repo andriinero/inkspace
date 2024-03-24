@@ -4,8 +4,8 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/lib/storage';
 
 import { RootState } from '@/app/store';
-import { PostData, PostDataSchema } from '@/types/itemData/PostData';
-import { ErrorData } from '@/types/responseData/error/ErrorData';
+import { PostData, PostDataSchema } from '@/types/entityData/PostData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { TPostFormSchema } from '@/types/formSchemas/CreatePostSchema';
 
 type PostBodyType = {
