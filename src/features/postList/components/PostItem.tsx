@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useNavigate } from 'react-router-dom';
 import parse from 'html-react-parser';
 
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
   deleteBookmark,
   postBookmark,
@@ -10,6 +11,7 @@ import {
   selectBookmarkActionState,
 } from '@/features/profile/profileSlice';
 import { setTopic } from '../postListSlice';
+import { enterEditMode } from '@/features/postForm/postFormSlice';
 
 import { PostAuthorData } from '@/types/itemData/GeneralAuthorData';
 import { TopicData } from '@/types/itemData/TopicData';
@@ -17,6 +19,8 @@ import { Waterfall } from '@/styles/animations/Waterfall';
 
 import PostDate from '@/components/general/TimeAgo';
 import { Username } from '@/styles/components/Username.styled';
+import { MenuItem } from '@/styles/components/MenuItem';
+import { SpecialMenuItem } from '@/styles/components/SpecialMenuItem';
 import * as S from './PostItem.styled';
 
 type PostItemProps = {
@@ -43,11 +47,13 @@ const PostItem = ({
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const authData = useAppSelector(selectAuthData);
 
   const fetchProfileState = useAppSelector(selectFetchProfileDataState);
   const bookmarkActionState = useAppSelector(selectBookmarkActionState);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleBookmarkAdd = (): void => {
     if (!bookmarkActionState.isLoading) dispatch(postBookmark(_id));
@@ -69,6 +75,12 @@ const PostItem = ({
     dispatch(setTopic(topic));
   };
 
+  const handleEditModeClick = (): void => {
+    dispatch(enterEditMode(_id));
+    setIsMenuOpen(false);
+    navigate('/post-form');
+  };
+
   const handleMuteAuthorClick = (): void => {
     // TODO:
     setIsMenuOpen(false);
@@ -78,6 +90,8 @@ const PostItem = ({
     // TODO:
     setIsMenuOpen(false);
   };
+
+  const isAuthor = authData?.sub === author._id;
 
   const handleBookmarkClick = isBookmarked ? handleBookmarkRemove : handleBookmarkAdd;
 
@@ -118,8 +132,13 @@ const PostItem = ({
                 isOpen={isMenuOpen}
                 isAlignedLeft={false}
               >
-                <S.MenuItem onClick={handleMenuClose}>Mute this author</S.MenuItem>
-                <S.MenuItem onClick={handleMenuClose}>Mute this publication</S.MenuItem>
+                {isAuthor && (
+                  <SpecialMenuItem onClick={handleEditModeClick}>
+                    Edit Post
+                  </SpecialMenuItem>
+                )}
+                <MenuItem onClick={handleMenuClose}>Mute this author</MenuItem>
+                <MenuItem onClick={handleMenuClose}>Mute this publication</MenuItem>
               </S.StyledDotMenu>
             </>
           )}

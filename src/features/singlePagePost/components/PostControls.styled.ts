@@ -33,31 +33,3 @@ export const LikeCount = styled.span`
   font-size: 0.8rem;
   font-weight: 300;
 `;
-
-export const MenuItem = styled.li`
-  padding: 0.5rem 1rem;
-
-  font-size: 0.9rem;
-  font-weight: 300;
-  list-style-type: none;
-
-  transition: color 100ms, background-color 100ms;
-
-  cursor: pointer;
-
-  &:hover {
-    color: ${({ theme }) => theme.color.text_secondary};
-  }
-
-  &:first-child {
-    padding-top: 1rem;
-  }
-
-  &:last-child {
-    padding-bottom: 1rem;
-  }
-`;
-
-export const SpecialMenuItem = styled(MenuItem)`
-  color: ${({ theme }) => theme.color.button_special_text};
-`;

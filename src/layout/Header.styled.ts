@@ -52,7 +52,6 @@ export const ProfileWrapper = styled.div`
 export const NewPostButton = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
 
   transition: filter 100ms;
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
@@ -49,12 +49,6 @@ const PostForm = () => {
     defaultValues,
   });
 
-  useEffect(() => {
-    return () => {
-      dispatch(exitEditMode());
-    };
-  }, [dispatch]);
-
   if (!isAuthenticated) return <Navigate to="/" />;
 
   const handlePostSubmit = async (formData: TPostFormSchema): Promise<void> => {
@@ -71,7 +65,7 @@ const PostForm = () => {
 
   return (
     <S.Wrapper>
-      <S.Header>Create post</S.Header>
+      <S.Header>{isEditMode ? 'Edit Post' : 'Create Post'}</S.Header>
       <S.Form onSubmit={handleSubmit(handleFormSubmit)} id="create-new-post">
         <S.InputContainer>
           <S.InputItem>
@@ -122,8 +116,14 @@ const PostForm = () => {
         </S.InputItem>
       </S.Form>
       <S.ControlsContainer>
-        <S.SaveDraftButton form="create-new-post" type="button" value="Save Draft" />
-        <S.PublishButton form="create-new-post" type="submit" value="Publish" />
+        {isEditMode ? (
+          <S.StyledButton form="create-new-post" type="submit" value="Save Edit" />
+        ) : (
+          <>
+            <S.StyledInactiveButton type="button" value="Save Draft" />
+            <S.StyledButton form="create-new-post" type="submit" value="Publish" />
+          </>
+        )}
       </S.ControlsContainer>
     </S.Wrapper>
   );

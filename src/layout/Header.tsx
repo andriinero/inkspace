@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { selectProfileImageId } from '@/features/profile/profileSlice';
@@ -10,14 +10,16 @@ import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import LoginDialog from '@/features/auth/components/LoginDialog';
 import * as S from './Header.styled';
+import { exitEditMode } from '@/features/postForm/postFormSlice';
 
 const Header = () => {
-  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const profileImageId = useAppSelector(selectProfileImageId);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleLogoClick = (): void => {
     dispatch(clearTopic());
@@ -33,18 +35,23 @@ const Header = () => {
     location.reload();
   };
 
+  const handleWritePostClick = (): void => {
+    dispatch(exitEditMode());
+    navigate('/post-form');
+  };
+
   return (
     <S.Wrapper>
       <S.Logo whileHover={{ x: -1, y: -1 }} onClick={handleLogoClick} src="/logo.svg" />
       <S.ProfileWrapper>
         {isAuthenticated ? (
           <>
-            <S.NewPostButton>
-              <S.StyledLink to="/post-form">
+            { pathname !== '/post-form' &&
+              <S.NewPostButton onClick={handleWritePostClick}>
                 <S.StyledAppIcon src="/post.svg" alt="Create New Post Icon" />
                 <S.NewPostButtonText>Write</S.NewPostButtonText>
-              </S.StyledLink>
-            </S.NewPostButton>
+              </S.NewPostButton>
+            }
             <S.StyledLink to="/profile">
               <S.ProfileIcon
                 imageId={profileImageId}

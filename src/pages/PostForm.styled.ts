@@ -71,14 +71,10 @@ export const ControlsContainer = styled.div`
   gap: 1rem;
 `;
 
-export const StyledFormButton = styled(FormButton)``;
+export const StyledButton = styled(FormButton)``;
 
-export const PublishButton = styled(FormButton)``;
-
-export const SaveDraftButton = styled(FormButton)`
-  cursor: not-allowed;
-
+export const StyledInactiveButton = styled(FormButton)`
   &:hover {
-    color: inherit;
+    cursor: not-allowed;
   }
 `;

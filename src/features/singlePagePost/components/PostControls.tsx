@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useNavigate } from 'react-router-dom';
 
 import { putLikeCount, selectPostLikeCount } from '../singlePagePostSlice';
 import { toggleComments } from '@/features/commentList/commentListSlice';
@@ -13,16 +14,15 @@ import { enterEditMode } from '@/features/postForm/postFormSlice';
 
 import Bookmark from '@/components/icons/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
+import { SpecialMenuItem } from '@/styles/components/SpecialMenuItem';
+import { MenuItem } from '@/styles/components/MenuItem';
 import {
   ControlsContainer,
   ControlsIcon,
   LikeCount,
   LikeWrapper,
-  MenuItem,
-  SpecialMenuItem,
   Wrapper,
 } from './PostControls.styled';
-import { useNavigate } from 'react-router-dom';
 
 type PostControlsProps = { postId: string; isAuthor: boolean };
 
@@ -60,6 +60,12 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
     setIsMenuOpen(false);
   };
 
+  const handleEditModeClick = (): void => {
+    dispatch(enterEditMode(postId));
+    setIsMenuOpen(false);
+    navigate('/post-form');
+  };
+
   const handleMuteAuthorClick = (): void => {
     // TODO:
     setIsMenuOpen(false);
@@ -68,12 +74,6 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
   const handleMutePublicationClick = (): void => {
     // TODO:
     setIsMenuOpen(false);
-  };
-
-  const handleEditModeClick = (): void => {
-    dispatch(enterEditMode(postId));
-    setIsMenuOpen(false);
-    navigate('/post-form');
   };
 
   const isBookmarked = userBookmarks?.some((p) => p === postId) || false;
