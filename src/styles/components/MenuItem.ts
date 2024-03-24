@@ -7,7 +7,7 @@ export const MenuItem = styled.li`
   font-weight: 300;
   list-style-type: none;
 
-  transition: color 100ms, background-color 100ms;
+  transition: all 100ms;
 
   &:hover {
     color: ${({ theme }) => theme.color.text_secondary};

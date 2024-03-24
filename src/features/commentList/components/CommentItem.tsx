@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { PostAuthorData } from '@/types/itemData/GeneralAuthorData';
@@ -21,10 +22,20 @@ type CommentProps = {
 };
 
 const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps) => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(true);
+
   const currentUserId = useAppSelector(selectCurrentUserId);
   const isEditMode = useAppSelector(selectCommentIsEditMode);
 
   const dispatch = useAppDispatch();
+
+  const handleCloseMenu = (): void => {
+    setIsMenuOpen(false);
+  };
+
+  const handleToggleMenu = (): void => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const handleDeleteClick = (): void => {
     dispatch(deleteComment(_id));
@@ -50,16 +61,21 @@ const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps)
         </S.WrapperAuthor>
         {ownedByUser && !isEditMode && (
           <S.ControlsWrapper>
-            <S.EditIcon
-              onIconClick={handleEditClick}
-              src="/edit.svg"
-              alt="Edit Comment Icon"
-            />
-            <S.ControlsIcon
-              onIconClick={handleDeleteClick}
-              src="/delete.svg"
-              alt="Delete Comment Icon"
-            />
+            <S.StyledDotMenu
+              onMenuClose={handleCloseMenu}
+              onToggle={handleToggleMenu}
+              isOpen={isMenuOpen}
+              isAlignedLeft={true}
+            >
+              <S.StyledMenuItem onClick={handleEditClick}>
+                Edit
+                <S.EditIcon src="/edit.svg" alt="Edit Comment Icon" />
+              </S.StyledMenuItem>
+              <S.StyledMenuItem onClick={handleDeleteClick}>
+                Delete
+                <S.ControlsIcon src="/delete.svg" alt="Delete Comment Icon" />
+              </S.StyledMenuItem>
+            </S.StyledDotMenu>
           </S.ControlsWrapper>
         )}
       </S.Header>

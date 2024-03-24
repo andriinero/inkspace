@@ -5,6 +5,8 @@ import TimeAgo from '@/components/general/TimeAgo';
 import AppIcon from '@/components/icons/AppIcon';
 import { Username } from '@/styles/components/Username.styled';
 import AppImage from '@/features/appImages/components/AppImage';
+import DotMenu from '@/components/general/DotMenu';
+import { MenuItem } from '@/styles/components/MenuItem';
 
 export const Wrapper = styled.li`
   display: flex;
@@ -62,13 +64,32 @@ export const ControlsWrapper = styled.div`
   gap: 0.5rem;
 `;
 
+export const StyledDotMenu = styled(DotMenu)``;
+
+export const StyledMenuItem = styled(MenuItem)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  font-size: 0.8rem;
+
+  &:hover {
+    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(192%)
+      contrast(82%);
+  }
+`;
+
 export const ControlsIcon = styled(AppIcon)`
-  width: 20px;
-  height: 20px;
+  width: 18px;
+
+  &:hover {
+    filter: none;
+  }
 `;
 
 export const EditIcon = styled(ControlsIcon)`
-  width: 18px;
+  width: 16px;
 `;
 
 export const CommentDate = styled(PostDate)`
