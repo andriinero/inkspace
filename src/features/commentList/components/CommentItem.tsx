@@ -22,7 +22,7 @@ type CommentProps = {
 };
 
 const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps) => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(true);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const currentUserId = useAppSelector(selectCurrentUserId);
   const isEditMode = useAppSelector(selectCommentIsEditMode);
@@ -43,6 +43,7 @@ const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps)
 
   const handleEditClick = (): void => {
     dispatch(enterEditMode({ commentId: _id, commentBody: body }));
+    setIsMenuOpen(false);
   };
 
   const ownedByUser = currentUserId === author._id;

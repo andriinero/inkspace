@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div<{ $isOpen: boolean }>`
-  display: flex;
+  display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
   flex-direction: column;
 
   position: fixed;
@@ -16,7 +16,7 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
   box-shadow: 0 0 2em rgb(0 0 0 / 0.3);
 
   transition: transform 500ms;
-  transform: ${(props) => (props.$isOpen ? 'translateX(0)' : 'translateX(450px)')};
+  transform: translateX(0);
 
   overflow: -moz-scrollbars-vertical;
   overflow-y: scroll;
@@ -27,6 +27,10 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
 
   &::-webkit-scrollbar {
     width: 8px;
+  }
+
+  @starting-style {
+    transform: translateX(400px);
   }
 `;
 
