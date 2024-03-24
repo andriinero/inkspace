@@ -4,7 +4,7 @@ import App from './app/App';
 import Home from './pages/Home';
 import SinglePagePost from './pages/SinglePagePost';
 import NotFound404 from './pages/NotFound404';
-import CreatePost from './pages/PostForm';
+import PostForm from './pages/PostForm';
 import Profile from './pages/Profile';
 import AuthorPage from './pages/AuthorPage';
 import ProfileEditPage from './pages/ProfileEditPage';
@@ -17,7 +17,7 @@ const Router = () => {
       children: [
         { index: true, element: <Home /> },
         { path: '/posts/:postid', element: <SinglePagePost /> },
-        { path: '/create-post', element: <CreatePost /> },
+        { path: '/post-form', element: <PostForm /> },
         {
           path: '/profile',
           element: <Profile />,

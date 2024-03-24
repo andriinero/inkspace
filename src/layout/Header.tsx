@@ -40,7 +40,7 @@ const Header = () => {
         {isAuthenticated ? (
           <>
             <S.NewPostButton>
-              <S.StyledLink to="/create-post">
+              <S.StyledLink to="/post-form">
                 <S.StyledAppIcon src="/post.svg" alt="Create New Post Icon" />
                 <S.NewPostButtonText>Write</S.NewPostButtonText>
               </S.StyledLink>

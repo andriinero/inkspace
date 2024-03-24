@@ -71,6 +71,8 @@ export const ControlsContainer = styled.div`
   gap: 1rem;
 `;
 
+export const StyledFormButton = styled(FormButton)``;
+
 export const PublishButton = styled(FormButton)``;
 
 export const SaveDraftButton = styled(FormButton)`

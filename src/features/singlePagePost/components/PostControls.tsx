@@ -73,7 +73,7 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
   const handleEditModeClick = (): void => {
     dispatch(enterEditMode(postId));
     setIsMenuOpen(false);
-    navigate('/edit-post');
+    navigate('/post-form');
   };
 
   const isBookmarked = userBookmarks?.some((p) => p === postId) || false;

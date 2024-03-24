@@ -6,6 +6,7 @@ import storage from '@/lib/storage';
 import { RootState } from '@/app/store';
 import { PostData, PostDataSchema } from '@/types/itemData/PostData';
 import { ErrorData } from '@/types/responseData/error/ErrorData';
+import { TPostFormSchema } from '@/types/formSchemas/CreatePostSchema';
 
 type PostBodyType = {
   title: string;
@@ -70,6 +71,30 @@ export const fetchEditTargetPost = createAsyncThunk(
   }
 );
 
+export const putEditTargetPost = createAsyncThunk(
+  'postForm/putEditTargetPost',
+  async (postData: TPostFormSchema, { rejectWithValue }) => {
+    const token = storage.getToken();
+
+    const { data, responseState } = await useAppFetch(`/api/posts/${postId}`, {
+      method: 'PUT',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+        body: JSON.stringify(postData),
+      },
+    });
+
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+
+    const validationResult = PostDataSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
+
+    return data as PostData;
+  }
+);
+
 const createPostSlice = createSlice({
   name: 'postForm',
   initialState,
@@ -117,8 +142,7 @@ export const { enterEditMode, exitEditMode } = createPostSlice.actions;
 
 export default createPostSlice.reducer;
 
-export const selectEditPostData = (state: RootState) =>
-  state.postForm.editTargetPostData;
+export const selectEditPostData = (state: RootState) => state.postForm.editTargetPostData;
 
 export const selectEditPostId = (state: RootState) => state.postForm.editTargetPostId;
 

@@ -1,42 +1,73 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { postPost } from '@/features/postForm/postFormSlice';
+import {
+  exitEditMode,
+  fetchEditTargetPost,
+  postPost,
+  selectEditPostId,
+  selectPostIsEditMode,
+} from '@/features/postForm/postFormSlice';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 import { Editor as TinyMCEEditor } from 'tinymce';
-import {
-  TCreatePostSchema,
-  CreatePostSchema,
-} from '@/types/formSchemas/CreatePostSchema';
+import { TPostFormSchema, PostFormSchema } from '@/types/formSchemas/CreatePostSchema';
 
 import TinyEditor from '@/features/postForm/components/TinyEditor';
 import * as S from './PostForm.styled';
 
-const CreatePost = () => {
+const PostForm = () => {
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isEditMode = useAppSelector(selectPostIsEditMode);
+  const editPostId = useAppSelector(selectEditPostId);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const defaultValues = async (): Promise<TPostFormSchema> => {
+    let values = { title: '', body: '', topic: '' };
+
+    if (isEditMode && editPostId) {
+      const data = await dispatch(fetchEditTargetPost(editPostId)).unwrap();
+      values = { title: data.title, body: data.body, topic: data.topic.name };
+    }
+
+    return values;
+  };
+
   const editorRef = useRef<TinyMCEEditor | null>(null);
   const {
     control,
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<TCreatePostSchema>({ resolver: zodResolver(CreatePostSchema) });
+  } = useForm<TPostFormSchema>({
+    resolver: zodResolver(PostFormSchema),
+    defaultValues,
+  });
 
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
-
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  useEffect(() => {
+    return () => {
+      dispatch(exitEditMode());
+    };
+  }, [dispatch]);
 
   if (!isAuthenticated) return <Navigate to="/" />;
 
-  const handleFormSubmit = async (formData: TCreatePostSchema): Promise<void> => {
+  const handlePostSubmit = async (formData: TPostFormSchema): Promise<void> => {
     const response = await dispatch(postPost(formData)).unwrap();
 
     if (response) navigate('/');
   };
+
+  const handlePutSubmit = async (formData: TPostFormSchema): Promise<void> => {
+    // const response = await dispatch().unwrap();
+  };
+
+  const handleFormSubmit = isEditMode ? handlePutSubmit : handlePostSubmit;
 
   return (
     <S.Wrapper>
@@ -98,4 +129,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default PostForm;
