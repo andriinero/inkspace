@@ -57,7 +57,9 @@ const SinglePagePost = () => {
               topic={postData.topic}
               bodyLength={postData.body.length}
             />
-            {isAuthenticated && <PostControls postId={postData._id} />}
+            {isAuthenticated && (
+              <PostControls postId={postData._id} isAuthor={isAuthor} />
+            )}
             <Body>{parse(postData.body)}</Body>
           </PostWrapper>
           <PostComments postId={postData._id} />

@@ -5,7 +5,10 @@ import storage from '@/lib/storage';
 
 import { RootState } from '@/app/store';
 import { PostData, PostDataSchema } from '@/types/itemData/PostData';
-import { PutLikeCount, PutLikeCountSchema } from '@/types/responseData/success/PutLikeCount';
+import {
+  PutLikeCount,
+  PutLikeCountSchema,
+} from '@/types/responseData/success/PutLikeCount';
 import { ErrorData } from '@/types/responseData/error/ErrorData';
 
 type SinglePagePostState = {
@@ -62,7 +65,7 @@ export const putLikeCount = createAsyncThunk(
 
     if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = PutLikeCountSchema.safeParse(data); 
+    const validationResult = PutLikeCountSchema.safeParse(data);
     if (!validationResult.success) console.error(validationResult.error);
 
     return data as PutLikeCount;

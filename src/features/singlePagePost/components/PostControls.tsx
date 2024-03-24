@@ -9,6 +9,7 @@ import {
   selectBookmarkActionState,
   selectProfileBookmarks,
 } from '@/features/profile/profileSlice';
+import { enterEditMode } from '@/features/createPost/createPostSlice';
 
 import Bookmark from '@/components/icons/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
@@ -18,12 +19,14 @@ import {
   LikeCount,
   LikeWrapper,
   MenuItem,
+  SpecialMenuItem,
   Wrapper,
 } from './PostControls.styled';
+import { useNavigate } from 'react-router-dom';
 
-type PostControlsProps = { postId: string };
+type PostControlsProps = { postId: string; isAuthor: boolean };
 
-const PostControls = ({ postId }: PostControlsProps) => {
+const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const likeCount = useAppSelector(selectPostLikeCount);
@@ -31,6 +34,7 @@ const PostControls = ({ postId }: PostControlsProps) => {
   const bookmarkActionState = useAppSelector(selectBookmarkActionState);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onLikeClick = (): void => {
     dispatch(putLikeCount(postId));
@@ -66,6 +70,13 @@ const PostControls = ({ postId }: PostControlsProps) => {
     setIsMenuOpen(false);
   };
 
+  const handleEditModeClick = (): void => {
+    dispatch(enterEditMode(postId));
+    setIsMenuOpen(false);
+    //FIXME: navigation route
+    navigate('');
+  };
+
   const isBookmarked = userBookmarks?.some((p) => p === postId) || false;
   const onBookmarkClick = isBookmarked ? handleBookmarkRemove : handleBookmarkAdd;
 
@@ -94,6 +105,9 @@ const PostControls = ({ postId }: PostControlsProps) => {
           onMenuClose={handleDropdownClose}
           isOpen={isMenuOpen}
         >
+          {isAuthor && (
+            <SpecialMenuItem onClick={handleEditModeClick}>Edit Post</SpecialMenuItem>
+          )}
           <MenuItem onClick={handleMuteAuthorClick}>Mute this author</MenuItem>
           <MenuItem onClick={handleMutePublicationClick}>Mute this publication</MenuItem>
         </DotMenu>

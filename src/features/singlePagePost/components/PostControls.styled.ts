@@ -57,3 +57,7 @@ export const MenuItem = styled.li`
     padding-bottom: 1rem;
   }
 `;
+
+export const SpecialMenuItem = styled(MenuItem)`
+  color: ${({ theme }) => theme.color.button_special_text};
+`;
