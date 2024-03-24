@@ -5,9 +5,9 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
-  exitEditMode,
   fetchEditTargetPost,
   postPost,
+  putEditTargetPost,
   selectEditPostId,
   selectPostIsEditMode,
 } from '@/features/postForm/postFormSlice';
@@ -58,7 +58,9 @@ const PostForm = () => {
   };
 
   const handlePutSubmit = async (formData: TPostFormSchema): Promise<void> => {
-    // const response = await dispatch().unwrap();
+    const response = await dispatch(putEditTargetPost(formData)).unwrap();
+
+    if (response) navigate('/');
   };
 
   const handleFormSubmit = isEditMode ? handlePutSubmit : handlePostSubmit;

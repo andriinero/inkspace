@@ -73,18 +73,22 @@ export const fetchEditTargetPost = createAsyncThunk(
 
 export const putEditTargetPost = createAsyncThunk(
   'postForm/putEditTargetPost',
-  async (postData: TPostFormSchema, { rejectWithValue }) => {
+  async (postData: TPostFormSchema, { getState, rejectWithValue }) => {
     const token = storage.getToken();
+    const state = getState() as { postForm: { editTargetPostId: string } };
 
-    const { data, responseState } = await useAppFetch(`/api/posts/${postId}`, {
-      method: 'PUT',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${token}`,
+    const { data, responseState } = await useAppFetch(
+      `/api/posts/${state.postForm.editTargetPostId}`,
+      {
+        method: 'PUT',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(postData),
-      },
-    });
+      }
+    );
 
     if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
