@@ -9,7 +9,7 @@ import {
   selectBookmarkActionState,
   selectProfileBookmarks,
 } from '@/features/profile/profileSlice';
-import { enterEditMode } from '@/features/createPost/createPostSlice';
+import { enterEditMode } from '@/features/postForm/postFormSlice';
 
 import Bookmark from '@/components/icons/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
@@ -73,8 +73,7 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
   const handleEditModeClick = (): void => {
     dispatch(enterEditMode(postId));
     setIsMenuOpen(false);
-    //FIXME: navigation route
-    navigate('');
+    navigate('/edit-post');
   };
 
   const isBookmarked = userBookmarks?.some((p) => p === postId) || false;

@@ -30,7 +30,7 @@ const initialState: CreatePostState = {
 };
 
 export const postPost = createAsyncThunk(
-  'createPostSlice/postPost',
+  'postForm/postPost',
   async (postBody: PostBodyType, { rejectWithValue }) => {
     const token = storage.getToken();
 
@@ -54,7 +54,7 @@ export const postPost = createAsyncThunk(
 );
 
 export const fetchEditTargetPost = createAsyncThunk(
-  'createPost/fetchEditTargetPost',
+  'postForm/fetchEditTargetPost',
   async (postId: string, { rejectWithValue }) => {
     const { data, responseState } = await useAppFetch(`/api/posts/${postId}`, {
       method: 'GET',
@@ -71,7 +71,7 @@ export const fetchEditTargetPost = createAsyncThunk(
 );
 
 const createPostSlice = createSlice({
-  name: 'createPost',
+  name: 'postForm',
   initialState,
   reducers: {
     enterEditMode(state, action) {
@@ -118,13 +118,13 @@ export const { enterEditMode, exitEditMode } = createPostSlice.actions;
 export default createPostSlice.reducer;
 
 export const selectEditPostData = (state: RootState) =>
-  state.createPost.editTargetPostData;
+  state.postForm.editTargetPostData;
 
-export const selectEditPostId = (state: RootState) => state.createPost.editTargetPostId;
+export const selectEditPostId = (state: RootState) => state.postForm.editTargetPostId;
 
-export const selectPostIsEditMode = (state: RootState) => state.createPost.isEditMode;
+export const selectPostIsEditMode = (state: RootState) => state.postForm.isEditMode;
 
-export const selectPostPostState = (state: RootState) => state.createPost.postPostState;
+export const selectPostPostState = (state: RootState) => state.postForm.postPostState;
 
 export const selectFetchTargetPostState = (state: RootState) =>
-  state.createPost.fetchEditTargetPostState;
+  state.postForm.fetchEditTargetPostState;

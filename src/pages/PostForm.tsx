@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { postPost } from '@/features/createPost/createPostSlice';
+import { postPost } from '@/features/postForm/postFormSlice';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 import { Editor as TinyMCEEditor } from 'tinymce';
@@ -13,8 +13,8 @@ import {
   CreatePostSchema,
 } from '@/types/formSchemas/CreatePostSchema';
 
-import TinyEditor from '@/features/createPost/components/TinyEditor';
-import * as S from './CreatePost.styled';
+import TinyEditor from '@/features/postForm/components/TinyEditor';
+import * as S from './PostForm.styled';
 
 const CreatePost = () => {
   const editorRef = useRef<TinyMCEEditor | null>(null);
