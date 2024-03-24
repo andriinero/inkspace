@@ -5,33 +5,6 @@ import { ErrorMessage } from '@/styles/components/ErrorMessage';
 import { InputLabel } from '@/styles/components/InputLabel';
 import { FormButton } from '@/styles/components/FormButton';
 
-export const Wrapper = styled(motion.div)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  height: 100dvh;
-  width: 100dvw;
-`;
-
-export const WrapperBackdrop = styled(motion.div)<{ $isOpen: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-  background-color: ${({ theme }) => theme.color.dialog_backdrop_bg};
-`;
-
 export const LoginWrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
