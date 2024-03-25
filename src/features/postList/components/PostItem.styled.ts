@@ -4,7 +4,7 @@ import Bookmark from '@/components/icons/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
 
 import PostReadTime from '@/components/general/PostReadTime';
-import { Title } from '@/styles/components/Title.styled';
+import { Title } from '@/components/styled/Title.styled';
 import { motion } from 'framer-motion';
 import AppImage from '@/features/appImages/components/AppImage';
 

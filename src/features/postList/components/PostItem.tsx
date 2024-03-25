@@ -18,9 +18,9 @@ import { TopicData } from '@/types/entityData/TopicData';
 import { Waterfall } from '@/styles/animations/Waterfall';
 
 import PostDate from '@/components/general/TimeAgo';
-import { Username } from '@/styles/components/Username.styled';
-import { MenuItem } from '@/styles/components/MenuItem';
-import { SpecialMenuItem } from '@/styles/components/SpecialMenuItem';
+import { Username } from '@/components/styled/Username.styled';
+import { MenuItem } from '@/components/styled/MenuItem';
+import { SpecialMenuItem } from '@/components/styled/SpecialMenuItem';
 import * as S from './PostItem.styled';
 
 type PostItemProps = {

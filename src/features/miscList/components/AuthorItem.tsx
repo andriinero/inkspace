@@ -7,9 +7,9 @@ import {
   selectFollowActionState,
 } from '@/features/profile/profileSlice';
 
-import { Username } from '@/styles/components/Username.styled';
+import { Username } from '@/components/styled/Username.styled';
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
-import { HollowButton } from '@/styles/components/HollowButton';
+import { HollowButton } from '@/components/styled/HollowButton';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 import * as S from './AuthorItem.styled';
 

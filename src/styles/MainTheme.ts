@@ -27,7 +27,7 @@ const mainTheme = {
     error_text: '#E74C3C',
     progress_scrollbar_bg: '#7de276',
     dialog_modal_bg: '#1B1E1F',
-    dialog_backdrop_bg: '#181a1bf2',
+    dialog_backdrop_bg: '#181a1b7d',
     input_text_border: '#979085',
     form_button_bg: '#181a1b',
     form_button_border: '#979085',

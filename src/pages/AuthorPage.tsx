@@ -21,7 +21,7 @@ import { FadeIn } from '@/styles/animations/FadeIn';
 
 import PostContainer from '@/features/authorPage/components/PostContainer';
 import Error from '@/components/general/Error';
-import { HollowButton } from '@/styles/components/HollowButton';
+import { HollowButton } from '@/components/styled/HollowButton';
 import { FollowCount, SignUpDate, UserBio } from './Profile.styled';
 import * as S from './AuthorPage.styled';
 

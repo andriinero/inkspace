@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Username } from '@/styles/components/Username.styled';
+import { Username } from '@/components/styled/Username.styled';
 import AppImage from '@/features/appImages/components/AppImage';
 import { motion } from 'framer-motion';
 

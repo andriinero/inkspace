@@ -1,4 +1,4 @@
-import { HollowButton } from '@/styles/components/HollowButton';
+import { HollowButton } from '@/components/styled/HollowButton';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 

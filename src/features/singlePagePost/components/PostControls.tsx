@@ -14,8 +14,8 @@ import { enterEditMode } from '@/features/postForm/postFormSlice';
 
 import Bookmark from '@/components/icons/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
-import { SpecialMenuItem } from '@/styles/components/SpecialMenuItem';
-import { MenuItem } from '@/styles/components/MenuItem';
+import { SpecialMenuItem } from '@/components/styled/SpecialMenuItem';
+import { MenuItem } from '@/components/styled/MenuItem';
 import {
   ControlsContainer,
   ControlsIcon,

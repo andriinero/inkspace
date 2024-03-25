@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PostReadTime from '@/components/general/PostReadTime';
 import { NavLink } from 'react-router-dom';
-import { Username } from '@/styles/components/Username.styled';
+import { Username } from '@/components/styled/Username.styled';
 import { motion } from 'framer-motion';
 import AppImage from '@/features/appImages/components/AppImage';
 

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { PostBody } from '@/styles/PostBody.styled';
-import { ErrorMessage } from '@/styles/components/ErrorMessage';
-import { InputText } from '@/styles/components/InputText';
-import { InputLabel } from '@/styles/components/InputLabel';
-import { FormButton } from '@/styles/components/FormButton';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import { InputText } from '@/components/styled/InputText';
+import { InputLabel } from '@/components/styled/InputLabel';
+import { FormButton } from '@/components/styled/FormButton';
 import { motion } from 'framer-motion';
 
 export const Wrapper = styled(motion.div)`

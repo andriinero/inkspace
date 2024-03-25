@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { GreenButton } from '@/styles/components/GreenButton';
+import { GreenButton } from '@/components/styled/GreenButton';
 import AppIcon from '@/components/icons/AppIcon';
 import AppImage from '@/features/appImages/components/AppImage';
 
@@ -84,6 +84,11 @@ export const ProfileIcon = styled(AppImage)`
 
   cursor: pointer;
   -webkit-user-drag: none;
+`;
+
+export const ControlsWrapper = styled.div`
+  display: flex;
+  gap: 1.3rem;
 `;
 
 export const HeaderButton = styled(GreenButton)``;

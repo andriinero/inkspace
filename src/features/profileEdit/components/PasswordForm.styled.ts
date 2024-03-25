@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { ErrorMessage } from '@/styles/components/ErrorMessage';
-import { FormButton } from '@/styles/components/FormButton';
-import { InputLabel } from '@/styles/components/InputLabel';
-import { InputText } from '@/styles/components/InputText';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import { FormButton } from '@/components/styled/FormButton';
+import { InputLabel } from '@/components/styled/InputLabel';
+import { InputText } from '@/components/styled/InputText';
 
 export const WrapperMain = styled.div`
   display: flex;

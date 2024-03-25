@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const MenuItem = styled.li`
   padding: 0.4rem 0.9rem;
 
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 300;
   list-style-type: none;
 

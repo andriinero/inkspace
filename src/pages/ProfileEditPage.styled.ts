@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import AppImage from '@/features/appImages/components/AppImage';
-import { Username } from '@/styles/components/Username.styled';
+import { Username } from '@/components/styled/Username.styled';
 import { motion } from 'framer-motion';
 
 export const Wrapper = styled(motion.div)`

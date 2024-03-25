@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { InputText } from '@/styles/components/InputText';
+import { InputText } from '@/components/styled/InputText';
 import { motion } from 'framer-motion';
-import { ErrorMessage } from '@/styles/components/ErrorMessage';
-import { InputLabel } from '@/styles/components/InputLabel';
-import { FormButton } from '@/styles/components/FormButton';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import { InputLabel } from '@/components/styled/InputLabel';
+import { FormButton } from '@/components/styled/FormButton';
 
 export const LoginWrapper = styled(motion.div)`
   display: flex;

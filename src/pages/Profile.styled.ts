@@ -1,5 +1,5 @@
 import AppImage from '@/features/appImages/components/AppImage';
-import { Username } from '@/styles/components/Username.styled';
+import { Username } from '@/components/styled/Username.styled';
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';

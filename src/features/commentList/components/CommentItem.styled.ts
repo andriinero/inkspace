@@ -3,10 +3,10 @@ import PostDate from '@/components/general/TimeAgo';
 import { NavLink } from 'react-router-dom';
 import TimeAgo from '@/components/general/TimeAgo';
 import AppIcon from '@/components/icons/AppIcon';
-import { Username } from '@/styles/components/Username.styled';
+import { Username } from '@/components/styled/Username.styled';
 import AppImage from '@/features/appImages/components/AppImage';
 import DotMenu from '@/components/general/DotMenu';
-import { MenuItem } from '@/styles/components/MenuItem';
+import { MenuItem } from '@/components/styled/MenuItem';
 
 export const Wrapper = styled.li`
   display: flex;
@@ -71,8 +71,6 @@ export const StyledMenuItem = styled(MenuItem)`
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-
-  font-size: 0.8rem;
 
   &:hover {
     filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(192%)

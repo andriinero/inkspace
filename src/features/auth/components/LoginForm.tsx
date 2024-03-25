@@ -6,16 +6,17 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   closeLoginModal,
   initAuth,
-  postLogin,
+  postSignUp,
   selectIsLoginModalOpen,
+  selectPostLoginState,
 } from '../authSlice';
 
 import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
-import * as S from './LoginForm.styled';
 import Dialog from '@/components/general/Dialog';
+import * as S from './LoginForm.styled';
 
 const LoginForm = () => {
   const [error, setError] = useState<ErrorData | null>(null);
@@ -28,6 +29,7 @@ const LoginForm = () => {
   });
 
   const isModalOpen = useAppSelector(selectIsLoginModalOpen);
+  const { isLoading } = useAppSelector(selectPostLoginState);
 
   const dispatch = useAppDispatch();
 
@@ -37,11 +39,13 @@ const LoginForm = () => {
 
   const handleSubmitLogin = async (formData: TLoginSchema): Promise<void> => {
     try {
-      const response = await dispatch(postLogin(formData)).unwrap();
+      if (!isLoading) {
+        const response = await dispatch(postSignUp(formData)).unwrap();
 
-      if (response) {
-        dispatch(initAuth());
-        dispatch(closeLoginModal());
+        if (response) {
+          dispatch(initAuth());
+          dispatch(closeLoginModal());
+        }
       }
     } catch (err) {
       setError(err as ErrorData);

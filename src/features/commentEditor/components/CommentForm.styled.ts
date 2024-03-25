@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import CommentCounter from './CommentCounter';
-import { FormButton } from '@/styles/components/FormButton';
+import { FormButton } from '@/components/styled/FormButton';
 
 export const Form = styled.form`
   display: flex;
