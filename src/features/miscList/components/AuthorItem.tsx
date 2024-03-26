@@ -49,7 +49,11 @@ const AuthorItem = ({
   return (
     <S.WrapperItem variants={WaterfallSlideIn.item}>
       <S.StyledLink to={`/authors/${_id}`}>
-        <S.AuthorIcon imageId={profile_image} altText="Author Icon" />
+        <S.AuthorIcon
+          imageId={profile_image}
+          placeholderSrc="/portrait-placeholder.png"
+          altText="Author Icon"
+        />
       </S.StyledLink>
       <S.BioContainer>
         <S.StyledLink to={`/authors/${_id}`}>

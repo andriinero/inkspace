@@ -60,7 +60,7 @@ const Header = () => {
             <S.StyledLink to="/profile">
               <S.ProfileIcon
                 imageId={profileImageId}
-                placeholderSrc="/empty.png"
+                placeholderSrc="/portrait-placeholder.png"
                 altText="Current User Profile Picture"
               />
             </S.StyledLink>

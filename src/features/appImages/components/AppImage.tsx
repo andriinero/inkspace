@@ -39,7 +39,12 @@ const AppImage = ({
     if (!imageURL && !isImageInQueue && imageId) fetch();
   }, [imageURL, isImageInQueue, imageId, dispatch]);
 
-  const imgSrc = imageURL ? imageURL : placeholderSrc;
+  const imgSrc =
+    !imageId && !isLoading
+      ? placeholderSrc
+      : isLoading && !imageURL
+      ? '/empty.png'
+      : imageURL;
 
   if (!imageId)
     return (

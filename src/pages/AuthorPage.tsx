@@ -86,7 +86,11 @@ const AuthorPage = () => {
       </S.WrapperMain>
       <S.WrapperAside>
         <S.ProfileWrapper>
-          <S.ProfileIcon imageId={authorData?.profile_image} altText="Profile Icon" />
+          <S.ProfileIcon
+            imageId={authorData?.profile_image}
+            placeholderSrc="/portrait-placeholder.png"
+            altText="Profile Icon"
+          />
           <S.StyledAsideUserName>{authorData?.username}</S.StyledAsideUserName>
           <FollowCount>{authorData?.followed_users_count} Following</FollowCount>
           <FollowCount>{authorData?.users_following_count} Followers</FollowCount>

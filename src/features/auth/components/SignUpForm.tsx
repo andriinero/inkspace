@@ -1,18 +1,14 @@
-import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
-  closeLoginModal,
   closeSignUpModal,
-  initAuth,
   postSignUp,
   selectIsSignUpModalOpen,
   selectPostSignUpState,
 } from '../authSlice';
 
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { SignUpSchema, TSignUpSchema } from '@/types/formSchemas/SignUpSchema';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
@@ -20,7 +16,6 @@ import Dialog from '@/components/general/Dialog';
 import * as S from './SignUpForm.styled';
 
 const LoginForm = () => {
-  const [error, setError] = useState<ErrorData | null>(null);
   const {
     handleSubmit,
     register,
@@ -30,7 +25,7 @@ const LoginForm = () => {
   });
 
   const isModalOpen = useAppSelector(selectIsSignUpModalOpen);
-  const { isLoading } = useAppSelector(selectPostSignUpState);
+  const { isLoading, error } = useAppSelector(selectPostSignUpState);
 
   const dispatch = useAppDispatch();
 
@@ -39,18 +34,7 @@ const LoginForm = () => {
   };
 
   const handleFormSubmit = async (formData: TSignUpSchema): Promise<void> => {
-    try {
-      if (!isLoading) {
-        const response = await dispatch(postSignUp(formData)).unwrap();
-
-        if (response) {
-          dispatch(initAuth());
-          dispatch(closeLoginModal());
-        }
-      }
-    } catch (err) {
-      setError(err as ErrorData);
-    }
+    if (!isLoading) dispatch(postSignUp(formData));
   };
 
   return (
@@ -107,7 +91,7 @@ const LoginForm = () => {
           </S.InputWrapper>
           <S.ControlsWrapper>
             <S.StyledErrorMessage $isVisible={Boolean(error)}>
-              {error?.message}
+              {error?.errors![0].msg}
             </S.StyledErrorMessage>
             <S.SubmitButton
               type="submit"

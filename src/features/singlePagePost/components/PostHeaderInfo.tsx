@@ -61,7 +61,11 @@ const PostHeaderInfo = ({
   return (
     <S.Wrapper>
       <S.AuthorStyledLink to={`/authors/${author._id}`}>
-        <S.ProfileIcon imageId={author.profile_image} altText="Author Icon" />
+        <S.ProfileIcon
+          imageId={author.profile_image}
+          placeholderSrc="/portrait-placeholder.png"
+          altText="Author Icon"
+        />
       </S.AuthorStyledLink>
       <S.MainContainer>
         <S.HeaderStyledLink to={`/authors/${author._id}`}>

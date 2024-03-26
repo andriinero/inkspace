@@ -9,6 +9,8 @@ import { AppThunk, RootState } from '@/app/store';
 import { fetchProfileData } from '../profile/profileSlice';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { TLoginSchema } from '@/types/formSchemas/LoginSchema';
+import { PostSignUp, PostSignUpSchema } from '@/types/fetchResponse/success/PostSignUp';
+import { TSignUpSchema } from '@/types/formSchemas/SignUpSchema';
 
 type AuthState = {
   authData: AuthData | null;
@@ -71,11 +73,11 @@ export const postLogin = createAsyncThunk<
 });
 
 export const postSignUp = createAsyncThunk<
-  PostLogin,
-  TLoginSchema,
+  PostSignUp,
+  TSignUpSchema,
   { rejectValue: ErrorData }
 >('auth/postSignUp', async (signUpBody, { rejectWithValue }) => {
-  const { data, responseState } = await useAppFetch('/auth/login', {
+  const { data, responseState } = await useAppFetch('/auth/sign-up', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     mode: 'cors',
@@ -84,12 +86,10 @@ export const postSignUp = createAsyncThunk<
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-  const validationResult = PostLoginSchema.safeParse(data);
+  const validationResult = PostSignUpSchema.safeParse(data);
   if (!validationResult.success) console.error(validationResult);
 
-  storage.setToken((data as PostLogin).token);
-
-  return data as PostLogin;
+  return data as PostSignUp;
 });
 
 export const initAuth = (): AppThunk => (dispatch) => {
@@ -160,10 +160,12 @@ const authSlice = createSlice({
       })
       .addCase(postSignUp.fulfilled, (state) => {
         state.postSignUpState.isLoading = false;
+        state.isSignUpModalOpen = false;
+        state.isLoginModalOpen = true;
       })
       .addCase(postSignUp.rejected, (state, action) => {
         state.postSignUpState.isLoading = false;
-        state.postLoginState.error = action.payload || (action.error as ErrorData);
+        state.postSignUpState.error = action.payload || (action.error as ErrorData);
       });
   },
 });

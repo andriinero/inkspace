@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,20 +5,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   closeLoginModal,
   initAuth,
-  postSignUp,
+  postLogin,
   selectIsLoginModalOpen,
   selectPostLoginState,
 } from '../authSlice';
 
 import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import Dialog from '@/components/general/Dialog';
 import * as S from './LoginForm.styled';
 
 const LoginForm = () => {
-  const [error, setError] = useState<ErrorData | null>(null);
   const {
     handleSubmit,
     register,
@@ -29,7 +26,7 @@ const LoginForm = () => {
   });
 
   const isModalOpen = useAppSelector(selectIsLoginModalOpen);
-  const { isLoading } = useAppSelector(selectPostLoginState);
+  const { isLoading, error } = useAppSelector(selectPostLoginState);
 
   const dispatch = useAppDispatch();
 
@@ -38,17 +35,13 @@ const LoginForm = () => {
   };
 
   const handleFormSubmit = async (formData: TLoginSchema): Promise<void> => {
-    try {
-      if (!isLoading) {
-        const response = await dispatch(postSignUp(formData)).unwrap();
+    if (!isLoading) {
+      const response = await dispatch(postLogin(formData)).unwrap();
 
-        if (response) {
-          dispatch(initAuth());
-          dispatch(closeLoginModal());
-        }
+      if (response) {
+        dispatch(initAuth());
+        dispatch(closeLoginModal());
       }
-    } catch (err) {
-      setError(err as ErrorData);
     }
   };
 

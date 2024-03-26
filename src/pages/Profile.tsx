@@ -52,7 +52,11 @@ const Profile = () => {
       </S.WrapperMain>
       <S.WrapperAside>
         <S.ProfileWrapper>
-          <S.ProfileIcon imageId={profileData?.profile_image} altText="Profile Icon" />
+          <S.ProfileIcon
+            imageId={profileData?.profile_image}
+            placeholderSrc="/portrait-placeholder.png"
+            altText="Profile Icon"
+          />
           <S.StyledAsideUserName>{profileData?.username}</S.StyledAsideUserName>
           <S.FollowCount>{profileData?.followed_users.length} Following</S.FollowCount>
           <S.FollowCount>{profileData?.users_following.length} Followers</S.FollowCount>

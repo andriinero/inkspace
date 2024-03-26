@@ -41,7 +41,11 @@ const ProfileEditPage = () => {
       </S.WrapperMain>
       <S.WrapperAside>
         <S.ProfileWrapper>
-          <S.ProfileIcon imageId={profileData.profile_image} altText="Profile Icon" />
+          <S.ProfileIcon
+            imageId={profileData.profile_image}
+            placeholderSrc="/portrait-placeholder.png"
+            altText="Profile Icon"
+          />
           <S.StyledUserName>{profileData?.username}</S.StyledUserName>
           <ImageForm />
           <S.FollowCount>{profileData?.followed_users.length} Following</S.FollowCount>
