@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { useAppFetch } from '@/lib/useAppFetch';
 
-import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/app/store';
 import { FullAuthorData, FullAuthorDataSchema } from '@/types/entityData/FullAuthorData';
@@ -11,8 +11,8 @@ import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 type AuthorPageState = {
   authorData: FullAuthorData | null;
   authorPosts: PostData[];
-  fetchAuthorState: { isLoading: boolean; error: SerializedError | null };
-  fetchAuthorPostsState: { isLoading: boolean; error: SerializedError | null };
+  fetchAuthorState: { isLoading: boolean; error: ErrorData | null };
+  fetchAuthorPostsState: { isLoading: boolean; error: ErrorData | null };
 };
 
 const initialState: AuthorPageState = {
@@ -22,39 +22,41 @@ const initialState: AuthorPageState = {
   fetchAuthorPostsState: { isLoading: true, error: null },
 };
 
-export const fetchAuthor = createAsyncThunk(
-  'authorPage/fetchAuthor',
-  async (authorId: string, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch(`/api/authors/${authorId}`, {
-      method: 'GET',
-      mode: 'cors',
-    });
+export const fetchAuthor = createAsyncThunk<
+  FullAuthorData,
+  string,
+  { rejectValue: ErrorData }
+>('authorPage/fetchAuthor', async (authorId, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch(`/api/authors/${authorId}`, {
+    method: 'GET',
+    mode: 'cors',
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = FullAuthorDataSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult.error);
+  const validationResult = FullAuthorDataSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult.error);
 
-    return data as FullAuthorData;
-  }
-);
+  return data as FullAuthorData;
+});
 
-export const fetchAuthorPosts = createAsyncThunk(
-  'authorPage/fetchAuthorPosts',
-  async (userId: string, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch(`/api/posts?userid=${userId}`, {
-      method: 'GET',
-      mode: 'cors',
-    });
+export const fetchAuthorPosts = createAsyncThunk<
+  PostData[],
+  string,
+  { rejectValue: ErrorData }
+>('authorPage/fetchAuthorPosts', async (userId, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch(`/api/posts?userid=${userId}`, {
+    method: 'GET',
+    mode: 'cors',
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = z.array(PostDataSchema).safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = z.array(PostDataSchema).safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as PostData[];
-  }
-);
+  return data as PostData[];
+});
 
 const authorPageSlice = createSlice({
   name: 'authorPage',
@@ -77,7 +79,7 @@ const authorPageSlice = createSlice({
       })
       .addCase(fetchAuthor.rejected, (state, action) => {
         state.fetchAuthorState.isLoading = false;
-        state.fetchAuthorState.error = action.error;
+        state.fetchAuthorState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(fetchAuthorPosts.pending, (state) => {
@@ -90,7 +92,7 @@ const authorPageSlice = createSlice({
       })
       .addCase(fetchAuthorPosts.rejected, (state, action) => {
         state.fetchAuthorPostsState.isLoading = false;
-        state.fetchAuthorPostsState.error = action.error;
+        state.fetchAuthorState.error = action.payload || (action.error as ErrorData);
       });
   },
 });

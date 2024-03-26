@@ -1,4 +1,4 @@
-import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/lib/storage';
@@ -8,18 +8,12 @@ import { PostData, PostDataSchema } from '@/types/entityData/PostData';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { TPostFormSchema } from '@/types/formSchemas/CreatePostSchema';
 
-type PostBodyType = {
-  title: string;
-  topic: string;
-  body: string;
-};
-
 type CreatePostState = {
   editTargetPostData: PostData | null;
   editTargetPostId: string | null;
   isEditMode: boolean;
-  postPostState: { isLoading: boolean; error: SerializedError | null };
-  fetchEditTargetPostState: { isLoading: boolean; error: SerializedError | null };
+  postPostState: { isLoading: boolean; error: ErrorData | null };
+  fetchEditTargetPostState: { isLoading: boolean; error: ErrorData | null };
 };
 
 const initialState: CreatePostState = {
@@ -30,74 +24,77 @@ const initialState: CreatePostState = {
   fetchEditTargetPostState: { isLoading: false, error: null },
 };
 
-export const postPost = createAsyncThunk(
-  'postForm/postPost',
-  async (postBody: PostBodyType, { rejectWithValue }) => {
-    const token = storage.getToken();
+export const postPost = createAsyncThunk<
+  PostData,
+  TPostFormSchema,
+  { rejectValue: ErrorData }
+>('postForm/postPost', async (postBody, { rejectWithValue }) => {
+  const token = storage.getToken();
 
-    const { data, responseState } = await useAppFetch(`/api/posts`, {
-      method: 'POST',
+  const { data, responseState } = await useAppFetch(`/api/posts`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(postBody),
+  });
+
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+
+  const validationResult = PostDataSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
+
+  return data as PostData;
+});
+
+export const fetchEditTargetPost = createAsyncThunk<
+  PostData,
+  string,
+  { rejectValue: ErrorData }
+>('postForm/fetchEditTargetPost', async (postId, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch(`/api/posts/${postId}`, {
+    method: 'GET',
+    mode: 'cors',
+  });
+
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+
+  const validationResult = PostDataSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
+
+  return data as PostData;
+});
+
+export const putEditTargetPost = createAsyncThunk<
+  PostData,
+  TPostFormSchema,
+  { rejectValue: ErrorData }
+>('postForm/putEditTargetPost', async (postData, { getState, rejectWithValue }) => {
+  const token = storage.getToken();
+  const state = getState() as { postForm: { editTargetPostId: string } };
+
+  const { data, responseState } = await useAppFetch(
+    `/api/posts/${state.postForm.editTargetPostId}`,
+    {
+      method: 'PUT',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(postBody),
-    });
+      body: JSON.stringify(postData),
+    }
+  );
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = PostDataSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = PostDataSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as PostData;
-  }
-);
-
-export const fetchEditTargetPost = createAsyncThunk(
-  'postForm/fetchEditTargetPost',
-  async (postId: string, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch(`/api/posts/${postId}`, {
-      method: 'GET',
-      mode: 'cors',
-    });
-
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
-
-    const validationResult = PostDataSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
-
-    return data as PostData;
-  }
-);
-
-export const putEditTargetPost = createAsyncThunk(
-  'postForm/putEditTargetPost',
-  async (postData: TPostFormSchema, { getState, rejectWithValue }) => {
-    const token = storage.getToken();
-    const state = getState() as { postForm: { editTargetPostId: string } };
-
-    const { data, responseState } = await useAppFetch(
-      `/api/posts/${state.postForm.editTargetPostId}`,
-      {
-        method: 'PUT',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(postData),
-      }
-    );
-
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
-
-    const validationResult = PostDataSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
-
-    return data as PostData;
-  }
-);
+  return data as PostData;
+});
 
 const createPostSlice = createSlice({
   name: 'postForm',
@@ -124,7 +121,7 @@ const createPostSlice = createSlice({
       })
       .addCase(postPost.rejected, (state, action) => {
         state.postPostState.isLoading = false;
-        state.postPostState.error = action.error;
+        state.postPostState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(fetchEditTargetPost.pending, (state) => {
@@ -137,7 +134,7 @@ const createPostSlice = createSlice({
       })
       .addCase(fetchEditTargetPost.rejected, (state, action) => {
         state.fetchEditTargetPostState.isLoading = false;
-        state.fetchEditTargetPostState.error = action.error;
+        state.postPostState.error = action.payload || (action.error as ErrorData);
       });
   },
 });

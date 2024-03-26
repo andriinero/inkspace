@@ -1,4 +1,4 @@
-import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/lib/storage';
@@ -14,9 +14,9 @@ type AuthState = {
   authData: AuthData | null;
   isLoginModalOpen: boolean;
   isSignUpModalOpen: boolean;
-  fetchAuthDataState: { isLoading: boolean; error: SerializedError | null };
-  postLoginState: { isLoading: boolean; error: SerializedError | null };
-  postSignUpState: { isLoading: boolean; error: SerializedError | null };
+  fetchAuthDataState: { isLoading: boolean; error: ErrorData | null };
+  postLoginState: { isLoading: boolean; error: ErrorData | null };
+  postSignUpState: { isLoading: boolean; error: ErrorData | null };
 };
 
 const initialState: AuthState = {
@@ -28,7 +28,7 @@ const initialState: AuthState = {
   postSignUpState: { isLoading: false, error: null },
 };
 
-export const fetchAuthData = createAsyncThunk(
+export const fetchAuthData = createAsyncThunk<AuthData, void, { rejectValue: ErrorData }>(
   'auth/fetchAuthData',
   async (_, { rejectWithValue }) => {
     const token = storage.getToken();
@@ -48,47 +48,49 @@ export const fetchAuthData = createAsyncThunk(
   }
 );
 
-export const postLogin = createAsyncThunk(
-  'auth/postLogin',
-  async (loginBody: TLoginSchema, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch('/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      mode: 'cors',
-      body: JSON.stringify(loginBody),
-    });
+export const postLogin = createAsyncThunk<
+  PostLogin,
+  TLoginSchema,
+  { rejectValue: ErrorData }
+>('auth/postLogin', async (loginBody, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch('/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    mode: 'cors',
+    body: JSON.stringify(loginBody),
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = PostLoginSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = PostLoginSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    storage.setToken((data as PostLogin).token);
+  storage.setToken((data as PostLogin).token);
 
-    return data as PostLogin;
-  }
-);
+  return data as PostLogin;
+});
 
-export const postSignUp = createAsyncThunk(
-  'auth/postSignUp',
-  async (signUpBody: TLoginSchema, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch('/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      mode: 'cors',
-      body: JSON.stringify(signUpBody),
-    });
+export const postSignUp = createAsyncThunk<
+  PostLogin,
+  TLoginSchema,
+  { rejectValue: ErrorData }
+>('auth/postSignUp', async (signUpBody, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch('/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    mode: 'cors',
+    body: JSON.stringify(signUpBody),
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = PostLoginSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = PostLoginSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    storage.setToken((data as PostLogin).token);
+  storage.setToken((data as PostLogin).token);
 
-    return data as PostLogin;
-  }
-);
+  return data as PostLogin;
+});
 
 export const initAuth = (): AppThunk => (dispatch) => {
   const token = storage.getToken();
@@ -137,7 +139,7 @@ const authSlice = createSlice({
       })
       .addCase(fetchAuthData.rejected, (state, action) => {
         state.fetchAuthDataState.isLoading = false;
-        state.fetchAuthDataState.error = action.error;
+        state.fetchAuthDataState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(postLogin.pending, (state) => {
@@ -149,7 +151,7 @@ const authSlice = createSlice({
       })
       .addCase(postLogin.rejected, (state, action) => {
         state.postLoginState.isLoading = false;
-        state.postLoginState.error = action.error;
+        state.postLoginState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(postSignUp.pending, (state) => {
@@ -161,7 +163,7 @@ const authSlice = createSlice({
       })
       .addCase(postSignUp.rejected, (state, action) => {
         state.postSignUpState.isLoading = false;
-        state.postSignUpState.error = action.error;
+        state.postLoginState.error = action.payload || (action.error as ErrorData);
       });
   },
 });

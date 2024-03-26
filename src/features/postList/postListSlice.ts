@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import { RootState } from '@/app/store';
@@ -13,7 +13,7 @@ type postListState = {
   selectedTopic: TopicData | null;
   fetchPostsState: {
     isLoading: boolean;
-    error: SerializedError | null;
+    error: ErrorData | null;
   };
 };
 
@@ -23,24 +23,25 @@ const initialState: postListState = {
   fetchPostsState: { isLoading: true, error: null },
 };
 
-export const fetchPosts = createAsyncThunk(
-  'postList/fetchPosts',
-  async (topicId: string = '', { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch(
-      `/api/posts?page=1&topic=${topicId}`,
-      {
-        mode: 'cors',
-      }
-    );
+export const fetchPosts = createAsyncThunk<
+  PostData[],
+  string,
+  { rejectValue: ErrorData }
+>('postList/fetchPosts', async (topicId = '', { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch(
+    `/api/posts?page=1&topic=${topicId}`,
+    {
+      mode: 'cors',
+    }
+  );
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = z.array(PostDataSchema).safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = z.array(PostDataSchema).safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as PostData[];
-  }
-);
+  return data as PostData[];
+});
 
 const postListSlice = createSlice({
   name: 'postList',
@@ -71,7 +72,7 @@ const postListSlice = createSlice({
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.fetchPostsState.isLoading = false;
-        state.fetchPostsState.error = action.error;
+        state.fetchPostsState.error = action.payload || (action.error as ErrorData);
       });
   },
 });

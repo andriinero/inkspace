@@ -1,23 +1,27 @@
-import { ZodError, z } from 'zod';
-import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { z } from 'zod';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/lib/storage';
 
 import { RootState } from '@/app/store';
 import { CommentData, CommentDataSchema } from '@/types/entityData/CommentData';
-import { TargetObjectIdSchema } from '@/types/fetchResponse/success/TargetObjectId';
+import {
+  TargetObjectId,
+  TargetObjectIdSchema,
+} from '@/types/fetchResponse/success/TargetObjectId';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 type CommentsState = {
   comments: CommentData[];
   areCommentsOpen: boolean;
   fetchCommentsState: {
     isLoading: boolean;
-    error: SerializedError | ZodError | null;
+    error: ErrorData | null;
   };
   deleteCommentState: {
     isLoading: boolean;
-    error: SerializedError | ZodError | null;
+    error: ErrorData | null;
   };
 };
 
@@ -34,52 +38,54 @@ const initialState: CommentsState = {
   },
 };
 
-export const fetchComments = createAsyncThunk(
-  'commentList/fetchComments',
-  async (postId: string, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch(`/api/posts/${postId}/comments`, {
-      method: 'GET',
-      mode: 'cors',
-    });
+export const fetchComments = createAsyncThunk<
+  CommentData[],
+  string,
+  { rejectValue: ErrorData }
+>('commentList/fetchComments', async (postId, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch(`/api/posts/${postId}/comments`, {
+    method: 'GET',
+    mode: 'cors',
+  });
 
-    if (!responseState.ok) return rejectWithValue(data);
+  if (!responseState.ok) return rejectWithValue(data as ErrorData);
 
-    const validationResult = z.array(CommentDataSchema).safeParse(data);
+  const validationResult = z.array(CommentDataSchema).safeParse(data);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
-
-    return validationResult.data;
+  if (!validationResult.success) {
+    console.error(validationResult);
+    return rejectWithValue(validationResult.error);
   }
-);
 
-export const deleteComment = createAsyncThunk(
-  'commentList/deleteComment',
-  async (commentId: string, { rejectWithValue }) => {
-    const token = storage.getToken();
+  return data as CommentData[];
+});
 
-    const { data, responseState } = await useAppFetch(`/api/comments/${commentId}`, {
-      method: 'DELETE',
-      mode: 'cors',
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+export const deleteComment = createAsyncThunk<
+  TargetObjectId,
+  string,
+  { rejectValue: ErrorData }
+>('commentList/deleteComment', async (commentId, { rejectWithValue }) => {
+  const token = storage.getToken();
 
-    if (!responseState.ok) return rejectWithValue(data);
+  const { data, responseState } = await useAppFetch(`/api/comments/${commentId}`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
 
-    const validationResult = TargetObjectIdSchema.safeParse(data);
+  if (!responseState.ok) return rejectWithValue(data as ErrorData);
 
-    if (!validationResult.success) {
-      console.error(validationResult);
-      return rejectWithValue(validationResult.error);
-    }
+  const validationResult = TargetObjectIdSchema.safeParse(data);
 
-    return validationResult.data;
+  if (!validationResult.success) {
+    console.error(validationResult);
+    return rejectWithValue(validationResult.error);
   }
-);
+
+  return data as TargetObjectId;
+});
 
 const commentListSlice = createSlice({
   name: 'commentList',
@@ -108,9 +114,9 @@ const commentListSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchComments.pending, (state) => {
+        state.comments = [];
         state.fetchCommentsState.isLoading = true;
         state.fetchCommentsState.error = null;
-        state.comments = [];
       })
       .addCase(fetchComments.fulfilled, (state, action) => {
         state.comments = action.payload;
@@ -118,7 +124,7 @@ const commentListSlice = createSlice({
       })
       .addCase(fetchComments.rejected, (state, action) => {
         state.fetchCommentsState.isLoading = false;
-        state.fetchCommentsState.error = action.error;
+        state.fetchCommentsState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(deleteComment.pending, (state) => {
@@ -131,7 +137,7 @@ const commentListSlice = createSlice({
       })
       .addCase(deleteComment.rejected, (state, action) => {
         state.deleteCommentState.isLoading = false;
-        state.deleteCommentState.error = action.error;
+        state.fetchCommentsState.error = action.payload || (action.error as ErrorData);
       });
   },
 });

@@ -19,9 +19,9 @@ import {
 } from '@/types/fetchResponse/success/TargetObjectId';
 
 type ProfileEditState = {
-  putPersonalDetailsState: { isLoading: boolean; error: SerializedError | null };
-  putPasswordState: { isLoading: boolean; error: SerializedError | null };
-  putProfileImageState: { isLoading: boolean; error: SerializedError | null };
+  putPersonalDetailsState: { isLoading: boolean; error: ErrorData | null };
+  putPasswordState: { isLoading: boolean; error: ErrorData | null };
+  putProfileImageState: { isLoading: boolean; error: ErrorData | null };
 };
 
 const initialState: ProfileEditState = {
@@ -30,81 +30,84 @@ const initialState: ProfileEditState = {
   putProfileImageState: { isLoading: false, error: null },
 };
 
-export const putPersonalDetails = createAsyncThunk(
-  'profile/putPersonalDetails',
-  async (profileData: TProfileDataEditSchema, { rejectWithValue }) => {
-    const token = storage.getToken();
+export const putPersonalDetails = createAsyncThunk<
+  PutProfileData,
+  TProfileDataEditSchema,
+  { rejectValue: ErrorData }
+>('profile/putPersonalDetails', async (profileData, { rejectWithValue }) => {
+  const token = storage.getToken();
 
-    const { data, responseState } = await useAppFetch('/api/profile', {
-      method: 'PUT',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(profileData),
-    });
+  const { data, responseState } = await useAppFetch('/api/profile', {
+    method: 'PUT',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(profileData),
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = PutProfileDataSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = PutProfileDataSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as PutProfileData;
-  }
-);
+  return data as PutProfileData;
+});
 
-export const putPassword = createAsyncThunk(
-  'profile/putPassword',
-  async (passwordData: TProfilePasswordEditSchema, { rejectWithValue }) => {
-    const token = storage.getToken();
+export const putPassword = createAsyncThunk<
+  PutProfileData,
+  TProfilePasswordEditSchema,
+  { rejectValue: ErrorData }
+>('profile/putPassword', async (passwordData, { rejectWithValue }) => {
+  const token = storage.getToken();
 
-    const { data, responseState } = await useAppFetch('/api/profile/password', {
-      method: 'PUT',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(passwordData),
-    });
+  const { data, responseState } = await useAppFetch('/api/profile/password', {
+    method: 'PUT',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(passwordData),
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = PutProfileDataSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = PutProfileDataSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as PutProfileData;
-  }
-);
+  return data as PutProfileData;
+});
 
-export const putProfileImage = createAsyncThunk(
-  'profile/putProfileImage',
-  async (image: File, { rejectWithValue, dispatch }) => {
-    const token = storage.getToken();
+export const putProfileImage = createAsyncThunk<
+  TargetObjectId,
+  File,
+  { rejectValue: ErrorData }
+>('profile/putProfileImage', async (image, { rejectWithValue, dispatch }) => {
+  const token = storage.getToken();
 
-    const formData = new FormData();
-    formData.append('image', image);
+  const formData = new FormData();
+  formData.append('image', image);
 
-    const { data, responseState } = await useAppFetch('/api/profile/image', {
-      method: 'PUT',
-      mode: 'cors',
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    });
+  const { data, responseState } = await useAppFetch('/api/profile/image', {
+    method: 'PUT',
+    mode: 'cors',
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = TargetObjectIdSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = TargetObjectIdSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    dispatch(updateImageId((data as TargetObjectId)._id));
+  dispatch(updateImageId((data as TargetObjectId)._id));
 
-    return data as TargetObjectId;
-  }
-);
+  return data as TargetObjectId;
+});
 
 const profileEditSlice = createSlice({
   name: 'profileEdit',
@@ -121,7 +124,8 @@ const profileEditSlice = createSlice({
       })
       .addCase(putPersonalDetails.rejected, (state, action) => {
         state.putPersonalDetailsState.isLoading = false;
-        state.putPersonalDetailsState.error = action.error;
+        state.putPersonalDetailsState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(putPassword.pending, (state) => {
@@ -133,7 +137,7 @@ const profileEditSlice = createSlice({
       })
       .addCase(putPassword.rejected, (state, action) => {
         state.putPasswordState.isLoading = false;
-        state.putPasswordState.error = action.error;
+        state.putPasswordState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(putProfileImage.pending, (state) => {
@@ -145,7 +149,7 @@ const profileEditSlice = createSlice({
       })
       .addCase(putProfileImage.rejected, (state, action) => {
         state.putProfileImageState.isLoading = false;
-        state.putProfileImageState.error = action.error;
+        state.putProfileImageState.error = action.payload || (action.error as ErrorData);
       });
   },
 });

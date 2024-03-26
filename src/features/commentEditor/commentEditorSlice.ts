@@ -1,4 +1,4 @@
-import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/lib/storage';
@@ -12,12 +12,12 @@ type CommentEditorState = {
   isEditMode: boolean;
   postCommentState: {
     isLoading: boolean;
-    error: SerializedError | null;
+    error: ErrorData | null;
   };
   updateCommentState: {
     commentId: string | null;
     isLoading: boolean;
-    error: SerializedError | null;
+    error: ErrorData | null;
   };
 };
 
@@ -38,53 +38,55 @@ const initialState: CommentEditorState = {
   },
 };
 
-export const postComment = createAsyncThunk(
-  'comments/postComment',
-  async ({ postId, commentBody }: PostCommentType, { rejectWithValue }) => {
-    const token = storage.getToken();
+export const postComment = createAsyncThunk<
+  CommentData,
+  PostCommentType,
+  { rejectValue: ErrorData }
+>('comments/postComment', async ({ postId, commentBody }, { rejectWithValue }) => {
+  const token = storage.getToken();
 
-    const { data, responseState } = await useAppFetch(`/api/posts/${postId}/comments`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ body: commentBody }),
-    });
+  const { data, responseState } = await useAppFetch(`/api/posts/${postId}/comments`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ body: commentBody }),
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = CommentDataSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = CommentDataSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as CommentData;
-  }
-);
+  return data as CommentData;
+});
 
-export const updateComment = createAsyncThunk(
-  'comments/updateComment',
-  async ({ commentId, commentBody }: UpdateCommentType, { rejectWithValue }) => {
-    const token = storage.getToken();
+export const updateComment = createAsyncThunk<
+  CommentData,
+  UpdateCommentType,
+  { rejectValue: ErrorData }
+>('comments/updateComment', async ({ commentId, commentBody }, { rejectWithValue }) => {
+  const token = storage.getToken();
 
-    const { data, responseState } = await useAppFetch(`/api/comments/${commentId}`, {
-      method: 'PUT',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ body: commentBody }),
-    });
+  const { data, responseState } = await useAppFetch(`/api/comments/${commentId}`, {
+    method: 'PUT',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ body: commentBody }),
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = CommentDataSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = CommentDataSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as CommentData;
-  }
-);
+  return data as CommentData;
+});
 
 const commentEditorSlice = createSlice({
   name: 'commentEditor',
@@ -113,9 +115,9 @@ const commentEditorSlice = createSlice({
       .addCase(postComment.fulfilled, (state) => {
         state.postCommentState.isLoading = false;
       })
-      .addCase(postComment.rejected, (state, payload) => {
+      .addCase(postComment.rejected, (state, action) => {
         state.postCommentState.isLoading = true;
-        state.postCommentState.error = payload.error;
+        state.postCommentState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(updateComment.pending, (state) => {
@@ -127,7 +129,7 @@ const commentEditorSlice = createSlice({
       })
       .addCase(updateComment.rejected, (state, action) => {
         state.updateCommentState.isLoading = false;
-        state.updateCommentState.error = action.error;
+        state.postCommentState.error = action.payload || (action.error as ErrorData);
       });
   },
 });

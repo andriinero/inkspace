@@ -38,7 +38,7 @@ const LoginForm = () => {
     dispatch(closeSignUpModal());
   };
 
-  const handleSubmitLogin = async (formData: TSignUpSchema): Promise<void> => {
+  const handleFormSubmit = async (formData: TSignUpSchema): Promise<void> => {
     try {
       if (!isLoading) {
         const response = await dispatch(postSignUp(formData)).unwrap();
@@ -60,7 +60,7 @@ const LoginForm = () => {
           <S.Header>Sign up</S.Header>
           <S.SubText>Sign up with your username and password</S.SubText>
         </S.HeaderWrapper>
-        <S.Form onSubmit={handleSubmit(handleSubmitLogin)}>
+        <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
           <S.InputWrapper>
             <S.StyledInputLabel htmlFor="sign-up-username">
               Your Username

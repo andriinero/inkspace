@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/lib/storage';
@@ -16,13 +16,13 @@ import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 type ProfileState = {
   profileData: ProfileData | null;
   profileBookmarkList: PostData[];
-  fetchProfileDataState: { isLoading: boolean; error: SerializedError | null };
+  fetchProfileDataState: { isLoading: boolean; error: ErrorData | null };
   fetchProfileBookmarksState: {
     isLoading: boolean;
-    error: SerializedError | null;
+    error: ErrorData | null;
   };
-  bookmarkActionState: { isLoading: boolean; error: SerializedError | null };
-  followActionState: { isLoading: boolean; error: SerializedError | null };
+  bookmarkActionState: { isLoading: boolean; error: ErrorData | null };
+  followActionState: { isLoading: boolean; error: ErrorData | null };
 };
 
 const initialState: ProfileState = {
@@ -34,149 +34,152 @@ const initialState: ProfileState = {
   followActionState: { isLoading: false, error: null },
 };
 
-export const fetchProfileData = createAsyncThunk(
-  'profile/fetchProfileData',
-  async (_, { rejectWithValue }) => {
-    const token = storage.getToken();
+export const fetchProfileData = createAsyncThunk<
+  ProfileData,
+  void,
+  { rejectValue: ErrorData }
+>('profile/fetchProfileData', async (_, { rejectWithValue }) => {
+  const token = storage.getToken();
 
-    const { data, responseState } = await useAppFetch('/api/profile', {
-      method: 'GET',
-      mode: 'cors',
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+  const { data, responseState } = await useAppFetch('/api/profile', {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = ProfileDataSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = ProfileDataSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as ProfileData;
-  }
-);
+  return data as ProfileData;
+});
 
-export const fetchProfileBookmarks = createAsyncThunk(
-  'profile/fetchProfileBookmarks',
-  async (_, { rejectWithValue }) => {
-    const token = storage.getToken();
+export const fetchProfileBookmarks = createAsyncThunk<
+  PostData[],
+  void,
+  { rejectValue: ErrorData }
+>('profile/fetchProfileBookmarks', async (_, { rejectWithValue }) => {
+  const token = storage.getToken();
 
-    const { data, responseState } = await useAppFetch('/api/profile/bookmarks', {
-      method: 'GET',
-      mode: 'cors',
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+  const { data, responseState } = await useAppFetch('/api/profile/bookmarks', {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
 
-    if (!responseState.ok) return rejectWithValue(data as ErrorData);
+  if (!responseState.ok) return rejectWithValue(data as ErrorData);
 
-    const validationResult = z.array(PostDataSchema).safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = z.array(PostDataSchema).safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as PostData[];
-  }
-);
+  return data as PostData[];
+});
 
-export const postBookmark = createAsyncThunk(
-  'profile/postBookmark',
-  async (postId: string, { rejectWithValue }) => {
-    const token = storage.getToken();
+export const postBookmark = createAsyncThunk<
+  TargetObjectId,
+  string,
+  { rejectValue: ErrorData }
+>('profile/postBookmark', async (postId, { rejectWithValue }) => {
+  const token = storage.getToken();
 
-    const { data, responseState } = await useAppFetch('/api/profile/bookmarks', {
-      method: 'POST',
+  const { data, responseState } = await useAppFetch('/api/profile/bookmarks', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ postid: postId }),
+  });
+
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+
+  const validationResult = TargetObjectIdSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
+
+  return data as TargetObjectId;
+});
+
+export const deleteBookmark = createAsyncThunk<
+  TargetObjectId,
+  string,
+  { rejectValue: ErrorData }
+>('profile/deleteBookmark', async (postId, { rejectWithValue }) => {
+  const token = storage.getToken();
+
+  const { data, responseState } = await useAppFetch(`/api/profile/bookmarks/${postId}`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+
+  const validationResult = TargetObjectIdSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
+
+  return data as TargetObjectId;
+});
+
+export const postFollowUser = createAsyncThunk<
+  TargetObjectId,
+  string,
+  { rejectValue: ErrorData }
+>('profile/postFollowUser', async (userId, { rejectWithValue }) => {
+  const token = storage.getToken();
+
+  const { data, responseState } = await useAppFetch('/api/profile/followed-users', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ userid: userId }),
+  });
+
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+
+  const validationResult = TargetObjectIdSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
+
+  return data as TargetObjectId;
+});
+
+export const deleteFollowUser = createAsyncThunk<
+  TargetObjectId,
+  string,
+  { rejectValue: ErrorData }
+>('profile/deleteFollowUser', async (userId, { rejectWithValue }) => {
+  const token = storage.getToken();
+
+  const { data, responseState } = await useAppFetch(
+    `/api/profile/followed-users/${userId}`,
+    {
+      method: 'DELETE',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ postid: postId }),
-    });
+    }
+  );
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = TargetObjectIdSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = TargetObjectIdSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as TargetObjectId;
-  }
-);
-
-export const deleteBookmark = createAsyncThunk(
-  'profile/deleteBookmark',
-  async (postId: string, { rejectWithValue }) => {
-    const token = storage.getToken();
-
-    const { data, responseState } = await useAppFetch(
-      `/api/profile/bookmarks/${postId}`,
-      {
-        method: 'DELETE',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
-
-    const validationResult = TargetObjectIdSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
-
-    return data as TargetObjectId;
-  }
-);
-
-export const postFollowUser = createAsyncThunk(
-  'profile/postFollowUser',
-  async (userId: string, { rejectWithValue }) => {
-    const token = storage.getToken();
-
-    const { data, responseState } = await useAppFetch('/api/profile/followed-users', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ userid: userId }),
-    });
-
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
-
-    const validationResult = TargetObjectIdSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
-
-    return data as TargetObjectId;
-  }
-);
-
-export const deleteFollowUser = createAsyncThunk(
-  'profile/deleteFollowUser',
-  async (userId: string, { rejectWithValue }) => {
-    const token = storage.getToken();
-
-    const { data, responseState } = await useAppFetch(
-      `/api/profile/followed-users/${userId}`,
-      {
-        method: 'DELETE',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
-
-    const validationResult = TargetObjectIdSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
-
-    return data as TargetObjectId;
-  }
-);
+  return data as TargetObjectId;
+});
 
 const profileSlice = createSlice({
   name: 'profile',
@@ -198,7 +201,7 @@ const profileSlice = createSlice({
       })
       .addCase(fetchProfileData.rejected, (state, action) => {
         state.fetchProfileDataState.isLoading = false;
-        state.fetchProfileDataState.error = action.error;
+        state.fetchProfileDataState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(fetchProfileBookmarks.pending, (state) => {
@@ -211,7 +214,7 @@ const profileSlice = createSlice({
       })
       .addCase(fetchProfileBookmarks.rejected, (state, action) => {
         state.fetchProfileBookmarksState.isLoading = false;
-        state.fetchProfileBookmarksState.error = action.error;
+        state.fetchProfileDataState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(postBookmark.pending, (state, action) => {
@@ -228,7 +231,7 @@ const profileSlice = createSlice({
             (id) => id !== action.meta.arg
           );
         state.bookmarkActionState.isLoading = false;
-        state.bookmarkActionState.error = action.error;
+        state.fetchProfileDataState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(deleteBookmark.pending, (state, action) => {
@@ -245,7 +248,7 @@ const profileSlice = createSlice({
       .addCase(deleteBookmark.rejected, (state, action) => {
         if (state.profileData) state.profileData.post_bookmarks.push(action.meta.arg);
         state.bookmarkActionState.isLoading = false;
-        state.bookmarkActionState.error = action.error;
+        state.fetchProfileDataState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(postFollowUser.pending, (state, action) => {
@@ -262,7 +265,7 @@ const profileSlice = createSlice({
             (id) => id !== action.meta.arg
           );
         state.followActionState.isLoading = false;
-        state.followActionState.error = action.error;
+        state.fetchProfileDataState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(deleteFollowUser.pending, (state, action) => {
@@ -279,7 +282,7 @@ const profileSlice = createSlice({
       .addCase(deleteFollowUser.rejected, (state, action) => {
         if (state.profileData) state.profileData.followed_users.push(action.meta.arg);
         state.followActionState.isLoading = false;
-        state.followActionState.error = action.error;
+        state.fetchProfileDataState.error = action.payload || (action.error as ErrorData);
       });
   },
 });

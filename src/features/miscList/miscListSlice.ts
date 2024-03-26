@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/lib/storage';
@@ -16,10 +16,10 @@ type miscListState = {
   postList: PostData[];
   bookmarkList: PostData[];
   //FIXME: naming
-  fetchAuthorsState: { isLoading: boolean; error: SerializedError | null };
-  fetchTopicsState: { isLoading: boolean; error: SerializedError | null };
-  fetchMiscPostsState: { isLoading: boolean; error: SerializedError | null };
-  fetchBookmarksState: { isLoading: boolean; error: SerializedError | null };
+  fetchAuthorsState: { isLoading: boolean; error: ErrorData | null };
+  fetchTopicsState: { isLoading: boolean; error: ErrorData | null };
+  fetchMiscPostsState: { isLoading: boolean; error: ErrorData | null };
+  fetchBookmarksState: { isLoading: boolean; error: ErrorData | null };
 };
 
 const initialState: miscListState = {
@@ -33,78 +33,82 @@ const initialState: miscListState = {
   fetchBookmarksState: { isLoading: true, error: null },
 };
 
-export const fetchAuthors = createAsyncThunk(
-  'miscList/fetchAuthors',
-  async (_, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch('/api/authors?random=3', {
-      method: 'GET',
-      mode: 'cors',
-    });
+export const fetchAuthors = createAsyncThunk<
+  FullAuthorData[],
+  void,
+  { rejectValue: ErrorData }
+>('miscList/fetchAuthors', async (_, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch('/api/authors?random=3', {
+    method: 'GET',
+    mode: 'cors',
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = z.array(FullAuthorDataSchema).safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = z.array(FullAuthorDataSchema).safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as FullAuthorData[];
-  }
-);
+  return data as FullAuthorData[];
+});
 
-export const fetchTopics = createAsyncThunk(
-  'miscList/fetchTopics',
-  async (_, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch('/api/topics?random=7', {
-      method: 'GET',
-      mode: 'cors',
-    });
+export const fetchTopics = createAsyncThunk<
+  TopicData[],
+  void,
+  { rejectValue: ErrorData }
+>('miscList/fetchTopics', async (_, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch('/api/topics?random=7', {
+    method: 'GET',
+    mode: 'cors',
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = z.array(TopicDataSchema).safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = z.array(TopicDataSchema).safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as TopicData;
-  }
-);
+  return data as TopicData[];
+});
 
-export const fetchMiscPosts = createAsyncThunk(
-  'miscList/fetchMiscPosts',
-  async (_, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch('/api/posts?random=3', {
-      method: 'GET',
-      mode: 'cors',
-    });
+export const fetchMiscPosts = createAsyncThunk<
+  PostData[],
+  void,
+  { rejectValue: ErrorData }
+>('miscList/fetchMiscPosts', async (_, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch('/api/posts?random=3', {
+    method: 'GET',
+    mode: 'cors',
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = z.array(PostDataSchema).safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = z.array(PostDataSchema).safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as PostData[];
-  }
-);
+  return data as PostData[];
+});
 
-export const fetchBookmarks = createAsyncThunk(
-  'miscList/fetchBookmarks',
-  async (_, { rejectWithValue }) => {
-    const token = storage.getToken();
+export const fetchBookmarks = createAsyncThunk<
+  PostData[],
+  void,
+  { rejectValue: ErrorData }
+>('miscList/fetchBookmarks', async (_, { rejectWithValue }) => {
+  const token = storage.getToken();
 
-    const { data, responseState } = await useAppFetch('/api/profile/bookmarks?limit=4', {
-      method: 'GET',
-      mode: 'cors',
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+  const { data, responseState } = await useAppFetch('/api/profile/bookmarks?limit=4', {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = z.array(PostDataSchema).safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = z.array(PostDataSchema).safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as PostData[];
-  }
-);
+  return data as PostData[];
+});
 
 const miscListSlice = createSlice({
   name: 'miscList',
@@ -123,7 +127,7 @@ const miscListSlice = createSlice({
       })
       .addCase(fetchAuthors.rejected, (state, action) => {
         state.fetchAuthorsState.isLoading = false;
-        state.fetchAuthorsState.error = action.error;
+        state.fetchAuthorsState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(fetchTopics.pending, (state) => {
@@ -137,7 +141,7 @@ const miscListSlice = createSlice({
       })
       .addCase(fetchTopics.rejected, (state, action) => {
         state.fetchTopicsState.isLoading = false;
-        state.fetchTopicsState.error = action.error;
+        state.fetchTopicsState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(fetchMiscPosts.pending, (state) => {
@@ -151,7 +155,7 @@ const miscListSlice = createSlice({
       })
       .addCase(fetchMiscPosts.rejected, (state, action) => {
         state.fetchMiscPostsState.isLoading = false;
-        state.fetchMiscPostsState.error = action.error;
+        state.fetchMiscPostsState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(fetchBookmarks.pending, (state) => {
@@ -164,7 +168,7 @@ const miscListSlice = createSlice({
       })
       .addCase(fetchBookmarks.rejected, (state, action) => {
         state.fetchBookmarksState.isLoading = false;
-        state.fetchBookmarksState.error = action.error;
+        state.fetchBookmarksState.error = action.payload || (action.error as ErrorData);
       });
   },
 });

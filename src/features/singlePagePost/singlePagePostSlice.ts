@@ -1,4 +1,4 @@
-import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/lib/storage';
@@ -17,9 +17,9 @@ type SinglePagePostState = {
   likeCount: number;
   fetchPostState: {
     isLoading: boolean;
-    error: SerializedError | null;
+    error: ErrorData | null;
   };
-  putLikeCountState: { isLoading: boolean; error: SerializedError | null };
+  putLikeCountState: { isLoading: boolean; error: ErrorData | null };
 };
 
 const initialState: SinglePagePostState = {
@@ -33,9 +33,9 @@ const initialState: SinglePagePostState = {
   putLikeCountState: { isLoading: false, error: null },
 };
 
-export const fetchPost = createAsyncThunk(
+export const fetchPost = createAsyncThunk<PostData, string, { rejectValue: ErrorData }>(
   'singlePagePost/fetchPost',
-  async (postId: string, { rejectWithValue }) => {
+  async (postId, { rejectWithValue }) => {
     const { data, responseState } = await useAppFetch(`/api/posts/${postId}`, {
       method: 'GET',
       mode: 'cors',
@@ -50,27 +50,28 @@ export const fetchPost = createAsyncThunk(
   }
 );
 
-export const putLikeCount = createAsyncThunk(
-  'singlePagePost/putLikeCount',
-  async (postId: string, { rejectWithValue }) => {
-    const token = storage.getToken();
+export const putLikeCount = createAsyncThunk<
+  PutLikeCount,
+  string,
+  { rejectValue: ErrorData }
+>('singlePagePost/putLikeCount', async (postId, { rejectWithValue }) => {
+  const token = storage.getToken();
 
-    const { data, responseState } = await useAppFetch(`/api/posts/${postId}/likes`, {
-      method: 'PUT',
-      mode: 'cors',
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+  const { data, responseState } = await useAppFetch(`/api/posts/${postId}/likes`, {
+    method: 'PUT',
+    mode: 'cors',
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = PutLikeCountSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult.error);
+  const validationResult = PutLikeCountSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult.error);
 
-    return data as PutLikeCount;
-  }
-);
+  return data as PutLikeCount;
+});
 
 const singlePagePostSlice = createSlice({
   name: 'singlePagePost',
@@ -94,7 +95,7 @@ const singlePagePostSlice = createSlice({
       })
       .addCase(fetchPost.rejected, (state, action) => {
         state.fetchPostState.isLoading = false;
-        state.fetchPostState.error = action.error;
+        state.fetchPostState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(putLikeCount.pending, (state) => {
@@ -107,7 +108,7 @@ const singlePagePostSlice = createSlice({
       })
       .addCase(putLikeCount.rejected, (state, action) => {
         state.putLikeCountState.isLoading = false;
-        state.putLikeCountState.error = action.error;
+        state.fetchPostState.error = action.payload || (action.error as ErrorData);
       });
   },
 });
