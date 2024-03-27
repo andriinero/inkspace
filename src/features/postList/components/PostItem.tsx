@@ -10,7 +10,7 @@ import {
   selectFetchProfileDataState,
   selectBookmarkActionState,
 } from '@/features/profile/profileSlice';
-import { setTopic } from '../postListSlice';
+import { deletePost, setTopic } from '../postListSlice';
 import { enterEditMode } from '@/features/postForm/postFormSlice';
 
 import { PostAuthorData } from '@/types/entityData/GeneralAuthorData';
@@ -19,8 +19,7 @@ import { Waterfall } from '@/styles/animations/Waterfall';
 
 import PostDate from '@/components/general/TimeAgo';
 import { Username } from '@/components/styled/Username.styled';
-import { MenuItem } from '@/components/styled/MenuItem';
-import { SpecialMenuItem } from '@/components/styled/SpecialMenuItem';
+import { MenuItem, MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
 import * as S from './PostItem.styled';
 
 type PostItemProps = {
@@ -81,12 +80,11 @@ const PostItem = ({
     navigate('/post-form');
   };
 
-  const handleMuteAuthorClick = (): void => {
-    // TODO:
-    setIsMenuOpen(false);
+  const handleDeleteClick = (): void => {
+    dispatch(deletePost(_id));
   };
 
-  const handleMutePublicationClick = (): void => {
+  const handleMuteAuthorClick = (): void => {
     // TODO:
     setIsMenuOpen(false);
   };
@@ -133,12 +131,14 @@ const PostItem = ({
                 isAlignedLeft={false}
               >
                 {isAuthor && (
-                  <SpecialMenuItem onClick={handleEditModeClick}>
+                  <MenuItemSuccess onClick={handleEditModeClick}>
                     Edit Post
-                  </SpecialMenuItem>
+                  </MenuItemSuccess>
                 )}
-                <MenuItem onClick={handleMenuClose}>Mute this author</MenuItem>
-                <MenuItem onClick={handleMenuClose}>Mute this publication</MenuItem>
+                <MenuItem onClick={handleMuteAuthorClick}>Mute this author</MenuItem>
+                {isAuthor && (
+                  <MenuItemDanger onClick={handleDeleteClick}>Delete Post</MenuItemDanger>
+                )}
               </S.StyledDotMenu>
             </>
           )}

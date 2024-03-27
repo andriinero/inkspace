@@ -21,3 +21,11 @@ export const MenuItem = styled.li`
     padding-bottom: 0.9rem;
   }
 `;
+
+export const MenuItemSuccess = styled(MenuItem)`
+  color: ${({ theme }) => theme.color.text_success};
+`;
+
+export const MenuItemDanger = styled(MenuItem)`
+  color: ${({ theme }) => theme.color.text_danger};
+`;

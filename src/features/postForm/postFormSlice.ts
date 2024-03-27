@@ -89,7 +89,6 @@ export const putEditTargetPost = createAsyncThunk<
       method: 'PUT',
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
       body: formData,

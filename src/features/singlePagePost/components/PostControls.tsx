@@ -14,8 +14,7 @@ import { enterEditMode } from '@/features/postForm/postFormSlice';
 
 import Bookmark from '@/components/icons/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
-import { SpecialMenuItem } from '@/components/styled/SpecialMenuItem';
-import { MenuItem } from '@/components/styled/MenuItem';
+import { MenuItem, MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
 import {
   ControlsContainer,
   ControlsIcon,
@@ -23,6 +22,7 @@ import {
   LikeWrapper,
   Wrapper,
 } from './PostControls.styled';
+import { deletePost } from '@/features/postList/postListSlice';
 
 type PostControlsProps = { postId: string; isAuthor: boolean };
 
@@ -66,12 +66,13 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
     navigate('/post-form');
   };
 
-  const handleMuteAuthorClick = (): void => {
-    // TODO:
-    setIsMenuOpen(false);
+  const handleDeleteClick = async (): Promise<void> => {
+    const response = await dispatch(deletePost(postId)).unwrap();
+
+    if (response) navigate('/');
   };
 
-  const handleMutePublicationClick = (): void => {
+  const handleMuteAuthorClick = (): void => {
     // TODO:
     setIsMenuOpen(false);
   };
@@ -105,10 +106,12 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
           isOpen={isMenuOpen}
         >
           {isAuthor && (
-            <SpecialMenuItem onClick={handleEditModeClick}>Edit Post</SpecialMenuItem>
+            <MenuItemSuccess onClick={handleEditModeClick}>Edit Post</MenuItemSuccess>
           )}
           <MenuItem onClick={handleMuteAuthorClick}>Mute this author</MenuItem>
-          <MenuItem onClick={handleMutePublicationClick}>Mute this publication</MenuItem>
+          {isAuthor && (
+            <MenuItemDanger onClick={handleDeleteClick}>Delete Post</MenuItemDanger>
+          )}
         </DotMenu>
       </ControlsContainer>
     </Wrapper>
