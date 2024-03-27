@@ -29,11 +29,17 @@ const PostForm = () => {
   const navigate = useNavigate();
 
   const defaultValues = async (): Promise<TPostFormSchema> => {
-    let values = { title: '', body: '', topic: '' };
+    let values = { title: '', body: '', topic: '', image: null };
 
     if (isEditMode && editPostId) {
       const data = await dispatch(fetchEditTargetPost(editPostId)).unwrap();
-      values = { title: data.title, body: data.body, topic: data.topic.name };
+
+      values = {
+        title: data.title,
+        body: data.body,
+        topic: data.topic.name,
+        image: null,
+      };
     }
 
     return values;
@@ -79,9 +85,7 @@ const PostForm = () => {
             <S.StyledInputLabel htmlFor="post-title">Title</S.StyledInputLabel>
             <S.StyledInputText
               id="post-title"
-              {...register('title', {
-                required: 'Title is required',
-              })}
+              {...register('title')}
               type="text"
               placeholder="Your title..."
             />
@@ -92,15 +96,20 @@ const PostForm = () => {
           <S.InputItem>
             <S.StyledInputLabel htmlFor="post-topic">Topic</S.StyledInputLabel>
             <S.StyledInputText
-              {...register('topic', {
-                required: 'Topic is required',
-              })}
+              {...register('topic')}
               id="post-topic"
               type="text"
               placeholder="Post topic..."
             />
             <S.StyledErrorMessage $isVisible={Boolean(errors.topic)}>
               {errors.topic?.message}
+            </S.StyledErrorMessage>
+          </S.InputItem>
+          <S.InputItem>
+            <S.StyledInputLabel htmlFor="post-image">Upload thumbnail</S.StyledInputLabel>
+            <S.InputFile {...register('image')} id="post-image" type="file" />
+            <S.StyledErrorMessage $isVisible={Boolean(errors.image)}>
+              {errors.image?.message}
             </S.StyledErrorMessage>
           </S.InputItem>
         </S.InputContainer>

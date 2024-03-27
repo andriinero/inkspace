@@ -51,6 +51,10 @@ export const StyledInputText = styled(InputText)`
   min-width: 300px;
 `;
 
+export const InputFile = styled.input`
+  min-width: 300px;
+`;
+
 export const Header = styled.h2`
   font-family: ${({ theme }) => theme.font.times};
   font-weight: 400;

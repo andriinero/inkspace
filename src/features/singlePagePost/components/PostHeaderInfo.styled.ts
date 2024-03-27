@@ -74,7 +74,7 @@ export const FollowButton = styled(motion.input)`
   border: 1px solid transparent;
   background-color: transparent;
 
-  color: ${({ theme }) => theme.color.button_special_text};
+  color: ${({ theme }) => theme.color.text_success};
   font-size: 1rem;
   text-align: center;
 

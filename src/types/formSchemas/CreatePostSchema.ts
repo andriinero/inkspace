@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { imageValidator } from './ProfileImageSchema';
 
 export const PostFormSchema = z.object({
   title: z
@@ -9,6 +10,7 @@ export const PostFormSchema = z.object({
     .string()
     .min(3, 'Topic must contain at least 3 character(s)')
     .max(100, 'Topic must contain at most 100 character(s)'),
+  image: imageValidator,
   body: z
     .string()
     .min(100, 'Post body must contain at least 100 character(s)')

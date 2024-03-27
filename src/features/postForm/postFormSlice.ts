@@ -7,6 +7,11 @@ import { RootState } from '@/app/store';
 import { PostData, PostDataSchema } from '@/types/entityData/PostData';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { TPostFormSchema } from '@/types/formSchemas/CreatePostSchema';
+import { formDataBuilder } from '@/utils/formDataBuilder';
+import {
+  TargetObjectId,
+  TargetObjectIdSchema,
+} from '@/types/fetchResponse/success/TargetObjectId';
 
 type CreatePostState = {
   editTargetPostData: PostData | null;
@@ -25,28 +30,29 @@ const initialState: CreatePostState = {
 };
 
 export const postPost = createAsyncThunk<
-  PostData,
+  TargetObjectId,
   TPostFormSchema,
   { rejectValue: ErrorData }
 >('postForm/postPost', async (postBody, { rejectWithValue }) => {
   const token = storage.getToken();
 
+  const formData = formDataBuilder(postBody);
+
   const { data, responseState } = await useAppFetch(`/api/posts`, {
     method: 'POST',
     mode: 'cors',
     headers: {
-      'Content-Type': 'application/json',
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(postBody),
+    body: formData,
   });
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-  const validationResult = PostDataSchema.safeParse(data);
+  const validationResult = TargetObjectIdSchema.safeParse(data);
   if (!validationResult.success) console.error(validationResult);
 
-  return data as PostData;
+  return data as TargetObjectId;
 });
 
 export const fetchEditTargetPost = createAsyncThunk<
@@ -75,6 +81,8 @@ export const putEditTargetPost = createAsyncThunk<
   const token = storage.getToken();
   const state = getState() as { postForm: { editTargetPostId: string } };
 
+  const formData = formDataBuilder(postData);
+
   const { data, responseState } = await useAppFetch(
     `/api/posts/${state.postForm.editTargetPostId}`,
     {
@@ -84,7 +92,7 @@ export const putEditTargetPost = createAsyncThunk<
         'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(postData),
+      body: formData,
     }
   );
 

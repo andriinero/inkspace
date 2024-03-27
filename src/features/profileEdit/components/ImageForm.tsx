@@ -5,10 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { putProfileImage, selectPutProfileImageState } from '../profileEditSlice';
 
-import {
-  ProfileImageSchema,
-  TProfileImageSchema,
-} from '@/types/formSchemas/ProfileImageSchema';
+import { ImageSchema, TImageSchema } from '@/types/formSchemas/ProfileImageSchema';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import * as S from './ImageForm.styled';
@@ -18,14 +15,14 @@ const ImageForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TProfileImageSchema>({ resolver: zodResolver(ProfileImageSchema) });
+  } = useForm<TImageSchema>({ resolver: zodResolver(ImageSchema) });
 
   const { isLoading, error } = useAppSelector(selectPutProfileImageState);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleFormSubmit = async (formData: TProfileImageSchema): Promise<void> => {
+  const handleFormSubmit = async (formData: TImageSchema): Promise<void> => {
     if (!isLoading) {
       const response = await dispatch(putProfileImage(formData.image as File)).unwrap();
 
@@ -41,7 +38,7 @@ const ImageForm = () => {
             Upload Image:
           </S.StyledInputLabel>
           <S.StyledInputFile
-            {...register('image', { required: 'Image is required' })}
+            {...register('image')}
             id="profile-image-upload"
             type="file"
           />
