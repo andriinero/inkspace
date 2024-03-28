@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { DateTime } from 'luxon';
 import { Navigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
 
 import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
@@ -24,8 +25,10 @@ import Error from '@/components/general/Error';
 import { HollowButton } from '@/components/styled/HollowButton';
 import { FollowCount, SignUpDate, UserBio } from './Profile.styled';
 import * as S from './AuthorPage.styled';
+import JumpButton from '@/components/general/JumpButton';
 
 const AuthorPage = () => {
+  const { isScrollingDown } = useWindowScrollDirection();
   const { authorid } = useParams();
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -107,6 +110,7 @@ const AuthorPage = () => {
           <UserBio>{authorData?.bio}</UserBio>
         </S.ProfileWrapper>
       </S.WrapperAside>
+      {isScrollingDown && <JumpButton />}
     </S.Wrapper>
   );
 };

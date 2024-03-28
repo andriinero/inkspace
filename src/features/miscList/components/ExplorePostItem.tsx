@@ -2,7 +2,7 @@ import { useAppDispatch } from '@/app/hooks';
 
 import { setTopic } from '@/features/postList/postListSlice';
 
-import { PostAuthorData } from '@/types/entityData/GeneralAuthorData';
+import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 import { TopicData } from '@/types/entityData/TopicData';
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 
@@ -10,7 +10,7 @@ import * as S from './ExplorePostItem.styled';
 
 type ExplorePostItemProps = {
   _id: string;
-  author: PostAuthorData;
+  author: GeneralAuthorData;
   title: string;
   body: string;
   date: string;

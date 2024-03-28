@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { PostAuthorData } from '@/types/entityData/GeneralAuthorData';
+import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 
 import { selectCurrentUserId } from '@/features/auth/authSlice';
 import { deleteComment } from '../commentListSlice';
@@ -18,7 +18,7 @@ import { MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
 type CommentProps = {
   _id: string;
   post: string;
-  author: PostAuthorData;
+  author: GeneralAuthorData;
   body: string;
   date: string;
   edit_date?: string;

@@ -8,7 +8,7 @@ import {
   selectProfileFollowedUsers,
 } from '@/features/profile/profileSlice';
 
-import { PostAuthorData } from '@/types/entityData/GeneralAuthorData';
+import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 import { TopicData } from '@/types/entityData/TopicData';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
 
 type PostAuthorProps = {
   isAuthor: boolean;
-  author: PostAuthorData;
+  author: GeneralAuthorData;
   date: string;
   topic: TopicData;
   bodyLength: number;

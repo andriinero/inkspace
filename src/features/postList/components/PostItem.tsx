@@ -13,7 +13,7 @@ import {
 import { deletePost, setTopic } from '../postListSlice';
 import { enterEditMode } from '@/features/postForm/postFormSlice';
 
-import { PostAuthorData } from '@/types/entityData/GeneralAuthorData';
+import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 import { TopicData } from '@/types/entityData/TopicData';
 import { Waterfall } from '@/styles/animations/Waterfall';
 
@@ -26,7 +26,7 @@ import DeleteConfirm from '@/components/general/DeleteConfirm';
 
 type PostItemProps = {
   _id: string;
-  author: PostAuthorData;
+  author: GeneralAuthorData;
   title: string;
   body: string;
   date: string;

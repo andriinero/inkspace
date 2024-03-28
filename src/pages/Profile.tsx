@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
 import { Navigate } from 'react-router-dom';
 import { DateTime } from 'luxon';
 
@@ -13,9 +14,12 @@ import { FadeIn } from '@/styles/animations/FadeIn';
 
 import Error from '@/components/general/Error';
 import BookmarkContainer from '@/features/profile/components/BookmarkContainer';
+import JumpButton from '@/components/general/JumpButton';
 import * as S from './Profile.styled';
 
 const Profile = () => {
+  const { isScrollingDown } = useWindowScrollDirection();
+
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   const profileData = useAppSelector(selectProfileData);
@@ -65,6 +69,7 @@ const Profile = () => {
           <S.UserBio>{profileData?.bio}</S.UserBio>
         </S.ProfileWrapper>
       </S.WrapperAside>
+      {isScrollingDown && <JumpButton />}
     </S.Wrapper>
   );
 };

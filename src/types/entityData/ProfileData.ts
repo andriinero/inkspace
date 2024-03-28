@@ -11,6 +11,7 @@ export const ProfileDataSchema = z.object({
   user_posts: z.string().array(),
   post_bookmarks: z.string().array(),
   ignored_posts: z.string().array(),
+  ignored_users: z.string().array(),
   ignored_topics: z.string().array(),
   followed_users: z.string().array(),
   users_following: z.string().array(),

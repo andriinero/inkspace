@@ -1,4 +1,4 @@
-import { PostAuthorData } from '@/types/entityData/GeneralAuthorData';
+import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 
 import { Waterfall } from '@/styles/animations/Waterfall';
 
@@ -8,7 +8,7 @@ import * as S from './BookmarkItem.styled';
 
 type BookmarkItemProps = {
   _id: string;
-  author: PostAuthorData;
+  author: GeneralAuthorData;
   title: string;
   body: string;
   date: string;

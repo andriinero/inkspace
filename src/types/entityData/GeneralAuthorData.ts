@@ -6,4 +6,4 @@ export const GeneralAuthorDataSchema = z.object({
   profile_image: z.string().optional(),
 });
 
-export type PostAuthorData = z.infer<typeof GeneralAuthorDataSchema>;
+export type GeneralAuthorData = z.infer<typeof GeneralAuthorDataSchema>;
