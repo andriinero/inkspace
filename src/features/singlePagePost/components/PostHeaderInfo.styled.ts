@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Username } from '@/components/styled/Username.styled';
 import { motion } from 'framer-motion';
 import AppImage from '@/features/appImages/components/AppImage';
+import { TextButton } from '@/components/styled/TextButton';
 
 export const Wrapper = styled.div`
   align-self: flex-start;
@@ -70,13 +71,4 @@ export const TopicName = styled.strong`
 
 export const PostReadEstimate = styled(PostReadTime)``;
 
-export const FollowButton = styled(motion.input)`
-  border: 1px solid transparent;
-  background-color: transparent;
-
-  color: ${({ theme }) => theme.color.text_success};
-  font-size: 1rem;
-  text-align: center;
-
-  cursor: pointer;
-`;
+export const FollowButton = styled(TextButton)``;

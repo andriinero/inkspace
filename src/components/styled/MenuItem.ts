@@ -9,6 +9,8 @@ export const MenuItem = styled.li`
 
   transition: all 100ms;
 
+  cursor: pointer;
+
   &:hover {
     color: ${({ theme }) => theme.color.text_secondary};
   }

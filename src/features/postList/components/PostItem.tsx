@@ -21,6 +21,8 @@ import PostDate from '@/components/general/TimeAgo';
 import { Username } from '@/components/styled/Username.styled';
 import { MenuItem, MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
 import * as S from './PostItem.styled';
+import Dialog from '@/components/general/Dialog';
+import DeleteConfirm from '@/components/general/DeleteConfirm';
 
 type PostItemProps = {
   _id: string;
@@ -44,6 +46,7 @@ const PostItem = ({
   isBookmarked,
 }: PostItemProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const authData = useAppSelector(selectAuthData);
@@ -78,6 +81,15 @@ const PostItem = ({
     dispatch(enterEditMode(_id));
     setIsMenuOpen(false);
     navigate('/post-form');
+  };
+
+  const handleOpenDeleteModal = (): void => {
+    setIsDeleteModalOpen(true);
+    setIsMenuOpen(false);
+  };
+
+  const handleCloseDeleteModal = (): void => {
+    setIsDeleteModalOpen(false);
   };
 
   const handleDeleteClick = (): void => {
@@ -137,9 +149,23 @@ const PostItem = ({
                 )}
                 <MenuItem onClick={handleMuteAuthorClick}>Mute this author</MenuItem>
                 {isAuthor && (
-                  <MenuItemDanger onClick={handleDeleteClick}>Delete Post</MenuItemDanger>
+                  <>
+                    <MenuItemDanger onClick={handleOpenDeleteModal}>
+                      Delete Post
+                    </MenuItemDanger>
+                  </>
                 )}
               </S.StyledDotMenu>
+              <Dialog
+                isModalOpen={isDeleteModalOpen}
+                onModalClose={handleCloseDeleteModal}
+              >
+                <DeleteConfirm
+                  headerText='Are you sure you want to delete this post?'
+                  onCancel={handleCloseDeleteModal}
+                  onDelete={handleDeleteClick}
+                />
+              </Dialog>
             </>
           )}
         </S.Controls>

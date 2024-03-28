@@ -1,5 +1,5 @@
 import { useAppFetch } from '@/lib/useAppFetch';
-import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { updateImageId } from '../profile/profileSlice';
 
