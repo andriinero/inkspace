@@ -8,6 +8,7 @@ import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice
 import {
   deleteFollowUser,
   postFollowUser,
+  selectIsUserFollowed,
   selectProfileData,
 } from '@/features/profile/profileSlice';
 import {
@@ -32,9 +33,9 @@ const AuthorPage = () => {
   const { authorid } = useParams();
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isFollowed = useAppSelector(selectIsUserFollowed(authorid as string)) as boolean;
 
   const authData = useAppSelector(selectAuthData);
-  const profileData = useAppSelector(selectProfileData);
 
   const authorData = useAppSelector(selectAuthorData);
   const { isLoading, error } = useAppSelector(selectFetchAuthorState);
@@ -62,10 +63,6 @@ const AuthorPage = () => {
   const signUpDate = DateTime.fromISO(authorData?.sign_up_date as string).toLocaleString(
     DateTime.DATE_MED
   );
-
-  const isFollowed = profileData?.followed_users.some(
-    (u) => u === authorData?._id
-  ) as boolean;
 
   const followButtonText = isFollowed ? 'Followed' : 'Follow';
   const handleFollowClick = isFollowed ? handleFollowRemove : handleFollowAdd;

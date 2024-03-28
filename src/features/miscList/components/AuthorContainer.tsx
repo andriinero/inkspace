@@ -7,7 +7,6 @@ import {
   selectFetchAuthorsState,
 } from '../miscListSlice';
 
-import { selectProfileFollowedUsers } from '@/features/profile/profileSlice';
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 
 import AuthorItem from './AuthorItem';
@@ -18,8 +17,6 @@ import * as S from './AuthorContainer.styled';
 const AuthorContainer = () => {
   const authorList = useAppSelector(selectAuthorList);
   const { isLoading, error } = useAppSelector(selectFetchAuthorsState);
-
-  const followList = useAppSelector(selectProfileFollowedUsers);
 
   const dispatch = useAppDispatch();
 
@@ -41,11 +38,9 @@ const AuthorContainer = () => {
             initial="hidden"
             animate="visible"
           >
-            {authorList.map((a) => {
-              const isFollowed = followList?.some((f) => f === a._id) as boolean;
-
-              return <AuthorItem key={a._id} isFollowed={isFollowed} {...a} />;
-            })}
+            {authorList.map((a) => (
+              <AuthorItem key={a._id} {...a} />
+            ))}
           </S.AuthorList>
         </>
       )}

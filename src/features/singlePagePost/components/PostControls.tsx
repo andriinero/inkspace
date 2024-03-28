@@ -8,7 +8,7 @@ import {
   deleteBookmark,
   postBookmark,
   selectBookmarkActionState,
-  selectProfileBookmarks,
+  selectIsPostBookmarked,
 } from '@/features/profile/profileSlice';
 import { enterEditMode } from '@/features/postForm/postFormSlice';
 
@@ -32,8 +32,8 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
+  const isBookmarked = useAppSelector(selectIsPostBookmarked(postId)) as boolean;
   const likeCount = useAppSelector(selectPostLikeCount);
-  const userBookmarks = useAppSelector(selectProfileBookmarks);
   const bookmarkActionState = useAppSelector(selectBookmarkActionState);
 
   const dispatch = useAppDispatch();
@@ -89,7 +89,6 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
     setIsMenuOpen(false);
   };
 
-  const isBookmarked = userBookmarks?.some((p) => p === postId) || false;
   const onBookmarkClick = isBookmarked ? handleBookmarkRemove : handleBookmarkAdd;
 
   return (

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { selectProfileBookmarks } from '@/features/profile/profileSlice';
 import {
   clearTopic,
   fetchPosts,
@@ -28,8 +27,6 @@ import {
 const PostContainer = () => {
   const postList = useAppSelector(selectPostList);
   const { isLoading, error } = useAppSelector(selectFetchPostListState);
-
-  const userBookmarks = useAppSelector(selectProfileBookmarks);
 
   const selectedTopic = useAppSelector(selectSelectedTopic) as TopicData;
 
@@ -65,11 +62,9 @@ const PostContainer = () => {
         </CalloutText>
       ) : (
         <PostList variants={Waterfall.container} initial="hidden" animate="visible">
-          {postList.map((post) => {
-            const isBookmarked = userBookmarks?.some((id) => id === post._id) as boolean;
-
-            return <PostItem isBookmarked={isBookmarked} key={post._id} {...post} />;
-          })}
+          {postList.map((post) => (
+            <PostItem key={post._id} {...post} />
+          ))}
         </PostList>
       )}
     </Wrapper>

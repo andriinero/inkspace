@@ -5,6 +5,7 @@ import {
   deleteFollowUser,
   postFollowUser,
   selectFollowActionState,
+  selectIsUserFollowed,
   selectProfileFollowedUsers,
 } from '@/features/profile/profileSlice';
 
@@ -33,8 +34,8 @@ const PostHeaderInfo = ({
   bodyLength,
 }: PostAuthorProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isFollowed = useAppSelector(selectIsUserFollowed(author._id));
 
-  const followList = useAppSelector(selectProfileFollowedUsers);
   const followActionState = useAppSelector(selectFollowActionState);
 
   const dispatch = useAppDispatch();
@@ -52,8 +53,6 @@ const PostHeaderInfo = ({
     dispatch(setTopic(topic));
     navigate('/');
   };
-
-  const isFollowed = followList?.some((f) => f === author._id);
 
   const followButtonText = isFollowed ? 'Followed' : 'Follow';
   const handleFollowClick = isFollowed ? handleFollowRemove : handleFollowAdd;

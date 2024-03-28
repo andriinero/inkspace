@@ -453,6 +453,9 @@ export const selectProfileBookmarksList = (state: RootState) =>
 export const selectProfileBookmarks = (state: RootState) =>
   state.profile.profileData?.post_bookmarks;
 
+export const selectIsPostBookmarked = (postId: string) => (state: RootState) =>
+  state.profile.profileData?.post_bookmarks.some((p) => p === postId);
+
 export const selectProfileFollowedUsers = (state: RootState) =>
   state.profile.profileData?.followed_users;
 

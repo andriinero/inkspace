@@ -5,6 +5,7 @@ import {
   deleteFollowUser,
   postFollowUser,
   selectFollowActionState,
+  selectIsUserFollowed,
 } from '@/features/profile/profileSlice';
 
 import { Username } from '@/components/styled/Username.styled';
@@ -17,18 +18,12 @@ type AuthorItemProps = {
   _id: string;
   username: string;
   bio?: string;
-  isFollowed: boolean;
-  profile_image: string;
+  profile_image?: string;
 };
 
-const AuthorItem = ({
-  _id,
-  username,
-  bio,
-  isFollowed,
-  profile_image,
-}: AuthorItemProps) => {
+const AuthorItem = ({ _id, username, bio, profile_image }: AuthorItemProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isFollowed = useAppSelector(selectIsUserFollowed(_id));
 
   const authData = useAppSelector(selectAuthData);
   const followActionState = useAppSelector(selectFollowActionState);

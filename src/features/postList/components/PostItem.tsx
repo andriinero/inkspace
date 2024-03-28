@@ -9,6 +9,7 @@ import {
   postBookmark,
   selectFetchProfileDataState,
   selectBookmarkActionState,
+  selectIsPostBookmarked,
 } from '@/features/profile/profileSlice';
 import { deletePost, setTopic } from '../postListSlice';
 import { enterEditMode } from '@/features/postForm/postFormSlice';
@@ -20,9 +21,9 @@ import { Waterfall } from '@/styles/animations/Waterfall';
 import PostDate from '@/components/general/TimeAgo';
 import { Username } from '@/components/styled/Username.styled';
 import { MenuItem, MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
-import * as S from './PostItem.styled';
 import Dialog from '@/components/general/Dialog';
 import DeleteConfirm from '@/components/general/DeleteConfirm';
+import * as S from './PostItem.styled';
 
 type PostItemProps = {
   _id: string;
@@ -32,7 +33,6 @@ type PostItemProps = {
   date: string;
   topic: TopicData;
   thumbnail_image?: string;
-  isBookmarked: boolean;
 };
 
 const PostItem = ({
@@ -43,12 +43,13 @@ const PostItem = ({
   date,
   topic,
   thumbnail_image,
-  isBookmarked,
 }: PostItemProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isBookmarked = useAppSelector(selectIsPostBookmarked(_id));
+
   const authData = useAppSelector(selectAuthData);
 
   const fetchProfileState = useAppSelector(selectFetchProfileDataState);
@@ -161,7 +162,7 @@ const PostItem = ({
                 onModalClose={handleCloseDeleteModal}
               >
                 <DeleteConfirm
-                  headerText='Are you sure you want to delete this post?'
+                  headerText="Are you sure you want to delete this post?"
                   onCancel={handleCloseDeleteModal}
                   onDelete={handleDeleteClick}
                 />
