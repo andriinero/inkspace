@@ -11,6 +11,7 @@ export const LoginWrapper = styled(motion.div)`
   gap: 4rem;
 
   position: absolute;
+  z-index: 2;
 
   padding: 7rem 13rem;
   border: none;

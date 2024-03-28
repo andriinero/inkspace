@@ -23,11 +23,14 @@ import {
   Wrapper,
 } from './PostControls.styled';
 import { deletePost } from '@/features/postList/postListSlice';
+import Dialog from '@/components/general/Dialog';
+import DeleteConfirm from '@/components/general/DeleteConfirm';
 
 type PostControlsProps = { postId: string; isAuthor: boolean };
 
 const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
   const likeCount = useAppSelector(selectPostLikeCount);
   const userBookmarks = useAppSelector(selectProfileBookmarks);
@@ -64,6 +67,15 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
     dispatch(enterEditMode(postId));
     setIsMenuOpen(false);
     navigate('/post-form');
+  };
+
+  const handleOpenDeleteModal = (): void => {
+    setIsDeleteModalOpen(true);
+    setIsMenuOpen(false);
+  };
+
+  const handleCloseDeleteModal = (): void => {
+    setIsDeleteModalOpen(false);
   };
 
   const handleDeleteClick = async (): Promise<void> => {
@@ -110,9 +122,16 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
           )}
           <MenuItem onClick={handleMuteAuthorClick}>Mute this author</MenuItem>
           {isAuthor && (
-            <MenuItemDanger onClick={handleDeleteClick}>Delete Post</MenuItemDanger>
+            <MenuItemDanger onClick={handleOpenDeleteModal}>Delete Post</MenuItemDanger>
           )}
         </DotMenu>
+        <Dialog isModalOpen={isDeleteModalOpen} onModalClose={handleCloseDeleteModal}>
+          <DeleteConfirm
+            headerText="Are you sure you want to delete this post?"
+            onCancel={handleCloseDeleteModal}
+            onDelete={handleDeleteClick}
+          />
+        </Dialog>
       </ControlsContainer>
     </Wrapper>
   );

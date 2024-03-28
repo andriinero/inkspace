@@ -11,6 +11,7 @@ export const Wrapper = styled(motion.div)`
   gap: 4rem;
 
   position: absolute;
+  z-index: 2;
 
   padding: 5rem 13rem;
   border: none;
