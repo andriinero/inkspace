@@ -24,11 +24,8 @@ import {
   StyledIcon,
   Wrapper,
 } from './PostContainer.styled';
-import useScrollDirection from '@/hooks/useScrollDirection';
 
 const PostContainer = () => {
-  const { isScrollingDown } = useScrollDirection();
-
   const postList = useAppSelector(selectPostList);
   const { isLoading, error } = useAppSelector(selectFetchPostListState);
 

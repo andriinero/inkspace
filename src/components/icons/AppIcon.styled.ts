@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const WrapperIcon = styled.img`
+export const Icon = styled.img`
   width: 22px;
 
   fill: #fff;
