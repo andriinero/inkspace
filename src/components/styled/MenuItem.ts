@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 export const MenuItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
   padding: 0.4rem 0.9rem;
 
   font-size: 0.8rem;

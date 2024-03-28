@@ -16,7 +16,7 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
   box-shadow: 0 0 2em rgb(0 0 0 / 0.3);
 
   transition: transform 500ms;
-  transform: translateX(0);
+  transform: none;
 
   overflow: -moz-scrollbars-vertical;
   overflow-y: scroll;

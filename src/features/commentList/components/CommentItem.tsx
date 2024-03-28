@@ -11,6 +11,9 @@ import {
 } from '@/features/commentEditor/commentEditorSlice';
 
 import * as S from './CommentItem.styled';
+import Dialog from '@/components/general/Dialog';
+import DeleteConfirm from '@/components/general/DeleteConfirm';
+import { MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
 
 type CommentProps = {
   _id: string;
@@ -23,6 +26,7 @@ type CommentProps = {
 
 const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
   const currentUserId = useAppSelector(selectCurrentUserId);
   const isEditMode = useAppSelector(selectCommentIsEditMode);
@@ -35,6 +39,15 @@ const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps)
 
   const handleToggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleOpenDeleteModal = (): void => {
+    setIsDeleteModalOpen(true);
+    setIsMenuOpen(false);
+  };
+
+  const handleCloseDeleteModal = (): void => {
+    setIsDeleteModalOpen(false);
   };
 
   const handleDeleteClick = (): void => {
@@ -68,15 +81,22 @@ const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps)
               isOpen={isMenuOpen}
               isAlignedLeft={true}
             >
-              <S.StyledMenuItem onClick={handleEditClick}>
+              <MenuItemSuccess onClick={handleEditClick}>
                 Edit
                 <S.EditIcon src="/edit.svg" alt="Edit Comment Icon" />
-              </S.StyledMenuItem>
-              <S.StyledMenuItem onClick={handleDeleteClick}>
+              </MenuItemSuccess>
+              <MenuItemDanger onClick={handleOpenDeleteModal}>
                 Delete
                 <S.ControlsIcon src="/delete.svg" alt="Delete Comment Icon" />
-              </S.StyledMenuItem>
+              </MenuItemDanger>
             </S.StyledDotMenu>
+            <Dialog isModalOpen={isDeleteModalOpen} onModalClose={handleCloseDeleteModal}>
+              <DeleteConfirm
+                headerText="Are you sure you want to delete this comment?"
+                onCancel={handleCloseDeleteModal}
+                onDelete={handleDeleteClick}
+              />
+            </Dialog>
           </S.ControlsWrapper>
         )}
       </S.Header>

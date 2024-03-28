@@ -66,18 +66,6 @@ export const ControlsWrapper = styled.div`
 
 export const StyledDotMenu = styled(DotMenu)``;
 
-export const StyledMenuItem = styled(MenuItem)`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-
-  &:hover {
-    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(192%)
-      contrast(82%);
-  }
-`;
-
 export const ControlsIcon = styled(AppIcon)`
   width: 18px;
 

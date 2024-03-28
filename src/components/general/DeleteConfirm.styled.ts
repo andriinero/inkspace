@@ -18,6 +18,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Header = styled.h3`
+  font-size: 1rem;
   font-weight: 300;
 `;
 
