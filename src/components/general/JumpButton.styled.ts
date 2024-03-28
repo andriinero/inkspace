@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { Icon } from '../icons/AppIcon.styled';
+import { motion } from 'framer-motion';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +15,7 @@ export const Wrapper = styled.div`
   margin-right: 1.5rem;
   margin-bottom: 1.5rem;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.color.text_danger};
+  background-color: ${({ theme }) => theme.color.main_bg_secondary};
 `;
 
 export const StyledIcon = styled(Icon)``;

@@ -1,7 +1,7 @@
 import { useMotionValueEvent, useScroll } from 'framer-motion';
 import { useState } from 'react';
 
-const useScrollDirection = () => {
+const useWindowScrollDirection = () => {
   const { scrollY } = useScroll();
 
   const [isScrollingDown, setIsScrollingDown] = useState<boolean>(false);
@@ -17,4 +17,4 @@ const useScrollDirection = () => {
   return { isScrollingDown };
 };
 
-export default useScrollDirection;
+export default useWindowScrollDirection;

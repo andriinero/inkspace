@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
 import parse from 'html-react-parser';
 
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
@@ -19,10 +20,12 @@ import PostControls from '@/features/singlePagePost/components/PostControls';
 import PostComments from '@/features/commentList/components/CommentList';
 import PostPageLoader from '@/components/loaders/PostPageLoader';
 import ScrollProgressBar from '@/components/general/ScrollProgressBar';
+import JumpButton from '@/components/general/JumpButton';
 import { Body, Header, PostWrapper, Wrapper } from './SinglePagePost.styled';
 
 const SinglePagePost = () => {
   const { postid } = useParams();
+  const { isScrollingDown } = useWindowScrollDirection();
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
@@ -71,6 +74,7 @@ const SinglePagePost = () => {
       ) : (
         <h2>Critical error.</h2>
       )}
+      {isScrollingDown && <JumpButton />}
     </Wrapper>
   );
 };
