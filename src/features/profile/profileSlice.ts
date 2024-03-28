@@ -217,11 +217,11 @@ export const fetchIgnoredUsers = createAsyncThunk<
   return data as GeneralAuthorData[];
 });
 
-export const postIgnoreUser = createAsyncThunk<
+export const postIgnoredUser = createAsyncThunk<
   TargetObjectId,
   string,
   { rejectValue: ErrorData }
->('profile/postIgnoreUser', async (userId, { rejectWithValue }) => {
+>('profile/postIgnoredUser', async (userId, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch('/api/profile/ignored-users', {
@@ -388,15 +388,15 @@ const profileSlice = createSlice({
           action.payload || (action.error as ErrorData);
       });
     builder
-      .addCase(postIgnoreUser.pending, (state, action) => {
+      .addCase(postIgnoredUser.pending, (state, action) => {
         if (state.profileData) state.profileData.ignored_users.push(action.meta.arg);
         state.ignoreUserActionState.isLoading = true;
         state.ignoreUserActionState.error = null;
       })
-      .addCase(postIgnoreUser.fulfilled, (state) => {
+      .addCase(postIgnoredUser.fulfilled, (state) => {
         state.ignoreUserActionState.isLoading = false;
       })
-      .addCase(postIgnoreUser.rejected, (state, action) => {
+      .addCase(postIgnoredUser.rejected, (state, action) => {
         if (state.profileData)
           state.profileData.ignored_users = state.profileData.ignored_users.filter(
             (id) => id !== action.meta.arg

@@ -10,6 +10,9 @@ import {
   selectFetchProfileDataState,
   selectBookmarkActionState,
   selectIsPostBookmarked,
+  selectIsUserIgnored,
+  postIgnoredUser,
+  deleteIgnoredUser,
 } from '@/features/profile/profileSlice';
 import { deletePost, setTopic } from '../postListSlice';
 import { enterEditMode } from '@/features/postForm/postFormSlice';
@@ -48,7 +51,8 @@ const PostItem = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const isBookmarked = useAppSelector(selectIsPostBookmarked(_id));
+  const isBookmarked = useAppSelector(selectIsPostBookmarked(_id)) as boolean;
+  const isIgnored = useAppSelector(selectIsUserIgnored(author._id));
 
   const authData = useAppSelector(selectAuthData);
 
@@ -58,11 +62,11 @@ const PostItem = ({
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleBookmarkAdd = (): void => {
+  const handleAddBookmark = (): void => {
     if (!bookmarkActionState.isLoading) dispatch(postBookmark(_id));
   };
 
-  const handleBookmarkRemove = (): void => {
+  const handleRemoveBookmark = (): void => {
     if (!bookmarkActionState.isLoading) dispatch(deleteBookmark(_id));
   };
 
@@ -97,14 +101,20 @@ const PostItem = ({
     dispatch(deletePost(_id));
   };
 
-  const handleMuteAuthorClick = (): void => {
-    // TODO:
+  const handleMuteAuthor = (): void => {
+    dispatch(postIgnoredUser(author._id));
+    setIsMenuOpen(false);
+  };
+
+  const handleUnmuteAuthor = (): void => {
+    dispatch(deleteIgnoredUser(author._id));
     setIsMenuOpen(false);
   };
 
   const isAuthor = authData?.sub === author._id;
 
-  const handleBookmarkClick = isBookmarked ? handleBookmarkRemove : handleBookmarkAdd;
+  const handleBookmarkClick = isBookmarked ? handleRemoveBookmark : handleAddBookmark;
+  const handleMuteAuthorClick = isIgnored ? handleUnmuteAuthor : handleMuteAuthor;
 
   return (
     <S.Wrapper variants={Waterfall.item}>
@@ -148,7 +158,9 @@ const PostItem = ({
                     Edit Post
                   </MenuItemSuccess>
                 )}
-                <MenuItem onClick={handleMuteAuthorClick}>Mute this author</MenuItem>
+                <MenuItem onClick={handleMuteAuthorClick}>
+                  {isIgnored ? 'Unmute this author' : 'Mute this author'}
+                </MenuItem>
                 {isAuthor && (
                   <>
                     <MenuItemDanger onClick={handleOpenDeleteModal}>

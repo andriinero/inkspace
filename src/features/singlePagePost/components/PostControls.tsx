@@ -2,13 +2,20 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { useNavigate } from 'react-router-dom';
 
-import { putLikeCount, selectPostLikeCount } from '../singlePagePostSlice';
+import {
+  putLikeCount,
+  selectCurrentPostAuthor,
+  selectPostLikeCount,
+} from '../singlePagePostSlice';
 import { toggleComments } from '@/features/commentList/commentListSlice';
 import {
   deleteBookmark,
+  deleteIgnoredUser,
   postBookmark,
+  postIgnoredUser,
   selectBookmarkActionState,
   selectIsPostBookmarked,
+  selectIsUserIgnored,
 } from '@/features/profile/profileSlice';
 import { enterEditMode } from '@/features/postForm/postFormSlice';
 
@@ -32,6 +39,9 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
+  const author = useAppSelector(selectCurrentPostAuthor)!;
+
+  const isIgnored = useAppSelector(selectIsUserIgnored(author._id));
   const isBookmarked = useAppSelector(selectIsPostBookmarked(postId)) as boolean;
   const likeCount = useAppSelector(selectPostLikeCount);
   const bookmarkActionState = useAppSelector(selectBookmarkActionState);
@@ -43,11 +53,11 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
     dispatch(putLikeCount(postId));
   };
 
-  const handleBookmarkAdd = (): void => {
+  const handleAddBookmark = (): void => {
     if (!bookmarkActionState.isLoading) dispatch(postBookmark(postId));
   };
 
-  const handleBookmarkRemove = (): void => {
+  const handleRemoveBookmark = (): void => {
     if (!bookmarkActionState.isLoading) dispatch(deleteBookmark(postId));
   };
 
@@ -84,12 +94,18 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
     if (response) navigate('/');
   };
 
-  const handleMuteAuthorClick = (): void => {
-    // TODO:
+  const handleMuteAuthor = (): void => {
+    dispatch(postIgnoredUser(author._id));
     setIsMenuOpen(false);
   };
 
-  const onBookmarkClick = isBookmarked ? handleBookmarkRemove : handleBookmarkAdd;
+  const handleUnmuteAuthor = (): void => {
+    dispatch(deleteIgnoredUser(author._id));
+    setIsMenuOpen(false);
+  };
+
+  const onBookmarkClick = isBookmarked ? handleRemoveBookmark : handleAddBookmark;
+  const handleMuteAuthorClick = isIgnored ? handleUnmuteAuthor : handleMuteAuthor;
 
   return (
     <Wrapper>
@@ -119,7 +135,9 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
           {isAuthor && (
             <MenuItemSuccess onClick={handleEditModeClick}>Edit Post</MenuItemSuccess>
           )}
-          <MenuItem onClick={handleMuteAuthorClick}>Mute this author</MenuItem>
+          <MenuItem onClick={handleMuteAuthorClick}>
+            {isIgnored ? 'Unmute this author' : 'Mute this author'}
+          </MenuItem>
           {isAuthor && (
             <MenuItemDanger onClick={handleOpenDeleteModal}>Delete Post</MenuItemDanger>
           )}
