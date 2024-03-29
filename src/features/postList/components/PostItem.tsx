@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { useNavigate } from 'react-router-dom';
+import useBookmarkPostAction from '@/hooks/useBookmarkPostAction';
+import useIgnoreUserAction from '@/hooks/useIgnoreUserAction';
 import parse from 'html-react-parser';
 
 import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
@@ -9,8 +11,7 @@ import {
   selectBookmarkActionState,
   selectIsPostBookmarked,
   selectIsUserIgnored,
-  postIgnoredUser,
-  deleteIgnoredUser,
+  selectIgnoreUserActionState,
 } from '@/features/profile/profileSlice';
 import { deletePost, setTopic } from '../postListSlice';
 import { enterEditMode } from '@/features/postForm/postFormSlice';
@@ -25,7 +26,6 @@ import { MenuItem, MenuItemDanger, MenuItemSuccess } from '@/components/styled/M
 import Dialog from '@/components/general/Dialog';
 import DeleteConfirm from '@/components/general/DeleteConfirm';
 import * as S from './PostItem.styled';
-import useBookmarkPostAction from '@/hooks/useBookmarkPostAction';
 
 type PostItemProps = {
   _id: string;
@@ -51,12 +51,15 @@ const PostItem = ({
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const isBookmarked = useAppSelector(selectIsPostBookmarked(_id)) as boolean;
-  const isIgnored = useAppSelector(selectIsUserIgnored(author._id));
+  const isIgnored = useAppSelector(selectIsUserIgnored(author._id)) as boolean;
 
   const authData = useAppSelector(selectAuthData);
 
   const fetchProfileState = useAppSelector(selectFetchProfileDataState);
   const bookmarkActionState = useAppSelector(selectBookmarkActionState);
+  const ignoreUserActionState = useAppSelector(selectIgnoreUserActionState);
+
+  const isAuthor = authData?.sub === author._id;
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -92,24 +95,21 @@ const PostItem = ({
     dispatch(deletePost(_id));
   };
 
-  const handleMuteAuthor = (): void => {
-    dispatch(postIgnoredUser(author._id));
-    setIsMenuOpen(false);
-  };
-
-  const handleUnmuteAuthor = (): void => {
-    dispatch(deleteIgnoredUser(author._id));
-    setIsMenuOpen(false);
-  };
-
-  const isAuthor = authData?.sub === author._id;
+  const handleIgnoreAction = useIgnoreUserAction(
+    author._id,
+    isIgnored,
+    ignoreUserActionState.isLoading
+  );
 
   const handleBookmarkClick = useBookmarkPostAction(
     _id,
     isBookmarked,
     bookmarkActionState.isLoading
   );
-  const handleMuteAuthorClick = isIgnored ? handleUnmuteAuthor : handleMuteAuthor;
+  const handleMuteAuthorClick = (): void => {
+    handleIgnoreAction();
+    setIsMenuOpen(false);
+  };
 
   return (
     <S.Wrapper variants={Waterfall.item}>

@@ -47,6 +47,8 @@ const initialState: ProfileState = {
   ignoreUserActionState: { isLoading: false, error: null },
 };
 
+// PROFILE DATA //
+
 export const fetchProfileData = createAsyncThunk<
   ProfileData,
   void,
@@ -69,6 +71,8 @@ export const fetchProfileData = createAsyncThunk<
 
   return data as ProfileData;
 });
+
+// BOOKMARKS //
 
 export const fetchProfileBookmarks = createAsyncThunk<
   PostData[],
@@ -142,6 +146,8 @@ export const deleteBookmark = createAsyncThunk<
   return data as TargetObjectId;
 });
 
+// FOLLOWED USERS //
+
 export const postFollowUser = createAsyncThunk<
   TargetObjectId,
   string,
@@ -193,6 +199,8 @@ export const deleteFollowUser = createAsyncThunk<
 
   return data as TargetObjectId;
 });
+
+// IGNORED USERS //
 
 export const fetchIgnoredUsers = createAsyncThunk<
   GeneralAuthorData[],
@@ -278,6 +286,9 @@ const profileSlice = createSlice({
     },
   },
   extraReducers(builder) {
+    
+    // PROFILE DATA //
+
     builder
       .addCase(fetchProfileData.pending, (state) => {
         state.fetchProfileDataState.isLoading = true;
@@ -291,6 +302,9 @@ const profileSlice = createSlice({
         state.fetchProfileDataState.isLoading = false;
         state.fetchProfileDataState.error = action.payload || (action.error as ErrorData);
       });
+
+    // BOOKMARKS //
+
     builder
       .addCase(fetchProfileBookmarks.pending, (state) => {
         state.fetchProfileBookmarksState.isLoading = true;
@@ -339,6 +353,9 @@ const profileSlice = createSlice({
         state.bookmarkActionState.isLoading = false;
         state.bookmarkActionState.error = action.payload || (action.error as ErrorData);
       });
+
+    // FOLLOWED USERS //
+
     builder
       .addCase(postFollowUser.pending, (state, action) => {
         if (state.profileData) state.profileData.followed_users.push(action.meta.arg);
@@ -373,6 +390,9 @@ const profileSlice = createSlice({
         state.followActionState.isLoading = false;
         state.followActionState.error = action.payload || (action.error as ErrorData);
       });
+
+    // IGNORED USERS //
+
     builder
       .addCase(fetchIgnoredUsers.pending, (state) => {
         state.fetchIgnoredUsersState.isLoading = true;
@@ -428,17 +448,10 @@ export const { updateImageId } = profileSlice.actions;
 
 export default profileSlice.reducer;
 
+// PROFILE DATA //
+
 export const selectFetchProfileDataState = (state: RootState) =>
   state.profile.fetchProfileDataState;
-
-export const selectFetchProfileBookmarksState = (state: RootState) =>
-  state.profile.fetchProfileBookmarksState;
-
-export const selectBookmarkActionState = (state: RootState) =>
-  state.profile.bookmarkActionState;
-
-export const selectFollowActionState = (state: RootState) =>
-  state.profile.followActionState;
 
 export const selectProfileData = (state: RootState) => state.profile.profileData;
 
@@ -446,6 +459,14 @@ export const selectProfileId = (state: RootState) => state.profile.profileData?.
 
 export const selectProfileImageId = (state: RootState) =>
   state.profile.profileData?.profile_image;
+
+// BOOKMARKS //
+
+export const selectFetchProfileBookmarksState = (state: RootState) =>
+  state.profile.fetchProfileBookmarksState;
+
+export const selectBookmarkActionState = (state: RootState) =>
+  state.profile.bookmarkActionState;
 
 export const selectProfileBookmarksList = (state: RootState) =>
   state.profile.profileBookmarkList;
@@ -456,11 +477,21 @@ export const selectProfileBookmarks = (state: RootState) =>
 export const selectIsPostBookmarked = (postId: string) => (state: RootState) =>
   state.profile.profileData?.post_bookmarks.some((p) => p === postId);
 
+// FOLLOWED USERS //
+
+export const selectFollowActionState = (state: RootState) =>
+  state.profile.followActionState;
+
 export const selectProfileFollowedUsers = (state: RootState) =>
   state.profile.profileData?.followed_users;
 
 export const selectIsUserFollowed = (userId: string) => (state: RootState) =>
   state.profile.profileData?.followed_users.some((u) => u === userId);
+
+// IGNORED USERS //
+
+export const selectIgnoreUserActionState = (state: RootState) =>
+  state.profile.ignoreUserActionState;
 
 export const selectProfileIgnoredUsers = (state: RootState) =>
   state.profile.profileData?.ignored_users;
