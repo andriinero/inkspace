@@ -11,6 +11,8 @@ import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { TLoginSchema } from '@/types/formSchemas/LoginSchema';
 import { PostSignUp, PostSignUpSchema } from '@/types/fetchResponse/success/PostSignUp';
 import { TSignUpSchema } from '@/types/formSchemas/SignUpSchema';
+import { addNotification } from '../pushNotification/pushNotificationSlice';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 type AuthState = {
   authData: AuthData | null;
@@ -93,13 +95,17 @@ export const postSignUp = createAsyncThunk<
 });
 
 export const initAuth = (): AppThunk => (dispatch) => {
-  const token = storage.getToken();
+  try {
+    const token = storage.getToken();
 
-  if (token) {
-    dispatch(fetchAuthData());
-    dispatch(fetchProfileData());
-  } else {
-    dispatch(resetLoadingState());
+    if (token) {
+      dispatch(fetchAuthData());
+      dispatch(fetchProfileData());
+    } else {
+      dispatch(resetLoadingState());
+    }
+  } catch (err) {
+    dispatch(addNotification((err as Error).message, PushNotificationType.ERROR));
   }
 };
 

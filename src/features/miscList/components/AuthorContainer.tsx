@@ -6,11 +6,13 @@ import {
   selectAuthorList,
   selectFetchAuthorsState,
 } from '../miscListSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 
 import AuthorItem from './AuthorItem';
-import Error from '@/components/general/Error';
 import MiscListLoader from '@/components/loaders/MiscListLoader';
 import * as S from './AuthorContainer.styled';
 
@@ -21,7 +23,15 @@ const AuthorContainer = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchAuthors());
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchAuthors()).unwrap();
+      } catch (err) {
+        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      }
+    };
+
+    fetchData();
   }, [dispatch]);
 
   return (
@@ -29,7 +39,7 @@ const AuthorContainer = () => {
       {isLoading ? (
         <MiscListLoader />
       ) : error ? (
-        <Error />
+        <MiscListLoader />
       ) : (
         <>
           <S.Header>Who to follow</S.Header>

@@ -18,9 +18,9 @@ const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   dispatch(removeNotification(id));
-    // }, 1000);
+    setTimeout(() => {
+      dispatch(removeNotification(id));
+    }, 4000);
   }, [id, dispatch]);
 
   const handleCloseClick = (): void => {
@@ -36,7 +36,7 @@ const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {
       exit={PushFromTop.hidden}
     >
       <MessageWrapper>
-        {statusTypePrefixMap[type]}: {message}
+        {statusTypePrefixMap[type]}: "{message}"
       </MessageWrapper>
       <StyledAppIcon src="/close.svg" onClick={handleCloseClick} />
     </Wrapper>

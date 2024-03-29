@@ -11,8 +11,11 @@ import {
   selectCurrentPostData,
 } from '@/features/singlePagePost/singlePagePostSlice';
 import { selectProfileId } from '@/features/profile/profileSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { FadeIn } from '@/styles/animations/FadeIn';
+import { Body, Header, PostWrapper, Wrapper } from './SinglePagePost.styled';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo';
 import Error from '@/components/general/Error';
@@ -21,7 +24,7 @@ import PostComments from '@/features/commentList/components/CommentList';
 import PostPageLoader from '@/components/loaders/PostPageLoader';
 import ScrollProgressBar from '@/components/general/ScrollProgressBar';
 import JumpButton from '@/components/general/JumpButton';
-import { Body, Header, PostWrapper, Wrapper } from './SinglePagePost.styled';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 const SinglePagePost = () => {
   const { postid } = useParams();
@@ -37,7 +40,15 @@ const SinglePagePost = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (postid) dispatch(fetchPost(postid));
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchPost(postid)).unwrap();
+      } catch (err) {
+        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      }
+    };
+
+    if (postid) fetchData();
   }, [dispatch, postid]);
 
   const isAuthor = profileId === postData?.author._id;

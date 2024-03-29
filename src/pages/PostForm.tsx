@@ -12,10 +12,13 @@ import {
   selectPostIsEditMode,
 } from '@/features/postForm/postFormSlice';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { Editor as TinyMCEEditor } from 'tinymce';
 import { TPostFormSchema, PostFormSchema } from '@/types/formSchemas/CreatePostSchema';
 import { FadeIn } from '@/styles/animations/FadeIn';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 import TinyEditor from '@/features/postForm/components/TinyEditor';
 import * as S from './PostForm.styled';
@@ -32,14 +35,18 @@ const PostForm = () => {
     let values = { title: '', body: '', topic: '', image: null };
 
     if (isEditMode && editPostId) {
-      const data = await dispatch(fetchEditTargetPost(editPostId)).unwrap();
+      try {
+        const data = await dispatch(fetchEditTargetPost(editPostId)).unwrap();
 
-      values = {
-        title: data.title,
-        body: data.body,
-        topic: data.topic.name,
-        image: null,
-      };
+        values = {
+          title: data.title,
+          body: data.body,
+          topic: data.topic.name,
+          image: null,
+        };
+      } catch (err) {
+        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      }
     }
 
     return values;

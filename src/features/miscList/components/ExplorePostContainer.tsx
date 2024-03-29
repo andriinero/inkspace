@@ -6,11 +6,13 @@ import {
   selectFetchMiscPostsState,
   selectMiscPostList,
 } from '../miscListSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 import MiscListLoader from '@/components/loaders/MiscListLoader';
-import Error from '@/components/general/Error';
 import ExplorePostItem from './ExplorePostItem';
 import { Header, PostList, Wrapper } from './ExplorePostContainer.styled';
 
@@ -21,7 +23,15 @@ const ExplorePostContainer = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchMiscPosts());
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchMiscPosts()).unwrap();
+      } catch (err) {
+        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      }
+    };
+
+    fetchData();
   }, [dispatch]);
 
   return (
@@ -29,7 +39,7 @@ const ExplorePostContainer = () => {
       {isLoading ? (
         <MiscListLoader />
       ) : error ? (
-        <Error />
+        <MiscListLoader />
       ) : (
         <>
           <Header>Explore new posts</Header>

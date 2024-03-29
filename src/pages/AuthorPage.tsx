@@ -9,7 +9,6 @@ import {
   deleteFollowUser,
   postFollowUser,
   selectIsUserFollowed,
-  selectProfileData,
 } from '@/features/profile/profileSlice';
 import {
   fetchAuthor,
@@ -27,6 +26,9 @@ import { HollowButton } from '@/components/styled/HollowButton';
 import { FollowCount, SignUpDate, UserBio } from './Profile.styled';
 import * as S from './AuthorPage.styled';
 import JumpButton from '@/components/general/JumpButton';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 const AuthorPage = () => {
   const { isScrollingDown } = useWindowScrollDirection();
@@ -43,7 +45,15 @@ const AuthorPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (authorid !== authData?.sub) dispatch(fetchAuthor(authorid!));
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchAuthor(authorid!));
+      } catch (err) {
+        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      }
+    };
+
+    if (authorid !== authData?.sub) fetchData();
 
     return () => {
       dispatch(resetState());

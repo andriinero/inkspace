@@ -2,13 +2,15 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { fetchTopics, selectTopicList, selectFetchTopicsState } from '../miscListSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { WaterfallPopUp } from '@/styles/animations/WaterfallPopUp';
+import { Header, TopicList, Wrapper } from './TopicContainer.styled';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 import TopicItem from './TopicItem';
 import TopicListLoader from '@/components/loaders/TopicListLoader';
-import Error from '@/components/general/Error';
-import { Header, TopicList, Wrapper } from './TopicContainer.styled';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 const TopicContainer = () => {
   const topicList = useAppSelector(selectTopicList);
@@ -17,7 +19,15 @@ const TopicContainer = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchTopics());
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchTopics()).unwrap();
+      } catch (err) {
+        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      }
+    };
+
+    fetchData();
   }, [dispatch]);
 
   return (
@@ -25,7 +35,7 @@ const TopicContainer = () => {
       {isLoading ? (
         <TopicListLoader />
       ) : error ? (
-        <Error />
+        <TopicListLoader />
       ) : (
         <>
           <Header>Explore topics</Header>

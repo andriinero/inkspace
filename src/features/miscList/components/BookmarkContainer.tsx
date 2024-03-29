@@ -6,13 +6,15 @@ import {
   selectBookmarkList,
   selectFetchBookmarksState,
 } from '../miscListSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
+import { BookmarkList, CalloutText, Header, Wrapper } from './BookmarkContainer.styled';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { Waterfall } from '@/styles/animations/Waterfall';
 
 import BookmarkItem from './BookmarkItem';
-import Error from '@/components/general/Error';
 import MiscListLoader from '@/components/loaders/MiscListLoader';
-import { BookmarkList, CalloutText, Header, Wrapper } from './BookmarkContainer.styled';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 const BookmarkContainer = () => {
   const bookmarkList = useAppSelector(selectBookmarkList);
@@ -21,7 +23,15 @@ const BookmarkContainer = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchBookmarks());
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchBookmarks()).unwrap();
+      } catch (err) {
+        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      }
+    };
+
+    fetchData();
   }, [dispatch]);
 
   return (
@@ -29,7 +39,7 @@ const BookmarkContainer = () => {
       {isLoading ? (
         <MiscListLoader />
       ) : error ? (
-        <Error />
+        <MiscListLoader />
       ) : bookmarkList.length === 0 ? (
         <CalloutText>No bookmarks yet!</CalloutText>
       ) : (

@@ -13,7 +13,7 @@ type PushNotificationState = {
 
 const initialState: PushNotificationState = {
   queue: [
-    { id: '0', message: 'test message', type: PushNotificationType.ERROR }
+    // { id: '0', message: 'test message', type: PushNotificationType.ERROR }
   ],
 };
 

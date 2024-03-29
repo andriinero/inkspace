@@ -8,13 +8,15 @@ import {
   selectPostList,
   selectSelectedTopic,
 } from '../postListSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { TopicData } from '@/types/entityData/TopicData';
 import { Waterfall } from '@/styles/animations/Waterfall';
 import { FadeInSlide } from '@/styles/animations/FadeInSlide';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 import PostItem from './PostItem';
-import Error from '@/components/general/Error';
 import PostListLoader from '@/components/loaders/PostListLoader';
 import {
   CalloutText,
@@ -33,7 +35,15 @@ const PostContainer = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchPosts(selectedTopic?._id));
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchPosts(selectedTopic?._id)).unwrap();
+      } catch (err) {
+        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      }
+    };
+
+    fetchData();
   }, [selectedTopic, dispatch]);
 
   const handleClearClick = (): void => {
@@ -51,7 +61,7 @@ const PostContainer = () => {
       {isLoading ? (
         <PostListLoader />
       ) : error ? (
-        <Error />
+        <PostListLoader />
       ) : postList.length === 0 ? (
         <CalloutText
           initial={FadeInSlide.hidden}

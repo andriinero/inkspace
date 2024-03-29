@@ -10,7 +10,11 @@ import {
   selectProfileData,
 } from '@/features/profile/profileSlice';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+
 import { FadeIn } from '@/styles/animations/FadeIn';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 import Error from '@/components/general/Error';
 import BookmarkContainer from '@/features/profile/components/BookmarkContainer';
@@ -28,7 +32,15 @@ const Profile = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isAuthenticated) dispatch(fetchProfileData());
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchProfileData()).unwrap();
+      } catch (err) {
+        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      }
+    };
+
+    if (isAuthenticated) fetchData();
   }, [isAuthenticated, dispatch]);
 
   if (!isAuthenticated) return <Navigate to="/" />;
