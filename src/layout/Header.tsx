@@ -12,6 +12,7 @@ import LoginForm from '@/features/auth/components/LoginForm';
 import * as S from './Header.styled';
 import { exitEditMode } from '@/features/postForm/postFormSlice';
 import SignUpForm from '@/features/auth/components/SignUpForm';
+import PushNotificationContainer from '@/features/pushNotification/components/PushNotificationContainer';
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -47,49 +48,52 @@ const Header = () => {
 
   return (
     <S.Wrapper>
-      <S.Logo whileHover={{ x: -1, y: -1 }} onClick={handleLogoClick} src="/logo.svg" />
-      <S.ProfileWrapper>
-        {isAuthenticated ? (
-          <>
-            {pathname !== '/post-form' && (
-              <S.NewPostButton onClick={handleWritePostClick}>
-                <S.StyledAppIcon src="/post.svg" alt="Create New Post Icon" />
-                <S.NewPostButtonText>Write</S.NewPostButtonText>
-              </S.NewPostButton>
-            )}
-            <S.StyledLink to="/profile">
-              <S.ProfileIcon
-                imageId={profileImageId}
-                placeholderSrc="/portrait-placeholder.png"
-                altText="Current User Profile Picture"
+      <S.ContentWrapper>
+        <S.Logo whileHover={{ x: -1, y: -1 }} onClick={handleLogoClick} src="/logo.svg" />
+        <S.ProfileWrapper>
+          {isAuthenticated ? (
+            <>
+              {pathname !== '/post-form' && (
+                <S.NewPostButton onClick={handleWritePostClick}>
+                  <S.StyledAppIcon src="/post.svg" alt="Create New Post Icon" />
+                  <S.NewPostButtonText>Write</S.NewPostButtonText>
+                </S.NewPostButton>
+              )}
+              <S.StyledLink to="/profile">
+                <S.ProfileIcon
+                  imageId={profileImageId}
+                  placeholderSrc="/portrait-placeholder.png"
+                  altText="Current User Profile Picture"
+                />
+              </S.StyledLink>
+              <S.HeaderButton
+                whileTap={ButtonInteraction.whileTap.animation}
+                onClick={handleLogoutClick}
+                type="button"
+                value="Logout"
               />
-            </S.StyledLink>
-            <S.HeaderButton
-              whileTap={ButtonInteraction.whileTap.animation}
-              onClick={handleLogoutClick}
-              type="button"
-              value="Logout"
-            />
-          </>
-        ) : (
-          <S.ControlsWrapper>
-            <S.HeaderButton
-              whileTap={ButtonInteraction.whileTap.animation}
-              onClick={handleSignUpClick}
-              type="button"
-              value="Sign Up"
-            />
-            <S.HeaderButton
-              whileTap={ButtonInteraction.whileTap.animation}
-              onClick={handleLoginClick}
-              type="button"
-              value="Login"
-            />
-          </S.ControlsWrapper>
-        )}
-      </S.ProfileWrapper>
-      <LoginForm />
-      <SignUpForm />
+            </>
+          ) : (
+            <S.ControlsWrapper>
+              <S.HeaderButton
+                whileTap={ButtonInteraction.whileTap.animation}
+                onClick={handleSignUpClick}
+                type="button"
+                value="Sign Up"
+              />
+              <S.HeaderButton
+                whileTap={ButtonInteraction.whileTap.animation}
+                onClick={handleLoginClick}
+                type="button"
+                value="Login"
+              />
+            </S.ControlsWrapper>
+          )}
+        </S.ProfileWrapper>
+        <LoginForm />
+        <SignUpForm />
+      </S.ContentWrapper>
+      <PushNotificationContainer />
     </S.Wrapper>
   );
 };

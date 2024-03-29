@@ -7,14 +7,15 @@ export const Wrapper = styled(motion.li)`
   justify-content: space-between;
   align-items: center;
 
-  position: fixed;
+  position: absolute;
 
-  padding: 0.7rem;
+  padding: 0.7rem 1rem; 
   width: 100%;
   border: none;
   background-color: ${({ theme }) => theme.color.text_danger};
 
   color: ${({ theme }) => theme.color.text_primary};
+  font-weight: 300;
 `;
 
 export const MessageWrapper = styled.p``;

@@ -18,9 +18,9 @@ const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(removeNotification(id));
-    }, 1000);
+    // setTimeout(() => {
+    //   dispatch(removeNotification(id));
+    // }, 1000);
   }, [id, dispatch]);
 
   const handleCloseClick = (): void => {

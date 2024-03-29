@@ -7,13 +7,17 @@ import AppImage from '@/features/appImages/components/AppImage';
 
 export const Wrapper = styled.header`
   grid-area: header;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 
   position: sticky;
   top: 0;
   z-index: 1;
+`;
+
+export const ContentWrapper = styled.div`
+  grid-area: header;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   padding: 0.75rem 1rem;
   border-bottom: 1px solid ${({ theme }) => theme.color.main_border};

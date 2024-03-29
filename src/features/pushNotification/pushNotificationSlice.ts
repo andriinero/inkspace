@@ -13,13 +13,10 @@ type PushNotificationState = {
 
 const initialState: PushNotificationState = {
   queue: [
-    { id: '0', message: 'test error notification', type: PushNotificationType.ERROR },
-    { id: '1', message: 'est error notification', type: PushNotificationType.ERROR },
-    { id: '2', message: 'error notification', type: PushNotificationType.ERROR },
+    { id: '0', message: 'test message', type: PushNotificationType.ERROR }
   ],
 };
 
-//TODO: rename to 'pushNotifications'
 const pushNotificationSlice = createSlice({
   name: 'pushNotification',
   initialState,
