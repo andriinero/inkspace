@@ -1,8 +1,12 @@
-import { StatusNotificationData } from '@/types/entityData/StatusNotificationData';
-import { Wrapper } from './StatusNotificationItem.styled';
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/app/hooks';
+
 import { removeNotification } from '../statusNotificationSlice';
+
+import { StatusNotificationData } from '@/types/entityData/StatusNotificationData';
+import { PushFromTop } from '@/styles/animations/PushFromTop';
+
+import { MessageWrapper, StyledAppIcon, Wrapper } from './StatusNotificationItem.styled';
 
 const statusTypePrefixMap = {
   error: 'Error',
@@ -19,9 +23,22 @@ const StatusNotificationItem = ({ id, message, type }: StatusNotificationData) =
     }, 4000);
   }, [id, dispatch]);
 
+  const handleCloseClick = (): void => {
+    dispatch(removeNotification(id));
+  };
+
   return (
-    <Wrapper>
-      {statusTypePrefixMap[type]}: {message}
+    <Wrapper
+      key={id}
+      initial={PushFromTop.hidden}
+      animate={PushFromTop.visible}
+      transition={PushFromTop.transition}
+      exit={PushFromTop.hidden}
+    >
+      <MessageWrapper>
+        {statusTypePrefixMap[type]}: {message}
+      </MessageWrapper>
+      <StyledAppIcon src="/close.svg" onClick={handleCloseClick} />
     </Wrapper>
   );
 };

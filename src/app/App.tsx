@@ -22,8 +22,8 @@ const App = () => {
     !isLoading && (
       <Wrapper>
         <ScrollToTop />
-        <StatusNotificationContainer />
         <Header />
+        <StatusNotificationContainer />
         <WrapperMain>
           <Outlet />
         </WrapperMain>
