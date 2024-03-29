@@ -7,6 +7,7 @@ import Header from '@/layout/Header';
 import ScrollToTop from '@/utils/ScrollToTop';
 import { Outlet } from 'react-router-dom';
 import { Wrapper, WrapperMain } from './App.styled';
+import StatusNotificationContainer from '@/features/statusNotification/components/StatusNotificationContainer';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ const App = () => {
     !isLoading && (
       <Wrapper>
         <ScrollToTop />
+        <StatusNotificationContainer />
         <Header />
         <WrapperMain>
           <Outlet />

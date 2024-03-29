@@ -1,14 +1,19 @@
 import { RootState } from '@/app/store';
-import { StatusNotification } from '@/types/StatusNotification';
+import {
+  StatusNotificationData,
+  StatusNotificationType,
+} from '@/types/entityData/StatusNotificationData';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 
 type StatusNotificationState = {
-  queue: StatusNotification[];
+  queue: StatusNotificationData[];
 };
 
 const initialState: StatusNotificationState = {
-  queue: [],
+  queue: [
+    { id: '0', message: 'test error notification', type: StatusNotificationType.ERROR },
+  ],
 };
 
 const statusNotificationSlice = createSlice({
@@ -16,15 +21,16 @@ const statusNotificationSlice = createSlice({
   initialState,
   reducers: {
     addNotification: {
-      reducer(state, action: PayloadAction<StatusNotification>) {
+      reducer(state, action: PayloadAction<StatusNotificationData>) {
         state.queue.push(action.payload);
       },
-      prepare(message: string) {
+      prepare(message: string, type: StatusNotificationType) {
         const id = uuidv4();
         return {
           payload: {
             id,
             message,
+            type,
           },
         };
       },
