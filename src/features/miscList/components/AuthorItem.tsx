@@ -1,9 +1,8 @@
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useAppSelector } from '@/app/hooks';
+import useFollowUserAction from '@/hooks/useFollowUserAction';
 
 import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
-  deleteFollowUser,
-  postFollowUser,
   selectFollowActionState,
   selectIsUserFollowed,
 } from '@/features/profile/profileSlice';
@@ -11,7 +10,9 @@ import {
 import { Username } from '@/components/styled/Username.styled';
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 import { HollowButton } from '@/components/styled/HollowButton';
+
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+
 import * as S from './AuthorItem.styled';
 
 type AuthorItemProps = {
@@ -23,23 +24,13 @@ type AuthorItemProps = {
 
 const AuthorItem = ({ _id, username, bio, profile_image }: AuthorItemProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const isFollowed = useAppSelector(selectIsUserFollowed(_id));
+  const isFollowed = useAppSelector(selectIsUserFollowed(_id)) as boolean;
+
+  const { isLoading } = useAppSelector(selectFollowActionState);
 
   const authData = useAppSelector(selectAuthData);
-  const followActionState = useAppSelector(selectFollowActionState);
 
-  const dispatch = useAppDispatch();
-
-  const handleFollowAdd = (): void => {
-    if (!followActionState.isLoading) dispatch(postFollowUser(_id));
-  };
-
-  const handleFollowRemove = (): void => {
-    if (!followActionState.isLoading) dispatch(deleteFollowUser(_id));
-  };
-
-  const handleFollowClick = isFollowed ? handleFollowRemove : handleFollowAdd;
-  const followButtonText = isFollowed ? 'Followed' : 'Follow';
+  const handleFollowClick = useFollowUserAction(_id, isFollowed, isLoading);
 
   return (
     <S.WrapperItem variants={WaterfallSlideIn.item}>
@@ -62,7 +53,7 @@ const AuthorItem = ({ _id, username, bio, profile_image }: AuthorItemProps) => {
           $isActive={isFollowed}
           onClick={handleFollowClick}
           type="button"
-          value={followButtonText}
+          value={isFollowed ? 'Followed' : 'Follow'}
         />
       )}
     </S.WrapperItem>

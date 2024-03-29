@@ -1,13 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import useFollowUserAction from '@/hooks/useFollowUserAction';
 
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
-  deleteFollowUser,
-  postFollowUser,
   selectFollowActionState,
   selectIsUserFollowed,
-  selectProfileFollowedUsers,
 } from '@/features/profile/profileSlice';
+import { setTopic } from '@/features/postList/postListSlice';
 
 import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 import { TopicData } from '@/types/entityData/TopicData';
@@ -15,8 +15,6 @@ import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import PostDate from '@/components/general/TimeAgo';
 import * as S from './PostHeaderInfo.styled';
-import { setTopic } from '@/features/postList/postListSlice';
-import { useNavigate } from 'react-router-dom';
 
 type PostAuthorProps = {
   isAuthor: boolean;
@@ -34,28 +32,19 @@ const PostHeaderInfo = ({
   bodyLength,
 }: PostAuthorProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const isFollowed = useAppSelector(selectIsUserFollowed(author._id));
+  const isFollowed = useAppSelector(selectIsUserFollowed(author._id)) as boolean;
 
-  const followActionState = useAppSelector(selectFollowActionState);
+  const { isLoading } = useAppSelector(selectFollowActionState);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const handleFollowAdd = (): void => {
-    if (!followActionState.isLoading) dispatch(postFollowUser(author._id));
-  };
-
-  const handleFollowRemove = (): void => {
-    if (!followActionState.isLoading) dispatch(deleteFollowUser(author._id));
-  };
 
   const handleTopicClick = (): void => {
     dispatch(setTopic(topic));
     navigate('/');
   };
 
-  const followButtonText = isFollowed ? 'Followed' : 'Follow';
-  const handleFollowClick = isFollowed ? handleFollowRemove : handleFollowAdd;
+  const handleFollowClick = useFollowUserAction(author._id, isFollowed, isLoading);
 
   return (
     <S.Wrapper>
@@ -77,7 +66,7 @@ const PostHeaderInfo = ({
               whileTap={ButtonInteraction.whileTap.animation}
               onClick={handleFollowClick}
               type="button"
-              value={followButtonText}
+              value={isFollowed ? 'Followed' : 'Follow'}
             />
           </>
         )}

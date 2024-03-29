@@ -8,6 +8,7 @@ import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice
 import {
   deleteFollowUser,
   postFollowUser,
+  selectFollowActionState,
   selectIsUserFollowed,
 } from '@/features/profile/profileSlice';
 import {
@@ -29,6 +30,8 @@ import JumpButton from '@/components/general/JumpButton';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import useFollowUserAction from '@/hooks/useFollowUserAction';
+import { AppDate } from '@/lib/AppDate';
 
 const AuthorPage = () => {
   const { isScrollingDown } = useWindowScrollDirection();
@@ -36,6 +39,8 @@ const AuthorPage = () => {
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const isFollowed = useAppSelector(selectIsUserFollowed(authorid as string)) as boolean;
+
+  const followActionState = useAppSelector(selectFollowActionState);
 
   const authData = useAppSelector(selectAuthData);
 
@@ -60,22 +65,15 @@ const AuthorPage = () => {
     };
   }, [authData?.sub, authorid, dispatch]);
 
-  if (authorid === authData?.sub) return <Navigate to="/profile" />;
-
-  const handleFollowAdd = (): void => {
-    if (authorData) dispatch(postFollowUser(authorData._id));
-  };
-
-  const handleFollowRemove = (): void => {
-    if (authorData) dispatch(deleteFollowUser(authorData._id));
-  };
-
-  const signUpDate = DateTime.fromISO(authorData?.sign_up_date as string).toLocaleString(
-    DateTime.DATE_MED
+  const handleFollowClick = useFollowUserAction(
+    authorData?._id as string,
+    isFollowed,
+    followActionState.isLoading
   );
 
-  const followButtonText = isFollowed ? 'Followed' : 'Follow';
-  const handleFollowClick = isFollowed ? handleFollowRemove : handleFollowAdd;
+  if (authorid === authData?.sub) return <Navigate to="/profile" />;
+
+  const signUpDate = AppDate.getMedDate(authorData?.sign_up_date as string);
 
   return isLoading ? (
     <></>
@@ -111,7 +109,7 @@ const AuthorPage = () => {
               $isActive={isFollowed}
               onClick={handleFollowClick}
               type="button"
-              value={followButtonText}
+              value={isFollowed ? 'Followed' : 'Follow'}
             />
           )}
           <UserBio>{authorData?.bio}</UserBio>

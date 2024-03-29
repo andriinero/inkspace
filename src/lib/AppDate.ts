@@ -13,4 +13,5 @@ export const AppDate = {
 
     return diff;
   },
+  getMedDate: (date: string) => DateTime.fromISO(date).toLocaleString(DateTime.DATE_MED),
 };
