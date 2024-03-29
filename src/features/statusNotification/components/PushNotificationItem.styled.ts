@@ -5,11 +5,12 @@ import styled from 'styled-components';
 export const Wrapper = styled(motion.li)`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   position: fixed;
 
   padding: 0.7rem;
-  width: 99.06dvw;
+  width: 100%;
   border: none;
   background-color: ${({ theme }) => theme.color.text_danger};
 
@@ -18,4 +19,7 @@ export const Wrapper = styled(motion.li)`
 
 export const MessageWrapper = styled.p``;
 
-export const StyledAppIcon = styled(Icon)``;
+export const StyledAppIcon = styled(Icon)`
+  width: 18px;
+  height: 18px;
+`;

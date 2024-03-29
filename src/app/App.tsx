@@ -7,7 +7,7 @@ import Header from '@/layout/Header';
 import ScrollToTop from '@/utils/ScrollToTop';
 import { Outlet } from 'react-router-dom';
 import { Wrapper, WrapperMain } from './App.styled';
-import StatusNotificationContainer from '@/features/statusNotification/components/StatusNotificationContainer';
+import PushNotificationContainer from '@/features/statusNotification/components/PushNotificationContainer';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ const App = () => {
       <Wrapper>
         <ScrollToTop />
         <Header />
-        <StatusNotificationContainer />
+        <PushNotificationContainer />
         <WrapperMain>
           <Outlet />
         </WrapperMain>

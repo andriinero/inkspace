@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/app/hooks';
 
-import { removeNotification } from '../statusNotificationSlice';
+import { removeNotification } from '../pushNotificationSlice';
 
-import { StatusNotificationData } from '@/types/entityData/StatusNotificationData';
+import { PushNotificationData } from '@/types/entityData/StatusNotificationData';
 import { PushFromTop } from '@/styles/animations/PushFromTop';
 
-import { MessageWrapper, StyledAppIcon, Wrapper } from './StatusNotificationItem.styled';
+import { MessageWrapper, StyledAppIcon, Wrapper } from './PushNotificationItem.styled';
 
 const statusTypePrefixMap = {
   error: 'Error',
@@ -14,13 +14,13 @@ const statusTypePrefixMap = {
   success: '',
 };
 
-const StatusNotificationItem = ({ id, message, type }: StatusNotificationData) => {
+const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     setTimeout(() => {
       dispatch(removeNotification(id));
-    }, 4000);
+    }, 1000);
   }, [id, dispatch]);
 
   const handleCloseClick = (): void => {
@@ -43,4 +43,4 @@ const StatusNotificationItem = ({ id, message, type }: StatusNotificationData) =
   );
 };
 
-export default StatusNotificationItem;
+export default PushNotificationItem;

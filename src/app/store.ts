@@ -11,7 +11,7 @@ import profileReducer from '@/features/profile/profileSlice';
 import authorPageReducer from '@/features/authorPage/authorPageSlice';
 import appImagesReducer from '@/features/appImages/appImagesSlice';
 import profileEditReducer from '@/features/profileEdit/profileEditSlice';
-import statusNotificationReducer from '@/features/statusNotification/statusNotificationSlice';
+import pushNotificationReducer from '@/features/statusNotification/pushNotificationSlice';
 
 export const store = configureStore({
   reducer: {
@@ -26,7 +26,7 @@ export const store = configureStore({
     authorPage: authorPageReducer,
     appImages: appImagesReducer,
     profileEdit: profileEditReducer,
-    statusNotification: statusNotificationReducer,
+    pushNotification: pushNotificationReducer,
   },
 });
 

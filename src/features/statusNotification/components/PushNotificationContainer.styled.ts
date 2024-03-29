@@ -6,6 +6,4 @@ export const Wrapper = styled.ul`
 
   position: relative;
   z-index: 2;
-
-  border: none;
 `;
