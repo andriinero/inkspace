@@ -32,6 +32,7 @@ import {
 import { deletePost } from '@/features/postList/postListSlice';
 import Dialog from '@/components/general/Dialog';
 import DeleteConfirm from '@/components/general/DeleteConfirm';
+import useBookmarkPostAction from '@/hooks/useBookmarkPostAction';
 
 type PostControlsProps = { postId: string; isAuthor: boolean };
 
@@ -51,14 +52,6 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
 
   const onLikeClick = (): void => {
     dispatch(putLikeCount(postId));
-  };
-
-  const handleAddBookmark = (): void => {
-    if (!bookmarkActionState.isLoading) dispatch(postBookmark(postId));
-  };
-
-  const handleRemoveBookmark = (): void => {
-    if (!bookmarkActionState.isLoading) dispatch(deleteBookmark(postId));
   };
 
   const onCommentsClick = (): void => {
@@ -104,7 +97,11 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
     setIsMenuOpen(false);
   };
 
-  const onBookmarkClick = isBookmarked ? handleRemoveBookmark : handleAddBookmark;
+  const onBookmarkClick = useBookmarkPostAction(
+    postId,
+    isBookmarked,
+    bookmarkActionState.isLoading
+  );
   const handleMuteAuthorClick = isIgnored ? handleUnmuteAuthor : handleMuteAuthor;
 
   return (

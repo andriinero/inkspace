@@ -5,8 +5,6 @@ import parse from 'html-react-parser';
 
 import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
-  deleteBookmark,
-  postBookmark,
   selectFetchProfileDataState,
   selectBookmarkActionState,
   selectIsPostBookmarked,
@@ -27,6 +25,7 @@ import { MenuItem, MenuItemDanger, MenuItemSuccess } from '@/components/styled/M
 import Dialog from '@/components/general/Dialog';
 import DeleteConfirm from '@/components/general/DeleteConfirm';
 import * as S from './PostItem.styled';
+import useBookmarkPostAction from '@/hooks/useBookmarkPostAction';
 
 type PostItemProps = {
   _id: string;
@@ -61,14 +60,6 @@ const PostItem = ({
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const handleAddBookmark = (): void => {
-    if (!bookmarkActionState.isLoading) dispatch(postBookmark(_id));
-  };
-
-  const handleRemoveBookmark = (): void => {
-    if (!bookmarkActionState.isLoading) dispatch(deleteBookmark(_id));
-  };
 
   const handleMenuToggle = (): void => {
     setIsMenuOpen(!isMenuOpen);
@@ -113,7 +104,11 @@ const PostItem = ({
 
   const isAuthor = authData?.sub === author._id;
 
-  const handleBookmarkClick = isBookmarked ? handleRemoveBookmark : handleAddBookmark;
+  const handleBookmarkClick = useBookmarkPostAction(
+    _id,
+    isBookmarked,
+    bookmarkActionState.isLoading
+  );
   const handleMuteAuthorClick = isIgnored ? handleUnmuteAuthor : handleMuteAuthor;
 
   return (
