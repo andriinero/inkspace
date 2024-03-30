@@ -1,7 +1,12 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
 
-import { fetchTopics, selectTopicList, selectFetchTopicsState } from '../miscListSlice';
+import {
+  fetchTopics,
+  selectMiscTopicList,
+  selectFetchMiscTopicsState,
+} from '../miscListSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { WaterfallPopUp } from '@/styles/animations/WaterfallPopUp';
@@ -13,8 +18,9 @@ import TopicListLoader from '@/components/loaders/TopicListLoader';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 const TopicContainer = () => {
-  const topicList = useAppSelector(selectTopicList);
-  const { isLoading, error } = useAppSelector(selectFetchTopicsState);
+  const topicList = useAppSelector(selectMiscTopicList);
+  const isLoading = useHomePageStatus();
+  const { error } = useAppSelector(selectFetchMiscTopicsState);
 
   const dispatch = useAppDispatch();
 

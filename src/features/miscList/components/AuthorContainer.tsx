@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
 
 import {
   fetchAuthors,
-  selectAuthorList,
-  selectFetchAuthorsState,
+  selectMiscAuthorList,
+  selectFetchMiscAuthorsState,
 } from '../miscListSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
@@ -17,8 +18,9 @@ import MiscListLoader from '@/components/loaders/MiscListLoader';
 import * as S from './AuthorContainer.styled';
 
 const AuthorContainer = () => {
-  const authorList = useAppSelector(selectAuthorList);
-  const { isLoading, error } = useAppSelector(selectFetchAuthorsState);
+  const authorList = useAppSelector(selectMiscAuthorList);
+  const isLoading = useHomePageStatus();
+  const { error } = useAppSelector(selectFetchMiscAuthorsState);
 
   const dispatch = useAppDispatch();
 

@@ -124,12 +124,12 @@ export const { setTopic, clearTopic } = postListSlice.actions;
 
 export default postListSlice.reducer;
 
+export const selectFetchPostListState = (state: RootState) =>
+  state.postList.fetchPostsState;
+
 export const selectPostList = (state: RootState) => state.postList.postList;
 
 export const selectSelectedTopic = (state: RootState) => state.postList.selectedTopic;
 
 export const selectIsTopicSelected = (topicId: string) => (state: RootState) =>
   state.postList.selectedTopic?._id === topicId;
-
-export const selectFetchPostListState = (state: RootState) =>
-  state.postList.fetchPostsState;

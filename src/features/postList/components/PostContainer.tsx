@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
 
 import {
   clearTopic,
@@ -28,7 +29,8 @@ import {
 
 const PostContainer = () => {
   const postList = useAppSelector(selectPostList);
-  const { isLoading, error } = useAppSelector(selectFetchPostListState);
+  const isLoading = useHomePageStatus();
+  const { error } = useAppSelector(selectFetchPostListState);
 
   const selectedTopic = useAppSelector(selectSelectedTopic) as TopicData;
 

@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
 
 import {
   fetchBookmarks,
-  selectBookmarkList,
-  selectFetchBookmarksState,
+  selectMiscBookmarkList,
+  selectFetchMiscBookmarksState,
 } from '../miscListSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
@@ -17,8 +18,9 @@ import MiscListLoader from '@/components/loaders/MiscListLoader';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 const BookmarkContainer = () => {
-  const bookmarkList = useAppSelector(selectBookmarkList);
-  const { isLoading, error } = useAppSelector(selectFetchBookmarksState);
+  const bookmarkList = useAppSelector(selectMiscBookmarkList);
+  const isLoading = useHomePageStatus();
+  const { error } = useAppSelector(selectFetchMiscBookmarksState);
 
   const dispatch = useAppDispatch();
 

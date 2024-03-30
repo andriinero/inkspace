@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
 
 import {
   fetchMiscPosts,
@@ -18,7 +19,8 @@ import { Header, PostList, Wrapper } from './ExplorePostContainer.styled';
 
 const ExplorePostContainer = () => {
   const postList = useAppSelector(selectMiscPostList);
-  const { isLoading, error } = useAppSelector(selectFetchMiscPostsState);
+  const isLoading = useHomePageStatus();
+  const { error } = useAppSelector(selectFetchMiscPostsState);
 
   const dispatch = useAppDispatch();
 
