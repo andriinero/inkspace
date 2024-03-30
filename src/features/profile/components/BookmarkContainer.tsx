@@ -1,11 +1,8 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useAppSelector } from '@/app/hooks';
 
 import {
-  fetchProfileBookmarks,
   selectFetchProfileBookmarksState,
   selectProfileBookmarksList,
-  selectProfileData,
 } from '../profileSlice';
 
 import { Waterfall } from '@/styles/animations/Waterfall';
@@ -16,16 +13,8 @@ import PostListLoader from '@/components/loaders/PostListLoader';
 import { BookmarkList, Wrapper } from './BookmarkContainer.styled';
 
 const BookmarkContainer = () => {
-  const profileData = useAppSelector(selectProfileData);
-
   const bookmarkList = useAppSelector(selectProfileBookmarksList);
   const { isLoading, error } = useAppSelector(selectFetchProfileBookmarksState);
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchProfileBookmarks());
-  }, [dispatch]);
 
   return (
     <Wrapper>
@@ -35,13 +24,9 @@ const BookmarkContainer = () => {
         <Error />
       ) : (
         <BookmarkList variants={Waterfall.container} initial="hidden" animate="visible">
-          {bookmarkList.map((b) => {
-            const isBookmarked = profileData?.post_bookmarks.some(
-              (userB) => userB === b._id
-            ) as boolean;
-
-            return <PostItem key={b._id} isBookmarked={isBookmarked} {...b} />;
-          })}
+          {bookmarkList.map((b) => (
+            <PostItem key={b._id} {...b} />
+          ))}
         </BookmarkList>
       )}
     </Wrapper>

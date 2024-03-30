@@ -1,37 +1,35 @@
 import { useEffect } from 'react';
-import { DateTime } from 'luxon';
 import { Navigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
+import useFollowUserAction from '@/hooks/useFollowUserAction';
+import useAuthorPageLoadingState from '@/hooks/useAuthorPageLoadingState';
+import { AppDate } from '@/lib/AppDate';
 
 import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
-  deleteFollowUser,
-  postFollowUser,
   selectFollowActionState,
   selectIsUserFollowed,
 } from '@/features/profile/profileSlice';
 import {
-  fetchAuthor,
+    fetchAuthorData,
+  fetchAuthorPosts,
   resetState,
   selectAuthorData,
-  selectFetchAuthorState,
+  selectFetchAuthorDataState,
 } from '@/features/authorPage/authorPageSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { FadeIn } from '@/styles/animations/FadeIn';
 
 import PostContainer from '@/features/authorPage/components/PostContainer';
 import Error from '@/components/general/Error';
 import { HollowButton } from '@/components/styled/HollowButton';
-import { FollowCount, SignUpDate, UserBio } from './Profile.styled';
-import * as S from './AuthorPage.styled';
 import JumpButton from '@/components/general/JumpButton';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import useFollowUserAction from '@/hooks/useFollowUserAction';
-import { AppDate } from '@/lib/AppDate';
+import * as S from './AuthorPage.styled';
 
 const AuthorPage = () => {
   const { isScrollingDown } = useWindowScrollDirection();
@@ -40,19 +38,21 @@ const AuthorPage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const isFollowed = useAppSelector(selectIsUserFollowed(authorid as string)) as boolean;
 
-  const followActionState = useAppSelector(selectFollowActionState);
-
   const authData = useAppSelector(selectAuthData);
 
   const authorData = useAppSelector(selectAuthorData);
-  const { isLoading, error } = useAppSelector(selectFetchAuthorState);
+  const isLoading = useAuthorPageLoadingState();
+  const { error } = useAppSelector(selectFetchAuthorDataState);
+
+  const followActionState = useAppSelector(selectFollowActionState);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(fetchAuthor(authorid!));
+        await dispatch(fetchAuthorData(authorid!)).unwrap();
+        await dispatch(fetchAuthorPosts(authorid!)).unwrap();
       } catch (err) {
         dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
       }
@@ -89,7 +89,7 @@ const AuthorPage = () => {
         <S.StyledMainUserName>{authorData?.username}</S.StyledMainUserName>
         <S.PostsWrapper>
           <S.Header>Recent Posts</S.Header>
-          <PostContainer userId={authorData?._id} />
+          <PostContainer />
         </S.PostsWrapper>
       </S.WrapperMain>
       <S.WrapperAside>
@@ -100,9 +100,9 @@ const AuthorPage = () => {
             altText="Profile Icon"
           />
           <S.StyledAsideUserName>{authorData?.username}</S.StyledAsideUserName>
-          <FollowCount>{authorData?.followed_users_count} Following</FollowCount>
-          <FollowCount>{authorData?.users_following_count} Followers</FollowCount>
-          <SignUpDate>Member since: {signUpDate}</SignUpDate>
+          <S.FollowCount>{authorData?.followed_users_count} Following</S.FollowCount>
+          <S.FollowCount>{authorData?.users_following_count} Followers</S.FollowCount>
+          <S.SignUpDate>Member since: {signUpDate}</S.SignUpDate>
           {isAuthenticated && (
             <HollowButton
               whileTap={ButtonInteraction.whileTap.animation}
@@ -112,7 +112,7 @@ const AuthorPage = () => {
               value={isFollowed ? 'Followed' : 'Follow'}
             />
           )}
-          <UserBio>{authorData?.bio}</UserBio>
+          <S.UserBio>{authorData?.bio}</S.UserBio>
         </S.ProfileWrapper>
       </S.WrapperAside>
       {isScrollingDown && <JumpButton />}

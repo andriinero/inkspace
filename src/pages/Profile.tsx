@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
+import useProfilePageLoadingState from '@/hooks/useProfilePageLoadingState';
 import { Navigate } from 'react-router-dom';
-import { DateTime } from 'luxon';
+import { AppDate } from '@/lib/AppDate';
 
 import {
+  fetchProfileBookmarks,
   fetchProfileData,
   selectFetchProfileDataState,
   selectProfileData,
@@ -27,7 +29,8 @@ const Profile = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   const profileData = useAppSelector(selectProfileData);
-  const { isLoading, error } = useAppSelector(selectFetchProfileDataState);
+  const isLoading = useProfilePageLoadingState();
+  const { error } = useAppSelector(selectFetchProfileDataState);
 
   const dispatch = useAppDispatch();
 
@@ -35,6 +38,7 @@ const Profile = () => {
     const fetchData = async () => {
       try {
         await dispatch(fetchProfileData()).unwrap();
+        await dispatch(fetchProfileBookmarks()).unwrap();
       } catch (err) {
         dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
       }
@@ -45,9 +49,7 @@ const Profile = () => {
 
   if (!isAuthenticated) return <Navigate to="/" />;
 
-  const signUpDate = DateTime.fromISO(profileData?.sign_up_date as string).toLocaleString(
-    DateTime.DATE_MED
-  );
+  const signUpDate = AppDate.getMedDate(profileData?.sign_up_date as string);
 
   return isLoading ? (
     <></>

@@ -11,18 +11,18 @@ import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 type AuthorPageState = {
   authorData: FullAuthorData | null;
   authorPosts: PostData[];
-  fetchAuthorState: { isLoading: boolean; error: ErrorData | null };
+  fetchAuthorDataState: { isLoading: boolean; error: ErrorData | null };
   fetchAuthorPostsState: { isLoading: boolean; error: ErrorData | null };
 };
 
 const initialState: AuthorPageState = {
   authorData: null,
   authorPosts: [],
-  fetchAuthorState: { isLoading: true, error: null },
+  fetchAuthorDataState: { isLoading: true, error: null },
   fetchAuthorPostsState: { isLoading: true, error: null },
 };
 
-export const fetchAuthor = createAsyncThunk<
+export const fetchAuthorData = createAsyncThunk<
   FullAuthorData,
   string,
   { rejectValue: ErrorData }
@@ -69,17 +69,17 @@ const authorPageSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchAuthor.pending, (state) => {
-        state.fetchAuthorState.isLoading = true;
-        state.fetchAuthorState.error = null;
+      .addCase(fetchAuthorData.pending, (state) => {
+        state.fetchAuthorDataState.isLoading = true;
+        state.fetchAuthorDataState.error = null;
       })
-      .addCase(fetchAuthor.fulfilled, (state, action) => {
+      .addCase(fetchAuthorData.fulfilled, (state, action) => {
         state.authorData = action.payload;
-        state.fetchAuthorState.isLoading = false;
+        state.fetchAuthorDataState.isLoading = false;
       })
-      .addCase(fetchAuthor.rejected, (state, action) => {
-        state.fetchAuthorState.isLoading = false;
-        state.fetchAuthorState.error = action.payload || (action.error as ErrorData);
+      .addCase(fetchAuthorData.rejected, (state, action) => {
+        state.fetchAuthorDataState.isLoading = false;
+        state.fetchAuthorDataState.error = action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(fetchAuthorPosts.pending, (state) => {
@@ -92,7 +92,7 @@ const authorPageSlice = createSlice({
       })
       .addCase(fetchAuthorPosts.rejected, (state, action) => {
         state.fetchAuthorPostsState.isLoading = false;
-        state.fetchAuthorState.error = action.payload || (action.error as ErrorData);
+        state.fetchAuthorDataState.error = action.payload || (action.error as ErrorData);
       });
   },
 });
@@ -101,12 +101,12 @@ export const { resetState } = authorPageSlice.actions;
 
 export default authorPageSlice.reducer;
 
+export const selectFetchAuthorDataState = (state: RootState) =>
+  state.authorPage.fetchAuthorDataState;
+
 export const selectAuthorData = (state: RootState) => state.authorPage.authorData;
-
-export const selectAuthorPosts = (state: RootState) => state.authorPage.authorPosts;
-
-export const selectFetchAuthorState = (state: RootState) =>
-  state.authorPage.fetchAuthorState;
 
 export const selectFetchAuthorPostsState = (state: RootState) =>
   state.authorPage.fetchAuthorPostsState;
+
+export const selectAuthorPosts = (state: RootState) => state.authorPage.authorPosts;

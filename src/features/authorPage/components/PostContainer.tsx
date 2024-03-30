@@ -1,12 +1,6 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useAppSelector } from '@/app/hooks';
 
-import { selectProfileData } from '@/features/profile/profileSlice';
-import {
-  fetchAuthorPosts,
-  selectAuthorPosts,
-  selectFetchAuthorPostsState,
-} from '../authorPageSlice';
+import { selectAuthorPosts, selectFetchAuthorPostsState } from '../authorPageSlice';
 
 import { Waterfall } from '@/styles/animations/Waterfall';
 
@@ -15,21 +9,9 @@ import PostItem from '@/features/postList/components/PostItem';
 import PostListLoader from '@/components/loaders/PostListLoader';
 import { PostList, Wrapper } from './PostContainer.styled';
 
-type PostContainerProps = {
-  userId?: string;
-};
-
-const PostContainer = ({ userId }: PostContainerProps) => {
-  const profileData = useAppSelector(selectProfileData);
-
+const PostContainer = () => {
   const postList = useAppSelector(selectAuthorPosts);
   const { isLoading, error } = useAppSelector(selectFetchAuthorPostsState);
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (userId) dispatch(fetchAuthorPosts(userId));
-  }, [userId, dispatch]);
 
   return (
     <Wrapper>
@@ -39,13 +21,9 @@ const PostContainer = ({ userId }: PostContainerProps) => {
         <Error />
       ) : (
         <PostList variants={Waterfall.container} initial="hidden" animate="visible">
-          {postList.map((p) => {
-            const isBookmarked = profileData?.post_bookmarks.some(
-              (b) => b === p._id
-            ) as boolean;
-
-            return <PostItem key={p._id} isBookmarked={isBookmarked} {...p} />;
-          })}
+          {postList.map((p) => (
+            <PostItem key={p._id} {...p} />
+          ))}
         </PostList>
       )}
     </Wrapper>
