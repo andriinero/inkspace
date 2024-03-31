@@ -46,12 +46,14 @@ const CarouselContainer = ({
   return (
     <S.Wrapper className={className}>
       <S.LeftButton
+        $isDisabled={scrollProgress === 0}
         onClick={handleLeftButtonClick}
         src="/arrow-left.svg"
         alt="Carousel Left Button Icon"
       />
       <S.ContentWrapper ref={carouselContentRef}>{children}</S.ContentWrapper>
       <S.RightButton
+        $isDisabled={scrollProgress === maxScrollWidth}
         onClick={handleRightButtonClick}
         src="/arrow-right.svg"
         alt="Carousel Right Button Icon"
