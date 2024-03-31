@@ -17,14 +17,6 @@ export const MenuItem = styled.li`
   &:hover {
     color: ${({ theme }) => theme.color.text_secondary};
   }
-
-  /* &:first-child {
-    padding-top: 0.9rem;
-  }
-
-  &:last-child {
-    padding-bottom: 0.9rem;
-  } */
 `;
 
 export const MenuItemSuccess = styled(MenuItem)`

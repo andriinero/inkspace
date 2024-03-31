@@ -55,7 +55,7 @@ export const fetchTopics = createAsyncThunk<
   void,
   { rejectValue: ErrorData }
 >('miscList/fetchTopics', async (_, { rejectWithValue }) => {
-  const { data, responseState } = await useAppFetch('/api/topics?random=7', {
+  const { data, responseState } = await useAppFetch('/api/topics?random=10', {
     method: 'GET',
     mode: 'cors',
   });

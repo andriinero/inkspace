@@ -10,4 +10,8 @@ export const StyledCarouselContainer = styled(CarouselContainer)`
 
 export const StyledTabItem = styled(TabItem)`
   flex-shrink: 0;
+
+  padding-bottom: 0.6rem;
+
+  font-size: 0.9rem;
 `;
