@@ -1,6 +1,3 @@
-import { WaterfallPopUp } from '@/styles/animations/WaterfallPopUp';
-import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-
 import { TopicButton, Wrapper } from './TopicItem.styled';
 
 type TopicItemProps = {
@@ -9,13 +6,8 @@ type TopicItemProps = {
 
 const TopicItem = ({ name }: TopicItemProps) => {
   return (
-    <Wrapper variants={WaterfallPopUp.item}>
-      <TopicButton
-        whileTap={ButtonInteraction.whileTap.animation}
-        $isActive={false}
-        type="button"
-        value={name}
-      />
+    <Wrapper>
+      <TopicButton $isActive={false} type="button" value={name} />
     </Wrapper>
   );
 };

@@ -22,8 +22,7 @@ import { CalloutText, PostList, Wrapper } from './PostContainer.styled';
 
 const PostContainer = () => {
   const postList = useAppSelector(selectPostList);
-  const isLoading = useHomePageStatus();
-  const { error } = useAppSelector(selectFetchPostListState);
+  const { isLoading, error } = useAppSelector(selectFetchPostListState);
 
   const selectedTopic = useAppSelector(selectSelectedTopic) as TopicData;
 

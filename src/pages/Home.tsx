@@ -16,12 +16,15 @@ import TabItem from '@/components/general/TabItem';
 import { AnimatePresence } from 'framer-motion';
 import { MainWrapper, Wrapper } from './Home.styled';
 import { TopicData } from '@/types/entityData/TopicData';
+import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
 
 const Home = () => {
   const { isScrollingDown } = useWindowScrollDirection();
 
   const topicsList = useAppSelector(selectMiscTopicList);
   const selectedTopic = useAppSelector(selectSelectedTopic);
+
+  const isLoading = useHomePageStatus();
 
   const dispatch = useAppDispatch();
 
@@ -36,22 +39,26 @@ const Home = () => {
   return (
     <Wrapper>
       <MainWrapper>
-        <CarouselContainer>
-          {topicsList.map((t) => {
-            const isSelected = selectedTopic?._id === t._id;
+        {!isLoading && (
+          <>
+            <CarouselContainer>
+              {topicsList.map((t) => {
+                const isSelected = selectedTopic?._id === t._id;
 
-            return (
-              <TabItem
-                key={t._id}
-                onItemClick={handleTopicClick(t, isSelected)}
-                isSelected={isSelected}
-              >
-                {t.name}
-              </TabItem>
-            );
-          })}
-        </CarouselContainer>
-        <PostContainer />
+                return (
+                  <TabItem
+                    key={t._id}
+                    onItemClick={handleTopicClick(t, isSelected)}
+                    isSelected={isSelected}
+                  >
+                    {t.name}
+                  </TabItem>
+                );
+              })}
+            </CarouselContainer>
+            <PostContainer />
+          </>
+        )}
       </MainWrapper>
       <MiscContainer />
       <AnimatePresence>{isScrollingDown && <JumpButton />}</AnimatePresence>
