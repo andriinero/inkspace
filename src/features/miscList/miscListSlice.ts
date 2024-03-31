@@ -26,10 +26,10 @@ const initialState: miscListState = {
   topicList: [],
   postList: [],
   bookmarkList: [],
-  fetchAuthorsState: { isLoading: true, error: null },
-  fetchTopicsState: { isLoading: true, error: null },
-  fetchPostsState: { isLoading: true, error: null },
-  fetchBookmarksState: { isLoading: true, error: null },
+  fetchAuthorsState: { isLoading: false, error: null },
+  fetchTopicsState: { isLoading: false, error: null },
+  fetchPostsState: { isLoading: false, error: null },
+  fetchBookmarksState: { isLoading: false, error: null },
 };
 
 export const fetchAuthors = createAsyncThunk<
@@ -167,8 +167,7 @@ const miscListSlice = createSlice({
       })
       .addCase(fetchBookmarks.rejected, (state, action) => {
         state.fetchBookmarksState.isLoading = false;
-        state.fetchBookmarksState.error =
-          action.payload || (action.error as ErrorData);
+        state.fetchBookmarksState.error = action.payload || (action.error as ErrorData);
       });
   },
 });

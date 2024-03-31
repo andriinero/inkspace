@@ -9,3 +9,7 @@ export const Wrapper = styled.div`
 
   min-height: 100%;
 `;
+
+export const MainWrapper = styled.div`
+  padding: 3rem;
+`;
