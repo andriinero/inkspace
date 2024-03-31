@@ -11,4 +11,7 @@ export const Wrapper = styled.div<{ $isSelected: boolean }>`
   color: ${({ theme, $isSelected }) =>
     $isSelected ? theme.color.topic_text_selected : theme.color.text_primary};
   font-weight: 300;
+
+  cursor: pointer;
+  user-select: none;
 `;

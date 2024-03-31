@@ -1,7 +1,11 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
-import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
 
+import {
+  clearTopic,
+  selectSelectedTopic,
+  setTopic,
+} from '@/features/postList/postListSlice';
 import { selectMiscTopicList } from '@/features/miscList/miscListSlice';
 
 import PostContainer from '@/features/postList/components/PostContainer';
@@ -11,7 +15,7 @@ import CarouselContainer from '@/features/postList/components/carousel/CarouselC
 import TabItem from '@/components/general/TabItem';
 import { AnimatePresence } from 'framer-motion';
 import { MainWrapper, Wrapper } from './Home.styled';
-import { selectSelectedTopic, setTopic } from '@/features/postList/postListSlice';
+import { TopicData } from '@/types/entityData/TopicData';
 
 const Home = () => {
   const { isScrollingDown } = useWindowScrollDirection();
@@ -20,6 +24,14 @@ const Home = () => {
   const selectedTopic = useAppSelector(selectSelectedTopic);
 
   const dispatch = useAppDispatch();
+
+  const handleTopicClick = (topic: TopicData, isSelected: boolean) => () => {
+    if (isSelected) {
+      dispatch(clearTopic());
+    } else {
+      dispatch(setTopic(topic));
+    }
+  };
 
   return (
     <Wrapper>
@@ -31,9 +43,7 @@ const Home = () => {
             return (
               <TabItem
                 key={t._id}
-                onItemClick={() => {
-                  dispatch(setTopic(t));
-                }}
+                onItemClick={handleTopicClick(t, isSelected)}
                 isSelected={isSelected}
               >
                 {t.name}

@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
 
 import {
-  clearTopic,
   fetchPosts,
   selectFetchPostListState,
   selectPostList,
@@ -19,13 +18,7 @@ import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 import PostItem from './PostItem';
 import PostListLoader from '@/components/loaders/PostListLoader';
-import {
-  CalloutText,
-  Header,
-  PostList,
-  StyledIcon,
-  Wrapper,
-} from './PostContainer.styled';
+import { CalloutText, PostList, Wrapper } from './PostContainer.styled';
 
 const PostContainer = () => {
   const postList = useAppSelector(selectPostList);
@@ -48,18 +41,8 @@ const PostContainer = () => {
     fetchData();
   }, [selectedTopic, dispatch]);
 
-  const handleClearClick = (): void => {
-    dispatch(clearTopic());
-  };
-
   return (
     <Wrapper>
-      {selectedTopic && (
-        <Header>
-          {selectedTopic.name}
-          <StyledIcon onClick={handleClearClick} src="/close.svg" />
-        </Header>
-      )}
       {isLoading ? (
         <PostListLoader />
       ) : error ? (
