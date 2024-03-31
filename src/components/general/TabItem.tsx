@@ -1,11 +1,21 @@
 import { ReactNode } from 'react';
 import { Wrapper } from './TabItem.styled';
 
-type TabItemProps = { isSelected?: boolean; children: ReactNode; onItemClick?: () => void };
+type TabItemProps = {
+  isSelected?: boolean;
+  children: ReactNode;
+  onItemClick?: () => void;
+  className?: string;
+};
 
-const TabItem = ({ isSelected = false, children, onItemClick: onClick }: TabItemProps) => {
+const TabItem = ({
+  isSelected = false,
+  children,
+  onItemClick: onClick,
+  className,
+}: TabItemProps) => {
   return (
-    <Wrapper $isSelected={isSelected} onClick={onClick}>
+    <Wrapper className={className} $isSelected={isSelected} onClick={onClick}>
       {children}
     </Wrapper>
   );

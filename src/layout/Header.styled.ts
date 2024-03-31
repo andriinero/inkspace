@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { GreenButton } from '@/components/styled/GreenButton';
 import AppIcon from '@/components/icons/AppIcon';
 import AppImage from '@/features/appImages/components/AppImage';
+import Dropdown from '@/components/general/Dropdown';
+import { MenuItem, MenuItemSuccess } from '@/components/styled/MenuItem';
 
 export const Wrapper = styled.header`
   grid-area: header;
@@ -19,7 +21,7 @@ export const ContentWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1.5rem;
   border-bottom: 1px solid ${({ theme }) => theme.color.main_border};
   background-color: ${({ theme }) => theme.color.main_bg_primary};
 `;
@@ -89,6 +91,14 @@ export const ProfileIcon = styled(AppImage)`
   cursor: pointer;
   -webkit-user-drag: none;
 `;
+
+export const StyledDropdown = styled(Dropdown)`
+  margin-top: 35px;
+`;
+
+export const StyledMenuItem = styled(MenuItem)``;
+
+export const StyledMenuItemSuccess = styled(MenuItemSuccess)``;
 
 export const ControlsWrapper = styled.div`
   display: flex;

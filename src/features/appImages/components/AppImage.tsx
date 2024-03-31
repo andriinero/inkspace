@@ -17,6 +17,7 @@ type AppImageProps = {
   altText?: string;
   imageId?: string;
   placeholderSrc?: string;
+  onClick?: () => void;
 };
 
 const AppImage = ({
@@ -24,6 +25,7 @@ const AppImage = ({
   altText,
   imageId,
   placeholderSrc = '/landscape-placeholder.png',
+  onClick,
 }: AppImageProps) => {
   const imageURL = useAppSelector(selectImageURL(imageId));
   const isImageInQueue = useAppSelector(selectIsImageInQueue(imageId));
@@ -49,6 +51,7 @@ const AppImage = ({
   if (!imageId)
     return (
       <Image
+        onClick={onClick}
         initial={FadeIn.hidden}
         animate={FadeIn.visible}
         transition={FadeIn.transition}
@@ -62,6 +65,7 @@ const AppImage = ({
     <BlankPlaceholder className={className} />
   ) : (
     <Image
+      onClick={onClick}
       initial={FadeIn.hidden}
       animate={FadeIn.visible}
       transition={FadeIn.transition}

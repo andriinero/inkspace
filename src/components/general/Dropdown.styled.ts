@@ -4,6 +4,7 @@ export const Wrapper = styled.ul<{ $isOpen: boolean; $isAlignedLeft: boolean }>`
   display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
   position: absolute;
 
+  padding: 1rem;
   margin-top: 25px;
   margin-left: ${({ $isAlignedLeft }) => ($isAlignedLeft ? '-95px' : '25px')};
   background-color: ${({ theme }) => theme.color.main_bg_secondary};
@@ -22,4 +23,5 @@ export const List = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 1rem;
 `;

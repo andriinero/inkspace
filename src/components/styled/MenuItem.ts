@@ -6,8 +6,6 @@ export const MenuItem = styled.li`
   align-items: center;
   gap: 1rem;
 
-  padding: 0.4rem 0.9rem;
-
   font-size: 0.8rem;
   font-weight: 300;
   list-style-type: none;
@@ -20,13 +18,13 @@ export const MenuItem = styled.li`
     color: ${({ theme }) => theme.color.text_secondary};
   }
 
-  &:first-child {
+  /* &:first-child {
     padding-top: 0.9rem;
   }
 
   &:last-child {
     padding-bottom: 0.9rem;
-  }
+  } */
 `;
 
 export const MenuItemSuccess = styled(MenuItem)`

@@ -5,23 +5,41 @@ import { selectProfileImageId } from '@/features/profile/profileSlice';
 import { clearTopic } from '@/features/postList/postListSlice';
 import { logout, selectIsAuthenticated } from '@/features/auth/authSlice';
 import { openSignUpModal, openLoginModal } from '@/features/auth/authSlice';
+import { exitEditMode } from '@/features/postForm/postFormSlice';
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import LoginForm from '@/features/auth/components/LoginForm';
-import * as S from './Header.styled';
-import { exitEditMode } from '@/features/postForm/postFormSlice';
 import SignUpForm from '@/features/auth/components/SignUpForm';
 import PushNotificationContainer from '@/features/pushNotification/components/PushNotificationContainer';
+import { useRef, useState } from 'react';
+import { MenuItemDanger } from '@/components/styled/MenuItem';
+import * as S from './Header.styled';
+import useCloseDropdown from '@/hooks/useCloseDropdown';
 
 const Header = () => {
   const { pathname } = useLocation();
+
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const dropdownRef = useRef<HTMLUListElement>(null);
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const profileImageId = useAppSelector(selectProfileImageId);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const handleOpenMenu = (): void => {
+    setIsMenuOpen(true);
+  };
+
+  const handleCloseMenu = (): void => {
+    setIsMenuOpen(false);
+  };
+
+  //FIXME: why here????
+  useCloseDropdown(dropdownRef, handleCloseMenu);
 
   const handleLogoClick = (): void => {
     dispatch(clearTopic());
@@ -39,6 +57,16 @@ const Header = () => {
 
   const handleLoginClick = (): void => {
     dispatch(openLoginModal());
+  };
+
+  const handleProfileClick = (): void => {
+    navigate('/profile');
+    setIsMenuOpen(false);
+  };
+
+  const handleEditProfileClick = (): void => {
+    navigate('/profile/edit');
+    setIsMenuOpen(false);
   };
 
   const handleLogoutClick = (): void => {
@@ -59,19 +87,19 @@ const Header = () => {
                   <S.NewPostButtonText>Write</S.NewPostButtonText>
                 </S.NewPostButton>
               )}
-              <S.StyledLink to="/profile">
-                <S.ProfileIcon
-                  imageId={profileImageId}
-                  placeholderSrc="/portrait-placeholder.png"
-                  altText="Current User Profile Picture"
-                />
-              </S.StyledLink>
-              <S.HeaderButton
-                whileTap={ButtonInteraction.whileTap.animation}
-                onClick={handleLogoutClick}
-                type="button"
-                value="Logout"
+              <S.ProfileIcon
+                onClick={handleOpenMenu}
+                imageId={profileImageId}
+                placeholderSrc="/portrait-placeholder.png"
+                altText="Current User Profile Picture"
               />
+              <S.StyledDropdown isOpen={isMenuOpen} innerRef={dropdownRef}>
+                <S.StyledMenuItem onClick={handleProfileClick}>Profile</S.StyledMenuItem>
+                <S.StyledMenuItemSuccess onClick={handleEditProfileClick}>
+                  Edit Profile
+                </S.StyledMenuItemSuccess>
+                <MenuItemDanger onClick={handleLogoutClick}>Logout</MenuItemDanger>
+              </S.StyledDropdown>
             </>
           ) : (
             <S.ControlsWrapper>
