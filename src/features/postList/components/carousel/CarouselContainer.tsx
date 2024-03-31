@@ -4,14 +4,19 @@ import * as S from './CarouselContainer.styled';
 
 type CarouselContainerProps = {
   stepSize?: number;
+  className?: string;
   children?: ReactNode;
 };
 
-const CarouselContainer = ({ stepSize = 100, children }: CarouselContainerProps) => {
-  const [scrollProgress, setScrollProgress] = useState(0);
+const CarouselContainer = ({
+  stepSize = 100,
+  className,
+  children,
+}: CarouselContainerProps) => {
+  const [scrollProgress, setScrollProgress] = useState<number>(0);
   const carouselContentRef = useRef<HTMLDivElement>(null);
 
-  const maxWidth =
+  const maxScrollWidth =
     (carouselContentRef.current?.scrollWidth as number) -
     (carouselContentRef.current?.offsetWidth as number);
 
@@ -24,8 +29,8 @@ const CarouselContainer = ({ stepSize = 100, children }: CarouselContainerProps)
   };
 
   const handleRightButtonClick = (): void => {
-    if (scrollProgress + stepSize > maxWidth) {
-      setScrollProgress(maxWidth);
+    if (scrollProgress + stepSize > maxScrollWidth) {
+      setScrollProgress(maxScrollWidth);
     } else {
       setScrollProgress(scrollProgress + stepSize);
     }
@@ -39,7 +44,7 @@ const CarouselContainer = ({ stepSize = 100, children }: CarouselContainerProps)
   }, [scrollProgress]);
 
   return (
-    <S.Wrapper>
+    <S.Wrapper className={className}>
       <S.LeftButton
         onClick={handleLeftButtonClick}
         src="/arrow-left.svg"
