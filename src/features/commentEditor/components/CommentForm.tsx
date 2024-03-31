@@ -9,7 +9,9 @@ import {
   selectCommentIsEditMode,
   selectCommentTextField,
   selectEditCommentId,
+  selectIsCommentOverflown,
   setCommentTextField,
+  setIsOverflown,
   updateComment,
 } from '../commentEditorSlice';
 import { addComment, editComment } from '@/features/commentList/commentListSlice';
@@ -22,14 +24,18 @@ type CommentFormProps = { postId: string };
 
 const CommentForm = ({ postId }: CommentFormProps) => {
   const commentText = useAppSelector(selectCommentTextField);
+  const isOverflown = useAppSelector(selectIsCommentOverflown);
   const isEditMode = useAppSelector(selectCommentIsEditMode);
   const editCommentId = useAppSelector(selectEditCommentId);
 
   const dispatch = useAppDispatch();
 
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
-    if (e.target.value.length <= MAX_CHARACTERS_PER_COMMENT)
+    if (e.target.value.length <= MAX_CHARACTERS_PER_COMMENT) {
       dispatch(setCommentTextField(e.target.value));
+    } else {
+      dispatch(setIsOverflown(true));
+    }
   };
 
   const handleCommentSubmit = async (e: FormEvent): Promise<void> => {
@@ -52,6 +58,7 @@ const CommentForm = ({ postId }: CommentFormProps) => {
         const response = await dispatch(
           updateComment({ commentId: editCommentId, commentBody: commentText })
         ).unwrap();
+
         if (response) {
           dispatch(setCommentTextField(''));
           dispatch(exitEditMode());
@@ -82,7 +89,14 @@ const CommentForm = ({ postId }: CommentFormProps) => {
           value={commentText}
         />
         <S.BottomWrapper>
-          <S.StyledCounter>{commentText.length}/280</S.StyledCounter>
+          <S.StyledCounter
+            isOverflown={isOverflown}
+            setIsOverflown={(value: boolean) => {
+              dispatch(setIsOverflown(value));
+            }}
+          >
+            {commentText.length}/280
+          </S.StyledCounter>
           <S.ControlsWrapper>
             {isEditMode && (
               <S.CancelActionButton

@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/lib/storage';
@@ -10,6 +10,7 @@ import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 type CommentEditorState = {
   textField: string;
   isEditMode: boolean;
+  isOverflown: boolean;
   postCommentState: {
     isLoading: boolean;
     error: ErrorData | null;
@@ -27,6 +28,7 @@ type UpdateCommentType = { commentId: string; commentBody: string };
 const initialState: CommentEditorState = {
   textField: '',
   isEditMode: false,
+  isOverflown: false,
   postCommentState: {
     isLoading: false,
     error: null,
@@ -105,6 +107,9 @@ const commentEditorSlice = createSlice({
       state.isEditMode = false;
       state.updateCommentState.commentId = null;
     },
+    setIsOverflown(state, action: PayloadAction<boolean>) {
+      state.isOverflown = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -134,7 +139,7 @@ const commentEditorSlice = createSlice({
   },
 });
 
-export const { setCommentTextField, enterEditMode, exitEditMode } =
+export const { setCommentTextField, enterEditMode, exitEditMode, setIsOverflown } =
   commentEditorSlice.actions;
 
 export default commentEditorSlice.reducer;
@@ -143,6 +148,9 @@ export const selectCommentTextField = (state: RootState) => state.commentEditor.
 
 export const selectCommentIsEditMode = (state: RootState) =>
   state.commentEditor.isEditMode;
+
+export const selectIsCommentOverflown = (state: RootState) =>
+  state.commentEditor.isOverflown;
 
 export const selectEditCommentId = (state: RootState) =>
   state.commentEditor.updateCommentState.commentId;

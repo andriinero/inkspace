@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import CommentCounter from './CommentCounter';
+import ShakeOnOverflow from '../../../components/general/ShakeOnOverflow';
 import { FormButton } from '@/components/styled/FormButton';
 
 export const Form = styled.form`
@@ -76,7 +76,7 @@ export const CancelActionButton = styled(FormButton)`
   font-size: 0.7rem;
 `;
 
-export const StyledCounter = styled(CommentCounter)`
+export const StyledCounter = styled(ShakeOnOverflow)`
   min-width: 7ch;
 
   color: ${({ theme }) => theme.color.text_primary};
