@@ -10,7 +10,7 @@ import { Waterfall } from '@/styles/animations/Waterfall';
 import Error from '@/components/general/Error';
 import PostItem from '@/features/postList/components/PostItem';
 import PostListLoader from '@/components/loaders/PostListLoader';
-import { BookmarkList, Wrapper } from './BookmarkContainer.styled';
+import { BookmarkList, CalloutText, Wrapper } from './BookmarkContainer.styled';
 
 const BookmarkContainer = () => {
   const bookmarkList = useAppSelector(selectProfileBookmarksList);
@@ -22,6 +22,8 @@ const BookmarkContainer = () => {
         <PostListLoader />
       ) : error ? (
         <Error />
+      ) : bookmarkList.length === 0 ? (
+        <CalloutText>No bookmarks yet!</CalloutText>
       ) : (
         <BookmarkList variants={Waterfall.container} initial="hidden" animate="visible">
           {bookmarkList.map((b) => (

@@ -8,6 +8,7 @@ import PostForm from './pages/PostForm';
 import Profile from './pages/Profile';
 import AuthorPage from './pages/AuthorPage';
 import ProfileEditPage from './pages/ProfileEditPage';
+import BookmarkContainer from './features/profile/components/BookmarkContainer';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -21,6 +22,12 @@ const Router = () => {
         {
           path: '/profile',
           element: <Profile />,
+          children: [
+            { index: true, path: '/profile/bookmarks', element: <BookmarkContainer /> },
+            { index: true, path: '/profile/your-posts', element: <BookmarkContainer /> },
+            { index: true, path: '/profile/followed-users', element: <BookmarkContainer /> },
+            { index: true, path: '/profile/ignored-users', element: <BookmarkContainer /> },
+          ],
         },
         { path: '/profile/edit', element: <ProfileEditPage /> },
         { path: '/authors/:authorid', element: <AuthorPage /> },

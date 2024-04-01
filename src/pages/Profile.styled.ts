@@ -30,9 +30,10 @@ export const StyledMainUserName = styled(Username)`
   word-wrap: break-word;
 `;
 
-export const BookmarkWrapper = styled.div`
+export const WrapperSection = styled.section`
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 
   padding: 2rem 0;
   margin: 0 2rem;

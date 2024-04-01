@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
 import useProfilePageLoadingState from '@/hooks/useProfilePageLoadingState';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { AppDate } from '@/lib/AppDate';
 
 import {
@@ -22,6 +22,7 @@ import Error from '@/components/general/Error';
 import BookmarkContainer from '@/features/profile/components/BookmarkContainer';
 import JumpButton from '@/components/general/JumpButton';
 import * as S from './Profile.styled';
+import ProfileTabs from '@/features/profile/components/ProfileTabs';
 
 const Profile = () => {
   const { isScrollingDown } = useWindowScrollDirection();
@@ -63,10 +64,10 @@ const Profile = () => {
     >
       <S.WrapperMain>
         <S.StyledMainUserName>{profileData?.username}</S.StyledMainUserName>
-        <S.BookmarkWrapper>
-          <S.Header>Your Bookmarks</S.Header>
-          <BookmarkContainer />
-        </S.BookmarkWrapper>
+        <S.WrapperSection>
+          <ProfileTabs />
+          <Outlet />
+        </S.WrapperSection>
       </S.WrapperMain>
       <S.WrapperAside>
         <S.ProfileWrapper>

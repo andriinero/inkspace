@@ -3,7 +3,7 @@ import { Wrapper } from './TabItem.styled';
 
 type TabItemProps = {
   isSelected?: boolean;
-  children: ReactNode;
+  children?: ReactNode;
   onItemClick?: () => void;
   className?: string;
 };
