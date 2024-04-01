@@ -8,7 +8,7 @@ import Dropdown from './Dropdown';
 type DotMenuProps = {
   className?: string;
   isOpen: boolean;
-  isAlignedLeft: boolean;
+  isAlignedLeft?: boolean;
   children: ReactNode;
   onToggle: () => void;
   onMenuClose: () => void;

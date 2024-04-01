@@ -8,6 +8,7 @@ export const Wrapper = styled.ul<{ $isOpen: boolean; $isAlignedLeft: boolean }>`
   margin-top: 25px;
   margin-left: ${({ $isAlignedLeft }) => ($isAlignedLeft ? '-95px' : '25px')};
   background-color: ${({ theme }) => theme.color.main_bg_secondary};
+  border-radius: 6px;
 
   transform: ${({ $isOpen }) => ($isOpen ? 'translateY(0)' : 'translateY(-10px)')};
   opacity: 1;

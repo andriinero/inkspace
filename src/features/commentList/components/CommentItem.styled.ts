@@ -6,7 +6,6 @@ import AppIcon from '@/components/icons/AppIcon';
 import { Username } from '@/components/styled/Username.styled';
 import AppImage from '@/features/appImages/components/AppImage';
 import DotMenu from '@/components/general/DotMenu';
-import { MenuItem } from '@/components/styled/MenuItem';
 
 export const Wrapper = styled.li`
   display: flex;
@@ -64,18 +63,8 @@ export const ControlsWrapper = styled.div`
   gap: 0.5rem;
 `;
 
-export const StyledDotMenu = styled(DotMenu)``;
-
-export const ControlsIcon = styled(AppIcon)`
-  width: 18px;
-
-  &:hover {
-    filter: none;
-  }
-`;
-
-export const EditIcon = styled(ControlsIcon)`
-  width: 16px;
+export const StyledDotMenu = styled(DotMenu)`
+  margin-left: 85px;
 `;
 
 export const CommentDate = styled(PostDate)`

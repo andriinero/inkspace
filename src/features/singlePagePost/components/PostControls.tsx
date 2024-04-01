@@ -132,9 +132,11 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
           {isAuthor && (
             <MenuItemSuccess onClick={handleEditModeClick}>Edit Post</MenuItemSuccess>
           )}
-          <MenuItem onClick={handleMuteAuthorClick}>
-            {isIgnored ? 'Unmute this author' : 'Mute this author'}
-          </MenuItem>
+          {!isAuthor && (
+            <MenuItem onClick={handleMuteAuthorClick}>
+              {isIgnored ? 'Unmute this author' : 'Mute this author'}
+            </MenuItem>
+          )}
           {isAuthor && (
             <MenuItemDanger onClick={handleOpenDeleteModal}>Delete Post</MenuItemDanger>
           )}

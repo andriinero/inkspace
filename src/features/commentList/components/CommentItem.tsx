@@ -59,7 +59,7 @@ const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps)
     setIsMenuOpen(false);
   };
 
-  const ownedByUser = currentUserId === author._id;
+  const isAuthor = currentUserId === author._id;
 
   return (
     <S.Wrapper>
@@ -73,22 +73,15 @@ const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps)
             <S.CommentDate date={date} />
           </S.WrapperInfo>
         </S.WrapperAuthor>
-        {ownedByUser && !isEditMode && (
+        {isAuthor && !isEditMode && (
           <S.ControlsWrapper>
             <S.StyledDotMenu
               onMenuClose={handleCloseMenu}
               onToggle={handleToggleMenu}
               isOpen={isMenuOpen}
-              isAlignedLeft={true}
             >
-              <MenuItemSuccess onClick={handleEditClick}>
-                Edit
-                <S.EditIcon src="/edit.svg" alt="Edit Comment Icon" />
-              </MenuItemSuccess>
-              <MenuItemDanger onClick={handleOpenDeleteModal}>
-                Delete
-                <S.ControlsIcon src="/delete.svg" alt="Delete Comment Icon" />
-              </MenuItemDanger>
+              <MenuItemSuccess onClick={handleEditClick}>Edit</MenuItemSuccess>
+              <MenuItemDanger onClick={handleOpenDeleteModal}>Delete</MenuItemDanger>
             </S.StyledDotMenu>
             <Dialog isModalOpen={isDeleteModalOpen} onModalClose={handleCloseDeleteModal}>
               <DeleteConfirm

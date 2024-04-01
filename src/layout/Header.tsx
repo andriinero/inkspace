@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import useCloseDropdown from '@/hooks/useCloseDropdown';
@@ -13,8 +14,6 @@ import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 import LoginForm from '@/features/auth/components/LoginForm';
 import SignUpForm from '@/features/auth/components/SignUpForm';
 import PushNotificationContainer from '@/features/pushNotification/components/PushNotificationContainer';
-import { useRef, useState } from 'react';
-import { MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
 import * as S from './Header.styled';
 
 const Header = () => {
@@ -94,11 +93,18 @@ const Header = () => {
                 altText="Current User Profile Picture"
               />
               <S.StyledDropdown isOpen={isMenuOpen} innerRef={dropdownRef}>
-                <S.StyledMenuItem onClick={handleProfileClick}>Profile</S.StyledMenuItem>
-                <MenuItemSuccess onClick={handleEditProfileClick}>
+                <S.StyledMenuItem onClick={handleProfileClick}>
+                  <S.StyledProfileIcon src="/profile.svg" alt="Profile Icon" />
+                  Profile
+                </S.StyledMenuItem>
+                <S.StyledMenuItem onClick={handleEditProfileClick}>
+                  <S.StyledProfileIcon src="/edit.svg" alt="Edit Icon" />
                   Edit Profile
-                </MenuItemSuccess>
-                <MenuItemDanger onClick={handleLogoutClick}>Logout</MenuItemDanger>
+                </S.StyledMenuItem>
+                <S.StyledMenuItem onClick={handleLogoutClick}>
+                  <S.StyledProfileIcon src="/exit.svg" alt="Logout Icon" />
+                  Logout
+                </S.StyledMenuItem>
               </S.StyledDropdown>
             </>
           ) : (

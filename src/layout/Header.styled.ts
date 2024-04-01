@@ -6,6 +6,7 @@ import AppIcon from '@/components/icons/AppIcon';
 import AppImage from '@/features/appImages/components/AppImage';
 import Dropdown from '@/components/general/Dropdown';
 import { MenuItem, MenuItemSuccess } from '@/components/styled/MenuItem';
+import { Icon } from '@/components/icons/AppIcon.styled';
 
 export const Wrapper = styled.header`
   grid-area: header;
@@ -93,10 +94,23 @@ export const ProfileIcon = styled(AppImage)`
 `;
 
 export const StyledDropdown = styled(Dropdown)`
-  margin-top: 40px;
+  margin-left: 0;
+  margin-top: 45px;
 `;
 
-export const StyledMenuItem = styled(MenuItem)``;
+export const StyledMenuItem = styled(MenuItem)`
+  justify-content: flex-start;
+
+  &:hover {
+    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
+      contrast(82%);
+  }
+`;
+
+export const StyledProfileIcon = styled(Icon)`
+  height: 20px;
+  width: 20px;
+`;
 
 export const ControlsWrapper = styled.div`
   display: flex;
