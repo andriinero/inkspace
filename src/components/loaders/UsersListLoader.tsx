@@ -7,8 +7,6 @@ const UsersListLoader = () => {
       <Item />
       <Item />
       <Item />
-      <Item />
-      <Item />
     </Wrapper>
   );
 };

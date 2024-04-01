@@ -2,11 +2,12 @@ import { useAppSelector } from '@/app/hooks';
 
 import { selectFetchProfilePostsState, selectProfilePostsList } from '../profileSlice';
 
+import { Waterfall } from '@/styles/animations/Waterfall';
+
 import PostListLoader from '@/components/loaders/PostListLoader';
 import Error from '@/components/general/Error';
-import { CalloutText, PostsList, Wrapper } from './RecentPosts.styled';
-import { Waterfall } from '@/styles/animations/Waterfall';
-import PostItem from '@/features/postList/components/PostItem';
+import { CalloutText, PostsList, Wrapper } from './RecentPostContainer.styled';
+import PostItem from '@/components/general/PostItem';
 
 const RecentPosts = () => {
   const postsList = useAppSelector(selectProfilePostsList);

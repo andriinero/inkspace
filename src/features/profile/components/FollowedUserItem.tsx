@@ -4,42 +4,35 @@ import useFollowUserAction from '@/hooks/useFollowUserAction';
 import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
   selectFollowActionState,
-  selectIgnoreUserActionState,
   selectIsUserFollowed,
-  selectIsUserIgnored,
 } from '@/features/profile/profileSlice';
 
 import { Username } from '@/components/styled/Username.styled';
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
+import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-import * as S from '@/features/profile/components/IgnoredUser.styled';
-import useIgnoreUserAction from '@/hooks/useIgnoreUserAction';
+import * as S from '@/features/profile/components/FollowedUserItem.styled';
 
-// FIXME:
-type AuthorItemProps = {
-  _id: string;
-  username: string;
-  bio?: string;
-  profile_image?: string;
+type FollowedUserProps = {
   className?: string;
-};
+} & GeneralAuthorData;
 
-const IgnoredUser = ({
+const FollowedUserItem = ({
   _id,
   username,
   bio,
   profile_image,
   className,
-}: AuthorItemProps) => {
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const isIgnored = useAppSelector(selectIsUserIgnored(_id)) as boolean;
-
-  const { isLoading } = useAppSelector(selectIgnoreUserActionState);
-
+}: FollowedUserProps) => {
   const authData = useAppSelector(selectAuthData);
 
-  const handleIgnoreClick = useIgnoreUserAction(_id, isIgnored, isLoading);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isFollowed = useAppSelector(selectIsUserFollowed(_id)) as boolean;
+
+  const { isLoading } = useAppSelector(selectFollowActionState);
+
+  const handleFollowClick = useFollowUserAction(_id, isFollowed, isLoading);
 
   return (
     <S.WrapperItem variants={WaterfallSlideIn.item} className={className}>
@@ -61,14 +54,14 @@ const IgnoredUser = ({
       {isAuthenticated && authData?.sub !== _id && (
         <S.StyledHollowButton
           whileTap={ButtonInteraction.whileTap.animation}
-          $isActive={isIgnored}
-          onClick={handleIgnoreClick}
+          $isActive={isFollowed}
+          onClick={handleFollowClick}
           type="button"
-          value={isIgnored ? 'Muted' : 'Unmuted'}
+          value={isFollowed ? 'Followed' : 'Follow'}
         />
       )}
     </S.WrapperItem>
   );
 };
 
-export default IgnoredUser;
+export default FollowedUserItem;

@@ -13,7 +13,7 @@ import {
   selectIsUserIgnored,
   selectIgnoreUserActionState,
 } from '@/features/profile/profileSlice';
-import { deletePost, setTopic } from '../postListSlice';
+import { deletePost, setTopic } from '../../features/postList/postListSlice';
 import { enterEditMode } from '@/features/postForm/postFormSlice';
 
 import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
@@ -153,9 +153,11 @@ const PostItem = ({
                     Edit Post
                   </MenuItemSuccess>
                 )}
-                <MenuItem onClick={handleMuteAuthorClick}>
-                  {isIgnored ? 'Unmute this author' : 'Mute this author'}
-                </MenuItem>
+                {!isAuthor && (
+                  <MenuItem onClick={handleMuteAuthorClick}>
+                    {isIgnored ? 'Unmute this author' : 'Mute this author'}
+                  </MenuItem>
+                )}
                 {isAuthor && (
                   <>
                     <MenuItemDanger onClick={handleOpenDeleteModal}>

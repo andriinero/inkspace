@@ -9,9 +9,9 @@ import Profile from './pages/Profile';
 import AuthorPage from './pages/AuthorPage';
 import ProfileEditPage from './pages/ProfileEditPage';
 import BookmarkContainer from './features/profile/components/BookmarkContainer';
-import RecentPosts from './features/profile/components/RecentPosts';
-import FollowedUsers from './features/profile/components/FollowedUsers';
-import IgnoredUsers from './features/profile/components/IgnoredUsers';
+import RecentPosts from './features/profile/components/RecentPostItem';
+import FollowedUserContainer from './features/profile/components/FollowedUserContainer';
+import IgnoredUserContainer from './features/profile/components/IgnoredUserContainer';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -31,12 +31,12 @@ const Router = () => {
             {
               index: true,
               path: '/profile/followed-users',
-              element: <FollowedUsers />,
+              element: <FollowedUserContainer />,
             },
             {
               index: true,
               path: '/profile/ignored-users',
-              element: <IgnoredUsers />,
+              element: <IgnoredUserContainer />,
             },
           ],
         },

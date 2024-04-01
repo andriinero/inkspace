@@ -1,35 +1,38 @@
 import { useAppSelector } from '@/app/hooks';
-import useFollowUserAction from '@/hooks/useFollowUserAction';
+import useIgnoreUserAction from '@/hooks/useIgnoreUserAction';
 
 import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
-  selectFollowActionState,
-  selectIsUserFollowed,
+  selectIgnoreUserActionState,
+  selectIsUserIgnored,
 } from '@/features/profile/profileSlice';
 
 import { Username } from '@/components/styled/Username.styled';
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
+import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-import * as S from '@/features/profile/components/FollowedUser.styled';
+import * as S from '@/features/profile/components/IgnoredUserItem.styled';
 
-type AuthorItemProps = {
-  _id: string;
-  username: string;
-  bio?: string;
-  profile_image?: string;
+type IgnoredUserProps = {
   className?: string;
-};
+} & GeneralAuthorData;
 
-const FollowedUser = ({ _id, username, bio, profile_image, className }: AuthorItemProps) => {
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const isFollowed = useAppSelector(selectIsUserFollowed(_id)) as boolean;
-
-  const { isLoading } = useAppSelector(selectFollowActionState);
-
+const IgnoredUserItem = ({
+  _id,
+  username,
+  bio,
+  profile_image,
+  className,
+}: IgnoredUserProps) => {
   const authData = useAppSelector(selectAuthData);
 
-  const handleFollowClick = useFollowUserAction(_id, isFollowed, isLoading);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isIgnored = useAppSelector(selectIsUserIgnored(_id)) as boolean;
+
+  const { isLoading } = useAppSelector(selectIgnoreUserActionState);
+
+  const handleIgnoreClick = useIgnoreUserAction(_id, isIgnored, isLoading);
 
   return (
     <S.WrapperItem variants={WaterfallSlideIn.item} className={className}>
@@ -51,14 +54,14 @@ const FollowedUser = ({ _id, username, bio, profile_image, className }: AuthorIt
       {isAuthenticated && authData?.sub !== _id && (
         <S.StyledHollowButton
           whileTap={ButtonInteraction.whileTap.animation}
-          $isActive={isFollowed}
-          onClick={handleFollowClick}
+          $isActive={isIgnored}
+          onClick={handleIgnoreClick}
           type="button"
-          value={isFollowed ? 'Followed' : 'Follow'}
+          value={isIgnored ? 'Muted' : 'Mute'}
         />
       )}
     </S.WrapperItem>
   );
 };
 
-export default FollowedUser;
+export default IgnoredUserItem;

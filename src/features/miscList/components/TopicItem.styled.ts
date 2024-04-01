@@ -9,4 +9,7 @@ export const TopicButton = styled(HollowButton)`
     $isActive ? theme.color.topic_bg_selected : theme.color.topic_bg};
 
   color: ${({ theme }) => theme.color.text_primary};
+
+  // TODO: topic route
+  cursor: default;
 `;

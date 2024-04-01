@@ -5,7 +5,7 @@ import { selectAuthorPosts, selectFetchAuthorPostsState } from '../authorPageSli
 import { Waterfall } from '@/styles/animations/Waterfall';
 
 import Error from '@/components/general/Error';
-import PostItem from '@/features/postList/components/PostItem';
+import PostItem from '@/components/general/PostItem';
 import PostListLoader from '@/components/loaders/PostListLoader';
 import { PostList, Wrapper } from './PostContainer.styled';
 

@@ -7,6 +7,6 @@ export const Wrapper = styled.div`
 `;
 
 export const Item = styled.div`
-  min-height: 6ch;
+  min-height: 12ch;
   background-color: ${({ theme }) => theme.color.loader_bg};
 `;

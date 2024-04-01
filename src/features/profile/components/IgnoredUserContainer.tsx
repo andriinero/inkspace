@@ -9,10 +9,10 @@ import { Waterfall } from '@/styles/animations/Waterfall';
 
 import UsersListLoader from '@/components/loaders/UsersListLoader';
 import Error from '@/components/general/Error';
-import IgnoredUser from './IgnoredUser';
-import { CalloutText, FollowedUsersList, Wrapper } from './IgnoredUsers.styled';
+import IgnoredUserItem from './IgnoredUserItem';
+import { CalloutText, FollowedUsersList, Wrapper } from './IgnoredUserContainer.styled';
 
-const IgnoredUsers = () => {
+const IgnoredUserContainer = () => {
   const usersList = useAppSelector(selectProfileIgnoredUsersList);
   const { isLoading, error } = useAppSelector(selectFetchIgnoredUsersState);
 
@@ -31,7 +31,7 @@ const IgnoredUsers = () => {
           animate="visible"
         >
           {usersList.map((u) => (
-            <IgnoredUser key={u._id} {...u} />
+            <IgnoredUserItem key={u._id} {...u} />
           ))}
         </FollowedUsersList>
       )}
@@ -39,4 +39,4 @@ const IgnoredUsers = () => {
   );
 };
 
-export default IgnoredUsers;
+export default IgnoredUserContainer;

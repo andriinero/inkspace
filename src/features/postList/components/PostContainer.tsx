@@ -16,7 +16,7 @@ import { FadeInSlide } from '@/styles/animations/FadeInSlide';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
-import PostItem from './PostItem';
+import PostItem from '../../../components/general/PostItem';
 import PostListLoader from '@/components/loaders/PostListLoader';
 import { CalloutText, PostList, Wrapper } from './PostContainer.styled';
 

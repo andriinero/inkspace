@@ -93,12 +93,10 @@ export const ProfileIcon = styled(AppImage)`
 `;
 
 export const StyledDropdown = styled(Dropdown)`
-  margin-top: 35px;
+  margin-top: 40px;
 `;
 
 export const StyledMenuItem = styled(MenuItem)``;
-
-export const StyledMenuItemSuccess = styled(MenuItemSuccess)``;
 
 export const ControlsWrapper = styled.div`
   display: flex;

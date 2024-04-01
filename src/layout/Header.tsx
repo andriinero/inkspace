@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import useCloseDropdown from '@/hooks/useCloseDropdown';
 
 import { selectProfileImageId } from '@/features/profile/profileSlice';
 import { clearTopic } from '@/features/postList/postListSlice';
@@ -13,9 +14,8 @@ import LoginForm from '@/features/auth/components/LoginForm';
 import SignUpForm from '@/features/auth/components/SignUpForm';
 import PushNotificationContainer from '@/features/pushNotification/components/PushNotificationContainer';
 import { useRef, useState } from 'react';
-import { MenuItemDanger } from '@/components/styled/MenuItem';
+import { MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
 import * as S from './Header.styled';
-import useCloseDropdown from '@/hooks/useCloseDropdown';
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -95,9 +95,9 @@ const Header = () => {
               />
               <S.StyledDropdown isOpen={isMenuOpen} innerRef={dropdownRef}>
                 <S.StyledMenuItem onClick={handleProfileClick}>Profile</S.StyledMenuItem>
-                <S.StyledMenuItemSuccess onClick={handleEditProfileClick}>
+                <MenuItemSuccess onClick={handleEditProfileClick}>
                   Edit Profile
-                </S.StyledMenuItemSuccess>
+                </MenuItemSuccess>
                 <MenuItemDanger onClick={handleLogoutClick}>Logout</MenuItemDanger>
               </S.StyledDropdown>
             </>
