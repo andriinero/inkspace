@@ -1,6 +1,6 @@
-import TabItem from '@/components/general/TabItem';
-import { StyledLink, Wrapper } from './ProfileTabs.styled';
 import { useLocation } from 'react-router-dom';
+
+import { StyledLink, StyledTabItem, Wrapper } from './ProfileTabs.styled';
 
 const ProfileTabs = () => {
   const location = useLocation();
@@ -9,18 +9,24 @@ const ProfileTabs = () => {
 
   return (
     <Wrapper>
-      <TabItem isSelected={endpoint === 'bookmarks'}>
-        <StyledLink to="/profile/bookmarks">Your Bookmarks</StyledLink>
-      </TabItem>
-      <TabItem isSelected={endpoint === 'your-posts'}>
-        <StyledLink to="/profile/your-posts">Your Posts</StyledLink>
-      </TabItem>
-      <TabItem isSelected={endpoint === 'followed-users'}>
-        <StyledLink to="/profile/followed-users">Followed Users</StyledLink>
-      </TabItem>
-      <TabItem isSelected={endpoint === 'ignored-users'}>
-        <StyledLink to="/profile/ignored-users">Ignored Users</StyledLink>
-      </TabItem>
+      <StyledLink to="/profile/bookmarks">
+        <StyledTabItem isSelected={endpoint === 'bookmarks'}>
+          Your Bookmarks
+        </StyledTabItem>
+      </StyledLink>
+      <StyledLink to="/profile/your-posts">
+        <StyledTabItem isSelected={endpoint === 'your-posts'}>Your Posts</StyledTabItem>
+      </StyledLink>
+      <StyledLink to="/profile/followed-users">
+        <StyledTabItem isSelected={endpoint === 'followed-users'}>
+          Followed Users
+        </StyledTabItem>
+      </StyledLink>
+      <StyledLink to="/profile/ignored-users">
+        <StyledTabItem isSelected={endpoint === 'ignored-users'}>
+          Ignored Users
+        </StyledTabItem>
+      </StyledLink>
     </Wrapper>
   );
 };
