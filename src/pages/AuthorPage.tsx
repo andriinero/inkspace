@@ -71,7 +71,7 @@ const AuthorPage = () => {
     followActionState.isLoading
   );
 
-  if (authorid === authData?.sub) return <Navigate to="/profile" />;
+  if (authorid === authData?.sub) return <Navigate to="/profile/bookmarks" />;
 
   const signUpDate = AppDate.getMedDate(authorData?.sign_up_date as string);
 

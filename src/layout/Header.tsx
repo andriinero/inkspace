@@ -60,7 +60,7 @@ const Header = () => {
   };
 
   const handleProfileClick = (): void => {
-    navigate('/profile');
+    navigate('/profile/bookmarks');
     setIsMenuOpen(false);
   };
 

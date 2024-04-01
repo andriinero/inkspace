@@ -9,6 +9,7 @@ import Profile from './pages/Profile';
 import AuthorPage from './pages/AuthorPage';
 import ProfileEditPage from './pages/ProfileEditPage';
 import BookmarkContainer from './features/profile/components/BookmarkContainer';
+import RecentPosts from './features/profile/components/RecentPosts';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -24,9 +25,17 @@ const Router = () => {
           element: <Profile />,
           children: [
             { index: true, path: '/profile/bookmarks', element: <BookmarkContainer /> },
-            { index: true, path: '/profile/your-posts', element: <BookmarkContainer /> },
-            { index: true, path: '/profile/followed-users', element: <BookmarkContainer /> },
-            { index: true, path: '/profile/ignored-users', element: <BookmarkContainer /> },
+            { index: true, path: '/profile/your-posts', element: <RecentPosts></RecentPosts> },
+            {
+              index: true,
+              path: '/profile/followed-users',
+              element: <></>,
+            },
+            {
+              index: true,
+              path: '/profile/ignored-users',
+              element: <></>,
+            },
           ],
         },
         { path: '/profile/edit', element: <ProfileEditPage /> },

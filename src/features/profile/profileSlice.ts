@@ -20,12 +20,14 @@ import {
 type ProfileState = {
   profileData: ProfileData | null;
   profileBookmarkList: PostData[];
+  profilePostsList: PostData[];
   profileIgnoredUsersList: GeneralAuthorData[];
   fetchProfileDataState: { isLoading: boolean; error: ErrorData | null };
   fetchProfileBookmarksState: {
     isLoading: boolean;
     error: ErrorData | null;
   };
+  fetchProfilePostsState: { isLoading: boolean; error: ErrorData | null };
   bookmarkActionState: { isLoading: boolean; error: ErrorData | null };
   followActionState: { isLoading: boolean; error: ErrorData | null };
   fetchIgnoredUsersState: {
@@ -38,8 +40,10 @@ type ProfileState = {
 const initialState: ProfileState = {
   profileData: null,
   profileBookmarkList: [],
+  profilePostsList: [],
   profileIgnoredUsersList: [],
   fetchProfileBookmarksState: { isLoading: true, error: null },
+  fetchProfilePostsState: { isLoading: true, error: null },
   fetchProfileDataState: { isLoading: true, error: null },
   bookmarkActionState: { isLoading: false, error: null },
   followActionState: { isLoading: false, error: null },
@@ -144,6 +148,34 @@ export const deleteBookmark = createAsyncThunk<
   if (!validationResult.success) console.error(validationResult);
 
   return data as TargetObjectId;
+});
+
+// RECENT POSTS //
+
+export const fetchProfilePosts = createAsyncThunk<
+  PostData[],
+  void,
+  { rejectValue: ErrorData; state: RootState }
+>('profile/fetchProfilePosts', async (_, { getState, rejectWithValue }) => {
+  const currentUserId = getState().auth.authData?.sub;
+
+  const { data, responseState } = await useAppFetch(
+    `/api/posts?userid=${currentUserId}`,
+    {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+
+  const validationResult = z.array(PostDataSchema).safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
+
+  return data as PostData[];
 });
 
 // FOLLOWED USERS //
@@ -286,7 +318,6 @@ const profileSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    
     // PROFILE DATA //
 
     builder
@@ -352,6 +383,23 @@ const profileSlice = createSlice({
         if (state.profileData) state.profileData.post_bookmarks.push(action.meta.arg);
         state.bookmarkActionState.isLoading = false;
         state.bookmarkActionState.error = action.payload || (action.error as ErrorData);
+      });
+
+    // RECENT POSTS //
+
+    builder
+      .addCase(fetchProfilePosts.pending, (state) => {
+        state.fetchProfilePostsState.isLoading = true;
+        state.fetchProfilePostsState.error = null;
+      })
+      .addCase(fetchProfilePosts.fulfilled, (state, action) => {
+        state.profilePostsList = action.payload;
+        state.fetchProfilePostsState.isLoading = false;
+      })
+      .addCase(fetchProfilePosts.rejected, (state, action) => {
+        state.fetchProfilePostsState.isLoading = false;
+        state.fetchProfilePostsState.error =
+          action.payload || (action.error as ErrorData);
       });
 
     // FOLLOWED USERS //
@@ -476,6 +524,14 @@ export const selectProfileBookmarks = (state: RootState) =>
 
 export const selectIsPostBookmarked = (postId: string) => (state: RootState) =>
   state.profile.profileData?.post_bookmarks.some((p) => p === postId);
+
+// RECENT POSTS //
+
+export const selectFetchProfilePostsState = (state: RootState) =>
+  state.profile.fetchProfilePostsState;
+
+export const selectProfilePostsList = (state: RootState) =>
+  state.profile.profilePostsList;
 
 // FOLLOWED USERS //
 

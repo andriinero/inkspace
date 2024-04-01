@@ -8,6 +8,7 @@ import { AppDate } from '@/lib/AppDate';
 import {
   fetchProfileBookmarks,
   fetchProfileData,
+  fetchProfilePosts,
   selectFetchProfileDataState,
   selectProfileData,
 } from '@/features/profile/profileSlice';
@@ -19,7 +20,6 @@ import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 import Error from '@/components/general/Error';
-import BookmarkContainer from '@/features/profile/components/BookmarkContainer';
 import JumpButton from '@/components/general/JumpButton';
 import * as S from './Profile.styled';
 import ProfileTabs from '@/features/profile/components/ProfileTabs';
@@ -40,6 +40,7 @@ const Profile = () => {
       try {
         await dispatch(fetchProfileData()).unwrap();
         await dispatch(fetchProfileBookmarks()).unwrap();
+        await dispatch(fetchProfilePosts()).unwrap();
       } catch (err) {
         dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
       }
