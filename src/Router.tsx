@@ -10,6 +10,7 @@ import AuthorPage from './pages/AuthorPage';
 import ProfileEditPage from './pages/ProfileEditPage';
 import BookmarkContainer from './features/profile/components/BookmarkContainer';
 import RecentPosts from './features/profile/components/RecentPosts';
+import FollowedUsers from './features/profile/components/FollowedUsers';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -25,11 +26,11 @@ const Router = () => {
           element: <Profile />,
           children: [
             { index: true, path: '/profile/bookmarks', element: <BookmarkContainer /> },
-            { index: true, path: '/profile/your-posts', element: <RecentPosts></RecentPosts> },
+            { index: true, path: '/profile/your-posts', element: <RecentPosts /> },
             {
               index: true,
               path: '/profile/followed-users',
-              element: <></>,
+              element: <FollowedUsers />,
             },
             {
               index: true,

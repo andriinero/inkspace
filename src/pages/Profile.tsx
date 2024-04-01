@@ -6,6 +6,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { AppDate } from '@/lib/AppDate';
 
 import {
+  fetchFollowedUsers,
   fetchProfileBookmarks,
   fetchProfileData,
   fetchProfilePosts,
@@ -41,6 +42,7 @@ const Profile = () => {
         await dispatch(fetchProfileData()).unwrap();
         await dispatch(fetchProfileBookmarks()).unwrap();
         await dispatch(fetchProfilePosts()).unwrap();
+        await dispatch(fetchFollowedUsers()).unwrap();
       } catch (err) {
         dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
       }

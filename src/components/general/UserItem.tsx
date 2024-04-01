@@ -12,8 +12,7 @@ import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 import { HollowButton } from '@/components/styled/HollowButton';
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-
-import * as S from './AuthorItem.styled';
+import * as S from '@/components/general/UserItem.styled';
 
 type AuthorItemProps = {
   _id: string;
@@ -23,13 +22,7 @@ type AuthorItemProps = {
   className?: string;
 };
 
-const AuthorItem = ({
-  _id,
-  username,
-  bio,
-  profile_image,
-  className,
-}: AuthorItemProps) => {
+const UserItem = ({ _id, username, bio, profile_image, className }: AuthorItemProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const isFollowed = useAppSelector(selectIsUserFollowed(_id)) as boolean;
 
@@ -41,21 +34,23 @@ const AuthorItem = ({
 
   return (
     <S.WrapperItem variants={WaterfallSlideIn.item} className={className}>
-      <S.StyledLink to={`/authors/${_id}`}>
-        <S.AuthorIcon
-          imageId={profile_image}
-          placeholderSrc="/portrait-placeholder.png"
-          altText="Author Icon"
-        />
-      </S.StyledLink>
-      <S.BioContainer>
+      <S.InfoWrapper>
         <S.StyledLink to={`/authors/${_id}`}>
-          <Username>{username}</Username>
+          <S.AuthorIcon
+            imageId={profile_image}
+            placeholderSrc="/portrait-placeholder.png"
+            altText="Author Icon"
+          />
         </S.StyledLink>
-        <S.BioContent>{bio || 'No user bio'}</S.BioContent>
-      </S.BioContainer>
+        <S.BioContainer>
+          <S.StyledLink to={`/authors/${_id}`}>
+            <Username>{username}</Username>
+          </S.StyledLink>
+          <S.BioContent>{bio || 'No user bio'}</S.BioContent>
+        </S.BioContainer>
+      </S.InfoWrapper>
       {isAuthenticated && authData?.sub !== _id && (
-        <HollowButton
+        <S.StyledHollowButton
           whileTap={ButtonInteraction.whileTap.animation}
           $isActive={isFollowed}
           onClick={handleFollowClick}
@@ -67,4 +62,4 @@ const AuthorItem = ({
   );
 };
 
-export default AuthorItem;
+export default UserItem;

@@ -21,6 +21,7 @@ type ProfileState = {
   profileData: ProfileData | null;
   profileBookmarkList: PostData[];
   profilePostsList: PostData[];
+  profileFollowedUsersList: GeneralAuthorData[];
   profileIgnoredUsersList: GeneralAuthorData[];
   fetchProfileDataState: { isLoading: boolean; error: ErrorData | null };
   fetchProfileBookmarksState: {
@@ -30,6 +31,10 @@ type ProfileState = {
   fetchProfilePostsState: { isLoading: boolean; error: ErrorData | null };
   bookmarkActionState: { isLoading: boolean; error: ErrorData | null };
   followActionState: { isLoading: boolean; error: ErrorData | null };
+  fetchFollowedUsersState: {
+    isLoading: boolean;
+    error: ErrorData | null;
+  };
   fetchIgnoredUsersState: {
     isLoading: boolean;
     error: ErrorData | null;
@@ -41,12 +46,14 @@ const initialState: ProfileState = {
   profileData: null,
   profileBookmarkList: [],
   profilePostsList: [],
+  profileFollowedUsersList: [],
   profileIgnoredUsersList: [],
   fetchProfileBookmarksState: { isLoading: true, error: null },
   fetchProfilePostsState: { isLoading: true, error: null },
   fetchProfileDataState: { isLoading: true, error: null },
   bookmarkActionState: { isLoading: false, error: null },
   followActionState: { isLoading: false, error: null },
+  fetchFollowedUsersState: { isLoading: true, error: null },
   fetchIgnoredUsersState: { isLoading: true, error: null },
   ignoreUserActionState: { isLoading: false, error: null },
 };
@@ -179,6 +186,29 @@ export const fetchProfilePosts = createAsyncThunk<
 });
 
 // FOLLOWED USERS //
+
+export const fetchFollowedUsers = createAsyncThunk<
+  GeneralAuthorData[],
+  void,
+  { rejectValue: ErrorData }
+>('profile/fetchFollowedUsers', async (_, { rejectWithValue }) => {
+  const token = storage.getToken();
+
+  const { data, responseState } = await useAppFetch('/api/profile/followed-users', {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!responseState.ok) return rejectWithValue(data as ErrorData);
+
+  const validationResult = z.array(GeneralAuthorDataSchema).safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
+
+  return data as GeneralAuthorData[];
+});
 
 export const postFollowUser = createAsyncThunk<
   TargetObjectId,
@@ -405,6 +435,19 @@ const profileSlice = createSlice({
     // FOLLOWED USERS //
 
     builder
+      .addCase(fetchFollowedUsers.pending, (state) => {
+        state.fetchFollowedUsersState.isLoading = true;
+        state.fetchFollowedUsersState.error = null;
+      })
+      .addCase(fetchFollowedUsers.fulfilled, (state, action) => {
+        state.profileFollowedUsersList = action.payload;
+        state.fetchFollowedUsersState.isLoading = false;
+      })
+      .addCase(fetchFollowedUsers.rejected, (state, action) => {
+        state.fetchFollowedUsersState.isLoading = false;
+        state.fetchFollowedUsersState.error =
+          action.payload || (action.error as ErrorData);
+      })
       .addCase(postFollowUser.pending, (state, action) => {
         if (state.profileData) state.profileData.followed_users.push(action.meta.arg);
         state.followActionState.isLoading = true;
@@ -534,6 +577,12 @@ export const selectProfilePostsList = (state: RootState) =>
   state.profile.profilePostsList;
 
 // FOLLOWED USERS //
+
+export const selectFetchFollowedUsersState = (state: RootState) =>
+  state.profile.fetchFollowedUsersState;
+
+export const selectProfileFollowedUsersList = (state: RootState) =>
+  state.profile.profileFollowedUsersList;
 
 export const selectFollowActionState = (state: RootState) =>
   state.profile.followActionState;
