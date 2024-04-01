@@ -8,16 +8,19 @@ import {
   selectFetchMiscBookmarksState,
 } from '../miscListSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
-import { BookmarkList, CalloutText, Header, Wrapper } from './BookmarkContainer.styled';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { Waterfall } from '@/styles/animations/Waterfall';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 import BookmarkItem from './BookmarkItem';
 import MiscListLoader from '@/components/loaders/MiscListLoader';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { BookmarkList, CalloutText, Header, Wrapper } from './BookmarkContainer.styled';
 
 const BookmarkContainer = () => {
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
   const bookmarkList = useAppSelector(selectMiscBookmarkList);
   const isLoading = useHomePageStatus();
   const { error } = useAppSelector(selectFetchMiscBookmarksState);
@@ -33,8 +36,8 @@ const BookmarkContainer = () => {
       }
     };
 
-    fetchData();
-  }, [dispatch]);
+    if (isAuthenticated) fetchData();
+  }, [isAuthenticated, dispatch]);
 
   return (
     <Wrapper>
@@ -42,19 +45,25 @@ const BookmarkContainer = () => {
         <MiscListLoader />
       ) : error ? (
         <MiscListLoader />
-      ) : bookmarkList.length === 0 ? (
-        <CalloutText>No bookmarks yet!</CalloutText>
       ) : (
         <>
           <Header>Recently Saved</Header>
-          <BookmarkList variants={Waterfall.container} initial="hidden" animate="visible">
-            {bookmarkList
-              .slice(0)
-              .reverse()
-              .map((b) => (
-                <BookmarkItem key={b._id} {...b} />
-              ))}
-          </BookmarkList>
+          {!isAuthenticated || bookmarkList.length === 0 ? (
+            <CalloutText>No bookmarks yet!</CalloutText>
+          ) : (
+            <BookmarkList
+              variants={Waterfall.container}
+              initial="hidden"
+              animate="visible"
+            >
+              {bookmarkList
+                .slice(0)
+                .reverse()
+                .map((b) => (
+                  <BookmarkItem key={b._id} {...b} />
+                ))}
+            </BookmarkList>
+          )}
         </>
       )}
     </Wrapper>
