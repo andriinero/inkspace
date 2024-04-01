@@ -1,20 +1,20 @@
 import { useAppSelector } from '@/app/hooks';
 
 import {
-  selectFetchFollowedUsersState,
-  selectProfileFollowedUsersList,
+  selectFetchIgnoredUsersState,
+  selectProfileIgnoredUsersList,
 } from '../profileSlice';
 
 import { Waterfall } from '@/styles/animations/Waterfall';
 
 import UsersListLoader from '@/components/loaders/UsersListLoader';
 import Error from '@/components/general/Error';
-import { CalloutText, FollowedUsersList, Wrapper } from './FollowedUsers.styled';
-import FollowedUser from '@/features/profile/components/FollowedUser';
+import IgnoredUser from './IgnoredUser';
+import { CalloutText, FollowedUsersList, Wrapper } from './IgnoredUsers.styled';
 
-const FollowedUsers = () => {
-  const usersList = useAppSelector(selectProfileFollowedUsersList);
-  const { isLoading, error } = useAppSelector(selectFetchFollowedUsersState);
+const IgnoredUsers = () => {
+  const usersList = useAppSelector(selectProfileIgnoredUsersList);
+  const { isLoading, error } = useAppSelector(selectFetchIgnoredUsersState);
 
   return (
     <Wrapper>
@@ -23,7 +23,7 @@ const FollowedUsers = () => {
       ) : error ? (
         <Error />
       ) : usersList.length === 0 ? (
-        <CalloutText>No one followed yet!</CalloutText>
+        <CalloutText>This list is empty!</CalloutText>
       ) : (
         <FollowedUsersList
           variants={Waterfall.container}
@@ -31,7 +31,7 @@ const FollowedUsers = () => {
           animate="visible"
         >
           {usersList.map((u) => (
-            <FollowedUser key={u._id} {...u} />
+            <IgnoredUser key={u._id} {...u} />
           ))}
         </FollowedUsersList>
       )}
@@ -39,4 +39,4 @@ const FollowedUsers = () => {
   );
 };
 
-export default FollowedUsers;
+export default IgnoredUsers;

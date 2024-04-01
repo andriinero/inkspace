@@ -11,6 +11,7 @@ import ProfileEditPage from './pages/ProfileEditPage';
 import BookmarkContainer from './features/profile/components/BookmarkContainer';
 import RecentPosts from './features/profile/components/RecentPosts';
 import FollowedUsers from './features/profile/components/FollowedUsers';
+import IgnoredUsers from './features/profile/components/IgnoredUsers';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -35,7 +36,7 @@ const Router = () => {
             {
               index: true,
               path: '/profile/ignored-users',
-              element: <></>,
+              element: <IgnoredUsers />,
             },
           ],
         },

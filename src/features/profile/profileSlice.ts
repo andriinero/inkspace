@@ -595,6 +595,12 @@ export const selectIsUserFollowed = (userId: string) => (state: RootState) =>
 
 // IGNORED USERS //
 
+export const selectFetchIgnoredUsersState = (state: RootState) =>
+  state.profile.fetchIgnoredUsersState;
+
+export const selectProfileIgnoredUsersList = (state: RootState) =>
+  state.profile.profileIgnoredUsersList;
+
 export const selectIgnoreUserActionState = (state: RootState) =>
   state.profile.ignoreUserActionState;
 

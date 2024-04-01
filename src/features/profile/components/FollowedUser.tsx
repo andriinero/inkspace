@@ -9,10 +9,9 @@ import {
 
 import { Username } from '@/components/styled/Username.styled';
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
-import { HollowButton } from '@/components/styled/HollowButton';
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-import * as S from '@/components/general/UserItem.styled';
+import * as S from '@/features/profile/components/FollowedUser.styled';
 
 type AuthorItemProps = {
   _id: string;
@@ -22,7 +21,7 @@ type AuthorItemProps = {
   className?: string;
 };
 
-const UserItem = ({ _id, username, bio, profile_image, className }: AuthorItemProps) => {
+const FollowedUser = ({ _id, username, bio, profile_image, className }: AuthorItemProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const isFollowed = useAppSelector(selectIsUserFollowed(_id)) as boolean;
 
@@ -62,4 +61,4 @@ const UserItem = ({ _id, username, bio, profile_image, className }: AuthorItemPr
   );
 };
 
-export default UserItem;
+export default FollowedUser;

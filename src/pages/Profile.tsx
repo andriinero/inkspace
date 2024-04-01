@@ -7,6 +7,7 @@ import { AppDate } from '@/lib/AppDate';
 
 import {
   fetchFollowedUsers,
+  fetchIgnoredUsers,
   fetchProfileBookmarks,
   fetchProfileData,
   fetchProfilePosts,
@@ -43,6 +44,7 @@ const Profile = () => {
         await dispatch(fetchProfileBookmarks()).unwrap();
         await dispatch(fetchProfilePosts()).unwrap();
         await dispatch(fetchFollowedUsers()).unwrap();
+        await dispatch(fetchIgnoredUsers()).unwrap();
       } catch (err) {
         dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
       }
