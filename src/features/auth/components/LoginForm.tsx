@@ -15,6 +15,8 @@ import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import Dialog from '@/components/general/Dialog';
 import * as S from './LoginForm.styled';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 const LoginForm = () => {
   const {
@@ -39,6 +41,7 @@ const LoginForm = () => {
       const response = await dispatch(postLogin(formData)).unwrap();
 
       if (response) {
+        dispatch(addNotification('login success', PushNotificationType.SUCCESS));
         dispatch(initAuth());
         dispatch(closeLoginModal());
       }

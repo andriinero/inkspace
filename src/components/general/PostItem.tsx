@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { useNavigate } from 'react-router-dom';
 import useBookmarkPostAction from '@/hooks/useBookmarkPostAction';
@@ -22,10 +22,11 @@ import { Waterfall } from '@/styles/animations/Waterfall';
 
 import PostDate from '@/components/general/TimeAgo';
 import { Username } from '@/components/styled/Username.styled';
-import { MenuItem, MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
 import Dialog from '@/components/general/Dialog';
 import DeleteConfirm from '@/components/general/DeleteConfirm';
 import * as S from './PostItem.styled';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 type PostItemProps = {
   _id: string;
@@ -91,8 +92,14 @@ const PostItem = ({
     setIsDeleteModalOpen(false);
   };
 
-  const handleDeleteClick = (): void => {
-    dispatch(deletePost(_id));
+  const handleDeleteClick = async (): Promise<void> => {
+    const response = await dispatch(deletePost(_id)).unwrap();
+
+    if (response) {
+      dispatch(
+        addNotification('post deleted successfully', PushNotificationType.SUCCESS)
+      );
+    }
   };
 
   const handleIgnoreAction = useIgnoreUserAction(

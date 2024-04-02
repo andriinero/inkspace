@@ -22,6 +22,7 @@ import { PushNotificationType } from '@/types/entityData/StatusNotificationData'
 
 import TinyEditor from '@/features/postForm/components/TinyEditor';
 import * as S from './PostForm.styled';
+import { mdiArrowDownBoldHexagonOutline } from '@mdi/js';
 
 const PostForm = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -68,13 +69,23 @@ const PostForm = () => {
   const handlePostSubmit = async (formData: TPostFormSchema): Promise<void> => {
     const response = await dispatch(postPost(formData)).unwrap();
 
-    if (response) navigate('/');
+    if (response) {
+      dispatch(
+        addNotification('post created successfully', PushNotificationType.SUCCESS)
+      );
+      navigate('/');
+    }
   };
 
   const handlePutSubmit = async (formData: TPostFormSchema): Promise<void> => {
     const response = await dispatch(putEditTargetPost(formData)).unwrap();
 
-    if (response) navigate('/');
+    if (response) {
+      dispatch(
+        addNotification('post saved successfully', PushNotificationType.SUCCESS)
+      );
+      navigate('/');
+    }
   };
 
   const handleFormSubmit = isEditMode ? handlePutSubmit : handlePostSubmit;

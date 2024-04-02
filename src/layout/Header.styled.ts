@@ -21,6 +21,9 @@ export const ContentWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  position: relative;
+  z-index: 1;
+
   padding: 0.75rem 1.5rem;
   border-bottom: 1px solid ${({ theme }) => theme.color.main_border};
   background-color: ${({ theme }) => theme.color.main_bg_primary};
@@ -110,6 +113,10 @@ export const StyledMenuItem = styled(MenuItem)`
 export const StyledProfileIcon = styled(Icon)`
   height: 20px;
   width: 20px;
+  
+  &:hover {
+    filter: none;
+  }
 `;
 
 export const ControlsWrapper = styled.div`

@@ -8,11 +8,11 @@ export const PushFromTop: PushFromTop = {
   hidden: {
     opacity: 0.5,
     originY: 0,
-    scaleY: 0,
+    y: -50,
   },
   visible: {
     opacity: 1,
-    scaleY: 1,
+    y: 0,
   },
   transition: { duration: 0.15 },
 };
