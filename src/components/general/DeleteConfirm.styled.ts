@@ -29,7 +29,7 @@ export const ControlsWrapper = styled.div`
 `;
 
 export const DeleteButton = styled(TextButton)`
-  color: ${({ theme }) => theme.color.text_danger};
+  color: ${({ theme }) => theme.color.danger};
 `;
 
 export const CancelButton = styled(TextButton)``;

@@ -88,7 +88,7 @@ export const SignUpDate = styled.span`
 `;
 
 export const StyledEditLink = styled(NavLink)`
-  color: ${({ theme }) => theme.color.text_success};
+  color: ${({ theme }) => theme.color.success};
   font-size: 0.8rem;
   font-weight: 400;
   text-decoration: none;

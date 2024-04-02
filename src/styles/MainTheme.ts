@@ -1,10 +1,13 @@
 const mainTheme = {
   color: {
-    // text_primary: '#E8E6E3',
     text_primary: '#D3D3D3',
     text_secondary: '#FFF',
-    text_success: '#7de276',
-    text_danger: '#C94A4A',
+    success: '#7de276',
+    warning: '#CD6133',
+    danger: '#C94A4A',
+    notification_success: '#417A3E',
+    notification_warning: '#cd6133',
+    notification_danger: '#C94A4A',
     main_bg_primary: '#181a1b',
     main_bg_secondary: '#242728',
     main_border: '#34383a',

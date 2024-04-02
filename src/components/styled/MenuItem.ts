@@ -20,9 +20,9 @@ export const MenuItem = styled.li`
 `;
 
 export const MenuItemSuccess = styled(MenuItem)`
-  color: ${({ theme }) => theme.color.text_success};
+  color: ${({ theme }) => theme.color.success};
 `;
 
 export const MenuItemDanger = styled(MenuItem)`
-  color: ${({ theme }) => theme.color.text_danger};
+  color: ${({ theme }) => theme.color.danger};
 `;

@@ -110,7 +110,7 @@ export const DeleteButton = styled(TextButton)`
 
   margin-top: 2rem;
 
-  color: ${({ theme }) => theme.color.text_danger};
+  color: ${({ theme }) => theme.color.danger};
   font-weight: 300;
 `;
 
@@ -119,7 +119,7 @@ export const UploadImageButton = styled(TextButton)`
 
   margin: 0.5rem 0;
 
-  color: ${({ theme }) => theme.color.text_success};
+  color: ${({ theme }) => theme.color.success};
   font-weight: 300;
 `;
 

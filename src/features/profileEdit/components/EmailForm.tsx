@@ -54,6 +54,10 @@ const EmailForm = () => {
       try {
         const response = await dispatch(putPersonalDetails(formData)).unwrap();
         if (response) {
+            addNotification(
+              'email updated successfully',
+              PushNotificationType.SUCCESS
+            )
           dispatch(closeModal());
           navigate('/');
         }

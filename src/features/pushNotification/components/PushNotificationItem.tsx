@@ -6,12 +6,16 @@ import { removeNotification } from '../pushNotificationSlice';
 import { PushNotificationData } from '@/types/entityData/StatusNotificationData';
 import { PushFromTop } from '@/styles/animations/PushFromTop';
 
-import { MessageWrapper, StyledAppIcon, Wrapper } from './PushNotificationItem.styled';
+import {
+  MessageWrapper,
+  StyledAppIcon,
+  Notification,
+} from './PushNotificationItem.styled';
 
 const statusTypePrefixMap = {
-  error: 'Error',
-  warning: 'Warning',
-  success: '',
+  error: 'Error: ',
+  warning: 'Warning: ',
+  success: 'Message: ',
 };
 
 const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {
@@ -28,7 +32,8 @@ const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {
   };
 
   return (
-    <Wrapper
+    <Notification
+      $type={type}
       key={id}
       initial={PushFromTop.hidden}
       animate={PushFromTop.visible}
@@ -36,10 +41,10 @@ const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {
       exit={PushFromTop.hidden}
     >
       <MessageWrapper>
-        {statusTypePrefixMap[type]}: "{message}"
+        {statusTypePrefixMap[type]}{message}.
       </MessageWrapper>
       <StyledAppIcon src="/close.svg" onClick={handleCloseClick} />
-    </Wrapper>
+    </Notification>
   );
 };
 

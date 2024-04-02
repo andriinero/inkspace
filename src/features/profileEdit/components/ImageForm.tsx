@@ -39,6 +39,10 @@ const ImageForm = () => {
       const response = await dispatch(putProfileImage(formData.image as File)).unwrap();
 
       if (response) {
+            addNotification(
+              'profile image updated successfully',
+              PushNotificationType.SUCCESS
+            )
         dispatch(closeModal());
         navigate('/');
       }

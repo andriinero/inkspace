@@ -7,6 +7,6 @@ export const InputFile = styled.input`
     border-radius: 3px;
     background-color: ${({ theme }) => theme.color.main_bg_secondary};
 
-    color: ${({ theme }) => theme.color.text_success};
+    color: ${({ theme }) => theme.color.success};
   }
 `;

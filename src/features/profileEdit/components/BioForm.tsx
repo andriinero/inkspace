@@ -53,6 +53,12 @@ const BioForm = () => {
       try {
         const response = await dispatch(putPersonalDetails(formData)).unwrap();
         if (response) {
+          dispatch(
+            addNotification(
+              'profile bio updated successfully',
+              PushNotificationType.SUCCESS
+            )
+          );
           dispatch(closeModal());
           navigate('/');
         }

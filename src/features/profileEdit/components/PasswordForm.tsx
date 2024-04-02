@@ -54,6 +54,10 @@ const PasswordForm = () => {
       try {
         const response = await dispatch(putPassword(formData)).unwrap();
         if (response) {
+            addNotification(
+              'password updated successfully',
+              PushNotificationType.SUCCESS
+            )
           dispatch(closeModal());
           navigate('/');
         }

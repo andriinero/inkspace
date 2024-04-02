@@ -53,6 +53,10 @@ const UsernameForm = () => {
       try {
         const response = await dispatch(putPersonalDetails(formData)).unwrap();
         if (response) {
+            addNotification(
+              'username updated successfully',
+              PushNotificationType.SUCCESS
+            )
           dispatch(closeModal());
           navigate('/');
         }
