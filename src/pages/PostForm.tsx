@@ -114,7 +114,7 @@ const PostForm = () => {
           </S.InputItem>
           <S.InputItem>
             <S.StyledInputLabel htmlFor="post-image">Upload thumbnail</S.StyledInputLabel>
-            <S.InputFile {...register('image')} id="post-image" type="file" />
+            <S.StyledInputFile {...register('image')} id="post-image" type="file" />
             <S.StyledErrorMessage $isVisible={Boolean(errors.image)}>
               {errors.image?.message}
             </S.StyledErrorMessage>

@@ -5,6 +5,7 @@ import { InputText } from '@/components/styled/InputText';
 import { InputLabel } from '@/components/styled/InputLabel';
 import { FormButton } from '@/components/styled/FormButton';
 import { motion } from 'framer-motion';
+import InputFile from '@/components/general/InputFile';
 
 export const Wrapper = styled(motion.div)`
   display: flex;
@@ -51,7 +52,7 @@ export const StyledInputText = styled(InputText)`
   min-width: 300px;
 `;
 
-export const InputFile = styled.input`
+export const StyledInputFile = styled(InputFile)`
   min-width: 300px;
 `;
 

@@ -37,11 +37,7 @@ const ImageForm = () => {
           <S.StyledInputLabel htmlFor="profile-image-upload">
             Upload Image:
           </S.StyledInputLabel>
-          <S.StyledInputFile
-            {...register('image')}
-            id="profile-image-upload"
-            type="file"
-          />
+          <S.StyledInputFile {...register('image')} id="profile-image-upload" />
         </S.InputItem>
         <S.StyledErrorMessage $isVisible={Boolean(errors.image)}>
           {errors.image?.message as string}

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import PostDate from '@/components/general/TimeAgo';
 import { NavLink } from 'react-router-dom';
 import TimeAgo from '@/components/general/TimeAgo';
-import AppIcon from '@/components/icons/AppIcon';
 import { Username } from '@/components/styled/Username.styled';
 import AppImage from '@/features/appImages/components/AppImage';
 import DotMenu from '@/components/general/DotMenu';

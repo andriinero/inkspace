@@ -2,8 +2,8 @@ import { ReactNode, useRef } from 'react';
 
 import useCloseDropdown from '@/hooks/useCloseDropdown';
 
-import AppIcon from '../icons/AppIcon';
 import Dropdown from './Dropdown';
+import { StyledIcon } from './DotMenu.styled';
 
 type DotMenuProps = {
   className?: string;
@@ -28,9 +28,9 @@ const DotMenu = ({
 
   return (
     <>
-      <AppIcon
+      <StyledIcon
         className={className}
-        onIconClick={onToggle}
+        onClick={onToggle}
         src="/dots-horizontal.svg"
         alt="Dot Menu Icon"
       />

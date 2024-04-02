@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon';
 import { useAppSelector } from '@/app/hooks';
 import { Navigate } from 'react-router-dom';
 
@@ -11,6 +10,7 @@ import PersonalDetailsForm from '@/features/profileEdit/components/PersonalDetai
 import PasswordForm from '@/features/profileEdit/components/PasswordForm';
 import ImageForm from '@/features/profileEdit/components/ImageForm';
 import * as S from './ProfileEditPage.styled';
+import { AppDate } from '@/lib/AppDate';
 
 const ProfileEditPage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -19,9 +19,7 @@ const ProfileEditPage = () => {
 
   if (!isAuthenticated || !profileData) return <Navigate to="/" />;
 
-  const signUpDate = DateTime.fromISO(profileData?.sign_up_date as string).toLocaleString(
-    DateTime.DATE_MED
-  );
+  const signUpDate = AppDate.getMedDate(profileData.sign_up_date);
 
   return (
     <S.Wrapper

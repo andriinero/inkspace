@@ -9,9 +9,7 @@ import {
 } from '../singlePagePostSlice';
 import { toggleComments } from '@/features/commentList/commentListSlice';
 import {
-  deleteBookmark,
   deleteIgnoredUser,
-  postBookmark,
   postIgnoredUser,
   selectBookmarkActionState,
   selectIsPostBookmarked,

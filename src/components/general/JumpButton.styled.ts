@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Icon } from '../icons/AppIcon.styled';
+import { Icon } from '../styled/AppIcon.styled';
 import { motion } from 'framer-motion';
 
 export const Wrapper = styled(motion.div)`

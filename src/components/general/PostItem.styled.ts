@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import Bookmark from '@/components/icons/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
-
 import PostReadTime from '@/components/general/PostReadTime';
 import { Title } from '@/components/styled/Title.styled';
 import { motion } from 'framer-motion';
 import AppImage from '@/features/appImages/components/AppImage';
+import { Icon } from '../styled/AppIcon.styled';
+import { MenuItem, MenuItemDanger, MenuItemSuccess } from '../styled/MenuItem';
 
 export const Wrapper = styled(motion.li)`
   display: grid;
@@ -155,5 +156,16 @@ export const StyledBookmark = styled(Bookmark)`
 export const StyledDotMenu = styled(DotMenu)`
   width: 20px;
 `;
+
+export const StyledMenuItem = styled(MenuItem)``;
+
+export const StyledMenuItemSuccess = styled(MenuItemSuccess)``;
+
+export const StyledMenuItemDanger = styled(MenuItemDanger)`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const StyledIcon = styled(Icon)``;
 
 // #endregion

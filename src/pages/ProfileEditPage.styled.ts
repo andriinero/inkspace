@@ -72,3 +72,5 @@ export const SignUpDate = styled.span`
   font-weight: 300;
   font-style: italic;
 `;
+
+export const ModalWrapper = styled.div``;

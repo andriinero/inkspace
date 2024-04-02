@@ -1,4 +1,4 @@
-import { Icon } from '@/components/icons/AppIcon.styled';
+import { Icon } from '@/components/styled/AppIcon.styled';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`

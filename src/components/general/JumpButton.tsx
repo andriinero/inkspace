@@ -1,6 +1,6 @@
 import { PopOut } from '@/styles/animations/PopOut';
 
-import { Icon } from '../icons/AppIcon.styled';
+import { Icon } from '../styled/AppIcon.styled';
 import { Wrapper } from './JumpButton.styled';
 
 type JumpButtonProps = {

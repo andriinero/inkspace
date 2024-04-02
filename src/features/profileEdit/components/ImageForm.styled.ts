@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { ErrorMessage } from '@/components/styled/ErrorMessage';
 import { FormButton } from '@/components/styled/FormButton';
 import { InputLabel } from '@/components/styled/InputLabel';
+import InputFile from '@/components/general/InputFile';
 
 export const WrapperMain = styled.div`
   display: flex;
@@ -35,7 +36,7 @@ export const StyledInputLabel = styled(InputLabel)`
   font-size: 0.9rem;
 `;
 
-export const StyledInputFile = styled.input`
+export const StyledInputFile = styled(InputFile)`
   &:focus {
     outline: none;
     box-shadow: 0 0 1em rgb(0 0 0 / 0.3);

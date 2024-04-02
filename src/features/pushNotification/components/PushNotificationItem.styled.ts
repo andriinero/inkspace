@@ -1,4 +1,4 @@
-import { Icon } from '@/components/icons/AppIcon.styled';
+import { Icon } from '@/components/styled/AppIcon.styled';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 

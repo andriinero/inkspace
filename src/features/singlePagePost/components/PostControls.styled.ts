@@ -1,4 +1,4 @@
-import AppIcon from '@/components/icons/AppIcon';
+import { Icon } from '@/components/styled/AppIcon.styled';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -17,7 +17,7 @@ export const ControlsContainer = styled.div`
   gap: 1rem;
 `;
 
-export const ControlsIcon = styled(AppIcon)`
+export const ControlsIcon = styled(Icon)`
   width: 20px;
   height: 20px;
 `;

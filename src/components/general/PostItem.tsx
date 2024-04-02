@@ -149,21 +149,19 @@ const PostItem = ({
                 isAlignedLeft={false}
               >
                 {isAuthor && (
-                  <MenuItemSuccess onClick={handleEditModeClick}>
+                  <S.StyledMenuItemSuccess onClick={handleEditModeClick}>
                     Edit Post
-                  </MenuItemSuccess>
+                  </S.StyledMenuItemSuccess>
                 )}
                 {!isAuthor && (
-                  <MenuItem onClick={handleMuteAuthorClick}>
+                  <S.StyledMenuItem onClick={handleMuteAuthorClick}>
                     {isIgnored ? 'Unmute this author' : 'Mute this author'}
-                  </MenuItem>
+                  </S.StyledMenuItem>
                 )}
                 {isAuthor && (
-                  <>
-                    <MenuItemDanger onClick={handleOpenDeleteModal}>
-                      Delete Post
-                    </MenuItemDanger>
-                  </>
+                  <S.StyledMenuItemDanger onClick={handleOpenDeleteModal}>
+                    Delete Post
+                  </S.StyledMenuItemDanger>
                 )}
               </S.StyledDotMenu>
               <Dialog

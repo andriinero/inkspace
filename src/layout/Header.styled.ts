@@ -2,11 +2,10 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { GreenButton } from '@/components/styled/GreenButton';
-import AppIcon from '@/components/icons/AppIcon';
 import AppImage from '@/features/appImages/components/AppImage';
 import Dropdown from '@/components/general/Dropdown';
-import { MenuItem, MenuItemSuccess } from '@/components/styled/MenuItem';
-import { Icon } from '@/components/icons/AppIcon.styled';
+import { MenuItem } from '@/components/styled/MenuItem';
+import { Icon } from '@/components/styled/AppIcon.styled';
 
 export const Wrapper = styled.header`
   grid-area: header;
@@ -71,7 +70,7 @@ export const NewPostButton = styled.div`
   }
 `;
 
-export const StyledAppIcon = styled(AppIcon)`
+export const StyledAppIcon = styled(Icon)`
   &:hover {
     filter: none;
   }
