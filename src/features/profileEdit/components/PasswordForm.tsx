@@ -23,7 +23,6 @@ export const ProfilePasswordEditSchema = z
     message: "Passwords don't match",
     path: ['passwordConfirmation'],
   });
-
 export type TProfilePasswordEditSchema = z.infer<typeof ProfilePasswordEditSchema>;
 
 const PasswordForm = () => {

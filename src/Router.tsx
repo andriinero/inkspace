@@ -14,6 +14,8 @@ import FollowedUserContainer from './features/profile/components/FollowedUserCon
 import IgnoredUserContainer from './features/profile/components/IgnoredUserContainer';
 import UsernameForm from './features/profileEdit/components/UsernameForm';
 import PasswordForm from './features/profileEdit/components/PasswordForm';
+import EmailForm from './features/profileEdit/components/EmailForm';
+import BioForm from './features/profileEdit/components/BioForm';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -46,9 +48,9 @@ const Router = () => {
           path: '/profile/edit',
           element: <ProfileEditPage />,
           children: [
-            { path: '/profile/edit/email', element: <></> },
+            { path: '/profile/edit/email', element: <EmailForm /> },
             { path: '/profile/edit/username', element: <UsernameForm /> },
-            { path: '/profile/edit/bio', element: <></> },
+            { path: '/profile/edit/bio', element: <BioForm /> },
             { path: '/profile/edit/password', element: <PasswordForm /> },
             { path: '/profile/edit/image', element: <></> },
           ],
