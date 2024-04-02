@@ -12,6 +12,7 @@ import BookmarkContainer from './features/profile/components/BookmarkContainer';
 import RecentPosts from './features/profile/components/RecentPostItem';
 import FollowedUserContainer from './features/profile/components/FollowedUserContainer';
 import IgnoredUserContainer from './features/profile/components/IgnoredUserContainer';
+import UsernameForm from './features/profileEdit/components/UsernameForm';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -40,7 +41,17 @@ const Router = () => {
             },
           ],
         },
-        { path: '/profile/edit', element: <ProfileEditPage /> },
+        {
+          path: '/profile/edit',
+          element: <ProfileEditPage />,
+          children: [
+            { path: '/profile/edit/email', element: <UsernameForm /> },
+            { path: '/profile/edit/username', element: <UsernameForm /> },
+            { path: '/profile/edit/bio', element: <UsernameForm /> },
+            { path: '/profile/edit/password', element: <UsernameForm /> },
+            { path: '/profile/edit/image', element: <UsernameForm /> },
+          ],
+        },
         { path: '/authors/:authorid', element: <AuthorPage /> },
       ],
       errorElement: <NotFound404 />,

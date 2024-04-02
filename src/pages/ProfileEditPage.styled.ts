@@ -3,6 +3,7 @@ import AppImage from '@/features/appImages/components/AppImage';
 import { Username } from '@/components/styled/Username.styled';
 import { motion } from 'framer-motion';
 import { TextButton } from '@/components/styled/TextButton';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled(motion.div)`
   display: grid;
@@ -107,6 +108,8 @@ export const SignUpDate = styled.span`
 export const DeleteButton = styled(TextButton)`
   align-self: flex-end;
 
+  margin-top: 2rem;
+
   color: ${({ theme }) => theme.color.text_danger};
   font-weight: 300;
 `;
@@ -118,4 +121,9 @@ export const UploadImageButton = styled(TextButton)`
 
   color: ${({ theme }) => theme.color.text_success};
   font-weight: 300;
+`;
+
+export const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
 `;

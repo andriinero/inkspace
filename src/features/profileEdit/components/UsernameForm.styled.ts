@@ -1,7 +1,9 @@
 import { HollowButton } from '@/components/styled/HollowButton';
 import styled from 'styled-components';
 
-export const Form = styled.form``;
+export const Form = styled.form`
+  z-index: 1;
+`;
 
 export const ControlsWrapper = styled.div`
   display: flex;

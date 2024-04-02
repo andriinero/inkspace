@@ -19,12 +19,14 @@ import {
 } from '@/types/fetchResponse/success/TargetObjectId';
 
 type ProfileEditState = {
+  isModalOpen: boolean;
   putPersonalDetailsState: { isLoading: boolean; error: ErrorData | null };
   putPasswordState: { isLoading: boolean; error: ErrorData | null };
   putProfileImageState: { isLoading: boolean; error: ErrorData | null };
 };
 
 const initialState: ProfileEditState = {
+  isModalOpen: false,
   putPersonalDetailsState: { isLoading: false, error: null },
   putPasswordState: { isLoading: false, error: null },
   putProfileImageState: { isLoading: false, error: null },
@@ -112,7 +114,14 @@ export const putProfileImage = createAsyncThunk<
 const profileEditSlice = createSlice({
   name: 'profileEdit',
   initialState,
-  reducers: {},
+  reducers: {
+    closeModal(state) {
+      state.isModalOpen = false;
+    },
+    openModal(state) {
+      state.isModalOpen = true;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(putPersonalDetails.pending, (state) => {
@@ -154,7 +163,12 @@ const profileEditSlice = createSlice({
   },
 });
 
+export const { openModal, closeModal } = profileEditSlice.actions;
+
 export default profileEditSlice.reducer;
+
+export const selectIsProfileModalOpen = (state: RootState) =>
+  state.profileEdit.isModalOpen;
 
 export const selectPutPersonalDetailsState = (state: RootState) =>
   state.profileEdit.putPersonalDetailsState;
