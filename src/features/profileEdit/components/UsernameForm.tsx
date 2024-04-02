@@ -1,31 +1,23 @@
+import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 
 import {
   closeModal,
   putPersonalDetails,
   selectPutPersonalDetailsState,
 } from '../profileEditSlice';
-
-import {
-  CancelButton,
-  ControlsWrapper,
-  Form,
-  InputWrapper,
-  StyledInputText,
-  StyledInputLabel,
-  SubmitButton,
-  StyledErrorMessage,
-  InputDescription,
-} from './UsernameForm.styled';
-import FormWrapper from './FormWrapper';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { selectProfileUsername } from '@/features/profile/profileSlice';
+
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { selectProfileUsername } from '@/features/profile/profileSlice';
-import { useNavigate } from 'react-router-dom';
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+
+import FormWrapper from './FormWrapper';
+import * as S from './UsernameForm.styled';
 
 const UsernameFormSchema = z.object({
   username: z
@@ -47,6 +39,8 @@ const UsernameForm = () => {
     defaultValues: { username },
   });
 
+  const { error } = useAppSelector(selectPutPersonalDetailsState);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -67,27 +61,42 @@ const UsernameForm = () => {
       }
   };
 
+  const isSubmitDisabled = !isDirty || isSubmitting;
+
   return (
     <FormWrapper>
-      <Form onSubmit={handleSubmit(handleFormSubmit)}>
-        <InputWrapper>
-          <StyledInputLabel htmlFor="edit-username">Username</StyledInputLabel>
-          <StyledInputText id="edit-username" {...register('username')} />
-          <InputDescription>You can sign in using this username</InputDescription>
-          <StyledErrorMessage $isVisible={Boolean(errors.username)}>
+      <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
+        <S.InputWrapper>
+          <S.StyledInputLabel htmlFor="edit-username">Username</S.StyledInputLabel>
+          <S.StyledInputText id="edit-username" {...register('username')} />
+          <S.InputDescription>You can sign in using this username</S.InputDescription>
+          <S.StyledErrorMessage $isVisible={Boolean(errors.username)}>
             {errors.username?.message}
-          </StyledErrorMessage>
-        </InputWrapper>
-        <ControlsWrapper>
-          <CancelButton onClick={handleModalClose} type="button" value="Cancel" />
-          <SubmitButton
-            disabled={!isDirty || isSubmitting}
-            $isDisabled={!isDirty || isSubmitting}
+          </S.StyledErrorMessage>
+          {error && (
+            <S.StyledErrorMessage $isVisible={true}>
+              An error has occurred while submitting the form
+            </S.StyledErrorMessage>
+          )}
+        </S.InputWrapper>
+        <S.ControlsWrapper>
+          <S.CancelButton
+            onClick={handleModalClose}
+            type="button"
+            value="Cancel"
+            whileTap={ButtonInteraction.whileTap.animation}
+          />
+          <S.SubmitButton
+            disabled={isSubmitDisabled}
+            $isDisabled={isSubmitDisabled}
             type="submit"
             value="Save"
+            whileTap={
+              !isSubmitDisabled ? ButtonInteraction.whileTap.animation : undefined
+            }
           />
-        </ControlsWrapper>
-      </Form>
+        </S.ControlsWrapper>
+      </S.Form>
     </FormWrapper>
   );
 };

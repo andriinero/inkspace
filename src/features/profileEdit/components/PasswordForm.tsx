@@ -1,23 +1,36 @@
+import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { putPassword, selectPutPasswordState } from '../profileEditSlice';
+import { closeModal, putPassword, selectPutPasswordState } from '../profileEditSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
-import {
-  ProfilePasswordEditSchema,
-  TProfilePasswordEditSchema,
-} from '@/types/formSchemas/ProfilePasswordEditSchema';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
+import FormWrapper from './FormWrapper';
 import * as S from './PasswordForm.styled';
+
+export const ProfilePasswordEditSchema = z
+  .object({
+    password: z.string().min(8, 'Password must contain at least 8 characters'),
+    passwordConfirmation: z.string(),
+  })
+  .refine((data) => data.password === data.passwordConfirmation, {
+    message: "Passwords don't match",
+    path: ['passwordConfirmation'],
+  });
+
+export type TProfilePasswordEditSchema = z.infer<typeof ProfilePasswordEditSchema>;
 
 const PasswordForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { isDirty, isSubmitting, errors },
   } = useForm<TProfilePasswordEditSchema>({
     defaultValues: {
       password: '',
@@ -26,28 +39,39 @@ const PasswordForm = () => {
     resolver: zodResolver(ProfilePasswordEditSchema),
   });
 
-  const { isLoading, error } = useAppSelector(selectPutPasswordState);
+  const { error } = useAppSelector(selectPutPasswordState);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const handleModalClose = (): void => {
+    dispatch(closeModal());
+  };
+
   const handleFormSubmit = async (
     formData: TProfilePasswordEditSchema
   ): Promise<void> => {
-    if (!isLoading) {
-      const response = await dispatch(putPassword(formData)).unwrap();
-
-      if (response) navigate('/');
-    }
+    if (!isSubmitting)
+      try {
+        const response = await dispatch(putPassword(formData)).unwrap();
+        if (response) {
+          dispatch(closeModal());
+          navigate('/');
+        }
+      } catch (err) {
+        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      }
   };
 
+  const isSubmitDisabled = !isDirty || isSubmitting;
+
   return (
-    <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
-      <S.InputContainer>
-        <S.InputItem>
+    <FormWrapper>
+      <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
+        <S.InputWrapper>
           <S.StyledInputLabel htmlFor="edit-password">Password</S.StyledInputLabel>
           <S.StyledInputText
-            {...register('password', { required: 'Password is required' })}
+            {...register('password')}
             id="edit-password"
             type="password"
             placeholder="••••••••"
@@ -55,31 +79,48 @@ const PasswordForm = () => {
           <S.StyledErrorMessage $isVisible={Boolean(errors.password)}>
             {errors.password?.message}
           </S.StyledErrorMessage>
-        </S.InputItem>
-        <S.InputItem>
-          <S.StyledInputLabel htmlFor="edit-password-confirmation">
-            Confirm Password
-          </S.StyledInputLabel>
-          <S.StyledInputText
-            {...register('passwordConfirmation')}
-            id="edit-password-confirmation"
-            type="password"
-            placeholder="••••••••"
+          <S.InputWrapper>
+            <S.StyledInputLabel htmlFor="edit-password-confirmation">
+              Confirm Password
+            </S.StyledInputLabel>
+            <S.StyledInputText
+              {...register('passwordConfirmation')}
+              id="edit-password-confirmation"
+              type="password"
+              placeholder="••••••••"
+            />
+            <S.InputDescription>
+              You can sign in using your new password
+            </S.InputDescription>
+            <S.StyledErrorMessage $isVisible={Boolean(errors.passwordConfirmation)}>
+              {errors.passwordConfirmation?.message}
+            </S.StyledErrorMessage>
+            {error && (
+              <S.StyledErrorMessage $isVisible={true}>
+                An error has occurred while submitting the form
+              </S.StyledErrorMessage>
+            )}
+          </S.InputWrapper>
+        </S.InputWrapper>
+        <S.ControlsWrapper>
+          <S.CancelButton
+            onClick={handleModalClose}
+            type="button"
+            value="Cancel"
+            whileTap={ButtonInteraction.whileTap.animation}
           />
-          <S.StyledErrorMessage $isVisible={Boolean(errors.passwordConfirmation)}>
-            {errors.passwordConfirmation?.message}
-          </S.StyledErrorMessage>
-        </S.InputItem>
-      </S.InputContainer>
-      <S.StyledErrorMessage $isVisible={Boolean(error)}>
-        An error has occurred while submitting the form
-      </S.StyledErrorMessage>
-      <S.SaveButton
-        type="submit"
-        value="Save"
-        whileTap={ButtonInteraction.whileTap.animation}
-      />
-    </S.Form>
+          <S.SubmitButton
+            disabled={!isDirty || isSubmitting}
+            $isDisabled={!isDirty || isSubmitting}
+            type="submit"
+            value="Save"
+            whileTap={
+              !isSubmitDisabled ? ButtonInteraction.whileTap.animation : undefined
+            }
+          />
+        </S.ControlsWrapper>
+      </S.Form>
+    </FormWrapper>
   );
 };
 

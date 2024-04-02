@@ -1,55 +1,53 @@
 import styled from 'styled-components';
 import { ErrorMessage } from '@/components/styled/ErrorMessage';
-import { FormButton } from '@/components/styled/FormButton';
+import { GreenButton } from '@/components/styled/GreenButton';
 import { InputLabel } from '@/components/styled/InputLabel';
-import { InputText } from '@/components/styled/InputText';
-
-export const WrapperMain = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-
-  padding: 3rem;
-  border-right: 1px solid ${({ theme }) => theme.color.main_border};
-`;
+import { InputTextBackground } from '@/components/styled/InputText';
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-`;
-
-export const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
 `;
 
-export const InputItem = styled.div`
+export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  width: 100%;
 `;
 
 export const StyledInputLabel = styled(InputLabel)`
-  font-size: 1rem;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
+  font-weight: 400;
 `;
 
-export const StyledInputText = styled(InputText)`
-  min-width: 300px;
-  text-align: start;
+export const StyledInputText = styled(InputTextBackground)`
+  width: 100%;
 
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
-  }
+  text-align: start;
+`;
+
+export const InputDescription = styled.span`
+  align-self: flex-start;
+
+  font-size: 0.9rem;
+  font-weight: 300;
 `;
 
 export const StyledErrorMessage = styled(ErrorMessage)``;
 
-export const SaveButton = styled(FormButton)`
+export const ControlsWrapper = styled.div`
+  display: flex;
   align-self: flex-end;
-
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  gap: 1rem;
 `;
+
+export const SubmitButton = styled(GreenButton)``;
+
+export const CancelButton = styled(GreenButton)``;

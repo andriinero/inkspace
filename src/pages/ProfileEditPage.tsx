@@ -59,7 +59,7 @@ const ProfileEditPage = () => {
           <S.StyledLink onClick={handleModalOpen} to="/profile/edit/bio">
             <S.FormGroupWrapper>
               <S.FieldTitle>Bio</S.FieldTitle>
-              <S.FieldValue>your bio...</S.FieldValue>
+              <S.FieldValue>bio...</S.FieldValue>
             </S.FormGroupWrapper>
           </S.StyledLink>
         </S.ContentWrapper>
