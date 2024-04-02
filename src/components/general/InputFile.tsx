@@ -1,4 +1,6 @@
+import { forwardRef } from 'react';
 import { RegisterOptions, UseFormRegisterReturn } from 'react-hook-form';
+
 import { Input } from './InputFile.styled';
 
 type InputFileProps = {
@@ -7,8 +9,8 @@ type InputFileProps = {
   className?: string;
 };
 
-const InputFile = ({ register, id, className }: InputFileProps) => {
+const InputFile = forwardRef(({ register, id, className }: InputFileProps, _) => {
   return <Input {...register} className={className} id={id} type="file" />;
-};
+});
 
 export default InputFile;

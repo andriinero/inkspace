@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import AppImage from '@/features/appImages/components/AppImage';
 import { Username } from '@/components/styled/Username.styled';
 import { motion } from 'framer-motion';
+import { TextButton } from '@/components/styled/TextButton';
 
 export const Wrapper = styled(motion.div)`
   display: grid;
@@ -12,25 +13,55 @@ export const Wrapper = styled(motion.div)`
   min-height: 100%;
 `;
 
+export const Header = styled.h2`
+  margin-bottom: 3rem;
+
+  font-size: 2rem;
+  font-weight: 500;
+  font-family: ${({ theme }) => theme.font.roboto};
+`;
+
 export const WrapperMain = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3rem;
 
   padding: 3rem;
   border-right: 1px solid ${({ theme }) => theme.color.main_border};
 `;
 
-export const Header = styled.h2`
-  font-size: 1.4rem;
-  font-weight: 100;
-  font-family: ${({ theme }) => theme.font.roboto};
+export const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  padding: 2rem 0;
+
+  border-bottom: 1px solid ${({ theme }) => theme.color.main_border_feint};
+
+  &:last-of-type {
+    border-bottom: none;
+  }
 `;
 
 export const FormGroupWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   gap: 2.5rem;
+
+  padding: 0.3 0rem;
+
+  cursor: pointer;
+
+  &:hover {
+    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
+      contrast(82%);
+  }
+`;
+
+export const FieldTitle = styled.span``;
+
+export const FieldValue = styled.span`
+  font-weight: 300;
 `;
 
 export const WrapperAside = styled.div`
@@ -73,4 +104,18 @@ export const SignUpDate = styled.span`
   font-style: italic;
 `;
 
-export const ModalWrapper = styled.div``;
+export const DeleteButton = styled(TextButton)`
+  align-self: flex-end;
+
+  color: ${({ theme }) => theme.color.text_danger};
+  font-weight: 300;
+`;
+
+export const UploadImageButton = styled(TextButton)`
+  align-self: flex-start;
+
+  margin: 0.5rem 0;
+
+  color: ${({ theme }) => theme.color.text_success};
+  font-weight: 300;
+`;

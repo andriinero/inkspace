@@ -17,7 +17,7 @@ import {
 } from '@/features/profile/profileSlice';
 import { enterEditMode } from '@/features/postForm/postFormSlice';
 
-import Bookmark from '@/components/icons/Bookmark';
+import Bookmark from '@/components/general/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
 import { MenuItem, MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
 import {
@@ -107,14 +107,14 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
       <ControlsContainer>
         <LikeWrapper>
           <ControlsIcon
-            onIconClick={onLikeClick}
+            onClick={onLikeClick}
             src="/thumb-up-outline.svg"
             alt="Like Icon"
           />
           <LikeCount>{likeCount ? likeCount : ''}</LikeCount>
         </LikeWrapper>
         <ControlsIcon
-          onIconClick={onCommentsClick}
+          onClick={onCommentsClick}
           src="/comment-outline.svg"
           alt="Toggle Comments Icon"
         />

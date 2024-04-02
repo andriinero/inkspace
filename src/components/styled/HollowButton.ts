@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-export const HollowButton = styled(motion.input)<{ $isActive: boolean }>`
+export const HollowButton = styled(motion.input)<{ $isActive?: boolean }>`
   align-self: flex-start;
 
   min-width: 11ch;

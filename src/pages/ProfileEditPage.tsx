@@ -1,4 +1,5 @@
 import { useAppSelector } from '@/app/hooks';
+import { AppDate } from '@/lib/AppDate';
 import { Navigate } from 'react-router-dom';
 
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
@@ -6,11 +7,8 @@ import { selectProfileData } from '@/features/profile/profileSlice';
 
 import { FadeIn } from '@/styles/animations/FadeIn';
 
-import PersonalDetailsForm from '@/features/profileEdit/components/PersonalDetailsForm';
-import PasswordForm from '@/features/profileEdit/components/PasswordForm';
 import ImageForm from '@/features/profileEdit/components/ImageForm';
 import * as S from './ProfileEditPage.styled';
-import { AppDate } from '@/lib/AppDate';
 
 const ProfileEditPage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -28,14 +26,30 @@ const ProfileEditPage = () => {
       transition={FadeIn.transition}
     >
       <S.WrapperMain>
-        <S.FormGroupWrapper>
-          <S.Header>Edit: Personal Details</S.Header>
-          <PersonalDetailsForm />
-        </S.FormGroupWrapper>
-        <S.FormGroupWrapper>
-          <S.Header>Edit: Account Password</S.Header>
-          <PasswordForm />
-        </S.FormGroupWrapper>
+        <S.Header>Edit Profile</S.Header>
+        <S.ContentWrapper>
+          <S.FormGroupWrapper>
+            <S.FieldTitle>Email address</S.FieldTitle>
+            <S.FieldValue>{profileData.email}</S.FieldValue>
+          </S.FormGroupWrapper>
+          <S.FormGroupWrapper>
+            <S.FieldTitle>Username</S.FieldTitle>
+            <S.FieldValue>{profileData.username}</S.FieldValue>
+          </S.FormGroupWrapper>
+          <S.FormGroupWrapper>
+            <S.FieldTitle>Bio</S.FieldTitle>
+            <S.FieldValue>your bio...</S.FieldValue>
+          </S.FormGroupWrapper>
+        </S.ContentWrapper>
+        <S.ContentWrapper>
+          <S.FormGroupWrapper>
+            <S.FieldTitle>Password</S.FieldTitle>
+            <S.FieldValue>••••••••</S.FieldValue>
+          </S.FormGroupWrapper>
+        </S.ContentWrapper>
+        <S.ContentWrapper>
+          <S.DeleteButton type="button" value="Delete account" />
+        </S.ContentWrapper>
       </S.WrapperMain>
       <S.WrapperAside>
         <S.ProfileWrapper>
@@ -45,7 +59,7 @@ const ProfileEditPage = () => {
             altText="Profile Icon"
           />
           <S.StyledUserName>{profileData?.username}</S.StyledUserName>
-          <ImageForm />
+          <S.UploadImageButton type="button" value="Upload Image" />
           <S.FollowCount>{profileData?.followed_users.length} Following</S.FollowCount>
           <S.FollowCount>{profileData?.users_following.length} Followers</S.FollowCount>
           <S.SignUpDate>Member since: {signUpDate}</S.SignUpDate>

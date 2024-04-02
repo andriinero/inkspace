@@ -37,6 +37,7 @@ export const StyledLink = styled(Link)`
 
 export const Logo = styled(motion.img)`
   height: 22px;
+  margin: 0.35rem 0;
 
   user-select: none;
   -webkit-user-drag: none;

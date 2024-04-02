@@ -81,31 +81,33 @@ const Header = () => {
           {isAuthenticated ? (
             <>
               {pathname !== '/post-form' && (
-                <S.NewPostButton onClick={handleWritePostClick}>
-                  <S.StyledAppIcon src="/post.svg" alt="Create New Post Icon" />
-                  <S.NewPostButtonText>Write</S.NewPostButtonText>
-                </S.NewPostButton>
+                <>
+                  <S.NewPostButton onClick={handleWritePostClick}>
+                    <S.StyledAppIcon src="/post.svg" alt="Create New Post Icon" />
+                    <S.NewPostButtonText>Write</S.NewPostButtonText>
+                  </S.NewPostButton>
+                  <S.ProfileIcon
+                    onClick={handleOpenMenu}
+                    imageId={profileImageId}
+                    placeholderSrc="/portrait-placeholder.png"
+                    altText="Current User Profile Picture"
+                  />
+                  <S.StyledDropdown isOpen={isMenuOpen} innerRef={dropdownRef}>
+                    <S.StyledMenuItem onClick={handleProfileClick}>
+                      <S.StyledProfileIcon src="/profile.svg" alt="Profile Icon" />
+                      Profile
+                    </S.StyledMenuItem>
+                    <S.StyledMenuItem onClick={handleEditProfileClick}>
+                      <S.StyledProfileIcon src="/edit.svg" alt="Edit Icon" />
+                      Edit Profile
+                    </S.StyledMenuItem>
+                    <S.StyledMenuItem onClick={handleLogoutClick}>
+                      <S.StyledProfileIcon src="/exit.svg" alt="Logout Icon" />
+                      Logout
+                    </S.StyledMenuItem>
+                  </S.StyledDropdown>
+                </>
               )}
-              <S.ProfileIcon
-                onClick={handleOpenMenu}
-                imageId={profileImageId}
-                placeholderSrc="/portrait-placeholder.png"
-                altText="Current User Profile Picture"
-              />
-              <S.StyledDropdown isOpen={isMenuOpen} innerRef={dropdownRef}>
-                <S.StyledMenuItem onClick={handleProfileClick}>
-                  <S.StyledProfileIcon src="/profile.svg" alt="Profile Icon" />
-                  Profile
-                </S.StyledMenuItem>
-                <S.StyledMenuItem onClick={handleEditProfileClick}>
-                  <S.StyledProfileIcon src="/edit.svg" alt="Edit Icon" />
-                  Edit Profile
-                </S.StyledMenuItem>
-                <S.StyledMenuItem onClick={handleLogoutClick}>
-                  <S.StyledProfileIcon src="/exit.svg" alt="Logout Icon" />
-                  Logout
-                </S.StyledMenuItem>
-              </S.StyledDropdown>
             </>
           ) : (
             <S.ControlsWrapper>

@@ -20,6 +20,10 @@ export const StyledTabItem = styled(TabItem)`
 export const StyledIcon = styled(Icon)`
   width: 20px;
   height: 20px;
+
+  &:hover {
+    filter: none;
+  }
 `;
 
 export const StyledLink = styled(Link)`
