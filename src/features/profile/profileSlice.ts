@@ -551,6 +551,13 @@ export const selectProfileId = (state: RootState) => state.profile.profileData?.
 export const selectProfileImageId = (state: RootState) =>
   state.profile.profileData?.profile_image;
 
+export const selectProfileUsername = (state: RootState) =>
+  state.profile.profileData?.username;
+
+export const selectProfileEmail = (state: RootState) => state.profile.profileData?.email;
+
+export const selectProfileBio = (state: RootState) => state.profile.profileData?.bio;
+
 // BOOKMARKS //
 
 export const selectFetchProfileBookmarksState = (state: RootState) =>
