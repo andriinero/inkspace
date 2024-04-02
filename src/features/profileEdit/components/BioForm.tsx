@@ -22,8 +22,8 @@ import * as S from './BioForm.styled';
 const BioFormSchema = z.object({
   bio: z
     .string()
-    .min(3, 'Username must contain at least 3 characters')
-    .max(280, 'Username must contain at most 280 characters'),
+    .min(3, 'Bio must contain at least 3 characters')
+    .max(280, 'Bio must contain at most 280 characters'),
 });
 type TBioFormSchema = z.infer<typeof BioFormSchema>;
 

@@ -42,6 +42,9 @@ const ProfileEditPage = () => {
       transition={FadeIn.transition}
     >
       <S.WrapperMain>
+        <Dialog isModalOpen={isModalOpen} onModalClose={handleModalClose}>
+          <Outlet />
+        </Dialog>
         <S.Header>Edit Profile</S.Header>
         <S.ContentWrapper>
           <S.StyledLink onClick={handleModalOpen} to="/profile/edit/email">
@@ -78,9 +81,6 @@ const ProfileEditPage = () => {
             value="Delete account"
           />
         </S.ContentWrapper>
-        <Dialog isModalOpen={isModalOpen} onModalClose={handleModalClose}>
-          <Outlet />
-        </Dialog>
       </S.WrapperMain>
       <S.WrapperAside>
         <S.ProfileWrapper>

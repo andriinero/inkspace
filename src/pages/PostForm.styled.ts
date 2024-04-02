@@ -5,7 +5,7 @@ import { InputText } from '@/components/styled/InputText';
 import { InputLabel } from '@/components/styled/InputLabel';
 import { FormButton } from '@/components/styled/FormButton';
 import { motion } from 'framer-motion';
-import InputFile from '@/components/general/InputFile';
+import { InputFile } from '@/components/styled/InputFile.styled';
 
 export const Wrapper = styled(motion.div)`
   display: flex;

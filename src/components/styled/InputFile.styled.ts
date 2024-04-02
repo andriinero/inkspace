@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Input = styled.input`
+export const InputFile = styled.input`
   &::-webkit-file-upload-button {
     padding: 0.5em;
     border: 1px solid transparent;

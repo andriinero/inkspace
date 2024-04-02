@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { ErrorMessage } from '@/components/styled/ErrorMessage';
-import { FormButton } from '@/components/styled/FormButton';
 import { InputLabel } from '@/components/styled/InputLabel';
-import InputFile from '@/components/general/InputFile';
+import { GreenButton } from '@/components/styled/GreenButton';
+import { InputFile } from '@/components/styled/InputFile.styled';
 
 export const WrapperMain = styled.div`
   display: flex;
@@ -19,16 +19,14 @@ export const Form = styled.form`
   gap: 0.2rem;
 `;
 
-export const InputGroup = styled.div`
+export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-`;
-
-export const InputItem = styled.div`
-  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
+
+  width: 100%;
 `;
 
 export const StyledInputLabel = styled(InputLabel)`
@@ -37,14 +35,34 @@ export const StyledInputLabel = styled(InputLabel)`
 `;
 
 export const StyledInputFile = styled(InputFile)`
+  min-width: 40ch;
+  background-color: ${({ theme }) => theme.color.main_bg_primary};
+  border-radius: 6px;
+
   &:focus {
     outline: none;
     box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
   }
+  &::-webkit-file-upload-button {
+    background-color: ${({ theme }) => theme.color.main_bg_primary};
+  }
+`;
+
+export const InputDescription = styled.span`
+  align-self: flex-start;
+
+  font-size: 0.9rem;
+  font-weight: 300;
+`;
+
+export const ControlsWrapper = styled.div`
+  display: flex;
+  align-self: flex-end;
+  gap: 1rem;
 `;
 
 export const StyledErrorMessage = styled(ErrorMessage)``;
 
-export const SaveButton = styled(FormButton)`
-  align-self: flex-start;
-`;
+export const SubmitButton = styled(GreenButton)``;
+
+export const CancelButton = styled(GreenButton)``;
