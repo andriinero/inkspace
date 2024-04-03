@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
@@ -46,7 +45,6 @@ const DeleteForm = () => {
   const { error } = useAppSelector(selectDeleteProfileState);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const handleModalClose = (): void => {
     dispatch(closeModal());
@@ -63,8 +61,6 @@ const DeleteForm = () => {
             PushNotificationType.SUCCESS
           )
         );
-        dispatch(logout());
-        navigate('/');
       }
     } catch (err) {
       dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));

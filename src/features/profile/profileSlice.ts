@@ -4,6 +4,8 @@ import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/lib/storage';
 
+import { logout } from '../auth/authSlice';
+
 import { RootState } from '@/app/store';
 import { ProfileData, ProfileDataSchema } from '@/types/entityData/ProfileData';
 import { PostData, PostDataSchema } from '@/types/entityData/PostData';
@@ -184,7 +186,7 @@ export const deleteProfile = createAsyncThunk<
   TargetObjectId,
   void,
   { rejectValue: ErrorData; state: RootState }
->('profile/deleteProfile', async (_, { getState, rejectWithValue }) => {
+>('profile/deleteProfile', async (_, { getState, rejectWithValue, dispatch }) => {
   const token = storage.getToken();
   const currentUserId = getState().profile.profileData?._id;
 
@@ -200,6 +202,8 @@ export const deleteProfile = createAsyncThunk<
 
   const validationResult = TargetObjectIdSchema.safeParse(data);
   if (!validationResult.success) console.error(validationResult);
+
+  dispatch(logout());
 
   return data as TargetObjectId;
 });

@@ -2,7 +2,6 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from 'react-router-dom';
 
 import {
   closeModal,
@@ -43,7 +42,6 @@ const EmailForm = () => {
   const { error } = useAppSelector(selectPutPersonalDetailsState);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const handleModalClose = (): void => {
     dispatch(closeModal());
@@ -58,7 +56,6 @@ const EmailForm = () => {
             addNotification('email updated successfully', PushNotificationType.SUCCESS)
           );
           dispatch(closeModal());
-          navigate('/');
         }
       } catch (err) {
         dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));

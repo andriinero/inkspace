@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import {
@@ -45,7 +44,6 @@ const PasswordForm = () => {
   const { error } = useAppSelector(selectPutPasswordState);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const handleModalClose = (): void => {
     dispatch(closeModal());
@@ -62,7 +60,6 @@ const PasswordForm = () => {
             addNotification('password updated successfully', PushNotificationType.SUCCESS)
           );
           dispatch(closeModal());
-          navigate('/');
         }
       } catch (err) {
         dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
