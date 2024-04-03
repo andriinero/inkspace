@@ -1,18 +1,20 @@
 import { z } from 'zod';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { selectProfileUsername } from '@/features/profile/profileSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { closeModal, deleteProfile, selectDeleteProfileState } from '../profileEditSlice';
+import { logout } from '@/features/auth/authSlice';
+
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import FormWrapper from './FormWrapper';
 import * as S from './DeleteForm.styled';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { useNavigate } from 'react-router-dom';
-import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-import { closeModal, selectPutProfileImageState } from '../profileEditSlice';
 
 const DeleteFormSchema = z
   .object({
@@ -37,7 +39,7 @@ const DeleteForm = () => {
     defaultValues: { username: currentUsername, confirmUsername: '' },
   });
 
-  const { error } = useAppSelector(selectPutProfileImageState);
+  const { error } = useAppSelector(selectDeleteProfileState);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -46,9 +48,9 @@ const DeleteForm = () => {
     dispatch(closeModal());
   };
 
-  const handleFormSubmit = async (formData: TDeleteFormSchema): Promise<void> => {
+  const handleFormSubmit = async (): Promise<void> => {
     try {
-      const response = await dispatch().unwrap();
+      const response = await dispatch(deleteProfile()).unwrap();
 
       if (response) {
         dispatch(
@@ -57,6 +59,8 @@ const DeleteForm = () => {
             PushNotificationType.SUCCESS
           )
         );
+        dispatch(logout());
+        navigate('/');
       }
     } catch (err) {
       dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));

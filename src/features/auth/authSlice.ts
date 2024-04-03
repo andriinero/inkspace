@@ -109,8 +109,9 @@ export const initAuth = (): AppThunk => (dispatch) => {
   }
 };
 
-export const logout = (): AppThunk => () => {
+export const logout = (): AppThunk => (dispatch) => {
   storage.clearToken();
+  dispatch(clearAuthData());
 };
 
 const authSlice = createSlice({
@@ -131,6 +132,9 @@ const authSlice = createSlice({
     },
     resetLoadingState(state) {
       state.fetchAuthDataState.isLoading = false;
+    },
+    clearAuthData(state) {
+      state.authData = null;
     },
   },
   extraReducers(builder) {
@@ -176,7 +180,7 @@ const authSlice = createSlice({
   },
 });
 
-const { resetLoadingState } = authSlice.actions;
+const { resetLoadingState, clearAuthData } = authSlice.actions;
 
 export const { openSignUpModal, closeSignUpModal, openLoginModal, closeLoginModal } =
   authSlice.actions;

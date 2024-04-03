@@ -23,6 +23,7 @@ type ProfileEditState = {
   putPersonalDetailsState: { isLoading: boolean; error: ErrorData | null };
   putPasswordState: { isLoading: boolean; error: ErrorData | null };
   putProfileImageState: { isLoading: boolean; error: ErrorData | null };
+  deleteProfileState: { isLoading: boolean; error: ErrorData | null };
 };
 
 const initialState: ProfileEditState = {
@@ -30,13 +31,14 @@ const initialState: ProfileEditState = {
   putPersonalDetailsState: { isLoading: false, error: null },
   putPasswordState: { isLoading: false, error: null },
   putProfileImageState: { isLoading: false, error: null },
+  deleteProfileState: { isLoading: false, error: null },
 };
 
 export const putPersonalDetails = createAsyncThunk<
   PutProfileData,
   TProfileDataEditSchema,
   { rejectValue: ErrorData }
->('profile/putPersonalDetails', async (profileData, { rejectWithValue }) => {
+>('profileEdit/putPersonalDetails', async (profileData, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch('/api/profile', {
@@ -61,7 +63,7 @@ export const putPassword = createAsyncThunk<
   PutProfileData,
   TProfilePasswordEditSchema,
   { rejectValue: ErrorData }
->('profile/putPassword', async (passwordData, { rejectWithValue }) => {
+>('profileEdit/putPassword', async (passwordData, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch('/api/profile/password', {
@@ -86,7 +88,7 @@ export const putProfileImage = createAsyncThunk<
   TargetObjectId,
   File,
   { rejectValue: ErrorData }
->('profile/putProfileImage', async (image, { rejectWithValue, dispatch }) => {
+>('profileEdit/putProfileImage', async (image, { rejectWithValue, dispatch }) => {
   const token = storage.getToken();
 
   const formData = new FormData();
@@ -107,6 +109,30 @@ export const putProfileImage = createAsyncThunk<
   if (!validationResult.success) console.error(validationResult);
 
   dispatch(updateImageId((data as TargetObjectId)._id));
+
+  return data as TargetObjectId;
+});
+
+export const deleteProfile = createAsyncThunk<
+  TargetObjectId,
+  void,
+  { rejectValue: ErrorData; state: RootState }
+>('profileEdit/deleteProfile', async (_, { getState, rejectWithValue }) => {
+  const token = storage.getToken();
+  const currentUserId = getState().profile.profileData?._id;
+
+  const { data, responseState } = await useAppFetch(`/api/profile/${currentUserId}`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+
+  const validationResult = TargetObjectIdSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
   return data as TargetObjectId;
 });
@@ -160,6 +186,18 @@ const profileEditSlice = createSlice({
         state.putProfileImageState.isLoading = false;
         state.putProfileImageState.error = action.payload || (action.error as ErrorData);
       });
+    builder
+      .addCase(deleteProfile.pending, (state) => {
+        state.deleteProfileState.isLoading = true;
+        state.putProfileImageState.error = null;
+      })
+      .addCase(deleteProfile.fulfilled, (state) => {
+        state.deleteProfileState.isLoading = false;
+      })
+      .addCase(deleteProfile.rejected, (state, action) => {
+        state.deleteProfileState.isLoading = false;
+        state.deleteProfileState.error = action.payload || (action.error as ErrorData);
+      });
   },
 });
 
@@ -178,3 +216,6 @@ export const selectPutPasswordState = (state: RootState) =>
 
 export const selectPutProfileImageState = (state: RootState) =>
   state.profileEdit.putProfileImageState;
+
+export const selectDeleteProfileState = (state: RootState) =>
+  state.profileEdit.deleteProfileState;
