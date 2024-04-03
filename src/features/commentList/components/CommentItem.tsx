@@ -65,7 +65,7 @@ const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps)
     <S.Wrapper>
       <S.Header>
         <S.WrapperAuthor>
-          <S.AuthorIcon imageId={author.profile_image} altText="Author Icon" />
+          <S.AuthorIcon imageId={author.profile_image} placeholderSrc='/portrait-placeholder.png' altText="Author Icon" />
           <S.WrapperInfo>
             <S.StyledLink to={`/authors/${author._id}`}>
               <S.StyledUsername>{author.username}</S.StyledUsername>
