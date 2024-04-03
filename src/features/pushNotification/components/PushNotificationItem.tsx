@@ -41,7 +41,8 @@ const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {
       exit={PushFromTop.hidden}
     >
       <MessageWrapper>
-        {statusTypePrefixMap[type]}{message}.
+        {statusTypePrefixMap[type]}
+        {message}.
       </MessageWrapper>
       <StyledAppIcon src="/close.svg" onClick={handleCloseClick} />
     </Notification>

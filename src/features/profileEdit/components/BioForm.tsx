@@ -52,6 +52,7 @@ const BioForm = () => {
     if (!isSubmitting)
       try {
         const response = await dispatch(putPersonalDetails(formData)).unwrap();
+
         if (response) {
           dispatch(
             addNotification(

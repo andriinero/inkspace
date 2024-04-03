@@ -75,11 +75,13 @@ const ProfileEditPage = () => {
           </S.StyledLink>
         </S.ContentWrapper>
         <S.ContentWrapper>
-          <S.DeleteButton
-            onClick={handleModalOpen}
-            type="button"
-            value="Delete account"
-          />
+          <S.StyledLink onClick={handleModalOpen} to="/profile/edit/delete">
+            <S.DeleteButton
+              onClick={handleModalOpen}
+              type="button"
+              value="Delete account"
+            />
+          </S.StyledLink>
         </S.ContentWrapper>
       </S.WrapperMain>
       <S.WrapperAside>

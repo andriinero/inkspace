@@ -52,10 +52,11 @@ const UsernameForm = () => {
     if (!isSubmitting)
       try {
         const response = await dispatch(putPersonalDetails(formData)).unwrap();
-        // FIXME: remove comment
-        console.log(response);
+
         if (response) {
-          dispatch(addNotification('username updated successfully', PushNotificationType.SUCCESS));
+          dispatch(
+            addNotification('username updated successfully', PushNotificationType.SUCCESS)
+          );
           dispatch(closeModal());
           navigate('/');
         }

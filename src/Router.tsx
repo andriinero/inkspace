@@ -17,6 +17,7 @@ import PasswordForm from './features/profileEdit/components/PasswordForm';
 import EmailForm from './features/profileEdit/components/EmailForm';
 import BioForm from './features/profileEdit/components/BioForm';
 import ImageForm from './features/profileEdit/components/ImageForm';
+import DeleteForm from './features/profileEdit/components/DeleteForm';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -54,6 +55,7 @@ const Router = () => {
             { path: '/profile/edit/bio', element: <BioForm /> },
             { path: '/profile/edit/password', element: <PasswordForm /> },
             { path: '/profile/edit/image', element: <ImageForm /> },
+            { path: '/profile/edit/delete', element: <DeleteForm /> },
           ],
         },
         { path: '/authors/:authorid', element: <AuthorPage /> },
