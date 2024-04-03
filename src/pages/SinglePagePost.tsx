@@ -14,8 +14,8 @@ import { selectProfileId } from '@/features/profile/profileSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { FadeIn } from '@/styles/animations/FadeIn';
-import { Body, Header, PostWrapper, Wrapper } from './SinglePagePost.styled';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo';
 import Error from '@/components/general/Error';
@@ -24,7 +24,13 @@ import PostComments from '@/features/commentList/components/CommentList';
 import PostPageLoader from '@/components/loaders/PostPageLoader';
 import ScrollProgressBar from '@/components/general/ScrollProgressBar';
 import JumpButton from '@/components/general/JumpButton';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import {
+  Body,
+  Header,
+  PostWrapper,
+  PreviewImage,
+  Wrapper,
+} from './SinglePagePost.styled';
 
 const SinglePagePost = () => {
   const { postid } = useParams();
@@ -42,7 +48,7 @@ const SinglePagePost = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(fetchPost(postid)).unwrap();
+        await dispatch(fetchPost(postid!)).unwrap();
       } catch (err) {
         dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
       }
@@ -73,6 +79,12 @@ const SinglePagePost = () => {
             />
             {isAuthenticated && (
               <PostControls postId={postData._id} isAuthor={isAuthor} />
+            )}
+            {postData.thumbnail_image && (
+              <PreviewImage
+                imageId={postData.thumbnail_image}
+                altText="Post Preview Image"
+              />
             )}
             <Body>{parse(postData.body)}</Body>
           </PostWrapper>

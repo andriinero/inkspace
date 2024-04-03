@@ -1,3 +1,4 @@
+import AppImage from '@/features/appImages/components/AppImage';
 import { PostBody } from '@/styles/PostBody.styled';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
@@ -19,6 +20,11 @@ export const PostWrapper = styled(motion.div)`
 
 export const Header = styled.h1`
   font-size: 2.7rem;
+`;
+
+export const PreviewImage = styled(AppImage)`
+  min-width: 100%;
+  object-fit: cover;
 `;
 
 export const Body = styled.div`

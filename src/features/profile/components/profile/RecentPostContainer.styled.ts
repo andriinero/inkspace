@@ -3,7 +3,11 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div``;
 
-export const PostsList = styled(motion.ul)``;
+export const PostsList = styled(motion.ul)`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+`;
 
 export const CalloutText = styled.h4`
   padding: 5rem 0;

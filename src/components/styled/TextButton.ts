@@ -10,4 +10,10 @@ export const TextButton = styled(motion.input)`
   text-align: center;
 
   cursor: pointer;
+
+  transition: color 100ms;
+
+  &:hover {
+    color: ${({ theme }) => theme.color.text_primary};
+  }
 `;

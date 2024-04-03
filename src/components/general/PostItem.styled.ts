@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import AppImage from '@/features/appImages/components/AppImage';
 import { Icon } from '../styled/AppIcon.styled';
 import { MenuItem, MenuItemDanger, MenuItemSuccess } from '../styled/MenuItem';
+import PostTopic from './PostTopic';
 
 export const Wrapper = styled(motion.li)`
   display: grid;
@@ -32,32 +33,6 @@ export const StyledLink = styled(NavLink)`
   color: inherit;
   text-decoration: none;
 `;
-
-// #region PostHead
-
-export const Head = styled.div`
-  grid-area: head;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-
-  font-weight: 300;
-  font-size: 0.9rem;
-`;
-
-export const AuthorIcon = styled(AppImage)`
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-
-  -webkit-user-drag: none;
-`;
-
-export const Divider = styled.span`
-  font-size: 0.9rem;
-`;
-
-// #endregion
 
 // #region PostBody
 
@@ -124,20 +99,7 @@ export const MiscContainer = styled.div`
   gap: 1rem;
 `;
 
-export const Topic = styled.span`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 0.3rem 0.5rem;
-  border: 1px solid ${({ theme }) => theme.color.topic_border};
-  border-radius: 16px;
-  background-color: ${({ theme }) => theme.color.topic_bg};
-
-  font-size: 0.8rem;
-
-  cursor: pointer;
-`;
+export const Topic = styled(PostTopic)``;
 
 export const PostReadEstimate = styled(PostReadTime)`
   font-size: 0.75rem;

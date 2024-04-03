@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { useNavigate } from 'react-router-dom';
 import useBookmarkPostAction from '@/hooks/useBookmarkPostAction';
@@ -15,18 +15,17 @@ import {
 } from '@/features/profile/profileSlice';
 import { deletePost, setTopic } from '../../features/postList/postListSlice';
 import { enterEditMode } from '@/features/postForm/postFormSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 import { TopicData } from '@/types/entityData/TopicData';
 import { Waterfall } from '@/styles/animations/Waterfall';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
-import PostDate from '@/components/general/TimeAgo';
-import { Username } from '@/components/styled/Username.styled';
 import Dialog from '@/components/general/Dialog';
 import DeleteConfirm from '@/components/general/DeleteConfirm';
+import PostItemHead from './PostItemHead';
 import * as S from './PostItem.styled';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 type PostItemProps = {
   _id: string;
@@ -120,20 +119,7 @@ const PostItem = ({
 
   return (
     <S.Wrapper variants={Waterfall.item}>
-      <S.Head>
-        <S.StyledLink to={`/authors/${author._id}`}>
-          <S.AuthorIcon
-            imageId={author.profile_image}
-            placeholderSrc="/portrait-placeholder.png"
-            altText="Author Icon"
-          />
-        </S.StyledLink>
-        <S.StyledLink to={`/authors/${author._id}`}>
-          <Username>{author.username}</Username>
-        </S.StyledLink>
-        <S.Divider>·</S.Divider>
-        <PostDate date={date} />
-      </S.Head>
+      <PostItemHead author={author} postDate={date} />
       <S.Body>
         <S.StyledLink to={`/posts/${_id}`}>
           <S.StyledTitle>{title}</S.StyledTitle>
@@ -143,7 +129,7 @@ const PostItem = ({
       <S.PreviewImage imageId={thumbnail_image} altText="Post Image Preview" />
       <S.Bottom>
         <S.MiscContainer>
-          {topic && <S.Topic onClick={handleTopicClick}>{topic.name}</S.Topic>}
+          {topic && <S.Topic onTopicClick={handleTopicClick}>{topic.name}</S.Topic>}
           <S.PostReadEstimate bodyLength={body.length} />
         </S.MiscContainer>
         <S.Controls>

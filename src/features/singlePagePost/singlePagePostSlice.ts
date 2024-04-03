@@ -121,7 +121,8 @@ export const selectSinglePost = (state: RootState) => state.singlePagePost.post;
 
 export const selectCurrentPostData = (state: RootState) => state.singlePagePost.post;
 
-export const selectCurrentPostAuthor = (state: RootState) => state.singlePagePost.post?.author;
+export const selectCurrentPostAuthor = (state: RootState) =>
+  state.singlePagePost.post?.author;
 
 export const selectFetchPostState = (state: RootState) =>
   state.singlePagePost.fetchPostState;

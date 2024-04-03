@@ -7,7 +7,7 @@ import { Waterfall } from '@/styles/animations/Waterfall';
 import PostListLoader from '@/components/loaders/PostListLoader';
 import Error from '@/components/general/Error';
 import { CalloutText, PostsList, Wrapper } from './RecentPostContainer.styled';
-import PostItem from '@/components/general/PostItem';
+import GeneralPostItem from '@/components/general/GeneralPostItem';
 
 const RecentPosts = () => {
   const postsList = useAppSelector(selectProfilePostsList);
@@ -24,7 +24,7 @@ const RecentPosts = () => {
       ) : (
         <PostsList variants={Waterfall.container} initial="hidden" animate="visible">
           {postsList.map((b) => (
-            <PostItem key={b._id} {...b} />
+            <GeneralPostItem key={b._id} {...b} />
           ))}
         </PostsList>
       )}

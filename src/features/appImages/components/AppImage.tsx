@@ -13,19 +13,19 @@ import { FadeIn } from '@/styles/animations/FadeIn';
 import { Image, BlankPlaceholder } from './AppImage.styled';
 
 type AppImageProps = {
-  className?: string;
   altText?: string;
   imageId?: string;
   placeholderSrc?: string;
   onClick?: () => void;
+  className?: string;
 };
 
 const AppImage = ({
-  className,
   altText,
   imageId,
   placeholderSrc = '/landscape-placeholder.png',
   onClick,
+  className,
 }: AppImageProps) => {
   const imageURL = useAppSelector(selectImageURL(imageId));
   const isImageInQueue = useAppSelector(selectIsImageInQueue(imageId));
@@ -55,9 +55,9 @@ const AppImage = ({
         initial={FadeIn.hidden}
         animate={FadeIn.visible}
         transition={FadeIn.transition}
-        className={className}
         src={imgSrc}
         alt={altText}
+        className={className}
       />
     );
 
@@ -69,9 +69,9 @@ const AppImage = ({
       initial={FadeIn.hidden}
       animate={FadeIn.visible}
       transition={FadeIn.transition}
-      className={className}
       src={imgSrc}
       alt={altText}
+      className={className}
     />
   );
 };
