@@ -12,7 +12,7 @@ import {
   closeModal,
   openModal,
   selectIsProfileModalOpen,
-} from '@/features/profileEdit/profileEditSlice';
+} from '@/features/profile/profileSlice';
 import * as S from './ProfileEditPage.styled';
 
 const ProfileEditPage = () => {

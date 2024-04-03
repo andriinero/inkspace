@@ -7,7 +7,7 @@ import {
   closeModal,
   putProfileImage,
   selectPutProfileImageState,
-} from '../profileEditSlice';
+} from '@/features/profile/profileSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { ImageSchema, TImageSchema } from '@/types/formSchemas/ProfileImageSchema';

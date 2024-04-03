@@ -8,16 +8,16 @@ import PostForm from './pages/PostForm';
 import Profile from './pages/Profile';
 import AuthorPage from './pages/AuthorPage';
 import ProfileEditPage from './pages/ProfileEditPage';
-import BookmarkContainer from './features/profile/components/BookmarkContainer';
-import RecentPosts from './features/profile/components/RecentPostItem';
-import FollowedUserContainer from './features/profile/components/FollowedUserContainer';
-import IgnoredUserContainer from './features/profile/components/IgnoredUserContainer';
-import UsernameForm from './features/profileEdit/components/UsernameForm';
-import PasswordForm from './features/profileEdit/components/PasswordForm';
-import EmailForm from './features/profileEdit/components/EmailForm';
-import BioForm from './features/profileEdit/components/BioForm';
-import ImageForm from './features/profileEdit/components/ImageForm';
-import DeleteForm from './features/profileEdit/components/DeleteForm';
+import BookmarkContainer from './features/profile/components/profile/BookmarkContainer';
+import RecentPosts from './features/profile/components/profile/RecentPostItem';
+import FollowedUserContainer from './features/profile/components/profile/FollowedUserContainer';
+import IgnoredUserContainer from './features/profile/components/profile/IgnoredUserContainer';
+import UsernameForm from './features/profile/components/edit/UsernameForm';
+import PasswordForm from './features/profile/components/edit/PasswordForm';
+import EmailForm from './features/profile/components/edit/EmailForm';
+import BioForm from './features/profile/components/edit/BioForm';
+import ImageForm from './features/profile/components/edit/ImageForm';
+import DeleteForm from './features/profile/components/edit/DeleteForm';
 
 const Router = () => {
   const router = createBrowserRouter([

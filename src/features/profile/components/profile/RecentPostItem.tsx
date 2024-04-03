@@ -1,6 +1,6 @@
 import { useAppSelector } from '@/app/hooks';
 
-import { selectFetchProfilePostsState, selectProfilePostsList } from '../profileSlice';
+import { selectFetchProfilePostsState, selectProfilePostsList } from '../../profileSlice';
 
 import { Waterfall } from '@/styles/animations/Waterfall';
 

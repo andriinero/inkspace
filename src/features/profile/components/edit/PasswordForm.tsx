@@ -4,7 +4,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { closeModal, putPassword, selectPutPasswordState } from '../profileEditSlice';
+import {
+  closeModal,
+  putPassword,
+  selectPutPasswordState,
+} from '@/features/profile/profileSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
@@ -14,7 +18,7 @@ import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 import FormWrapper from './FormWrapper';
 import * as S from './PasswordForm.styled';
 
-export const ProfilePasswordEditSchema = z
+const ProfilePasswordEditSchema = z
   .object({
     password: z.string().min(8, 'Password must contain at least 8 characters'),
     passwordConfirmation: z.string(),

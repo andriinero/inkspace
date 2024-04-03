@@ -8,35 +8,36 @@ import {
   closeModal,
   putPersonalDetails,
   selectPutPersonalDetailsState,
-} from '../profileEditSlice';
+} from '@/features/profile/profileSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
-import { selectProfileUsername } from '@/features/profile/profileSlice';
+import { selectProfileEmail } from '@/features/profile/profileSlice';
 
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import FormWrapper from './FormWrapper';
-import * as S from './UsernameForm.styled';
+import * as S from './EmailForm.styled';
 
-const UsernameFormSchema = z.object({
-  username: z
+const EmailFormSchema = z.object({
+  email: z
     .string()
-    .min(3, 'Username must contain at least 3 characters')
-    .max(100, 'Username must contain at most 100 characters'),
+    .email()
+    .min(3, 'Email must contain at least 3 characters')
+    .max(100, 'Email must contain at most 100 characters'),
 });
-type TUsernameFormSchema = z.infer<typeof UsernameFormSchema>;
+type TEmailFormSchema = z.infer<typeof EmailFormSchema>;
 
-const UsernameForm = () => {
-  const username = useAppSelector(selectProfileUsername) as string;
+const EmailForm = () => {
+  const email = useAppSelector(selectProfileEmail) as string;
 
   const {
     register,
     handleSubmit,
     formState: { isDirty, isSubmitting, errors },
-  } = useForm<TUsernameFormSchema>({
-    resolver: zodResolver(UsernameFormSchema),
-    defaultValues: { username },
+  } = useForm<TEmailFormSchema>({
+    resolver: zodResolver(EmailFormSchema),
+    defaultValues: { email },
   });
 
   const { error } = useAppSelector(selectPutPersonalDetailsState);
@@ -48,14 +49,13 @@ const UsernameForm = () => {
     dispatch(closeModal());
   };
 
-  const handleFormSubmit = async (formData: TUsernameFormSchema): Promise<void> => {
+  const handleFormSubmit = async (formData: TEmailFormSchema): Promise<void> => {
     if (!isSubmitting)
       try {
         const response = await dispatch(putPersonalDetails(formData)).unwrap();
-
         if (response) {
           dispatch(
-            addNotification('username updated successfully', PushNotificationType.SUCCESS)
+            addNotification('email updated successfully', PushNotificationType.SUCCESS)
           );
           dispatch(closeModal());
           navigate('/');
@@ -71,11 +71,11 @@ const UsernameForm = () => {
     <FormWrapper>
       <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
         <S.InputWrapper>
-          <S.StyledInputLabel htmlFor="edit-username">Username</S.StyledInputLabel>
-          <S.StyledInputText id="edit-username" {...register('username')} />
-          <S.InputDescription>You can sign in using this username</S.InputDescription>
-          <S.StyledErrorMessage $isVisible={Boolean(errors.username)}>
-            {errors.username?.message}
+          <S.StyledInputLabel htmlFor="edit-email">Email</S.StyledInputLabel>
+          <S.StyledInputText id="edit-email" {...register('email')} />
+          <S.InputDescription>Your personal email</S.InputDescription>
+          <S.StyledErrorMessage $isVisible={Boolean(errors.email)}>
+            {errors.email?.message}
           </S.StyledErrorMessage>
           {error && (
             <S.StyledErrorMessage $isVisible={true}>
@@ -105,4 +105,4 @@ const UsernameForm = () => {
   );
 };
 
-export default UsernameForm;
+export default EmailForm;

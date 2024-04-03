@@ -24,7 +24,7 @@ import { PushNotificationType } from '@/types/entityData/StatusNotificationData'
 import Error from '@/components/general/Error';
 import JumpButton from '@/components/general/JumpButton';
 import * as S from './Profile.styled';
-import ProfileTabs from '@/features/profile/components/ProfileTabs';
+import ProfileTabs from '@/features/profile/components/profile/ProfileTabs';
 
 const Profile = () => {
   const { isScrollingDown } = useWindowScrollDirection();

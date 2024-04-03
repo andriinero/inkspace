@@ -1,20 +1,20 @@
 import { useAppSelector } from '@/app/hooks';
 
 import {
-  selectFetchIgnoredUsersState,
-  selectProfileIgnoredUsersList,
-} from '../profileSlice';
+  selectFetchFollowedUsersState,
+  selectProfileFollowedUsersList,
+} from '../../profileSlice';
 
 import { Waterfall } from '@/styles/animations/Waterfall';
 
 import UsersListLoader from '@/components/loaders/UsersListLoader';
 import Error from '@/components/general/Error';
-import IgnoredUserItem from './IgnoredUserItem';
-import { CalloutText, FollowedUsersList, Wrapper } from './IgnoredUserContainer.styled';
+import { CalloutText, FollowedUsersList, Wrapper } from './FollowedUserContainer.styled';
+import FollowedUserItem from '@/features/profile/components/profile/FollowedUserItem';
 
-const IgnoredUserContainer = () => {
-  const usersList = useAppSelector(selectProfileIgnoredUsersList);
-  const { isLoading, error } = useAppSelector(selectFetchIgnoredUsersState);
+const FollowedUserContainer = () => {
+  const usersList = useAppSelector(selectProfileFollowedUsersList);
+  const { isLoading, error } = useAppSelector(selectFetchFollowedUsersState);
 
   return (
     <Wrapper>
@@ -23,7 +23,7 @@ const IgnoredUserContainer = () => {
       ) : error ? (
         <Error />
       ) : usersList.length === 0 ? (
-        <CalloutText>This list is empty!</CalloutText>
+        <CalloutText>No one followed yet!</CalloutText>
       ) : (
         <FollowedUsersList
           variants={Waterfall.container}
@@ -31,7 +31,7 @@ const IgnoredUserContainer = () => {
           animate="visible"
         >
           {usersList.map((u) => (
-            <IgnoredUserItem key={u._id} {...u} />
+            <FollowedUserItem key={u._id} {...u} />
           ))}
         </FollowedUsersList>
       )}
@@ -39,4 +39,4 @@ const IgnoredUserContainer = () => {
   );
 };
 
-export default IgnoredUserContainer;
+export default FollowedUserContainer;

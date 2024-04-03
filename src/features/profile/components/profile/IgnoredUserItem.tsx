@@ -12,7 +12,7 @@ import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-import * as S from '@/features/profile/components/IgnoredUserItem.styled';
+import * as S from '@/features/profile/components/profile/IgnoredUserItem.styled';
 
 type IgnoredUserProps = {
   className?: string;

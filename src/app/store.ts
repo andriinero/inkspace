@@ -10,7 +10,6 @@ import commentEditorReducer from '@/features/commentEditor/commentEditorSlice';
 import profileReducer from '@/features/profile/profileSlice';
 import authorPageReducer from '@/features/authorPage/authorPageSlice';
 import appImagesReducer from '@/features/appImages/appImagesSlice';
-import profileEditReducer from '@/features/profileEdit/profileEditSlice';
 import pushNotificationReducer from '@/features/pushNotification/pushNotificationSlice';
 
 export const store = configureStore({
@@ -25,7 +24,6 @@ export const store = configureStore({
     profile: profileReducer,
     authorPage: authorPageReducer,
     appImages: appImagesReducer,
-    profileEdit: profileEditReducer,
     pushNotification: pushNotificationReducer,
   },
 });

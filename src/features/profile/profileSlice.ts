@@ -16,21 +16,26 @@ import {
   GeneralAuthorData,
   GeneralAuthorDataSchema,
 } from '@/types/entityData/GeneralAuthorData';
+import { PutProfileDataSchema } from '@/types/fetchResponse/success/PutProfileEdit';
+import { TProfileDataEditSchema } from '@/types/formSchemas/ProfileDataEditSchema';
+import { PutProfileData } from '@/types/fetchResponse/success/PutProfileEdit';
+import { TProfilePasswordEditSchema } from './components/edit/PasswordForm';
 
 type ProfileState = {
+  isModalOpen: boolean;
+  // DATA //
   profileData: ProfileData | null;
   profileBookmarkList: PostData[];
   profilePostsList: PostData[];
   profileFollowedUsersList: GeneralAuthorData[];
   profileIgnoredUsersList: GeneralAuthorData[];
+  // FETCH STATE //
   fetchProfileDataState: { isLoading: boolean; error: ErrorData | null };
   fetchProfileBookmarksState: {
     isLoading: boolean;
     error: ErrorData | null;
   };
   fetchProfilePostsState: { isLoading: boolean; error: ErrorData | null };
-  bookmarkActionState: { isLoading: boolean; error: ErrorData | null };
-  followActionState: { isLoading: boolean; error: ErrorData | null };
   fetchFollowedUsersState: {
     isLoading: boolean;
     error: ErrorData | null;
@@ -39,23 +44,38 @@ type ProfileState = {
     isLoading: boolean;
     error: ErrorData | null;
   };
+  putPersonalDetailsState: { isLoading: boolean; error: ErrorData | null };
+  putPasswordState: { isLoading: boolean; error: ErrorData | null };
+  putProfileImageState: { isLoading: boolean; error: ErrorData | null };
+  deleteProfileState: { isLoading: boolean; error: ErrorData | null };
+  // ACTION STATE //
   ignoreUserActionState: { isLoading: boolean; error: ErrorData | null };
+  bookmarkActionState: { isLoading: boolean; error: ErrorData | null };
+  followActionState: { isLoading: boolean; error: ErrorData | null };
 };
 
 const initialState: ProfileState = {
+  isModalOpen: false,
+  // DATA //
   profileData: null,
   profileBookmarkList: [],
   profilePostsList: [],
   profileFollowedUsersList: [],
   profileIgnoredUsersList: [],
+  // FETCH STATE //
+  fetchProfileDataState: { isLoading: true, error: null },
   fetchProfileBookmarksState: { isLoading: true, error: null },
   fetchProfilePostsState: { isLoading: true, error: null },
-  fetchProfileDataState: { isLoading: true, error: null },
-  bookmarkActionState: { isLoading: false, error: null },
-  followActionState: { isLoading: false, error: null },
   fetchFollowedUsersState: { isLoading: true, error: null },
   fetchIgnoredUsersState: { isLoading: true, error: null },
+  putPersonalDetailsState: { isLoading: false, error: null },
+  putPasswordState: { isLoading: false, error: null },
+  putProfileImageState: { isLoading: false, error: null },
+  deleteProfileState: { isLoading: false, error: null },
+  // ACTION STATE //
   ignoreUserActionState: { isLoading: false, error: null },
+  bookmarkActionState: { isLoading: false, error: null },
+  followActionState: { isLoading: false, error: null },
 };
 
 // PROFILE DATA //
@@ -81,6 +101,107 @@ export const fetchProfileData = createAsyncThunk<
   if (!validationResult.success) console.error(validationResult);
 
   return data as ProfileData;
+});
+
+export const putPersonalDetails = createAsyncThunk<
+  PutProfileData,
+  TProfileDataEditSchema,
+  { rejectValue: ErrorData }
+>('profile/putPersonalDetails', async (profileData, { rejectWithValue }) => {
+  const token = storage.getToken();
+
+  const { data, responseState } = await useAppFetch('/api/profile', {
+    method: 'PUT',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(profileData),
+  });
+
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+
+  const validationResult = PutProfileDataSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
+
+  return data as PutProfileData;
+});
+
+export const putPassword = createAsyncThunk<
+  PutProfileData,
+  TProfilePasswordEditSchema,
+  { rejectValue: ErrorData }
+>('profile/putPassword', async (passwordData, { rejectWithValue }) => {
+  const token = storage.getToken();
+
+  const { data, responseState } = await useAppFetch('/api/profile/password', {
+    method: 'PUT',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(passwordData),
+  });
+
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+
+  const validationResult = PutProfileDataSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
+
+  return data as PutProfileData;
+});
+
+export const putProfileImage = createAsyncThunk<
+  TargetObjectId,
+  File,
+  { rejectValue: ErrorData }
+>('profile/putProfileImage', async (image, { rejectWithValue }) => {
+  const token = storage.getToken();
+
+  const formData = new FormData();
+  formData.append('image', image);
+
+  const { data, responseState } = await useAppFetch('/api/profile/image', {
+    method: 'PUT',
+    mode: 'cors',
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+
+  const validationResult = TargetObjectIdSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
+
+  return data as TargetObjectId;
+});
+
+export const deleteProfile = createAsyncThunk<
+  TargetObjectId,
+  void,
+  { rejectValue: ErrorData; state: RootState }
+>('profile/deleteProfile', async (_, { getState, rejectWithValue }) => {
+  const token = storage.getToken();
+  const currentUserId = getState().profile.profileData?._id;
+
+  const { data, responseState } = await useAppFetch(`/api/profile/${currentUserId}`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+
+  const validationResult = TargetObjectIdSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
+
+  return data as TargetObjectId;
 });
 
 // BOOKMARKS //
@@ -343,8 +464,11 @@ const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    updateImageId(state, action) {
-      state.profileData!.profile_image = action.payload;
+    closeModal(state) {
+      state.isModalOpen = false;
+    },
+    openModal(state) {
+      state.isModalOpen = true;
     },
   },
   extraReducers(builder) {
@@ -362,6 +486,57 @@ const profileSlice = createSlice({
       .addCase(fetchProfileData.rejected, (state, action) => {
         state.fetchProfileDataState.isLoading = false;
         state.fetchProfileDataState.error = action.payload || (action.error as ErrorData);
+      });
+    builder
+      .addCase(putPersonalDetails.pending, (state) => {
+        state.putPersonalDetailsState.isLoading = true;
+        state.putPersonalDetailsState.error = null;
+      })
+      .addCase(putPersonalDetails.fulfilled, (state, { payload }) => {
+        state.profileData = { ...state.profileData!, ...payload };
+        state.putPersonalDetailsState.isLoading = false;
+      })
+      .addCase(putPersonalDetails.rejected, (state, action) => {
+        state.putPersonalDetailsState.isLoading = false;
+        state.putPersonalDetailsState.error =
+          action.payload || (action.error as ErrorData);
+      });
+    builder
+      .addCase(putPassword.pending, (state) => {
+        state.putPasswordState.isLoading = true;
+        state.putPasswordState.error = null;
+      })
+      .addCase(putPassword.fulfilled, (state) => {
+        state.putPasswordState.isLoading = false;
+      })
+      .addCase(putPassword.rejected, (state, action) => {
+        state.putPasswordState.isLoading = false;
+        state.putPasswordState.error = action.payload || (action.error as ErrorData);
+      });
+    builder
+      .addCase(putProfileImage.pending, (state) => {
+        state.putProfileImageState.isLoading = true;
+        state.putProfileImageState.error = null;
+      })
+      .addCase(putProfileImage.fulfilled, (state, action) => {
+        state.profileData!.profile_image = action.payload._id;
+        state.putProfileImageState.isLoading = false;
+      })
+      .addCase(putProfileImage.rejected, (state, action) => {
+        state.putProfileImageState.isLoading = false;
+        state.putProfileImageState.error = action.payload || (action.error as ErrorData);
+      });
+    builder
+      .addCase(deleteProfile.pending, (state) => {
+        state.deleteProfileState.isLoading = true;
+        state.putProfileImageState.error = null;
+      })
+      .addCase(deleteProfile.fulfilled, (state) => {
+        state.deleteProfileState.isLoading = false;
+      })
+      .addCase(deleteProfile.rejected, (state, action) => {
+        state.deleteProfileState.isLoading = false;
+        state.deleteProfileState.error = action.payload || (action.error as ErrorData);
       });
 
     // BOOKMARKS //
@@ -535,14 +710,28 @@ const profileSlice = createSlice({
   },
 });
 
-export const { updateImageId } = profileSlice.actions;
+export const { openModal, closeModal } = profileSlice.actions;
 
 export default profileSlice.reducer;
+
+export const selectIsProfileModalOpen = (state: RootState) => state.profile.isModalOpen;
 
 // PROFILE DATA //
 
 export const selectFetchProfileDataState = (state: RootState) =>
   state.profile.fetchProfileDataState;
+
+export const selectPutPersonalDetailsState = (state: RootState) =>
+  state.profile.putPersonalDetailsState;
+
+export const selectPutPasswordState = (state: RootState) =>
+  state.profile.putPasswordState;
+
+export const selectPutProfileImageState = (state: RootState) =>
+  state.profile.putProfileImageState;
+
+export const selectDeleteProfileState = (state: RootState) =>
+  state.profile.deleteProfileState;
 
 export const selectProfileData = (state: RootState) => state.profile.profileData;
 

@@ -3,7 +3,7 @@ import { useAppSelector } from '@/app/hooks';
 import {
   selectFetchProfileBookmarksState,
   selectProfileBookmarksList,
-} from '../profileSlice';
+} from '../../profileSlice';
 
 import { Waterfall } from '@/styles/animations/Waterfall';
 

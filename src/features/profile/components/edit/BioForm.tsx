@@ -8,36 +8,35 @@ import {
   closeModal,
   putPersonalDetails,
   selectPutPersonalDetailsState,
-} from '../profileEditSlice';
+} from '@/features/profile/profileSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
-import { selectProfileEmail } from '@/features/profile/profileSlice';
+import { selectProfileBio } from '@/features/profile/profileSlice';
 
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import FormWrapper from './FormWrapper';
-import * as S from './EmailForm.styled';
+import * as S from './BioForm.styled';
 
-const EmailFormSchema = z.object({
-  email: z
+const BioFormSchema = z.object({
+  bio: z
     .string()
-    .email()
-    .min(3, 'Email must contain at least 3 characters')
-    .max(100, 'Email must contain at most 100 characters'),
+    .min(3, 'Bio must contain at least 3 characters')
+    .max(280, 'Bio must contain at most 280 characters'),
 });
-type TEmailFormSchema = z.infer<typeof EmailFormSchema>;
+type TBioFormSchema = z.infer<typeof BioFormSchema>;
 
-const EmailForm = () => {
-  const email = useAppSelector(selectProfileEmail) as string;
+const BioForm = () => {
+  const bio = useAppSelector(selectProfileBio) as string;
 
   const {
     register,
     handleSubmit,
     formState: { isDirty, isSubmitting, errors },
-  } = useForm<TEmailFormSchema>({
-    resolver: zodResolver(EmailFormSchema),
-    defaultValues: { email },
+  } = useForm<TBioFormSchema>({
+    resolver: zodResolver(BioFormSchema),
+    defaultValues: { bio },
   });
 
   const { error } = useAppSelector(selectPutPersonalDetailsState);
@@ -49,13 +48,17 @@ const EmailForm = () => {
     dispatch(closeModal());
   };
 
-  const handleFormSubmit = async (formData: TEmailFormSchema): Promise<void> => {
+  const handleFormSubmit = async (formData: TBioFormSchema): Promise<void> => {
     if (!isSubmitting)
       try {
         const response = await dispatch(putPersonalDetails(formData)).unwrap();
+
         if (response) {
           dispatch(
-            addNotification('email updated successfully', PushNotificationType.SUCCESS)
+            addNotification(
+              'profile bio updated successfully',
+              PushNotificationType.SUCCESS
+            )
           );
           dispatch(closeModal());
           navigate('/');
@@ -71,11 +74,11 @@ const EmailForm = () => {
     <FormWrapper>
       <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
         <S.InputWrapper>
-          <S.StyledInputLabel htmlFor="edit-email">Email</S.StyledInputLabel>
-          <S.StyledInputText id="edit-email" {...register('email')} />
-          <S.InputDescription>Your personal email</S.InputDescription>
-          <S.StyledErrorMessage $isVisible={Boolean(errors.email)}>
-            {errors.email?.message}
+          <S.StyledInputLabel htmlFor="edit-bio">Bio</S.StyledInputLabel>
+          <S.StyledInputText id="edit-bio" {...register('bio')} />
+          <S.InputDescription>Your profile bio</S.InputDescription>
+          <S.StyledErrorMessage $isVisible={Boolean(errors.bio)}>
+            {errors.bio?.message}
           </S.StyledErrorMessage>
           {error && (
             <S.StyledErrorMessage $isVisible={true}>
@@ -105,4 +108,4 @@ const EmailForm = () => {
   );
 };
 
-export default EmailForm;
+export default BioForm;

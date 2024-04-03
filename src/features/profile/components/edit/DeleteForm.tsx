@@ -6,7 +6,11 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { selectProfileUsername } from '@/features/profile/profileSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
-import { closeModal, deleteProfile, selectDeleteProfileState } from '../profileEditSlice';
+import {
+  closeModal,
+  deleteProfile,
+  selectDeleteProfileState,
+} from '@/features/profile/profileSlice';
 import { logout } from '@/features/auth/authSlice';
 
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
