@@ -1,16 +1,15 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
 
 import {
   fetchPosts,
   selectFetchPostListState,
+  selectIsFollowingList,
   selectPostList,
   selectSelectedTopic,
 } from '../postListSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
-import { TopicData } from '@/types/entityData/TopicData';
 import { Waterfall } from '@/styles/animations/Waterfall';
 import { FadeInSlide } from '@/styles/animations/FadeInSlide';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
@@ -24,21 +23,22 @@ const PostContainer = () => {
   const postList = useAppSelector(selectPostList);
   const { isLoading, error } = useAppSelector(selectFetchPostListState);
 
-  const selectedTopic = useAppSelector(selectSelectedTopic) as TopicData;
+  const selectedTopic = useAppSelector(selectSelectedTopic);
+  const isFollowList = useAppSelector(selectIsFollowingList);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(fetchPosts(selectedTopic?._id)).unwrap();
+        await dispatch(fetchPosts()).unwrap();
       } catch (err) {
         dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
       }
     };
 
     fetchData();
-  }, [selectedTopic, dispatch]);
+  }, [selectedTopic, isFollowList, dispatch]);
 
   return (
     <Wrapper>
@@ -52,7 +52,7 @@ const PostContainer = () => {
           animate={FadeInSlide.visible}
           transition={FadeInSlide.transition}
         >
-          Be the first one to post!
+          Nothing posted yet!
         </CalloutText>
       ) : (
         <PostList variants={Waterfall.container} initial="hidden" animate="visible">

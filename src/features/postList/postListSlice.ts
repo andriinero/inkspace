@@ -16,6 +16,7 @@ import {
 
 type postListState = {
   postList: PostData[];
+  isFollowList: boolean;
   selectedTopic: TopicData | null;
   fetchPostsState: {
     isLoading: boolean;
@@ -26,6 +27,7 @@ type postListState = {
 
 const initialState: postListState = {
   postList: [],
+  isFollowList: false,
   selectedTopic: null,
   fetchPostsState: { isLoading: true, error: null },
   deletePostState: { isLoading: false, error: null },
@@ -33,11 +35,17 @@ const initialState: postListState = {
 
 export const fetchPosts = createAsyncThunk<
   PostData[],
-  string,
-  { rejectValue: ErrorData }
->('postList/fetchPosts', async (topicId = '', { rejectWithValue }) => {
+  void,
+  { rejectValue: ErrorData; state: RootState }
+>('postList/fetchPosts', async (_, { rejectWithValue, getState }) => {
+  const currentUserId = getState().profile.profileData?._id || '';
+  const selectedTopicId = getState().postList.selectedTopic?._id || '';
+  const isFollowList = getState().postList.isFollowList;
+
   const { data, responseState } = await useAppFetch(
-    `/api/posts?page=1&topic=${topicId}`,
+    `/api/posts?page=1&topic=${selectedTopicId}&ignoreList=${currentUserId}&followList=${
+      isFollowList ? currentUserId : ''
+    }`,
     {
       method: 'GET',
       mode: 'cors',
@@ -89,6 +97,9 @@ const postListSlice = createSlice({
     clearTopic(state) {
       state.selectedTopic = null;
     },
+    setIsFollowList(state, action: PayloadAction<boolean>) {
+      state.isFollowList = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -120,7 +131,7 @@ const postListSlice = createSlice({
   },
 });
 
-export const { setTopic, clearTopic } = postListSlice.actions;
+export const { setTopic, clearTopic, setIsFollowList } = postListSlice.actions;
 
 export default postListSlice.reducer;
 
@@ -133,3 +144,5 @@ export const selectSelectedTopic = (state: RootState) => state.postList.selected
 
 export const selectIsTopicSelected = (topicId: string) => (state: RootState) =>
   state.postList.selectedTopic?._id === topicId;
+
+export const selectIsFollowingList = (state: RootState) => state.postList.isFollowList;

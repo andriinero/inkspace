@@ -44,7 +44,7 @@ const TopicContainer = () => {
         <TopicListLoader />
       ) : (
         <>
-          <Header>Explore topics</Header>
+          <Header>Recently added topics</Header>
           <TopicList
             variants={WaterfallPopUp.container}
             initial="hidden"
