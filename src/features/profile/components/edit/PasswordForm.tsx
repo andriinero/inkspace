@@ -12,7 +12,6 @@ import { addNotification } from '@/features/pushNotification/pushNotificationSli
 
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import FormWrapper from './FormWrapper';
 import * as S from './PasswordForm.styled';
@@ -106,21 +105,8 @@ const PasswordForm = () => {
           </S.InputWrapper>
         </S.InputWrapper>
         <S.ControlsWrapper>
-          <S.CancelButton
-            onClick={handleModalClose}
-            type="button"
-            value="Cancel"
-            whileTap={ButtonInteraction.whileTap.animation}
-          />
-          <S.SubmitButton
-            disabled={!isDirty || isSubmitting}
-            $isDisabled={!isDirty || isSubmitting}
-            type="submit"
-            value="Save"
-            whileTap={
-              !isSubmitDisabled ? ButtonInteraction.whileTap.animation : undefined
-            }
-          />
+          <S.CancelButton onClick={handleModalClose} type="button" value="Cancel" />
+          <S.SubmitButton disabled={isSubmitDisabled} type="submit" value="Save" />
         </S.ControlsWrapper>
       </S.Form>
     </FormWrapper>

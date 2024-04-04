@@ -22,7 +22,6 @@ import { PushNotificationType } from '@/types/entityData/StatusNotificationData'
 
 import TinyEditor from '@/features/postForm/components/TinyEditor';
 import * as S from './PostForm.styled';
-import { mdiArrowDownBoldHexagonOutline } from '@mdi/js';
 
 const PostForm = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -154,7 +153,7 @@ const PostForm = () => {
           <S.StyledButton form="create-new-post" type="submit" value="Save Edit" />
         ) : (
           <>
-            <S.StyledInactiveButton type="button" value="Save Draft" />
+            <S.StyledInactiveButton disabled type="button" value="Save Draft" />
             <S.StyledButton form="create-new-post" type="submit" value="Publish" />
           </>
         )}

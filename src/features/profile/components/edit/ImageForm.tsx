@@ -10,7 +10,6 @@ import {
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { ImageSchema, TImageSchema } from '@/types/formSchemas/ProfileImageSchema';
-import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
@@ -69,21 +68,8 @@ const ImageForm = () => {
           An error has occurred while submitting the form
         </S.StyledErrorMessage>
         <S.ControlsWrapper>
-          <S.CancelButton
-            onClick={handleModalClose}
-            type="button"
-            value="Cancel"
-            whileTap={ButtonInteraction.whileTap.animation}
-          />
-          <S.SubmitButton
-            disabled={isSubmitDisabled}
-            $isDisabled={isSubmitDisabled}
-            type="submit"
-            value="Save Image"
-            whileTap={
-              !isSubmitDisabled ? ButtonInteraction.whileTap.animation : undefined
-            }
-          />
+          <S.CancelButton onClick={handleModalClose} type="button" value="Cancel" />
+          <S.SubmitButton disabled={isSubmitDisabled} type="submit" value="Save Image" />
         </S.ControlsWrapper>
       </S.Form>
     </FormWrapper>

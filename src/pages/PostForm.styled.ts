@@ -79,8 +79,4 @@ export const ControlsContainer = styled.div`
 
 export const StyledButton = styled(FormButton)``;
 
-export const StyledInactiveButton = styled(FormButton)`
-  &:hover {
-    cursor: not-allowed;
-  }
-`;
+export const StyledInactiveButton = styled(FormButton)``;

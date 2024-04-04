@@ -10,6 +10,5 @@ export const TopicButton = styled(HollowButton)`
 
   color: ${({ theme }) => theme.color.text_primary};
 
-  // TODO: topic route
-  cursor: default;
+  opacity: 1;
 `;

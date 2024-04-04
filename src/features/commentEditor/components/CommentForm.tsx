@@ -74,7 +74,6 @@ const CommentForm = () => {
     const response = await dispatch(updateComment(formData.body)).unwrap();
 
     if (response) {
-      reset();
       dispatch(exitEditMode());
       dispatch(
         editComment({
@@ -83,6 +82,7 @@ const CommentForm = () => {
           editDate: response.edit_date,
         })
       );
+      reset();
     }
   };
 
@@ -127,14 +127,12 @@ const CommentForm = () => {
                 onClick={handleEditCancelClick}
                 type="button"
                 value="Cancel"
-                whileTap={ButtonInteraction.whileTap.animation}
               />
             )}
             <S.SubmitActionButton
               disabled={isSubmitDisabled}
               type="submit"
               value={isEditMode ? 'Update' : 'Respond'}
-              whileTap={ButtonInteraction.whileTap.animation}
             />
           </S.ControlsWrapper>
         </S.BottomWrapper>

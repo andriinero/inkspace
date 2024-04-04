@@ -10,11 +10,9 @@ import {
   deleteProfile,
   selectDeleteProfileState,
 } from '@/features/profile/profileSlice';
-import { logout } from '@/features/auth/authSlice';
 
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import FormWrapper from './FormWrapper';
 import * as S from './DeleteForm.styled';
@@ -88,21 +86,8 @@ const DeleteForm = () => {
           )}
         </S.InputWrapper>
         <S.ControlsWrapper>
-          <S.CancelButton
-            onClick={handleModalClose}
-            whileTap={ButtonInteraction.whileTap.animation}
-            type="button"
-            value="Cancel"
-          />
-          <S.SubmitButton
-            disabled={isSubmitDisabled}
-            $isDisabled={isSubmitDisabled}
-            type="submit"
-            value="Submit"
-            whileTap={
-              !isSubmitDisabled ? ButtonInteraction.whileTap.animation : undefined
-            }
-          />
+          <S.CancelButton onClick={handleModalClose} type="button" value="Cancel" />
+          <S.SubmitButton disabled={isSubmitDisabled} type="submit" value="Submit" />
         </S.ControlsWrapper>
         <S.InputDescriptionDanger>You can't undo this action!</S.InputDescriptionDanger>
       </S.Form>

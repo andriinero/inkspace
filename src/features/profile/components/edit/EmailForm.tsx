@@ -13,7 +13,6 @@ import { selectProfileEmail } from '@/features/profile/profileSlice';
 
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import FormWrapper from './FormWrapper';
 import * as S from './EmailForm.styled';
@@ -81,21 +80,8 @@ const EmailForm = () => {
           )}
         </S.InputWrapper>
         <S.ControlsWrapper>
-          <S.CancelButton
-            onClick={handleModalClose}
-            type="button"
-            value="Cancel"
-            whileTap={ButtonInteraction.whileTap.animation}
-          />
-          <S.SubmitButton
-            disabled={isSubmitDisabled}
-            $isDisabled={isSubmitDisabled}
-            type="submit"
-            value="Save"
-            whileTap={
-              !isSubmitDisabled ? ButtonInteraction.whileTap.animation : undefined
-            }
-          />
+          <S.CancelButton onClick={handleModalClose} type="button" value="Cancel" />
+          <S.SubmitButton disabled={isSubmitDisabled} type="submit" value="Save" />
         </S.ControlsWrapper>
       </S.Form>
     </FormWrapper>

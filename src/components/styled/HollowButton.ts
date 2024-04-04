@@ -14,8 +14,4 @@ export const HollowButton = styled(AppButton)<{ $isActive?: boolean }>`
   color: ${({ $isActive: $isFollowed, theme }) =>
     $isFollowed ? theme.color.topic_text_selected : theme.color.text_primary};
   font-size: 0.85rem;
-
-  transition: color 100ms;
-
-  cursor: pointer;
 `;
