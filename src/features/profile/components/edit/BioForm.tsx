@@ -34,8 +34,6 @@ const BioForm = () => {
     defaultValues: { bio },
   });
 
-  const { error } = useAppSelector(selectPutPersonalDetailsState);
-
   const dispatch = useAppDispatch();
 
   const handleModalClose = (): void => {
@@ -57,7 +55,15 @@ const BioForm = () => {
           dispatch(closeModal());
         }
       } catch (err) {
-        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+        const error = err as ErrorData;
+
+        dispatch(
+          addNotification(
+            error.errors![0].msg || error.message,
+            PushNotificationType.ERROR
+          )
+        );
+        dispatch(closeModal());
       }
   };
 
@@ -73,11 +79,6 @@ const BioForm = () => {
           <S.StyledErrorMessage $isVisible={Boolean(errors.bio)}>
             {errors.bio?.message}
           </S.StyledErrorMessage>
-          {error && (
-            <S.StyledErrorMessage $isVisible={true}>
-              An error has occurred while submitting the form
-            </S.StyledErrorMessage>
-          )}
         </S.InputWrapper>
         <S.ControlsWrapper>
           <S.CancelButton onClick={handleModalClose} type="button" value="Cancel" />

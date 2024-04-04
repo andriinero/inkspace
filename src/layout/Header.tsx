@@ -9,8 +9,6 @@ import { logout, selectIsAuthenticated } from '@/features/auth/authSlice';
 import { openSignUpModal, openLoginModal } from '@/features/auth/authSlice';
 import { exitEditMode } from '@/features/postForm/postFormSlice';
 
-import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-
 import LoginForm from '@/features/auth/components/LoginForm';
 import SignUpForm from '@/features/auth/components/SignUpForm';
 import PushNotificationContainer from '@/features/pushNotification/components/PushNotificationContainer';

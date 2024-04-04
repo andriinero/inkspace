@@ -46,6 +46,7 @@ const ImageForm = () => {
       }
     } catch (err) {
       dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      dispatch(closeModal());
     }
   };
 
