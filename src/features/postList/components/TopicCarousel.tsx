@@ -9,8 +9,11 @@ import {
 import { StyledCarouselContainer, StyledTabItem, Wrapper } from './TopicCarousel.styled';
 import { selectMiscTopicList } from '@/features/miscList/miscListSlice';
 import { TopicData } from '@/types/entityData/TopicData';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 const TopicCarousel = () => {
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
   const topicsList = useAppSelector(selectMiscTopicList);
   const selectedTopic = useAppSelector(selectSelectedTopic);
   const isFollowList = useAppSelector(selectIsFollowingList);
@@ -28,9 +31,7 @@ const TopicCarousel = () => {
   };
 
   const handleFollowingClick = (): void => {
-    isFollowList
-      ? dispatch(setIsFollowList(false))
-      : dispatch(setIsFollowList(true));
+    isFollowList ? dispatch(setIsFollowList(false)) : dispatch(setIsFollowList(true));
 
     dispatch(clearTopic());
   };
@@ -38,9 +39,11 @@ const TopicCarousel = () => {
   return (
     <Wrapper>
       <StyledCarouselContainer>
-        <StyledTabItem onItemClick={handleFollowingClick} isSelected={isFollowList}>
-          Your Following
-        </StyledTabItem>
+        {isAuthenticated && (
+          <StyledTabItem onItemClick={handleFollowingClick} isSelected={isFollowList}>
+            Your Following
+          </StyledTabItem>
+        )}
         {topicsList.map((t) => {
           const isSelected = selectedTopic?._id === t._id;
 

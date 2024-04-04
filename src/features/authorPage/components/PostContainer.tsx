@@ -4,10 +4,10 @@ import { selectAuthorPosts, selectFetchAuthorPostsState } from '../authorPageSli
 
 import { Waterfall } from '@/styles/animations/Waterfall';
 
-import Error from '@/components/general/Error';
 import PostItem from '@/components/general/PostItem';
 import PostListLoader from '@/components/loaders/PostListLoader';
 import { PostList, Wrapper } from './PostContainer.styled';
+import { CalloutText } from '@/components/styled/CalloutText.styled';
 
 const PostContainer = () => {
   const postList = useAppSelector(selectAuthorPosts);
@@ -18,7 +18,9 @@ const PostContainer = () => {
       {isLoading ? (
         <PostListLoader />
       ) : error ? (
-        <Error />
+        <PostListLoader />
+      ) : postList.length === 0 ? (
+        <CalloutText>Nothing posted yet!</CalloutText>
       ) : (
         <PostList variants={Waterfall.container} initial="hidden" animate="visible">
           {postList.map((p) => (

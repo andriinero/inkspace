@@ -80,9 +80,7 @@ const PostForm = () => {
     const response = await dispatch(putEditTargetPost(formData)).unwrap();
 
     if (response) {
-      dispatch(
-        addNotification('post saved successfully', PushNotificationType.SUCCESS)
-      );
+      dispatch(addNotification('post saved successfully', PushNotificationType.SUCCESS));
       navigate('/');
     }
   };
@@ -152,10 +150,7 @@ const PostForm = () => {
         {isEditMode ? (
           <S.StyledButton form="create-new-post" type="submit" value="Save Edit" />
         ) : (
-          <>
-            <S.StyledInactiveButton disabled type="button" value="Save Draft" />
-            <S.StyledButton form="create-new-post" type="submit" value="Publish" />
-          </>
+          <S.StyledButton form="create-new-post" type="submit" value="Publish" />
         )}
       </S.ControlsContainer>
     </S.Wrapper>

@@ -20,17 +20,6 @@ export const Header = styled.h1`
   font-weight: 100;
 `;
 
-export const CalloutText = styled(motion.h2)`
-  display: inline-block;
-  align-self: center;
-
-  margin-top: 8rem;
-
-  font-size: 1.4rem;
-  font-weight: 200;
-  font-style: italic;
-  letter-spacing: 0.1rem;
-`;
 
 export const PostList = styled(motion.ul)`
   display: flex;

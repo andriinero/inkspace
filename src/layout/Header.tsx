@@ -15,6 +15,7 @@ import LoginForm from '@/features/auth/components/LoginForm';
 import SignUpForm from '@/features/auth/components/SignUpForm';
 import PushNotificationContainer from '@/features/pushNotification/components/PushNotificationContainer';
 import * as S from './Header.styled';
+import useTestUserLogin from '@/features/auth/hooks/useTestUserLogin';
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -28,6 +29,8 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const handleTestUserLogin = useTestUserLogin();
 
   const handleOpenMenu = (): void => {
     setIsMenuOpen(true);
@@ -111,18 +114,9 @@ const Header = () => {
             </>
           ) : (
             <S.ControlsWrapper>
-              <S.HeaderButton
-                whileTap={ButtonInteraction.whileTap.animation}
-                onClick={handleSignUpClick}
-                type="button"
-                value="Sign Up"
-              />
-              <S.HeaderButton
-                whileTap={ButtonInteraction.whileTap.animation}
-                onClick={handleLoginClick}
-                type="button"
-                value="Login"
-              />
+              <S.HeaderButton onClick={handleSignUpClick} type="button" value="Sign Up" />
+              <S.HeaderButton onClick={handleLoginClick} type="button" value="Login" />
+              <S.HeaderButton onClick={handleTestUserLogin} type="button" value="Log In As Test User" />
             </S.ControlsWrapper>
           )}
         </S.ProfileWrapper>

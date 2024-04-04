@@ -9,20 +9,19 @@ import {
   selectIsLoginModalOpen,
   selectPostLoginState,
 } from '../authSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
-import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 import Dialog from '@/components/general/Dialog';
 import * as S from './LoginForm.styled';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 const LoginForm = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { isSubmitting, errors },
   } = useForm<TLoginSchema>({
     resolver: zodResolver(LoginSchema),
   });
@@ -47,6 +46,8 @@ const LoginForm = () => {
       }
     }
   };
+
+  const isSubmitDisabled = isSubmitting;
 
   return (
     <Dialog isModalOpen={isModalOpen} onModalClose={handleCloseModal}>
@@ -84,10 +85,7 @@ const LoginForm = () => {
             <S.StyledErrorMessage $isVisible={Boolean(error)}>
               {error?.message}
             </S.StyledErrorMessage>
-            <S.SubmitButton
-              type="submit"
-              whileTap={ButtonInteraction.whileTap.animation}
-            />
+            <S.SubmitButton disabled={isSubmitDisabled} type="submit" value="Log In" />
           </S.ControlsWrapper>
         </S.LoginForm>
       </S.LoginWrapper>

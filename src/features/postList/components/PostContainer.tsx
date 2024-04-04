@@ -11,13 +11,13 @@ import {
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { Waterfall } from '@/styles/animations/Waterfall';
-import { FadeInSlide } from '@/styles/animations/FadeInSlide';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 import PostItem from '../../../components/general/PostItem';
 import PostListLoader from '@/components/loaders/PostListLoader';
-import { CalloutText, PostList, Wrapper } from './PostContainer.styled';
+import { PostList, Wrapper } from './PostContainer.styled';
+import { CalloutText } from '@/components/styled/CalloutText.styled';
 
 const PostContainer = () => {
   const postList = useAppSelector(selectPostList);
@@ -47,13 +47,7 @@ const PostContainer = () => {
       ) : error ? (
         <PostListLoader />
       ) : postList.length === 0 ? (
-        <CalloutText
-          initial={FadeInSlide.hidden}
-          animate={FadeInSlide.visible}
-          transition={FadeInSlide.transition}
-        >
-          Nothing posted yet!
-        </CalloutText>
+        <CalloutText>Nothing posted yet!</CalloutText>
       ) : (
         <PostList variants={Waterfall.container} initial="hidden" animate="visible">
           {postList.map((post) => (
