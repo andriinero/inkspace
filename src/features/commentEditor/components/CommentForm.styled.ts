@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import ShakeOnOverflow from '../../../components/general/ShakeOnOverflow';
 import { FormButton } from '@/components/styled/FormButton';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
 
 export const Form = styled.form`
   display: flex;
@@ -10,26 +11,6 @@ export const Form = styled.form`
   padding: 0.9rem;
 
   background-color: ${({ theme }) => theme.color.main_bg_secondary};
-`;
-
-export const InputText = styled.textarea`
-  min-height: 12ch;
-
-  padding: 0.3rem;
-  border: 1px solid transparent;
-  background-color: transparent;
-
-  color: ${({ theme }) => theme.color.text_primary};
-
-  resize: vertical;
-
-  &:focus {
-    outline: none;
-  }
-
-  &::-webkit-scrollbar {
-    width: 4px;
-  }
 `;
 
 export const FormWrapper = styled.div`
@@ -84,3 +65,5 @@ export const StyledCounter = styled(ShakeOnOverflow)`
   font-weight: 300;
   text-align: right;
 `;
+
+export const StyledErrorMessage = styled(ErrorMessage)``;

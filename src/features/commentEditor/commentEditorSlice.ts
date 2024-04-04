@@ -8,7 +8,7 @@ import { CommentData, CommentDataSchema } from '@/types/entityData/CommentData';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 type CommentEditorState = {
-  textField: string;
+  commentId: string | null;
   isEditMode: boolean;
   isOverflown: boolean;
   postCommentState: {
@@ -16,17 +16,13 @@ type CommentEditorState = {
     error: ErrorData | null;
   };
   updateCommentState: {
-    commentId: string | null;
     isLoading: boolean;
     error: ErrorData | null;
   };
 };
 
-type PostCommentType = { postId: string; commentBody: string };
-type UpdateCommentType = { commentId: string; commentBody: string };
-
 const initialState: CommentEditorState = {
-  textField: '',
+  commentId: null,
   isEditMode: false,
   isOverflown: false,
   postCommentState: {
@@ -34,7 +30,6 @@ const initialState: CommentEditorState = {
     error: null,
   },
   updateCommentState: {
-    commentId: null,
     isLoading: false,
     error: null,
   },
@@ -42,10 +37,12 @@ const initialState: CommentEditorState = {
 
 export const postComment = createAsyncThunk<
   CommentData,
-  PostCommentType,
-  { rejectValue: ErrorData }
->('comments/postComment', async ({ postId, commentBody }, { rejectWithValue }) => {
+  string,
+  { rejectValue: ErrorData; state: RootState }
+>('comments/postComment', async (body, { rejectWithValue, getState }) => {
   const token = storage.getToken();
+
+  const postId = getState().singlePagePost.post?._id;
 
   const { data, responseState } = await useAppFetch(`/api/posts/${postId}/comments`, {
     method: 'POST',
@@ -54,7 +51,7 @@ export const postComment = createAsyncThunk<
       'Content-Type': 'application/json',
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ body: commentBody }),
+    body: JSON.stringify({ body }),
   });
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
@@ -67,19 +64,21 @@ export const postComment = createAsyncThunk<
 
 export const updateComment = createAsyncThunk<
   CommentData,
-  UpdateCommentType,
-  { rejectValue: ErrorData }
->('comments/updateComment', async ({ commentId, commentBody }, { rejectWithValue }) => {
+  string,
+  { rejectValue: ErrorData; state: RootState }
+>('comments/updateComment', async (body, { rejectWithValue, getState }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch(`/api/comments/${commentId}`, {
+  const editCommentId = getState().commentEditor.commentId;
+
+  const { data, responseState } = await useAppFetch(`/api/comments/${editCommentId}`, {
     method: 'PUT',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ body: commentBody }),
+    body: JSON.stringify({ body }),
   });
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
@@ -94,18 +93,13 @@ const commentEditorSlice = createSlice({
   name: 'commentEditor',
   initialState,
   reducers: {
-    setCommentTextField(state, action) {
-      state.textField = action.payload;
-    },
     enterEditMode(state, action) {
-      state.textField = action.payload.commentBody;
+      state.commentId = action.payload.commentId;
       state.isEditMode = true;
-      state.updateCommentState.commentId = action.payload.commentId;
     },
     exitEditMode(state) {
-      state.textField = '';
+      state.commentId = null;
       state.isEditMode = false;
-      state.updateCommentState.commentId = null;
     },
     setIsOverflown(state, action: PayloadAction<boolean>) {
       state.isOverflown = action.payload;
@@ -139,12 +133,9 @@ const commentEditorSlice = createSlice({
   },
 });
 
-export const { setCommentTextField, enterEditMode, exitEditMode, setIsOverflown } =
-  commentEditorSlice.actions;
+export const { enterEditMode, exitEditMode, setIsOverflown } = commentEditorSlice.actions;
 
 export default commentEditorSlice.reducer;
-
-export const selectCommentTextField = (state: RootState) => state.commentEditor.textField;
 
 export const selectCommentIsEditMode = (state: RootState) =>
   state.commentEditor.isEditMode;
@@ -152,8 +143,7 @@ export const selectCommentIsEditMode = (state: RootState) =>
 export const selectIsCommentOverflown = (state: RootState) =>
   state.commentEditor.isOverflown;
 
-export const selectEditCommentId = (state: RootState) =>
-  state.commentEditor.updateCommentState.commentId;
+export const selectEditCommentId = (state: RootState) => state.commentEditor.commentId;
 
 export const selectPostCommentState = (state: RootState) =>
   state.commentEditor.postCommentState;

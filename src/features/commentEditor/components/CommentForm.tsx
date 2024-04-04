@@ -1,76 +1,84 @@
-import { ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, useEffect } from 'react';
+import { z } from 'zod';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-
-import { MAX_CHARACTERS_PER_COMMENT, MIN_CHARACTERS_PER_COMMENT } from '@/data/consts';
 
 import {
   exitEditMode,
   postComment,
   selectCommentIsEditMode,
-  selectCommentTextField,
   selectEditCommentId,
   selectIsCommentOverflown,
-  setCommentTextField,
   setIsOverflown,
   updateComment,
 } from '../commentEditorSlice';
-import { addComment, editComment } from '@/features/commentList/commentListSlice';
+import {
+  addComment,
+  editComment,
+  selectCommentById,
+} from '@/features/commentList/commentListSlice';
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
 import * as S from './CommentForm.styled';
+import CommentTextarea from './CommentTextarea';
 
-type CommentFormProps = { postId: string };
+const CommentFormSchema = z.object({
+  body: z
+    .string()
+    .min(10, 'Comment body must contain at least 10 characters')
+    .max(280, 'Comment body must contain at most 280 characters'),
+});
+type TCommentFormSchema = z.infer<typeof CommentFormSchema>;
 
-const CommentForm = ({ postId }: CommentFormProps) => {
-  const commentText = useAppSelector(selectCommentTextField);
+const CommentForm = () => {
+  const commendEditId = useAppSelector(selectEditCommentId) as string;
+  const comment = useAppSelector(selectCommentById(commendEditId));
+
   const isOverflown = useAppSelector(selectIsCommentOverflown);
   const isEditMode = useAppSelector(selectCommentIsEditMode);
-  const editCommentId = useAppSelector(selectEditCommentId);
+
+  const {
+    handleSubmit,
+    formState: { isDirty, isSubmitting, errors },
+    watch,
+    setValue,
+    reset,
+    control,
+  } = useForm<TCommentFormSchema>({
+    resolver: zodResolver(CommentFormSchema),
+    defaultValues: { body: comment?.body as string },
+  });
+
+  useEffect(() => {
+    setValue('body', comment?.body as string);
+  }, [comment, setValue]);
 
   const dispatch = useAppDispatch();
 
-  const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
-    if (e.target.value.length <= MAX_CHARACTERS_PER_COMMENT) {
-      dispatch(setCommentTextField(e.target.value));
-    } else {
-      dispatch(setIsOverflown(true));
+  const handleCommentPost = async (formData: TCommentFormSchema): Promise<void> => {
+    const response = await dispatch(postComment(formData.body));
+
+    if (response) {
+      dispatch(addComment(response.payload));
+      reset();
     }
   };
 
-  const handleCommentSubmit = async (e: FormEvent): Promise<void> => {
-    e.preventDefault();
+  const handleCommentPut = async (formData: TCommentFormSchema): Promise<void> => {
+    const response = await dispatch(updateComment(formData.body)).unwrap();
 
-    if (commentText.length > MIN_CHARACTERS_PER_COMMENT) {
-      const response = await dispatch(postComment({ postId, commentBody: commentText }));
-      if (response) {
-        dispatch(setCommentTextField(''));
-        dispatch(addComment(response.payload));
-      }
-    }
-  };
-
-  const handleCommentUpdate = async (e: FormEvent): Promise<void> => {
-    e.preventDefault();
-
-    if (commentText.length >= MIN_CHARACTERS_PER_COMMENT) {
-      if (isEditMode && editCommentId) {
-        const response = await dispatch(
-          updateComment({ commentId: editCommentId, commentBody: commentText })
-        ).unwrap();
-
-        if (response) {
-          dispatch(setCommentTextField(''));
-          dispatch(exitEditMode());
-          dispatch(
-            editComment({
-              commentId: response._id,
-              commentBody: response.body,
-              editDate: response.edit_date,
-            })
-          );
-        }
-      }
+    if (response) {
+      dispatch(exitEditMode());
+      dispatch(
+        editComment({
+          commentId: response._id,
+          commentBody: response.body,
+          editDate: response.edit_date,
+        })
+      );
+      reset();
     }
   };
 
@@ -78,16 +86,28 @@ const CommentForm = ({ postId }: CommentFormProps) => {
     dispatch(exitEditMode());
   };
 
-  const handleFormSubmit = isEditMode ? handleCommentUpdate : handleCommentSubmit;
+  const commentBodyLength = watch('body', '').length;
+
+  const handleFormSubmit = isEditMode ? handleCommentPut : handleCommentPost;
+
+  const isSubmitDisabled = !isDirty || isSubmitting;
 
   return (
     <S.FormWrapper>
-      <S.Form onSubmit={handleFormSubmit}>
-        <S.InputText
-          onChange={handleCommentChange}
-          placeholder="What are your thoughts?"
-          value={commentText}
+      <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
+        <Controller
+          control={control}
+          name="body"
+          render={({ field }) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { ref, ...nonFieldRef } = field;
+
+            return <CommentTextarea {...nonFieldRef} errors={errors} />;
+          }}
         />
+        <S.StyledErrorMessage $isVisible={Boolean(errors.body)}>
+          {errors.body?.message}
+        </S.StyledErrorMessage>
         <S.BottomWrapper>
           <S.StyledCounter
             isOverflown={isOverflown}
@@ -95,7 +115,7 @@ const CommentForm = ({ postId }: CommentFormProps) => {
               dispatch(setIsOverflown(value));
             }}
           >
-            {commentText.length}/280
+            {commentBodyLength}/280
           </S.StyledCounter>
           <S.ControlsWrapper>
             {isEditMode && (
@@ -107,6 +127,7 @@ const CommentForm = ({ postId }: CommentFormProps) => {
               />
             )}
             <S.SubmitActionButton
+              disabled={isSubmitDisabled}
               type="submit"
               value={isEditMode ? 'Update' : 'Respond'}
               whileTap={ButtonInteraction.whileTap.animation}

@@ -147,6 +147,9 @@ export const { addComment, editComment, openComments, closeComments, toggleComme
 
 export default commentListSlice.reducer;
 
+export const selectCommentById = (id: string) => (state: RootState) =>
+  state.commentList.comments.find((c) => c._id === id);
+
 export const selectCommentList = (state: RootState) => state.commentList.comments;
 
 export const selectAreCommentsOpen = (state: RootState) =>
