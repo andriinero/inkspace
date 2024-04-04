@@ -1,8 +1,10 @@
-import { ChangeEvent, useState } from 'react';
-import { Textarea } from './CommentTextarea.styled';
+import { ChangeEvent} from 'react';
 import { FieldErrors } from 'react-hook-form';
 import { useAppDispatch } from '@/app/hooks';
+
 import { setIsOverflown } from '../commentEditorSlice';
+
+import { Textarea } from './CommentTextarea.styled';
 
 type CommentTextareaProps = {
   value: string;
@@ -11,8 +13,6 @@ type CommentTextareaProps = {
 };
 
 const CommentTextarea = ({ value, onChange, errors }: CommentTextareaProps) => {
-  const [text, setText] = useState<string>(value);
-
   const dispatch = useAppDispatch();
 
   const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
@@ -20,13 +20,12 @@ const CommentTextarea = ({ value, onChange, errors }: CommentTextareaProps) => {
 
     if (errors.body?.type === 'too_big') dispatch(setIsOverflown(true));
 
-    setText(value);
     onChange(value);
   };
 
   return (
     <Textarea
-      value={text}
+      value={value}
       onChange={handleTextareaChange}
       placeholder="What are your thoughts?"
     />

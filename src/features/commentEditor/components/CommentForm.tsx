@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect } from 'react';
+import { useEffect } from 'react';
 import { z } from 'zod';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -21,8 +21,8 @@ import {
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
-import * as S from './CommentForm.styled';
 import CommentTextarea from './CommentTextarea';
+import * as S from './CommentForm.styled';
 
 const CommentFormSchema = z.object({
   body: z
@@ -34,7 +34,7 @@ type TCommentFormSchema = z.infer<typeof CommentFormSchema>;
 
 const CommentForm = () => {
   const commendEditId = useAppSelector(selectEditCommentId) as string;
-  const comment = useAppSelector(selectCommentById(commendEditId));
+  const commentEditData = useAppSelector(selectCommentById(commendEditId));
 
   const isOverflown = useAppSelector(selectIsCommentOverflown);
   const isEditMode = useAppSelector(selectCommentIsEditMode);
@@ -48,12 +48,16 @@ const CommentForm = () => {
     control,
   } = useForm<TCommentFormSchema>({
     resolver: zodResolver(CommentFormSchema),
-    defaultValues: { body: comment?.body as string },
+    defaultValues: { body: '' },
   });
 
   useEffect(() => {
-    setValue('body', comment?.body as string);
-  }, [comment, setValue]);
+    setValue('body', commentEditData?.body as string);
+
+    return () => {
+      setValue('body', '');
+    };
+  }, [commentEditData, setValue]);
 
   const dispatch = useAppDispatch();
 
@@ -70,6 +74,7 @@ const CommentForm = () => {
     const response = await dispatch(updateComment(formData.body)).unwrap();
 
     if (response) {
+      reset();
       dispatch(exitEditMode());
       dispatch(
         editComment({
@@ -78,7 +83,6 @@ const CommentForm = () => {
           editDate: response.edit_date,
         })
       );
-      reset();
     }
   };
 
