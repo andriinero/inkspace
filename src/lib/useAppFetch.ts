@@ -1,4 +1,4 @@
-import { BASE_API_URL } from '@/config';
+import EnvVars from "@/config/EnvVars";
 
 type ResponseState = {
   statusCode: number;
@@ -14,9 +14,12 @@ export const useAppFetch = async (
   path: string,
   opts?: RequestInit,
   signal?: AbortSignal,
-  isImage: boolean = false
+  isImage: boolean = false,
 ): Promise<AppFetchResult> => {
-  const response = await fetch(`${BASE_API_URL}${path}`, { ...opts, signal });
+  const response = await fetch(`${EnvVars.RESTAPI_SERVER_URL}${path}`, {
+    ...opts,
+    signal,
+  });
 
   let data = null;
 
