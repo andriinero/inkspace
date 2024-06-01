@@ -44,15 +44,18 @@ export const postComment = createAsyncThunk<
 
   const postId = getState().singlePagePost.post?._id;
 
-  const { data, responseState } = await useAppFetch(`/api/posts/${postId}/comments`, {
-    method: 'POST',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`,
+  const { data, responseState } = await useAppFetch(
+    `/api/posts/${postId}/comments`,
+    {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ body }),
     },
-    body: JSON.stringify({ body }),
-  });
+  );
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
@@ -71,15 +74,18 @@ export const updateComment = createAsyncThunk<
 
   const editCommentId = getState().commentEditor.commentId;
 
-  const { data, responseState } = await useAppFetch(`/api/comments/${editCommentId}`, {
-    method: 'PUT',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`,
+  const { data, responseState } = await useAppFetch(
+    `/api/comments/${editCommentId}`,
+    {
+      method: 'PUT',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ body }),
     },
-    body: JSON.stringify({ body }),
-  });
+  );
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
@@ -116,7 +122,8 @@ const commentEditorSlice = createSlice({
       })
       .addCase(postComment.rejected, (state, action) => {
         state.postCommentState.isLoading = true;
-        state.postCommentState.error = action.payload || (action.error as ErrorData);
+        state.postCommentState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(updateComment.pending, (state) => {
@@ -128,12 +135,14 @@ const commentEditorSlice = createSlice({
       })
       .addCase(updateComment.rejected, (state, action) => {
         state.updateCommentState.isLoading = false;
-        state.postCommentState.error = action.payload || (action.error as ErrorData);
+        state.postCommentState.error =
+          action.payload || (action.error as ErrorData);
       });
   },
 });
 
-export const { enterEditMode, exitEditMode, setIsOverflown } = commentEditorSlice.actions;
+export const { enterEditMode, exitEditMode, setIsOverflown } =
+  commentEditorSlice.actions;
 
 export default commentEditorSlice.reducer;
 
@@ -143,7 +152,8 @@ export const selectCommentIsEditMode = (state: RootState) =>
 export const selectIsCommentOverflown = (state: RootState) =>
   state.commentEditor.isOverflown;
 
-export const selectEditCommentId = (state: RootState) => state.commentEditor.commentId;
+export const selectEditCommentId = (state: RootState) =>
+  state.commentEditor.commentId;
 
 export const selectPostCommentState = (state: RootState) =>
   state.commentEditor.postCommentState;

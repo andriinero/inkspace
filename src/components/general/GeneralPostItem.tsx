@@ -4,7 +4,10 @@ import { GeneralPostData } from '@/types/entityData/GeneralPostData';
 import PostItemHead from './PostItemHead';
 import * as S from './GeneralPostItem.styled';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { fetchProfilePosts, selectProfileId } from '@/features/profile/profileSlice';
+import {
+  fetchProfilePosts,
+  selectProfileId,
+} from '@/features/profile/profileSlice';
 import { useNavigate } from 'react-router-dom';
 import { enterEditMode } from '@/features/postForm/postFormSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
@@ -47,7 +50,10 @@ const GeneralPostItem = ({
 
     if (response) {
       dispatch(
-        addNotification('post deleted successfully', PushNotificationType.SUCCESS)
+        addNotification(
+          'post deleted successfully',
+          PushNotificationType.SUCCESS,
+        ),
       );
       dispatch(fetchProfilePosts());
       setIsDeleteModalOpen(false);
@@ -86,7 +92,10 @@ const GeneralPostItem = ({
           )}
         </S.MiscWrapper>
       </S.ContentWrapper>
-      <Dialog isModalOpen={isDeleteModalOpen} onModalClose={handleCloseDeleteModal}>
+      <Dialog
+        isModalOpen={isDeleteModalOpen}
+        onModalClose={handleCloseDeleteModal}
+      >
         <DeleteConfirm
           headerText="Are you sure you want to delete this post?"
           onDelete={handleDeleteClick}

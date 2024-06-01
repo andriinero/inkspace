@@ -50,7 +50,12 @@ const SinglePagePost = () => {
       try {
         await dispatch(fetchPost(postid!)).unwrap();
       } catch (err) {
-        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+        dispatch(
+          addNotification(
+            (err as ErrorData).message,
+            PushNotificationType.ERROR,
+          ),
+        );
       }
     };
 

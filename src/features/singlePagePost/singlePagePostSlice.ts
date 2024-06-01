@@ -33,22 +33,23 @@ const initialState: SinglePagePostState = {
   putLikeCountState: { isLoading: false, error: null },
 };
 
-export const fetchPost = createAsyncThunk<PostData, string, { rejectValue: ErrorData }>(
-  'singlePagePost/fetchPost',
-  async (postId, { rejectWithValue }) => {
-    const { data, responseState } = await useAppFetch(`/api/posts/${postId}`, {
-      method: 'GET',
-      mode: 'cors',
-    });
+export const fetchPost = createAsyncThunk<
+  PostData,
+  string,
+  { rejectValue: ErrorData }
+>('singlePagePost/fetchPost', async (postId, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch(`/api/posts/${postId}`, {
+    method: 'GET',
+    mode: 'cors',
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = PostDataSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = PostDataSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as PostData;
-  }
-);
+  return data as PostData;
+});
 
 export const putLikeCount = createAsyncThunk<
   PutLikeCount,
@@ -57,13 +58,16 @@ export const putLikeCount = createAsyncThunk<
 >('singlePagePost/putLikeCount', async (postId, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch(`/api/posts/${postId}/likes`, {
-    method: 'PUT',
-    mode: 'cors',
-    headers: {
-      authorization: `Bearer ${token}`,
+  const { data, responseState } = await useAppFetch(
+    `/api/posts/${postId}/likes`,
+    {
+      method: 'PUT',
+      mode: 'cors',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
@@ -95,7 +99,8 @@ const singlePagePostSlice = createSlice({
       })
       .addCase(fetchPost.rejected, (state, action) => {
         state.fetchPostState.isLoading = false;
-        state.fetchPostState.error = action.payload || (action.error as ErrorData);
+        state.fetchPostState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(putLikeCount.pending, (state) => {
@@ -108,7 +113,8 @@ const singlePagePostSlice = createSlice({
       })
       .addCase(putLikeCount.rejected, (state, action) => {
         state.putLikeCountState.isLoading = false;
-        state.fetchPostState.error = action.payload || (action.error as ErrorData);
+        state.fetchPostState.error =
+          action.payload || (action.error as ErrorData);
       });
   },
 });
@@ -119,7 +125,8 @@ export default singlePagePostSlice.reducer;
 
 export const selectSinglePost = (state: RootState) => state.singlePagePost.post;
 
-export const selectCurrentPostData = (state: RootState) => state.singlePagePost.post;
+export const selectCurrentPostData = (state: RootState) =>
+  state.singlePagePost.post;
 
 export const selectCurrentPostAuthor = (state: RootState) =>
   state.singlePagePost.post?.author;
@@ -130,6 +137,8 @@ export const selectFetchPostState = (state: RootState) =>
 export const selectPostLikeCountState = (state: RootState) =>
   state.singlePagePost.putLikeCountState;
 
-export const selectIsPostLiked = (state: RootState) => state.singlePagePost.isLiked;
+export const selectIsPostLiked = (state: RootState) =>
+  state.singlePagePost.isLiked;
 
-export const selectPostLikeCount = (state: RootState) => state.singlePagePost.likeCount;
+export const selectPostLikeCount = (state: RootState) =>
+  state.singlePagePost.likeCount;

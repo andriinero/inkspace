@@ -5,7 +5,10 @@ import useBookmarkPostAction from '@/hooks/useBookmarkPostAction';
 import useIgnoreUserAction from '@/hooks/useIgnoreUserAction';
 import parse from 'html-react-parser';
 
-import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
+import {
+  selectAuthData,
+  selectIsAuthenticated,
+} from '@/features/auth/authSlice';
 import {
   selectFetchProfileDataState,
   selectBookmarkActionState,
@@ -96,7 +99,10 @@ const PostItem = ({
 
     if (response) {
       dispatch(
-        addNotification('post deleted successfully', PushNotificationType.SUCCESS)
+        addNotification(
+          'post deleted successfully',
+          PushNotificationType.SUCCESS,
+        ),
       );
     }
   };
@@ -104,13 +110,13 @@ const PostItem = ({
   const handleIgnoreAction = useIgnoreUserAction(
     author._id,
     isIgnored,
-    ignoreUserActionState.isLoading
+    ignoreUserActionState.isLoading,
   );
 
   const handleBookmarkClick = useBookmarkPostAction(
     _id,
     isBookmarked,
-    bookmarkActionState.isLoading
+    bookmarkActionState.isLoading,
   );
   const handleMuteAuthorClick = (): void => {
     handleIgnoreAction();
@@ -129,7 +135,9 @@ const PostItem = ({
       <S.PreviewImage imageId={thumbnail_image} altText="Post Image Preview" />
       <S.Bottom>
         <S.MiscContainer>
-          {topic && <S.Topic onTopicClick={handleTopicClick}>{topic.name}</S.Topic>}
+          {topic && (
+            <S.Topic onTopicClick={handleTopicClick}>{topic.name}</S.Topic>
+          )}
           <S.PostReadEstimate bodyLength={body.length} />
         </S.MiscContainer>
         <S.Controls>

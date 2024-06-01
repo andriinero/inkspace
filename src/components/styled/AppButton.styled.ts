@@ -12,6 +12,7 @@ export const AppButton = styled(motion.input).attrs(({ disabled }) => ({
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 
   &:hover {
-    color: ${({ theme, disabled }) => (disabled ? '' : theme.color.text_primary)};
+    color: ${({ theme, disabled }) =>
+      disabled ? '' : theme.color.text_primary};
   }
 `;

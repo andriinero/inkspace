@@ -26,7 +26,7 @@ const pushNotificationSlice = createSlice({
     addNotification: {
       reducer(state, action: PayloadAction<PushNotificationData>) {
         const isErrorPresent = state.queue.some(
-          (n) => n.message === action.payload.message
+          (n) => n.message === action.payload.message,
         );
 
         if (!isErrorPresent) state.queue.push(action.payload);
@@ -48,7 +48,8 @@ const pushNotificationSlice = createSlice({
   },
 });
 
-export const { addNotification, removeNotification } = pushNotificationSlice.actions;
+export const { addNotification, removeNotification } =
+  pushNotificationSlice.actions;
 
 export default pushNotificationSlice.reducer;
 

@@ -40,7 +40,9 @@ const LoginForm = () => {
       const response = await dispatch(postLogin(formData)).unwrap();
 
       if (response) {
-        dispatch(addNotification('login success', PushNotificationType.SUCCESS));
+        dispatch(
+          addNotification('login success', PushNotificationType.SUCCESS),
+        );
         dispatch(initAuth());
         dispatch(closeLoginModal());
       }
@@ -71,7 +73,9 @@ const LoginForm = () => {
             </S.StyledErrorMessage>
           </S.InputWrapper>
           <S.InputWrapper>
-            <S.StyledInputLabel htmlFor="login-password">Password</S.StyledInputLabel>
+            <S.StyledInputLabel htmlFor="login-password">
+              Password
+            </S.StyledInputLabel>
             <S.StyledInputText
               {...register('password', { required: 'Password is required' })}
               id="login-password"
@@ -85,7 +89,11 @@ const LoginForm = () => {
             <S.StyledErrorMessage $isVisible={Boolean(error)}>
               {error?.message}
             </S.StyledErrorMessage>
-            <S.SubmitButton disabled={isSubmitDisabled} type="submit" value="Log In" />
+            <S.SubmitButton
+              disabled={isSubmitDisabled}
+              type="submit"
+              value="Log In"
+            />
           </S.ControlsWrapper>
         </S.LoginForm>
       </S.LoginWrapper>

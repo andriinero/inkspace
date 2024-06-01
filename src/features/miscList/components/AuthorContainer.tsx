@@ -29,7 +29,12 @@ const AuthorContainer = () => {
       try {
         await dispatch(fetchAuthors()).unwrap();
       } catch (err) {
-        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+        dispatch(
+          addNotification(
+            (err as ErrorData).message,
+            PushNotificationType.ERROR,
+          ),
+        );
       }
     };
 

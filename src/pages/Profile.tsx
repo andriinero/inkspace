@@ -46,7 +46,12 @@ const Profile = () => {
         await dispatch(fetchFollowedUsers()).unwrap();
         await dispatch(fetchIgnoredUsers()).unwrap();
       } catch (err) {
-        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+        dispatch(
+          addNotification(
+            (err as ErrorData).message,
+            PushNotificationType.ERROR,
+          ),
+        );
       }
     };
 
@@ -82,8 +87,12 @@ const Profile = () => {
             altText="Profile Icon"
           />
           <S.StyledAsideUserName>{profileData?.username}</S.StyledAsideUserName>
-          <S.FollowCount>{profileData?.followed_users.length} Following</S.FollowCount>
-          <S.FollowCount>{profileData?.users_following.length} Followers</S.FollowCount>
+          <S.FollowCount>
+            {profileData?.followed_users.length} Following
+          </S.FollowCount>
+          <S.FollowCount>
+            {profileData?.users_following.length} Followers
+          </S.FollowCount>
           <S.SignUpDate>Member since: {signUpDate}</S.SignUpDate>
           <S.StyledEditLink to="/profile/edit">Edit Profile</S.StyledEditLink>
           <S.UserBio>{profileData?.bio}</S.UserBio>

@@ -49,7 +49,7 @@ export const fetchPosts = createAsyncThunk<
     {
       method: 'GET',
       mode: 'cors',
-    }
+    },
   );
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
@@ -113,7 +113,8 @@ const postListSlice = createSlice({
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.fetchPostsState.isLoading = false;
-        state.fetchPostsState.error = action.payload || (action.error as ErrorData);
+        state.fetchPostsState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(deletePost.pending, (state) => {
@@ -121,12 +122,15 @@ const postListSlice = createSlice({
         state.deletePostState.error = null;
       })
       .addCase(deletePost.fulfilled, (state, action) => {
-        state.postList = state.postList.filter((p) => p._id !== action.payload._id);
+        state.postList = state.postList.filter(
+          (p) => p._id !== action.payload._id,
+        );
         state.deletePostState.isLoading = false;
       })
       .addCase(deletePost.rejected, (state, action) => {
         state.deletePostState.isLoading = false;
-        state.deletePostState.error = action.payload || (action.error as ErrorData);
+        state.deletePostState.error =
+          action.payload || (action.error as ErrorData);
       });
   },
 });
@@ -140,9 +144,11 @@ export const selectFetchPostListState = (state: RootState) =>
 
 export const selectPostList = (state: RootState) => state.postList.postList;
 
-export const selectSelectedTopic = (state: RootState) => state.postList.selectedTopic;
+export const selectSelectedTopic = (state: RootState) =>
+  state.postList.selectedTopic;
 
 export const selectIsTopicSelected = (topicId: string) => (state: RootState) =>
   state.postList.selectedTopic?._id === topicId;
 
-export const selectIsFollowingList = (state: RootState) => state.postList.isFollowList;
+export const selectIsFollowingList = (state: RootState) =>
+  state.postList.isFollowList;

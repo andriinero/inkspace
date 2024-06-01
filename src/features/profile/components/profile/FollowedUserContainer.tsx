@@ -9,7 +9,11 @@ import { Waterfall } from '@/styles/animations/Waterfall';
 
 import UsersListLoader from '@/components/loaders/UsersListLoader';
 import Error from '@/components/general/Error';
-import { CalloutText, FollowedUsersList, Wrapper } from './FollowedUserContainer.styled';
+import {
+  CalloutText,
+  FollowedUsersList,
+  Wrapper,
+} from './FollowedUserContainer.styled';
 import FollowedUserItem from '@/features/profile/components/profile/FollowedUserItem';
 
 const FollowedUserContainer = () => {

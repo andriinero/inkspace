@@ -2,7 +2,7 @@ import { RefObject, useEffect } from 'react';
 
 const useCloseDropdown = (
   ref: RefObject<HTMLElement | null>,
-  onWindowClick: () => void
+  onWindowClick: () => void,
 ) => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent): void => {

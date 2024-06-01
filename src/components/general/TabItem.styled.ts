@@ -16,8 +16,8 @@ export const Wrapper = styled.div<{ $isSelected: boolean }>`
     ${({ $isSelected }) =>
       !$isSelected &&
       css`
-        filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
-          contrast(82%);
+        filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg)
+          brightness(102%) contrast(82%);
       `}
   }
 

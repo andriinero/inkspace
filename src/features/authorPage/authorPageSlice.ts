@@ -4,7 +4,10 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/app/store';
-import { FullAuthorData, FullAuthorDataSchema } from '@/types/entityData/FullAuthorData';
+import {
+  FullAuthorData,
+  FullAuthorDataSchema,
+} from '@/types/entityData/FullAuthorData';
 import { PostData, PostDataSchema } from '@/types/entityData/PostData';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
@@ -27,10 +30,13 @@ export const fetchAuthorData = createAsyncThunk<
   string,
   { rejectValue: ErrorData }
 >('authorPage/fetchAuthor', async (authorId, { rejectWithValue }) => {
-  const { data, responseState } = await useAppFetch(`/api/authors/${authorId}`, {
-    method: 'GET',
-    mode: 'cors',
-  });
+  const { data, responseState } = await useAppFetch(
+    `/api/authors/${authorId}`,
+    {
+      method: 'GET',
+      mode: 'cors',
+    },
+  );
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
@@ -45,10 +51,13 @@ export const fetchAuthorPosts = createAsyncThunk<
   string,
   { rejectValue: ErrorData }
 >('authorPage/fetchAuthorPosts', async (userId, { rejectWithValue }) => {
-  const { data, responseState } = await useAppFetch(`/api/posts?userid=${userId}`, {
-    method: 'GET',
-    mode: 'cors',
-  });
+  const { data, responseState } = await useAppFetch(
+    `/api/posts?userid=${userId}`,
+    {
+      method: 'GET',
+      mode: 'cors',
+    },
+  );
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
@@ -79,7 +88,8 @@ const authorPageSlice = createSlice({
       })
       .addCase(fetchAuthorData.rejected, (state, action) => {
         state.fetchAuthorDataState.isLoading = false;
-        state.fetchAuthorDataState.error = action.payload || (action.error as ErrorData);
+        state.fetchAuthorDataState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(fetchAuthorPosts.pending, (state) => {
@@ -92,7 +102,8 @@ const authorPageSlice = createSlice({
       })
       .addCase(fetchAuthorPosts.rejected, (state, action) => {
         state.fetchAuthorPostsState.isLoading = false;
-        state.fetchAuthorDataState.error = action.payload || (action.error as ErrorData);
+        state.fetchAuthorDataState.error =
+          action.payload || (action.error as ErrorData);
       });
   },
 });
@@ -104,9 +115,11 @@ export default authorPageSlice.reducer;
 export const selectFetchAuthorDataState = (state: RootState) =>
   state.authorPage.fetchAuthorDataState;
 
-export const selectAuthorData = (state: RootState) => state.authorPage.authorData;
+export const selectAuthorData = (state: RootState) =>
+  state.authorPage.authorData;
 
 export const selectFetchAuthorPostsState = (state: RootState) =>
   state.authorPage.fetchAuthorPostsState;
 
-export const selectAuthorPosts = (state: RootState) => state.authorPage.authorPosts;
+export const selectAuthorPosts = (state: RootState) =>
+  state.authorPage.authorPosts;

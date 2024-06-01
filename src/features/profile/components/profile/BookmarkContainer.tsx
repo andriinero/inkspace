@@ -25,7 +25,11 @@ const BookmarkContainer = () => {
       ) : bookmarkList.length === 0 ? (
         <CalloutText>No bookmarks yet!</CalloutText>
       ) : (
-        <BookmarkList variants={Waterfall.container} initial="hidden" animate="visible">
+        <BookmarkList
+          variants={Waterfall.container}
+          initial="hidden"
+          animate="visible"
+        >
           {bookmarkList.map((b) => (
             <PostItem key={b._id} {...b} />
           ))}

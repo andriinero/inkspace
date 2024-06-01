@@ -2,14 +2,23 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
 
 import storage from '@/lib/storage';
-import { PostLogin, PostLoginSchema } from '@/types/fetchResponse/success/PostLogin';
-import { AuthData, AuthDataSchema } from '@/types/entityData/AuthenticationData';
+import {
+  PostLogin,
+  PostLoginSchema,
+} from '@/types/fetchResponse/success/PostLogin';
+import {
+  AuthData,
+  AuthDataSchema,
+} from '@/types/entityData/AuthenticationData';
 
 import { AppThunk, RootState } from '@/app/store';
 import { fetchProfileData } from '../profile/profileSlice';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { TLoginSchema } from '@/types/formSchemas/LoginSchema';
-import { PostSignUp, PostSignUpSchema } from '@/types/fetchResponse/success/PostSignUp';
+import {
+  PostSignUp,
+  PostSignUpSchema,
+} from '@/types/fetchResponse/success/PostSignUp';
 import { TSignUpSchema } from '@/types/formSchemas/SignUpSchema';
 import { addNotification } from '../pushNotification/pushNotificationSlice';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
@@ -32,25 +41,26 @@ const initialState: AuthState = {
   postSignUpState: { isLoading: false, error: null },
 };
 
-export const fetchAuthData = createAsyncThunk<AuthData, void, { rejectValue: ErrorData }>(
-  'auth/fetchAuthData',
-  async (_, { rejectWithValue }) => {
-    const token = storage.getToken();
+export const fetchAuthData = createAsyncThunk<
+  AuthData,
+  void,
+  { rejectValue: ErrorData }
+>('auth/fetchAuthData', async (_, { rejectWithValue }) => {
+  const token = storage.getToken();
 
-    const { data, responseState } = await useAppFetch('/auth/login', {
-      method: 'GET',
-      mode: 'cors',
-      headers: { authorization: `Bearer ${token}` },
-    });
+  const { data, responseState } = await useAppFetch('/auth/login', {
+    method: 'GET',
+    mode: 'cors',
+    headers: { authorization: `Bearer ${token}` },
+  });
 
-    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-    const validationResult = AuthDataSchema.safeParse(data);
-    if (!validationResult.success) console.error(validationResult);
+  const validationResult = AuthDataSchema.safeParse(data);
+  if (!validationResult.success) console.error(validationResult);
 
-    return data as AuthData;
-  }
-);
+  return data as AuthData;
+});
 
 export const postLogin = createAsyncThunk<
   PostLogin,
@@ -105,7 +115,9 @@ export const initAuth = (): AppThunk => (dispatch) => {
       dispatch(resetLoadingState());
     }
   } catch (err) {
-    dispatch(addNotification((err as Error).message, PushNotificationType.ERROR));
+    dispatch(
+      addNotification((err as Error).message, PushNotificationType.ERROR),
+    );
   }
 };
 
@@ -149,7 +161,8 @@ const authSlice = createSlice({
       })
       .addCase(fetchAuthData.rejected, (state, action) => {
         state.fetchAuthDataState.isLoading = false;
-        state.fetchAuthDataState.error = action.payload || (action.error as ErrorData);
+        state.fetchAuthDataState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(postLogin.pending, (state) => {
@@ -161,7 +174,8 @@ const authSlice = createSlice({
       })
       .addCase(postLogin.rejected, (state, action) => {
         state.postLoginState.isLoading = false;
-        state.postLoginState.error = action.payload || (action.error as ErrorData);
+        state.postLoginState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(postSignUp.pending, (state) => {
@@ -175,31 +189,42 @@ const authSlice = createSlice({
       })
       .addCase(postSignUp.rejected, (state, action) => {
         state.postSignUpState.isLoading = false;
-        state.postSignUpState.error = action.payload || (action.error as ErrorData);
+        state.postSignUpState.error =
+          action.payload || (action.error as ErrorData);
       });
   },
 });
 
 const { resetLoadingState, clearAuthData } = authSlice.actions;
 
-export const { openSignUpModal, closeSignUpModal, openLoginModal, closeLoginModal } =
-  authSlice.actions;
+export const {
+  openSignUpModal,
+  closeSignUpModal,
+  openLoginModal,
+  closeLoginModal,
+} = authSlice.actions;
 
 export default authSlice.reducer;
 
-export const selectCurrentUserId = (state: RootState) => state.auth.authData?.sub;
+export const selectCurrentUserId = (state: RootState) =>
+  state.auth.authData?.sub;
 
 export const selectAuthData = (state: RootState) => state.auth.authData;
 
 export const selectFetchAuthDataState = (state: RootState) =>
   state.auth.fetchAuthDataState;
 
-export const selectPostLoginState = (state: RootState) => state.auth.postLoginState;
+export const selectPostLoginState = (state: RootState) =>
+  state.auth.postLoginState;
 
-export const selectPostSignUpState = (state: RootState) => state.auth.postSignUpState;
+export const selectPostSignUpState = (state: RootState) =>
+  state.auth.postSignUpState;
 
-export const selectIsAuthenticated = (state: RootState) => Boolean(state.auth.authData);
+export const selectIsAuthenticated = (state: RootState) =>
+  Boolean(state.auth.authData);
 
-export const selectIsLoginModalOpen = (state: RootState) => state.auth.isLoginModalOpen;
+export const selectIsLoginModalOpen = (state: RootState) =>
+  state.auth.isLoginModalOpen;
 
-export const selectIsSignUpModalOpen = (state: RootState) => state.auth.isSignUpModalOpen;
+export const selectIsSignUpModalOpen = (state: RootState) =>
+  state.auth.isSignUpModalOpen;

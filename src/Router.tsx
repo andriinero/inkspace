@@ -32,8 +32,16 @@ const Router = () => {
           path: '/profile',
           element: <Profile />,
           children: [
-            { index: true, path: '/profile/bookmarks', element: <BookmarkContainer /> },
-            { index: true, path: '/profile/your-posts', element: <RecentPosts /> },
+            {
+              index: true,
+              path: '/profile/bookmarks',
+              element: <BookmarkContainer />,
+            },
+            {
+              index: true,
+              path: '/profile/your-posts',
+              element: <RecentPosts />,
+            },
             {
               index: true,
               path: '/profile/followed-users',

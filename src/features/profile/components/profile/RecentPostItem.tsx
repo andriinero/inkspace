@@ -1,6 +1,9 @@
 import { useAppSelector } from '@/app/hooks';
 
-import { selectFetchProfilePostsState, selectProfilePostsList } from '../../profileSlice';
+import {
+  selectFetchProfilePostsState,
+  selectProfilePostsList,
+} from '../../profileSlice';
 
 import { Waterfall } from '@/styles/animations/Waterfall';
 
@@ -22,7 +25,11 @@ const RecentPosts = () => {
       ) : postsList.length === 0 ? (
         <CalloutText>No posts yet!</CalloutText>
       ) : (
-        <PostsList variants={Waterfall.container} initial="hidden" animate="visible">
+        <PostsList
+          variants={Waterfall.container}
+          initial="hidden"
+          animate="visible"
+        >
           {postsList.map((b) => (
             <GeneralPostItem key={b._id} {...b} />
           ))}

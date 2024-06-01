@@ -69,8 +69,8 @@ export const NewPostButton = styled.div`
   user-select: none;
 
   &:hover {
-    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
-      contrast(82%);
+    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg)
+      brightness(102%) contrast(82%);
   }
 `;
 
@@ -105,15 +105,15 @@ export const StyledMenuItem = styled(MenuItem)`
   justify-content: flex-start;
 
   &:hover {
-    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
-      contrast(82%);
+    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg)
+      brightness(102%) contrast(82%);
   }
 `;
 
 export const StyledProfileIcon = styled(Icon)`
   height: 20px;
   width: 20px;
-  
+
   &:hover {
     filter: none;
   }

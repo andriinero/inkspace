@@ -77,31 +77,34 @@ export const putEditTargetPost = createAsyncThunk<
   PostData,
   TPostFormSchema,
   { rejectValue: ErrorData }
->('postForm/putEditTargetPost', async (postData, { getState, rejectWithValue }) => {
-  const token = storage.getToken();
-  const state = getState() as { postForm: { editTargetPostId: string } };
+>(
+  'postForm/putEditTargetPost',
+  async (postData, { getState, rejectWithValue }) => {
+    const token = storage.getToken();
+    const state = getState() as { postForm: { editTargetPostId: string } };
 
-  const formData = formDataBuilder(postData);
+    const formData = formDataBuilder(postData);
 
-  const { data, responseState } = await useAppFetch(
-    `/api/posts/${state.postForm.editTargetPostId}`,
-    {
-      method: 'PUT',
-      mode: 'cors',
-      headers: {
-        authorization: `Bearer ${token}`,
+    const { data, responseState } = await useAppFetch(
+      `/api/posts/${state.postForm.editTargetPostId}`,
+      {
+        method: 'PUT',
+        mode: 'cors',
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+        body: formData,
       },
-      body: formData,
-    }
-  );
+    );
 
-  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-  const validationResult = PostDataSchema.safeParse(data);
-  if (!validationResult.success) console.error(validationResult);
+    const validationResult = PostDataSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-  return data as PostData;
-});
+    return data as PostData;
+  },
+);
 
 const createPostSlice = createSlice({
   name: 'postForm',
@@ -128,7 +131,8 @@ const createPostSlice = createSlice({
       })
       .addCase(postPost.rejected, (state, action) => {
         state.postPostState.isLoading = false;
-        state.postPostState.error = action.payload || (action.error as ErrorData);
+        state.postPostState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(fetchEditTargetPost.pending, (state) => {
@@ -141,7 +145,8 @@ const createPostSlice = createSlice({
       })
       .addCase(fetchEditTargetPost.rejected, (state, action) => {
         state.fetchEditTargetPostState.isLoading = false;
-        state.postPostState.error = action.payload || (action.error as ErrorData);
+        state.postPostState.error =
+          action.payload || (action.error as ErrorData);
       });
   },
 });
@@ -150,13 +155,17 @@ export const { enterEditMode, exitEditMode } = createPostSlice.actions;
 
 export default createPostSlice.reducer;
 
-export const selectEditPostData = (state: RootState) => state.postForm.editTargetPostData;
+export const selectEditPostData = (state: RootState) =>
+  state.postForm.editTargetPostData;
 
-export const selectEditPostId = (state: RootState) => state.postForm.editTargetPostId;
+export const selectEditPostId = (state: RootState) =>
+  state.postForm.editTargetPostId;
 
-export const selectPostIsEditMode = (state: RootState) => state.postForm.isEditMode;
+export const selectPostIsEditMode = (state: RootState) =>
+  state.postForm.isEditMode;
 
-export const selectPostPostState = (state: RootState) => state.postForm.postPostState;
+export const selectPostPostState = (state: RootState) =>
+  state.postForm.postPostState;
 
 export const selectFetchTargetPostState = (state: RootState) =>
   state.postForm.fetchEditTargetPostState;

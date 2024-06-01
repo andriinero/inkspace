@@ -2,16 +2,10 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "types": [
-      "vite/client"
-    ],
+    "types": ["vite/client"],
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -26,18 +20,11 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "src",
     "paths": {
-      "@/*": [
-        "*"
-      ],
-      "@assets/*": [
-        "assets/*"
-      ],
+      "@/*": ["*"],
+      "@assets/*": ["assets/*"]
     }
   },
-  "include": [
-    "src",
-    "src/components/general"
-  ],
+  "include": ["src", "src/components/general"],
   "references": [
     {
       "path": "./tsconfig.node.json"

@@ -45,8 +45,8 @@ const AppImage = ({
     !imageId && !isLoading
       ? placeholderSrc
       : isLoading && !imageURL
-      ? '/empty.png'
-      : imageURL;
+        ? '/empty.png'
+        : imageURL;
 
   if (!imageId)
     return (

@@ -10,7 +10,11 @@ import { Waterfall } from '@/styles/animations/Waterfall';
 import UsersListLoader from '@/components/loaders/UsersListLoader';
 import Error from '@/components/general/Error';
 import IgnoredUserItem from './IgnoredUserItem';
-import { CalloutText, FollowedUsersList, Wrapper } from './IgnoredUserContainer.styled';
+import {
+  CalloutText,
+  FollowedUsersList,
+  Wrapper,
+} from './IgnoredUserContainer.styled';
 
 const IgnoredUserContainer = () => {
   const usersList = useAppSelector(selectProfileIgnoredUsersList);

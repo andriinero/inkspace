@@ -32,7 +32,9 @@ const PostHeaderInfo = ({
   bodyLength,
 }: PostAuthorProps) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const isFollowed = useAppSelector(selectIsUserFollowed(author._id)) as boolean;
+  const isFollowed = useAppSelector(
+    selectIsUserFollowed(author._id),
+  ) as boolean;
 
   const { isLoading } = useAppSelector(selectFollowActionState);
 
@@ -44,7 +46,11 @@ const PostHeaderInfo = ({
     navigate('/');
   };
 
-  const handleFollowClick = useFollowUserAction(author._id, isFollowed, isLoading);
+  const handleFollowClick = useFollowUserAction(
+    author._id,
+    isFollowed,
+    isLoading,
+  );
 
   return (
     <S.Wrapper>

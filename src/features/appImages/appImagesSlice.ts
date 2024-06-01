@@ -23,7 +23,7 @@ export const fetchImage = createAsyncThunk(
       `/api/images/${imageId}`,
       {},
       undefined,
-      true
+      true,
     );
 
     if (!responseState.ok) throw rejectWithValue(data as ErrorData);
@@ -33,7 +33,7 @@ export const fetchImage = createAsyncThunk(
     const imageURL = URL.createObjectURL(data as Blob);
 
     return { imageId, imageURL };
-  }
+  },
 );
 
 const appImagesSlice = createSlice({
@@ -48,26 +48,34 @@ const appImagesSlice = createSlice({
       .addCase(fetchImage.fulfilled, (state, action) => {
         const { imageId, imageURL } = action.payload;
 
-        if (!state.imageURLsMap[imageId]) state.imageURLsMap[imageId] = imageURL;
+        if (!state.imageURLsMap[imageId])
+          state.imageURLsMap[imageId] = imageURL;
 
-        state.fetchQueue = state.fetchQueue.filter((q) => q !== action.meta.arg);
+        state.fetchQueue = state.fetchQueue.filter(
+          (q) => q !== action.meta.arg,
+        );
       })
       .addCase(fetchImage.rejected, (state, action) => {
-        state.fetchQueue = state.fetchQueue.filter((q) => q !== action.meta.arg);
+        state.fetchQueue = state.fetchQueue.filter(
+          (q) => q !== action.meta.arg,
+        );
       });
   },
 });
 
 export default appImagesSlice.reducer;
 
-export const selectImageURLsMap = (state: RootState) => state.appImages.imageURLsMap;
+export const selectImageURLsMap = (state: RootState) =>
+  state.appImages.imageURLsMap;
 
-export const selectImageURL = (imageId: string | undefined) => (state: RootState) => {
-  return imageId ? state.appImages.imageURLsMap[imageId] : undefined;
-};
+export const selectImageURL =
+  (imageId: string | undefined) => (state: RootState) => {
+    return imageId ? state.appImages.imageURLsMap[imageId] : undefined;
+  };
 
-export const selectIsImageInQueue = (imageId: string | undefined) => (state: RootState) =>
-  state.appImages.fetchQueue.some((q) => q === imageId);
+export const selectIsImageInQueue =
+  (imageId: string | undefined) => (state: RootState) =>
+    state.appImages.fetchQueue.some((q) => q === imageId);
 
 export const selectAreImagesLoading = (state: RootState) =>
   state.appImages.fetchQueue.length !== 0;

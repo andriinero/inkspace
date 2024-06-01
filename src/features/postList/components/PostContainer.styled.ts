@@ -20,7 +20,6 @@ export const Header = styled.h1`
   font-weight: 100;
 `;
 
-
 export const PostList = styled(motion.ul)`
   display: flex;
   flex-direction: column;
@@ -37,7 +36,7 @@ export const StyledIcon = styled.img`
   cursor: pointer;
 
   &:hover {
-    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg) brightness(102%)
-      contrast(82%);
+    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg)
+      brightness(102%) contrast(82%);
   }
 `;

@@ -25,7 +25,9 @@ const ProfilePasswordEditSchema = z
     message: "Passwords don't match",
     path: ['passwordConfirmation'],
   });
-export type TProfilePasswordEditSchema = z.infer<typeof ProfilePasswordEditSchema>;
+export type TProfilePasswordEditSchema = z.infer<
+  typeof ProfilePasswordEditSchema
+>;
 
 const PasswordForm = () => {
   const {
@@ -49,19 +51,27 @@ const PasswordForm = () => {
   };
 
   const handleFormSubmit = async (
-    formData: TProfilePasswordEditSchema
+    formData: TProfilePasswordEditSchema,
   ): Promise<void> => {
     if (!isSubmitting)
       try {
         const response = await dispatch(putPassword(formData)).unwrap();
         if (response) {
           dispatch(
-            addNotification('password updated successfully', PushNotificationType.SUCCESS)
+            addNotification(
+              'password updated successfully',
+              PushNotificationType.SUCCESS,
+            ),
           );
           dispatch(closeModal());
         }
       } catch (err) {
-        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+        dispatch(
+          addNotification(
+            (err as ErrorData).message,
+            PushNotificationType.ERROR,
+          ),
+        );
         dispatch(closeModal());
       }
   };
@@ -72,7 +82,9 @@ const PasswordForm = () => {
     <FormWrapper>
       <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
         <S.InputWrapper>
-          <S.StyledInputLabel htmlFor="edit-password">Password</S.StyledInputLabel>
+          <S.StyledInputLabel htmlFor="edit-password">
+            Password
+          </S.StyledInputLabel>
           <S.StyledInputText
             {...register('password')}
             id="edit-password"
@@ -95,7 +107,9 @@ const PasswordForm = () => {
             <S.InputDescription>
               You can sign in using your new password
             </S.InputDescription>
-            <S.StyledErrorMessage $isVisible={Boolean(errors.passwordConfirmation)}>
+            <S.StyledErrorMessage
+              $isVisible={Boolean(errors.passwordConfirmation)}
+            >
               {errors.passwordConfirmation?.message}
             </S.StyledErrorMessage>
             {error && (
@@ -106,8 +120,16 @@ const PasswordForm = () => {
           </S.InputWrapper>
         </S.InputWrapper>
         <S.ControlsWrapper>
-          <S.CancelButton onClick={handleModalClose} type="button" value="Cancel" />
-          <S.SubmitButton disabled={isSubmitDisabled} type="submit" value="Save" />
+          <S.CancelButton
+            onClick={handleModalClose}
+            type="button"
+            value="Cancel"
+          />
+          <S.SubmitButton
+            disabled={isSubmitDisabled}
+            type="submit"
+            value="Save"
+          />
         </S.ControlsWrapper>
       </S.Form>
     </FormWrapper>

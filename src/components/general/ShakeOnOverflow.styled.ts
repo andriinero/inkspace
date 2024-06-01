@@ -23,8 +23,7 @@ export const Wrapper = styled.span<{
   $shakeDuration: number;
   $iterationCount: number;
 }>`
-  animation: ${({ $isOverflown, $shakeDuration, $iterationCount }) =>
-    css`
-      ${$isOverflown ? shake : ''} ${$shakeDuration}ms linear ${$iterationCount}
-    `};
+  animation: ${({ $isOverflown, $shakeDuration, $iterationCount }) => css`
+    ${$isOverflown ? shake : ''} ${$shakeDuration}ms linear ${$iterationCount}
+  `};
 `;

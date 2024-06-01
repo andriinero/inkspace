@@ -10,7 +10,7 @@ const useTestUserLogin = () => {
 
   const handleTestUserLogin = async (): Promise<void> => {
     const response = await dispatch(
-      postLogin({ username: 'Max', password: 'guestpassword1' })
+      postLogin({ username: 'Max', password: 'guestpassword1' }),
     ).unwrap();
 
     if (response) {

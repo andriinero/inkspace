@@ -13,5 +13,3 @@ export const CalloutText = styled.h4`
   font-style: italic;
   font-weight: 200;
 `;
-
-

@@ -1,6 +1,9 @@
 import { useAppDispatch } from '@/app/hooks';
 
-import { deleteFollowUser, postFollowUser } from '@/features/profile/profileSlice';
+import {
+  deleteFollowUser,
+  postFollowUser,
+} from '@/features/profile/profileSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
@@ -9,7 +12,7 @@ import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 const useFollowUserAction = (
   userId: string,
   isFollowed: boolean,
-  isLoading: boolean = false
+  isLoading: boolean = false,
 ) => {
   const dispatch = useAppDispatch();
 
@@ -21,7 +24,9 @@ const useFollowUserAction = (
           : await dispatch(postFollowUser(userId)).unwrap();
       }
     } catch (err) {
-      dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      dispatch(
+        addNotification((err as ErrorData).message, PushNotificationType.ERROR),
+      );
     }
   };
 

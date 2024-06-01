@@ -12,7 +12,12 @@ type DialogProps = {
   children?: ReactNode;
 };
 
-const Dialog = ({ isModalOpen, onModalClose, className, children }: DialogProps) => {
+const Dialog = ({
+  isModalOpen,
+  onModalClose,
+  className,
+  children,
+}: DialogProps) => {
   useEffect(() => {
     const positionValue = isModalOpen ? 'fixed' : 'static';
     document.querySelector('html')!.style.position = positionValue;

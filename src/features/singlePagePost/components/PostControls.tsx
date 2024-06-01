@@ -19,7 +19,11 @@ import { enterEditMode } from '@/features/postForm/postFormSlice';
 
 import Bookmark from '@/components/general/Bookmark';
 import DotMenu from '@/components/general/DotMenu';
-import { MenuItem, MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
+import {
+  MenuItem,
+  MenuItemDanger,
+  MenuItemSuccess,
+} from '@/components/styled/MenuItem';
 import {
   ControlsContainer,
   ControlsIcon,
@@ -41,7 +45,9 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
   const author = useAppSelector(selectCurrentPostAuthor)!;
 
   const isIgnored = useAppSelector(selectIsUserIgnored(author._id));
-  const isBookmarked = useAppSelector(selectIsPostBookmarked(postId)) as boolean;
+  const isBookmarked = useAppSelector(
+    selectIsPostBookmarked(postId),
+  ) as boolean;
   const likeCount = useAppSelector(selectPostLikeCount);
   const bookmarkActionState = useAppSelector(selectBookmarkActionState);
 
@@ -98,9 +104,11 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
   const onBookmarkClick = useBookmarkPostAction(
     postId,
     isBookmarked,
-    bookmarkActionState.isLoading
+    bookmarkActionState.isLoading,
   );
-  const handleMuteAuthorClick = isIgnored ? handleUnmuteAuthor : handleMuteAuthor;
+  const handleMuteAuthorClick = isIgnored
+    ? handleUnmuteAuthor
+    : handleMuteAuthor;
 
   return (
     <Wrapper>
@@ -128,7 +136,9 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
           isOpen={isMenuOpen}
         >
           {isAuthor && (
-            <MenuItemSuccess onClick={handleEditModeClick}>Edit Post</MenuItemSuccess>
+            <MenuItemSuccess onClick={handleEditModeClick}>
+              Edit Post
+            </MenuItemSuccess>
           )}
           {!isAuthor && (
             <MenuItem onClick={handleMuteAuthorClick}>
@@ -136,10 +146,15 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
             </MenuItem>
           )}
           {isAuthor && (
-            <MenuItemDanger onClick={handleOpenDeleteModal}>Delete Post</MenuItemDanger>
+            <MenuItemDanger onClick={handleOpenDeleteModal}>
+              Delete Post
+            </MenuItemDanger>
           )}
         </DotMenu>
-        <Dialog isModalOpen={isDeleteModalOpen} onModalClose={handleCloseDeleteModal}>
+        <Dialog
+          isModalOpen={isDeleteModalOpen}
+          onModalClose={handleCloseDeleteModal}
+        >
           <DeleteConfirm
             headerText="Are you sure you want to delete this post?"
             onCancel={handleCloseDeleteModal}

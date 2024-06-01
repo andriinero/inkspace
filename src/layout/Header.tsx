@@ -77,14 +77,21 @@ const Header = () => {
   return (
     <S.Wrapper>
       <S.ContentWrapper>
-        <S.Logo whileHover={{ x: -1, y: -1 }} onClick={handleLogoClick} src="/logo.svg" />
+        <S.Logo
+          whileHover={{ x: -1, y: -1 }}
+          onClick={handleLogoClick}
+          src="/logo.svg"
+        />
         <S.ProfileWrapper>
           {isAuthenticated ? (
             <>
               {pathname !== '/post-form' && (
                 <>
                   <S.NewPostButton onClick={handleWritePostClick}>
-                    <S.StyledAppIcon src="/post.svg" alt="Create New Post Icon" />
+                    <S.StyledAppIcon
+                      src="/post.svg"
+                      alt="Create New Post Icon"
+                    />
                     <S.NewPostButtonText>Write</S.NewPostButtonText>
                   </S.NewPostButton>
                   <S.ProfileIcon
@@ -95,7 +102,10 @@ const Header = () => {
                   />
                   <S.StyledDropdown isOpen={isMenuOpen} innerRef={dropdownRef}>
                     <S.StyledMenuItem onClick={handleProfileClick}>
-                      <S.StyledProfileIcon src="/profile.svg" alt="Profile Icon" />
+                      <S.StyledProfileIcon
+                        src="/profile.svg"
+                        alt="Profile Icon"
+                      />
                       Profile
                     </S.StyledMenuItem>
                     <S.StyledMenuItem onClick={handleEditProfileClick}>
@@ -112,9 +122,21 @@ const Header = () => {
             </>
           ) : (
             <S.ControlsWrapper>
-              <S.HeaderButton onClick={handleSignUpClick} type="button" value="Sign Up" />
-              <S.HeaderButton onClick={handleLoginClick} type="button" value="Login" />
-              <S.HeaderButton onClick={handleTestUserLogin} type="button" value="Log In As Test User" />
+              <S.HeaderButton
+                onClick={handleSignUpClick}
+                type="button"
+                value="Sign Up"
+              />
+              <S.HeaderButton
+                onClick={handleLoginClick}
+                type="button"
+                value="Login"
+              />
+              <S.HeaderButton
+                onClick={handleTestUserLogin}
+                type="button"
+                value="Log In As Test User"
+              />
             </S.ControlsWrapper>
           )}
         </S.ProfileWrapper>

@@ -1,6 +1,9 @@
 import { useAppSelector } from '@/app/hooks';
 
-import { selectAuthorPosts, selectFetchAuthorPostsState } from '../authorPageSlice';
+import {
+  selectAuthorPosts,
+  selectFetchAuthorPostsState,
+} from '../authorPageSlice';
 
 import { Waterfall } from '@/styles/animations/Waterfall';
 
@@ -22,7 +25,11 @@ const PostContainer = () => {
       ) : postList.length === 0 ? (
         <CalloutText>Nothing posted yet!</CalloutText>
       ) : (
-        <PostList variants={Waterfall.container} initial="hidden" animate="visible">
+        <PostList
+          variants={Waterfall.container}
+          initial="hidden"
+          animate="visible"
+        >
           {postList.map((p) => (
             <PostItem key={p._id} {...p} />
           ))}

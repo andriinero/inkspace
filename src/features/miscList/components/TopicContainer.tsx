@@ -1,21 +1,21 @@
-import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
+import { useEffect } from 'react';
 
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 import {
   fetchTopics,
-  selectMiscTopicList,
   selectFetchMiscTopicsState,
+  selectMiscTopicList,
 } from '../miscListSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { WaterfallPopUp } from '@/styles/animations/WaterfallPopUp';
-import { Header, TopicList, Wrapper } from './TopicContainer.styled';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { Header, TopicList, Wrapper } from './TopicContainer.styled';
 
-import TopicItem from './TopicItem';
 import TopicListLoader from '@/components/loaders/TopicListLoader';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import TopicItem from './TopicItem';
 
 const TopicContainer = () => {
   const topicList = useAppSelector(selectMiscTopicList);
@@ -29,7 +29,12 @@ const TopicContainer = () => {
       try {
         await dispatch(fetchTopics()).unwrap();
       } catch (err) {
-        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+        dispatch(
+          addNotification(
+            (err as ErrorData).message,
+            PushNotificationType.ERROR,
+          ),
+        );
       }
     };
 

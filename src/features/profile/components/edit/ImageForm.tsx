@@ -9,7 +9,10 @@ import {
 } from '@/features/profile/profileSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
-import { ImageSchema, TImageSchema } from '@/types/formSchemas/ProfileImageSchema';
+import {
+  ImageSchema,
+  TImageSchema,
+} from '@/types/formSchemas/ProfileImageSchema';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
@@ -33,19 +36,23 @@ const ImageForm = () => {
 
   const handleFormSubmit = async (formData: TImageSchema): Promise<void> => {
     try {
-      const response = await dispatch(putProfileImage(formData.image as File)).unwrap();
+      const response = await dispatch(
+        putProfileImage(formData.image as File),
+      ).unwrap();
 
       if (response) {
         dispatch(
           addNotification(
             'profile image updated successfully',
-            PushNotificationType.SUCCESS
-          )
+            PushNotificationType.SUCCESS,
+          ),
         );
         dispatch(closeModal());
       }
     } catch (err) {
-      dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      dispatch(
+        addNotification((err as ErrorData).message, PushNotificationType.ERROR),
+      );
       dispatch(closeModal());
     }
   };
@@ -59,7 +66,11 @@ const ImageForm = () => {
           <S.StyledInputLabel htmlFor="edit-profile-image">
             Upload Image:
           </S.StyledInputLabel>
-          <S.StyledInputFile {...register('image')} id="edit-profile-image" type="file" />
+          <S.StyledInputFile
+            {...register('image')}
+            id="edit-profile-image"
+            type="file"
+          />
           <S.InputDescription>Your profile image</S.InputDescription>
           <S.StyledErrorMessage $isVisible={Boolean(errors.image)}>
             {errors.image?.message as string}
@@ -69,8 +80,16 @@ const ImageForm = () => {
           An error has occurred while submitting the form
         </S.StyledErrorMessage>
         <S.ControlsWrapper>
-          <S.CancelButton onClick={handleModalClose} type="button" value="Cancel" />
-          <S.SubmitButton disabled={isSubmitDisabled} type="submit" value="Save Image" />
+          <S.CancelButton
+            onClick={handleModalClose}
+            type="button"
+            value="Cancel"
+          />
+          <S.SubmitButton
+            disabled={isSubmitDisabled}
+            type="submit"
+            value="Save Image"
+          />
         </S.ControlsWrapper>
       </S.Form>
     </FormWrapper>

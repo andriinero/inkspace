@@ -186,27 +186,33 @@ export const deleteProfile = createAsyncThunk<
   TargetObjectId,
   void,
   { rejectValue: ErrorData; state: RootState }
->('profile/deleteProfile', async (_, { getState, rejectWithValue, dispatch }) => {
-  const token = storage.getToken();
-  const currentUserId = getState().profile.profileData?._id;
+>(
+  'profile/deleteProfile',
+  async (_, { getState, rejectWithValue, dispatch }) => {
+    const token = storage.getToken();
+    const currentUserId = getState().profile.profileData?._id;
 
-  const { data, responseState } = await useAppFetch(`/api/profile/${currentUserId}`, {
-    method: 'DELETE',
-    mode: 'cors',
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
-  });
+    const { data, responseState } = await useAppFetch(
+      `/api/profile/${currentUserId}`,
+      {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      },
+    );
 
-  if (!responseState.ok) throw rejectWithValue(data as ErrorData);
+    if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
-  const validationResult = TargetObjectIdSchema.safeParse(data);
-  if (!validationResult.success) console.error(validationResult);
+    const validationResult = TargetObjectIdSchema.safeParse(data);
+    if (!validationResult.success) console.error(validationResult);
 
-  dispatch(logout());
+    dispatch(logout());
 
-  return data as TargetObjectId;
-});
+    return data as TargetObjectId;
+  },
+);
 
 // BOOKMARKS //
 
@@ -265,14 +271,17 @@ export const deleteBookmark = createAsyncThunk<
 >('profile/deleteBookmark', async (postId, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch(`/api/profile/bookmarks/${postId}`, {
-    method: 'DELETE',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`,
+  const { data, responseState } = await useAppFetch(
+    `/api/profile/bookmarks/${postId}`,
+    {
+      method: 'DELETE',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
@@ -299,7 +308,7 @@ export const fetchProfilePosts = createAsyncThunk<
       headers: {
         'Content-Type': 'application/json',
       },
-    }
+    },
   );
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
@@ -319,13 +328,16 @@ export const fetchFollowedUsers = createAsyncThunk<
 >('profile/fetchFollowedUsers', async (_, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch('/api/profile/followed-users', {
-    method: 'GET',
-    mode: 'cors',
-    headers: {
-      authorization: `Bearer ${token}`,
+  const { data, responseState } = await useAppFetch(
+    '/api/profile/followed-users',
+    {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   if (!responseState.ok) return rejectWithValue(data as ErrorData);
 
@@ -342,15 +354,18 @@ export const postFollowUser = createAsyncThunk<
 >('profile/postFollowUser', async (userId, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch('/api/profile/followed-users', {
-    method: 'POST',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`,
+  const { data, responseState } = await useAppFetch(
+    '/api/profile/followed-users',
+    {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ userid: userId }),
     },
-    body: JSON.stringify({ userid: userId }),
-  });
+  );
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
@@ -376,7 +391,7 @@ export const deleteFollowUser = createAsyncThunk<
         'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
-    }
+    },
   );
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
@@ -396,13 +411,16 @@ export const fetchIgnoredUsers = createAsyncThunk<
 >('profile/fetchIgnoredUsers', async (_, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch('/api/profile/ignored-users', {
-    method: 'GET',
-    mode: 'cors',
-    headers: {
-      authorization: `Bearer ${token}`,
+  const { data, responseState } = await useAppFetch(
+    '/api/profile/ignored-users',
+    {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   if (!responseState.ok) return rejectWithValue(data as ErrorData);
 
@@ -419,15 +437,18 @@ export const postIgnoredUser = createAsyncThunk<
 >('profile/postIgnoredUser', async (userId, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch('/api/profile/ignored-users', {
-    method: 'POST',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`,
+  const { data, responseState } = await useAppFetch(
+    '/api/profile/ignored-users',
+    {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ userid: userId }),
     },
-    body: JSON.stringify({ userid: userId }),
-  });
+  );
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
@@ -453,7 +474,7 @@ export const deleteIgnoredUser = createAsyncThunk<
         'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
-    }
+    },
   );
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
@@ -489,7 +510,8 @@ const profileSlice = createSlice({
       })
       .addCase(fetchProfileData.rejected, (state, action) => {
         state.fetchProfileDataState.isLoading = false;
-        state.fetchProfileDataState.error = action.payload || (action.error as ErrorData);
+        state.fetchProfileDataState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(putPersonalDetails.pending, (state) => {
@@ -515,7 +537,8 @@ const profileSlice = createSlice({
       })
       .addCase(putPassword.rejected, (state, action) => {
         state.putPasswordState.isLoading = false;
-        state.putPasswordState.error = action.payload || (action.error as ErrorData);
+        state.putPasswordState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(putProfileImage.pending, (state) => {
@@ -528,7 +551,8 @@ const profileSlice = createSlice({
       })
       .addCase(putProfileImage.rejected, (state, action) => {
         state.putProfileImageState.isLoading = false;
-        state.putProfileImageState.error = action.payload || (action.error as ErrorData);
+        state.putProfileImageState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(deleteProfile.pending, (state) => {
@@ -540,7 +564,8 @@ const profileSlice = createSlice({
       })
       .addCase(deleteProfile.rejected, (state, action) => {
         state.deleteProfileState.isLoading = false;
-        state.deleteProfileState.error = action.payload || (action.error as ErrorData);
+        state.deleteProfileState.error =
+          action.payload || (action.error as ErrorData);
       });
 
     // BOOKMARKS //
@@ -561,7 +586,8 @@ const profileSlice = createSlice({
       });
     builder
       .addCase(postBookmark.pending, (state, action) => {
-        if (state.profileData) state.profileData.post_bookmarks.push(action.meta.arg);
+        if (state.profileData)
+          state.profileData.post_bookmarks.push(action.meta.arg);
         state.bookmarkActionState.isLoading = true;
         state.bookmarkActionState.error = null;
       })
@@ -570,18 +596,21 @@ const profileSlice = createSlice({
       })
       .addCase(postBookmark.rejected, (state, action) => {
         if (state.profileData)
-          state.profileData.post_bookmarks = state.profileData.post_bookmarks.filter(
-            (id) => id !== action.meta.arg
-          );
+          state.profileData.post_bookmarks =
+            state.profileData.post_bookmarks.filter(
+              (id) => id !== action.meta.arg,
+            );
         state.bookmarkActionState.isLoading = false;
-        state.bookmarkActionState.error = action.payload || (action.error as ErrorData);
+        state.bookmarkActionState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(deleteBookmark.pending, (state, action) => {
         if (state.profileData)
-          state.profileData.post_bookmarks = state.profileData.post_bookmarks.filter(
-            (id) => id !== action.meta.arg
-          );
+          state.profileData.post_bookmarks =
+            state.profileData.post_bookmarks.filter(
+              (id) => id !== action.meta.arg,
+            );
         state.bookmarkActionState.isLoading = true;
         state.bookmarkActionState.error = null;
       })
@@ -589,9 +618,11 @@ const profileSlice = createSlice({
         state.bookmarkActionState.isLoading = false;
       })
       .addCase(deleteBookmark.rejected, (state, action) => {
-        if (state.profileData) state.profileData.post_bookmarks.push(action.meta.arg);
+        if (state.profileData)
+          state.profileData.post_bookmarks.push(action.meta.arg);
         state.bookmarkActionState.isLoading = false;
-        state.bookmarkActionState.error = action.payload || (action.error as ErrorData);
+        state.bookmarkActionState.error =
+          action.payload || (action.error as ErrorData);
       });
 
     // RECENT POSTS //
@@ -628,7 +659,8 @@ const profileSlice = createSlice({
           action.payload || (action.error as ErrorData);
       })
       .addCase(postFollowUser.pending, (state, action) => {
-        if (state.profileData) state.profileData.followed_users.push(action.meta.arg);
+        if (state.profileData)
+          state.profileData.followed_users.push(action.meta.arg);
         state.followActionState.isLoading = true;
         state.followActionState.error = null;
       })
@@ -637,18 +669,21 @@ const profileSlice = createSlice({
       })
       .addCase(postFollowUser.rejected, (state, action) => {
         if (state.profileData)
-          state.profileData.followed_users = state.profileData.followed_users.filter(
-            (id) => id !== action.meta.arg
-          );
+          state.profileData.followed_users =
+            state.profileData.followed_users.filter(
+              (id) => id !== action.meta.arg,
+            );
         state.followActionState.isLoading = false;
-        state.followActionState.error = action.payload || (action.error as ErrorData);
+        state.followActionState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(deleteFollowUser.pending, (state, action) => {
         if (state.profileData)
-          state.profileData.followed_users = state.profileData.followed_users.filter(
-            (id) => id !== action.meta.arg
-          );
+          state.profileData.followed_users =
+            state.profileData.followed_users.filter(
+              (id) => id !== action.meta.arg,
+            );
         state.followActionState.isLoading = true;
         state.followActionState.error = null;
       })
@@ -656,9 +691,11 @@ const profileSlice = createSlice({
         state.followActionState.isLoading = false;
       })
       .addCase(deleteFollowUser.rejected, (state, action) => {
-        if (state.profileData) state.profileData.followed_users.push(action.meta.arg);
+        if (state.profileData)
+          state.profileData.followed_users.push(action.meta.arg);
         state.followActionState.isLoading = false;
-        state.followActionState.error = action.payload || (action.error as ErrorData);
+        state.followActionState.error =
+          action.payload || (action.error as ErrorData);
       });
 
     // IGNORED USERS //
@@ -679,7 +716,8 @@ const profileSlice = createSlice({
       });
     builder
       .addCase(postIgnoredUser.pending, (state, action) => {
-        if (state.profileData) state.profileData.ignored_users.push(action.meta.arg);
+        if (state.profileData)
+          state.profileData.ignored_users.push(action.meta.arg);
         state.ignoreUserActionState.isLoading = true;
         state.ignoreUserActionState.error = null;
       })
@@ -688,18 +726,21 @@ const profileSlice = createSlice({
       })
       .addCase(postIgnoredUser.rejected, (state, action) => {
         if (state.profileData)
-          state.profileData.ignored_users = state.profileData.ignored_users.filter(
-            (id) => id !== action.meta.arg
-          );
+          state.profileData.ignored_users =
+            state.profileData.ignored_users.filter(
+              (id) => id !== action.meta.arg,
+            );
         state.ignoreUserActionState.isLoading = false;
-        state.ignoreUserActionState.error = action.payload || (action.error as ErrorData);
+        state.ignoreUserActionState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(deleteIgnoredUser.pending, (state, action) => {
         if (state.profileData)
-          state.profileData.ignored_users = state.profileData.ignored_users.filter(
-            (id) => id !== action.meta.arg
-          );
+          state.profileData.ignored_users =
+            state.profileData.ignored_users.filter(
+              (id) => id !== action.meta.arg,
+            );
         state.ignoreUserActionState.isLoading = true;
         state.ignoreUserActionState.error = null;
       })
@@ -707,9 +748,11 @@ const profileSlice = createSlice({
         state.ignoreUserActionState.isLoading = false;
       })
       .addCase(deleteIgnoredUser.rejected, (state, action) => {
-        if (state.profileData) state.profileData.ignored_users.push(action.meta.arg);
+        if (state.profileData)
+          state.profileData.ignored_users.push(action.meta.arg);
         state.ignoreUserActionState.isLoading = false;
-        state.ignoreUserActionState.error = action.payload || (action.error as ErrorData);
+        state.ignoreUserActionState.error =
+          action.payload || (action.error as ErrorData);
       });
   },
 });
@@ -718,7 +761,8 @@ export const { openModal, closeModal } = profileSlice.actions;
 
 export default profileSlice.reducer;
 
-export const selectIsProfileModalOpen = (state: RootState) => state.profile.isModalOpen;
+export const selectIsProfileModalOpen = (state: RootState) =>
+  state.profile.isModalOpen;
 
 // PROFILE DATA //
 
@@ -737,9 +781,11 @@ export const selectPutProfileImageState = (state: RootState) =>
 export const selectDeleteProfileState = (state: RootState) =>
   state.profile.deleteProfileState;
 
-export const selectProfileData = (state: RootState) => state.profile.profileData;
+export const selectProfileData = (state: RootState) =>
+  state.profile.profileData;
 
-export const selectProfileId = (state: RootState) => state.profile.profileData?._id;
+export const selectProfileId = (state: RootState) =>
+  state.profile.profileData?._id;
 
 export const selectProfileImageId = (state: RootState) =>
   state.profile.profileData?.profile_image;
@@ -747,9 +793,11 @@ export const selectProfileImageId = (state: RootState) =>
 export const selectProfileUsername = (state: RootState) =>
   state.profile.profileData?.username;
 
-export const selectProfileEmail = (state: RootState) => state.profile.profileData?.email;
+export const selectProfileEmail = (state: RootState) =>
+  state.profile.profileData?.email;
 
-export const selectProfileBio = (state: RootState) => state.profile.profileData?.bio;
+export const selectProfileBio = (state: RootState) =>
+  state.profile.profileData?.bio;
 
 // BOOKMARKS //
 

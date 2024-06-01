@@ -17,9 +17,12 @@ export const imageValidator = z
   .refine((file) => !file || (!!file && file.size <= MAX_FILE_SIZE), {
     message: 'Max image size is 2MB',
   })
-  .refine((file) => !file || (!!file && ACCEPTED_FILE_TYPES.includes(file.type)), {
-    message: 'Only .jpeg, .png formats are supported',
-  });
+  .refine(
+    (file) => !file || (!!file && ACCEPTED_FILE_TYPES.includes(file.type)),
+    {
+      message: 'Only .jpeg, .png formats are supported',
+    },
+  );
 
 export const ImageSchema = z.object({
   image: imageValidator,

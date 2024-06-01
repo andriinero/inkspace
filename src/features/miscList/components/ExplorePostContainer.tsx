@@ -29,7 +29,12 @@ const ExplorePostContainer = () => {
       try {
         await dispatch(fetchMiscPosts()).unwrap();
       } catch (err) {
-        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+        dispatch(
+          addNotification(
+            (err as ErrorData).message,
+            PushNotificationType.ERROR,
+          ),
+        );
       }
     };
 

@@ -34,7 +34,11 @@ const DotMenu = ({
         src="/dots-horizontal.svg"
         alt="Dot Menu Icon"
       />
-      <Dropdown innerRef={dropdown} isOpen={isOpen} isAlignedLeft={isAlignedLeft}>
+      <Dropdown
+        innerRef={dropdown}
+        isOpen={isOpen}
+        isAlignedLeft={isAlignedLeft}
+      >
         {children}
       </Dropdown>
     </>

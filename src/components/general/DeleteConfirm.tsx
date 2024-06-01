@@ -12,7 +12,11 @@ type DeleteConfirmProps = {
   onCancel: () => void;
 };
 
-const DeleteConfirm = ({ headerText, onDelete, onCancel }: DeleteConfirmProps) => {
+const DeleteConfirm = ({
+  headerText,
+  onDelete,
+  onCancel,
+}: DeleteConfirmProps) => {
   return (
     <Wrapper>
       <Header>{headerText}</Header>

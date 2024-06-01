@@ -17,8 +17,8 @@ export const Notification = styled(motion.li)<{ $type: PushNotificationType }>`
     $type === 'error'
       ? theme.color.notification_danger
       : $type === 'success'
-      ? theme.color.notification_success
-      : theme.color.notification_warning};
+        ? theme.color.notification_success
+        : theme.color.notification_warning};
 `;
 
 export const MessageWrapper = styled.p`

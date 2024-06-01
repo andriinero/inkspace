@@ -23,9 +23,17 @@ export const ContentWrapper = styled.div`
 export const CarouselIcon = styled(Icon)``;
 
 export const LeftButton = styled(CarouselIcon)`
-  background-color: linear-gradient(top, rgba(255, 0, 0, 0), rgba(255, 0, 0, 1));
+  background-color: linear-gradient(
+    top,
+    rgba(255, 0, 0, 0),
+    rgba(255, 0, 0, 1)
+  );
 `;
 
 export const RightButton = styled(CarouselIcon)`
-  background-color: linear-gradient(top, rgba(255, 0, 0, 0), rgba(255, 0, 0, 1));
+  background-color: linear-gradient(
+    top,
+    rgba(255, 0, 0, 0),
+    rgba(255, 0, 0, 1)
+  );
 `;

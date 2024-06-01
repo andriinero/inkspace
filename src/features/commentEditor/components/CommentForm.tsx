@@ -1,9 +1,14 @@
-import { useEffect } from 'react';
-import { z } from 'zod';
-import { Controller, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { z } from 'zod';
 
+import {
+  addComment,
+  editComment,
+  selectCommentById,
+} from '@/features/commentList/commentListSlice';
 import {
   exitEditMode,
   postComment,
@@ -13,16 +18,9 @@ import {
   setIsOverflown,
   updateComment,
 } from '../commentEditorSlice';
-import {
-  addComment,
-  editComment,
-  selectCommentById,
-} from '@/features/commentList/commentListSlice';
 
-import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-
-import CommentTextarea from './CommentTextarea';
 import * as S from './CommentForm.styled';
+import CommentTextarea from './CommentTextarea';
 
 const CommentFormSchema = z.object({
   body: z
@@ -61,7 +59,9 @@ const CommentForm = () => {
 
   const dispatch = useAppDispatch();
 
-  const handleCommentPost = async (formData: TCommentFormSchema): Promise<void> => {
+  const handleCommentPost = async (
+    formData: TCommentFormSchema,
+  ): Promise<void> => {
     const response = await dispatch(postComment(formData.body));
 
     if (response) {
@@ -70,7 +70,9 @@ const CommentForm = () => {
     }
   };
 
-  const handleCommentPut = async (formData: TCommentFormSchema): Promise<void> => {
+  const handleCommentPut = async (
+    formData: TCommentFormSchema,
+  ): Promise<void> => {
     const response = await dispatch(updateComment(formData.body)).unwrap();
 
     if (response) {
@@ -80,7 +82,7 @@ const CommentForm = () => {
           commentId: response._id,
           commentBody: response.body,
           editDate: response.edit_date,
-        })
+        }),
       );
       reset();
     }

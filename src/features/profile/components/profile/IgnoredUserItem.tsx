@@ -1,7 +1,10 @@
 import { useAppSelector } from '@/app/hooks';
 import useIgnoreUserAction from '@/hooks/useIgnoreUserAction';
 
-import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
+import {
+  selectAuthData,
+  selectIsAuthenticated,
+} from '@/features/auth/authSlice';
 import {
   selectIgnoreUserActionState,
   selectIsUserIgnored,

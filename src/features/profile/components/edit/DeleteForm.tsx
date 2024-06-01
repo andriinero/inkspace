@@ -56,12 +56,14 @@ const DeleteForm = () => {
         dispatch(
           addNotification(
             'Thank you for using my app! We are sad to see you go :( -Siriuszx',
-            PushNotificationType.SUCCESS
-          )
+            PushNotificationType.SUCCESS,
+          ),
         );
       }
     } catch (err) {
-      dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      dispatch(
+        addNotification((err as ErrorData).message, PushNotificationType.ERROR),
+      );
     }
   };
 
@@ -75,7 +77,10 @@ const DeleteForm = () => {
           <S.StyledInputLabel htmlFor="edit-profile-delete">
             Type "{currentUsername}" to delete your account
           </S.StyledInputLabel>
-          <S.StyledInputText id="edit-profile-delete" {...register('confirmUsername')} />
+          <S.StyledInputText
+            id="edit-profile-delete"
+            {...register('confirmUsername')}
+          />
           <S.StyledErrorMessage $isVisible={Boolean(errors.confirmUsername)}>
             {errors.confirmUsername?.message}
           </S.StyledErrorMessage>
@@ -86,10 +91,20 @@ const DeleteForm = () => {
           )}
         </S.InputWrapper>
         <S.ControlsWrapper>
-          <S.CancelButton onClick={handleModalClose} type="button" value="Cancel" />
-          <S.SubmitButton disabled={isSubmitDisabled} type="submit" value="Submit" />
+          <S.CancelButton
+            onClick={handleModalClose}
+            type="button"
+            value="Cancel"
+          />
+          <S.SubmitButton
+            disabled={isSubmitDisabled}
+            type="submit"
+            value="Submit"
+          />
         </S.ControlsWrapper>
-        <S.InputDescriptionDanger>You can't undo this action!</S.InputDescriptionDanger>
+        <S.InputDescriptionDanger>
+          You can't undo this action!
+        </S.InputDescriptionDanger>
       </S.Form>
     </FormWrapper>
   );

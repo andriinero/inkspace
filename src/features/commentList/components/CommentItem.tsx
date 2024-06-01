@@ -24,7 +24,7 @@ type CommentProps = {
   edit_date?: string;
 };
 
-const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps) => {
+const CommentItem = ({ _id, author, body, date, edit_date }: CommentProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
@@ -65,7 +65,11 @@ const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps)
     <S.Wrapper>
       <S.Header>
         <S.WrapperAuthor>
-          <S.AuthorIcon imageId={author.profile_image} placeholderSrc='/portrait-placeholder.png' altText="Author Icon" />
+          <S.AuthorIcon
+            imageId={author.profile_image}
+            placeholderSrc="/portrait-placeholder.png"
+            altText="Author Icon"
+          />
           <S.WrapperInfo>
             <S.StyledLink to={`/authors/${author._id}`}>
               <S.StyledUsername>{author.username}</S.StyledUsername>
@@ -81,9 +85,14 @@ const CommentItem = ({ _id, post, author, body, date, edit_date }: CommentProps)
               isOpen={isMenuOpen}
             >
               <MenuItemSuccess onClick={handleEditClick}>Edit</MenuItemSuccess>
-              <MenuItemDanger onClick={handleOpenDeleteModal}>Delete</MenuItemDanger>
+              <MenuItemDanger onClick={handleOpenDeleteModal}>
+                Delete
+              </MenuItemDanger>
             </S.StyledDotMenu>
-            <Dialog isModalOpen={isDeleteModalOpen} onModalClose={handleCloseDeleteModal}>
+            <Dialog
+              isModalOpen={isDeleteModalOpen}
+              onModalClose={handleCloseDeleteModal}
+            >
               <DeleteConfirm
                 headerText="Are you sure you want to delete this comment?"
                 onCancel={handleCloseDeleteModal}

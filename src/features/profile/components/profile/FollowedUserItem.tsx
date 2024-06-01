@@ -1,7 +1,10 @@
 import { useAppSelector } from '@/app/hooks';
 import useFollowUserAction from '@/hooks/useFollowUserAction';
 
-import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
+import {
+  selectAuthData,
+  selectIsAuthenticated,
+} from '@/features/auth/authSlice';
 import {
   selectFollowActionState,
   selectIsUserFollowed,

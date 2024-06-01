@@ -9,7 +9,7 @@ import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 const useBookmarkPostAction = (
   postId: string,
   isBookmarked: boolean,
-  isLoading: boolean = false
+  isLoading: boolean = false,
 ) => {
   const dispatch = useAppDispatch();
 
@@ -21,7 +21,9 @@ const useBookmarkPostAction = (
           : await dispatch(postBookmark(postId)).unwrap();
       }
     } catch (err) {
-      dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+      dispatch(
+        addNotification((err as ErrorData).message, PushNotificationType.ERROR),
+      );
     }
   };
 

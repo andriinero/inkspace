@@ -17,7 +17,12 @@ type ExplorePostItemProps = {
   topic: TopicData;
 };
 
-const ExplorePostItem = ({ _id, author, title, topic }: ExplorePostItemProps) => {
+const ExplorePostItem = ({
+  _id,
+  author,
+  title,
+  topic,
+}: ExplorePostItemProps) => {
   const dispatch = useAppDispatch();
 
   const handleTopicClick = (): void => {

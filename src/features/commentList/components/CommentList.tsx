@@ -39,7 +39,7 @@ const CommentList = ({ postId }: PostCommentsProps) => {
   return (
     <Wrapper $isOpen={isOpen}>
       <Header>{`Responses (${commentList.length})`}</Header>
-      {isAuthenticated && <CommentForm postId={postId} />}
+      {isAuthenticated && <CommentForm />}
       <WrapperList>
         {commentList.map((comment) => (
           <CommentItem key={comment._id} {...comment} />

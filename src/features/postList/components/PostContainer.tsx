@@ -33,7 +33,12 @@ const PostContainer = () => {
       try {
         await dispatch(fetchPosts()).unwrap();
       } catch (err) {
-        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+        dispatch(
+          addNotification(
+            (err as ErrorData).message,
+            PushNotificationType.ERROR,
+          ),
+        );
       }
     };
 
@@ -49,7 +54,11 @@ const PostContainer = () => {
       ) : postList.length === 0 ? (
         <CalloutText>Nothing posted yet!</CalloutText>
       ) : (
-        <PostList variants={Waterfall.container} initial="hidden" animate="visible">
+        <PostList
+          variants={Waterfall.container}
+          initial="hidden"
+          animate="visible"
+        >
           {postList.map((post) => (
             <PostItem key={post._id} {...post} />
           ))}

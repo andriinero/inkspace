@@ -16,7 +16,12 @@ import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 import BookmarkItem from './BookmarkItem';
 import MiscListLoader from '@/components/loaders/MiscListLoader';
-import { BookmarkList, CalloutText, Header, Wrapper } from './BookmarkContainer.styled';
+import {
+  BookmarkList,
+  CalloutText,
+  Header,
+  Wrapper,
+} from './BookmarkContainer.styled';
 
 const BookmarkContainer = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -32,7 +37,12 @@ const BookmarkContainer = () => {
       try {
         await dispatch(fetchBookmarks()).unwrap();
       } catch (err) {
-        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+        dispatch(
+          addNotification(
+            (err as ErrorData).message,
+            PushNotificationType.ERROR,
+          ),
+        );
       }
     };
 

@@ -6,13 +6,16 @@ import useFollowUserAction from '@/hooks/useFollowUserAction';
 import useAuthorPageLoadingState from '@/hooks/useAuthorPageLoadingState';
 import { AppDate } from '@/lib/AppDate';
 
-import { selectAuthData, selectIsAuthenticated } from '@/features/auth/authSlice';
+import {
+  selectAuthData,
+  selectIsAuthenticated,
+} from '@/features/auth/authSlice';
 import {
   selectFollowActionState,
   selectIsUserFollowed,
 } from '@/features/profile/profileSlice';
 import {
-    fetchAuthorData,
+  fetchAuthorData,
   fetchAuthorPosts,
   resetState,
   selectAuthorData,
@@ -36,7 +39,9 @@ const AuthorPage = () => {
   const { authorid } = useParams();
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-  const isFollowed = useAppSelector(selectIsUserFollowed(authorid as string)) as boolean;
+  const isFollowed = useAppSelector(
+    selectIsUserFollowed(authorid as string),
+  ) as boolean;
 
   const authData = useAppSelector(selectAuthData);
 
@@ -54,7 +59,12 @@ const AuthorPage = () => {
         await dispatch(fetchAuthorData(authorid!)).unwrap();
         await dispatch(fetchAuthorPosts(authorid!)).unwrap();
       } catch (err) {
-        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+        dispatch(
+          addNotification(
+            (err as ErrorData).message,
+            PushNotificationType.ERROR,
+          ),
+        );
       }
     };
 
@@ -68,7 +78,7 @@ const AuthorPage = () => {
   const handleFollowClick = useFollowUserAction(
     authorData?._id as string,
     isFollowed,
-    followActionState.isLoading
+    followActionState.isLoading,
   );
 
   if (authorid === authData?.sub) return <Navigate to="/profile/bookmarks" />;
@@ -100,8 +110,12 @@ const AuthorPage = () => {
             altText="Profile Icon"
           />
           <S.StyledAsideUserName>{authorData?.username}</S.StyledAsideUserName>
-          <S.FollowCount>{authorData?.followed_users_count} Following</S.FollowCount>
-          <S.FollowCount>{authorData?.users_following_count} Followers</S.FollowCount>
+          <S.FollowCount>
+            {authorData?.followed_users_count} Following
+          </S.FollowCount>
+          <S.FollowCount>
+            {authorData?.users_following_count} Followers
+          </S.FollowCount>
           <S.SignUpDate>Member since: {signUpDate}</S.SignUpDate>
           {isAuthenticated && (
             <HollowButton

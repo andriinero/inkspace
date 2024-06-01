@@ -1,4 +1,4 @@
-import { ChangeEvent} from 'react';
+import { ChangeEvent } from 'react';
 import { FieldErrors } from 'react-hook-form';
 import { useAppDispatch } from '@/app/hooks';
 

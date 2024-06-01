@@ -5,7 +5,10 @@ import { useAppFetch } from '@/lib/useAppFetch';
 import storage from '@/lib/storage';
 
 import { RootState } from '@/app/store';
-import { FullAuthorData, FullAuthorDataSchema } from '@/types/entityData/FullAuthorData';
+import {
+  FullAuthorData,
+  FullAuthorDataSchema,
+} from '@/types/entityData/FullAuthorData';
 import { TopicData, TopicDataSchema } from '@/types/entityData/TopicData';
 import { PostData, PostDataSchema } from '@/types/entityData/PostData';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
@@ -93,13 +96,16 @@ export const fetchBookmarks = createAsyncThunk<
 >('miscList/fetchBookmarks', async (_, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch('/api/profile/bookmarks?limit=4', {
-    method: 'GET',
-    mode: 'cors',
-    headers: {
-      authorization: `Bearer ${token}`,
+  const { data, responseState } = await useAppFetch(
+    '/api/profile/bookmarks?limit=4',
+    {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
 
@@ -126,7 +132,8 @@ const miscListSlice = createSlice({
       })
       .addCase(fetchAuthors.rejected, (state, action) => {
         state.fetchAuthorsState.isLoading = false;
-        state.fetchAuthorsState.error = action.payload || (action.error as ErrorData);
+        state.fetchAuthorsState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(fetchTopics.pending, (state) => {
@@ -140,7 +147,8 @@ const miscListSlice = createSlice({
       })
       .addCase(fetchTopics.rejected, (state, action) => {
         state.fetchTopicsState.isLoading = false;
-        state.fetchTopicsState.error = action.payload || (action.error as ErrorData);
+        state.fetchTopicsState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(fetchMiscPosts.pending, (state) => {
@@ -154,7 +162,8 @@ const miscListSlice = createSlice({
       })
       .addCase(fetchMiscPosts.rejected, (state, action) => {
         state.fetchPostsState.isLoading = false;
-        state.fetchPostsState.error = action.payload || (action.error as ErrorData);
+        state.fetchPostsState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(fetchBookmarks.pending, (state) => {
@@ -167,7 +176,8 @@ const miscListSlice = createSlice({
       })
       .addCase(fetchBookmarks.rejected, (state, action) => {
         state.fetchBookmarksState.isLoading = false;
-        state.fetchBookmarksState.error = action.payload || (action.error as ErrorData);
+        state.fetchBookmarksState.error =
+          action.payload || (action.error as ErrorData);
       });
   },
 });
@@ -177,12 +187,14 @@ export default miscListSlice.reducer;
 export const selectFetchMiscAuthorsState = (state: RootState) =>
   state.miscList.fetchAuthorsState;
 
-export const selectMiscAuthorList = (state: RootState) => state.miscList.authorList;
+export const selectMiscAuthorList = (state: RootState) =>
+  state.miscList.authorList;
 
 export const selectFetchMiscTopicsState = (state: RootState) =>
   state.miscList.fetchTopicsState;
 
-export const selectMiscTopicList = (state: RootState) => state.miscList.topicList;
+export const selectMiscTopicList = (state: RootState) =>
+  state.miscList.topicList;
 
 export const selectFetchMiscPostsState = (state: RootState) =>
   state.miscList.fetchPostsState;
@@ -192,4 +204,5 @@ export const selectMiscPostList = (state: RootState) => state.miscList.postList;
 export const selectFetchMiscBookmarksState = (state: RootState) =>
   state.miscList.fetchBookmarksState;
 
-export const selectMiscBookmarkList = (state: RootState) => state.miscList.bookmarkList;
+export const selectMiscBookmarkList = (state: RootState) =>
+  state.miscList.bookmarkList;

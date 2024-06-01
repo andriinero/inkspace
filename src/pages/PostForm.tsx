@@ -15,7 +15,10 @@ import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { Editor as TinyMCEEditor } from 'tinymce';
-import { TPostFormSchema, PostFormSchema } from '@/types/formSchemas/CreatePostSchema';
+import {
+  TPostFormSchema,
+  PostFormSchema,
+} from '@/types/formSchemas/CreatePostSchema';
 import { FadeIn } from '@/styles/animations/FadeIn';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
@@ -45,7 +48,12 @@ const PostForm = () => {
           image: null,
         };
       } catch (err) {
-        dispatch(addNotification((err as ErrorData).message, PushNotificationType.ERROR));
+        dispatch(
+          addNotification(
+            (err as ErrorData).message,
+            PushNotificationType.ERROR,
+          ),
+        );
       }
     }
 
@@ -70,7 +78,10 @@ const PostForm = () => {
 
     if (response) {
       dispatch(
-        addNotification('post created successfully', PushNotificationType.SUCCESS)
+        addNotification(
+          'post created successfully',
+          PushNotificationType.SUCCESS,
+        ),
       );
       navigate('/');
     }
@@ -80,7 +91,12 @@ const PostForm = () => {
     const response = await dispatch(putEditTargetPost(formData)).unwrap();
 
     if (response) {
-      dispatch(addNotification('post saved successfully', PushNotificationType.SUCCESS));
+      dispatch(
+        addNotification(
+          'post saved successfully',
+          PushNotificationType.SUCCESS,
+        ),
+      );
       navigate('/');
     }
   };
@@ -121,8 +137,14 @@ const PostForm = () => {
             </S.StyledErrorMessage>
           </S.InputItem>
           <S.InputItem>
-            <S.StyledInputLabel htmlFor="post-image">Upload thumbnail</S.StyledInputLabel>
-            <S.StyledInputFile {...register('image')} id="post-image" type="file" />
+            <S.StyledInputLabel htmlFor="post-image">
+              Upload thumbnail
+            </S.StyledInputLabel>
+            <S.StyledInputFile
+              {...register('image')}
+              id="post-image"
+              type="file"
+            />
             <S.StyledErrorMessage $isVisible={Boolean(errors.image)}>
               {errors.image?.message}
             </S.StyledErrorMessage>
@@ -137,7 +159,11 @@ const PostForm = () => {
                 required: { value: true, message: 'Post body is required' },
               }}
               render={({ field: { onChange, value } }) => (
-                <TinyEditor onChange={onChange} value={value} editorRef={editorRef} />
+                <TinyEditor
+                  onChange={onChange}
+                  value={value}
+                  editorRef={editorRef}
+                />
               )}
             />
           </S.PostWrapper>
@@ -148,9 +174,17 @@ const PostForm = () => {
       </S.Form>
       <S.ControlsContainer>
         {isEditMode ? (
-          <S.StyledButton form="create-new-post" type="submit" value="Save Edit" />
+          <S.StyledButton
+            form="create-new-post"
+            type="submit"
+            value="Save Edit"
+          />
         ) : (
-          <S.StyledButton form="create-new-post" type="submit" value="Publish" />
+          <S.StyledButton
+            form="create-new-post"
+            type="submit"
+            value="Publish"
+          />
         )}
       </S.ControlsContainer>
     </S.Wrapper>

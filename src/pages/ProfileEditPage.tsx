@@ -99,8 +99,12 @@ const ProfileEditPage = () => {
               value="Upload Image"
             />
           </S.StyledLink>
-          <S.FollowCount>{profileData?.followed_users.length} Following</S.FollowCount>
-          <S.FollowCount>{profileData?.users_following.length} Followers</S.FollowCount>
+          <S.FollowCount>
+            {profileData?.followed_users.length} Following
+          </S.FollowCount>
+          <S.FollowCount>
+            {profileData?.users_following.length} Followers
+          </S.FollowCount>
           <S.SignUpDate>Member since: {signUpDate}</S.SignUpDate>
         </S.ProfileWrapper>
       </S.WrapperAside>

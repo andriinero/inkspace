@@ -59,14 +59,22 @@ const LoginForm = () => {
             </S.StyledErrorMessage>
           </S.InputWrapper>
           <S.InputWrapper>
-            <S.StyledInputLabel htmlFor="sign-up-email">Your Email</S.StyledInputLabel>
-            <S.StyledInputText {...register('email')} id="sign-up-email" type="email" />
+            <S.StyledInputLabel htmlFor="sign-up-email">
+              Your Email
+            </S.StyledInputLabel>
+            <S.StyledInputText
+              {...register('email')}
+              id="sign-up-email"
+              type="email"
+            />
             <S.StyledErrorMessage $isVisible={Boolean(errors.email)}>
               {errors.email?.message}
             </S.StyledErrorMessage>
           </S.InputWrapper>
           <S.InputWrapper>
-            <S.StyledInputLabel htmlFor="sign-up-password">Password</S.StyledInputLabel>
+            <S.StyledInputLabel htmlFor="sign-up-password">
+              Password
+            </S.StyledInputLabel>
             <S.StyledInputText
               {...register('password')}
               id="sign-up-password"

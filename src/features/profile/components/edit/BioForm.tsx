@@ -1,21 +1,20 @@
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import {
   closeModal,
   putPersonalDetails,
-  selectPutPersonalDetailsState,
+  selectProfileBio,
 } from '@/features/profile/profileSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
-import { selectProfileBio } from '@/features/profile/profileSlice';
 
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
-import FormWrapper from './FormWrapper';
 import * as S from './BioForm.styled';
+import FormWrapper from './FormWrapper';
 
 const BioFormSchema = z.object({
   bio: z.string().max(280, 'Bio must contain at most 280 characters'),
@@ -49,8 +48,8 @@ const BioForm = () => {
           dispatch(
             addNotification(
               'profile bio updated successfully',
-              PushNotificationType.SUCCESS
-            )
+              PushNotificationType.SUCCESS,
+            ),
           );
           dispatch(closeModal());
         }
@@ -60,8 +59,8 @@ const BioForm = () => {
         dispatch(
           addNotification(
             error.errors![0].msg || error.message,
-            PushNotificationType.ERROR
-          )
+            PushNotificationType.ERROR,
+          ),
         );
         dispatch(closeModal());
       }
@@ -81,8 +80,16 @@ const BioForm = () => {
           </S.StyledErrorMessage>
         </S.InputWrapper>
         <S.ControlsWrapper>
-          <S.CancelButton onClick={handleModalClose} type="button" value="Cancel" />
-          <S.SubmitButton disabled={isSubmitDisabled} type="submit" value="Save" />
+          <S.CancelButton
+            onClick={handleModalClose}
+            type="button"
+            value="Cancel"
+          />
+          <S.SubmitButton
+            disabled={isSubmitDisabled}
+            type="submit"
+            value="Save"
+          />
         </S.ControlsWrapper>
       </S.Form>
     </FormWrapper>

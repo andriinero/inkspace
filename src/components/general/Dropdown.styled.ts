@@ -10,9 +10,12 @@ export const Wrapper = styled.ul<{ $isOpen: boolean; $isAlignedLeft: boolean }>`
   background-color: ${({ theme }) => theme.color.main_bg_secondary};
   border-radius: 6px;
 
-  transform: ${({ $isOpen }) => ($isOpen ? 'translateY(0)' : 'translateY(-10px)')};
+  transform: ${({ $isOpen }) =>
+    $isOpen ? 'translateY(0)' : 'translateY(-10px)'};
   opacity: 1;
-  transition: transform 200ms, opacity 200ms;
+  transition:
+    transform 200ms,
+    opacity 200ms;
 
   @starting-style {
     transform: translateY(-10px);

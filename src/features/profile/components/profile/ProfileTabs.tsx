@@ -1,6 +1,11 @@
 import { useLocation } from 'react-router-dom';
 
-import { StyledIcon, StyledLink, StyledTabItem, Wrapper } from './ProfileTabs.styled';
+import {
+  StyledIcon,
+  StyledLink,
+  StyledTabItem,
+  Wrapper,
+} from './ProfileTabs.styled';
 
 const ProfileTabs = () => {
   const location = useLocation();

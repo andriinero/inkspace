@@ -1,21 +1,20 @@
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import {
   closeModal,
   putPersonalDetails,
-  selectPutPersonalDetailsState,
+  selectProfileEmail,
 } from '@/features/profile/profileSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
-import { selectProfileEmail } from '@/features/profile/profileSlice';
 
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
-import FormWrapper from './FormWrapper';
 import * as S from './EmailForm.styled';
+import FormWrapper from './FormWrapper';
 
 const EmailFormSchema = z.object({
   email: z
@@ -44,13 +43,18 @@ const EmailForm = () => {
     dispatch(closeModal());
   };
 
-  const handleFormSubmit = async (formData: TEmailFormSchema): Promise<void> => {
+  const handleFormSubmit = async (
+    formData: TEmailFormSchema,
+  ): Promise<void> => {
     if (!isSubmitting)
       try {
         const response = await dispatch(putPersonalDetails(formData)).unwrap();
         if (response) {
           dispatch(
-            addNotification('email updated successfully', PushNotificationType.SUCCESS)
+            addNotification(
+              'email updated successfully',
+              PushNotificationType.SUCCESS,
+            ),
           );
           dispatch(closeModal());
         }
@@ -60,8 +64,8 @@ const EmailForm = () => {
         dispatch(
           addNotification(
             error.errors![0].msg || error.message,
-            PushNotificationType.ERROR
-          )
+            PushNotificationType.ERROR,
+          ),
         );
         dispatch(closeModal());
       }
@@ -81,8 +85,16 @@ const EmailForm = () => {
           </S.StyledErrorMessage>
         </S.InputWrapper>
         <S.ControlsWrapper>
-          <S.CancelButton onClick={handleModalClose} type="button" value="Cancel" />
-          <S.SubmitButton disabled={isSubmitDisabled} type="submit" value="Save" />
+          <S.CancelButton
+            onClick={handleModalClose}
+            type="button"
+            value="Cancel"
+          />
+          <S.SubmitButton
+            disabled={isSubmitDisabled}
+            type="submit"
+            value="Save"
+          />
         </S.ControlsWrapper>
       </S.Form>
     </FormWrapper>

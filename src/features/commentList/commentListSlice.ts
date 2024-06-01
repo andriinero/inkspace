@@ -1,16 +1,16 @@
-import { z } from 'zod';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useAppFetch } from '@/lib/useAppFetch';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { z } from 'zod';
 
 import storage from '@/lib/storage';
 
 import { RootState } from '@/app/store';
 import { CommentData, CommentDataSchema } from '@/types/entityData/CommentData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import {
   TargetObjectId,
   TargetObjectIdSchema,
 } from '@/types/fetchResponse/success/TargetObjectId';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 type CommentsState = {
   comments: CommentData[];
@@ -43,19 +43,19 @@ export const fetchComments = createAsyncThunk<
   string,
   { rejectValue: ErrorData }
 >('commentList/fetchComments', async (postId, { rejectWithValue }) => {
-  const { data, responseState } = await useAppFetch(`/api/posts/${postId}/comments`, {
-    method: 'GET',
-    mode: 'cors',
-  });
+  const { data, responseState } = await useAppFetch(
+    `/api/posts/${postId}/comments`,
+    {
+      method: 'GET',
+      mode: 'cors',
+    },
+  );
 
   if (!responseState.ok) return rejectWithValue(data as ErrorData);
 
   const validationResult = z.array(CommentDataSchema).safeParse(data);
 
-  if (!validationResult.success) {
-    console.error(validationResult);
-    return rejectWithValue(validationResult.error);
-  }
+  if (!validationResult.success) console.error(validationResult);
 
   return data as CommentData[];
 });
@@ -67,22 +67,22 @@ export const deleteComment = createAsyncThunk<
 >('commentList/deleteComment', async (commentId, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch(`/api/comments/${commentId}`, {
-    method: 'DELETE',
-    mode: 'cors',
-    headers: {
-      authorization: `Bearer ${token}`,
+  const { data, responseState } = await useAppFetch(
+    `/api/comments/${commentId}`,
+    {
+      method: 'DELETE',
+      mode: 'cors',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   if (!responseState.ok) return rejectWithValue(data as ErrorData);
 
   const validationResult = TargetObjectIdSchema.safeParse(data);
 
-  if (!validationResult.success) {
-    console.error(validationResult);
-    return rejectWithValue(validationResult.error);
-  }
+  if (!validationResult.success) console.error(validationResult);
 
   return data as TargetObjectId;
 });
@@ -96,7 +96,7 @@ const commentListSlice = createSlice({
     },
     editComment(state, action) {
       const commentIndex = state.comments.findIndex(
-        (c) => c._id === action.payload.commentId
+        (c) => c._id === action.payload.commentId,
       );
       state.comments[commentIndex].body = action.payload.commentBody;
       state.comments[commentIndex].edit_date = action.payload.editDate;
@@ -124,7 +124,8 @@ const commentListSlice = createSlice({
       })
       .addCase(fetchComments.rejected, (state, action) => {
         state.fetchCommentsState.isLoading = false;
-        state.fetchCommentsState.error = action.payload || (action.error as ErrorData);
+        state.fetchCommentsState.error =
+          action.payload || (action.error as ErrorData);
       });
     builder
       .addCase(deleteComment.pending, (state) => {
@@ -132,25 +133,34 @@ const commentListSlice = createSlice({
         state.deleteCommentState.error = null;
       })
       .addCase(deleteComment.fulfilled, (state, action) => {
-        state.comments = state.comments.filter((c) => c._id !== action.payload._id);
+        state.comments = state.comments.filter(
+          (c) => c._id !== action.payload._id,
+        );
         state.deleteCommentState.isLoading = false;
       })
       .addCase(deleteComment.rejected, (state, action) => {
         state.deleteCommentState.isLoading = false;
-        state.fetchCommentsState.error = action.payload || (action.error as ErrorData);
+        state.fetchCommentsState.error =
+          action.payload || (action.error as ErrorData);
       });
   },
 });
 
-export const { addComment, editComment, openComments, closeComments, toggleComments } =
-  commentListSlice.actions;
+export const {
+  addComment,
+  editComment,
+  openComments,
+  closeComments,
+  toggleComments,
+} = commentListSlice.actions;
 
 export default commentListSlice.reducer;
 
 export const selectCommentById = (id: string) => (state: RootState) =>
   state.commentList.comments.find((c) => c._id === id);
 
-export const selectCommentList = (state: RootState) => state.commentList.comments;
+export const selectCommentList = (state: RootState) =>
+  state.commentList.comments;
 
 export const selectAreCommentsOpen = (state: RootState) =>
   state.commentList.areCommentsOpen;

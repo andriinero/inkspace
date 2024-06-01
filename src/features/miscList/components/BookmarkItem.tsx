@@ -14,7 +14,13 @@ type BookmarkItemProps = {
   date: string;
 };
 
-const BookmarkItem = ({ _id, author, title, body, date }: BookmarkItemProps) => {
+const BookmarkItem = ({
+  _id,
+  author,
+  title,
+  body,
+  date,
+}: BookmarkItemProps) => {
   return (
     <S.WrapperItem variants={Waterfall.item}>
       <S.Header>
