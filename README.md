@@ -12,7 +12,9 @@
   <p align="center">
     Fullstack React Web Application written in TypeScript
     <br />
-    <a href="https://inkspace-alpha.vercel.app/">View Demo</a>
+    <a href="https://inkspace-alpha.vercel.app">View Demo</a>
+    ·
+    <a href="https://github.com/andriinero/inkspace_backend">Backend</a>
     ·
     <a href="https://github.com/andriinero/inkspace/issues/new">Report Bug</a>
     ·
