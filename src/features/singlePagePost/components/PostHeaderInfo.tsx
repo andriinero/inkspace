@@ -1,20 +1,20 @@
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import useFollowUserAction from '@/hooks/useFollowUserAction';
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import useFollowUserAction from "@/hooks/useFollowUserAction";
 
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import { selectIsAuthenticated } from "@/features/auth/authSlice";
 import {
   selectFollowActionState,
   selectIsUserFollowed,
-} from '@/features/profile/profileSlice';
-import { setTopic } from '@/features/postList/postListSlice';
+} from "@/features/profile/profileSlice";
+import { setTopic } from "@/features/postList/postListSlice";
 
-import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
-import { TopicData } from '@/types/entityData/TopicData';
-import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+import { GeneralAuthorData } from "@/types/entityData/GeneralAuthorData";
+import { TopicData } from "@/types/entityData/TopicData";
+import { ButtonInteraction } from "@/styles/animations/ButtonInteraction";
 
-import PostDate from '@/components/general/TimeAgo';
-import * as S from './PostHeaderInfo.styled';
+import PostDate from "@/components/general/TimeAgo";
+import * as S from "./PostHeaderInfo.styled";
 
 type PostAuthorProps = {
   isAuthor: boolean;
@@ -43,7 +43,7 @@ const PostHeaderInfo = ({
 
   const handleTopicClick = (): void => {
     dispatch(setTopic(topic));
-    navigate('/');
+    navigate("/");
   };
 
   const handleFollowClick = useFollowUserAction(
@@ -72,7 +72,7 @@ const PostHeaderInfo = ({
               whileTap={ButtonInteraction.whileTap.animation}
               onClick={handleFollowClick}
               type="button"
-              value={isFollowed ? 'Followed' : 'Follow'}
+              value={isFollowed ? "Followed" : "Follow"}
             />
           </>
         )}

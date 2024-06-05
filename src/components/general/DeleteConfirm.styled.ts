@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { TextButton } from '../styled/TextButton';
+import styled from "styled-components";
+import { TextButton } from "../styled/TextButton";
 
 export const Wrapper = styled.div`
   display: flex;

@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import AppImage from '@/features/appImages/components/AppImage';
-import { NavLink } from 'react-router-dom';
-import { Username } from '../styled/Username.styled';
-import TimeAgo from './TimeAgo';
+import styled from "styled-components";
+import AppImage from "@/features/appImages/components/AppImage";
+import { NavLink } from "react-router-dom";
+import { Username } from "../styled/Username.styled";
+import TimeAgo from "./TimeAgo";
 
 export const StyledLink = styled(NavLink)`
   display: flex;

@@ -1,27 +1,27 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { useAppFetch } from '@/lib/useAppFetch';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useAppFetch } from "@/lib/useAppFetch";
 
-import storage from '@/lib/storage';
+import storage from "@/lib/storage";
 import {
   PostLogin,
   PostLoginSchema,
-} from '@/types/fetchResponse/success/PostLogin';
+} from "@/types/fetchResponse/success/PostLogin";
 import {
   AuthData,
   AuthDataSchema,
-} from '@/types/entityData/AuthenticationData';
+} from "@/types/entityData/AuthenticationData";
 
-import { AppThunk, RootState } from '@/app/store';
-import { fetchProfileData } from '../profile/profileSlice';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
-import { TLoginSchema } from '@/types/formSchemas/LoginSchema';
+import { AppThunk, RootState } from "@/app/store";
+import { fetchProfileData } from "../profile/profileSlice";
+import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { TLoginSchema } from "@/types/formSchemas/LoginSchema";
 import {
   PostSignUp,
   PostSignUpSchema,
-} from '@/types/fetchResponse/success/PostSignUp';
-import { TSignUpSchema } from '@/types/formSchemas/SignUpSchema';
-import { addNotification } from '../pushNotification/pushNotificationSlice';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+} from "@/types/fetchResponse/success/PostSignUp";
+import { TSignUpSchema } from "@/types/formSchemas/SignUpSchema";
+import { addNotification } from "../pushNotification/pushNotificationSlice";
+import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
 
 type AuthState = {
   authData: AuthData | null;
@@ -45,12 +45,12 @@ export const fetchAuthData = createAsyncThunk<
   AuthData,
   void,
   { rejectValue: ErrorData }
->('auth/fetchAuthData', async (_, { rejectWithValue }) => {
+>("auth/fetchAuthData", async (_, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch('/auth/login', {
-    method: 'GET',
-    mode: 'cors',
+  const { data, responseState } = await useAppFetch("/auth/login", {
+    method: "GET",
+    mode: "cors",
     headers: { authorization: `Bearer ${token}` },
   });
 
@@ -66,11 +66,11 @@ export const postLogin = createAsyncThunk<
   PostLogin,
   TLoginSchema,
   { rejectValue: ErrorData }
->('auth/postLogin', async (loginBody, { rejectWithValue }) => {
-  const { data, responseState } = await useAppFetch('/auth/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    mode: 'cors',
+>("auth/postLogin", async (loginBody, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch("/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    mode: "cors",
     body: JSON.stringify(loginBody),
   });
 
@@ -88,11 +88,11 @@ export const postSignUp = createAsyncThunk<
   PostSignUp,
   TSignUpSchema,
   { rejectValue: ErrorData }
->('auth/postSignUp', async (signUpBody, { rejectWithValue }) => {
-  const { data, responseState } = await useAppFetch('/auth/sign-up', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    mode: 'cors',
+>("auth/postSignUp", async (signUpBody, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch("/auth/sign-up", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    mode: "cors",
     body: JSON.stringify(signUpBody),
   });
 
@@ -127,7 +127,7 @@ export const logout = (): AppThunk => (dispatch) => {
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     openLoginModal(state) {

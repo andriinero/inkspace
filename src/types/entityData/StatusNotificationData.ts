@@ -1,9 +1,9 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export enum PushNotificationType {
-  ERROR = 'error',
-  WARNING = 'warning',
-  SUCCESS = 'success',
+  ERROR = "error",
+  WARNING = "warning",
+  SUCCESS = "success",
 }
 
 export const PushNotificationDataSchema = z.object({

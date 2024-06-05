@@ -1,27 +1,27 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import useHomePageStatus from "@/hooks/useHomeLoadingStatus";
 
 import {
   fetchBookmarks,
   selectMiscBookmarkList,
   selectFetchMiscBookmarksState,
-} from '../miscListSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
+} from "../miscListSlice";
+import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
+import { selectIsAuthenticated } from "@/features/auth/authSlice";
 
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { Waterfall } from '@/styles/animations/Waterfall';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
+import { Waterfall } from "@/styles/animations/Waterfall";
+import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
 
-import BookmarkItem from './BookmarkItem';
-import MiscListLoader from '@/components/loaders/MiscListLoader';
+import BookmarkItem from "./BookmarkItem";
+import MiscListLoader from "@/components/loaders/MiscListLoader";
 import {
   BookmarkList,
   CalloutText,
   Header,
   Wrapper,
-} from './BookmarkContainer.styled';
+} from "./BookmarkContainer.styled";
 
 const BookmarkContainer = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);

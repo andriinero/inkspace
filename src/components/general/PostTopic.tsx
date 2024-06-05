@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { Topic } from './PostTopic.styled';
+import { ReactNode } from "react";
+import { Topic } from "./PostTopic.styled";
 
 type PostTopicProps = {
   onTopicClick?: () => void;

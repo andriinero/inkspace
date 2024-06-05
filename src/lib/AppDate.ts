@@ -1,4 +1,4 @@
-import { DateTime, DurationLikeObject } from 'luxon';
+import { DateTime, DurationLikeObject } from "luxon";
 
 export const AppDate = {
   getRelative: (date: string): string => {

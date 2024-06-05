@@ -1,4 +1,4 @@
-import { Body, Header, MiscInfo, Post, Wrapper } from './PostListLoader.styled';
+import { Body, Header, MiscInfo, Post, Wrapper } from "./PostListLoader.styled";
 
 const PostListLoader = () => {
   return (

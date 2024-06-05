@@ -1,21 +1,21 @@
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
-import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import useHomePageStatus from "@/hooks/useHomeLoadingStatus";
+import { useEffect } from "react";
 
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
 import {
   fetchTopics,
   selectFetchMiscTopicsState,
   selectMiscTopicList,
-} from '../miscListSlice';
+} from "../miscListSlice";
 
-import { WaterfallPopUp } from '@/styles/animations/WaterfallPopUp';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
-import { Header, TopicList, Wrapper } from './TopicContainer.styled';
+import { WaterfallPopUp } from "@/styles/animations/WaterfallPopUp";
+import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { Header, TopicList, Wrapper } from "./TopicContainer.styled";
 
-import TopicListLoader from '@/components/loaders/TopicListLoader';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import TopicItem from './TopicItem';
+import TopicListLoader from "@/components/loaders/TopicListLoader";
+import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
+import TopicItem from "./TopicItem";
 
 const TopicContainer = () => {
   const topicList = useAppSelector(selectMiscTopicList);

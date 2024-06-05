@@ -1,7 +1,7 @@
-import { Icon } from '@/components/styled/AppIcon.styled';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { motion } from 'framer-motion';
-import styled from 'styled-components';
+import { Icon } from "@/components/styled/AppIcon.styled";
+import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
+import { motion } from "framer-motion";
+import styled from "styled-components";
 
 export const Notification = styled(motion.li)<{ $type: PushNotificationType }>`
   display: flex;
@@ -14,9 +14,9 @@ export const Notification = styled(motion.li)<{ $type: PushNotificationType }>`
   width: 100%;
   border: none;
   background-color: ${({ theme, $type }) =>
-    $type === 'error'
+    $type === "error"
       ? theme.color.notification_danger
-      : $type === 'success'
+      : $type === "success"
         ? theme.color.notification_success
         : theme.color.notification_warning};
 `;

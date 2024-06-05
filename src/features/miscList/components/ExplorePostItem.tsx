@@ -1,12 +1,12 @@
-import { useAppDispatch } from '@/app/hooks';
+import { useAppDispatch } from "@/app/hooks";
 
-import { setTopic } from '@/features/postList/postListSlice';
+import { setTopic } from "@/features/postList/postListSlice";
 
-import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
-import { TopicData } from '@/types/entityData/TopicData';
-import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
+import { GeneralAuthorData } from "@/types/entityData/GeneralAuthorData";
+import { TopicData } from "@/types/entityData/TopicData";
+import { WaterfallSlideIn } from "@/styles/animations/WaterfallSlideIn";
 
-import * as S from './ExplorePostItem.styled';
+import * as S from "./ExplorePostItem.styled";
 
 type ExplorePostItemProps = {
   _id: string;

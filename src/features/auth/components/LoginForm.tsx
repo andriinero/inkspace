@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   closeLoginModal,
@@ -8,14 +8,14 @@ import {
   postLogin,
   selectIsLoginModalOpen,
   selectPostLoginState,
-} from '../authSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+} from "../authSlice";
+import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
 
-import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { LoginSchema, TLoginSchema } from "@/types/formSchemas/LoginSchema";
+import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
 
-import Dialog from '@/components/general/Dialog';
-import * as S from './LoginForm.styled';
+import Dialog from "@/components/general/Dialog";
+import * as S from "./LoginForm.styled";
 
 const LoginForm = () => {
   const {
@@ -41,7 +41,7 @@ const LoginForm = () => {
 
       if (response) {
         dispatch(
-          addNotification('login success', PushNotificationType.SUCCESS),
+          addNotification("login success", PushNotificationType.SUCCESS),
         );
         dispatch(initAuth());
         dispatch(closeLoginModal());
@@ -64,7 +64,7 @@ const LoginForm = () => {
               Your username
             </S.StyledInputLabel>
             <S.StyledInputText
-              {...register('username', { required: 'Username is required' })}
+              {...register("username", { required: "Username is required" })}
               id="login-username"
               type="text"
             />
@@ -77,7 +77,7 @@ const LoginForm = () => {
               Password
             </S.StyledInputLabel>
             <S.StyledInputText
-              {...register('password', { required: 'Password is required' })}
+              {...register("password", { required: "Password is required" })}
               id="login-password"
               type="password"
             />

@@ -1,22 +1,22 @@
-import { useAppSelector } from '@/app/hooks';
-import useFollowUserAction from '@/hooks/useFollowUserAction';
+import { useAppSelector } from "@/app/hooks";
+import useFollowUserAction from "@/hooks/useFollowUserAction";
 
 import {
   selectAuthData,
   selectIsAuthenticated,
-} from '@/features/auth/authSlice';
+} from "@/features/auth/authSlice";
 import {
   selectFollowActionState,
   selectIsUserFollowed,
-} from '@/features/profile/profileSlice';
+} from "@/features/profile/profileSlice";
 
-import { Username } from '@/components/styled/Username.styled';
-import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
-import { HollowButton } from '@/components/styled/HollowButton';
+import { Username } from "@/components/styled/Username.styled";
+import { WaterfallSlideIn } from "@/styles/animations/WaterfallSlideIn";
+import { HollowButton } from "@/components/styled/HollowButton";
 
-import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+import { ButtonInteraction } from "@/styles/animations/ButtonInteraction";
 
-import * as S from './AuthorItem.styled';
+import * as S from "./AuthorItem.styled";
 
 type AuthorItemProps = {
   _id: string;
@@ -55,7 +55,7 @@ const AuthorItem = ({
         <S.StyledLink to={`/authors/${_id}`}>
           <Username>{username}</Username>
         </S.StyledLink>
-        <S.BioContent>{bio || 'No user bio'}</S.BioContent>
+        <S.BioContent>{bio || "No user bio"}</S.BioContent>
       </S.BioContainer>
       {isAuthenticated && authData?.sub !== _id && (
         <HollowButton
@@ -63,7 +63,7 @@ const AuthorItem = ({
           $isActive={isFollowed}
           onClick={handleFollowClick}
           type="button"
-          value={isFollowed ? 'Followed' : 'Follow'}
+          value={isFollowed ? "Followed" : "Follow"}
         />
       )}
     </S.WrapperItem>

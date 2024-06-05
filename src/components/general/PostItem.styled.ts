@@ -1,20 +1,20 @@
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import Bookmark from '@/components/general/Bookmark';
-import DotMenu from '@/components/general/DotMenu';
-import PostReadTime from '@/components/general/PostReadTime';
-import { Title } from '@/components/styled/Title.styled';
-import { motion } from 'framer-motion';
-import AppImage from '@/features/appImages/components/AppImage';
-import { Icon } from '../styled/AppIcon.styled';
-import { MenuItem, MenuItemDanger, MenuItemSuccess } from '../styled/MenuItem';
-import PostTopic from './PostTopic';
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import Bookmark from "@/components/general/Bookmark";
+import DotMenu from "@/components/general/DotMenu";
+import PostReadTime from "@/components/general/PostReadTime";
+import { Title } from "@/components/styled/Title.styled";
+import { motion } from "framer-motion";
+import AppImage from "@/features/appImages/components/AppImage";
+import { Icon } from "../styled/AppIcon.styled";
+import { MenuItem, MenuItemDanger, MenuItemSuccess } from "../styled/MenuItem";
+import PostTopic from "./PostTopic";
 
 export const Wrapper = styled(motion.li)`
   display: grid;
   grid-template-columns: 1fr minmax(64px, 128px);
   grid-template-rows: auto auto;
-  grid-template-areas: 'head head' 'body preview';
+  grid-template-areas: "head head" "body preview";
   row-gap: 0.7rem;
   column-gap: 4rem;
 
@@ -58,7 +58,7 @@ export const BodyText = styled.div`
 
   overflow: hidden;
 
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   line-height: 1.5rem;
   text-overflow: ellipsis;
 

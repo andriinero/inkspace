@@ -1,4 +1,4 @@
-import { styled, keyframes, css } from 'styled-components';
+import { styled, keyframes, css } from "styled-components";
 
 export const shake = keyframes`
   0% {
@@ -24,6 +24,6 @@ export const Wrapper = styled.span<{
   $iterationCount: number;
 }>`
   animation: ${({ $isOverflown, $shakeDuration, $iterationCount }) => css`
-    ${$isOverflown ? shake : ''} ${$shakeDuration}ms linear ${$iterationCount}
+    ${$isOverflown ? shake : ""} ${$shakeDuration}ms linear ${$iterationCount}
   `};
 `;

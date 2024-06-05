@@ -1,9 +1,9 @@
-import { useAppSelector } from '@/app/hooks';
+import { useAppSelector } from "@/app/hooks";
 
 import {
   selectFetchProfileBookmarksState,
   selectFetchProfileDataState,
-} from '@/features/profile/profileSlice';
+} from "@/features/profile/profileSlice";
 
 const useProfilePageLoadingState = () => {
   const profileData = useAppSelector(selectFetchProfileDataState);

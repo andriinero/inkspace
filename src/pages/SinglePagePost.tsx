@@ -1,36 +1,36 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
-import parse from 'html-react-parser';
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import useWindowScrollDirection from "@/hooks/useWindowScrollDirection";
+import parse from "html-react-parser";
 
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import { selectIsAuthenticated } from "@/features/auth/authSlice";
 import {
   fetchPost,
   selectFetchPostState,
   selectCurrentPostData,
-} from '@/features/singlePagePost/singlePagePostSlice';
-import { selectProfileId } from '@/features/profile/profileSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+} from "@/features/singlePagePost/singlePagePostSlice";
+import { selectProfileId } from "@/features/profile/profileSlice";
+import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
 
-import { FadeIn } from '@/styles/animations/FadeIn';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { FadeIn } from "@/styles/animations/FadeIn";
+import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
 
-import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo';
-import Error from '@/components/general/Error';
-import PostControls from '@/features/singlePagePost/components/PostControls';
-import PostComments from '@/features/commentList/components/CommentList';
-import PostPageLoader from '@/components/loaders/PostPageLoader';
-import ScrollProgressBar from '@/components/general/ScrollProgressBar';
-import JumpButton from '@/components/general/JumpButton';
+import PostHeaderInfo from "@/features/singlePagePost/components/PostHeaderInfo";
+import Error from "@/components/general/Error";
+import PostControls from "@/features/singlePagePost/components/PostControls";
+import PostComments from "@/features/commentList/components/CommentList";
+import PostPageLoader from "@/components/loaders/PostPageLoader";
+import ScrollProgressBar from "@/components/general/ScrollProgressBar";
+import JumpButton from "@/components/general/JumpButton";
 import {
   Body,
   Header,
   PostWrapper,
   PreviewImage,
   Wrapper,
-} from './SinglePagePost.styled';
+} from "./SinglePagePost.styled";
 
 const SinglePagePost = () => {
   const { postid } = useParams();

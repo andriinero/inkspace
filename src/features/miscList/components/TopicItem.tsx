@@ -1,4 +1,4 @@
-import { TopicButton, Wrapper } from './TopicItem.styled';
+import { TopicButton, Wrapper } from "./TopicItem.styled";
 
 type TopicItemProps = {
   name: string;

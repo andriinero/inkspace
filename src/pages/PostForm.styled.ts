@@ -1,11 +1,11 @@
-import styled from 'styled-components';
-import { PostBody } from '@/styles/PostBody.styled';
-import { ErrorMessage } from '@/components/styled/ErrorMessage';
-import { InputText } from '@/components/styled/InputText';
-import { InputLabel } from '@/components/styled/InputLabel';
-import { FormButton } from '@/components/styled/FormButton';
-import { motion } from 'framer-motion';
-import { InputFile } from '@/components/styled/InputFile.styled';
+import styled from "styled-components";
+import { PostBody } from "@/styles/PostBody.styled";
+import { ErrorMessage } from "@/components/styled/ErrorMessage";
+import { InputText } from "@/components/styled/InputText";
+import { InputLabel } from "@/components/styled/InputLabel";
+import { FormButton } from "@/components/styled/FormButton";
+import { motion } from "framer-motion";
+import { InputFile } from "@/components/styled/InputFile.styled";
 
 export const Wrapper = styled(motion.div)`
   display: flex;

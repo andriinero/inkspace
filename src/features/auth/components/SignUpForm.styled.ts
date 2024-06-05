@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { InputText } from '@/components/styled/InputText';
-import { motion } from 'framer-motion';
-import { ErrorMessage } from '@/components/styled/ErrorMessage';
-import { InputLabel } from '@/components/styled/InputLabel';
-import { FormButton } from '@/components/styled/FormButton';
+import styled from "styled-components";
+import { InputText } from "@/components/styled/InputText";
+import { motion } from "framer-motion";
+import { ErrorMessage } from "@/components/styled/ErrorMessage";
+import { InputLabel } from "@/components/styled/InputLabel";
+import { FormButton } from "@/components/styled/FormButton";
 
 export const Wrapper = styled(motion.div)`
   display: flex;

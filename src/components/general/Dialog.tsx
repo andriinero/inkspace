@@ -1,9 +1,9 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect } from "react";
 
-import { FadeIn } from '@/styles/animations/FadeIn';
+import { FadeIn } from "@/styles/animations/FadeIn";
 
-import { AnimatePresence } from 'framer-motion';
-import { Wrapper, Backdrop } from './Dialog.styled';
+import { AnimatePresence } from "framer-motion";
+import { Wrapper, Backdrop } from "./Dialog.styled";
 
 type DialogProps = {
   isModalOpen: boolean;
@@ -19,8 +19,8 @@ const Dialog = ({
   children,
 }: DialogProps) => {
   useEffect(() => {
-    const positionValue = isModalOpen ? 'fixed' : 'static';
-    document.querySelector('html')!.style.position = positionValue;
+    const positionValue = isModalOpen ? "fixed" : "static";
+    document.querySelector("html")!.style.position = positionValue;
   }, [isModalOpen]);
 
   return (

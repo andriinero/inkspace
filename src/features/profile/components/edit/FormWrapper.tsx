@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { Wrapper } from './FormWrapper.styled';
+import { ReactNode } from "react";
+import { Wrapper } from "./FormWrapper.styled";
 
 type FormWrapperProps = {
   className?: string;

@@ -1,40 +1,40 @@
-import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { useNavigate } from "react-router-dom";
 
 import {
   putLikeCount,
   selectCurrentPostAuthor,
   selectPostLikeCount,
-} from '../singlePagePostSlice';
-import { toggleComments } from '@/features/commentList/commentListSlice';
+} from "../singlePagePostSlice";
+import { toggleComments } from "@/features/commentList/commentListSlice";
 import {
   deleteIgnoredUser,
   postIgnoredUser,
   selectBookmarkActionState,
   selectIsPostBookmarked,
   selectIsUserIgnored,
-} from '@/features/profile/profileSlice';
-import { enterEditMode } from '@/features/postForm/postFormSlice';
+} from "@/features/profile/profileSlice";
+import { enterEditMode } from "@/features/postForm/postFormSlice";
 
-import Bookmark from '@/components/general/Bookmark';
-import DotMenu from '@/components/general/DotMenu';
+import Bookmark from "@/components/general/Bookmark";
+import DotMenu from "@/components/general/DotMenu";
 import {
   MenuItem,
   MenuItemDanger,
   MenuItemSuccess,
-} from '@/components/styled/MenuItem';
+} from "@/components/styled/MenuItem";
 import {
   ControlsContainer,
   ControlsIcon,
   LikeCount,
   LikeWrapper,
   Wrapper,
-} from './PostControls.styled';
-import { deletePost } from '@/features/postList/postListSlice';
-import Dialog from '@/components/general/Dialog';
-import DeleteConfirm from '@/components/general/DeleteConfirm';
-import useBookmarkPostAction from '@/hooks/useBookmarkPostAction';
+} from "./PostControls.styled";
+import { deletePost } from "@/features/postList/postListSlice";
+import Dialog from "@/components/general/Dialog";
+import DeleteConfirm from "@/components/general/DeleteConfirm";
+import useBookmarkPostAction from "@/hooks/useBookmarkPostAction";
 
 type PostControlsProps = { postId: string; isAuthor: boolean };
 
@@ -73,7 +73,7 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
   const handleEditModeClick = (): void => {
     dispatch(enterEditMode(postId));
     setIsMenuOpen(false);
-    navigate('/post-form');
+    navigate("/post-form");
   };
 
   const handleOpenDeleteModal = (): void => {
@@ -88,7 +88,7 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
   const handleDeleteClick = async (): Promise<void> => {
     const response = await dispatch(deletePost(postId)).unwrap();
 
-    if (response) navigate('/');
+    if (response) navigate("/");
   };
 
   const handleMuteAuthor = (): void => {
@@ -119,7 +119,7 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
             src="/thumb-up-outline.svg"
             alt="Like Icon"
           />
-          <LikeCount>{likeCount ? likeCount : ''}</LikeCount>
+          <LikeCount>{likeCount ? likeCount : ""}</LikeCount>
         </LikeWrapper>
         <ControlsIcon
           onClick={onCommentsClick}
@@ -142,7 +142,7 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
           )}
           {!isAuthor && (
             <MenuItem onClick={handleMuteAuthorClick}>
-              {isIgnored ? 'Unmute this author' : 'Mute this author'}
+              {isIgnored ? "Unmute this author" : "Mute this author"}
             </MenuItem>
           )}
           {isAuthor && (

@@ -1,4 +1,4 @@
-import { Transition } from 'framer-motion';
+import { Transition } from "framer-motion";
 
 type PopOut = {
   hidden: NonNullable<unknown>;

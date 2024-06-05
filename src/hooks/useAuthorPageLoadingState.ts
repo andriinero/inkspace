@@ -1,9 +1,9 @@
-import { useAppSelector } from '@/app/hooks';
+import { useAppSelector } from "@/app/hooks";
 
 import {
   selectFetchAuthorPostsState,
   selectFetchAuthorDataState,
-} from '@/features/authorPage/authorPageSlice';
+} from "@/features/authorPage/authorPageSlice";
 
 const useAuthorPageLoadingState = () => {
   const authorData = useAppSelector(selectFetchAuthorDataState);

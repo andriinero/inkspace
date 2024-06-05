@@ -1,17 +1,17 @@
-import { z } from 'zod';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { useAppFetch } from '@/lib/useAppFetch';
+import { z } from "zod";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useAppFetch } from "@/lib/useAppFetch";
 
-import storage from '@/lib/storage';
+import storage from "@/lib/storage";
 
-import { RootState } from '@/app/store';
+import { RootState } from "@/app/store";
 import {
   FullAuthorData,
   FullAuthorDataSchema,
-} from '@/types/entityData/FullAuthorData';
-import { TopicData, TopicDataSchema } from '@/types/entityData/TopicData';
-import { PostData, PostDataSchema } from '@/types/entityData/PostData';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+} from "@/types/entityData/FullAuthorData";
+import { TopicData, TopicDataSchema } from "@/types/entityData/TopicData";
+import { PostData, PostDataSchema } from "@/types/entityData/PostData";
+import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
 
 type miscListState = {
   authorList: FullAuthorData[];
@@ -39,10 +39,10 @@ export const fetchAuthors = createAsyncThunk<
   FullAuthorData[],
   void,
   { rejectValue: ErrorData }
->('miscList/fetchAuthors', async (_, { rejectWithValue }) => {
-  const { data, responseState } = await useAppFetch('/api/authors?random=3', {
-    method: 'GET',
-    mode: 'cors',
+>("miscList/fetchAuthors", async (_, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch("/api/authors?random=3", {
+    method: "GET",
+    mode: "cors",
   });
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
@@ -57,10 +57,10 @@ export const fetchTopics = createAsyncThunk<
   TopicData[],
   void,
   { rejectValue: ErrorData }
->('miscList/fetchTopics', async (_, { rejectWithValue }) => {
-  const { data, responseState } = await useAppFetch('/api/topics?random=10', {
-    method: 'GET',
-    mode: 'cors',
+>("miscList/fetchTopics", async (_, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch("/api/topics?random=10", {
+    method: "GET",
+    mode: "cors",
   });
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
@@ -75,10 +75,10 @@ export const fetchMiscPosts = createAsyncThunk<
   PostData[],
   void,
   { rejectValue: ErrorData }
->('miscList/fetchMiscPosts', async (_, { rejectWithValue }) => {
-  const { data, responseState } = await useAppFetch('/api/posts?random=3', {
-    method: 'GET',
-    mode: 'cors',
+>("miscList/fetchMiscPosts", async (_, { rejectWithValue }) => {
+  const { data, responseState } = await useAppFetch("/api/posts?random=3", {
+    method: "GET",
+    mode: "cors",
   });
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
@@ -93,14 +93,14 @@ export const fetchBookmarks = createAsyncThunk<
   PostData[],
   void,
   { rejectValue: ErrorData }
->('miscList/fetchBookmarks', async (_, { rejectWithValue }) => {
+>("miscList/fetchBookmarks", async (_, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch(
-    '/api/profile/bookmarks?limit=4',
+    "/api/profile/bookmarks?limit=4",
     {
-      method: 'GET',
-      mode: 'cors',
+      method: "GET",
+      mode: "cors",
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -116,7 +116,7 @@ export const fetchBookmarks = createAsyncThunk<
 });
 
 const miscListSlice = createSlice({
-  name: 'miscList',
+  name: "miscList",
   initialState,
   reducers: {},
   extraReducers(builder) {

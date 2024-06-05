@@ -1,7 +1,7 @@
-import AppImage from '@/features/appImages/components/AppImage';
-import { PostBody } from '@/styles/PostBody.styled';
-import { motion } from 'framer-motion';
-import styled from 'styled-components';
+import AppImage from "@/features/appImages/components/AppImage";
+import { PostBody } from "@/styles/PostBody.styled";
+import { motion } from "framer-motion";
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;

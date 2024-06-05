@@ -1,6 +1,6 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect } from "react";
 
-import { Wrapper } from './ShakeOnOverflow.styled';
+import { Wrapper } from "./ShakeOnOverflow.styled";
 
 type ShakeOnOverflowProps = {
   className?: string;

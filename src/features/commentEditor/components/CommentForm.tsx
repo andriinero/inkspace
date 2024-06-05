@@ -1,14 +1,14 @@
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { z } from "zod";
 
 import {
   addComment,
   editComment,
   selectCommentById,
-} from '@/features/commentList/commentListSlice';
+} from "@/features/commentList/commentListSlice";
 import {
   exitEditMode,
   postComment,
@@ -17,16 +17,16 @@ import {
   selectIsCommentOverflown,
   setIsOverflown,
   updateComment,
-} from '../commentEditorSlice';
+} from "../commentEditorSlice";
 
-import * as S from './CommentForm.styled';
-import CommentTextarea from './CommentTextarea';
+import * as S from "./CommentForm.styled";
+import CommentTextarea from "./CommentTextarea";
 
 const CommentFormSchema = z.object({
   body: z
     .string()
-    .min(10, 'Comment body must contain at least 10 characters')
-    .max(280, 'Comment body must contain at most 280 characters'),
+    .min(10, "Comment body must contain at least 10 characters")
+    .max(280, "Comment body must contain at most 280 characters"),
 });
 type TCommentFormSchema = z.infer<typeof CommentFormSchema>;
 
@@ -46,14 +46,14 @@ const CommentForm = () => {
     control,
   } = useForm<TCommentFormSchema>({
     resolver: zodResolver(CommentFormSchema),
-    defaultValues: { body: '' },
+    defaultValues: { body: "" },
   });
 
   useEffect(() => {
-    setValue('body', commentEditData?.body as string);
+    setValue("body", commentEditData?.body as string);
 
     return () => {
-      setValue('body', '');
+      setValue("body", "");
     };
   }, [commentEditData, setValue]);
 
@@ -92,7 +92,7 @@ const CommentForm = () => {
     dispatch(exitEditMode());
   };
 
-  const commentBodyLength = watch('body', '').length;
+  const commentBodyLength = watch("body", "").length;
 
   const handleFormSubmit = isEditMode ? handleCommentPut : handleCommentPost;
 
@@ -134,7 +134,7 @@ const CommentForm = () => {
             <S.SubmitActionButton
               disabled={isSubmitDisabled}
               type="submit"
-              value={isEditMode ? 'Update' : 'Respond'}
+              value={isEditMode ? "Update" : "Respond"}
             />
           </S.ControlsWrapper>
         </S.BottomWrapper>

@@ -1,34 +1,34 @@
-import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { useNavigate } from 'react-router-dom';
-import useBookmarkPostAction from '@/hooks/useBookmarkPostAction';
-import useIgnoreUserAction from '@/hooks/useIgnoreUserAction';
-import parse from 'html-react-parser';
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { useNavigate } from "react-router-dom";
+import useBookmarkPostAction from "@/hooks/useBookmarkPostAction";
+import useIgnoreUserAction from "@/hooks/useIgnoreUserAction";
+import parse from "html-react-parser";
 
 import {
   selectAuthData,
   selectIsAuthenticated,
-} from '@/features/auth/authSlice';
+} from "@/features/auth/authSlice";
 import {
   selectFetchProfileDataState,
   selectBookmarkActionState,
   selectIsPostBookmarked,
   selectIsUserIgnored,
   selectIgnoreUserActionState,
-} from '@/features/profile/profileSlice';
-import { deletePost, setTopic } from '../../features/postList/postListSlice';
-import { enterEditMode } from '@/features/postForm/postFormSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+} from "@/features/profile/profileSlice";
+import { deletePost, setTopic } from "../../features/postList/postListSlice";
+import { enterEditMode } from "@/features/postForm/postFormSlice";
+import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
 
-import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
-import { TopicData } from '@/types/entityData/TopicData';
-import { Waterfall } from '@/styles/animations/Waterfall';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { GeneralAuthorData } from "@/types/entityData/GeneralAuthorData";
+import { TopicData } from "@/types/entityData/TopicData";
+import { Waterfall } from "@/styles/animations/Waterfall";
+import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
 
-import Dialog from '@/components/general/Dialog';
-import DeleteConfirm from '@/components/general/DeleteConfirm';
-import PostItemHead from './PostItemHead';
-import * as S from './PostItem.styled';
+import Dialog from "@/components/general/Dialog";
+import DeleteConfirm from "@/components/general/DeleteConfirm";
+import PostItemHead from "./PostItemHead";
+import * as S from "./PostItem.styled";
 
 type PostItemProps = {
   _id: string;
@@ -82,7 +82,7 @@ const PostItem = ({
   const handleEditModeClick = (): void => {
     dispatch(enterEditMode(_id));
     setIsMenuOpen(false);
-    navigate('/post-form');
+    navigate("/post-form");
   };
 
   const handleOpenDeleteModal = (): void => {
@@ -100,7 +100,7 @@ const PostItem = ({
     if (response) {
       dispatch(
         addNotification(
-          'post deleted successfully',
+          "post deleted successfully",
           PushNotificationType.SUCCESS,
         ),
       );
@@ -160,7 +160,7 @@ const PostItem = ({
                 )}
                 {!isAuthor && (
                   <S.StyledMenuItem onClick={handleMuteAuthorClick}>
-                    {isIgnored ? 'Unmute this author' : 'Mute this author'}
+                    {isIgnored ? "Unmute this author" : "Mute this author"}
                   </S.StyledMenuItem>
                 )}
                 {isAuthor && (

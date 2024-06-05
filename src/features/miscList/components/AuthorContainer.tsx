@@ -1,21 +1,21 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import useHomePageStatus from "@/hooks/useHomeLoadingStatus";
 
 import {
   fetchAuthors,
   selectMiscAuthorList,
   selectFetchMiscAuthorsState,
-} from '../miscListSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+} from "../miscListSlice";
+import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
 
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
-import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
+import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
+import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { WaterfallSlideIn } from "@/styles/animations/WaterfallSlideIn";
 
-import AuthorItem from './AuthorItem';
-import MiscListLoader from '@/components/loaders/MiscListLoader';
-import * as S from './AuthorContainer.styled';
+import AuthorItem from "./AuthorItem";
+import MiscListLoader from "@/components/loaders/MiscListLoader";
+import * as S from "./AuthorContainer.styled";
 
 const AuthorContainer = () => {
   const authorList = useAppSelector(selectMiscAuthorList);

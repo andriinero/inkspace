@@ -1,23 +1,23 @@
-import { useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from "react-hook-form";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   closeModal,
   putProfileImage,
   selectPutProfileImageState,
-} from '@/features/profile/profileSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+} from "@/features/profile/profileSlice";
+import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
 
 import {
   ImageSchema,
   TImageSchema,
-} from '@/types/formSchemas/ProfileImageSchema';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+} from "@/types/formSchemas/ProfileImageSchema";
+import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
 
-import FormWrapper from './FormWrapper';
-import * as S from './ImageForm.styled';
+import FormWrapper from "./FormWrapper";
+import * as S from "./ImageForm.styled";
 
 const ImageForm = () => {
   const {
@@ -43,7 +43,7 @@ const ImageForm = () => {
       if (response) {
         dispatch(
           addNotification(
-            'profile image updated successfully',
+            "profile image updated successfully",
             PushNotificationType.SUCCESS,
           ),
         );
@@ -67,7 +67,7 @@ const ImageForm = () => {
             Upload Image:
           </S.StyledInputLabel>
           <S.StyledInputFile
-            {...register('image')}
+            {...register("image")}
             id="edit-profile-image"
             type="file"
           />

@@ -1,11 +1,11 @@
-import { useAppSelector } from '@/app/hooks';
+import { useAppSelector } from "@/app/hooks";
 
 import {
   selectFetchMiscAuthorsState,
   selectFetchMiscBookmarksState,
   selectFetchMiscPostsState,
   selectFetchMiscTopicsState,
-} from '@/features/miscList/miscListSlice';
+} from "@/features/miscList/miscListSlice";
 
 const useHomePageStatus = () => {
   const miscPosts = useAppSelector(selectFetchMiscPostsState);

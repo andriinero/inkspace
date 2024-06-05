@@ -1,23 +1,23 @@
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 import {
   closeModal,
   putPersonalDetails,
   selectProfileBio,
-} from '@/features/profile/profileSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+} from "@/features/profile/profileSlice";
+import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
 
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
+import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
 
-import * as S from './BioForm.styled';
-import FormWrapper from './FormWrapper';
+import * as S from "./BioForm.styled";
+import FormWrapper from "./FormWrapper";
 
 const BioFormSchema = z.object({
-  bio: z.string().max(280, 'Bio must contain at most 280 characters'),
+  bio: z.string().max(280, "Bio must contain at most 280 characters"),
 });
 type TBioFormSchema = z.infer<typeof BioFormSchema>;
 
@@ -47,7 +47,7 @@ const BioForm = () => {
         if (response) {
           dispatch(
             addNotification(
-              'profile bio updated successfully',
+              "profile bio updated successfully",
               PushNotificationType.SUCCESS,
             ),
           );
@@ -73,7 +73,7 @@ const BioForm = () => {
       <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
         <S.InputWrapper>
           <S.StyledInputLabel htmlFor="edit-bio">Bio</S.StyledInputLabel>
-          <S.StyledInputText id="edit-bio" {...register('bio')} />
+          <S.StyledInputText id="edit-bio" {...register("bio")} />
           <S.InputDescription>Your profile bio</S.InputDescription>
           <S.StyledErrorMessage $isVisible={Boolean(errors.bio)}>
             {errors.bio?.message}

@@ -1,4 +1,4 @@
-import { Item, Wrapper } from './UsersListLoader.styled';
+import { Item, Wrapper } from "./UsersListLoader.styled";
 
 const UsersListLoader = () => {
   return (

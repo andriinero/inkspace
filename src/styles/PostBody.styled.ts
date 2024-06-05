@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from "styled-components";
 
 export const PostBody = css`
   font-size: 1.25rem;

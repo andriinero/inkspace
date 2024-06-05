@@ -1,7 +1,7 @@
-import TabItem from '@/components/general/TabItem';
-import { Icon } from '@/components/styled/AppIcon.styled';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import TabItem from "@/components/general/TabItem";
+import { Icon } from "@/components/styled/AppIcon.styled";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;

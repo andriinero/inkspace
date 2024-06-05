@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { AppButton } from './AppButton.styled';
+import styled from "styled-components";
+import { AppButton } from "./AppButton.styled";
 
 export const HollowButton = styled(AppButton)<{ $isActive?: boolean }>`
   align-self: flex-start;

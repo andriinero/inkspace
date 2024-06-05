@@ -1,6 +1,6 @@
-import { ReactNode, RefObject } from 'react';
+import { ReactNode, RefObject } from "react";
 
-import { Wrapper, List } from './Dropdown.styled';
+import { Wrapper, List } from "./Dropdown.styled";
 
 type DropdownProps = {
   innerRef?: RefObject<HTMLUListElement>;

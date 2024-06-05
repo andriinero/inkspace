@@ -1,8 +1,8 @@
-import { useRef } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useRef } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   fetchEditTargetPost,
@@ -10,21 +10,21 @@ import {
   putEditTargetPost,
   selectEditPostId,
   selectPostIsEditMode,
-} from '@/features/postForm/postFormSlice';
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+} from "@/features/postForm/postFormSlice";
+import { selectIsAuthenticated } from "@/features/auth/authSlice";
+import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
 
-import { Editor as TinyMCEEditor } from 'tinymce';
+import { Editor as TinyMCEEditor } from "tinymce";
 import {
   TPostFormSchema,
   PostFormSchema,
-} from '@/types/formSchemas/CreatePostSchema';
-import { FadeIn } from '@/styles/animations/FadeIn';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+} from "@/types/formSchemas/CreatePostSchema";
+import { FadeIn } from "@/styles/animations/FadeIn";
+import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
 
-import TinyEditor from '@/features/postForm/components/TinyEditor';
-import * as S from './PostForm.styled';
+import TinyEditor from "@/features/postForm/components/TinyEditor";
+import * as S from "./PostForm.styled";
 
 const PostForm = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -35,7 +35,7 @@ const PostForm = () => {
   const navigate = useNavigate();
 
   const defaultValues = async (): Promise<TPostFormSchema> => {
-    let values = { title: '', body: '', topic: '', image: null };
+    let values = { title: "", body: "", topic: "", image: null };
 
     if (isEditMode && editPostId) {
       try {
@@ -79,11 +79,11 @@ const PostForm = () => {
     if (response) {
       dispatch(
         addNotification(
-          'post created successfully',
+          "post created successfully",
           PushNotificationType.SUCCESS,
         ),
       );
-      navigate('/');
+      navigate("/");
     }
   };
 
@@ -93,11 +93,11 @@ const PostForm = () => {
     if (response) {
       dispatch(
         addNotification(
-          'post saved successfully',
+          "post saved successfully",
           PushNotificationType.SUCCESS,
         ),
       );
-      navigate('/');
+      navigate("/");
     }
   };
 
@@ -109,14 +109,14 @@ const PostForm = () => {
       animate={FadeIn.visible}
       transition={FadeIn.transition}
     >
-      <S.Header>{isEditMode ? 'Edit Post' : 'Create Post'}</S.Header>
+      <S.Header>{isEditMode ? "Edit Post" : "Create Post"}</S.Header>
       <S.Form onSubmit={handleSubmit(handleFormSubmit)} id="create-new-post">
         <S.InputContainer>
           <S.InputItem>
             <S.StyledInputLabel htmlFor="post-title">Title</S.StyledInputLabel>
             <S.StyledInputText
               id="post-title"
-              {...register('title')}
+              {...register("title")}
               type="text"
               placeholder="Your title..."
             />
@@ -127,7 +127,7 @@ const PostForm = () => {
           <S.InputItem>
             <S.StyledInputLabel htmlFor="post-topic">Topic</S.StyledInputLabel>
             <S.StyledInputText
-              {...register('topic')}
+              {...register("topic")}
               id="post-topic"
               type="text"
               placeholder="Post topic..."
@@ -141,7 +141,7 @@ const PostForm = () => {
               Upload thumbnail
             </S.StyledInputLabel>
             <S.StyledInputFile
-              {...register('image')}
+              {...register("image")}
               id="post-image"
               type="file"
             />
@@ -156,7 +156,7 @@ const PostForm = () => {
               name="body"
               control={control}
               rules={{
-                required: { value: true, message: 'Post body is required' },
+                required: { value: true, message: "Post body is required" },
               }}
               render={({ field: { onChange, value } }) => (
                 <TinyEditor

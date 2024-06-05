@@ -1,8 +1,8 @@
-import { useScroll } from 'framer-motion';
+import { useScroll } from "framer-motion";
 
-import { FadeIn } from '@/styles/animations/FadeIn';
+import { FadeIn } from "@/styles/animations/FadeIn";
 
-import { Wrapper } from './ScrollProgressBar.styled';
+import { Wrapper } from "./ScrollProgressBar.styled";
 
 type ScrollProgressBarProps = { className?: string };
 

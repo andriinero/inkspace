@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from './hooks';
 
 import { initAuth, selectFetchAuthDataState } from '@/features/auth/authSlice';
 
-import { Analytics } from '@vercel/analytics/react';
 import Header from '@/layout/Header';
 import ScrollToTop from '@/utils/ScrollToTop';
 import { Outlet } from 'react-router-dom';
@@ -21,7 +20,6 @@ const App = () => {
   return (
     !isLoading && (
       <Wrapper>
-        <Analytics />
         <ScrollToTop />
         <Header />
         <WrapperMain>

@@ -1,19 +1,19 @@
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   closeSignUpModal,
   postSignUp,
   selectIsSignUpModalOpen,
   selectPostSignUpState,
-} from '../authSlice';
+} from "../authSlice";
 
-import { SignUpSchema, TSignUpSchema } from '@/types/formSchemas/SignUpSchema';
-import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+import { SignUpSchema, TSignUpSchema } from "@/types/formSchemas/SignUpSchema";
+import { ButtonInteraction } from "@/styles/animations/ButtonInteraction";
 
-import Dialog from '@/components/general/Dialog';
-import * as S from './SignUpForm.styled';
+import Dialog from "@/components/general/Dialog";
+import * as S from "./SignUpForm.styled";
 
 const LoginForm = () => {
   const {
@@ -50,7 +50,7 @@ const LoginForm = () => {
               Your Username
             </S.StyledInputLabel>
             <S.StyledInputText
-              {...register('username')}
+              {...register("username")}
               id="sign-up-username"
               type="text"
             />
@@ -63,7 +63,7 @@ const LoginForm = () => {
               Your Email
             </S.StyledInputLabel>
             <S.StyledInputText
-              {...register('email')}
+              {...register("email")}
               id="sign-up-email"
               type="email"
             />
@@ -76,7 +76,7 @@ const LoginForm = () => {
               Password
             </S.StyledInputLabel>
             <S.StyledInputText
-              {...register('password')}
+              {...register("password")}
               id="sign-up-password"
               type="password"
             />
@@ -89,7 +89,7 @@ const LoginForm = () => {
               Confirm Password
             </S.StyledInputLabel>
             <S.StyledInputText
-              {...register('confirmPassword')}
+              {...register("confirmPassword")}
               id="sign-up-password-confirm"
               type="password"
             />

@@ -1,4 +1,4 @@
-import EnvVars from '@/config/EnvVars';
+import EnvVars from "@/config/EnvVars";
 
 type ResponseState = {
   statusCode: number;

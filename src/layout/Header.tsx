@@ -1,19 +1,19 @@
-import { useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import useCloseDropdown from '@/hooks/useCloseDropdown';
+import { useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import useCloseDropdown from "@/hooks/useCloseDropdown";
 
-import { selectProfileImageId } from '@/features/profile/profileSlice';
-import { clearTopic } from '@/features/postList/postListSlice';
-import { logout, selectIsAuthenticated } from '@/features/auth/authSlice';
-import { openSignUpModal, openLoginModal } from '@/features/auth/authSlice';
-import { exitEditMode } from '@/features/postForm/postFormSlice';
+import { selectProfileImageId } from "@/features/profile/profileSlice";
+import { clearTopic } from "@/features/postList/postListSlice";
+import { logout, selectIsAuthenticated } from "@/features/auth/authSlice";
+import { openSignUpModal, openLoginModal } from "@/features/auth/authSlice";
+import { exitEditMode } from "@/features/postForm/postFormSlice";
 
-import LoginForm from '@/features/auth/components/LoginForm';
-import SignUpForm from '@/features/auth/components/SignUpForm';
-import PushNotificationContainer from '@/features/pushNotification/components/PushNotificationContainer';
-import * as S from './Header.styled';
-import useTestUserLogin from '@/features/auth/hooks/useTestUserLogin';
+import LoginForm from "@/features/auth/components/LoginForm";
+import SignUpForm from "@/features/auth/components/SignUpForm";
+import PushNotificationContainer from "@/features/pushNotification/components/PushNotificationContainer";
+import * as S from "./Header.styled";
+import useTestUserLogin from "@/features/auth/hooks/useTestUserLogin";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -43,12 +43,12 @@ const Header = () => {
 
   const handleLogoClick = (): void => {
     dispatch(clearTopic());
-    navigate('/');
+    navigate("/");
   };
 
   const handleWritePostClick = (): void => {
     dispatch(exitEditMode());
-    navigate('/post-form');
+    navigate("/post-form");
   };
 
   const handleSignUpClick = (): void => {
@@ -60,12 +60,12 @@ const Header = () => {
   };
 
   const handleProfileClick = (): void => {
-    navigate('/profile/bookmarks');
+    navigate("/profile/bookmarks");
     setIsMenuOpen(false);
   };
 
   const handleEditProfileClick = (): void => {
-    navigate('/profile/edit');
+    navigate("/profile/edit");
     setIsMenuOpen(false);
   };
 
@@ -85,7 +85,7 @@ const Header = () => {
         <S.ProfileWrapper>
           {isAuthenticated ? (
             <>
-              {pathname !== '/post-form' && (
+              {pathname !== "/post-form" && (
                 <>
                   <S.NewPostButton onClick={handleWritePostClick}>
                     <S.StyledAppIcon

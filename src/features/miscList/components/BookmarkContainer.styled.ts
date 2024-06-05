@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import { motion } from "framer-motion";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;

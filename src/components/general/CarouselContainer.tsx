@@ -1,6 +1,6 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from "react";
 
-import * as S from './CarouselContainer.styled';
+import * as S from "./CarouselContainer.styled";
 
 type CarouselContainerProps = {
   stepSize?: number;
@@ -39,7 +39,7 @@ const CarouselContainer = ({
   useEffect(() => {
     carouselContentRef.current?.scroll({
       left: scrollProgress,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }, [scrollProgress]);
 

@@ -3,7 +3,7 @@ import {
   ErrorHeader,
   MessageWrapper,
   ErrorMessage,
-} from './NotFound404.styled';
+} from "./NotFound404.styled";
 
 const NotFound404 = () => {
   return (

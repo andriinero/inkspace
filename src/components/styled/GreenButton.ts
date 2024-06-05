@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { AppButton } from './AppButton.styled';
+import styled from "styled-components";
+import { AppButton } from "./AppButton.styled";
 
 export const GreenButton = styled(AppButton)<{ $isDisabled?: boolean }>`
   padding: 0.4rem 0.5rem;

@@ -1,4 +1,4 @@
-import { StyledIcon } from './Bookmark.styled';
+import { StyledIcon } from "./Bookmark.styled";
 
 type BookmarkProps = {
   onBookmarked: () => void;
@@ -7,7 +7,7 @@ type BookmarkProps = {
 };
 
 const Bookmark = ({ onBookmarked, className, isBookmarked }: BookmarkProps) => {
-  const bookmarkSrc = isBookmarked ? '/bookmark.svg' : '/bookmark-outline.svg';
+  const bookmarkSrc = isBookmarked ? "/bookmark.svg" : "/bookmark-outline.svg";
 
   return (
     <StyledIcon

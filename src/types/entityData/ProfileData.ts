@@ -1,6 +1,6 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import { UserRole } from './AuthenticationData';
+import { UserRole } from "./AuthenticationData";
 
 export const ProfileDataSchema = z.object({
   _id: z.string(),

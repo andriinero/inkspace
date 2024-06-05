@@ -1,19 +1,19 @@
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { AppDate } from '@/lib/AppDate';
-import { Navigate, Outlet } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { AppDate } from "@/lib/AppDate";
+import { Navigate, Outlet } from "react-router-dom";
 
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
-import { selectProfileData } from '@/features/profile/profileSlice';
+import { selectIsAuthenticated } from "@/features/auth/authSlice";
+import { selectProfileData } from "@/features/profile/profileSlice";
 
-import { FadeIn } from '@/styles/animations/FadeIn';
+import { FadeIn } from "@/styles/animations/FadeIn";
 
-import Dialog from '@/components/general/Dialog';
+import Dialog from "@/components/general/Dialog";
 import {
   closeModal,
   openModal,
   selectIsProfileModalOpen,
-} from '@/features/profile/profileSlice';
-import * as S from './ProfileEditPage.styled';
+} from "@/features/profile/profileSlice";
+import * as S from "./ProfileEditPage.styled";
 
 const ProfileEditPage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);

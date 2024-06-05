@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 
 import {
   fetchPosts,
@@ -7,17 +7,17 @@ import {
   selectIsFollowingList,
   selectPostList,
   selectSelectedTopic,
-} from '../postListSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+} from "../postListSlice";
+import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
 
-import { Waterfall } from '@/styles/animations/Waterfall';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { Waterfall } from "@/styles/animations/Waterfall";
+import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
+import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
 
-import PostItem from '../../../components/general/PostItem';
-import PostListLoader from '@/components/loaders/PostListLoader';
-import { PostList, Wrapper } from './PostContainer.styled';
-import { CalloutText } from '@/components/styled/CalloutText.styled';
+import PostItem from "../../../components/general/PostItem";
+import PostListLoader from "@/components/loaders/PostListLoader";
+import { PostList, Wrapper } from "./PostContainer.styled";
+import { CalloutText } from "@/components/styled/CalloutText.styled";
 
 const PostContainer = () => {
   const postList = useAppSelector(selectPostList);

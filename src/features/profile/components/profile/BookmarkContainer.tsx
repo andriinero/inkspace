@@ -1,16 +1,16 @@
-import { useAppSelector } from '@/app/hooks';
+import { useAppSelector } from "@/app/hooks";
 
 import {
   selectFetchProfileBookmarksState,
   selectProfileBookmarksList,
-} from '../../profileSlice';
+} from "../../profileSlice";
 
-import { Waterfall } from '@/styles/animations/Waterfall';
+import { Waterfall } from "@/styles/animations/Waterfall";
 
-import Error from '@/components/general/Error';
-import PostItem from '@/components/general/PostItem';
-import PostListLoader from '@/components/loaders/PostListLoader';
-import { BookmarkList, CalloutText, Wrapper } from './BookmarkContainer.styled';
+import Error from "@/components/general/Error";
+import PostItem from "@/components/general/PostItem";
+import PostListLoader from "@/components/loaders/PostListLoader";
+import { BookmarkList, CalloutText, Wrapper } from "./BookmarkContainer.styled";
 
 const BookmarkContainer = () => {
   const bookmarkList = useAppSelector(selectProfileBookmarksList);

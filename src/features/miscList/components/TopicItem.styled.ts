@@ -1,5 +1,5 @@
-import { HollowButton } from '@/components/styled/HollowButton';
-import styled from 'styled-components';
+import { HollowButton } from "@/components/styled/HollowButton";
+import styled from "styled-components";
 
 export const Wrapper = styled.li``;
 

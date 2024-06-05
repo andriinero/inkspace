@@ -1,16 +1,16 @@
-import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
+import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 
-import postListReducer from '@/features/postList/postListSlice';
-import miscListReducer from '@/features/miscList/miscListSlice';
-import singlePagePostReducer from '@/features/singlePagePost/singlePagePostSlice';
-import authReducer from '@/features/auth/authSlice';
-import postFormReducer from '@/features/postForm/postFormSlice';
-import commentListReducer from '@/features/commentList/commentListSlice';
-import commentEditorReducer from '@/features/commentEditor/commentEditorSlice';
-import profileReducer from '@/features/profile/profileSlice';
-import authorPageReducer from '@/features/authorPage/authorPageSlice';
-import appImagesReducer from '@/features/appImages/appImagesSlice';
-import pushNotificationReducer from '@/features/pushNotification/pushNotificationSlice';
+import postListReducer from "@/features/postList/postListSlice";
+import miscListReducer from "@/features/miscList/miscListSlice";
+import singlePagePostReducer from "@/features/singlePagePost/singlePagePostSlice";
+import authReducer from "@/features/auth/authSlice";
+import postFormReducer from "@/features/postForm/postFormSlice";
+import commentListReducer from "@/features/commentList/commentListSlice";
+import commentEditorReducer from "@/features/commentEditor/commentEditorSlice";
+import profileReducer from "@/features/profile/profileSlice";
+import authorPageReducer from "@/features/authorPage/authorPageSlice";
+import appImagesReducer from "@/features/appImages/appImagesSlice";
+import pushNotificationReducer from "@/features/pushNotification/pushNotificationSlice";
 
 export const store = configureStore({
   reducer: {

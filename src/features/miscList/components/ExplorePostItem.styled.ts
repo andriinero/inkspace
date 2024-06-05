@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import { Username } from '@/components/styled/Username.styled';
-import { motion } from 'framer-motion';
-import { Title } from '@/components/styled/Title.styled';
-import AppImage from '@/features/appImages/components/AppImage';
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import { Username } from "@/components/styled/Username.styled";
+import { motion } from "framer-motion";
+import { Title } from "@/components/styled/Title.styled";
+import AppImage from "@/features/appImages/components/AppImage";
 
 export const WrapperItem = styled(motion.li)`
   display: flex;

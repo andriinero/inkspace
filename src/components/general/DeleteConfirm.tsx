@@ -4,7 +4,7 @@ import {
   ControlsWrapper,
   DeleteButton,
   Header,
-} from './DeleteConfirm.styled';
+} from "./DeleteConfirm.styled";
 
 type DeleteConfirmProps = {
   headerText: string;

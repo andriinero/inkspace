@@ -1,21 +1,21 @@
-import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
+import { WaterfallSlideIn } from "@/styles/animations/WaterfallSlideIn";
 
-import { GeneralPostData } from '@/types/entityData/GeneralPostData';
-import PostItemHead from './PostItemHead';
-import * as S from './GeneralPostItem.styled';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { GeneralPostData } from "@/types/entityData/GeneralPostData";
+import PostItemHead from "./PostItemHead";
+import * as S from "./GeneralPostItem.styled";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import {
   fetchProfilePosts,
   selectProfileId,
-} from '@/features/profile/profileSlice';
-import { useNavigate } from 'react-router-dom';
-import { enterEditMode } from '@/features/postForm/postFormSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { deletePost } from '@/features/postList/postListSlice';
-import Dialog from './Dialog';
-import DeleteConfirm from './DeleteConfirm';
-import { useState } from 'react';
+} from "@/features/profile/profileSlice";
+import { useNavigate } from "react-router-dom";
+import { enterEditMode } from "@/features/postForm/postFormSlice";
+import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
+import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
+import { deletePost } from "@/features/postList/postListSlice";
+import Dialog from "./Dialog";
+import DeleteConfirm from "./DeleteConfirm";
+import { useState } from "react";
 
 const GeneralPostItem = ({
   _id,
@@ -42,7 +42,7 @@ const GeneralPostItem = ({
 
   const handleEnterEditMode = (): void => {
     dispatch(enterEditMode(_id));
-    navigate('/post-form');
+    navigate("/post-form");
   };
 
   const handleDeleteClick = async (): Promise<void> => {
@@ -51,7 +51,7 @@ const GeneralPostItem = ({
     if (response) {
       dispatch(
         addNotification(
-          'post deleted successfully',
+          "post deleted successfully",
           PushNotificationType.SUCCESS,
         ),
       );

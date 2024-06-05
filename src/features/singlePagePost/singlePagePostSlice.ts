@@ -1,15 +1,15 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { useAppFetch } from '@/lib/useAppFetch';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useAppFetch } from "@/lib/useAppFetch";
 
-import storage from '@/lib/storage';
+import storage from "@/lib/storage";
 
-import { RootState } from '@/app/store';
-import { PostData, PostDataSchema } from '@/types/entityData/PostData';
+import { RootState } from "@/app/store";
+import { PostData, PostDataSchema } from "@/types/entityData/PostData";
 import {
   PutLikeCount,
   PutLikeCountSchema,
-} from '@/types/fetchResponse/success/PutLikeCount';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+} from "@/types/fetchResponse/success/PutLikeCount";
+import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
 
 type SinglePagePostState = {
   post: PostData | null;
@@ -37,10 +37,10 @@ export const fetchPost = createAsyncThunk<
   PostData,
   string,
   { rejectValue: ErrorData }
->('singlePagePost/fetchPost', async (postId, { rejectWithValue }) => {
+>("singlePagePost/fetchPost", async (postId, { rejectWithValue }) => {
   const { data, responseState } = await useAppFetch(`/api/posts/${postId}`, {
-    method: 'GET',
-    mode: 'cors',
+    method: "GET",
+    mode: "cors",
   });
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
@@ -55,14 +55,14 @@ export const putLikeCount = createAsyncThunk<
   PutLikeCount,
   string,
   { rejectValue: ErrorData }
->('singlePagePost/putLikeCount', async (postId, { rejectWithValue }) => {
+>("singlePagePost/putLikeCount", async (postId, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch(
     `/api/posts/${postId}/likes`,
     {
-      method: 'PUT',
-      mode: 'cors',
+      method: "PUT",
+      mode: "cors",
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -78,7 +78,7 @@ export const putLikeCount = createAsyncThunk<
 });
 
 const singlePagePostSlice = createSlice({
-  name: 'singlePagePost',
+  name: "singlePagePost",
   initialState,
   reducers: {
     toggleIsLiked(state) {

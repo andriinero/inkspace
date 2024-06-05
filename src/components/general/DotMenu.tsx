@@ -1,9 +1,9 @@
-import { ReactNode, useRef } from 'react';
+import { ReactNode, useRef } from "react";
 
-import useCloseDropdown from '@/hooks/useCloseDropdown';
+import useCloseDropdown from "@/hooks/useCloseDropdown";
 
-import Dropdown from './Dropdown';
-import { StyledIcon } from './DotMenu.styled';
+import Dropdown from "./Dropdown";
+import { StyledIcon } from "./DotMenu.styled";
 
 type DotMenuProps = {
   className?: string;

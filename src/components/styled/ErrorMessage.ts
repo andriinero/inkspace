@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ErrorMessage = styled.span<{ $isVisible: boolean }>`
   display: inline-block;
-  visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
+  visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
 
   color: ${({ theme }) => theme.color.error_text};
   font-size: 0.8rem;
@@ -10,6 +10,6 @@ export const ErrorMessage = styled.span<{ $isVisible: boolean }>`
   font-style: italic;
 
   &::before {
-    content: '* ';
+    content: "* ";
   }
 `;
