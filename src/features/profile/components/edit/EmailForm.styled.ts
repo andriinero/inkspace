@@ -1,8 +1,8 @@
-import { ErrorMessage } from "@/components/styled/ErrorMessage";
-import { GreenButton } from "@/components/styled/GreenButton";
-import { InputLabel } from "@/components/styled/InputLabel";
-import { InputTextBackground } from "@/components/styled/InputText";
-import styled from "styled-components";
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import { GreenButton } from '@/components/styled/GreenButton';
+import { InputLabel } from '@/components/styled/InputLabel';
+import { InputTextBackground } from '@/components/styled/InputText';
+import styled from 'styled-components';
 
 export const Form = styled.form`
   display: flex;

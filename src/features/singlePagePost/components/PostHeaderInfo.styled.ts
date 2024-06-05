@@ -1,17 +1,17 @@
-import styled from "styled-components";
-import PostReadTime from "@/components/general/PostReadTime";
-import { NavLink } from "react-router-dom";
-import { Username } from "@/components/styled/Username.styled";
-import AppImage from "@/features/appImages/components/AppImage";
-import { TextButton } from "@/components/styled/TextButton";
+import styled from 'styled-components';
+import PostReadTime from '@/components/general/PostReadTime';
+import { NavLink } from 'react-router-dom';
+import { Username } from '@/components/styled/Username.styled';
+import AppImage from '@/features/appImages/components/AppImage';
+import { TextButton } from '@/components/styled/TextButton';
 
 export const Wrapper = styled.div`
   align-self: flex-start;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-areas:
-    "icon main"
-    "icon misc";
+    'icon main'
+    'icon misc';
   column-gap: 1rem;
 `;
 

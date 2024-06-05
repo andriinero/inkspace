@@ -1,11 +1,11 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useAppFetch } from "@/lib/useAppFetch";
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useAppFetch } from '@/lib/useAppFetch';
 
-import storage from "@/lib/storage";
+import storage from '@/lib/storage';
 
-import { RootState } from "@/app/store";
-import { CommentData, CommentDataSchema } from "@/types/entityData/CommentData";
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { RootState } from '@/app/store';
+import { CommentData, CommentDataSchema } from '@/types/entityData/CommentData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 type CommentEditorState = {
   commentId: string | null;
@@ -39,7 +39,7 @@ export const postComment = createAsyncThunk<
   CommentData,
   string,
   { rejectValue: ErrorData; state: RootState }
->("comments/postComment", async (body, { rejectWithValue, getState }) => {
+>('comments/postComment', async (body, { rejectWithValue, getState }) => {
   const token = storage.getToken();
 
   const postId = getState().singlePagePost.post?._id;
@@ -47,10 +47,10 @@ export const postComment = createAsyncThunk<
   const { data, responseState } = await useAppFetch(
     `/api/posts/${postId}/comments`,
     {
-      method: "POST",
-      mode: "cors",
+      method: 'POST',
+      mode: 'cors',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ body }),
@@ -69,7 +69,7 @@ export const updateComment = createAsyncThunk<
   CommentData,
   string,
   { rejectValue: ErrorData; state: RootState }
->("comments/updateComment", async (body, { rejectWithValue, getState }) => {
+>('comments/updateComment', async (body, { rejectWithValue, getState }) => {
   const token = storage.getToken();
 
   const editCommentId = getState().commentEditor.commentId;
@@ -77,10 +77,10 @@ export const updateComment = createAsyncThunk<
   const { data, responseState } = await useAppFetch(
     `/api/comments/${editCommentId}`,
     {
-      method: "PUT",
-      mode: "cors",
+      method: 'PUT',
+      mode: 'cors',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ body }),
@@ -96,7 +96,7 @@ export const updateComment = createAsyncThunk<
 });
 
 const commentEditorSlice = createSlice({
-  name: "commentEditor",
+  name: 'commentEditor',
   initialState,
   reducers: {
     enterEditMode(state, action) {

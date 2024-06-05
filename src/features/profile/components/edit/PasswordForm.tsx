@@ -1,29 +1,29 @@
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import {
   closeModal,
   putPassword,
   selectPutPasswordState,
-} from "@/features/profile/profileSlice";
-import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
+} from '@/features/profile/profileSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
-import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
-import FormWrapper from "./FormWrapper";
-import * as S from "./PasswordForm.styled";
+import FormWrapper from './FormWrapper';
+import * as S from './PasswordForm.styled';
 
 const ProfilePasswordEditSchema = z
   .object({
-    password: z.string().min(8, "Password must contain at least 8 characters"),
+    password: z.string().min(8, 'Password must contain at least 8 characters'),
     passwordConfirmation: z.string(),
   })
   .refine((data) => data.password === data.passwordConfirmation, {
     message: "Passwords don't match",
-    path: ["passwordConfirmation"],
+    path: ['passwordConfirmation'],
   });
 export type TProfilePasswordEditSchema = z.infer<
   typeof ProfilePasswordEditSchema
@@ -36,8 +36,8 @@ const PasswordForm = () => {
     formState: { isDirty, isSubmitting, errors },
   } = useForm<TProfilePasswordEditSchema>({
     defaultValues: {
-      password: "",
-      passwordConfirmation: "",
+      password: '',
+      passwordConfirmation: '',
     },
     resolver: zodResolver(ProfilePasswordEditSchema),
   });
@@ -59,7 +59,7 @@ const PasswordForm = () => {
         if (response) {
           dispatch(
             addNotification(
-              "password updated successfully",
+              'password updated successfully',
               PushNotificationType.SUCCESS,
             ),
           );
@@ -86,7 +86,7 @@ const PasswordForm = () => {
             Password
           </S.StyledInputLabel>
           <S.StyledInputText
-            {...register("password")}
+            {...register('password')}
             id="edit-password"
             type="password"
             placeholder="••••••••"
@@ -99,7 +99,7 @@ const PasswordForm = () => {
               Confirm Password
             </S.StyledInputLabel>
             <S.StyledInputText
-              {...register("passwordConfirmation")}
+              {...register('passwordConfirmation')}
               id="edit-password-confirmation"
               type="password"
               placeholder="••••••••"

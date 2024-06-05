@@ -1,6 +1,6 @@
-import { FadeInSlide } from "@/styles/animations/FadeInSlide";
-import { motion } from "framer-motion";
-import styled from "styled-components";
+import { FadeInSlide } from '@/styles/animations/FadeInSlide';
+import { motion } from 'framer-motion';
+import styled from 'styled-components';
 
 export const CalloutText = styled(motion.h2).attrs(() => ({
   initial: FadeInSlide.hidden,

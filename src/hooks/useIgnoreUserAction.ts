@@ -1,13 +1,13 @@
-import { useAppDispatch } from "@/app/hooks";
+import { useAppDispatch } from '@/app/hooks';
 
 import {
   deleteIgnoredUser,
   postIgnoredUser,
-} from "@/features/profile/profileSlice";
-import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
+} from '@/features/profile/profileSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
-import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 const useIgnoreUserAction = (
   userId: string,

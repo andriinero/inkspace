@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const InputText = styled.input`
   padding: 0.3rem 0.4rem;

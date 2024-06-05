@@ -1,27 +1,27 @@
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import {
   closeModal,
   putPersonalDetails,
   selectProfileEmail,
-} from "@/features/profile/profileSlice";
-import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
+} from '@/features/profile/profileSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
-import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
-import * as S from "./EmailForm.styled";
-import FormWrapper from "./FormWrapper";
+import * as S from './EmailForm.styled';
+import FormWrapper from './FormWrapper';
 
 const EmailFormSchema = z.object({
   email: z
     .string()
     .email()
-    .min(3, "Email must contain at least 3 characters")
-    .max(100, "Email must contain at most 100 characters"),
+    .min(3, 'Email must contain at least 3 characters')
+    .max(100, 'Email must contain at most 100 characters'),
 });
 type TEmailFormSchema = z.infer<typeof EmailFormSchema>;
 
@@ -52,7 +52,7 @@ const EmailForm = () => {
         if (response) {
           dispatch(
             addNotification(
-              "email updated successfully",
+              'email updated successfully',
               PushNotificationType.SUCCESS,
             ),
           );
@@ -78,7 +78,7 @@ const EmailForm = () => {
       <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
         <S.InputWrapper>
           <S.StyledInputLabel htmlFor="edit-email">Email</S.StyledInputLabel>
-          <S.StyledInputText id="edit-email" {...register("email")} />
+          <S.StyledInputText id="edit-email" {...register('email')} />
           <S.InputDescription>Your personal email</S.InputDescription>
           <S.StyledErrorMessage $isVisible={Boolean(errors.email)}>
             {errors.email?.message}

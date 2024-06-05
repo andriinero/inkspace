@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import { motion } from "framer-motion";
-import AppImage from "@/features/appImages/components/AppImage";
-import { HollowButton } from "../../../../components/styled/HollowButton";
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import AppImage from '@/features/appImages/components/AppImage';
+import { HollowButton } from '../../../../components/styled/HollowButton';
 
 export const WrapperItem = styled(motion.li)`
   display: flex;

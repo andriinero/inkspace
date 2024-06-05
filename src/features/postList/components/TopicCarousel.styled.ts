@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import CarouselContainer from "@/components/general/CarouselContainer";
-import TabItem from "@/components/general/TabItem";
+import styled from 'styled-components';
+import CarouselContainer from '@/components/general/CarouselContainer';
+import TabItem from '@/components/general/TabItem';
 
 export const Wrapper = styled.div``;
 

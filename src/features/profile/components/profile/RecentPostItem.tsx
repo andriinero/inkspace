@@ -1,16 +1,16 @@
-import { useAppSelector } from "@/app/hooks";
+import { useAppSelector } from '@/app/hooks';
 
 import {
   selectFetchProfilePostsState,
   selectProfilePostsList,
-} from "../../profileSlice";
+} from '../../profileSlice';
 
-import { Waterfall } from "@/styles/animations/Waterfall";
+import { Waterfall } from '@/styles/animations/Waterfall';
 
-import PostListLoader from "@/components/loaders/PostListLoader";
-import Error from "@/components/general/Error";
-import { CalloutText, PostsList, Wrapper } from "./RecentPostContainer.styled";
-import GeneralPostItem from "@/components/general/GeneralPostItem";
+import PostListLoader from '@/components/loaders/PostListLoader';
+import Error from '@/components/general/Error';
+import { CalloutText, PostsList, Wrapper } from './RecentPostContainer.styled';
+import GeneralPostItem from '@/components/general/GeneralPostItem';
 
 const RecentPosts = () => {
   const postsList = useAppSelector(selectProfilePostsList);

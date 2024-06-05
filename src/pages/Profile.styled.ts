@@ -1,8 +1,8 @@
-import AppImage from "@/features/appImages/components/AppImage";
-import { Username } from "@/components/styled/Username.styled";
-import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import AppImage from '@/features/appImages/components/AppImage';
+import { Username } from '@/components/styled/Username.styled';
+import { motion } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const Wrapper = styled(motion.div)`
   display: grid;

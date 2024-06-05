@@ -1,21 +1,21 @@
-import { useEffect } from "react";
-import { useAppDispatch } from "@/app/hooks";
+import { useEffect } from 'react';
+import { useAppDispatch } from '@/app/hooks';
 
-import { removeNotification } from "../pushNotificationSlice";
+import { removeNotification } from '../pushNotificationSlice';
 
-import { PushNotificationData } from "@/types/entityData/StatusNotificationData";
-import { PushFromTop } from "@/styles/animations/PushFromTop";
+import { PushNotificationData } from '@/types/entityData/StatusNotificationData';
+import { PushFromTop } from '@/styles/animations/PushFromTop';
 
 import {
   MessageWrapper,
   StyledAppIcon,
   Notification,
-} from "./PushNotificationItem.styled";
+} from './PushNotificationItem.styled';
 
 const statusTypePrefixMap = {
-  error: "Error: ",
-  warning: "Warning: ",
-  success: "Message: ",
+  error: 'Error: ',
+  warning: 'Warning: ',
+  success: 'Message: ',
 };
 
 const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { AppButton } from "./AppButton.styled";
+import styled from 'styled-components';
+import { AppButton } from './AppButton.styled';
 
 export const TextButton = styled(AppButton)`
   border: 1px solid transparent;

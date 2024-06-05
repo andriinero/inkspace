@@ -1,4 +1,4 @@
-import { Transition } from "framer-motion";
+import { Transition } from 'framer-motion';
 
 type FadeInSlide = {
   hidden: NonNullable<unknown>;

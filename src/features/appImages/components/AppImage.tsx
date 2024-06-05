@@ -1,16 +1,16 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import {
   fetchImage,
   selectAreImagesLoading,
   selectImageURL,
   selectIsImageInQueue,
-} from "../appImagesSlice";
+} from '../appImagesSlice';
 
-import { FadeIn } from "@/styles/animations/FadeIn";
+import { FadeIn } from '@/styles/animations/FadeIn';
 
-import { Image, BlankPlaceholder } from "./AppImage.styled";
+import { Image, BlankPlaceholder } from './AppImage.styled';
 
 type AppImageProps = {
   altText?: string;
@@ -23,7 +23,7 @@ type AppImageProps = {
 const AppImage = ({
   altText,
   imageId,
-  placeholderSrc = "/landscape-placeholder.png",
+  placeholderSrc = '/landscape-placeholder.png',
   onClick,
   className,
 }: AppImageProps) => {
@@ -45,7 +45,7 @@ const AppImage = ({
     !imageId && !isLoading
       ? placeholderSrc
       : isLoading && !imageURL
-        ? "/empty.png"
+        ? '/empty.png'
         : imageURL;
 
   if (!imageId)

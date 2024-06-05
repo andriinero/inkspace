@@ -1,5 +1,5 @@
-import { Icon } from "@/components/styled/AppIcon.styled";
-import styled from "styled-components";
+import { Icon } from '@/components/styled/AppIcon.styled';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { AppButton } from "./AppButton.styled";
+import styled from 'styled-components';
+import { AppButton } from './AppButton.styled';
 
 export const FormButton = styled(AppButton)`
   padding: 0.5rem 0.8rem;

@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import ShakeOnOverflow from "../../../components/general/ShakeOnOverflow";
-import { FormButton } from "@/components/styled/FormButton";
-import { ErrorMessage } from "@/components/styled/ErrorMessage";
+import styled from 'styled-components';
+import ShakeOnOverflow from '../../../components/general/ShakeOnOverflow';
+import { FormButton } from '@/components/styled/FormButton';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
 
 export const Form = styled.form`
   display: flex;

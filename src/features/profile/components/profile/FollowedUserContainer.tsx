@@ -1,20 +1,20 @@
-import { useAppSelector } from "@/app/hooks";
+import { useAppSelector } from '@/app/hooks';
 
 import {
   selectFetchFollowedUsersState,
   selectProfileFollowedUsersList,
-} from "../../profileSlice";
+} from '../../profileSlice';
 
-import { Waterfall } from "@/styles/animations/Waterfall";
+import { Waterfall } from '@/styles/animations/Waterfall';
 
-import UsersListLoader from "@/components/loaders/UsersListLoader";
-import Error from "@/components/general/Error";
+import UsersListLoader from '@/components/loaders/UsersListLoader';
+import Error from '@/components/general/Error';
 import {
   CalloutText,
   FollowedUsersList,
   Wrapper,
-} from "./FollowedUserContainer.styled";
-import FollowedUserItem from "@/features/profile/components/profile/FollowedUserItem";
+} from './FollowedUserContainer.styled';
+import FollowedUserItem from '@/features/profile/components/profile/FollowedUserItem';
 
 const FollowedUserContainer = () => {
   const usersList = useAppSelector(selectProfileFollowedUsersList);

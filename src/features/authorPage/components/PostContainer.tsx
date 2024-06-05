@@ -1,16 +1,16 @@
-import { useAppSelector } from "@/app/hooks";
+import { useAppSelector } from '@/app/hooks';
 
 import {
   selectAuthorPosts,
   selectFetchAuthorPostsState,
-} from "../authorPageSlice";
+} from '../authorPageSlice';
 
-import { Waterfall } from "@/styles/animations/Waterfall";
+import { Waterfall } from '@/styles/animations/Waterfall';
 
-import PostItem from "@/components/general/PostItem";
-import PostListLoader from "@/components/loaders/PostListLoader";
-import { PostList, Wrapper } from "./PostContainer.styled";
-import { CalloutText } from "@/components/styled/CalloutText.styled";
+import PostItem from '@/components/general/PostItem';
+import PostListLoader from '@/components/loaders/PostListLoader';
+import { PostList, Wrapper } from './PostContainer.styled';
+import { CalloutText } from '@/components/styled/CalloutText.styled';
 
 const PostContainer = () => {
   const postList = useAppSelector(selectAuthorPosts);

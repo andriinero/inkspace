@@ -1,7 +1,9 @@
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import { motion } from "framer-motion";
-import AppImage from "@/features/appImages/components/AppImage";
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import AppImage from '@/features/appImages/components/AppImage';
+import { HollowButton } from '@/components/styled/HollowButton';
+import tw from 'twin.macro';
 
 export const WrapperItem = styled(motion.li)`
   display: grid;
@@ -18,21 +20,10 @@ export const StyledLink = styled(NavLink)`
 export const BioContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
 `;
 
 export const BioContent = styled.p`
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-
-  max-width: 20ch;
-
-  font-size: 0.8rem;
-  line-height: 1.2rem;
-  text-overflow: ellipsis;
-
-  overflow: hidden;
+  ${tw`line-clamp-2 text-sm font-light text-gray-700`}
 `;
 
 export const AuthorIcon = styled(AppImage)`
@@ -43,4 +34,8 @@ export const AuthorIcon = styled(AppImage)`
   border-radius: 50%;
 
   -webkit-user-drag: none;
+`;
+
+export const StyledHollowButton = styled(HollowButton)`
+  ${tw`self-center`}
 `;

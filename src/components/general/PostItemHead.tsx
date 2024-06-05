@@ -1,6 +1,6 @@
-import { GeneralAuthorData } from "@/types/entityData/GeneralAuthorData";
+import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 
-import * as S from "./PostItemHead.styled";
+import * as S from './PostItemHead.styled';
 
 type PostItemHeadProps = {
   author: GeneralAuthorData;

@@ -1,18 +1,18 @@
-import { z } from "zod";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useAppFetch } from "@/lib/useAppFetch";
+import { z } from 'zod';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useAppFetch } from '@/lib/useAppFetch';
 
-import storage from "@/lib/storage";
+import storage from '@/lib/storage';
 
-import { RootState } from "@/app/store";
-import { PayloadAction } from "@reduxjs/toolkit";
-import { PostData, PostDataSchema } from "@/types/entityData/PostData";
-import { TopicData } from "@/types/entityData/TopicData";
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { RootState } from '@/app/store';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { PostData, PostDataSchema } from '@/types/entityData/PostData';
+import { TopicData } from '@/types/entityData/TopicData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import {
   TargetObjectId,
   TargetObjectIdSchema,
-} from "@/types/fetchResponse/success/TargetObjectId";
+} from '@/types/fetchResponse/success/TargetObjectId';
 
 type postListState = {
   postList: PostData[];
@@ -37,18 +37,18 @@ export const fetchPosts = createAsyncThunk<
   PostData[],
   void,
   { rejectValue: ErrorData; state: RootState }
->("postList/fetchPosts", async (_, { rejectWithValue, getState }) => {
-  const currentUserId = getState().profile.profileData?._id || "";
-  const selectedTopicId = getState().postList.selectedTopic?._id || "";
+>('postList/fetchPosts', async (_, { rejectWithValue, getState }) => {
+  const currentUserId = getState().profile.profileData?._id || '';
+  const selectedTopicId = getState().postList.selectedTopic?._id || '';
   const isFollowList = getState().postList.isFollowList;
 
   const { data, responseState } = await useAppFetch(
     `/api/posts?page=1&topic=${selectedTopicId}&ignoreList=${currentUserId}&followList=${
-      isFollowList ? currentUserId : ""
+      isFollowList ? currentUserId : ''
     }`,
     {
-      method: "GET",
-      mode: "cors",
+      method: 'GET',
+      mode: 'cors',
     },
   );
 
@@ -64,12 +64,12 @@ export const deletePost = createAsyncThunk<
   TargetObjectId,
   string,
   { rejectValue: ErrorData }
->("postList/deletePost", async (postId, { rejectWithValue }) => {
+>('postList/deletePost', async (postId, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch(`/api/posts/${postId}`, {
-    method: "DELETE",
-    mode: "cors",
+    method: 'DELETE',
+    mode: 'cors',
     headers: { authorization: `Bearer ${token}` },
   });
 
@@ -82,7 +82,7 @@ export const deletePost = createAsyncThunk<
 });
 
 const postListSlice = createSlice({
-  name: "postList",
+  name: 'postList',
   initialState,
   reducers: {
     setTopic: {

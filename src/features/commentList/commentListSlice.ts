@@ -1,16 +1,16 @@
-import { useAppFetch } from "@/lib/useAppFetch";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { z } from "zod";
+import { useAppFetch } from '@/lib/useAppFetch';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { z } from 'zod';
 
-import storage from "@/lib/storage";
+import storage from '@/lib/storage';
 
-import { RootState } from "@/app/store";
-import { CommentData, CommentDataSchema } from "@/types/entityData/CommentData";
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { RootState } from '@/app/store';
+import { CommentData, CommentDataSchema } from '@/types/entityData/CommentData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import {
   TargetObjectId,
   TargetObjectIdSchema,
-} from "@/types/fetchResponse/success/TargetObjectId";
+} from '@/types/fetchResponse/success/TargetObjectId';
 
 type CommentsState = {
   comments: CommentData[];
@@ -42,12 +42,12 @@ export const fetchComments = createAsyncThunk<
   CommentData[],
   string,
   { rejectValue: ErrorData }
->("commentList/fetchComments", async (postId, { rejectWithValue }) => {
+>('commentList/fetchComments', async (postId, { rejectWithValue }) => {
   const { data, responseState } = await useAppFetch(
     `/api/posts/${postId}/comments`,
     {
-      method: "GET",
-      mode: "cors",
+      method: 'GET',
+      mode: 'cors',
     },
   );
 
@@ -64,14 +64,14 @@ export const deleteComment = createAsyncThunk<
   TargetObjectId,
   string,
   { rejectValue: ErrorData }
->("commentList/deleteComment", async (commentId, { rejectWithValue }) => {
+>('commentList/deleteComment', async (commentId, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch(
     `/api/comments/${commentId}`,
     {
-      method: "DELETE",
-      mode: "cors",
+      method: 'DELETE',
+      mode: 'cors',
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -88,7 +88,7 @@ export const deleteComment = createAsyncThunk<
 });
 
 const commentListSlice = createSlice({
-  name: "commentList",
+  name: 'commentList',
   initialState,
   reducers: {
     addComment(state, action) {

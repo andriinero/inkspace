@@ -1,20 +1,20 @@
-import { useAppSelector } from "@/app/hooks";
+import { useAppSelector } from '@/app/hooks';
 
 import {
   selectFetchIgnoredUsersState,
   selectProfileIgnoredUsersList,
-} from "../../profileSlice";
+} from '../../profileSlice';
 
-import { Waterfall } from "@/styles/animations/Waterfall";
+import { Waterfall } from '@/styles/animations/Waterfall';
 
-import UsersListLoader from "@/components/loaders/UsersListLoader";
-import Error from "@/components/general/Error";
-import IgnoredUserItem from "./IgnoredUserItem";
+import UsersListLoader from '@/components/loaders/UsersListLoader';
+import Error from '@/components/general/Error';
+import IgnoredUserItem from './IgnoredUserItem';
 import {
   CalloutText,
   FollowedUsersList,
   Wrapper,
-} from "./IgnoredUserContainer.styled";
+} from './IgnoredUserContainer.styled';
 
 const IgnoredUserContainer = () => {
   const usersList = useAppSelector(selectProfileIgnoredUsersList);

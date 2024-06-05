@@ -1,10 +1,10 @@
-import { useAppDispatch } from "@/app/hooks";
+import { useAppDispatch } from '@/app/hooks';
 
-import { deleteBookmark, postBookmark } from "@/features/profile/profileSlice";
-import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
+import { deleteBookmark, postBookmark } from '@/features/profile/profileSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
-import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 const useBookmarkPostAction = (
   postId: string,

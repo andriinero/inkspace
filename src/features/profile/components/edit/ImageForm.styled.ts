@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { ErrorMessage } from "@/components/styled/ErrorMessage";
-import { InputLabel } from "@/components/styled/InputLabel";
-import { GreenButton } from "@/components/styled/GreenButton";
-import { InputFile } from "@/components/styled/InputFile.styled";
+import styled from 'styled-components';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import { InputLabel } from '@/components/styled/InputLabel';
+import { GreenButton } from '@/components/styled/GreenButton';
+import { InputFile } from '@/components/styled/InputFile.styled';
 
 export const WrapperMain = styled.div`
   display: flex;

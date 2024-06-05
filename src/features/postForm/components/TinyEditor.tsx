@@ -1,8 +1,8 @@
-import { MutableRefObject } from "react";
+import { MutableRefObject } from 'react';
 
-import { Editor as TinyMCEEditor } from "tinymce";
+import { Editor as TinyMCEEditor } from 'tinymce';
 
-import { Editor } from "@tinymce/tinymce-react";
+import { Editor } from '@tinymce/tinymce-react';
 
 type TinyEditorProps = {
   editorRef: MutableRefObject<TinyMCEEditor | null>;
@@ -20,14 +20,14 @@ const TinyEditor = ({ editorRef, onChange, value }: TinyEditorProps) => {
         inline_styles: true,
         inline: true,
         min_height: 300,
-        plugins: "",
+        plugins: '',
         toolbar:
-          "undo redo blockquote h2 | bold italic underline strikethrough",
-        tinycomments_mode: "embedded",
-        tinycomments_author: "Author name",
+          'undo redo blockquote h2 | bold italic underline strikethrough',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
         mergetags_list: [
-          { value: "First.Name", title: "First Name" },
-          { value: "Email", title: "Email" },
+          { value: 'First.Name', title: 'First Name' },
+          { value: 'Email', title: 'Email' },
         ],
       }}
       initialValue="Tell your story..."

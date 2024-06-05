@@ -1,38 +1,38 @@
-import { useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import useWindowScrollDirection from "@/hooks/useWindowScrollDirection";
-import useFollowUserAction from "@/hooks/useFollowUserAction";
-import useAuthorPageLoadingState from "@/hooks/useAuthorPageLoadingState";
-import { AppDate } from "@/lib/AppDate";
+import { useEffect } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
+import useFollowUserAction from '@/hooks/useFollowUserAction';
+import useAuthorPageLoadingState from '@/hooks/useAuthorPageLoadingState';
+import { AppDate } from '@/lib/AppDate';
 
 import {
   selectAuthData,
   selectIsAuthenticated,
-} from "@/features/auth/authSlice";
+} from '@/features/auth/authSlice';
 import {
   selectFollowActionState,
   selectIsUserFollowed,
-} from "@/features/profile/profileSlice";
+} from '@/features/profile/profileSlice';
 import {
   fetchAuthorData,
   fetchAuthorPosts,
   resetState,
   selectAuthorData,
   selectFetchAuthorDataState,
-} from "@/features/authorPage/authorPageSlice";
-import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
+} from '@/features/authorPage/authorPageSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
-import { ButtonInteraction } from "@/styles/animations/ButtonInteraction";
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
-import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
-import { FadeIn } from "@/styles/animations/FadeIn";
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { FadeIn } from '@/styles/animations/FadeIn';
 
-import PostContainer from "@/features/authorPage/components/PostContainer";
-import Error from "@/components/general/Error";
-import { HollowButton } from "@/components/styled/HollowButton";
-import JumpButton from "@/components/general/JumpButton";
-import * as S from "./AuthorPage.styled";
+import PostContainer from '@/features/authorPage/components/PostContainer';
+import Error from '@/components/general/Error';
+import { HollowButton } from '@/components/styled/HollowButton';
+import JumpButton from '@/components/general/JumpButton';
+import * as S from './AuthorPage.styled';
 
 const AuthorPage = () => {
   const { isScrollingDown } = useWindowScrollDirection();
@@ -123,7 +123,7 @@ const AuthorPage = () => {
               $isActive={isFollowed}
               onClick={handleFollowClick}
               type="button"
-              value={isFollowed ? "Followed" : "Follow"}
+              value={isFollowed ? 'Followed' : 'Follow'}
             />
           )}
           <S.UserBio>{authorData?.bio}</S.UserBio>

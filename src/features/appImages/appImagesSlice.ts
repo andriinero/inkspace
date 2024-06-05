@@ -1,10 +1,10 @@
-import { useAppFetch } from "@/lib/useAppFetch";
+import { useAppFetch } from '@/lib/useAppFetch';
 
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from "@/app/store";
-import { ImageDataSchema } from "@/types/entityData/ImageData";
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { RootState } from '@/app/store';
+import { ImageDataSchema } from '@/types/entityData/ImageData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 type AppImageSliceState = {
   imageURLsMap: { [key: string]: string };
@@ -17,7 +17,7 @@ const initialState: AppImageSliceState = {
 };
 
 export const fetchImage = createAsyncThunk(
-  "appImages/fetchImage",
+  'appImages/fetchImage',
   async (imageId: string, { rejectWithValue }) => {
     const { data, responseState } = await useAppFetch(
       `/api/images/${imageId}`,
@@ -37,7 +37,7 @@ export const fetchImage = createAsyncThunk(
 );
 
 const appImagesSlice = createSlice({
-  name: "appImages",
+  name: 'appImages',
   initialState,
   reducers: {},
   extraReducers(builder) {

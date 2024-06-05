@@ -1,27 +1,27 @@
-import { z } from "zod";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useAppFetch } from "@/lib/useAppFetch";
+import { z } from 'zod';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useAppFetch } from '@/lib/useAppFetch';
 
-import storage from "@/lib/storage";
+import storage from '@/lib/storage';
 
-import { logout } from "../auth/authSlice";
+import { logout } from '../auth/authSlice';
 
-import { RootState } from "@/app/store";
-import { ProfileData, ProfileDataSchema } from "@/types/entityData/ProfileData";
-import { PostData, PostDataSchema } from "@/types/entityData/PostData";
+import { RootState } from '@/app/store';
+import { ProfileData, ProfileDataSchema } from '@/types/entityData/ProfileData';
+import { PostData, PostDataSchema } from '@/types/entityData/PostData';
 import {
   TargetObjectId,
   TargetObjectIdSchema,
-} from "@/types/fetchResponse/success/TargetObjectId";
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+} from '@/types/fetchResponse/success/TargetObjectId';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import {
   GeneralAuthorData,
   GeneralAuthorDataSchema,
-} from "@/types/entityData/GeneralAuthorData";
-import { PutProfileDataSchema } from "@/types/fetchResponse/success/PutProfileEdit";
-import { TProfileDataEditSchema } from "@/types/formSchemas/ProfileDataEditSchema";
-import { PutProfileData } from "@/types/fetchResponse/success/PutProfileEdit";
-import { TProfilePasswordEditSchema } from "./components/edit/PasswordForm";
+} from '@/types/entityData/GeneralAuthorData';
+import { PutProfileDataSchema } from '@/types/fetchResponse/success/PutProfileEdit';
+import { TProfileDataEditSchema } from '@/types/formSchemas/ProfileDataEditSchema';
+import { PutProfileData } from '@/types/fetchResponse/success/PutProfileEdit';
+import { TProfilePasswordEditSchema } from './components/edit/PasswordForm';
 
 type ProfileState = {
   isModalOpen: boolean;
@@ -86,12 +86,12 @@ export const fetchProfileData = createAsyncThunk<
   ProfileData,
   void,
   { rejectValue: ErrorData }
->("profile/fetchProfileData", async (_, { rejectWithValue }) => {
+>('profile/fetchProfileData', async (_, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch("/api/profile", {
-    method: "GET",
-    mode: "cors",
+  const { data, responseState } = await useAppFetch('/api/profile', {
+    method: 'GET',
+    mode: 'cors',
     headers: {
       authorization: `Bearer ${token}`,
     },
@@ -109,14 +109,14 @@ export const putPersonalDetails = createAsyncThunk<
   PutProfileData,
   TProfileDataEditSchema,
   { rejectValue: ErrorData }
->("profile/putPersonalDetails", async (profileData, { rejectWithValue }) => {
+>('profile/putPersonalDetails', async (profileData, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch("/api/profile", {
-    method: "PUT",
-    mode: "cors",
+  const { data, responseState } = await useAppFetch('/api/profile', {
+    method: 'PUT',
+    mode: 'cors',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(profileData),
@@ -134,14 +134,14 @@ export const putPassword = createAsyncThunk<
   PutProfileData,
   TProfilePasswordEditSchema,
   { rejectValue: ErrorData }
->("profile/putPassword", async (passwordData, { rejectWithValue }) => {
+>('profile/putPassword', async (passwordData, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch("/api/profile/password", {
-    method: "PUT",
-    mode: "cors",
+  const { data, responseState } = await useAppFetch('/api/profile/password', {
+    method: 'PUT',
+    mode: 'cors',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(passwordData),
@@ -159,15 +159,15 @@ export const putProfileImage = createAsyncThunk<
   TargetObjectId,
   File,
   { rejectValue: ErrorData }
->("profile/putProfileImage", async (image, { rejectWithValue }) => {
+>('profile/putProfileImage', async (image, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const formData = new FormData();
-  formData.append("image", image);
+  formData.append('image', image);
 
-  const { data, responseState } = await useAppFetch("/api/profile/image", {
-    method: "PUT",
-    mode: "cors",
+  const { data, responseState } = await useAppFetch('/api/profile/image', {
+    method: 'PUT',
+    mode: 'cors',
     headers: {
       authorization: `Bearer ${token}`,
     },
@@ -187,7 +187,7 @@ export const deleteProfile = createAsyncThunk<
   void,
   { rejectValue: ErrorData; state: RootState }
 >(
-  "profile/deleteProfile",
+  'profile/deleteProfile',
   async (_, { getState, rejectWithValue, dispatch }) => {
     const token = storage.getToken();
     const currentUserId = getState().profile.profileData?._id;
@@ -195,8 +195,8 @@ export const deleteProfile = createAsyncThunk<
     const { data, responseState } = await useAppFetch(
       `/api/profile/${currentUserId}`,
       {
-        method: "DELETE",
-        mode: "cors",
+        method: 'DELETE',
+        mode: 'cors',
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -220,12 +220,12 @@ export const fetchProfileBookmarks = createAsyncThunk<
   PostData[],
   void,
   { rejectValue: ErrorData }
->("profile/fetchProfileBookmarks", async (_, { rejectWithValue }) => {
+>('profile/fetchProfileBookmarks', async (_, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch("/api/profile/bookmarks", {
-    method: "GET",
-    mode: "cors",
+  const { data, responseState } = await useAppFetch('/api/profile/bookmarks', {
+    method: 'GET',
+    mode: 'cors',
     headers: {
       authorization: `Bearer ${token}`,
     },
@@ -243,14 +243,14 @@ export const postBookmark = createAsyncThunk<
   TargetObjectId,
   string,
   { rejectValue: ErrorData }
->("profile/postBookmark", async (postId, { rejectWithValue }) => {
+>('profile/postBookmark', async (postId, { rejectWithValue }) => {
   const token = storage.getToken();
 
-  const { data, responseState } = await useAppFetch("/api/profile/bookmarks", {
-    method: "POST",
-    mode: "cors",
+  const { data, responseState } = await useAppFetch('/api/profile/bookmarks', {
+    method: 'POST',
+    mode: 'cors',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ postid: postId }),
@@ -268,16 +268,16 @@ export const deleteBookmark = createAsyncThunk<
   TargetObjectId,
   string,
   { rejectValue: ErrorData }
->("profile/deleteBookmark", async (postId, { rejectWithValue }) => {
+>('profile/deleteBookmark', async (postId, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch(
     `/api/profile/bookmarks/${postId}`,
     {
-      method: "DELETE",
-      mode: "cors",
+      method: 'DELETE',
+      mode: 'cors',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
     },
@@ -297,16 +297,16 @@ export const fetchProfilePosts = createAsyncThunk<
   PostData[],
   void,
   { rejectValue: ErrorData; state: RootState }
->("profile/fetchProfilePosts", async (_, { getState, rejectWithValue }) => {
+>('profile/fetchProfilePosts', async (_, { getState, rejectWithValue }) => {
   const currentUserId = getState().auth.authData?.sub;
 
   const { data, responseState } = await useAppFetch(
     `/api/posts?userid=${currentUserId}`,
     {
-      method: "GET",
-      mode: "cors",
+      method: 'GET',
+      mode: 'cors',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     },
   );
@@ -325,14 +325,14 @@ export const fetchFollowedUsers = createAsyncThunk<
   GeneralAuthorData[],
   void,
   { rejectValue: ErrorData }
->("profile/fetchFollowedUsers", async (_, { rejectWithValue }) => {
+>('profile/fetchFollowedUsers', async (_, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch(
-    "/api/profile/followed-users",
+    '/api/profile/followed-users',
     {
-      method: "GET",
-      mode: "cors",
+      method: 'GET',
+      mode: 'cors',
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -351,16 +351,16 @@ export const postFollowUser = createAsyncThunk<
   TargetObjectId,
   string,
   { rejectValue: ErrorData }
->("profile/postFollowUser", async (userId, { rejectWithValue }) => {
+>('profile/postFollowUser', async (userId, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch(
-    "/api/profile/followed-users",
+    '/api/profile/followed-users',
     {
-      method: "POST",
-      mode: "cors",
+      method: 'POST',
+      mode: 'cors',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ userid: userId }),
@@ -379,16 +379,16 @@ export const deleteFollowUser = createAsyncThunk<
   TargetObjectId,
   string,
   { rejectValue: ErrorData }
->("profile/deleteFollowUser", async (userId, { rejectWithValue }) => {
+>('profile/deleteFollowUser', async (userId, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch(
     `/api/profile/followed-users/${userId}`,
     {
-      method: "DELETE",
-      mode: "cors",
+      method: 'DELETE',
+      mode: 'cors',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
     },
@@ -408,14 +408,14 @@ export const fetchIgnoredUsers = createAsyncThunk<
   GeneralAuthorData[],
   void,
   { rejectValue: ErrorData }
->("profile/fetchIgnoredUsers", async (_, { rejectWithValue }) => {
+>('profile/fetchIgnoredUsers', async (_, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch(
-    "/api/profile/ignored-users",
+    '/api/profile/ignored-users',
     {
-      method: "GET",
-      mode: "cors",
+      method: 'GET',
+      mode: 'cors',
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -434,16 +434,16 @@ export const postIgnoredUser = createAsyncThunk<
   TargetObjectId,
   string,
   { rejectValue: ErrorData }
->("profile/postIgnoredUser", async (userId, { rejectWithValue }) => {
+>('profile/postIgnoredUser', async (userId, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch(
-    "/api/profile/ignored-users",
+    '/api/profile/ignored-users',
     {
-      method: "POST",
-      mode: "cors",
+      method: 'POST',
+      mode: 'cors',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ userid: userId }),
@@ -462,16 +462,16 @@ export const deleteIgnoredUser = createAsyncThunk<
   TargetObjectId,
   string,
   { rejectValue: ErrorData }
->("profile/deleteIgnoredUser", async (userId, { rejectWithValue }) => {
+>('profile/deleteIgnoredUser', async (userId, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const { data, responseState } = await useAppFetch(
     `/api/profile/ignored-users/${userId}`,
     {
-      method: "DELETE",
-      mode: "cors",
+      method: 'DELETE',
+      mode: 'cors',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
     },
@@ -486,7 +486,7 @@ export const deleteIgnoredUser = createAsyncThunk<
 });
 
 const profileSlice = createSlice({
-  name: "profile",
+  name: 'profile',
   initialState,
   reducers: {
     closeModal(state) {

@@ -1,17 +1,17 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useAppFetch } from "@/lib/useAppFetch";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useAppFetch } from '@/lib/useAppFetch';
 
-import storage from "@/lib/storage";
+import storage from '@/lib/storage';
 
-import { RootState } from "@/app/store";
-import { PostData, PostDataSchema } from "@/types/entityData/PostData";
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
-import { TPostFormSchema } from "@/types/formSchemas/CreatePostSchema";
-import { formDataBuilder } from "@/utils/formDataBuilder";
+import { RootState } from '@/app/store';
+import { PostData, PostDataSchema } from '@/types/entityData/PostData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { TPostFormSchema } from '@/types/formSchemas/CreatePostSchema';
+import { formDataBuilder } from '@/utils/formDataBuilder';
 import {
   TargetObjectId,
   TargetObjectIdSchema,
-} from "@/types/fetchResponse/success/TargetObjectId";
+} from '@/types/fetchResponse/success/TargetObjectId';
 
 type CreatePostState = {
   editTargetPostData: PostData | null;
@@ -33,14 +33,14 @@ export const postPost = createAsyncThunk<
   TargetObjectId,
   TPostFormSchema,
   { rejectValue: ErrorData }
->("postForm/postPost", async (postBody, { rejectWithValue }) => {
+>('postForm/postPost', async (postBody, { rejectWithValue }) => {
   const token = storage.getToken();
 
   const formData = formDataBuilder(postBody);
 
   const { data, responseState } = await useAppFetch(`/api/posts`, {
-    method: "POST",
-    mode: "cors",
+    method: 'POST',
+    mode: 'cors',
     headers: {
       authorization: `Bearer ${token}`,
     },
@@ -59,10 +59,10 @@ export const fetchEditTargetPost = createAsyncThunk<
   PostData,
   string,
   { rejectValue: ErrorData }
->("postForm/fetchEditTargetPost", async (postId, { rejectWithValue }) => {
+>('postForm/fetchEditTargetPost', async (postId, { rejectWithValue }) => {
   const { data, responseState } = await useAppFetch(`/api/posts/${postId}`, {
-    method: "GET",
-    mode: "cors",
+    method: 'GET',
+    mode: 'cors',
   });
 
   if (!responseState.ok) throw rejectWithValue(data as ErrorData);
@@ -78,7 +78,7 @@ export const putEditTargetPost = createAsyncThunk<
   TPostFormSchema,
   { rejectValue: ErrorData }
 >(
-  "postForm/putEditTargetPost",
+  'postForm/putEditTargetPost',
   async (postData, { getState, rejectWithValue }) => {
     const token = storage.getToken();
     const state = getState() as { postForm: { editTargetPostId: string } };
@@ -88,8 +88,8 @@ export const putEditTargetPost = createAsyncThunk<
     const { data, responseState } = await useAppFetch(
       `/api/posts/${state.postForm.editTargetPostId}`,
       {
-        method: "PUT",
-        mode: "cors",
+        method: 'PUT',
+        mode: 'cors',
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -107,7 +107,7 @@ export const putEditTargetPost = createAsyncThunk<
 );
 
 const createPostSlice = createSlice({
-  name: "postForm",
+  name: 'postForm',
   initialState,
   reducers: {
     enterEditMode(state, action) {

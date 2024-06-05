@@ -1,26 +1,26 @@
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import {
   closeModal,
   putPersonalDetails,
   selectProfileUsername,
-} from "@/features/profile/profileSlice";
-import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
+} from '@/features/profile/profileSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
-import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
-import FormWrapper from "./FormWrapper";
-import * as S from "./UsernameForm.styled";
+import FormWrapper from './FormWrapper';
+import * as S from './UsernameForm.styled';
 
 const UsernameFormSchema = z.object({
   username: z
     .string()
-    .min(3, "Username must contain at least 3 characters")
-    .max(100, "Username must contain at most 100 characters"),
+    .min(3, 'Username must contain at least 3 characters')
+    .max(100, 'Username must contain at most 100 characters'),
 });
 type TUsernameFormSchema = z.infer<typeof UsernameFormSchema>;
 
@@ -52,7 +52,7 @@ const UsernameForm = () => {
         if (response) {
           dispatch(
             addNotification(
-              "username updated successfully",
+              'username updated successfully',
               PushNotificationType.SUCCESS,
             ),
           );
@@ -80,7 +80,7 @@ const UsernameForm = () => {
           <S.StyledInputLabel htmlFor="edit-username">
             Username
           </S.StyledInputLabel>
-          <S.StyledInputText id="edit-username" {...register("username")} />
+          <S.StyledInputText id="edit-username" {...register('username')} />
           <S.InputDescription>
             You can sign in using this username
           </S.InputDescription>

@@ -1,21 +1,21 @@
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { selectProfileUsername } from "@/features/profile/profileSlice";
-import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
+import { selectProfileUsername } from '@/features/profile/profileSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 import {
   closeModal,
   deleteProfile,
   selectDeleteProfileState,
-} from "@/features/profile/profileSlice";
+} from '@/features/profile/profileSlice';
 
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
-import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
-import FormWrapper from "./FormWrapper";
-import * as S from "./DeleteForm.styled";
+import FormWrapper from './FormWrapper';
+import * as S from './DeleteForm.styled';
 
 const DeleteFormSchema = z
   .object({
@@ -24,7 +24,7 @@ const DeleteFormSchema = z
   })
   .refine(({ username, confirmUsername }) => username === confirmUsername, {
     message: "Usernames don't match",
-    path: ["confirmUsername"],
+    path: ['confirmUsername'],
   });
 type TDeleteFormSchema = z.infer<typeof DeleteFormSchema>;
 
@@ -37,7 +37,7 @@ const DeleteForm = () => {
     formState: { errors, isValid, isSubmitting },
   } = useForm<TDeleteFormSchema>({
     resolver: zodResolver(DeleteFormSchema),
-    defaultValues: { username: currentUsername, confirmUsername: "" },
+    defaultValues: { username: currentUsername, confirmUsername: '' },
   });
 
   const { error } = useAppSelector(selectDeleteProfileState);
@@ -55,7 +55,7 @@ const DeleteForm = () => {
       if (response) {
         dispatch(
           addNotification(
-            "Thank you for using my app! We are sad to see you go :( -Siriuszx",
+            'Thank you for using my app! We are sad to see you go :( -Siriuszx',
             PushNotificationType.SUCCESS,
           ),
         );
@@ -79,7 +79,7 @@ const DeleteForm = () => {
           </S.StyledInputLabel>
           <S.StyledInputText
             id="edit-profile-delete"
-            {...register("confirmUsername")}
+            {...register('confirmUsername')}
           />
           <S.StyledErrorMessage $isVisible={Boolean(errors.confirmUsername)}>
             {errors.confirmUsername?.message}

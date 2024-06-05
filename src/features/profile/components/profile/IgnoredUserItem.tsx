@@ -1,21 +1,21 @@
-import { useAppSelector } from "@/app/hooks";
-import useIgnoreUserAction from "@/hooks/useIgnoreUserAction";
+import { useAppSelector } from '@/app/hooks';
+import useIgnoreUserAction from '@/hooks/useIgnoreUserAction';
 
 import {
   selectAuthData,
   selectIsAuthenticated,
-} from "@/features/auth/authSlice";
+} from '@/features/auth/authSlice';
 import {
   selectIgnoreUserActionState,
   selectIsUserIgnored,
-} from "@/features/profile/profileSlice";
+} from '@/features/profile/profileSlice';
 
-import { Username } from "@/components/styled/Username.styled";
-import { WaterfallSlideIn } from "@/styles/animations/WaterfallSlideIn";
-import { GeneralAuthorData } from "@/types/entityData/GeneralAuthorData";
+import { Username } from '@/components/styled/Username.styled';
+import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
+import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 
-import { ButtonInteraction } from "@/styles/animations/ButtonInteraction";
-import * as S from "@/features/profile/components/profile/IgnoredUserItem.styled";
+import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
+import * as S from '@/features/profile/components/profile/IgnoredUserItem.styled';
 
 type IgnoredUserProps = {
   className?: string;
@@ -51,7 +51,7 @@ const IgnoredUserItem = ({
           <S.StyledLink to={`/authors/${_id}`}>
             <Username>{username}</Username>
           </S.StyledLink>
-          <S.BioContent>{bio || "No user bio"}</S.BioContent>
+          <S.BioContent>{bio || 'No user bio'}</S.BioContent>
         </S.BioContainer>
       </S.InfoWrapper>
       {isAuthenticated && authData?.sub !== _id && (
@@ -60,7 +60,7 @@ const IgnoredUserItem = ({
           $isActive={isIgnored}
           onClick={handleIgnoreClick}
           type="button"
-          value={isIgnored ? "Muted" : "Mute"}
+          value={isIgnored ? 'Muted' : 'Mute'}
         />
       )}
     </S.WrapperItem>

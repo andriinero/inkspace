@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import AppImage from "@/features/appImages/components/AppImage";
-import { Username } from "@/components/styled/Username.styled";
-import { motion } from "framer-motion";
-import { TextButton } from "@/components/styled/TextButton";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import AppImage from '@/features/appImages/components/AppImage';
+import { Username } from '@/components/styled/Username.styled';
+import { motion } from 'framer-motion';
+import { TextButton } from '@/components/styled/TextButton';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled(motion.div)`
   display: grid;

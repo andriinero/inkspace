@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { Username } from "@/components/styled/Username.styled";
-import AppImage from "@/features/appImages/components/AppImage";
-import { motion } from "framer-motion";
+import styled from 'styled-components';
+import { Username } from '@/components/styled/Username.styled';
+import AppImage from '@/features/appImages/components/AppImage';
+import { motion } from 'framer-motion';
 
 export const Wrapper = styled(motion.div)`
   display: grid;

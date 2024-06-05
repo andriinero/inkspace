@@ -1,10 +1,10 @@
-import { GeneralAuthorData } from "@/types/entityData/GeneralAuthorData";
+import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 
-import { Waterfall } from "@/styles/animations/Waterfall";
+import { Waterfall } from '@/styles/animations/Waterfall';
 
-import TimeAgo from "@/components/general/TimeAgo";
-import PostReadTime from "@/components/general/PostReadTime";
-import * as S from "./BookmarkItem.styled";
+import TimeAgo from '@/components/general/TimeAgo';
+import PostReadTime from '@/components/general/PostReadTime';
+import * as S from './BookmarkItem.styled';
 
 type BookmarkItemProps = {
   _id: string;

@@ -1,7 +1,7 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { TopicDataSchema } from "./TopicData";
-import { GeneralAuthorDataSchema } from "./GeneralAuthorData";
+import { TopicDataSchema } from './TopicData';
+import { GeneralAuthorDataSchema } from './GeneralAuthorData';
 
 export const GeneralPostDataSchema = z.object({
   _id: z.string(),

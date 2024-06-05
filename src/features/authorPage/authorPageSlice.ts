@@ -1,15 +1,15 @@
-import { z } from "zod";
-import { useAppFetch } from "@/lib/useAppFetch";
+import { z } from 'zod';
+import { useAppFetch } from '@/lib/useAppFetch';
 
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from "@/app/store";
+import { RootState } from '@/app/store';
 import {
   FullAuthorData,
   FullAuthorDataSchema,
-} from "@/types/entityData/FullAuthorData";
-import { PostData, PostDataSchema } from "@/types/entityData/PostData";
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
+} from '@/types/entityData/FullAuthorData';
+import { PostData, PostDataSchema } from '@/types/entityData/PostData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 type AuthorPageState = {
   authorData: FullAuthorData | null;
@@ -29,12 +29,12 @@ export const fetchAuthorData = createAsyncThunk<
   FullAuthorData,
   string,
   { rejectValue: ErrorData }
->("authorPage/fetchAuthor", async (authorId, { rejectWithValue }) => {
+>('authorPage/fetchAuthor', async (authorId, { rejectWithValue }) => {
   const { data, responseState } = await useAppFetch(
     `/api/authors/${authorId}`,
     {
-      method: "GET",
-      mode: "cors",
+      method: 'GET',
+      mode: 'cors',
     },
   );
 
@@ -50,12 +50,12 @@ export const fetchAuthorPosts = createAsyncThunk<
   PostData[],
   string,
   { rejectValue: ErrorData }
->("authorPage/fetchAuthorPosts", async (userId, { rejectWithValue }) => {
+>('authorPage/fetchAuthorPosts', async (userId, { rejectWithValue }) => {
   const { data, responseState } = await useAppFetch(
     `/api/posts?userid=${userId}`,
     {
-      method: "GET",
-      mode: "cors",
+      method: 'GET',
+      mode: 'cors',
     },
   );
 
@@ -68,7 +68,7 @@ export const fetchAuthorPosts = createAsyncThunk<
 });
 
 const authorPageSlice = createSlice({
-  name: "authorPage",
+  name: 'authorPage',
   initialState,
   reducers: {
     resetState(state) {

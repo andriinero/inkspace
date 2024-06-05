@@ -1,17 +1,12 @@
-import styled from "styled-components";
-import { AppButton } from "./AppButton.styled";
+import styled from 'styled-components';
+import { AppButton } from './AppButton.styled';
+import tw from 'twin.macro';
 
-export const HollowButton = styled(AppButton)<{ $isActive?: boolean }>`
-  align-self: flex-start;
-
-  min-width: 11ch;
-  padding: 0.6rem 0.8rem;
-  border: 1px solid ${({ theme }) => theme.color.topic_border};
-  border-radius: 16px;
-  background-color: ${({ $isActive, theme }) =>
-    $isActive ? theme.color.topic_bg_selected : theme.color.topic_bg};
-
-  color: ${({ $isActive: $isFollowed, theme }) =>
-    $isFollowed ? theme.color.topic_text_selected : theme.color.text_primary};
-  font-size: 0.85rem;
-`;
+export const HollowButton = styled(AppButton)<{
+  $isActive?: boolean;
+  className?: string;
+}>(({ $isActive, className }) => [
+  tw`py-2 px-3 text-xs font-light rounded-3xl ring-1 ring-gray-800`,
+  $isActive && tw`bg-gray-900 text-white`,
+  className,
+]);

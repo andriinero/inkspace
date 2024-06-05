@@ -1,7 +1,7 @@
-import { PopOut } from "@/styles/animations/PopOut";
+import { PopOut } from '@/styles/animations/PopOut';
 
-import { Icon } from "../styled/AppIcon.styled";
-import { Wrapper } from "./JumpButton.styled";
+import { Icon } from '../styled/AppIcon.styled';
+import { Wrapper } from './JumpButton.styled';
 
 type JumpButtonProps = {
   className?: string;
@@ -9,7 +9,7 @@ type JumpButtonProps = {
 
 const JumpButton = ({ className }: JumpButtonProps) => {
   const handleIconClick = (): void => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

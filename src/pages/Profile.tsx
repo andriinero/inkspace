@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import useWindowScrollDirection from "@/hooks/useWindowScrollDirection";
-import useProfilePageLoadingState from "@/hooks/useProfilePageLoadingState";
-import { Navigate, Outlet } from "react-router-dom";
-import { AppDate } from "@/lib/AppDate";
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
+import useProfilePageLoadingState from '@/hooks/useProfilePageLoadingState';
+import { Navigate, Outlet } from 'react-router-dom';
+import { AppDate } from '@/lib/AppDate';
 
 import {
   fetchFollowedUsers,
@@ -13,18 +13,18 @@ import {
   fetchProfilePosts,
   selectFetchProfileDataState,
   selectProfileData,
-} from "@/features/profile/profileSlice";
-import { selectIsAuthenticated } from "@/features/auth/authSlice";
-import { addNotification } from "@/features/pushNotification/pushNotificationSlice";
+} from '@/features/profile/profileSlice';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
-import { FadeIn } from "@/styles/animations/FadeIn";
-import { ErrorData } from "@/types/fetchResponse/error/ErrorData";
-import { PushNotificationType } from "@/types/entityData/StatusNotificationData";
+import { FadeIn } from '@/styles/animations/FadeIn';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
-import Error from "@/components/general/Error";
-import JumpButton from "@/components/general/JumpButton";
-import * as S from "./Profile.styled";
-import ProfileTabs from "@/features/profile/components/profile/ProfileTabs";
+import Error from '@/components/general/Error';
+import JumpButton from '@/components/general/JumpButton';
+import * as S from './Profile.styled';
+import ProfileTabs from '@/features/profile/components/profile/ProfileTabs';
 
 const Profile = () => {
   const { isScrollingDown } = useWindowScrollDirection();

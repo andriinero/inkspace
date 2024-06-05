@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { Wrapper } from "./TabItem.styled";
+import { ReactNode } from 'react';
+import { Wrapper } from './TabItem.styled';
 
 type TabItemProps = {
   isSelected?: boolean;

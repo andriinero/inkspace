@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { GeneralAuthorDataSchema } from "./GeneralAuthorData";
+import { z } from 'zod';
+import { GeneralAuthorDataSchema } from './GeneralAuthorData';
 
 export const CommentDataSchema = z.object({
   _id: z.string(),

@@ -1,11 +1,11 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
-import { RootState } from "@/app/store";
+import { RootState } from '@/app/store';
 import {
   PushNotificationData,
   PushNotificationType,
-} from "@/types/entityData/StatusNotificationData";
+} from '@/types/entityData/StatusNotificationData';
 
 type PushNotificationState = {
   queue: PushNotificationData[];
@@ -20,7 +20,7 @@ const initialState: PushNotificationState = {
 };
 
 const pushNotificationSlice = createSlice({
-  name: "pushNotification",
+  name: 'pushNotification',
   initialState,
   reducers: {
     addNotification: {

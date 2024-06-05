@@ -1,4 +1,4 @@
-import { Item } from "./TopicList.styled";
+import { Item } from './TopicList.styled';
 
 const TopicListLoader = () => {
   return (

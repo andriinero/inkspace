@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { GeneralAuthorData } from "@/types/entityData/GeneralAuthorData";
+import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 
-import { selectCurrentUserId } from "@/features/auth/authSlice";
-import { deleteComment } from "../commentListSlice";
+import { selectCurrentUserId } from '@/features/auth/authSlice';
+import { deleteComment } from '../commentListSlice';
 import {
   enterEditMode,
   selectCommentIsEditMode,
-} from "@/features/commentEditor/commentEditorSlice";
+} from '@/features/commentEditor/commentEditorSlice';
 
-import * as S from "./CommentItem.styled";
-import Dialog from "@/components/general/Dialog";
-import DeleteConfirm from "@/components/general/DeleteConfirm";
-import { MenuItemDanger, MenuItemSuccess } from "@/components/styled/MenuItem";
+import * as S from './CommentItem.styled';
+import Dialog from '@/components/general/Dialog';
+import DeleteConfirm from '@/components/general/DeleteConfirm';
+import { MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
 
 type CommentProps = {
   _id: string;

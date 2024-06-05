@@ -1,18 +1,18 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import {
   closeComments,
   fetchComments,
   selectAreCommentsOpen,
   selectCommentList,
-} from "@/features/commentList/commentListSlice";
-import { selectIsAuthenticated } from "@/features/auth/authSlice";
-import { exitEditMode } from "@/features/commentEditor/commentEditorSlice";
+} from '@/features/commentList/commentListSlice';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
+import { exitEditMode } from '@/features/commentEditor/commentEditorSlice';
 
-import { Wrapper, Header, WrapperList } from "./CommentList.styled";
-import CommentItem from "./CommentItem";
-import CommentForm from "../../commentEditor/components/CommentForm";
+import { Wrapper, Header, WrapperList } from './CommentList.styled';
+import CommentItem from './CommentItem';
+import CommentForm from '../../commentEditor/components/CommentForm';
 
 type PostCommentsProps = {
   postId: string;
