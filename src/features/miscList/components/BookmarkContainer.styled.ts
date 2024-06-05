@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import { motion } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -11,10 +11,6 @@ export const Wrapper = styled.div`
 export const StyledLink = styled(NavLink)`
   color: inherit;
   text-decoration: none;
-`;
-
-export const Header = styled.h3`
-  font-size: 1rem;
 `;
 
 export const BookmarkList = styled(motion.ul)`

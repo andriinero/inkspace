@@ -1,9 +1,10 @@
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import { Username } from "@/components/styled/Username.styled";
-import { motion } from "framer-motion";
-import { Title } from "@/components/styled/Title.styled";
-import AppImage from "@/features/appImages/components/AppImage";
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import { Username } from '@/components/styled/Username.styled';
+import { motion } from 'framer-motion';
+import { Title } from '@/components/styled/Title.styled';
+import AppImage from '@/features/appImages/components/AppImage';
+import tw from 'twin.macro';
 
 export const WrapperItem = styled(motion.li)`
   display: flex;
@@ -53,7 +54,5 @@ export const TopicName = styled.span`
 `;
 
 export const PostTitle = styled(Title)`
-  margin-bottom: 0.4rem;
-
-  font-size: 1rem;
+  ${tw`font-bold`}
 `;

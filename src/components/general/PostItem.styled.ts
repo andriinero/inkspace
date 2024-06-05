@@ -39,10 +39,8 @@ export const Body = styled.div`
   gap: 0.4rem;
 `;
 
-export const StyledTitle = tw(Title)`mb-2 text-2xl font-bold`;
-/**
- *
- */
+export const StyledTitle = tw(Title)`mb-2 text-xl font-bold`;
+
 export const BodyText = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 3;
