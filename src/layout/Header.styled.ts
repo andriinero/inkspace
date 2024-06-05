@@ -1,11 +1,12 @@
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { GreenButton } from "@/components/styled/GreenButton";
-import AppImage from "@/features/appImages/components/AppImage";
-import Dropdown from "@/components/general/Dropdown";
-import { MenuItem } from "@/components/styled/MenuItem";
-import { Icon } from "@/components/styled/AppIcon.styled";
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { GreenButton } from '@/components/styled/GreenButton';
+import AppImage from '@/features/appImages/components/AppImage';
+import Dropdown from '@/components/general/Dropdown';
+import { MenuItem } from '@/components/styled/MenuItem';
+import { Icon } from '@/components/styled/AppIcon.styled';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.header`
   grid-area: header;
@@ -15,7 +16,8 @@ export const Wrapper = styled.header`
   z-index: 1;
 `;
 
-export const ContentWrapper = styled.div`
+export const ContentWrapper = styled.div(() => [
+  `
   grid-area: header;
   display: flex;
   justify-content: space-between;
@@ -23,11 +25,9 @@ export const ContentWrapper = styled.div`
 
   position: relative;
   z-index: 1;
-
-  padding: 0.75rem 1.5rem;
-  border-bottom: 1px solid ${({ theme }) => theme.color.main_border};
-  background-color: ${({ theme }) => theme.color.main_bg_primary};
-`;
+`,
+  tw`border-b border-gray-200 py-3 px-6 bg-white`,
+]);
 
 export const StyledLink = styled(Link)`
   display: flex;

@@ -3,6 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "babelMacros": {
+    "twin": {
+      "preset": "styled-components"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "start": "vite",
@@ -18,6 +23,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
@@ -49,6 +55,7 @@
     "socket.io-client": "^4.7.5",
     "styled-components": "^6.1.11",
     "tailwind-merge": "^2.2.2",
+    "twin.macro": "^3.4.1",
     "uuid": "^9.0.1",
     "vite-tsconfig-paths": "^4.3.2",
     "zod": "^3.22.4"
@@ -68,6 +75,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-v8": "^1.5.1",
     "autoprefixer": "^10.4.19",
+    "babel-plugin-styled-components": "^2.1.4",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-react-app": "^7.0.1",

@@ -1,35 +1,31 @@
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import Bookmark from "@/components/general/Bookmark";
-import DotMenu from "@/components/general/DotMenu";
-import PostReadTime from "@/components/general/PostReadTime";
-import { Title } from "@/components/styled/Title.styled";
-import { motion } from "framer-motion";
-import AppImage from "@/features/appImages/components/AppImage";
-import { Icon } from "../styled/AppIcon.styled";
-import { MenuItem, MenuItemDanger, MenuItemSuccess } from "../styled/MenuItem";
-import PostTopic from "./PostTopic";
+import Bookmark from '@/components/general/Bookmark';
+import DotMenu from '@/components/general/DotMenu';
+import PostReadTime from '@/components/general/PostReadTime';
+import { Title } from '@/components/styled/Title.styled';
+import AppImage from '@/features/appImages/components/AppImage';
+import { motion } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import tw from 'twin.macro';
+import { Icon } from '../styled/AppIcon.styled';
+import { MenuItem, MenuItemDanger, MenuItemSuccess } from '../styled/MenuItem';
+import PostTopic from './PostTopic';
 
-export const Wrapper = styled(motion.li)`
+export const Wrapper = styled(motion.li)(() => [
+  `
   display: grid;
   grid-template-columns: 1fr minmax(64px, 128px);
   grid-template-rows: auto auto;
-  grid-template-areas: "head head" "body preview";
+  grid-template-areas: 'head head' 'body preview';
   row-gap: 0.7rem;
   column-gap: 4rem;
-
-  padding: 2rem 0;
-  border-bottom: 1px solid ${({ theme }) => theme.color.main_border_feint};
-
-  &:last-child {
-    border-bottom: none;
-  }
-`;
+`,
+  tw`border-b border-gray-200 py-8 last:border-none text-gray-800`,
+]);
 
 export const StyledLink = styled(NavLink)`
   display: flex;
   align-items: center;
-
   color: inherit;
   text-decoration: none;
 `;
@@ -43,11 +39,7 @@ export const Body = styled.div`
   gap: 0.4rem;
 `;
 
-export const StyledTitle = styled(Title)`
-  margin-bottom: 0.5rem;
-
-  font-size: 1.25rem;
-`;
+export const StyledTitle = tw(Title)`mb-2 text-2xl font-bold`;
 /**
  *
  */
@@ -58,7 +50,7 @@ export const BodyText = styled.div`
 
   overflow: hidden;
 
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Times New Roman', Times, serif;
   line-height: 1.5rem;
   text-overflow: ellipsis;
 

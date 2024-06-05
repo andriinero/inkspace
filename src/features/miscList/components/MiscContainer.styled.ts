@@ -1,10 +1,13 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import tw from 'twin.macro';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div(() => [
+  `
   display: flex;
   flex-direction: column;
   gap: 3rem;
 
   padding: 3rem 2rem;
-  border-left: 1px solid ${({ theme }) => theme.color.main_border};
-`;
+`,
+  tw`border-l border-gray-200`,
+]);

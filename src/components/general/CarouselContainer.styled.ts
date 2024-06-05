@@ -1,5 +1,5 @@
-import { Icon } from "@/components/styled/AppIcon.styled";
-import styled from "styled-components";
+import { Icon } from '@/components/styled/AppIcon.styled';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: grid;
@@ -22,18 +22,6 @@ export const ContentWrapper = styled.div`
 
 export const CarouselIcon = styled(Icon)``;
 
-export const LeftButton = styled(CarouselIcon)`
-  background-color: linear-gradient(
-    top,
-    rgba(255, 0, 0, 0),
-    rgba(255, 0, 0, 1)
-  );
-`;
+export const LeftButton = styled(CarouselIcon)``;
 
-export const RightButton = styled(CarouselIcon)`
-  background-color: linear-gradient(
-    top,
-    rgba(255, 0, 0, 0),
-    rgba(255, 0, 0, 1)
-  );
-`;
+export const RightButton = styled(CarouselIcon)``;

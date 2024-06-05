@@ -1,12 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
-  grid-template-areas: "header" "main" "footer";
+  grid-template-areas: 'header' 'main' 'footer';
 
   min-height: 100dvh;
-  background-color: ${({ theme }) => theme.color.main_bg_primary};
 `;
 
 export const WrapperMain = styled.main`

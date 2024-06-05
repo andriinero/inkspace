@@ -1,4 +1,4 @@
-import { TopicButton, Wrapper } from "./TopicItem.styled";
+import { TopicButton, Wrapper } from './TopicItem.styled';
 
 type TopicItemProps = {
   name: string;
@@ -7,12 +7,7 @@ type TopicItemProps = {
 const TopicItem = ({ name }: TopicItemProps) => {
   return (
     <Wrapper>
-      <TopicButton
-        disabled={true}
-        $isActive={false}
-        type="button"
-        value={name}
-      />
+      <TopicButton isActive={false}>{name}</TopicButton>
     </Wrapper>
   );
 };
