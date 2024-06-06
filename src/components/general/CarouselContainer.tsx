@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 
 import type { ReactNode } from 'react';
 
-import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import * as S from './CarouselContainer.styled';
+import AppIcon from './AppIcon';
 
 type CarouselContainerProps = {
   stepSize?: number;
@@ -48,21 +49,13 @@ const CarouselContainer = ({
 
   return (
     <S.Wrapper className={className}>
-      <BiChevronLeft />
-      <S.LeftButton
-        $isDisabled={scrollProgress === 0}
-        onClick={handleLeftButtonClick}
-        src="/arrow-left.svg"
-        alt="Carousel Left Button Icon"
-      />
+      <AppIcon>
+        <BsChevronLeft onClick={handleLeftButtonClick} />
+      </AppIcon>
       <S.ContentWrapper ref={carouselContentRef}>{children}</S.ContentWrapper>
-      <S.RightButton
-        $isDisabled={scrollProgress === maxScrollWidth}
-        onClick={handleRightButtonClick}
-        src="/arrow-right.svg"
-        alt="Carousel Right Button Icon"
-      />
-      <BiChevronRight />
+      <AppIcon>
+        <BsChevronRight onClick={handleRightButtonClick} />
+      </AppIcon>
     </S.Wrapper>
   );
 };

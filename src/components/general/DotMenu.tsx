@@ -3,7 +3,8 @@ import { ReactNode, useRef } from 'react';
 import useCloseDropdown from '@/hooks/useCloseDropdown';
 
 import Dropdown from './Dropdown';
-import { StyledIcon } from './DotMenu.styled';
+import { BsThreeDots } from 'react-icons/bs';
+import AppIcon from './AppIcon';
 
 type DotMenuProps = {
   className?: string;
@@ -28,12 +29,9 @@ const DotMenu = ({
 
   return (
     <>
-      <StyledIcon
-        className={className}
-        onClick={onToggle}
-        src="/dots-horizontal.svg"
-        alt="Dot Menu Icon"
-      />
+      <AppIcon className={className} onClick={onToggle}>
+        <BsThreeDots />
+      </AppIcon>
       <Dropdown
         innerRef={dropdown}
         isOpen={isOpen}

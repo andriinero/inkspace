@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import useCloseDropdown from '@/hooks/useCloseDropdown';
+import useTestUserLogin from '@/features/auth/hooks/useTestUserLogin';
 
 import { selectProfileImageId } from '@/features/profile/profileSlice';
 import { clearTopic } from '@/features/postList/postListSlice';
@@ -13,7 +14,13 @@ import LoginForm from '@/features/auth/components/LoginForm';
 import SignUpForm from '@/features/auth/components/SignUpForm';
 import PushNotificationContainer from '@/features/pushNotification/components/PushNotificationContainer';
 import * as S from './Header.styled';
-import useTestUserLogin from '@/features/auth/hooks/useTestUserLogin';
+import AppIcon from '@/components/general/AppIcon';
+import {
+  BsArrowBarLeft,
+  BsPencilFill,
+  BsPersonFill,
+  BsPostage,
+} from 'react-icons/bs';
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -87,10 +94,9 @@ const Header = () => {
               {pathname !== '/post-form' && (
                 <>
                   <S.NewPostButton onClick={handleWritePostClick}>
-                    <S.StyledAppIcon
-                      src="/post.svg"
-                      alt="Create New Post Icon"
-                    />
+                    <AppIcon>
+                      <BsPostage />
+                    </AppIcon>
                     <S.NewPostButtonText>Write</S.NewPostButtonText>
                   </S.NewPostButton>
                   <S.ProfileIcon
@@ -101,18 +107,21 @@ const Header = () => {
                   />
                   <S.StyledDropdown isOpen={isMenuOpen} innerRef={dropdownRef}>
                     <S.StyledMenuItem onClick={handleProfileClick}>
-                      <S.StyledProfileIcon
-                        src="/profile.svg"
-                        alt="Profile Icon"
-                      />
+                      <AppIcon>
+                        <BsPersonFill />
+                      </AppIcon>
                       Profile
                     </S.StyledMenuItem>
                     <S.StyledMenuItem onClick={handleEditProfileClick}>
-                      <S.StyledProfileIcon src="/edit.svg" alt="Edit Icon" />
+                      <AppIcon>
+                        <BsPencilFill />
+                      </AppIcon>
                       Edit Profile
                     </S.StyledMenuItem>
                     <S.StyledMenuItem onClick={handleLogoutClick}>
-                      <S.StyledProfileIcon src="/exit.svg" alt="Logout Icon" />
+                      <AppIcon>
+                        <BsArrowBarLeft />
+                      </AppIcon>
                       Logout
                     </S.StyledMenuItem>
                   </S.StyledDropdown>

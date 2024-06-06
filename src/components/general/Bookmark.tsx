@@ -1,4 +1,5 @@
-import { StyledIcon } from './Bookmark.styled';
+import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
+import AppIcon from './AppIcon';
 
 type BookmarkProps = {
   onBookmarked: () => void;
@@ -7,15 +8,10 @@ type BookmarkProps = {
 };
 
 const Bookmark = ({ onBookmarked, className, isBookmarked }: BookmarkProps) => {
-  const bookmarkSrc = isBookmarked ? '/bookmark.svg' : '/bookmark-outline.svg';
-
   return (
-    <StyledIcon
-      onClick={onBookmarked}
-      className={className}
-      src={bookmarkSrc}
-      alt="Bookmark Icon"
-    />
+    <AppIcon onClick={onBookmarked} className={className}>
+      {isBookmarked ? <BsBookmarkFill /> : <BsBookmark />}
+    </AppIcon>
   );
 };
 

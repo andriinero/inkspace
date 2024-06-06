@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Icon } from '../styled/AppIcon.styled';
 import { motion } from 'framer-motion';
 
 export const Wrapper = styled(motion.div)`
@@ -17,5 +16,3 @@ export const Wrapper = styled(motion.div)`
   border-radius: 50%;
   background-color: ${({ theme }) => theme.color.main_bg_secondary};
 `;
-
-export const StyledIcon = styled(Icon)``;

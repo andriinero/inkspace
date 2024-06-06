@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { useNavigate } from 'react-router-dom';
+import useBookmarkPostAction from '@/hooks/useBookmarkPostAction';
 
 import {
   putLikeCount,
@@ -15,6 +16,7 @@ import {
   selectIsPostBookmarked,
   selectIsUserIgnored,
 } from '@/features/profile/profileSlice';
+import { deletePost } from '@/features/postList/postListSlice';
 import { enterEditMode } from '@/features/postForm/postFormSlice';
 
 import Bookmark from '@/components/general/Bookmark';
@@ -26,15 +28,14 @@ import {
 } from '@/components/styled/MenuItem';
 import {
   ControlsContainer,
-  ControlsIcon,
   LikeCount,
   LikeWrapper,
   Wrapper,
 } from './PostControls.styled';
-import { deletePost } from '@/features/postList/postListSlice';
 import Dialog from '@/components/general/Dialog';
 import DeleteConfirm from '@/components/general/DeleteConfirm';
-import useBookmarkPostAction from '@/hooks/useBookmarkPostAction';
+import AppIcon from '@/components/general/AppIcon';
+import { BsChat, BsHandThumbsUp } from 'react-icons/bs';
 
 type PostControlsProps = { postId: string; isAuthor: boolean };
 
@@ -114,18 +115,14 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
     <Wrapper>
       <ControlsContainer>
         <LikeWrapper>
-          <ControlsIcon
-            onClick={onLikeClick}
-            src="/thumb-up-outline.svg"
-            alt="Like Icon"
-          />
+          <AppIcon onClick={onLikeClick}>
+            <BsHandThumbsUp />
+          </AppIcon>
           <LikeCount>{likeCount ? likeCount : ''}</LikeCount>
         </LikeWrapper>
-        <ControlsIcon
-          onClick={onCommentsClick}
-          src="/comment-outline.svg"
-          alt="Toggle Comments Icon"
-        />
+        <AppIcon onClick={onCommentsClick}>
+          <BsChat />
+        </AppIcon>
       </ControlsContainer>
       <ControlsContainer>
         <Bookmark onBookmarked={onBookmarkClick} isBookmarked={isBookmarked} />

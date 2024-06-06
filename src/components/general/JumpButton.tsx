@@ -1,7 +1,8 @@
 import { PopOut } from '@/styles/animations/PopOut';
 
-import { Icon } from '../styled/AppIcon.styled';
 import { Wrapper } from './JumpButton.styled';
+import AppIcon from './AppIcon';
+import { BsChevronUp } from 'react-icons/bs';
 
 type JumpButtonProps = {
   className?: string;
@@ -19,12 +20,9 @@ const JumpButton = ({ className }: JumpButtonProps) => {
       transition={PopOut.transition}
       exit={PopOut.hidden}
     >
-      <Icon
-        className={className}
-        onClick={handleIconClick}
-        src="/up-arrow.svg"
-        alt="Jump To Top Icon"
-      />
+      <AppIcon className={className} onClick={handleIconClick}>
+        <BsChevronUp />
+      </AppIcon>
     </Wrapper>
   );
 };

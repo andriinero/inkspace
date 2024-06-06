@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import { Icon } from '../styled/AppIcon.styled';
 import { MenuItem, MenuItemDanger, MenuItemSuccess } from '../styled/MenuItem';
 import PostTopic from './PostTopic';
 
@@ -117,7 +116,5 @@ export const StyledMenuItemDanger = styled(MenuItemDanger)`
   display: flex;
   justify-content: flex-end;
 `;
-
-export const StyledIcon = styled(Icon)``;
 
 // #endregion

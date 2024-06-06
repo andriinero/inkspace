@@ -5,7 +5,6 @@ import { GreenButton } from '@/components/styled/GreenButton';
 import AppImage from '@/features/appImages/components/AppImage';
 import Dropdown from '@/components/general/Dropdown';
 import { MenuItem } from '@/components/styled/MenuItem';
-import { Icon } from '@/components/styled/AppIcon.styled';
 import tw from 'twin.macro';
 
 export const Wrapper = styled.header`
@@ -13,7 +12,7 @@ export const Wrapper = styled.header`
 
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 20;
 `;
 
 export const ContentWrapper = styled.div(() => [
@@ -74,12 +73,6 @@ export const NewPostButton = styled.div`
   }
 `;
 
-export const StyledAppIcon = styled(Icon)`
-  &:hover {
-    filter: none;
-  }
-`;
-
 export const NewPostButtonText = styled.span`
   margin-left: 0.5rem;
 
@@ -107,15 +100,6 @@ export const StyledMenuItem = styled(MenuItem)`
   &:hover {
     filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg)
       brightness(102%) contrast(82%);
-  }
-`;
-
-export const StyledProfileIcon = styled(Icon)`
-  height: 20px;
-  width: 20px;
-
-  &:hover {
-    filter: none;
   }
 `;
 

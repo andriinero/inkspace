@@ -1,5 +1,4 @@
 import TabItem from '@/components/general/TabItem';
-import { Icon } from '@/components/styled/AppIcon.styled';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -15,15 +14,6 @@ export const StyledTabItem = styled(TabItem)`
   gap: 0.5rem;
 
   font-size: 0.9rem;
-`;
-
-export const StyledIcon = styled(Icon)`
-  width: 20px;
-  height: 20px;
-
-  &:hover {
-    filter: none;
-  }
 `;
 
 export const StyledLink = styled(Link)`

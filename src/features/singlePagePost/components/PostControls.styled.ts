@@ -1,4 +1,3 @@
-import { Icon } from '@/components/styled/AppIcon.styled';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -15,11 +14,6 @@ export const Wrapper = styled.div`
 export const ControlsContainer = styled.div`
   display: flex;
   gap: 1rem;
-`;
-
-export const ControlsIcon = styled(Icon)`
-  width: 20px;
-  height: 20px;
 `;
 
 export const LikeWrapper = styled.div`
