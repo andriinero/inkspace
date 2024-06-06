@@ -1,6 +1,5 @@
 <a name="readme-top"></a>
 
-
 <!-- PROJECT LOGO -->
 <div align="center">
   <a href="https://github.com/andriinero/inkspace">
@@ -21,7 +20,6 @@
     <a href="https://github.com/andriinero/inkspace/issues/new">Suggestion</a>
   </p>
 </div>
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -44,8 +42,8 @@
   </ol>
 </details>
 
-
 ### Built With
+
 - [![Neovim][Neovim]][Neovim-url]
 - [![JavaScript][JavaScript]][JavaScript-url]
 - [![TypeScript][TypeScript]][TypeScript-url]
@@ -60,24 +58,27 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
+
 To run this app, you'll need NodeJS on your system.
 
 If you don't have NodeJS installed, no worries! Just visit the amazing new [NodeJS installation guide](https://nodejs.org/en/download/package-manager) and you'll find all the info you need to get started.
 
 ### Installation
+
 1. Go to [inkspace_backend](https://github.com/andriinero/inkspace_backend) and follow installation steps there first
 2. Once you're done with the fist step clone the repo
    ```sh
    git clone https://github.com/andriinero/inkspace.git
    ```
 3. Go to the cloned repo and install NPM packages
+
    ```sh
    npm install
    ```
@@ -86,12 +87,12 @@ If you don't have NodeJS installed, no worries! Just visit the amazing new [Node
    ```sh
    npm run dev
    ```
-*NOTE: If the new tab didn't open in your browser, visit http://localhost:5173 to see the app*
+   _NOTE: If the new tab didn't open in your browser, visit http://localhost:5173 to see the app_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -107,8 +108,8 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- MARKDOWN LINKS & IMAGES -->
+
 [Neovim]: https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white
 [Neovim-url]: https://neovim.io/
 [TypeScript]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white

@@ -1,5 +1,8 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+import type { ReactNode } from 'react';
+
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import * as S from './CarouselContainer.styled';
 
 type CarouselContainerProps = {
@@ -45,6 +48,7 @@ const CarouselContainer = ({
 
   return (
     <S.Wrapper className={className}>
+      <BiChevronLeft />
       <S.LeftButton
         $isDisabled={scrollProgress === 0}
         onClick={handleLeftButtonClick}
@@ -58,6 +62,7 @@ const CarouselContainer = ({
         src="/arrow-right.svg"
         alt="Carousel Right Button Icon"
       />
+      <BiChevronRight />
     </S.Wrapper>
   );
 };

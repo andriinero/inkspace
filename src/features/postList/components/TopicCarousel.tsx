@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+
 import {
   clearTopic,
   selectIsFollowingList,
@@ -6,14 +7,17 @@ import {
   setIsFollowList,
   setTopic,
 } from '../postListSlice';
+import { selectMiscTopicList } from '@/features/miscList/miscListSlice';
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
+
+import { TopicData } from '@/types/entityData/TopicData';
+
 import {
+  ContentPadding,
   StyledCarouselContainer,
   StyledTabItem,
   Wrapper,
 } from './TopicCarousel.styled';
-import { selectMiscTopicList } from '@/features/miscList/miscListSlice';
-import { TopicData } from '@/types/entityData/TopicData';
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 const TopicCarousel = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -67,6 +71,7 @@ const TopicCarousel = () => {
           );
         })}
       </StyledCarouselContainer>
+      <ContentPadding />
     </Wrapper>
   );
 };

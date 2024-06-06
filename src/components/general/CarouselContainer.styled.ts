@@ -1,5 +1,6 @@
 import { Icon } from '@/components/styled/AppIcon.styled';
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
   display: grid;
@@ -8,16 +9,11 @@ export const Wrapper = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-
-  padding: 0 0.2rem;
-  overflow-x: scroll;
-
   &::-webkit-scrollbar {
     display: none;
   }
+  // ${tw`flex items-center gap-12 px-0.5 overflow-x-hidden border-b border-gray-300`}
+  ${tw`flex items-center gap-12 px-0.5 overflow-x-hidden`}
 `;
 
 export const CarouselIcon = styled(Icon)``;
