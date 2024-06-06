@@ -1,13 +1,6 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Username = styled.span`
-  display: inline-block;
-
-  max-width: 16ch;
-
-  font-weight: 500;
-
-  white-space: nowrap;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
+  ${tw`font-medium max-w-[16ch] whitespace-nowrap overflow-x-hidden text-ellipsis`}
 `;

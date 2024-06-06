@@ -5,84 +5,52 @@ import TimeAgo from '@/components/general/TimeAgo';
 import { Username } from '@/components/styled/Username.styled';
 import AppImage from '@/features/appImages/components/AppImage';
 import DotMenu from '@/components/general/DotMenu';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.li`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0.7rem;
-
-  padding: 1.5rem 0.5rem;
-  border-bottom: 1px solid ${({ theme }) => theme.color.comments_border};
-
-  &:last-child {
-    border-bottom: 1px solid transparent;
-  }
+  ${tw`flex flex-col justify-center gap-3 py-6 px-2 border-b border-gray-100 last:border-none`}
 `;
 
 export const StyledLink = styled(NavLink)`
-  color: inherit;
-  text-decoration: none;
+  ${tw`no-underline`}
 `;
 
 export const Header = styled.h3`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  ${tw`flex justify-between items-center`}
 `;
 
 export const WrapperAuthor = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
+  ${tw`flex items-center gap-3`}
 `;
 
 export const WrapperInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-
-  font-size: 1rem;
-  font-weight: 400;
+  ${tw`flex flex-col`}
 `;
 
 export const AuthorIcon = styled(AppImage)`
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  ${tw`size-8 rounded-full`}
 `;
 
 export const StyledUsername = styled(Username)`
-  font-weight: 300;
-  font-size: 0.9rem;
+  ${tw`font-light text-sm`}
 `;
 
 export const ControlsWrapper = styled.div`
-  display: flex;
-  gap: 0.5rem;
+  ${tw`flex gap-2`}
 `;
 
 export const StyledDotMenu = styled(DotMenu)`
-  margin-left: 85px;
+  ${tw`ml-[86px]`}
 `;
 
 export const CommentDate = styled(PostDate)`
-  font-weight: 300;
-  font-size: 0.8rem;
+  ${tw`font-light text-sm`}
 `;
 
 export const Body = styled.p`
-  font-size: 0.9rem;
-  line-height: 1.5rem;
-  overflow-wrap: break-word;
+  ${tw`text-sm leading-normal break-words font-light`}
 `;
 
 export const EditDate = styled(TimeAgo)`
-  display: block;
-  align-self: flex-end;
-
-  font-size: 0.7rem;
-  font-weight: 300;
-  font-style: italic;
-  letter-spacing: 0.04rem;
+  ${tw`self-end text-xs font-light`}
 `;

@@ -1,13 +1,7 @@
 import styled from 'styled-components';
 import { AppButton } from './AppButton.styled';
+import tw from 'twin.macro';
 
 export const FormButton = styled(AppButton)`
-  padding: 0.5rem 0.8rem;
-  border: 1px solid ${({ theme }) => theme.color.form_button_border};
-  border-radius: 16px;
-  background-color: ${({ theme }) => theme.color.form_button_bg};
-
-  color: ${({ theme }) => theme.color.text_primary};
-  font-size: 0.8rem;
-  font-weight: 300;
+  ${tw`py-2 px-3 rounded-full text-xs bg-green-700 text-white`}
 `;

@@ -1,4 +1,5 @@
 import cn from '@/utils/cn';
+
 import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 type AppIconProps = {

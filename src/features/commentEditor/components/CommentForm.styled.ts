@@ -2,68 +2,38 @@ import styled from 'styled-components';
 import ShakeOnOverflow from '../../../components/general/ShakeOnOverflow';
 import { FormButton } from '@/components/styled/FormButton';
 import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import tw from 'twin.macro';
 
 export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  padding: 0.9rem;
-
-  background-color: ${({ theme }) => theme.color.main_bg_secondary};
+  ${tw`p-4 flex flex-col gap-2 shadow rounded text-sm`}
 `;
 
-export const FormWrapper = styled.div`
-  &:focus-within {
-    ${Form} {
-      box-shadow: 0 0 1em rgb(0 0 0 / 0.2);
-    }
-  }
-`;
+export const FormWrapper = styled.div``;
 
 export const Header = styled.h2`
-  font-size: 1.3rem;
+  ${tw`text-lg`}
 `;
 
 export const CommentList = styled.ol`
-  display: flex;
-  flex-direction: column;
+  ${tw`flex flex-col`}
 `;
 
 export const BottomWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 0 0.3rem;
+  ${tw`flex justify-between items-center px-1`}
 `;
 
 export const ControlsWrapper = styled.div`
-  display: flex;
-  gap: 1rem;
+  ${tw`flex gap-4`}
 `;
 
-export const SubmitActionButton = styled(FormButton)`
-  padding: 0.3rem;
-  border: 1px solid ${({ theme }) => theme.color.main_button_border_primary};
-  background-color: ${({ theme }) => theme.color.main_button_bg_primary};
-
-  font-size: 0.7rem;
-`;
+export const SubmitActionButton = styled(FormButton)``;
 
 export const CancelActionButton = styled(FormButton)`
-  padding: 0.3rem;
-
-  font-size: 0.7rem;
+  ${tw`bg-transparent text-gray-800`}
 `;
 
 export const StyledCounter = styled(ShakeOnOverflow)`
-  min-width: 7ch;
-
-  color: ${({ theme }) => theme.color.text_primary};
-  font-size: 0.8rem;
-  font-weight: 300;
-  text-align: right;
+  ${tw`min-w-[7ch] font-light text-right`}
 `;
 
 export const StyledErrorMessage = styled(ErrorMessage)``;

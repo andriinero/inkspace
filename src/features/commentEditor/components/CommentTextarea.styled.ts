@@ -1,21 +1,6 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Textarea = styled.textarea`
-  min-height: 12ch;
-
-  padding: 0.3rem;
-  border: 1px solid transparent;
-  background-color: transparent;
-
-  color: ${({ theme }) => theme.color.text_primary};
-
-  resize: vertical;
-
-  &:focus {
-    outline: none;
-  }
-
-  &::-webkit-scrollbar {
-    width: 4px;
-  }
+  ${tw`min-h-[12ch] border border-transparent placeholder:font-light resize-y outline-none`}
 `;

@@ -1,29 +1,18 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-
-  padding: 0.8rem;
-  border-top: 1px solid ${({ theme }) => theme.color.post_border_controls};
-  border-bottom: 1px solid ${({ theme }) => theme.color.post_border_controls};
+  ${tw`p-3 border-b border-t border-gray-100 flex justify-between items-center gap-4`}
 `;
 
 export const ControlsContainer = styled.div`
-  display: flex;
-  gap: 1rem;
+  ${tw`flex gap-4`}
 `;
 
 export const LikeWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.4rem;
+  ${tw`flex justify-center items-center gap-2`}
 `;
 
 export const LikeCount = styled.span`
-  font-size: 0.8rem;
-  font-weight: 300;
+  ${tw`font-light text-sm`}
 `;
