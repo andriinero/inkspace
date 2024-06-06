@@ -10,11 +10,11 @@ const GlobalStyles = createGlobalStyle`
     overflow-wrap: anywhere;
   }
 
-  // html {
-  //   width: 100%;
-  //   overflow: -moz-scrollbars-vertical; 
-  //   overflow-y: scroll;
-  // }
+  html {
+    width: 100%;
+    overflow: -moz-scrollbars-vertical; 
+    overflow-y: scroll;
+  }
   
   // *::-webkit-scrollbar {
   //   width: 16px;

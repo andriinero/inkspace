@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -8,5 +9,5 @@ export const Wrapper = styled.div`
 
 export const Item = styled.div`
   min-height: 12ch;
-  background-color: ${({ theme }) => theme.color.loader_bg};
+  ${tw`bg-gray-50 animate-pulse`}
 `;

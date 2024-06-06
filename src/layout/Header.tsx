@@ -17,9 +17,9 @@ import * as S from './Header.styled';
 import AppIcon from '@/components/general/AppIcon';
 import {
   BsArrowBarLeft,
-  BsPencilFill,
-  BsPersonFill,
-  BsPostage,
+  BsPencil,
+  BsPencilSquare,
+  BsPerson,
 } from 'react-icons/bs';
 
 const Header = () => {
@@ -95,7 +95,7 @@ const Header = () => {
                 <>
                   <S.NewPostButton onClick={handleWritePostClick}>
                     <AppIcon>
-                      <BsPostage />
+                      <BsPencilSquare />
                     </AppIcon>
                     <S.NewPostButtonText>Write</S.NewPostButtonText>
                   </S.NewPostButton>
@@ -108,13 +108,13 @@ const Header = () => {
                   <S.StyledDropdown isOpen={isMenuOpen} innerRef={dropdownRef}>
                     <S.StyledMenuItem onClick={handleProfileClick}>
                       <AppIcon>
-                        <BsPersonFill />
+                        <BsPerson />
                       </AppIcon>
                       Profile
                     </S.StyledMenuItem>
                     <S.StyledMenuItem onClick={handleEditProfileClick}>
                       <AppIcon>
-                        <BsPencilFill />
+                        <BsPencil />
                       </AppIcon>
                       Edit Profile
                     </S.StyledMenuItem>

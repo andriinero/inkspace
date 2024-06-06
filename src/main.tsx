@@ -15,7 +15,7 @@ import { IconContext } from 'react-icons';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <IconContext.Provider value={{ color: '#1f2937', size: '1.25rem' }}>
+      <IconContext.Provider value={{ size: '1rem' }}>
         <ThemeProvider theme={mainTheme}>
           <GlobalStyles />
           <Router />

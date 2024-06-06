@@ -1,20 +1,9 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled(motion.div)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-
-  height: 100dvh;
-  width: 100dvw;
+  ${tw`flex justify-center items-center z-[2] w-dvw h-dvh fixed inset-0`}
 `;
 
 export const Backdrop = styled(Wrapper)`

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ export const Post = styled.div`
   gap: 1rem;
 
   & > * {
-    background-color: ${({ theme }) => theme.color.loader_bg};
+    ${tw`bg-gray-50 animate-pulse`}
   }
 `;
 

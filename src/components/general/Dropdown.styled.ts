@@ -1,13 +1,12 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.ul<{ $isOpen: boolean; $isAlignedLeft: boolean }>`
   display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
   position: absolute;
 
-  padding: 1rem;
   margin-top: 25px;
   margin-left: ${({ $isAlignedLeft }) => ($isAlignedLeft ? '-95px' : '25px')};
-  background-color: ${({ theme }) => theme.color.main_bg_secondary};
   border-radius: 6px;
 
   transform: ${({ $isOpen }) =>
@@ -21,6 +20,7 @@ export const Wrapper = styled.ul<{ $isOpen: boolean; $isAlignedLeft: boolean }>`
     transform: translateY(-10px);
     opacity: 0.1;
   }
+  ${tw`p-3 bg-white border rounded-md shadow-sm`}
 `;
 
 export const List = styled.div`

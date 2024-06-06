@@ -21,7 +21,7 @@ const JumpButton = ({ className }: JumpButtonProps) => {
       exit={PopOut.hidden}
     >
       <AppIcon className={className} onClick={handleIconClick}>
-        <BsChevronUp />
+        <BsChevronUp size="1.25rem" />
       </AppIcon>
     </Wrapper>
   );

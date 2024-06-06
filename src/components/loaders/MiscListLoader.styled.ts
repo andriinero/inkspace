@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Item = styled.div`
   min-height: 6ch;
-  background-color: ${({ theme }) => theme.color.loader_bg};
+  ${tw`bg-gray-50 animate-pulse`}
 `;

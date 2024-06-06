@@ -8,7 +8,13 @@ type AppIconProps = {
 
 const AppIcon = ({ className, children, ...otherProps }: AppIconProps) => {
   return (
-    <div className={cn('cursor-pointer', className)} {...otherProps}>
+    <div
+      className={cn(
+        'cursor-pointer text-gray-600 transition hover:text-gray-800',
+        className,
+      )}
+      {...otherProps}
+    >
       {children}
     </div>
   );
