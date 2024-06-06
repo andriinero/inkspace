@@ -30,7 +30,6 @@ import { FadeIn } from '@/styles/animations/FadeIn';
 
 import PostContainer from '@/features/authorPage/components/PostContainer';
 import Error from '@/components/general/Error';
-import { HollowButton } from '@/components/styled/HollowButton';
 import JumpButton from '@/components/general/JumpButton';
 import * as S from './AuthorPage.styled';
 
@@ -117,8 +116,9 @@ const AuthorPage = () => {
             {authorData?.users_following_count} Followers
           </S.FollowCount>
           <S.SignUpDate>Member since: {signUpDate}</S.SignUpDate>
+          <S.UserBio>{authorData?.bio}</S.UserBio>
           {isAuthenticated && (
-            <HollowButton
+            <S.FollowButton
               whileTap={ButtonInteraction.whileTap.animation}
               $isActive={isFollowed}
               onClick={handleFollowClick}
@@ -126,7 +126,6 @@ const AuthorPage = () => {
               value={isFollowed ? 'Followed' : 'Follow'}
             />
           )}
-          <S.UserBio>{authorData?.bio}</S.UserBio>
         </S.ProfileWrapper>
       </S.WrapperAside>
       {isScrollingDown && <JumpButton />}
