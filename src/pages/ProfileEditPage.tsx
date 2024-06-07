@@ -93,11 +93,9 @@ const ProfileEditPage = () => {
           />
           <S.StyledUserName>{profileData?.username}</S.StyledUserName>
           <S.StyledLink to="/profile/edit/image">
-            <S.UploadImageButton
-              onClick={handleModalOpen}
-              type="button"
-              value="Upload Image"
-            />
+            <S.UploadImageButton onClick={handleModalOpen}>
+              Upload Image
+            </S.UploadImageButton>
           </S.StyledLink>
           <S.FollowCount>
             {profileData?.followed_users.length} Following

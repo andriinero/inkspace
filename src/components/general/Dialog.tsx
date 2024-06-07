@@ -3,7 +3,7 @@ import { ReactNode, useEffect } from 'react';
 import { FadeIn } from '@/styles/animations/FadeIn';
 
 import { AnimatePresence } from 'framer-motion';
-import { Wrapper, Backdrop } from './Dialog.styled';
+import { Wrapper, Backdrop, ContentWrapper } from './Dialog.styled';
 
 type DialogProps = {
   isModalOpen: boolean;
@@ -32,8 +32,8 @@ const Dialog = ({
           transition={{ duration: 0.2 }}
           exit={FadeIn.hidden}
         >
+          <ContentWrapper>{children}</ContentWrapper>
           <Backdrop className={className} onClick={onModalClose}></Backdrop>
-          {children}
         </Wrapper>
       )}
     </AnimatePresence>

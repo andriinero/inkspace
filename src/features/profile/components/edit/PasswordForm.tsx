@@ -10,11 +10,17 @@ import {
 } from '@/features/profile/profileSlice';
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import type { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 import FormWrapper from './FormWrapper';
 import * as S from './PasswordForm.styled';
+import ProfileLabel from '../general/ProfileLabel';
+import ProfileInput from '../general/ProfileInput';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import InputDescription from '@/components/general/InputDesciption';
+import CancelButton from '@/components/general/CancelButton';
+import SubmitButton from '@/components/general/SubmitButton';
 
 const ProfilePasswordEditSchema = z
   .object({
@@ -82,54 +88,44 @@ const PasswordForm = () => {
     <FormWrapper>
       <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
         <S.InputWrapper>
-          <S.StyledInputLabel htmlFor="edit-password">
-            Password
-          </S.StyledInputLabel>
-          <S.StyledInputText
+          <ProfileLabel htmlFor="edit-password">Password</ProfileLabel>
+          <ProfileInput
             {...register('password')}
             id="edit-password"
             type="password"
             placeholder="••••••••"
           />
-          <S.StyledErrorMessage $isVisible={Boolean(errors.password)}>
+          <ErrorMessage $isVisible={Boolean(errors.password)}>
             {errors.password?.message}
-          </S.StyledErrorMessage>
+          </ErrorMessage>
           <S.InputWrapper>
-            <S.StyledInputLabel htmlFor="edit-password-confirmation">
+            <ProfileLabel htmlFor="edit-password-confirmation">
               Confirm Password
-            </S.StyledInputLabel>
-            <S.StyledInputText
+            </ProfileLabel>
+            <ProfileInput
               {...register('passwordConfirmation')}
               id="edit-password-confirmation"
               type="password"
               placeholder="••••••••"
             />
-            <S.InputDescription>
+            <InputDescription>
               You can sign in using your new password
-            </S.InputDescription>
-            <S.StyledErrorMessage
-              $isVisible={Boolean(errors.passwordConfirmation)}
-            >
+            </InputDescription>
+            <ErrorMessage $isVisible={Boolean(errors.passwordConfirmation)}>
               {errors.passwordConfirmation?.message}
-            </S.StyledErrorMessage>
+            </ErrorMessage>
             {error && (
-              <S.StyledErrorMessage $isVisible={true}>
+              <ErrorMessage $isVisible={true}>
                 An error has occurred while submitting the form
-              </S.StyledErrorMessage>
+              </ErrorMessage>
             )}
           </S.InputWrapper>
         </S.InputWrapper>
         <S.ControlsWrapper>
-          <S.CancelButton
-            onClick={handleModalClose}
-            type="button"
-            value="Cancel"
-          />
-          <S.SubmitButton
-            disabled={isSubmitDisabled}
-            type="submit"
-            value="Save"
-          />
+          <CancelButton onClick={handleModalClose}>Cancel</CancelButton>
+          <SubmitButton disabled={isSubmitDisabled} type="submit">
+            Save
+          </SubmitButton>
         </S.ControlsWrapper>
       </S.Form>
     </FormWrapper>

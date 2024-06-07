@@ -16,6 +16,11 @@ import { PushNotificationType } from '@/types/entityData/StatusNotificationData'
 
 import FormWrapper from './FormWrapper';
 import * as S from './DeleteForm.styled';
+import ProfileLabel from '../general/ProfileLabel';
+import ProfileInput from '../general/ProfileInput';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import CancelButton from '@/components/general/CancelButton';
+import SubmitButton from '@/components/general/SubmitButton';
 
 const DeleteFormSchema = z
   .object({
@@ -74,33 +79,27 @@ const DeleteForm = () => {
       <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
         <S.Header>Are you sure you want to delete your account?</S.Header>
         <S.InputWrapper>
-          <S.StyledInputLabel htmlFor="edit-profile-delete">
+          <ProfileLabel htmlFor="edit-profile-delete">
             Type "{currentUsername}" to delete your account
-          </S.StyledInputLabel>
-          <S.StyledInputText
+          </ProfileLabel>
+          <ProfileInput
             id="edit-profile-delete"
             {...register('confirmUsername')}
           />
-          <S.StyledErrorMessage $isVisible={Boolean(errors.confirmUsername)}>
+          <ErrorMessage $isVisible={Boolean(errors.confirmUsername)}>
             {errors.confirmUsername?.message}
-          </S.StyledErrorMessage>
+          </ErrorMessage>
           {error && (
-            <S.StyledErrorMessage $isVisible={true}>
+            <ErrorMessage $isVisible={true}>
               An error has occurred while submitting the form
-            </S.StyledErrorMessage>
+            </ErrorMessage>
           )}
         </S.InputWrapper>
         <S.ControlsWrapper>
-          <S.CancelButton
-            onClick={handleModalClose}
-            type="button"
-            value="Cancel"
-          />
-          <S.SubmitButton
-            disabled={isSubmitDisabled}
-            type="submit"
-            value="Submit"
-          />
+          <CancelButton onClick={handleModalClose}>Cancel</CancelButton>
+          <SubmitButton disabled={isSubmitDisabled} type="submit">
+            Delete
+          </SubmitButton>
         </S.ControlsWrapper>
         <S.InputDescriptionDanger>
           You can't undo this action!

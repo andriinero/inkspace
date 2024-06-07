@@ -11,10 +11,16 @@ import {
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import type { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 import * as S from './EmailForm.styled';
 import FormWrapper from './FormWrapper';
+import ProfileLabel from '../general/ProfileLabel';
+import ProfileInput from '../general/ProfileInput';
+import InputDescription from '@/components/general/InputDesciption';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import SubmitButton from '@/components/general/SubmitButton';
+import CancelButton from '@/components/general/CancelButton';
 
 const EmailFormSchema = z.object({
   email: z
@@ -77,24 +83,18 @@ const EmailForm = () => {
     <FormWrapper>
       <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
         <S.InputWrapper>
-          <S.StyledInputLabel htmlFor="edit-email">Email</S.StyledInputLabel>
-          <S.StyledInputText id="edit-email" {...register('email')} />
-          <S.InputDescription>Your personal email</S.InputDescription>
-          <S.StyledErrorMessage $isVisible={Boolean(errors.email)}>
+          <ProfileLabel htmlFor="edit-email">Email</ProfileLabel>
+          <ProfileInput id="edit-email" {...register('email')} />
+          <InputDescription>Your personal email</InputDescription>
+          <ErrorMessage $isVisible={Boolean(errors.email)}>
             {errors.email?.message}
-          </S.StyledErrorMessage>
+          </ErrorMessage>
         </S.InputWrapper>
         <S.ControlsWrapper>
-          <S.CancelButton
-            onClick={handleModalClose}
-            type="button"
-            value="Cancel"
-          />
-          <S.SubmitButton
-            disabled={isSubmitDisabled}
-            type="submit"
-            value="Save"
-          />
+          <CancelButton onClick={handleModalClose}>Cancel</CancelButton>
+          <SubmitButton disabled={isSubmitDisabled} type="submit">
+            Save
+          </SubmitButton>
         </S.ControlsWrapper>
       </S.Form>
     </FormWrapper>

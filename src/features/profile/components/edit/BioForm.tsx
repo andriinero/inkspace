@@ -11,10 +11,16 @@ import {
 import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import type { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 import * as S from './BioForm.styled';
 import FormWrapper from './FormWrapper';
+import ProfileLabel from '../general/ProfileLabel';
+import ProfileInput from '../general/ProfileInput';
+import InputDescription from '@/components/general/InputDesciption';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import CancelButton from '@/components/general/CancelButton';
+import SubmitButton from '@/components/general/SubmitButton';
 
 const BioFormSchema = z.object({
   bio: z.string().max(280, 'Bio must contain at most 280 characters'),
@@ -72,24 +78,18 @@ const BioForm = () => {
     <FormWrapper>
       <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
         <S.InputWrapper>
-          <S.StyledInputLabel htmlFor="edit-bio">Bio</S.StyledInputLabel>
-          <S.StyledInputText id="edit-bio" {...register('bio')} />
-          <S.InputDescription>Your profile bio</S.InputDescription>
-          <S.StyledErrorMessage $isVisible={Boolean(errors.bio)}>
+          <ProfileLabel htmlFor="edit-bio">Bio</ProfileLabel>
+          <ProfileInput id="edit-bio" {...register('bio')} />
+          <InputDescription>Your profile bio</InputDescription>
+          <ErrorMessage $isVisible={Boolean(errors.bio)}>
             {errors.bio?.message}
-          </S.StyledErrorMessage>
+          </ErrorMessage>
         </S.InputWrapper>
         <S.ControlsWrapper>
-          <S.CancelButton
-            onClick={handleModalClose}
-            type="button"
-            value="Cancel"
-          />
-          <S.SubmitButton
-            disabled={isSubmitDisabled}
-            type="submit"
-            value="Save"
-          />
+          <CancelButton onClick={handleModalClose}>Cancel</CancelButton>
+          <SubmitButton disabled={isSubmitDisabled} type="submit">
+            Save
+          </SubmitButton>
         </S.ControlsWrapper>
       </S.Form>
     </FormWrapper>

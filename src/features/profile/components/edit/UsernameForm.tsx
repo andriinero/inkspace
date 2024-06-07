@@ -15,6 +15,12 @@ import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 import FormWrapper from './FormWrapper';
 import * as S from './UsernameForm.styled';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import ProfileInput from '../general/ProfileInput';
+import InputDescription from '@/components/general/InputDesciption';
+import SubmitButton from '@/components/general/SubmitButton';
+import CancelButton from '@/components/general/CancelButton';
+import ProfileLabel from '../general/ProfileLabel';
 
 const UsernameFormSchema = z.object({
   username: z
@@ -77,28 +83,20 @@ const UsernameForm = () => {
     <FormWrapper>
       <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
         <S.InputWrapper>
-          <S.StyledInputLabel htmlFor="edit-username">
-            Username
-          </S.StyledInputLabel>
-          <S.StyledInputText id="edit-username" {...register('username')} />
-          <S.InputDescription>
+          <ProfileLabel htmlFor="edit-username">Username</ProfileLabel>
+          <ProfileInput id="edit-username" {...register('username')} />
+          <InputDescription>
             You can sign in using this username
-          </S.InputDescription>
-          <S.StyledErrorMessage $isVisible={Boolean(errors.username)}>
+          </InputDescription>
+          <ErrorMessage $isVisible={Boolean(errors.username)}>
             {errors.username?.message}
-          </S.StyledErrorMessage>
+          </ErrorMessage>
         </S.InputWrapper>
         <S.ControlsWrapper>
-          <S.CancelButton
-            onClick={handleModalClose}
-            type="button"
-            value="Cancel"
-          />
-          <S.SubmitButton
-            disabled={isSubmitDisabled}
-            type="submit"
-            value="Save"
-          />
+          <CancelButton onClick={handleModalClose}>Cancel</CancelButton>
+          <SubmitButton disabled={isSubmitDisabled} type="submit" value="Save">
+            Save
+          </SubmitButton>
         </S.ControlsWrapper>
       </S.Form>
     </FormWrapper>
