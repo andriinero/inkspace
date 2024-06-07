@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "start": "vite",
+    "start": "node_modules/next/dist/bin/next start -p $PORT",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest run --pool=forks",
