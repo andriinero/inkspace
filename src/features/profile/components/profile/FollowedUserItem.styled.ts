@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import AppImage from '@/features/appImages/components/AppImage';
-import { HollowButton } from '../../../../components/styled/HollowButton';
-import tw from 'twin.macro';
 
 export const WrapperItem = styled(motion.li)`
   display: flex;
@@ -52,5 +50,3 @@ export const AuthorIcon = styled(AppImage)`
 
   -webkit-user-drag: none;
 `;
-
-export const StyledHollowButton = styled(HollowButton)``;

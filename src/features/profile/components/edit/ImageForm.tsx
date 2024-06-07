@@ -18,6 +18,11 @@ import { PushNotificationType } from '@/types/entityData/StatusNotificationData'
 
 import FormWrapper from './FormWrapper';
 import * as S from './ImageForm.styled';
+import ProfileLabel from '../general/ProfileLabel';
+import InputDescription from '@/components/general/InputDesciption';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import SubmitButton from '@/components/general/SubmitButton';
+import CancelButton from '@/components/general/CancelButton';
 
 const ImageForm = () => {
   const {
@@ -63,33 +68,29 @@ const ImageForm = () => {
     <FormWrapper>
       <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
         <S.InputWrapper>
-          <S.StyledInputLabel htmlFor="edit-profile-image">
+          <ProfileLabel htmlFor="edit-profile-image">
             Upload Image:
-          </S.StyledInputLabel>
+          </ProfileLabel>
           <S.StyledInputFile
             {...register('image')}
             id="edit-profile-image"
             type="file"
           />
-          <S.InputDescription>Your profile image</S.InputDescription>
-          <S.StyledErrorMessage $isVisible={Boolean(errors.image)}>
+          <InputDescription>Your profile image</InputDescription>
+          <ErrorMessage $isVisible={Boolean(errors.image)}>
             {errors.image?.message as string}
-          </S.StyledErrorMessage>
+          </ErrorMessage>
         </S.InputWrapper>
-        <S.StyledErrorMessage $isVisible={Boolean(error)}>
+        <ErrorMessage $isVisible={Boolean(error)}>
           An error has occurred while submitting the form
-        </S.StyledErrorMessage>
+        </ErrorMessage>
         <S.ControlsWrapper>
-          <S.CancelButton
-            onClick={handleModalClose}
-            type="button"
-            value="Cancel"
-          />
-          <S.SubmitButton
-            disabled={isSubmitDisabled}
-            type="submit"
-            value="Save Image"
-          />
+          <CancelButton onClick={handleModalClose} type="button">
+            Cancel
+          </CancelButton>
+          <SubmitButton disabled={isSubmitDisabled} type="submit">
+            Save Image
+          </SubmitButton>
         </S.ControlsWrapper>
       </S.Form>
     </FormWrapper>

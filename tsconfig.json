@@ -5,36 +5,37 @@
         "name": "@styled/typescript-styled-plugin"
       }
     ],
-  },
-  "target": "ESNext",
-  "useDefineForClassFields": true,
-  "lib": [
-    "DOM",
-    "DOM.Iterable",
-    "ESNext"
-  ],
-  "allowJs": false,
-  "skipLibCheck": true,
-  "allowSyntheticDefaultImports": true,
-  "strict": true,
-  "module": "ESNext",
-  "esModuleInterop": true,
-  "moduleResolution": "Node",
-  "resolveJsonModule": true,
-  "isolatedModules": true,
-  "noEmit": true,
-  "jsx": "react-jsx",
-  "types": [
-    "vitest/globals"
-  ],
-  "baseUrl": "src",
-  "paths": {
-    "@/*": [
-      "*"
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
     ],
-    "@assets/*": [
-      "assets/*"
-    ]
+    "allowJs": false,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": [
+      "vitest/globals",
+      "vite/client"
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "@/*": [
+        "*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ]
+    }
   },
   "references": [
     {

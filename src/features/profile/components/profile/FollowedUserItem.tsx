@@ -16,6 +16,7 @@ import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 import * as S from '@/features/profile/components/profile/FollowedUserItem.styled';
+import { HollowButton } from '@/components/styled/HollowButton';
 
 type FollowedUserProps = {
   className?: string;
@@ -55,13 +56,14 @@ const FollowedUserItem = ({
         </S.BioContainer>
       </S.InfoWrapper>
       {isAuthenticated && authData?.sub !== _id && (
-        <S.StyledHollowButton
+        <HollowButton
           whileTap={ButtonInteraction.whileTap.animation}
           $isActive={isFollowed}
           onClick={handleFollowClick}
           type="button"
-          value={isFollowed ? 'Followed' : 'Follow'}
-        />
+        >
+          {isFollowed ? 'Followed' : 'Follow'}
+        </HollowButton>
       )}
     </S.WrapperItem>
   );

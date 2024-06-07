@@ -61,8 +61,9 @@ const AuthorItem = ({
           $isActive={isFollowed}
           onClick={handleFollowClick}
           type="button"
-          value={isFollowed ? 'Following' : 'Follow'}
-        />
+        >
+          {isFollowed ? 'Following' : 'Follow'}
+        </S.StyledHollowButton>
       )}
     </S.WrapperItem>
   );

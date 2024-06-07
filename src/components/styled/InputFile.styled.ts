@@ -1,12 +1,7 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const InputFile = styled.input`
-  &::-webkit-file-upload-button {
-    padding: 0.5em;
-    border: 1px solid transparent;
-    border-radius: 3px;
-    background-color: ${({ theme }) => theme.color.main_bg_secondary};
-
-    color: ${({ theme }) => theme.color.success};
-  }
+  ${tw`text-xs border border-gray-200 rounded cursor-pointer`}
+  ${tw`file:p-1 file:border-gray-50 file:border-none`}
 `;

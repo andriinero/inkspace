@@ -174,17 +174,13 @@ const PostForm = () => {
       </S.Form>
       <S.ControlsContainer>
         {isEditMode ? (
-          <S.StyledButton
-            form="create-new-post"
-            type="submit"
-            value="Save Edit"
-          />
+          <S.StyledButton form="create-new-post" type="submit">
+            Save Edit
+          </S.StyledButton>
         ) : (
-          <S.StyledButton
-            form="create-new-post"
-            type="submit"
-            value="Publish"
-          />
+          <S.StyledButton form="create-new-post" type="submit">
+            Publish
+          </S.StyledButton>
         )}
       </S.ControlsContainer>
     </S.Wrapper>

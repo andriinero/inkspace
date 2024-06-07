@@ -123,8 +123,9 @@ const AuthorPage = () => {
               $isActive={isFollowed}
               onClick={handleFollowClick}
               type="button"
-              value={isFollowed ? 'Followed' : 'Follow'}
-            />
+            >
+              {isFollowed ? 'Followed' : 'Follow'}
+            </S.FollowButton>
           )}
         </S.ProfileWrapper>
       </S.WrapperAside>
