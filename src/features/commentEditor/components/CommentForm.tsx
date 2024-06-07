@@ -111,9 +111,11 @@ const CommentForm = () => {
             return <CommentTextarea {...nonFieldRef} errors={errors} />;
           }}
         />
-        <S.StyledErrorMessage $isVisible={Boolean(errors.body)}>
-          {errors.body?.message}
-        </S.StyledErrorMessage>
+        {errors.body?.message && (
+          <S.StyledErrorMessage $isVisible={true}>
+            {errors.body?.message}
+          </S.StyledErrorMessage>
+        )}
         <S.BottomWrapper>
           <S.StyledCounter
             isOverflown={isOverflown}

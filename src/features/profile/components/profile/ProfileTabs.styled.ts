@@ -1,22 +1,23 @@
 import TabItem from '@/components/general/TabItem';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  gap: 2.5rem;
+  ${tw`flex flex-col`}
 `;
 
-export const StyledTabItem = styled(TabItem)`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+export const StyledTabItem = styled(TabItem)(({ isSelected }) => [
+  tw`pb-2 flex items-center gap-2 text-sm`,
+  isSelected && tw`border-b border-gray-800`,
+]);
 
-  font-size: 0.9rem;
+export const ContentWrapper = styled.div`
+  ${tw`flex justify-start gap-10`}
 `;
 
-export const StyledLink = styled(Link)`
-  color: inherit;
-  text-decoration: none;
+export const ContentPadding = styled.div`
+  ${tw`border-b border-gray-200 relative top-[-1px] z-[-1]`}
 `;
+
+export const StyledLink = styled(Link)``;

@@ -3,100 +3,56 @@ import { Username } from '@/components/styled/Username.styled';
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled(motion.div)`
-  display: grid;
-  grid-template-columns: minmax(50ch, 80ch) minmax(30ch, 40ch);
-  justify-content: center;
-  gap: 4rem;
-
-  min-height: 100%;
+  ${tw`grid grid-cols-[minmax(50ch,80ch) minmax(30ch,40ch)] justify-center gap-16 min-h-full`}
 `;
 
 export const WrapperMain = styled.main`
-  display: grid;
-  grid-template-rows: 13ch 1fr;
-
-  padding: 3rem 0;
-  border-right: 1px solid ${({ theme }) => theme.color.main_border};
+  ${tw`py-12 flex flex-col gap-8`}
 `;
 
 export const StyledMainUserName = styled(Username)`
-  padding: 2rem 1rem;
-  max-width: 100%;
-
-  font-size: 2.5rem;
-  white-space: break-spaces;
-  word-wrap: break-word;
+  ${tw`py-8 max-w-full text-5xl break-words`}
 `;
 
 export const WrapperSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  padding: 2rem 0;
-  margin: 0 2rem;
-  border-top: 1px solid ${({ theme }) => theme.color.main_border_feint};
+  ${tw`flex flex-col gap-4`}
 `;
 
 export const Header = styled.h2`
-  align-self: flex-start;
-
-  font-size: 1.5rem;
-  font-weight: 100;
+  ${tw`self-start text-2xl font-extralight`}
 `;
 
 export const WrapperAside = styled.aside`
-  display: flex;
-  flex-direction: column;
-
-  padding: 3rem 0;
+  ${tw`p-12 flex flex-col border-l border-gray-200`}
 `;
 
 export const ProfileWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  ${tw`flex flex-col gap-3`}
 `;
 
 export const ProfileIcon = styled(AppImage)`
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
+  ${tw`size-24 rounded-full`}
 `;
 
 export const StyledAsideUserName = styled(Username)`
-  max-width: none;
-
-  white-space: break-spaces;
-  word-wrap: break-word;
+  ${tw`break-words`}
 `;
 
 export const FollowCount = styled.span`
-  display: inline-block;
-
-  font-weight: 300;
+  ${tw`font-light`}
 `;
 
 export const SignUpDate = styled.span`
-  display: inline-block;
-
-  font-size: 0.8rem;
-  font-weight: 300;
-  font-style: italic;
+  ${tw`text-sm font-light italic`}
 `;
 
 export const StyledEditLink = styled(NavLink)`
-  color: ${({ theme }) => theme.color.success};
-  font-size: 0.8rem;
-  font-weight: 400;
-  text-decoration: none;
+  ${tw`text-green-700 text-sm`}
 `;
 
 export const UserBio = styled.p`
-  padding: 1rem 0;
-
-  font-size: 0.9rem;
-  font-weight: 300;
+  ${tw`py-4 text-sm font-light`}
 `;
