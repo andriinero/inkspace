@@ -4,126 +4,64 @@ import { Username } from '@/components/styled/Username.styled';
 import { motion } from 'framer-motion';
 import { TextButton } from '@/components/styled/TextButton';
 import { Link } from 'react-router-dom';
+import tw from 'twin.macro';
 
 export const Wrapper = styled(motion.div)`
-  display: grid;
-  grid-template-columns: minmax(50ch, 80ch) minmax(30ch, 40ch);
-  justify-content: center;
-  gap: 4rem;
-
-  min-height: 100%;
+  ${tw`grid grid-cols-[minmax(50ch,80ch)minmax(30ch,40ch)] justify-center gap-16`}
 `;
 
 export const Header = styled.h2`
-  margin-bottom: 3rem;
-
-  font-size: 2rem;
-  font-weight: 500;
-  font-family: ${({ theme }) => theme.font.roboto};
+  ${tw`py-8 text-4xl font-medium`}
 `;
 
 export const WrapperMain = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  padding: 3rem;
-  border-right: 1px solid ${({ theme }) => theme.color.main_border};
+  ${tw`flex flex-col p-12`}
 `;
 
 export const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-
-  padding: 2rem 0;
-
-  border-bottom: 1px solid ${({ theme }) => theme.color.main_border_feint};
-
-  &:last-of-type {
-    border-bottom: none;
-  }
+  ${tw`flex flex-col gap-12 py-8 border-b border-gray-200 last:border-b-0`}
 `;
 
 export const FormGroupWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 2.5rem;
-
-  padding: 0.3 0rem;
-
-  cursor: pointer;
-
-  &:hover {
-    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg)
-      brightness(102%) contrast(82%);
-  }
+  ${tw`flex justify-between gap-10 cursor-pointer`}
 `;
 
 export const FieldTitle = styled.span``;
 
 export const FieldValue = styled.span`
-  font-weight: 300;
+  ${tw`font-light`}
 `;
 
 export const WrapperAside = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  padding: 3rem 0;
+  ${tw`flex flex-col p-12 border-l border-gray-200`}
 `;
 
 export const ProfileWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  ${tw`flex flex-col gap-4`}
 `;
 
 export const ProfileIcon = styled(AppImage)`
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
+  ${tw`size-24 rounded-full`}
 `;
 
 export const StyledUserName = styled(Username)`
-  max-width: none;
-
-  white-space: break-spaces;
-  word-wrap: break-word;
+  ${tw`break-words`}
 `;
 
 export const FollowCount = styled.span`
-  display: inline-block;
-
-  font-weight: 300;
+  ${tw`font-light`}
 `;
 
 export const SignUpDate = styled.span`
-  display: inline-block;
-
-  font-size: 0.8rem;
-  font-weight: 300;
-  font-style: italic;
+  ${tw`text-sm italic font-light`}
 `;
 
 export const DeleteButton = styled(TextButton)`
-  align-self: flex-end;
-
-  margin-top: 2rem;
-
-  color: ${({ theme }) => theme.color.danger};
-  font-weight: 300;
+  ${tw`font-light text-red-800 mt-8 self-end text-base`}
 `;
 
 export const UploadImageButton = styled(TextButton)`
-  align-self: flex-start;
-
-  margin: 0.5rem 0;
-
-  color: ${({ theme }) => theme.color.success};
-  font-weight: 300;
+  ${tw`self-start`}
 `;
 
-export const StyledLink = styled(Link)`
-  color: inherit;
-  text-decoration: none;
-`;
+export const StyledLink = styled(Link)``;

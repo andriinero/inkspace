@@ -14,7 +14,7 @@ export const WrapperMain = styled.main`
 `;
 
 export const StyledMainUserName = styled(Username)`
-  ${tw`py-8 max-w-full text-5xl break-words`}
+  ${tw`py-8 max-w-full text-4xl break-words`}
 `;
 
 export const WrapperSection = styled.section`

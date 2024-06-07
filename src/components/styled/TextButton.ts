@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 import { AppButton } from './AppButton.styled';
+import tw from 'twin.macro';
 
 export const TextButton = styled(AppButton)`
-  border: 1px solid transparent;
-  background-color: transparent;
-
-  color: ${({ theme }) => theme.color.success};
-  font-size: 1rem;
-  text-align: center;
+  ${tw`text-green-700 text-sm`}
 `;
