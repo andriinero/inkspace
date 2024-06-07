@@ -12,10 +12,16 @@ import {
 import { SignUpSchema, TSignUpSchema } from '@/types/formSchemas/SignUpSchema';
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 
-import Dialog from '@/components/general/Dialog';
 import * as S from './SignUpForm.styled';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import { InputLabel } from '@/components/styled/InputLabel';
+import SubmitButton from '@/components/general/SubmitButton';
+import AuthPanel from './AuthPanel.styled';
+import AuthForm from './AuthForm.styled';
+import AuthInput from './AuthInput.styled';
+import AuthConrolsWrapper from './AuthControlsWrapper.styled';
 
-const LoginForm = () => {
+const SignUpFormm = () => {
   const {
     handleSubmit,
     register,
@@ -38,78 +44,70 @@ const LoginForm = () => {
   };
 
   return (
-    <Dialog isModalOpen={isModalOpen} onModalClose={handleCloseModal}>
-      <S.Wrapper>
+    <S.StyledDialog isModalOpen={isModalOpen} onModalClose={handleCloseModal}>
+      <AuthPanel>
         <S.HeaderWrapper>
           <S.Header>Sign up</S.Header>
           <S.SubText>Sign up with your username and password</S.SubText>
         </S.HeaderWrapper>
-        <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
+        <AuthForm onSubmit={handleSubmit(handleFormSubmit)}>
           <S.InputWrapper>
-            <S.StyledInputLabel htmlFor="sign-up-username">
-              Your Username
-            </S.StyledInputLabel>
-            <S.StyledInputText
+            <InputLabel htmlFor="sign-up-username">Your Username</InputLabel>
+            <AuthInput
               {...register('username')}
               id="sign-up-username"
               type="text"
             />
-            <S.StyledErrorMessage $isVisible={Boolean(errors.username)}>
+            <ErrorMessage $isVisible={Boolean(errors.username)}>
               {errors.username?.message}
-            </S.StyledErrorMessage>
+            </ErrorMessage>
           </S.InputWrapper>
           <S.InputWrapper>
-            <S.StyledInputLabel htmlFor="sign-up-email">
-              Your Email
-            </S.StyledInputLabel>
-            <S.StyledInputText
-              {...register('email')}
-              id="sign-up-email"
-              type="email"
-            />
-            <S.StyledErrorMessage $isVisible={Boolean(errors.email)}>
+            <InputLabel htmlFor="sign-up-email">Your Email</InputLabel>
+            <AuthInput {...register('email')} id="sign-up-email" type="email" />
+            <ErrorMessage $isVisible={Boolean(errors.email)}>
               {errors.email?.message}
-            </S.StyledErrorMessage>
+            </ErrorMessage>
           </S.InputWrapper>
           <S.InputWrapper>
-            <S.StyledInputLabel htmlFor="sign-up-password">
-              Password
-            </S.StyledInputLabel>
-            <S.StyledInputText
+            <InputLabel htmlFor="sign-up-password">Password</InputLabel>
+            <AuthInput
               {...register('password')}
               id="sign-up-password"
               type="password"
             />
-            <S.StyledErrorMessage $isVisible={Boolean(errors.password)}>
+            <ErrorMessage $isVisible={Boolean(errors.password)}>
               {errors.password?.message}
-            </S.StyledErrorMessage>
+            </ErrorMessage>
           </S.InputWrapper>
           <S.InputWrapper>
-            <S.StyledInputLabel htmlFor="sign-up-password-confirm">
+            <InputLabel htmlFor="sign-up-password-confirm">
               Confirm Password
-            </S.StyledInputLabel>
-            <S.StyledInputText
+            </InputLabel>
+            <AuthInput
               {...register('confirmPassword')}
               id="sign-up-password-confirm"
               type="password"
             />
-            <S.StyledErrorMessage $isVisible={Boolean(errors.confirmPassword)}>
+            <ErrorMessage $isVisible={Boolean(errors.confirmPassword)}>
               {errors.confirmPassword?.message}
-            </S.StyledErrorMessage>
+            </ErrorMessage>
           </S.InputWrapper>
-          <S.ControlsWrapper>
-            <S.StyledErrorMessage $isVisible={Boolean(error)}>
+          <AuthConrolsWrapper>
+            <ErrorMessage $isVisible={Boolean(error)}>
               {error?.errors![0].msg}
-            </S.StyledErrorMessage>
-            <S.SubmitButton
+            </ErrorMessage>
+            <SubmitButton
               type="submit"
               whileTap={ButtonInteraction.whileTap.animation}
-            />
-          </S.ControlsWrapper>
-        </S.Form>
-      </S.Wrapper>
-    </Dialog>
+            >
+              Sign Up
+            </SubmitButton>
+          </AuthConrolsWrapper>
+        </AuthForm>
+      </AuthPanel>
+    </S.StyledDialog>
   );
 };
 
-export default LoginForm;
+export default SignUpFormm;

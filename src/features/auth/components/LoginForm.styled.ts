@@ -1,72 +1,28 @@
 import styled from 'styled-components';
-import { InputText } from '@/components/styled/InputText';
-import { motion } from 'framer-motion';
-import { ErrorMessage } from '@/components/styled/ErrorMessage';
-import { InputLabel } from '@/components/styled/InputLabel';
-import { FormButton } from '@/components/styled/FormButton';
+import tw from 'twin.macro';
+import Dialog from '@/components/general/Dialog';
+import AuthForm from './AuthForm.styled';
 
-export const LoginWrapper = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
+export const StyledDialog = styled(Dialog)`
+  ${tw`max-w-xl w-full`}
+`;
 
-  position: absolute;
-  z-index: 2;
-
-  padding: 7rem 13rem;
-  border: none;
-  border-radius: 6px;
-  background-color: ${({ theme }) => theme.color.dialog_modal_bg};
-  box-shadow: 0 0 3em rgb(0 0 0 / 0.3);
-  text-align: center;
-
-  color: ${({ theme }) => theme.color.text_primary};
+export const StyledAuthForm = styled(AuthForm)`
+  ${tw`gap-16`}
 `;
 
 export const HeaderWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  ${tw`flex flex-col gap-6`}
 `;
 
 export const Header = styled.h2`
-  font-size: 2rem;
-  font-weight: 200;
-  font-family: ${({ theme }) => theme.font.times};
+  ${tw`text-2xl font-light font-serif`}
 `;
 
 export const SubText = styled.p`
-  font-weight: 300;
-`;
-
-export const LoginForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  ${tw`font-light`}
 `;
 
 export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  ${tw`flex flex-col gap-2`}
 `;
-
-export const StyledInputLabel = styled(InputLabel)``;
-
-export const StyledInputText = styled(InputText)`
-  margin: 0 1.2rem;
-`;
-
-export const StyledErrorMessage = styled(ErrorMessage)``;
-
-export const ControlsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-export const SubmitButton = styled(FormButton)`
-  margin: 0 3rem;
-`;
-
-export const CloseButton = styled(FormButton)``;

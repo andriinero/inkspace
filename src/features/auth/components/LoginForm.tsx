@@ -14,8 +14,13 @@ import { addNotification } from '@/features/pushNotification/pushNotificationSli
 import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
-import Dialog from '@/components/general/Dialog';
 import * as S from './LoginForm.styled';
+import AuthPanel from './AuthPanel.styled';
+import { InputLabel } from '@/components/styled/InputLabel';
+import AuthInput from './AuthInput.styled';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import AuthControlsWrapper from './AuthControlsWrapper.styled';
+import SubmitButton from '@/components/general/SubmitButton';
 
 const LoginForm = () => {
   const {
@@ -52,52 +57,46 @@ const LoginForm = () => {
   const isSubmitDisabled = isSubmitting;
 
   return (
-    <Dialog isModalOpen={isModalOpen} onModalClose={handleCloseModal}>
-      <S.LoginWrapper>
+    <S.StyledDialog isModalOpen={isModalOpen} onModalClose={handleCloseModal}>
+      <AuthPanel>
         <S.HeaderWrapper>
           <S.Header>Welcome Back</S.Header>
           <S.SubText>Sign in with your username and password</S.SubText>
         </S.HeaderWrapper>
-        <S.LoginForm onSubmit={handleSubmit(handleFormSubmit)}>
+        <S.StyledAuthForm onSubmit={handleSubmit(handleFormSubmit)}>
           <S.InputWrapper>
-            <S.StyledInputLabel htmlFor="login-username">
-              Your username
-            </S.StyledInputLabel>
-            <S.StyledInputText
+            <InputLabel htmlFor="login-username">Your username</InputLabel>
+            <AuthInput
               {...register('username', { required: 'Username is required' })}
               id="login-username"
               type="text"
             />
-            <S.StyledErrorMessage $isVisible={Boolean(errors.username)}>
+            <ErrorMessage $isVisible={Boolean(errors.username)}>
               {errors.username?.message}
-            </S.StyledErrorMessage>
+            </ErrorMessage>
           </S.InputWrapper>
           <S.InputWrapper>
-            <S.StyledInputLabel htmlFor="login-password">
-              Password
-            </S.StyledInputLabel>
-            <S.StyledInputText
+            <InputLabel htmlFor="login-password">Password</InputLabel>
+            <AuthInput
               {...register('password', { required: 'Password is required' })}
               id="login-password"
               type="password"
             />
-            <S.StyledErrorMessage $isVisible={Boolean(errors.password)}>
+            <ErrorMessage $isVisible={Boolean(errors.password)}>
               {errors.password?.message}
-            </S.StyledErrorMessage>
+            </ErrorMessage>
           </S.InputWrapper>
-          <S.ControlsWrapper>
-            <S.StyledErrorMessage $isVisible={Boolean(error)}>
+          <AuthControlsWrapper>
+            <ErrorMessage $isVisible={Boolean(error)}>
               {error?.message}
-            </S.StyledErrorMessage>
-            <S.SubmitButton
-              disabled={isSubmitDisabled}
-              type="submit"
-              value="Log In"
-            />
-          </S.ControlsWrapper>
-        </S.LoginForm>
-      </S.LoginWrapper>
-    </Dialog>
+            </ErrorMessage>
+            <SubmitButton disabled={isSubmitDisabled} type="submit">
+              Log In
+            </SubmitButton>
+          </AuthControlsWrapper>
+        </S.StyledAuthForm>
+      </AuthPanel>
+    </S.StyledDialog>
   );
 };
 

@@ -130,21 +130,15 @@ const Header = () => {
             </>
           ) : (
             <S.ControlsWrapper>
-              <S.HeaderButton
-                onClick={handleSignUpClick}
-                type="button"
-                value="Sign Up"
-              />
-              <S.HeaderButton
-                onClick={handleLoginClick}
-                type="button"
-                value="Login"
-              />
-              <S.HeaderButton
-                onClick={handleTestUserLogin}
-                type="button"
-                value="Log In As Test User"
-              />
+              <S.HeaderButton onClick={handleSignUpClick} type="button">
+                Sign Up
+              </S.HeaderButton>
+              <S.HeaderButton onClick={handleLoginClick} type="button">
+                Login
+              </S.HeaderButton>
+              <S.HeaderButton onClick={handleTestUserLogin} type="button">
+                Test User
+              </S.HeaderButton>
             </S.ControlsWrapper>
           )}
         </S.ProfileWrapper>

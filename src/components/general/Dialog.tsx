@@ -32,8 +32,8 @@ const Dialog = ({
           transition={{ duration: 0.2 }}
           exit={FadeIn.hidden}
         >
-          <ContentWrapper>{children}</ContentWrapper>
-          <Backdrop className={className} onClick={onModalClose}></Backdrop>
+          <ContentWrapper className={className}>{children}</ContentWrapper>
+          <Backdrop onClick={onModalClose}></Backdrop>
         </Wrapper>
       )}
     </AnimatePresence>

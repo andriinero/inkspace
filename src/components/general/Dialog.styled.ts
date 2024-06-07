@@ -7,7 +7,7 @@ export const Wrapper = styled(motion.div)`
 `;
 
 export const ContentWrapper = styled.div`
-  ${tw`z-30`}
+  ${tw`flex justify-center items-center z-30`}
 `;
 
 export const Backdrop = styled(Wrapper)`
