@@ -57,7 +57,7 @@ export const SignUpDate = styled.span`
 `;
 
 export const DeleteButton = styled(TextButton)`
-  ${tw`font-light text-red-800 mt-8 self-end text-base`}
+  ${tw`text-red-800 mt-8 self-end text-base`}
 `;
 
 export const UploadImageButton = styled(TextButton)`

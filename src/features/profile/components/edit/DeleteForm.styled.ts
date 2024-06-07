@@ -1,38 +1,23 @@
 import InputDescription from '@/components/general/InputDesciption';
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
+  ${tw`flex flex-col justify-center items-center gap-4`}
 `;
 
 export const Header = styled.h3`
-  margin-bottom: 0.8rem;
+  ${tw`mb-2`}
 `;
 
 export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-
-  width: 100%;
+  ${tw`flex flex-col justify-center items-center gap-4 w-full`}
 `;
 
 export const InputDescriptionDanger = styled(InputDescription)`
-  align-self: flex-start;
-
-  color: ${({ theme }) => theme.color.danger};
-  font-size: 0.9rem;
-  font-weight: 300;
+  ${tw`self-start text-sm text-red-800`}
 `;
 
 export const ControlsWrapper = styled.div`
-  display: flex;
-  align-self: flex-end;
-  gap: 1rem;
+  ${tw`flex self-end gap-4`}
 `;

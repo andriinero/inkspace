@@ -8,8 +8,16 @@ type SubmitButtonProps = {
   children?: ReactNode;
 } & HTMLMotionProps<'button'>;
 
-const SubmitButton = ({ className, children }: SubmitButtonProps) => {
-  return <Button className={className}>{children}</Button>;
+const SubmitButton = ({
+  className,
+  children,
+  ...otherProps
+}: SubmitButtonProps) => {
+  return (
+    <Button className={className} {...otherProps}>
+      {children}
+    </Button>
+  );
 };
 
 export default SubmitButton;

@@ -91,7 +91,9 @@ const EmailForm = () => {
           </ErrorMessage>
         </S.InputWrapper>
         <S.ControlsWrapper>
-          <CancelButton onClick={handleModalClose}>Cancel</CancelButton>
+          <CancelButton onClick={handleModalClose} type="button">
+            Cancel
+          </CancelButton>
           <SubmitButton disabled={isSubmitDisabled} type="submit">
             Save
           </SubmitButton>

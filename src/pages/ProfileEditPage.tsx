@@ -76,11 +76,9 @@ const ProfileEditPage = () => {
         </S.ContentWrapper>
         <S.ContentWrapper>
           <S.StyledLink onClick={handleModalOpen} to="/profile/edit/delete">
-            <S.DeleteButton
-              onClick={handleModalOpen}
-              type="button"
-              value="Delete account"
-            />
+            <S.DeleteButton onClick={handleModalOpen}>
+              Delete Account
+            </S.DeleteButton>
           </S.StyledLink>
         </S.ContentWrapper>
       </S.WrapperMain>
@@ -93,7 +91,7 @@ const ProfileEditPage = () => {
           />
           <S.StyledUserName>{profileData?.username}</S.StyledUserName>
           <S.StyledLink to="/profile/edit/image">
-            <S.UploadImageButton onClick={handleModalOpen}>
+            <S.UploadImageButton onClick={handleModalOpen} type="button">
               Upload Image
             </S.UploadImageButton>
           </S.StyledLink>
