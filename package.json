@@ -32,6 +32,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@reduxjs/toolkit": "^2.0.1",
     "@tinymce/tinymce-react": "^5.0.1",
+    "tinymce": "^7.0.0",
     "@types/luxon": "^3.4.2",
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
