@@ -1,26 +1,18 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  min-height: 100dvh;
-  background-color: ${({ theme }) => theme.color.main_bg_primary};
+  ${tw`flex justify-center items-center min-h-dvh`}
 `;
 
 export const MessageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1.5rem;
+  ${tw`flex flex-col justify-center gap-6`}
 `;
 
 export const ErrorHeader = styled.h1`
-  font-size: 3rem;
+  ${tw`text-4xl font-medium`}
 `;
 
 export const ErrorMessage = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 300;
+  ${tw`text-lg font-light`}
 `;

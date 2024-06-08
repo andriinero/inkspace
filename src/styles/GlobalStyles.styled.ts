@@ -1,42 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
+import tw from 'twin.macro';
 
 const GlobalStyles = createGlobalStyle`
   * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    
     font-family: ${({ theme }) => theme.font.roboto};
-    overflow-wrap: anywhere;
+    ${tw`box-border m-0 p-0`}
   }
 
   html {
-    width: 100%;
     overflow: -moz-scrollbars-vertical; 
-    overflow-y: scroll;
+    ${tw`overflow-y-scroll w-full`}
   }
-  
-  // *::-webkit-scrollbar {
-  //   width: 16px;
-  // }
-  //
-  // *::-webkit-scrollbar-thumb {
-  //   background-color: ${({ theme }) => theme.color.scrollbar_bg_thumb};    
-  //
-  //   transition: color 200ms;
-  //
-  //   &:hover {
-  //     background-color: ${({ theme }) => theme.color.scrollbar_bg_thumb_hover};
-  //   }
-  // }
-  //
-  // *::-webkit-scrollbar-track {
-  //   background-color: ${({ theme }) => theme.color.scrollbar_bg_track};    
-  // }
-  //
-  // body {
-  //   color: ${({ theme }) => theme.color.text_primary};
-  // }
 `;
 
 export default GlobalStyles;

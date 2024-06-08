@@ -1,15 +1,11 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
   grid-area: main;
-  display: grid;
-  grid-template-columns: minmax(50ch, 90ch) minmax(30ch, 40ch);
-  justify-content: center;
-  gap: 4rem;
-
-  min-height: 100%;
+  ${tw`grid grid-cols-[minmax(50ch,90ch)minmax(30ch,40ch)] justify-center gap-16 min-h-full`}
 `;
 
 export const MainWrapper = styled.div`
-  padding: 3rem;
+  ${tw`p-12`}
 `;

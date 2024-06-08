@@ -1,14 +1,11 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
-  display: grid;
-  grid-template-rows: auto 1fr auto;
   grid-template-areas: 'header' 'main' 'footer';
-
-  min-height: 100dvh;
+  ${tw`grid grid-rows-[auto,1fr,auto] min-h-dvh`}
 `;
 
 export const WrapperMain = styled.main`
-  display: flex;
-  justify-content: center;
+  ${tw`flex justify-center`}
 `;

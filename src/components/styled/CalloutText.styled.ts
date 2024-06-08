@@ -1,19 +1,12 @@
 import { FadeInSlide } from '@/styles/animations/FadeInSlide';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const CalloutText = styled(motion.h2).attrs(() => ({
   initial: FadeInSlide.hidden,
   animate: FadeInSlide.visible,
   transition: FadeInSlide.transition,
 }))`
-  display: inline-block;
-  align-self: center;
-
-  margin-top: 8rem;
-
-  font-size: 1.4rem;
-  font-weight: 200;
-  font-style: italic;
-  letter-spacing: 0.1rem;
+  ${tw`self-center mt-64 text-xl font-extralight italic tracking-wider`}
 `;
