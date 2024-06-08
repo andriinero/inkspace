@@ -2,12 +2,9 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  ${tw`flex flex-col gap-4`}
 `;
 
 export const Item = styled.div`
-  min-height: 12ch;
-  ${tw`bg-gray-50 animate-pulse`}
+  ${tw`bg-gray-50 animate-pulse min-h-[12ch]`}
 `;
