@@ -10,53 +10,34 @@ import tw from 'twin.macro';
 import { MenuItem, MenuItemDanger, MenuItemSuccess } from '../styled/MenuItem';
 import PostTopic from './PostTopic';
 
-export const Wrapper = styled(motion.li)(() => [
-  `
-  display: grid;
-  grid-template-columns: 1fr minmax(64px, 128px);
-  grid-template-rows: auto auto;
+export const Wrapper = styled(motion.li)`
   grid-template-areas: 'head head' 'body preview';
-  row-gap: 0.7rem;
-  column-gap: 4rem;
-`,
-  tw`border-b border-gray-200 py-8 last:border-none text-gray-800`,
-]);
+  ${tw`border-b border-gray-200 py-8 last:border-none text-gray-800 grid grid-cols-[1fr,minmax(4rem,8rem)] grid-rows-[auto,auto] gap-y-3 gap-x-16`}
+`;
 
 export const StyledLink = styled(NavLink)`
-  display: flex;
-  align-items: center;
-  color: inherit;
-  text-decoration: none;
+  ${tw`flex items-center`}
 `;
 
 // #region PostBody
 
 export const Body = styled.div`
   grid-area: body;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+  ${tw`flex flex-col gap-2`}
 `;
 
-export const StyledTitle = tw(Title)`mb-2 text-xl font-bold`;
+export const StyledTitle = styled(Title)`
+  ${tw`mb-2 text-xl font-bold`}
+`;
 
 export const BodyText = styled.div`
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-
-  overflow: hidden;
-
-  font-family: 'Times New Roman', Times, serif;
-  line-height: 1.5rem;
-  text-overflow: ellipsis;
-
   & * {
     color: inherit;
     font-size: inherit;
     font-weight: inherit;
     font-family: inherit;
   }
+  ${tw`line-clamp-3 overflow-hidden font-serif leading-6 text-ellipsis`}
 `;
 
 // #endregion
@@ -65,11 +46,7 @@ export const BodyText = styled.div`
 
 export const PreviewImage = styled(AppImage)`
   grid-area: preview;
-  width: 128px;
-  height: 128px;
-  object-fit: cover;
-
-  -webkit-user-drag: none;
+  ${tw`size-32 object-cover select-none`}
 `;
 
 // #endregion
@@ -77,35 +54,29 @@ export const PreviewImage = styled(AppImage)`
 // #region PostBottom
 
 export const Bottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  ${tw`flex justify-between items-center`}
 `;
 
 export const MiscContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  ${tw`flex items-center gap-4`}
 `;
 
 export const Topic = styled(PostTopic)``;
 
 export const PostReadEstimate = styled(PostReadTime)`
-  font-size: 0.75rem;
-  font-weight: 300;
+  ${tw`text-sm font-light`}
 `;
 
 export const Controls = styled.div`
-  display: flex;
-  gap: 1rem;
+  ${tw`flex gap-4`}
 `;
 
 export const StyledBookmark = styled(Bookmark)`
-  width: 20px;
+  ${tw`w-5`}
 `;
 
 export const StyledDotMenu = styled(DotMenu)`
-  width: 20px;
+  ${tw`w-5`}
 `;
 
 export const StyledMenuItem = styled(MenuItem)``;
@@ -113,8 +84,7 @@ export const StyledMenuItem = styled(MenuItem)``;
 export const StyledMenuItemSuccess = styled(MenuItemSuccess)``;
 
 export const StyledMenuItemDanger = styled(MenuItemDanger)`
-  display: flex;
-  justify-content: flex-end;
+  ${tw`flex justify-end`}
 `;
 
 // #endregion

@@ -16,6 +16,7 @@ import { deletePost } from '@/features/postList/postListSlice';
 import Dialog from './Dialog';
 import DeleteConfirmFormForm from './DeleteConfirmForm';
 import { useState } from 'react';
+import { DestructiveButton } from './DestructiveButton.styled';
 
 const GeneralPostItem = ({
   _id,
@@ -78,16 +79,16 @@ const GeneralPostItem = ({
           </S.StyledLink>
           {isAuthor && (
             <S.ControlsWrapper>
-              <S.EditButton
-                onClick={handleEnterEditMode}
-                value="Edit Post"
-                type="button"
-              />
-              <S.DeleteButton
+              <S.EditButton onClick={handleEnterEditMode} type="button">
+                Edit Post
+              </S.EditButton>
+              <DestructiveButton
                 onClick={handleOpenDeleteModal}
                 value="Delete Post"
                 type="button"
-              />
+              >
+                Delete Post
+              </DestructiveButton>
             </S.ControlsWrapper>
           )}
         </S.MiscWrapper>

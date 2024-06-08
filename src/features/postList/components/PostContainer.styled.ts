@@ -1,42 +1,19 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  padding: 1rem 0;
+  ${tw`flex flex-col py-4`}
 `;
 
 export const Header = styled.h1`
-  display: flex;
-  align-items: center;
-  align-self: flex-end;
-  gap: 1rem;
-
-  padding-top: 2rem;
-
-  font-size: 1.5rem;
-  font-weight: 100;
+  ${tw`flex items-center self-end gap-4 pt-8 text-2xl font-extralight`}
 `;
 
 export const PostList = styled(motion.ul)`
-  display: flex;
-  flex-direction: column;
-
-  padding: 1rem 0;
+  ${tw`flex flex-col py-4`}
 `;
 
 export const StyledIcon = styled.img`
-  width: 16px;
-
-  fill: #fff;
-  transition: filter 100ms;
-
-  cursor: pointer;
-
-  &:hover {
-    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg)
-      brightness(102%) contrast(82%);
-  }
+  ${tw`cursor-pointer transition w-4`}
 `;

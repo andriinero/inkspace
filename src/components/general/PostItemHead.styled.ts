@@ -3,37 +3,23 @@ import AppImage from '@/features/appImages/components/AppImage';
 import { NavLink } from 'react-router-dom';
 import { Username } from '../styled/Username.styled';
 import TimeAgo from './TimeAgo';
+import tw from 'twin.macro';
 
 export const StyledLink = styled(NavLink)`
-  display: flex;
-  align-items: center;
-
-  color: inherit;
-  text-decoration: none;
+  ${tw`flex items-center`}
 `;
 
 export const Head = styled.div`
   grid-area: head;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-
-  font-weight: 300;
-  font-size: 0.9rem;
+  ${tw`flex items-center gap-2 text-sm font-light`}
 `;
 
 export const AuthorIcon = styled(AppImage)`
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-
-  -webkit-user-drag: none;
+  ${tw`size-6 rounded-full select-none`}
 `;
 
 export const StyledUsername = styled(Username)``;
 
 export const StyledPostDate = styled(TimeAgo)``;
 
-export const Divider = styled.span`
-  font-size: 0.9rem;
-`;
+export const Divider = styled.span``;

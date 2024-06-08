@@ -6,20 +6,13 @@ import { HollowButton } from '@/components/styled/HollowButton';
 import tw from 'twin.macro';
 
 export const WrapperItem = styled(motion.li)`
-  display: grid;
-  grid-template-columns: auto minmax(100px, 300px) auto;
-  justify-content: space-between;
-  gap: 1.1rem;
+  ${tw`grid grid-cols-[auto,minmax(100px,300px),auto] justify-between gap-5`}
 `;
 
-export const StyledLink = styled(NavLink)`
-  color: inherit;
-  text-decoration: none;
-`;
+export const StyledLink = styled(NavLink)``;
 
 export const BioContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${tw`flex flex-col`}
 `;
 
 export const BioContent = styled.p`
@@ -27,13 +20,7 @@ export const BioContent = styled.p`
 `;
 
 export const AuthorIcon = styled(AppImage)`
-  align-self: flex-start;
-
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-
-  -webkit-user-drag: none;
+  ${tw`self-start size-8 rounded-full select-none`}
 `;
 
 export const StyledHollowButton = styled(HollowButton)`

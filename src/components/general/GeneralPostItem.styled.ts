@@ -4,68 +4,36 @@ import { motion } from 'framer-motion';
 import AppImage from '@/features/appImages/components/AppImage';
 import PostTopic from './PostTopic';
 import { TextButton } from '../styled/TextButton';
+import tw from 'twin.macro';
 
 export const WrapperItem = styled(motion.li)`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  padding: 1rem;
-  border-radius: 6px;
-  border-bottom: 1px solid ${({ theme }) => theme.color.main_border_feint};
-
-  &:last-child {
-    border-bottom: 1px solid transparent;
-  }
+  ${tw`flex flex-col gap-4 p-4 rounded border-b border-gray-200 last:border-none`}
 `;
 
 export const ContentWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 4rem;
+  ${tw`flex justify-between gap-16`}
 `;
 
 export const Header = styled.h2``;
 
 export const InfoWrapper = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-direction: column;
-  gap: 0.7rem;
-
-  padding: 1rem;
+  ${tw`p-4 flex flex-col justify-between items-center gap-3`}
 `;
 
 export const StyledPostTopic = styled(PostTopic)``;
 
-export const StyledLink = styled(NavLink)`
-  color: inherit;
-  text-decoration: none;
-`;
+export const StyledLink = styled(NavLink)``;
 
 export const MiscWrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-  flex-direction: column;
-  gap: 1rem;
+  ${tw`flex flex-col items-center gap-4`}
 `;
 
 export const PreviewImage = styled(AppImage)`
-  width: 128px;
-  height: 78px;
-  border-radius: 6px;
-  object-fit: cover;
+  ${tw`size-32 rounded object-cover`}
 `;
 
 export const ControlsWrapper = styled.div`
-  display: flex;
-  align-self: flex-end;
-  gap: 2rem;
+  ${tw`flex self-end gap-8`}
 `;
 
 export const EditButton = styled(TextButton)``;
-
-export const DeleteButton = styled(TextButton)`
-  color: ${({ theme }) => theme.color.danger};
-`;

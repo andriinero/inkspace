@@ -4,40 +4,28 @@ import { NavLink } from 'react-router-dom';
 import { Username } from '@/components/styled/Username.styled';
 import AppImage from '@/features/appImages/components/AppImage';
 import { TextButton } from '@/components/styled/TextButton';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
-  align-self: flex-start;
-  display: grid;
-  grid-template-columns: auto auto;
   grid-template-areas:
     'icon main'
     'icon misc';
-  column-gap: 1rem;
+  ${tw`self-start grid grid-cols-[auto,auto] gap-x-4`}
 `;
 
-export const StyledLink = styled(NavLink)`
-  color: inherit;
-  text-decoration: none;
-`;
+export const StyledLink = styled(NavLink)``;
 
 export const AuthorStyledLink = styled(StyledLink)`
   grid-area: icon;
-  display: flex;
-  align-items: center;
+  ${tw`flex items-center`}
 `;
 
 export const HeaderStyledLink = styled(StyledLink)`
-  display: flex;
-  align-items: center;
+  ${tw`flex items-center`}
 `;
 
 export const InfoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-
-  font-size: 0.9rem;
-  font-weight: 300;
+  ${tw`flex items-center gap-2 text-sm font-light`}
 `;
 
 export const MainContainer = styled(InfoContainer)`
@@ -48,24 +36,20 @@ export const MiscContainer = styled(InfoContainer)`
   grid-area: misc;
 `;
 
-export const Divider = styled.span`
-  font-size: 0.9rem;
-`;
+export const Divider = styled.span``;
 
 export const ProfileIcon = styled(AppImage)`
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
+  ${tw`size-12 rounded-full`}
 `;
 
 export const Name = styled(Username)`
-  font-size: 0.9rem;
+  ${tw`text-sm`}
 `;
 
 export const TopicInfo = styled.span``;
 
 export const TopicName = styled.strong`
-  cursor: pointer;
+  ${tw`cursor-pointer`}
 `;
 
 export const PostReadEstimate = styled(PostReadTime)``;
