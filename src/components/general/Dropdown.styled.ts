@@ -1,31 +1,20 @@
 import styled from 'styled-components';
 import tw from 'twin.macro';
 
-export const Wrapper = styled.ul<{ $isOpen: boolean; $isAlignedLeft: boolean }>`
-  display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
-  position: absolute;
-
-  margin-top: 25px;
-  margin-left: ${({ $isAlignedLeft }) => ($isAlignedLeft ? '-95px' : '25px')};
-  border-radius: 6px;
-
-  transform: ${({ $isOpen }) =>
-    $isOpen ? 'translateY(0)' : 'translateY(-10px)'};
-  opacity: 1;
-  transition:
-    transform 200ms,
-    opacity 200ms;
-
-  @starting-style {
-    transform: translateY(-10px);
-    opacity: 0.1;
-  }
-  ${tw`p-3 bg-white border rounded-md shadow-sm`}
-`;
+export const Wrapper = styled.ul<{ $isOpen: boolean; $isAlignedLeft: boolean }>(
+  ({ $isOpen, $isAlignedLeft }) => [
+    `
+      @starting-style {
+        transform: translateY(-10px);
+        opacity: 0.1;
+      }
+    `,
+    tw`mt-6 ml-[25px] hidden absolute p-3 bg-white border rounded-md shadow-sm opacity-100 transition duration-150`,
+    $isOpen && tw`block translate-y-0.5`,
+    $isAlignedLeft && tw`ml-[-95px]`,
+  ],
+);
 
 export const List = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
+  ${tw`flex flex-col justify-center gap-4`}
 `;
