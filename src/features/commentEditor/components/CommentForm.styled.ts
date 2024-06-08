@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import ShakeOnOverflow from '../../../components/general/ShakeOnOverflow';
-import { FormButton } from '@/components/styled/FormButton';
-import { ErrorMessage } from '@/components/styled/ErrorMessage';
 import tw from 'twin.macro';
 
 export const Form = styled.form`
@@ -26,14 +24,6 @@ export const ControlsWrapper = styled.div`
   ${tw`flex gap-4`}
 `;
 
-export const SubmitActionButton = styled(FormButton)``;
-
-export const CancelActionButton = styled(FormButton)`
-  ${tw`bg-transparent text-gray-800`}
-`;
-
 export const StyledCounter = styled(ShakeOnOverflow)`
   ${tw`min-w-[7ch] font-light text-right`}
 `;
-
-export const StyledErrorMessage = styled(ErrorMessage)``;

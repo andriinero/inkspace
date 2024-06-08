@@ -21,6 +21,9 @@ import {
 
 import * as S from './CommentForm.styled';
 import CommentTextarea from './CommentTextarea';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import CancelButton from '@/components/general/CancelButton';
+import SubmitButton from '@/components/general/SubmitButton';
 
 const CommentFormSchema = z.object({
   body: z
@@ -112,9 +115,7 @@ const CommentForm = () => {
           }}
         />
         {errors.body?.message && (
-          <S.StyledErrorMessage $isVisible={true}>
-            {errors.body?.message}
-          </S.StyledErrorMessage>
+          <ErrorMessage $isVisible={true}>{errors.body?.message}</ErrorMessage>
         )}
         <S.BottomWrapper>
           <S.StyledCounter
@@ -127,17 +128,13 @@ const CommentForm = () => {
           </S.StyledCounter>
           <S.ControlsWrapper>
             {isEditMode && (
-              <S.CancelActionButton
-                onClick={handleEditCancelClick}
-                type="button"
-                value="Cancel"
-              />
+              <CancelButton onClick={handleEditCancelClick} type="button">
+                Cancel
+              </CancelButton>
             )}
-            <S.SubmitActionButton
-              disabled={isSubmitDisabled}
-              type="submit"
-              value={isEditMode ? 'Update' : 'Respond'}
-            />
+            <SubmitButton disabled={isSubmitDisabled} type="submit">
+              {isEditMode ? 'Update' : 'Respond'}
+            </SubmitButton>
           </S.ControlsWrapper>
         </S.BottomWrapper>
       </S.Form>
