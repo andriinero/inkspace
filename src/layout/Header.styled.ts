@@ -9,103 +9,47 @@ import tw from 'twin.macro';
 
 export const Wrapper = styled.header`
   grid-area: header;
-
-  position: sticky;
-  top: 0;
-  z-index: 20;
+  ${tw`sticky z-20 top-0`}
 `;
 
 export const ContentWrapper = styled.div(() => [
-  `
-  grid-area: header;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  position: relative;
-  z-index: 1;
-`,
-  tw`border-b border-gray-200 py-3 px-6 bg-white`,
+  tw`flex justify-between items-center border-b border-gray-200 py-3 px-6 bg-white z-10 relative`,
 ]);
 
 export const StyledLink = styled(Link)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  color: inherit;
-  text-decoration: none;
+  ${tw`flex justify-center items-center`}
 `;
 
 export const Logo = styled(motion.img)`
-  height: 22px;
-  margin: 0.35rem 0;
-
-  user-select: none;
-  -webkit-user-drag: none;
-  cursor: pointer;
-
-  transition: color 200ms;
-
-  &:hover {
-    filter: invert(0) sepia(0) saturate(0%) hue-rotate(198deg) brightness(101%)
-      contrast(124%);
-  }
+  ${tw`transition-colors duration-150 cursor-pointer select-none h-5 my-1`}
 `;
 
 export const ProfileWrapper = styled.div`
-  display: flex;
-  gap: 2rem;
+  ${tw`flex gap-8`}
 `;
 
 export const NewPostButton = styled.div`
-  display: flex;
-  align-items: center;
-
-  transition: filter 100ms;
-
-  cursor: pointer;
-  user-select: none;
-
-  &:hover {
-    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg)
-      brightness(102%) contrast(82%);
-  }
+  ${tw`flex items-center cursor-pointer select-none hover:text-gray-800 transition`}
 `;
 
 export const NewPostButtonText = styled.span`
-  margin-left: 0.5rem;
-
-  font-size: 0.9rem;
-  font-weight: 300;
+  ${tw`ml-2 text-sm font-light`}
 `;
 
 export const ProfileIcon = styled(AppImage)`
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-
-  cursor: pointer;
-  -webkit-user-drag: none;
+  ${tw`size-8 rounded-full select-none cursor-pointer`}
 `;
 
 export const StyledDropdown = styled(Dropdown)`
-  margin-left: 0;
-  margin-top: 45px;
+  ${tw`mt-12 ml-0`}
 `;
 
 export const StyledMenuItem = styled(MenuItem)`
-  justify-content: flex-start;
-
-  &:hover {
-    filter: invert(75%) sepia(0%) saturate(303%) hue-rotate(333deg)
-      brightness(102%) contrast(82%);
-  }
+  ${tw`justify-start`}
 `;
 
 export const ControlsWrapper = styled.div`
-  display: flex;
-  gap: 1.3rem;
+  ${tw`flex gap-5`}
 `;
 
-export const HeaderButton = styled(GreenButton)``;
+export const StyledGreenButton = styled(GreenButton)``;

@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import useCloseDropdown from '@/hooks/useCloseDropdown';
-import useTestUserLogin from '@/features/auth/hooks/useTestUserLogin';
 
 import { selectProfileImageId } from '@/features/profile/profileSlice';
 import { clearTopic } from '@/features/postList/postListSlice';
@@ -34,8 +33,6 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const handleTestUserLogin = useTestUserLogin();
 
   const handleOpenMenu = (): void => {
     setIsMenuOpen(true);
@@ -130,15 +127,12 @@ const Header = () => {
             </>
           ) : (
             <S.ControlsWrapper>
-              <S.HeaderButton onClick={handleSignUpClick} type="button">
+              <S.StyledGreenButton onClick={handleSignUpClick} type="button">
                 Sign Up
-              </S.HeaderButton>
-              <S.HeaderButton onClick={handleLoginClick} type="button">
+              </S.StyledGreenButton>
+              <S.StyledGreenButton onClick={handleLoginClick} type="button">
                 Login
-              </S.HeaderButton>
-              <S.HeaderButton onClick={handleTestUserLogin} type="button">
-                Test User
-              </S.HeaderButton>
+              </S.StyledGreenButton>
             </S.ControlsWrapper>
           )}
         </S.ProfileWrapper>
