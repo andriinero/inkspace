@@ -1,27 +1,18 @@
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  ${tw`flex flex-col gap-6`}
 `;
 
-export const StyledLink = styled(NavLink)`
-  color: inherit;
-  text-decoration: none;
-`;
+export const StyledLink = styled(NavLink)``;
 
 export const BookmarkList = styled(motion.ul)`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-
-  list-style: none;
+  ${tw`flex flex-col gap-8 list-none`}
 `;
 
 export const CalloutText = styled.h4`
-  font-style: italic;
-  font-weight: 200;
+  ${tw`italic font-light`}
 `;

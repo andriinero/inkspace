@@ -7,50 +7,31 @@ import AppImage from '@/features/appImages/components/AppImage';
 import tw from 'twin.macro';
 
 export const WrapperItem = styled(motion.li)`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  ${tw`flex flex-col gap-2`}
 `;
 
 export const Header = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  ${tw`flex items-center gap-2`}
 `;
 
 export const StyledLink = styled(NavLink)`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  color: inherit;
-  text-decoration: none;
+  ${tw`flex items-center gap-2`}
 `;
 
 export const AuthorIcon = styled(AppImage)`
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
+  ${tw`size-6 rounded-full`}
 `;
 
 export const AuthorName = styled(Username)`
-  font-size: 0.8rem;
+  ${tw`text-sm`}
 `;
 
 export const TopicWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  font-size: 0.8rem;
-  font-weight: 300;
+  ${tw`flex items-center gap-2 text-sm font-light`}
 `;
 
 export const TopicName = styled.span`
-  font-size: 0.9rem;
-  font-weight: 500;
-
-  cursor: pointer;
+  ${tw`text-sm font-medium cursor-pointer`}
 `;
 
 export const PostTitle = styled(Title)`

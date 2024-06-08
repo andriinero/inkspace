@@ -1,20 +1,13 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  ${tw`flex flex-col gap-6`}
 `;
 
-export const Header = styled.h3`
-  font-size: 1rem;
-`;
+export const Header = styled.h3``;
 
 export const AuthorList = styled(motion.ul)`
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-
-  list-style: none;
+  ${tw`flex flex-col gap-6 list-none`}
 `;

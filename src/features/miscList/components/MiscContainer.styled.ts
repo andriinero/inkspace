@@ -1,13 +1,6 @@
 import styled from 'styled-components';
 import tw from 'twin.macro';
 
-export const Wrapper = styled.div(() => [
-  `
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-
-  padding: 3rem 2rem;
-`,
-  tw`border-l border-gray-200`,
-]);
+export const Wrapper = styled.div`
+  ${tw`flex flex-col gap-12 py-12 px-8 border-l border-gray-200`}
+`;

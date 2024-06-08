@@ -7,32 +7,23 @@ import AppImage from '@/features/appImages/components/AppImage';
 import tw from 'twin.macro';
 
 export const WrapperItem = styled(motion.li)`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  ${tw`flex flex-col gap-2`}
 `;
 
 export const Header = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  ${tw`flex items-center gap-2`}
 `;
 
 export const StyledLink = styled(NavLink)`
-  margin-top: auto;
-
-  color: inherit;
-  text-decoration: none;
+  ${tw`mt-auto`}
 `;
 
 export const AuthorIcon = styled(AppImage)`
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
+  ${tw`size-6 rounded-full`}
 `;
 
 export const AuthorName = styled(Username)`
-  font-size: 0.8rem;
+  ${tw`text-sm`}
 `;
 
 export const BookmarkTitle = styled(Title)`
@@ -40,14 +31,7 @@ export const BookmarkTitle = styled(Title)`
 `;
 
 export const MiscInfo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-
-  font-size: 0.8rem;
-  font-weight: 300;
+  ${tw`flex items-center gap-1 text-sm font-light`}
 `;
 
-export const Divider = styled.span`
-  font-size: 1rem;
-`;
+export const Divider = styled.span``;
