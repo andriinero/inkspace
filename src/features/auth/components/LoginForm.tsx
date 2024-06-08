@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import useGuestLogin from '../hooks/useGuestLogin';
 
 import {
   closeLoginModal,
@@ -15,11 +16,9 @@ import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 import * as S from './LoginForm.styled';
-import AuthPanel from './AuthPanel.styled';
 import { InputLabel } from '@/components/styled/InputLabel';
 import AuthInput from './AuthInput.styled';
 import { ErrorMessage } from '@/components/styled/ErrorMessage';
-import AuthControlsWrapper from './AuthControlsWrapper.styled';
 import SubmitButton from '@/components/general/SubmitButton';
 
 const LoginForm = () => {
@@ -30,6 +29,8 @@ const LoginForm = () => {
   } = useForm<TLoginSchema>({
     resolver: zodResolver(LoginSchema),
   });
+
+  const handleGuestLogin = useGuestLogin();
 
   const isModalOpen = useAppSelector(selectIsLoginModalOpen);
   const { isLoading, error } = useAppSelector(selectPostLoginState);
@@ -58,7 +59,7 @@ const LoginForm = () => {
 
   return (
     <S.StyledDialog isModalOpen={isModalOpen} onModalClose={handleCloseModal}>
-      <AuthPanel>
+      <S.StyledAuthPanel>
         <S.HeaderWrapper>
           <S.Header>Welcome Back</S.Header>
           <S.SubText>Sign in with your username and password</S.SubText>
@@ -86,16 +87,19 @@ const LoginForm = () => {
               {errors.password?.message}
             </ErrorMessage>
           </S.InputWrapper>
-          <AuthControlsWrapper>
-            <ErrorMessage $isVisible={Boolean(error)}>
-              {error?.message}
-            </ErrorMessage>
+          <S.StyledAuthControlsWrapper>
             <SubmitButton disabled={isSubmitDisabled} type="submit">
               Log In
             </SubmitButton>
-          </AuthControlsWrapper>
+            <SubmitButton onClick={handleGuestLogin} type="button">
+              Login Guest
+            </SubmitButton>
+          </S.StyledAuthControlsWrapper>
+          <ErrorMessage $isVisible={Boolean(error)}>
+            {error?.message}
+          </ErrorMessage>
         </S.StyledAuthForm>
-      </AuthPanel>
+      </S.StyledAuthPanel>
     </S.StyledDialog>
   );
 };

@@ -5,7 +5,7 @@ import { addNotification } from '@/features/pushNotification/pushNotificationSli
 
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
-const useTestUserLogin = () => {
+const useGuestLogin = () => {
   const dispatch = useAppDispatch();
 
   const handleTestUserLogin = async (): Promise<void> => {
@@ -23,4 +23,4 @@ const useTestUserLogin = () => {
   return handleTestUserLogin;
 };
 
-export default useTestUserLogin;
+export default useGuestLogin;
