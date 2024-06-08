@@ -33,7 +33,7 @@ import {
   Wrapper,
 } from './PostControls.styled';
 import Dialog from '@/components/general/Dialog';
-import DeleteConfirm from '@/components/general/DeleteConfirm';
+import DeleteConfirmFormForm from '@/components/general/DeleteConfirmForm';
 import AppIcon from '@/components/general/AppIcon';
 import { BsChat, BsHandThumbsUp } from 'react-icons/bs';
 
@@ -152,7 +152,7 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
           isModalOpen={isDeleteModalOpen}
           onModalClose={handleCloseDeleteModal}
         >
-          <DeleteConfirm
+          <DeleteConfirmFormForm
             headerText="Are you sure you want to delete this post?"
             onCancel={handleCloseDeleteModal}
             onDelete={handleDeleteClick}

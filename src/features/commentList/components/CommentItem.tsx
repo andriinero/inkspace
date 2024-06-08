@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
-import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
-
 import { selectCurrentUserId } from '@/features/auth/authSlice';
 import { deleteComment } from '../commentListSlice';
 import {
@@ -10,9 +8,11 @@ import {
   selectCommentIsEditMode,
 } from '@/features/commentEditor/commentEditorSlice';
 
+import type { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
+
 import * as S from './CommentItem.styled';
 import Dialog from '@/components/general/Dialog';
-import DeleteConfirm from '@/components/general/DeleteConfirm';
+import DeleteConfirmFormForm from '@/components/general/DeleteConfirmForm';
 import { MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
 
 type CommentProps = {
@@ -93,7 +93,7 @@ const CommentItem = ({ _id, author, body, date, edit_date }: CommentProps) => {
               isModalOpen={isDeleteModalOpen}
               onModalClose={handleCloseDeleteModal}
             >
-              <DeleteConfirm
+              <DeleteConfirmFormForm
                 headerText="Are you sure you want to delete this comment?"
                 onCancel={handleCloseDeleteModal}
                 onDelete={handleDeleteClick}

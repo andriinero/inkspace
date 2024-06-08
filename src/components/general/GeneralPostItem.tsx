@@ -14,7 +14,7 @@ import { addNotification } from '@/features/pushNotification/pushNotificationSli
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { deletePost } from '@/features/postList/postListSlice';
 import Dialog from './Dialog';
-import DeleteConfirm from './DeleteConfirm';
+import DeleteConfirmFormForm from './DeleteConfirmForm';
 import { useState } from 'react';
 
 const GeneralPostItem = ({
@@ -96,7 +96,7 @@ const GeneralPostItem = ({
         isModalOpen={isDeleteModalOpen}
         onModalClose={handleCloseDeleteModal}
       >
-        <DeleteConfirm
+        <DeleteConfirmFormForm
           headerText="Are you sure you want to delete this post?"
           onDelete={handleDeleteClick}
           onCancel={handleCloseDeleteModal}
