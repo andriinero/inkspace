@@ -2,51 +2,26 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import AppImage from '@/features/appImages/components/AppImage';
+import tw from 'twin.macro';
 
 export const WrapperItem = styled(motion.li)`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 2rem;
+  ${tw`flex justify-between items-center p-8`}
 `;
 
-export const StyledLink = styled(NavLink)`
-  color: inherit;
-  text-decoration: none;
-`;
+export const StyledLink = styled(NavLink)``;
 
 export const InfoWrapper = styled.div`
-  display: flex;
-  gap: 2rem;
+  ${tw`flex gap-8`}
 `;
 
 export const BioContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+  ${tw`flex flex-col gap-2`}
 `;
 
 export const BioContent = styled.p`
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-
-  max-width: 20ch;
-
-  font-size: 0.8rem;
-  line-height: 1.2rem;
-  text-overflow: ellipsis;
-
-  overflow: hidden;
+  ${tw`line-clamp-2 max-w-[20ch] text-sm leading-tight text-ellipsis overflow-hidden`}
 `;
 
 export const AuthorIcon = styled(AppImage)`
-  align-self: flex-start;
-
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-
-  -webkit-user-drag: none;
+  ${tw`self-start size-16 rounded-full select-none`}
 `;
