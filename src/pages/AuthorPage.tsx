@@ -21,7 +21,7 @@ import {
   selectAuthorData,
   selectFetchAuthorDataState,
 } from '@/features/authorPage/authorPageSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
@@ -59,7 +59,7 @@ const AuthorPage = () => {
         await dispatch(fetchAuthorPosts(authorid!)).unwrap();
       } catch (err) {
         dispatch(
-          addNotification(
+          addPushNotification(
             (err as ErrorData).message,
             PushNotificationType.ERROR,
           ),

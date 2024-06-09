@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 import { selectProfileUsername } from '@/features/profile/profileSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 import {
   closeModal,
   deleteProfile,
@@ -59,7 +59,7 @@ const DeleteForm = () => {
 
       if (response) {
         dispatch(
-          addNotification(
+          addPushNotification(
             'Thank you for using my app! We are sad to see you go :( -Siriuszx',
             PushNotificationType.SUCCESS,
           ),
@@ -67,7 +67,10 @@ const DeleteForm = () => {
       }
     } catch (err) {
       dispatch(
-        addNotification((err as ErrorData).message, PushNotificationType.ERROR),
+        addPushNotification(
+          (err as ErrorData).message,
+          PushNotificationType.ERROR,
+        ),
       );
     }
   };

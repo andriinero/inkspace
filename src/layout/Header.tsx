@@ -8,6 +8,7 @@ import { clearTopic } from '@/features/postList/postListSlice';
 import { logout, selectIsAuthenticated } from '@/features/auth/authSlice';
 import { openSignUpModal, openLoginModal } from '@/features/auth/authSlice';
 import { exitEditMode } from '@/features/postForm/postFormSlice';
+import { selectHasPushNotifications } from '@/features/pushNotification/pushNotificationSlice';
 
 import LoginForm from '@/features/auth/components/LoginForm';
 import SignUpForm from '@/features/auth/components/SignUpForm';
@@ -23,11 +24,10 @@ import {
 
 const Header = () => {
   const { pathname } = useLocation();
-
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-
   const dropdownRef = useRef<HTMLUListElement>(null);
 
+  const hasPushNotifications = useAppSelector(selectHasPushNotifications);
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const profileImageId = useAppSelector(selectProfileImageId);
 
@@ -139,7 +139,7 @@ const Header = () => {
         <LoginForm />
         <SignUpForm />
       </S.ContentWrapper>
-      <PushNotificationContainer />
+      {hasPushNotifications && <PushNotificationContainer />}
     </S.Wrapper>
   );
 };

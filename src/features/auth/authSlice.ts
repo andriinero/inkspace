@@ -20,7 +20,7 @@ import {
   PostSignUpSchema,
 } from '@/types/fetchResponse/success/PostSignUp';
 import { TSignUpSchema } from '@/types/formSchemas/SignUpSchema';
-import { addNotification } from '../pushNotification/pushNotificationSlice';
+import { addPushNotification } from '../pushNotification/pushNotificationSlice';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
 type AuthState = {
@@ -116,7 +116,7 @@ export const initAuth = (): AppThunk => (dispatch) => {
     }
   } catch (err) {
     dispatch(
-      addNotification((err as Error).message, PushNotificationType.ERROR),
+      addPushNotification((err as Error).message, PushNotificationType.ERROR),
     );
   }
 };

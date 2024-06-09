@@ -7,7 +7,7 @@ import {
   putProfileImage,
   selectPutProfileImageState,
 } from '@/features/profile/profileSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import {
   ImageSchema,
@@ -47,7 +47,7 @@ const ImageForm = () => {
 
       if (response) {
         dispatch(
-          addNotification(
+          addPushNotification(
             'profile image updated successfully',
             PushNotificationType.SUCCESS,
           ),
@@ -56,7 +56,10 @@ const ImageForm = () => {
       }
     } catch (err) {
       dispatch(
-        addNotification((err as ErrorData).message, PushNotificationType.ERROR),
+        addPushNotification(
+          (err as ErrorData).message,
+          PushNotificationType.ERROR,
+        ),
       );
       dispatch(closeModal());
     }

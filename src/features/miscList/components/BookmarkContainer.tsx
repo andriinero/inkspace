@@ -7,7 +7,7 @@ import {
   selectMiscBookmarkList,
   selectFetchMiscBookmarksState,
 } from '../miscListSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
@@ -34,7 +34,7 @@ const BookmarkContainer = () => {
         await dispatch(fetchBookmarks()).unwrap();
       } catch (err) {
         dispatch(
-          addNotification(
+          addPushNotification(
             (err as ErrorData).message,
             PushNotificationType.ERROR,
           ),

@@ -1,7 +1,7 @@
 import { useAppDispatch } from '@/app/hooks';
 
 import { closeLoginModal, initAuth, postLogin } from '../authSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 
@@ -14,7 +14,9 @@ const useGuestLogin = () => {
     ).unwrap();
 
     if (response) {
-      dispatch(addNotification('login success', PushNotificationType.SUCCESS));
+      dispatch(
+        addPushNotification('login success', PushNotificationType.SUCCESS),
+      );
       dispatch(initAuth());
       dispatch(closeLoginModal());
     }

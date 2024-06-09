@@ -8,7 +8,7 @@ import {
   selectPostList,
   selectSelectedTopic,
 } from '../postListSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { Waterfall } from '@/styles/animations/Waterfall';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
@@ -34,7 +34,7 @@ const PostContainer = () => {
         await dispatch(fetchPosts()).unwrap();
       } catch (err) {
         dispatch(
-          addNotification(
+          addPushNotification(
             (err as ErrorData).message,
             PushNotificationType.ERROR,
           ),

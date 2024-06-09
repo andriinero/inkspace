@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
 import { useEffect } from 'react';
 
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 import {
   fetchTopics,
   selectFetchMiscTopicsState,
@@ -31,7 +31,7 @@ const TopicContainer = () => {
         await dispatch(fetchTopics()).unwrap();
       } catch (err) {
         dispatch(
-          addNotification(
+          addPushNotification(
             (err as ErrorData).message,
             PushNotificationType.ERROR,
           ),

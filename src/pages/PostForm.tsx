@@ -12,7 +12,7 @@ import {
   selectPostIsEditMode,
 } from '@/features/postForm/postFormSlice';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { Editor as TinyMCEEditor } from 'tinymce';
 import {
@@ -49,7 +49,7 @@ const PostForm = () => {
         };
       } catch (err) {
         dispatch(
-          addNotification(
+          addPushNotification(
             (err as ErrorData).message,
             PushNotificationType.ERROR,
           ),
@@ -78,7 +78,7 @@ const PostForm = () => {
 
     if (response) {
       dispatch(
-        addNotification(
+        addPushNotification(
           'post created successfully',
           PushNotificationType.SUCCESS,
         ),
@@ -92,7 +92,7 @@ const PostForm = () => {
 
     if (response) {
       dispatch(
-        addNotification(
+        addPushNotification(
           'post saved successfully',
           PushNotificationType.SUCCESS,
         ),

@@ -1,11 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 
-import { RootState } from '@/app/store';
+import type { RootState } from '@/app/store';
 import {
   PushNotificationData,
   PushNotificationType,
 } from '@/types/entityData/StatusNotificationData';
+import capitalizeString from '@/utils/capitalizeString';
 
 type PushNotificationState = {
   queue: PushNotificationData[];
@@ -13,9 +14,9 @@ type PushNotificationState = {
 
 const initialState: PushNotificationState = {
   queue: [
-    { id: '0', message: 'test message', type: PushNotificationType.ERROR },
-    // { id: '0', message: 'test message', type: PushNotificationType.WARNING },
-    // { id: '1', message: 'test message', type: PushNotificationType.SUCCESS },
+    // { id: '0', message: 'Test message', type: PushNotificationType.ERROR },
+    // { id: '1', message: 'Test message', type: PushNotificationType.WARNING },
+    // { id: '2', message: 'Test message', type: PushNotificationType.SUCCESS },
   ],
 };
 
@@ -23,7 +24,7 @@ const pushNotificationSlice = createSlice({
   name: 'pushNotification',
   initialState,
   reducers: {
-    addNotification: {
+    addPushNotification: {
       reducer(state, action: PayloadAction<PushNotificationData>) {
         const isErrorPresent = state.queue.some(
           (n) => n.message === action.payload.message,
@@ -36,22 +37,25 @@ const pushNotificationSlice = createSlice({
         return {
           payload: {
             id,
-            message,
+            message: capitalizeString(message),
             type,
           },
         };
       },
     },
-    removeNotification(state, action: PayloadAction<string>) {
+    removePushNotification(state, action: PayloadAction<string>) {
       state.queue = state.queue.filter((n) => n.id !== action.payload);
     },
   },
 });
 
-export const { addNotification, removeNotification } =
+export const { addPushNotification, removePushNotification } =
   pushNotificationSlice.actions;
 
 export default pushNotificationSlice.reducer;
+
+export const selectHasPushNotifications = (state: RootState) =>
+  state.pushNotification.queue.length > 0;
 
 export const selectFirstPushNotification = (state: RootState) =>
   state.pushNotification.queue[0];

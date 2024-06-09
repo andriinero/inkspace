@@ -8,7 +8,7 @@ import {
   putPersonalDetails,
   selectProfileUsername,
 } from '@/features/profile/profileSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
@@ -57,7 +57,7 @@ const UsernameForm = () => {
 
         if (response) {
           dispatch(
-            addNotification(
+            addPushNotification(
               'username updated successfully',
               PushNotificationType.SUCCESS,
             ),
@@ -68,7 +68,7 @@ const UsernameForm = () => {
         const error = err as ErrorData;
 
         dispatch(
-          addNotification(
+          addPushNotification(
             error.errors![0].msg || error.message,
             PushNotificationType.ERROR,
           ),

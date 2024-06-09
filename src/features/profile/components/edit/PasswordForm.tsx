@@ -8,7 +8,7 @@ import {
   putPassword,
   selectPutPasswordState,
 } from '@/features/profile/profileSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import type { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
@@ -64,7 +64,7 @@ const PasswordForm = () => {
         const response = await dispatch(putPassword(formData)).unwrap();
         if (response) {
           dispatch(
-            addNotification(
+            addPushNotification(
               'password updated successfully',
               PushNotificationType.SUCCESS,
             ),
@@ -73,7 +73,7 @@ const PasswordForm = () => {
         }
       } catch (err) {
         dispatch(
-          addNotification(
+          addPushNotification(
             (err as ErrorData).message,
             PushNotificationType.ERROR,
           ),

@@ -8,7 +8,7 @@ import {
   putPersonalDetails,
   selectProfileBio,
 } from '@/features/profile/profileSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import type { ErrorData } from '@/types/fetchResponse/error/ErrorData';
@@ -52,7 +52,7 @@ const BioForm = () => {
 
         if (response) {
           dispatch(
-            addNotification(
+            addPushNotification(
               'profile bio updated successfully',
               PushNotificationType.SUCCESS,
             ),
@@ -63,7 +63,7 @@ const BioForm = () => {
         const error = err as ErrorData;
 
         dispatch(
-          addNotification(
+          addPushNotification(
             error.errors![0].msg || error.message,
             PushNotificationType.ERROR,
           ),

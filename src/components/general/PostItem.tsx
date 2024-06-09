@@ -17,7 +17,7 @@ import {
   selectIsPostBookmarked,
   selectIsUserIgnored,
 } from '@/features/profile/profileSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 import { deletePost, setTopic } from '../../features/postList/postListSlice';
 
 import { Waterfall } from '@/styles/animations/Waterfall';
@@ -99,7 +99,7 @@ const PostItem = ({
 
     if (response) {
       dispatch(
-        addNotification(
+        addPushNotification(
           'post deleted successfully',
           PushNotificationType.SUCCESS,
         ),

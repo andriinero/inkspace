@@ -10,7 +10,7 @@ import {
   selectIsLoginModalOpen,
   selectPostLoginState,
 } from '../authSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { LoginSchema, TLoginSchema } from '@/types/formSchemas/LoginSchema';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
@@ -47,7 +47,7 @@ const LoginForm = () => {
 
       if (response) {
         dispatch(
-          addNotification('login success', PushNotificationType.SUCCESS),
+          addPushNotification('login success', PushNotificationType.SUCCESS),
         );
         dispatch(initAuth());
         dispatch(closeLoginModal());

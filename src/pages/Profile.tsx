@@ -15,7 +15,7 @@ import {
   selectProfileData,
 } from '@/features/profile/profileSlice';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { FadeIn } from '@/styles/animations/FadeIn';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
@@ -48,7 +48,7 @@ const Profile = () => {
         await dispatch(fetchIgnoredUsers()).unwrap();
       } catch (err) {
         dispatch(
-          addNotification(
+          addPushNotification(
             (err as ErrorData).message,
             PushNotificationType.ERROR,
           ),

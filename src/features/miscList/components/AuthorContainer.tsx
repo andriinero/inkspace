@@ -7,7 +7,7 @@ import {
   selectMiscAuthorList,
   selectFetchMiscAuthorsState,
 } from '../miscListSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
@@ -31,7 +31,7 @@ const AuthorContainer = () => {
         await dispatch(fetchAuthors()).unwrap();
       } catch (err) {
         dispatch(
-          addNotification(
+          addPushNotification(
             (err as ErrorData).message,
             PushNotificationType.ERROR,
           ),

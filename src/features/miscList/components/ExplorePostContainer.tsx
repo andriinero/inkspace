@@ -7,7 +7,7 @@ import {
   selectFetchMiscPostsState,
   selectMiscPostList,
 } from '../miscListSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
@@ -31,7 +31,7 @@ const ExplorePostContainer = () => {
         await dispatch(fetchMiscPosts()).unwrap();
       } catch (err) {
         dispatch(
-          addNotification(
+          addPushNotification(
             (err as ErrorData).message,
             PushNotificationType.ERROR,
           ),

@@ -11,7 +11,7 @@ import {
   selectCurrentPostData,
 } from '@/features/singlePagePost/singlePagePostSlice';
 import { selectProfileId } from '@/features/profile/profileSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { FadeIn } from '@/styles/animations/FadeIn';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
@@ -51,7 +51,7 @@ const SinglePagePost = () => {
         await dispatch(fetchPost(postid!)).unwrap();
       } catch (err) {
         dispatch(
-          addNotification(
+          addPushNotification(
             (err as ErrorData).message,
             PushNotificationType.ERROR,
           ),

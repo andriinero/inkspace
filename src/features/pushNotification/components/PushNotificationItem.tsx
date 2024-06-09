@@ -1,20 +1,13 @@
 import { useAppDispatch } from '@/app/hooks';
+import useNotificationAutoDismiss from '../hooks/useNotificationAutoDismiss';
 
-import { removeNotification } from '../pushNotificationSlice';
+import { removePushNotification } from '../pushNotificationSlice';
 
 import { PushNotificationData } from '@/types/entityData/StatusNotificationData';
 import { PushFromTop } from '@/styles/animations/PushFromTop';
 
-import { MessageText, Wrapper } from './PushNotificationItem.styled';
-import AppIcon from '@/components/general/AppIcon';
+import { CrossIcon, MessageText, Wrapper } from './PushNotificationItem.styled';
 import { BsX } from 'react-icons/bs';
-import useNotificationAutoDismiss from '../hooks/useNotificationAutoDismiss';
-
-const statusTypePrefixMap = {
-  error: 'Error: ',
-  warning: 'Warning: ',
-  success: 'Message: ',
-};
 
 const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {
   useNotificationAutoDismiss(id);
@@ -22,7 +15,7 @@ const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {
   const dispatch = useAppDispatch();
 
   const handleCloseClick = (): void => {
-    dispatch(removeNotification(id));
+    dispatch(removePushNotification(id));
   };
 
   return (
@@ -34,13 +27,10 @@ const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {
       transition={PushFromTop.transition}
       exit={PushFromTop.hidden}
     >
-      <MessageText>
-        {statusTypePrefixMap[type]}
-        {message}.
-      </MessageText>
-      <AppIcon onClick={handleCloseClick}>
-        <BsX />
-      </AppIcon>
+      <MessageText>{message}</MessageText>
+      <CrossIcon $type={type} onClick={handleCloseClick}>
+        <BsX size="1.25rem" />
+      </CrossIcon>
     </Wrapper>
   );
 };

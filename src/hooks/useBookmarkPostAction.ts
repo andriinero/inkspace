@@ -1,7 +1,7 @@
 import { useAppDispatch } from '@/app/hooks';
 
 import { deleteBookmark, postBookmark } from '@/features/profile/profileSlice';
-import { addNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
@@ -22,7 +22,10 @@ const useBookmarkPostAction = (
       }
     } catch (err) {
       dispatch(
-        addNotification((err as ErrorData).message, PushNotificationType.ERROR),
+        addPushNotification(
+          (err as ErrorData).message,
+          PushNotificationType.ERROR,
+        ),
       );
     }
   };
