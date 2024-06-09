@@ -148,10 +148,10 @@ const PostItem = ({
                 isBookmarked={isBookmarked}
               />
               <S.StyledDotMenu
+                isAlignedLeft
+                isOpen={isMenuOpen}
                 onToggle={handleMenuToggle}
                 onMenuClose={handleMenuClose}
-                isOpen={isMenuOpen}
-                isAlignedLeft={false}
               >
                 {isAuthor && (
                   <S.StyledMenuItemSuccess onClick={handleEditModeClick}>

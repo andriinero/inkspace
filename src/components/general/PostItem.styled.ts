@@ -11,8 +11,11 @@ import { MenuItem, MenuItemDanger, MenuItemSuccess } from '../styled/MenuItem';
 import PostTopic from './PostTopic';
 
 export const Wrapper = styled(motion.li)`
-  grid-template-areas: 'head head' 'body preview';
-  ${tw`border-b border-gray-200 py-8 last:border-none text-gray-800 grid grid-cols-[1fr,minmax(4rem,8rem)] grid-rows-[auto,auto] gap-y-3 gap-x-16`}
+  grid-template-areas:
+    'head head head preview'
+    'body body body preview'
+    'bottom bottom bottom bottom';
+  ${tw`border-b border-gray-200 py-5 sm:py-8 last:border-none text-gray-800 grid grid-cols-[1fr,minmax(4rem,8rem)] grid-rows-[auto,auto] gap-y-3 sm:gap-x-16`}
 `;
 
 export const StyledLink = styled(NavLink)`
@@ -37,7 +40,7 @@ export const BodyText = styled.div`
     font-weight: inherit;
     font-family: inherit;
   }
-  ${tw`line-clamp-3 overflow-hidden font-serif leading-6 text-ellipsis`}
+  ${tw`overflow-hidden font-serif leading-6 text-ellipsis hidden sm:line-clamp-3`}
 `;
 
 // #endregion
@@ -46,7 +49,7 @@ export const BodyText = styled.div`
 
 export const PreviewImage = styled(AppImage)`
   grid-area: preview;
-  ${tw`size-32 object-cover select-none`}
+  ${tw`size-24 sm:size-32 object-cover select-none`}
 `;
 
 // #endregion
@@ -54,11 +57,12 @@ export const PreviewImage = styled(AppImage)`
 // #region PostBottom
 
 export const Bottom = styled.div`
-  ${tw`flex justify-between items-center`}
+  grid-area: bottom;
+  ${tw`flex justify-between items-center gap-2`}
 `;
 
 export const MiscContainer = styled.div`
-  ${tw`flex items-center gap-4`}
+  ${tw`flex items-center gap-6`}
 `;
 
 export const Topic = styled(PostTopic)``;
@@ -68,7 +72,7 @@ export const PostReadEstimate = styled(PostReadTime)`
 `;
 
 export const Controls = styled.div`
-  ${tw`flex gap-4`}
+  ${tw`flex gap-6`}
 `;
 
 export const StyledBookmark = styled(Bookmark)`
