@@ -3,5 +3,5 @@ import { AppButton } from './AppButton.styled';
 import tw from 'twin.macro';
 
 export const TextButton = styled(AppButton)`
-  ${tw`text-green-700 text-sm`}
+  ${tw`text-green-700 font-medium flex items-center`}
 `;

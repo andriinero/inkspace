@@ -20,7 +20,7 @@ import { PushNotificationType } from '@/types/entityData/StatusNotificationData'
 import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo';
 import Error from '@/components/general/Error';
 import PostControls from '@/features/singlePagePost/components/PostControls';
-import PostComments from '@/features/commentList/components/CommentList';
+import CommentList from '@/features/commentList/components/CommentList';
 import PostPageLoader from '@/components/loaders/PostPageLoader';
 import ScrollProgressBar from '@/components/general/ScrollProgressBar';
 import JumpButton from '@/components/general/JumpButton';
@@ -93,7 +93,7 @@ const SinglePagePost = () => {
             )}
             <Body>{parse(postData.body)}</Body>
           </PostWrapper>
-          <PostComments postId={postData._id} />
+          <CommentList postId={postData._id} />
         </>
       ) : isLoading ? (
         <PostPageLoader />

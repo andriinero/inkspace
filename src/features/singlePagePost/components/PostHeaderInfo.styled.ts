@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   grid-template-areas:
     'icon main'
     'icon misc';
-  ${tw`self-start grid grid-cols-[auto,auto] gap-x-4`}
+  ${tw`self-start grid grid-cols-[auto,auto] gap-x-4 gap-y-2 sm:gap-y-0 text-sm`}
 `;
 
 export const StyledLink = styled(NavLink)``;
@@ -25,11 +25,12 @@ export const HeaderStyledLink = styled(StyledLink)`
 `;
 
 export const InfoContainer = styled.div`
-  ${tw`flex items-center gap-2 text-sm font-light`}
+  ${tw`flex flex-wrap items-center gap-2 font-light `}
 `;
 
 export const MainContainer = styled(InfoContainer)`
   grid-area: main;
+  ${tw`flex items-center`}
 `;
 
 export const MiscContainer = styled(InfoContainer)`
@@ -43,7 +44,7 @@ export const ProfileIcon = styled(AppImage)`
 `;
 
 export const Name = styled(Username)`
-  ${tw`text-sm`}
+  ${tw``}
 `;
 
 export const TopicInfo = styled.span``;

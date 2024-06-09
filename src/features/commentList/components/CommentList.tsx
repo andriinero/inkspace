@@ -13,6 +13,7 @@ import { exitEditMode } from '@/features/commentEditor/commentEditorSlice';
 import { Wrapper, Header, WrapperList } from './CommentList.styled';
 import CommentItem from './CommentItem';
 import CommentForm from '../../commentEditor/components/CommentForm';
+import CloseButton from '@/components/general/CloseButton';
 
 type PostCommentsProps = {
   postId: string;
@@ -38,7 +39,14 @@ const CommentList = ({ postId }: PostCommentsProps) => {
 
   return (
     <Wrapper $isOpen={isOpen}>
-      <Header>{`Responses (${commentList.length})`}</Header>
+      <Header>
+        <span>Responses ({commentList.length})</span>
+        <CloseButton
+          onClick={() => {
+            dispatch(closeComments());
+          }}
+        />
+      </Header>
       {isAuthenticated && <CommentForm />}
       <WrapperList>
         {commentList.map((comment) => (

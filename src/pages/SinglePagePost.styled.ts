@@ -13,7 +13,7 @@ export const PostWrapper = styled(motion.div)`
 `;
 
 export const Header = styled.h1`
-  ${tw`text-4xl font-bold`}
+  ${tw`text-4xl font-bold text-wrap break-words`}
 `;
 
 export const PreviewImage = styled(AppImage)`
