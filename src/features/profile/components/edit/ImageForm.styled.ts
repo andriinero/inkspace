@@ -15,7 +15,7 @@ export const InputWrapper = styled.div`
 `;
 
 export const StyledInputFile = styled(InputFile)`
-  ${tw`rounded min-w-[40ch] text-xs outline:none focus:shadow`}
+  ${tw`rounded min-w-[40ch] text-xs outline-none focus:shadow`}
 `;
 
 export const ControlsWrapper = styled.div`

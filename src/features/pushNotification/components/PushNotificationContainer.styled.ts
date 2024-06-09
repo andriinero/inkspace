@@ -1,6 +1,6 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled.ul`
-  display: flex;
-  flex-direction: column;
+  ${tw`flex flex-col`}
 `;

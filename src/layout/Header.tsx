@@ -16,9 +16,9 @@ import * as S from './Header.styled';
 import AppIcon from '@/components/general/AppIcon';
 import {
   BsArrowBarLeft,
-  BsPencil,
   BsPencilSquare,
-  BsPerson,
+  BsPersonFill,
+  BsPersonGear,
 } from 'react-icons/bs';
 
 const Header = () => {
@@ -105,13 +105,13 @@ const Header = () => {
                   <S.StyledDropdown isOpen={isMenuOpen} innerRef={dropdownRef}>
                     <S.StyledMenuItem onClick={handleProfileClick}>
                       <AppIcon>
-                        <BsPerson />
+                        <BsPersonFill />
                       </AppIcon>
                       Profile
                     </S.StyledMenuItem>
                     <S.StyledMenuItem onClick={handleEditProfileClick}>
                       <AppIcon>
-                        <BsPencil />
+                        <BsPersonGear />
                       </AppIcon>
                       Edit Profile
                     </S.StyledMenuItem>

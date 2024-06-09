@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
-  ${tw`flex flex-col items-center`}
+  ${tw`px-4 flex flex-col items-center`}
 `;
 
 export const PostWrapper = styled(motion.div)`

@@ -13,7 +13,7 @@ export const Wrapper = styled.header`
 `;
 
 export const ContentWrapper = styled.div(() => [
-  tw`flex justify-between items-center border-b border-gray-200 py-3 px-6 bg-white z-10 relative`,
+  tw`py-3 px-6 flex gap-4 justify-between items-center border-b border-gray-200 bg-white z-10 relative`,
 ]);
 
 export const StyledLink = styled(Link)`

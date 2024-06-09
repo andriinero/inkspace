@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useAppDispatch } from '@/app/hooks';
 
 import { removeNotification } from '../pushNotificationSlice';
@@ -6,9 +5,10 @@ import { removeNotification } from '../pushNotificationSlice';
 import { PushNotificationData } from '@/types/entityData/StatusNotificationData';
 import { PushFromTop } from '@/styles/animations/PushFromTop';
 
-import { MessageWrapper, Notification } from './PushNotificationItem.styled';
+import { MessageText, Wrapper } from './PushNotificationItem.styled';
 import AppIcon from '@/components/general/AppIcon';
 import { BsX } from 'react-icons/bs';
+import useNotificationAutoDismiss from '../hooks/useNotificationAutoDismiss';
 
 const statusTypePrefixMap = {
   error: 'Error: ',
@@ -17,20 +17,16 @@ const statusTypePrefixMap = {
 };
 
 const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {
-  const dispatch = useAppDispatch();
+  useNotificationAutoDismiss(id);
 
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(removeNotification(id));
-    }, 4000);
-  }, [id, dispatch]);
+  const dispatch = useAppDispatch();
 
   const handleCloseClick = (): void => {
     dispatch(removeNotification(id));
   };
 
   return (
-    <Notification
+    <Wrapper
       $type={type}
       key={id}
       initial={PushFromTop.hidden}
@@ -38,14 +34,14 @@ const PushNotificationItem = ({ id, message, type }: PushNotificationData) => {
       transition={PushFromTop.transition}
       exit={PushFromTop.hidden}
     >
-      <MessageWrapper>
+      <MessageText>
         {statusTypePrefixMap[type]}
         {message}.
-      </MessageWrapper>
+      </MessageText>
       <AppIcon onClick={handleCloseClick}>
         <BsX />
       </AppIcon>
-    </Notification>
+    </Wrapper>
   );
 };
 
