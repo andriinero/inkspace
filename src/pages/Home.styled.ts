@@ -3,7 +3,7 @@ import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
   grid-area: main;
-  ${tw`flex justify-center`}
+  ${tw`flex justify-center max-w-screen-xl w-full`}
 `;
 
 export const MainWrapper = styled.div`
