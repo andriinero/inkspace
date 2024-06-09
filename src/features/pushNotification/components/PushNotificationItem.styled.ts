@@ -1,4 +1,5 @@
 import AppIcon from '@/components/general/AppIcon';
+import CloseButton from '@/components/general/CloseButton';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
@@ -18,10 +19,11 @@ export const MessageText = styled.p`
   ${tw``}
 `;
 
-export const CrossIcon = styled(AppIcon)<{ $type: PushNotificationType }>(
-  ({ $type }) => [
-    // $type === 'success' && tw`hover:bg-green-50 text-green-700`,
-    // $type === 'error' && tw`hover:bg-red-50 text-red-700`,
-    // $type === 'warning' && tw`hover:bg-yellow-50 text-yellow-700`,
-  ],
-);
+export const StyledCloseButton = styled(CloseButton)<{
+  $type: PushNotificationType;
+}>(({ $type }) => [
+  tw``,
+  // $type === 'success' && tw`hover:bg-green-50 text-green-700`,
+  // $type === 'error' && tw`hover:bg-red-50 text-red-700`,
+  // $type === 'warning' && tw`hover:bg-yellow-50 text-yellow-700`,
+]);

@@ -72,8 +72,9 @@ const PostHeaderInfo = ({
               whileTap={ButtonInteraction.whileTap.animation}
               onClick={handleFollowClick}
               type="button"
-              value={isFollowed ? 'Followed' : 'Follow'}
-            />
+            >
+              {isFollowed ? 'Followed' : 'Follow'}
+            </S.FollowButton>
           </>
         )}
       </S.MainContainer>
