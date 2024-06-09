@@ -61,7 +61,7 @@ export const DeleteButton = styled(TextButton)`
 `;
 
 export const UploadImageButton = styled(TextButton)`
-  ${tw`self-start`}
+  ${tw`self-start text-sm`}
 `;
 
 export const StyledLink = styled(Link)``;

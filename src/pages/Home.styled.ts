@@ -3,9 +3,9 @@ import tw from 'twin.macro';
 
 export const Wrapper = styled.div`
   grid-area: main;
-  ${tw`grid grid-cols-[minmax(50ch,90ch)minmax(30ch,40ch)] justify-center gap-16 min-h-full`}
+  ${tw`flex justify-center`}
 `;
 
 export const MainWrapper = styled.div`
-  ${tw`p-12`}
+  ${tw`py-12 px-8 sm:px-20 max-w-4xl w-full`}
 `;

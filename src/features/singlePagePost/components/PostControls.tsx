@@ -127,7 +127,7 @@ const PostControls = ({ postId, isAuthor }: PostControlsProps) => {
       <ControlsContainer>
         <Bookmark onBookmarked={onBookmarkClick} isBookmarked={isBookmarked} />
         <DotMenu
-          isAlignedLeft={false}
+          isAlignedLeft={true}
           onToggle={handleDropdownToggle}
           onMenuClose={handleDropdownClose}
           isOpen={isMenuOpen}
