@@ -1,5 +1,5 @@
+import InputFile from '@/components/general/InputFile';
 import styled from 'styled-components';
-import { InputFile } from '@/components/styled/InputFile.styled';
 import tw from 'twin.macro';
 
 export const WrapperMain = styled.div`
@@ -15,7 +15,7 @@ export const InputWrapper = styled.div`
 `;
 
 export const StyledInputFile = styled(InputFile)`
-  ${tw`rounded min-w-[40ch] text-xs outline-none focus:shadow`}
+  ${tw`flex justify-center rounded min-w-[40ch] text-lg text-center outline-none focus:shadow`}
 `;
 
 export const ControlsWrapper = styled.div`

@@ -4,8 +4,8 @@ import { ErrorMessage } from '@/components/styled/ErrorMessage';
 import { InputText } from '@/components/styled/InputText';
 import { FormButton } from '@/components/styled/FormButton';
 import { motion } from 'framer-motion';
-import { InputFile } from '@/components/styled/InputFile.styled';
 import tw from 'twin.macro';
+import InputFile from '@/components/general/InputFile';
 
 export const Wrapper = styled(motion.div)`
   ${tw`flex flex-col gap-8 py-12 w-[80ch]`}
@@ -40,7 +40,7 @@ export const StyledTopicInput = styled(StyledInputText)`
 `;
 
 export const StyledInputFile = styled(InputFile)`
-  ${tw`min-w-[300px]`}
+  ${tw``}
 `;
 
 export const Form = styled.form`

@@ -74,11 +74,9 @@ const ImageForm = () => {
           <ProfileLabel htmlFor="edit-profile-image">
             Upload Image:
           </ProfileLabel>
-          <S.StyledInputFile
-            {...register('image')}
-            id="edit-profile-image"
-            type="file"
-          />
+          <S.StyledInputFile {...register('image')} id="edit-profile-image">
+            Upload Image
+          </S.StyledInputFile>
           <InputDescription>Your profile image</InputDescription>
           <ErrorMessage $isVisible={Boolean(errors.image)}>
             {errors.image?.message as string}
