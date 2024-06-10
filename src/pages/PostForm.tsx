@@ -65,7 +65,7 @@ const PostForm = () => {
     control,
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isLoading, isDirty },
   } = useForm<TPostFormSchema>({
     resolver: zodResolver(PostFormSchema),
     defaultValues,
@@ -101,6 +101,8 @@ const PostForm = () => {
     }
   };
 
+  const isSubmitDisabled = isLoading || !isDirty;
+
   const handleFormSubmit = isEditMode ? handlePutSubmit : handlePostSubmit;
 
   return (
@@ -109,37 +111,55 @@ const PostForm = () => {
       animate={FadeIn.visible}
       transition={FadeIn.transition}
     >
-      <S.Header>{isEditMode ? 'Edit Post' : 'Create Post'}</S.Header>
       <S.Form onSubmit={handleSubmit(handleFormSubmit)} id="create-new-post">
+        <S.ControlsContainer>
+          {isEditMode ? (
+            <S.StyledButton
+              disabled={isSubmitDisabled}
+              form="create-new-post"
+              type="submit"
+            >
+              Save Edit
+            </S.StyledButton>
+          ) : (
+            <>
+              <S.StyledButton disabled form="create-new-post" type="submit">
+                Save Draft
+              </S.StyledButton>
+              <S.StyledButton
+                disabled={isSubmitDisabled}
+                form="create-new-post"
+                type="submit"
+              >
+                Publish
+              </S.StyledButton>
+            </>
+          )}
+        </S.ControlsContainer>
         <S.InputContainer>
           <S.InputItem>
-            <S.StyledInputLabel htmlFor="post-title">Title</S.StyledInputLabel>
-            <S.StyledInputText
+            <S.StyledTitleInput
               id="post-title"
               {...register('title')}
               type="text"
-              placeholder="Your title..."
+              placeholder="Title..."
             />
             <S.StyledErrorMessage $isVisible={Boolean(errors.title)}>
               {errors.title?.message}
             </S.StyledErrorMessage>
           </S.InputItem>
           <S.InputItem>
-            <S.StyledInputLabel htmlFor="post-topic">Topic</S.StyledInputLabel>
-            <S.StyledInputText
+            <S.StyledTopicInput
               {...register('topic')}
               id="post-topic"
               type="text"
-              placeholder="Post topic..."
+              placeholder="Topic..."
             />
             <S.StyledErrorMessage $isVisible={Boolean(errors.topic)}>
               {errors.topic?.message}
             </S.StyledErrorMessage>
           </S.InputItem>
           <S.InputItem>
-            <S.StyledInputLabel htmlFor="post-image">
-              Upload thumbnail
-            </S.StyledInputLabel>
             <S.StyledInputFile
               {...register('image')}
               id="post-image"
@@ -172,17 +192,6 @@ const PostForm = () => {
           </S.StyledErrorMessage>
         </S.InputItem>
       </S.Form>
-      <S.ControlsContainer>
-        {isEditMode ? (
-          <S.StyledButton form="create-new-post" type="submit">
-            Save Edit
-          </S.StyledButton>
-        ) : (
-          <S.StyledButton form="create-new-post" type="submit">
-            Publish
-          </S.StyledButton>
-        )}
-      </S.ControlsContainer>
     </S.Wrapper>
   );
 };
