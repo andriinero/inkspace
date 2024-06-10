@@ -7,7 +7,7 @@ type TopicItemProps = {
 const TopicItem = ({ name }: TopicItemProps) => {
   return (
     <Wrapper>
-      <TopicButton isActive={false}>{name}</TopicButton>
+      <TopicButton $isActive>{name}</TopicButton>
     </Wrapper>
   );
 };

@@ -4,7 +4,7 @@ import tw from 'twin.macro';
 const GlobalStyles = createGlobalStyle`
   * {
     font-family: ${({ theme }) => theme.font.roboto};
-    ${tw`box-border m-0 p-0`}
+    ${tw`box-border m-0 p-0 transition-colors`}
   }
 
   html {

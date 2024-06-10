@@ -107,24 +107,24 @@ const Header = () => {
                       <S.StyledMenuSection>
                         <S.StyledMenuItem onClick={handleProfileClick}>
                           <AppIcon>
-                            <BsPersonFill size="1.25rem" />
+                            <BsPersonFill />
                           </AppIcon>
                           Profile
                         </S.StyledMenuItem>
                         <S.StyledMenuItem onClick={handleEditProfileClick}>
                           <AppIcon>
-                            <BsPersonGear size="1.25rem" />
+                            <BsPersonGear />
                           </AppIcon>
                           Edit Profile
                         </S.StyledMenuItem>
                       </S.StyledMenuSection>
                       <S.StyledMenuSection>
-                        <S.StyledMenuItem onClick={handleLogoutClick}>
-                          <AppIcon>
-                            <BsArrowBarLeft size="1.25rem" />
+                        <S.StyledMenuItemDanger onClick={handleLogoutClick}>
+                          <AppIcon className="text-red-800">
+                            <BsArrowBarLeft />
                           </AppIcon>
                           Logout
-                        </S.StyledMenuItem>
+                        </S.StyledMenuItemDanger>
                       </S.StyledMenuSection>
                     </S.StyledMenuWrapper>
                   </S.StyledDropdown>

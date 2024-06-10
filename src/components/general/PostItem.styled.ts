@@ -58,7 +58,7 @@ export const PreviewImage = styled(AppImage)`
 
 export const Bottom = styled.div`
   grid-area: bottom;
-  ${tw`flex justify-between items-center gap-2`}
+  ${tw`mt-1 flex justify-between items-center gap-2`}
 `;
 
 export const MiscContainer = styled.div`

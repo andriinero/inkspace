@@ -11,7 +11,7 @@ export const Wrapper = styled.ul<{ $isOpen: boolean; $isAlignedLeft: boolean }>(
     `,
     tw`mt-6 hidden absolute origin-right min-w-[4rem] p-3 bg-white border border-gray-100 rounded-md shadow-md opacity-100 transition duration-150 overflow-hidden`,
     $isOpen && tw`block translate-y-0.5`,
-    $isAlignedLeft && tw`ml-[-50px]`,
+    $isAlignedLeft && tw`ml-[-55px]`,
   ],
 );
 

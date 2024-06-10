@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { GreenButton } from '@/components/styled/GreenButton';
 import AppImage from '@/features/appImages/components/AppImage';
 import Dropdown from '@/components/general/Dropdown';
-import { MenuItem } from '@/components/styled/MenuItem';
+import { MenuItem, MenuItemDanger } from '@/components/styled/MenuItem';
 import tw from 'twin.macro';
 
 export const Wrapper = styled.header`
@@ -49,11 +49,15 @@ export const StyledMenuWrapper = styled.div`
 `;
 
 export const StyledMenuSection = styled.div`
-  ${tw`p-4 flex flex-col gap-4 border-b border-gray-200 last:border-none`}
+  ${tw`p-3 flex flex-col gap-4 border-b border-gray-200 last:border-none`}
 `;
 
 export const StyledMenuItem = styled(MenuItem)`
-  ${tw`justify-start text-sm`}
+  ${tw`justify-start items-center text-xs`}
+`;
+
+export const StyledMenuItemDanger = styled(MenuItemDanger)`
+  ${tw`justify-start text-xs`}
 `;
 
 export const ControlsWrapper = styled.div`
