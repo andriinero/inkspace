@@ -8,7 +8,7 @@ import tw from 'twin.macro';
 import InputFile from '@/components/general/InputFile';
 
 export const Wrapper = styled(motion.div)`
-  ${tw`flex flex-col gap-8 py-12 w-[80ch]`}
+  ${tw`p-4 flex flex-col gap-8 py-12 max-w-2xl w-full`}
 `;
 
 export const InputContainer = styled.div`
@@ -28,7 +28,7 @@ export const InputItem = styled.div`
 
 export const StyledInputText = styled(InputText)`
   font-family: ${({ theme }) => theme.font.times};
-  ${tw`px-0 min-w-[300px] ring-0 shadow-none text-start outline-none`};
+  ${tw`px-0 max-w-lg w-full ring-0 shadow-none text-start outline-none`};
 `;
 
 export const StyledTitleInput = styled(StyledInputText)`

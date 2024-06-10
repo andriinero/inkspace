@@ -40,7 +40,7 @@ export const ControlsWrapper = styled.div`
 `;
 
 export const StyledDotMenu = styled(DotMenu)`
-  ${tw`ml-[86px]`}
+  ${tw``}
 `;
 
 export const CommentDate = styled(PostDate)`

@@ -12,8 +12,8 @@ import type { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 
 import * as S from './CommentItem.styled';
 import Dialog from '@/components/general/Dialog';
-import DeleteConfirmFormForm from '@/components/general/DeleteConfirmForm';
 import { MenuItemDanger, MenuItemSuccess } from '@/components/styled/MenuItem';
+import DeleteConfirmForm from '@/components/general/DeleteConfirmForm';
 
 type CommentProps = {
   _id: string;
@@ -80,6 +80,7 @@ const CommentItem = ({ _id, author, body, date, edit_date }: CommentProps) => {
         {isAuthor && !isEditMode && (
           <S.ControlsWrapper>
             <S.StyledDotMenu
+              isAlignedLeft
               onMenuClose={handleCloseMenu}
               onToggle={handleToggleMenu}
               isOpen={isMenuOpen}
@@ -93,7 +94,7 @@ const CommentItem = ({ _id, author, body, date, edit_date }: CommentProps) => {
               isModalOpen={isDeleteModalOpen}
               onModalClose={handleCloseDeleteModal}
             >
-              <DeleteConfirmFormForm
+              <DeleteConfirmForm
                 headerText="Are you sure you want to delete this comment?"
                 onCancel={handleCloseDeleteModal}
                 onDelete={handleDeleteClick}

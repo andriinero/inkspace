@@ -103,24 +103,30 @@ const Header = () => {
                     altText="Current User Profile Picture"
                   />
                   <S.StyledDropdown isOpen={isMenuOpen} innerRef={dropdownRef}>
-                    <S.StyledMenuItem onClick={handleProfileClick}>
-                      <AppIcon>
-                        <BsPersonFill />
-                      </AppIcon>
-                      Profile
-                    </S.StyledMenuItem>
-                    <S.StyledMenuItem onClick={handleEditProfileClick}>
-                      <AppIcon>
-                        <BsPersonGear />
-                      </AppIcon>
-                      Edit Profile
-                    </S.StyledMenuItem>
-                    <S.StyledMenuItem onClick={handleLogoutClick}>
-                      <AppIcon>
-                        <BsArrowBarLeft />
-                      </AppIcon>
-                      Logout
-                    </S.StyledMenuItem>
+                    <S.StyledMenuWrapper>
+                      <S.StyledMenuSection>
+                        <S.StyledMenuItem onClick={handleProfileClick}>
+                          <AppIcon>
+                            <BsPersonFill size="1.25rem" />
+                          </AppIcon>
+                          Profile
+                        </S.StyledMenuItem>
+                        <S.StyledMenuItem onClick={handleEditProfileClick}>
+                          <AppIcon>
+                            <BsPersonGear size="1.25rem" />
+                          </AppIcon>
+                          Edit Profile
+                        </S.StyledMenuItem>
+                      </S.StyledMenuSection>
+                      <S.StyledMenuSection>
+                        <S.StyledMenuItem onClick={handleLogoutClick}>
+                          <AppIcon>
+                            <BsArrowBarLeft size="1.25rem" />
+                          </AppIcon>
+                          Logout
+                        </S.StyledMenuItem>
+                      </S.StyledMenuSection>
+                    </S.StyledMenuWrapper>
                   </S.StyledDropdown>
                 </>
               )}

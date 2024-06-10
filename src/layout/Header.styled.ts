@@ -41,11 +41,19 @@ export const ProfileIcon = styled(AppImage)`
 `;
 
 export const StyledDropdown = styled(Dropdown)`
-  ${tw`mt-12 ml-0`}
+  ${tw`p-0 mt-12 max-w-[10rem] w-full right-2 `}
+`;
+
+export const StyledMenuWrapper = styled.div`
+  ${tw`flex flex-col`}
+`;
+
+export const StyledMenuSection = styled.div`
+  ${tw`p-4 flex flex-col gap-4 border-b border-gray-200 last:border-none`}
 `;
 
 export const StyledMenuItem = styled(MenuItem)`
-  ${tw`justify-start`}
+  ${tw`justify-start text-sm`}
 `;
 
 export const ControlsWrapper = styled.div`

@@ -12,7 +12,7 @@ type DeleteConfirmProps = {
   onCancel: () => void;
 };
 
-const DeleteConfirmFormForm = ({
+const DeleteConfirmForm = ({
   headerText,
   onDelete,
   onCancel,
@@ -32,4 +32,4 @@ const DeleteConfirmFormForm = ({
   );
 };
 
-export default DeleteConfirmFormForm;
+export default DeleteConfirmForm;

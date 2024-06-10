@@ -25,10 +25,10 @@ import { GeneralAuthorData } from '@/types/entityData/GeneralAuthorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { TopicData } from '@/types/entityData/TopicData';
 
-import DeleteConfirmFormForm from '@/components/general/DeleteConfirmForm';
-import Dialog from '@/components/general/Dialog';
 import * as S from './PostItem.styled';
 import PostItemHead from './PostItemHead';
+import DeleteConfirmForm from './DeleteConfirmForm';
+import Dialog from './Dialog';
 
 type PostItemProps = {
   _id: string;
@@ -173,7 +173,7 @@ const PostItem = ({
                 isModalOpen={isDeleteModalOpen}
                 onModalClose={handleCloseDeleteModal}
               >
-                <DeleteConfirmFormForm
+                <DeleteConfirmForm
                   headerText="Are you sure you want to delete this post?"
                   onCancel={handleCloseDeleteModal}
                   onDelete={handleDeleteClick}

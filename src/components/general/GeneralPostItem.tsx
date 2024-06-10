@@ -1,22 +1,24 @@
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useState } from 'react';
+
+import {
+  fetchProfilePosts,
+  selectProfileId,
+} from '@/features/profile/profileSlice';
+import { enterEditMode } from '@/features/postForm/postFormSlice';
+import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
+import { deletePost } from '@/features/postList/postListSlice';
+
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { WaterfallSlideIn } from '@/styles/animations/WaterfallSlideIn';
 
 import { GeneralPostData } from '@/types/entityData/GeneralPostData';
 import PostItemHead from './PostItemHead';
 import * as S from './GeneralPostItem.styled';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import {
-  fetchProfilePosts,
-  selectProfileId,
-} from '@/features/profile/profileSlice';
-import { useNavigate } from 'react-router-dom';
-import { enterEditMode } from '@/features/postForm/postFormSlice';
-import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
-import { deletePost } from '@/features/postList/postListSlice';
 import Dialog from './Dialog';
-import DeleteConfirmFormForm from './DeleteConfirmForm';
-import { useState } from 'react';
 import { DestructiveButton } from './DestructiveButton.styled';
+import DeleteConfirmForm from './DeleteConfirmForm';
 
 const GeneralPostItem = ({
   _id,
@@ -97,7 +99,7 @@ const GeneralPostItem = ({
         isModalOpen={isDeleteModalOpen}
         onModalClose={handleCloseDeleteModal}
       >
-        <DeleteConfirmFormForm
+        <DeleteConfirmForm
           headerText="Are you sure you want to delete this post?"
           onDelete={handleDeleteClick}
           onCancel={handleCloseDeleteModal}
