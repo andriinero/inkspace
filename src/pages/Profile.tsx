@@ -24,7 +24,6 @@ import { PushNotificationType } from '@/types/entityData/StatusNotificationData'
 import Error from '@/components/general/Error';
 import JumpButton from '@/components/general/JumpButton';
 import * as S from './Profile.styled';
-import * as Wrapper from './Wrapper';
 import ProfileTabs from '@/features/profile/components/profile/ProfileTabs';
 
 const Profile = () => {
@@ -68,7 +67,7 @@ const Profile = () => {
   ) : error ? (
     <Error />
   ) : (
-    <Wrapper.Wrapper
+    <S.Wrapper
       initial={FadeIn.hidden}
       animate={FadeIn.visible}
       transition={FadeIn.transition}
@@ -100,7 +99,7 @@ const Profile = () => {
         </S.ProfileWrapper>
       </S.WrapperAside>
       {isScrollingDown && <JumpButton />}
-    </Wrapper.Wrapper>
+    </S.Wrapper>
   );
 };
 

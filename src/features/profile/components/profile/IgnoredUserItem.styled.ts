@@ -6,10 +6,12 @@ import { HollowButton } from '../../../../components/styled/HollowButton';
 import tw from 'twin.macro';
 
 export const WrapperItem = styled(motion.li)`
-  ${tw`flex justify-between items-center p-8`}
+  ${tw`flex justify-between items-center p-2 sm:p-8`}
 `;
 
-export const StyledLink = styled(NavLink)``;
+export const StyledLink = styled(NavLink)`
+  ${tw`shrink-0`}
+`;
 
 export const InfoWrapper = styled.div`
   ${tw`flex gap-8`}

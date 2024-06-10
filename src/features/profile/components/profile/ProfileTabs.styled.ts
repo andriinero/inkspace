@@ -13,11 +13,11 @@ export const StyledTabItem = styled(TabItem)(({ isSelected }) => [
 ]);
 
 export const ContentWrapper = styled.div`
-  ${tw`flex justify-start gap-10`}
+  ${tw`flex flex-wrap justify-start gap-10`}
 `;
 
 export const ContentPadding = styled.div`
-  ${tw`border-b border-gray-200 relative top-[-1px] z-[-1]`}
+  ${tw`hidden md:block border-b border-gray-200 relative top-[-1px] z-[-1]`}
 `;
 
 export const StyledLink = styled(Link)``;

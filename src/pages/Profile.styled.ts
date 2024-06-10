@@ -6,15 +6,15 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 
 export const Wrapper = styled(motion.div)`
-  ${tw`grid grid-cols-[minmax(50ch,80ch) minmax(30ch,40ch)] justify-center gap-16 min-h-full`}
+  ${tw`flex flex-col-reverse sm:flex-row justify-end max-w-screen-xl w-full`}
 `;
 
 export const WrapperMain = styled.main`
-  ${tw`py-12 flex flex-col gap-8`}
+  ${tw`p-4 max-w-4xl w-full`}
 `;
 
 export const StyledMainUserName = styled(Username)`
-  ${tw`py-8 max-w-full text-4xl break-words`}
+  ${tw`hidden sm:block pb-8 max-w-full text-4xl break-words`}
 `;
 
 export const WrapperSection = styled.section`
@@ -26,7 +26,7 @@ export const Header = styled.h2`
 `;
 
 export const WrapperAside = styled.aside`
-  ${tw`p-12 flex flex-col border-l border-gray-200`}
+  ${tw`p-4 flex flex-col sm:border-l sm:border-gray-200`}
 `;
 
 export const ProfileWrapper = styled.div`
