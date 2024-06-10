@@ -1,19 +1,15 @@
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import useAuthorPageLoadingState from '@/hooks/useAuthorPageLoadingState';
+import useFollowUserAction from '@/hooks/useFollowUserAction';
+import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
+import { AppDate } from '@/lib/AppDate';
 import { useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
-import useFollowUserAction from '@/hooks/useFollowUserAction';
-import useAuthorPageLoadingState from '@/hooks/useAuthorPageLoadingState';
-import { AppDate } from '@/lib/AppDate';
 
 import {
   selectAuthData,
   selectIsAuthenticated,
 } from '@/features/auth/authSlice';
-import {
-  selectFollowActionState,
-  selectIsUserFollowed,
-} from '@/features/profile/profileSlice';
 import {
   fetchAuthorData,
   fetchAuthorPosts,
@@ -21,20 +17,24 @@ import {
   selectAuthorData,
   selectFetchAuthorDataState,
 } from '@/features/authorPage/authorPageSlice';
+import {
+  selectFollowActionState,
+  selectIsUserFollowed,
+} from '@/features/profile/profileSlice';
 import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { ButtonInteraction } from '@/styles/animations/ButtonInteraction';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
-import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
 import { FadeIn } from '@/styles/animations/FadeIn';
+import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
-import PostContainer from '@/features/authorPage/components/PostContainer';
 import Error from '@/components/general/Error';
 import JumpButton from '@/components/general/JumpButton';
+import PostContainer from '@/features/authorPage/components/PostContainer';
 import * as S from './AuthorPage.styled';
 
 const AuthorPage = () => {
-  const { isScrollingDown } = useWindowScrollDirection();
+  const { isScrollingUp } = useWindowScrollDirection();
   const { authorid } = useParams();
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -129,7 +129,7 @@ const AuthorPage = () => {
           )}
         </S.ProfileWrapper>
       </S.WrapperAside>
-      {isScrollingDown && <JumpButton />}
+      {isScrollingUp && <JumpButton />}
     </S.Wrapper>
   );
 };

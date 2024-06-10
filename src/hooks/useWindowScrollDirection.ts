@@ -4,17 +4,17 @@ import { useState } from 'react';
 const useWindowScrollDirection = () => {
   const { scrollY } = useScroll();
 
-  const [isScrollingDown, setIsScrollingDown] = useState<boolean>(false);
+  const [isScrollingUp, setIsScrollingUp] = useState<boolean>(false);
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     const prev = scrollY.getPrevious();
     const vector = latest - (prev as number);
 
-    if (vector > 0) setIsScrollingDown(() => true);
-    else setIsScrollingDown(() => false);
+    if (vector < 0) setIsScrollingUp(() => true);
+    else setIsScrollingUp(() => false);
   });
 
-  return { isScrollingDown };
+  return { isScrollingUp };
 };
 
 export default useWindowScrollDirection;

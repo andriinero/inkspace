@@ -1,29 +1,29 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
 import parse from 'html-react-parser';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
-import {
-  fetchPost,
-  selectFetchPostState,
-  selectCurrentPostData,
-} from '@/features/singlePagePost/singlePagePostSlice';
 import { selectProfileId } from '@/features/profile/profileSlice';
 import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
+import {
+  fetchPost,
+  selectCurrentPostData,
+  selectFetchPostState,
+} from '@/features/singlePagePost/singlePagePostSlice';
 
 import { FadeIn } from '@/styles/animations/FadeIn';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
-import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo';
 import Error from '@/components/general/Error';
-import PostControls from '@/features/singlePagePost/components/PostControls';
-import CommentList from '@/features/commentList/components/CommentList';
-import PostPageLoader from '@/components/loaders/PostPageLoader';
-import ScrollProgressBar from '@/components/general/ScrollProgressBar';
 import JumpButton from '@/components/general/JumpButton';
+import ScrollProgressBar from '@/components/general/ScrollProgressBar';
+import PostPageLoader from '@/components/loaders/PostPageLoader';
+import CommentList from '@/features/commentList/components/CommentList';
+import PostControls from '@/features/singlePagePost/components/PostControls';
+import PostHeaderInfo from '@/features/singlePagePost/components/PostHeaderInfo';
 import {
   Body,
   Header,
@@ -34,7 +34,7 @@ import {
 
 const SinglePagePost = () => {
   const { postid } = useParams();
-  const { isScrollingDown } = useWindowScrollDirection();
+  const { isScrollingUp } = useWindowScrollDirection();
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
@@ -102,7 +102,7 @@ const SinglePagePost = () => {
       ) : (
         <h2>Critical error.</h2>
       )}
-      {isScrollingDown && <JumpButton />}
+      {isScrollingUp && <JumpButton />}
     </Wrapper>
   );
 };

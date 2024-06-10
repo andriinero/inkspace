@@ -1,15 +1,15 @@
 import useHomePageStatus from '@/hooks/useHomeLoadingStatus';
 import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
 
-import PostContainer from '@/features/postList/components/PostContainer';
-import MiscContainer from '@/features/miscList/components/MiscContainer';
 import JumpButton from '@/components/general/JumpButton';
-import { AnimatePresence } from 'framer-motion';
+import MiscContainer from '@/features/miscList/components/MiscContainer';
+import PostContainer from '@/features/postList/components/PostContainer';
 import TopicCarousel from '@/features/postList/components/TopicCarousel';
+import { AnimatePresence } from 'framer-motion';
 import { MainWrapper, Wrapper } from './Home.styled';
 
 const Home = () => {
-  const { isScrollingDown } = useWindowScrollDirection();
+  const { isScrollingUp } = useWindowScrollDirection();
 
   const isLoading = useHomePageStatus();
 
@@ -24,7 +24,7 @@ const Home = () => {
         )}
       </MainWrapper>
       <MiscContainer />
-      <AnimatePresence>{isScrollingDown && <JumpButton />}</AnimatePresence>
+      <AnimatePresence>{isScrollingUp && <JumpButton />}</AnimatePresence>
     </Wrapper>
   );
 };

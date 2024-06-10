@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
 import useProfilePageLoadingState from '@/hooks/useProfilePageLoadingState';
-import { Navigate, Outlet } from 'react-router-dom';
+import useWindowScrollDirection from '@/hooks/useWindowScrollDirection';
 import { AppDate } from '@/lib/AppDate';
+import { useEffect } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
   fetchFollowedUsers,
   fetchIgnoredUsers,
@@ -14,20 +15,19 @@ import {
   selectFetchProfileDataState,
   selectProfileData,
 } from '@/features/profile/profileSlice';
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
 import { FadeIn } from '@/styles/animations/FadeIn';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 
 import Error from '@/components/general/Error';
 import JumpButton from '@/components/general/JumpButton';
-import * as S from './Profile.styled';
 import ProfileTabs from '@/features/profile/components/profile/ProfileTabs';
+import * as S from './Profile.styled';
 
 const Profile = () => {
-  const { isScrollingDown } = useWindowScrollDirection();
+  const { isScrollingUp } = useWindowScrollDirection();
 
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
@@ -98,7 +98,7 @@ const Profile = () => {
           <S.UserBio>{profileData?.bio}</S.UserBio>
         </S.ProfileWrapper>
       </S.WrapperAside>
-      {isScrollingDown && <JumpButton />}
+      {isScrollingUp && <JumpButton />}
     </S.Wrapper>
   );
 };
