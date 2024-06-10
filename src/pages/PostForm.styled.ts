@@ -28,7 +28,7 @@ export const InputItem = styled.div`
 
 export const StyledInputText = styled(InputText)`
   font-family: ${({ theme }) => theme.font.times};
-  ${tw`px-0 max-w-lg w-full ring-0 shadow-none text-start outline-none`};
+  ${tw`px-0 w-full ring-0 shadow-none text-start outline-none`};
 `;
 
 export const StyledTitleInput = styled(StyledInputText)`
