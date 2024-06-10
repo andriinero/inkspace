@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import tw from 'twin.macro';
 
 export const Wrapper = styled(motion.div)`
-  ${tw`grid grid-cols-[minmax(50ch,80ch)minmax(30ch,40ch)] justify-center gap-16`}
+  ${tw`flex flex-col-reverse sm:flex-row justify-end sm:justify-center max-w-screen-xl w-full`}
 `;
 
 export const Header = styled.h2`
@@ -15,7 +15,7 @@ export const Header = styled.h2`
 `;
 
 export const WrapperMain = styled.div`
-  ${tw`flex flex-col p-12`}
+  ${tw`p-4 sm:p-12 max-w-4xl w-full`}
 `;
 
 export const ContentWrapper = styled.div`
@@ -33,7 +33,7 @@ export const FieldValue = styled.span`
 `;
 
 export const WrapperAside = styled.div`
-  ${tw`flex flex-col p-12 border-l border-gray-200`}
+  ${tw`p-4 sm:p-12 flex flex-col sm:border-l sm:border-gray-200`}
 `;
 
 export const ProfileWrapper = styled.div`
