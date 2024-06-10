@@ -12,5 +12,5 @@ export const ContentPadding = styled.div`
 `;
 
 export const StyledTabItem = styled(TabItem)`
-  ${tw`z-10 text-sm pb-2 shrink-0`}
+  ${tw`z-10 text-sm pb-2 shrink-0 select-none`}
 `;

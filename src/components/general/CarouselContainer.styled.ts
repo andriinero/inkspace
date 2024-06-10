@@ -14,7 +14,7 @@ export const ContentWrapper = styled.div`
 `;
 
 export const StyledAppIcon = styled(AppIcon)`
-  ${tw`p-2 pt-0 absolute opacity-70 z-[15]`}
+  ${tw`pb-2 absolute opacity-70 z-[15] from-70%`}
 `;
 
 export const LeftArrowIcon = styled(StyledAppIcon)`
