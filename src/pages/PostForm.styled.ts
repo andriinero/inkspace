@@ -1,11 +1,11 @@
-import styled from 'styled-components';
-import { PostBody } from '@/styles/PostBody.styled';
-import { ErrorMessage } from '@/components/styled/ErrorMessage';
-import { InputText } from '@/components/styled/InputText';
-import { FormButton } from '@/components/styled/FormButton';
-import { motion } from 'framer-motion';
-import tw from 'twin.macro';
 import InputFile from '@/components/general/InputFile';
+import { ErrorMessage } from '@/components/styled/ErrorMessage';
+import { FormButton } from '@/components/styled/FormButton';
+import { InputText } from '@/components/styled/InputText';
+import { PostBody } from '@/styles/PostBody.styled';
+import { motion } from 'framer-motion';
+import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const Wrapper = styled(motion.div)`
   ${tw`p-4 flex flex-col gap-8 py-12 max-w-2xl w-full`}

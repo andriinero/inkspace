@@ -1,9 +1,10 @@
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { zodResolver } from '@hookform/resolvers/zod';
 
+import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import {
   fetchEditTargetPost,
   postPost,
@@ -11,17 +12,16 @@ import {
   selectEditPostId,
   selectPostIsEditMode,
 } from '@/features/postForm/postFormSlice';
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import { addPushNotification } from '@/features/pushNotification/pushNotificationSlice';
 
-import { Editor as TinyMCEEditor } from 'tinymce';
-import {
-  TPostFormSchema,
-  PostFormSchema,
-} from '@/types/formSchemas/CreatePostSchema';
 import { FadeIn } from '@/styles/animations/FadeIn';
-import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
 import { PushNotificationType } from '@/types/entityData/StatusNotificationData';
+import { ErrorData } from '@/types/fetchResponse/error/ErrorData';
+import {
+  PostFormSchema,
+  TPostFormSchema,
+} from '@/types/formSchemas/CreatePostSchema';
+import { Editor as TinyMCEEditor } from 'tinymce';
 
 import TinyEditor from '@/features/postForm/components/TinyEditor';
 import * as S from './PostForm.styled';
@@ -160,11 +160,7 @@ const PostForm = () => {
             </S.StyledErrorMessage>
           </S.InputItem>
           <S.InputItem>
-            <S.StyledInputFile
-              {...register('image')}
-              id="post-image"
-              type="file"
-            >
+            <S.StyledInputFile {...register('image')} id="post-image">
               Upload Thumbnail
             </S.StyledInputFile>
             <S.StyledErrorMessage $isVisible={Boolean(errors.image)}>
