@@ -7,5 +7,5 @@ export const Wrapper = styled.div`
 `;
 
 export const MainWrapper = styled.div`
-  ${tw`py-12 px-8 sm:px-20 max-w-4xl w-full`}
+  ${tw`py-12 px-6 sm:px-20 max-w-4xl w-full`}
 `;

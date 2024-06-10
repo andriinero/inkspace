@@ -38,7 +38,7 @@ export const ProfileIcon = styled(AppImage)`
 `;
 
 export const StyledAsideUserName = styled(Username)`
-  ${tw`break-words`}
+  ${tw`break-words text-lg sm:text-base`}
 `;
 
 export const FollowCount = styled.span`

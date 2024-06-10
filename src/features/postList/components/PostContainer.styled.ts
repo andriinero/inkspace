@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Header = styled.h1`
-  ${tw`flex items-center self-end gap-4 pt-8 text-2xl font-extralight`}
+  ${tw`flex items-center self-end gap-4 pt-8 text-xl sm:text-2xl font-extralight`}
 `;
 
 export const PostList = styled(motion.ul)`

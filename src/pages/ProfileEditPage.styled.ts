@@ -45,7 +45,7 @@ export const ProfileIcon = styled(AppImage)`
 `;
 
 export const StyledUserName = styled(Username)`
-  ${tw`break-words`}
+  ${tw`break-words text-lg sm:text-base `}
 `;
 
 export const FollowCount = styled.span`

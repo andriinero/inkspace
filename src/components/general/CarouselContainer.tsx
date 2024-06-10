@@ -4,7 +4,6 @@ import type { ReactNode } from 'react';
 
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import * as S from './CarouselContainer.styled';
-import AppIcon from './AppIcon';
 
 type CarouselContainerProps = {
   stepSize?: number;
@@ -49,13 +48,13 @@ const CarouselContainer = ({
 
   return (
     <S.Wrapper className={className}>
-      <AppIcon>
+      <S.LeftArrowIcon>
         <BsChevronLeft onClick={handleLeftButtonClick} />
-      </AppIcon>
+      </S.LeftArrowIcon>
       <S.ContentWrapper ref={carouselContentRef}>{children}</S.ContentWrapper>
-      <AppIcon>
+      <S.RightArrowIcon>
         <BsChevronRight onClick={handleRightButtonClick} />
-      </AppIcon>
+      </S.RightArrowIcon>
     </S.Wrapper>
   );
 };
