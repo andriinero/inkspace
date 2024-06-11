@@ -1,26 +1,29 @@
 import { css } from 'styled-components';
+import tw from 'twin.macro';
 
 export const PostBody = css`
-  font-size: 1.25rem;
   font-family: ${({ theme }) => theme.font.times};
+  ${tw`text-xl`}
 
   p,
   span,
-  em,
   s,
+  em,
   strong {
     font-size: inherit;
-    line-height: 2rem;
     font-family: inherit;
+    ${tw`leading-relaxed`}
+  }
+
+  strong {
+    ${tw`font-sans`}
   }
 
   h2 {
-    font-size: inherit;
-    line-height: 1.5rem;
+    ${tw`text-2xl font-bold`}
   }
 
   h3 {
-    font-size: 1rem;
-    line-height: 1.25rem;
+    ${tw`text-xl font-bold`}
   }
 `;
