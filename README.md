@@ -11,7 +11,7 @@
   <p align="center">
     Fullstack React Web Application written in TypeScript
     <br />
-    <a href="https://inkspace-alpha.vercel.app">View Demo</a>
+    <a href="https://inkspace-an.vercel.app">View Demo</a>
     ·
     <a href="https://github.com/andriinero/inkspace_backend">Backend</a>
     ·
@@ -50,6 +50,7 @@
 - [![React][React]][React-url]
 - [![Redux][Redux]][Redux-url]
 - [![Styled-Components][StyledComponents]][StyledComponents-url]
+- [![TailwindCSS][TailwindCSS]][TailwindCSS-url]
 - [![Node.js][NodeJS]][NodeJS-url]
 - [![Express.js][Express]][Express-url]
 - [![MongoDB][MongoDB]][MongoDB-url]
@@ -122,6 +123,8 @@ Don't forget to give the project a star! Thanks again!
 [Redux-url]: https://redux-toolkit.js.org/
 [StyledComponents]: https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white
 [StyledComponents-url]: https://styled-components.com/
+[TailwindCSS]: https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white
+[TailwindCSS-url]: https://tailwindcss.com/
 [JWT]: https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens
 [JWT-url]: https://jwt.io/introduction
 [NodeJS]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
